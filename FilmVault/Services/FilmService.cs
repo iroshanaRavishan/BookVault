@@ -51,9 +51,21 @@ namespace BookVault.Services
                 .ToListAsync();
         }
 
-        public Task<BookDto?> GetBookByIdAsync(Guid id)
+        public async Task<BookDto?> GetBookByIdAsync(Guid id)
         {
-            throw new NotImplementedException();
+            var book = await _dbContext.Books
+                       .AsNoTracking()
+                       .FirstOrDefaultAsync(m => m.Id == id);
+            if (book == null)
+                return null;
+
+            return new BookDto(
+                book.Id,
+                book.Name,
+                book.Genre,
+                book.ReleaseDate,
+                book.Rating
+            );
         }
 
         public Task UpdateBookAsync(Guid id, UpdateBookDto command)
