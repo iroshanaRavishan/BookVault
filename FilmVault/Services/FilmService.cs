@@ -41,19 +41,31 @@ namespace FilmVault.Services
         {
             return await _dbContext.Films
                 .AsNoTracking()
-                .Select(movie => new FilmDto(
-                    movie.Id,
-                    movie.Name,
-                    movie.Genre,
-                    movie.ReleaseDate,
-                    movie.Rating
+                .Select(film => new FilmDto(
+                    film.Id,
+                    film.Name,
+                    film.Genre,
+                    film.ReleaseDate,
+                    film.Rating
                 ))
                 .ToListAsync();
         }
 
-        public Task<FilmDto?> GetFilmByIdAsync(Guid id)
+        public async Task<FilmDto?> GetFilmByIdAsync(Guid id)
         {
-            throw new NotImplementedException();
+            var film = await _dbContext.Films
+                       .AsNoTracking()
+                       .FirstOrDefaultAsync(m => m.Id == id);
+            if (film == null)
+                return null;
+
+            return new FilmDto(
+                film.Id,
+                film.Name,
+                film.Genre,
+                film.ReleaseDate,
+                film.Rating
+            );
         }
 
         public Task UpdateFilmAsync(Guid id, UpdateFilmDto command)
