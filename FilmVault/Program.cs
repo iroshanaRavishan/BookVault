@@ -1,4 +1,5 @@
 using BookVault.Data;
+using BookVault.Services;
 using Microsoft.EntityFrameworkCore;
 using Scalar.AspNetCore;
 
@@ -7,6 +8,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
+builder.Services.AddTransient<IBookService, BookService>();
+builder.Services.AddControllers();
 
 builder.Services.AddDbContext<BookDbContext>(options =>
 {
@@ -17,11 +20,6 @@ builder.Services.AddDbContext<BookDbContext>(options =>
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.MapOpenApi();
-}
-
 app.UseHttpsRedirection();
 
 if (app.Environment.IsDevelopment())
@@ -30,7 +28,7 @@ if (app.Environment.IsDevelopment())
     app.MapScalarApiReference();
 }
 
-// triggerring the seeding process
+// triggering the seeding process
 // remove this when deploying to production
 await using (var serviceScope = app.Services.CreateAsyncScope())
 await using (var dbContext = serviceScope.ServiceProvider.GetRequiredService<BookDbContext>())
@@ -38,9 +36,8 @@ await using (var dbContext = serviceScope.ServiceProvider.GetRequiredService<Boo
     await dbContext.Database.EnsureCreatedAsync();
 }
 
-app.Run();
+app.UseHttpsRedirection();
 
-internal record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}
+app.MapControllers();
+
+app.Run();
