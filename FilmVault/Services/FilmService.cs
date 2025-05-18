@@ -32,9 +32,14 @@ namespace BookVault.Services
             );
         }
 
-        public Task DeleteBookAsync(Guid id)
+        public async Task DeleteBookAsync(Guid id)
         {
-            throw new NotImplementedException();
+            var bookToDelete = await _dbContext.Books.FindAsync(id);
+            if (bookToDelete != null)
+            {
+                _dbContext.Books.Remove(bookToDelete);
+                await _dbContext.SaveChangesAsync();
+            }
         }
 
         public async Task<IEnumerable<BookDto>> GetAllBooksAsync()
