@@ -1,6 +1,7 @@
 ﻿using BookVault.Data;
 using BookVault.DTOs;
 using BookVault.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace BookVault.Services
 {
@@ -36,9 +37,18 @@ namespace BookVault.Services
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<BookDto>> GetAllBooksAsync()
+        public async Task<IEnumerable<BookDto>> GetAllBooksAsync()
         {
-            throw new NotImplementedException();
+            return await _dbContext.Books
+                .AsNoTracking()
+                .Select(book => new BookDto(
+                    book.Id,
+                    book.Name,
+                    book.Genre,
+                    book.ReleaseDate,
+                    book.Rating
+                ))
+                .ToListAsync();
         }
 
         public Task<BookDto?> GetBookByIdAsync(Guid id)
