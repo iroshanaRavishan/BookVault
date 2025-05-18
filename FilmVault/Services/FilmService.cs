@@ -15,7 +15,7 @@ namespace FilmVault.Services
             _logger = logger;
         }
 
-        public async Task<FilmDto> CreateMovieAsync(CreateFilmDto command)
+        public async Task<FilmDto> CreateFilmAsync(CreateFilmDto command)
         {
             var film = Film.Create(command.Name, command.Genre, command.ReleaseDate, command.Rating);
 
@@ -31,22 +31,22 @@ namespace FilmVault.Services
             );
         }
 
-        public Task DeleteMovieAsync(Guid id)
+        public Task DeleteFilmAsync(Guid id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<FilmDto>> GetAllMoviesAsync()
+        public Task<IEnumerable<FilmDto>> GetAllFilmsAsync()
         {
             throw new NotImplementedException();
         }
 
-        public Task<FilmDto?> GetMovieByIdAsync(Guid id)
+        public Task<FilmDto?> GetFilmByIdAsync(Guid id)
         {
             throw new NotImplementedException();
         }
 
-        public Task UpdateMovieAsync(Guid id, UpdateFilmDto command)
+        public Task UpdateFilmAsync(Guid id, UpdateFilmDto command)
         {
             throw new NotImplementedException();
         }

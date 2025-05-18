@@ -4,10 +4,10 @@ namespace FilmVault.Services
 {
     public interface IFilmService
     {
-        Task<FilmDto> CreateMovieAsync(CreateFilmDto command);
-        Task<FilmDto?> GetMovieByIdAsync(Guid id);
-        Task<IEnumerable<FilmDto>> GetAllMoviesAsync();
-        Task UpdateMovieAsync(Guid id, UpdateFilmDto command);
-        Task DeleteMovieAsync(Guid id);
+        Task<FilmDto> CreateFilmAsync(CreateFilmDto command);
+        Task<FilmDto?> GetFilmByIdAsync(Guid id);
+        Task<IEnumerable<FilmDto>> GetAllFilmsAsync();
+        Task UpdateFilmAsync(Guid id, UpdateFilmDto command);
+        Task DeleteFilmAsync(Guid id);
     }
 }
