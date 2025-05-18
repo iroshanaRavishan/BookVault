@@ -32,9 +32,14 @@ namespace FilmVault.Services
             );
         }
 
-        public Task DeleteFilmAsync(Guid id)
+        public async Task DeleteFilmAsync(Guid id)
         {
-            throw new NotImplementedException();
+            var filmToDelete = await _dbContext.Films.FindAsync(id);
+            if (filmToDelete != null)
+            {
+                _dbContext.Films.Remove(filmToDelete);
+                await _dbContext.SaveChangesAsync();
+            }
         }
 
         public async Task<IEnumerable<FilmDto>> GetAllFilmsAsync()
