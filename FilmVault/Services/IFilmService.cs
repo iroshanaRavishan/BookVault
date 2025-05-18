@@ -4,10 +4,10 @@ namespace BookVault.Services
 {
     public interface IBookService
     {
-        Task<BookDto> CreateMovieAsync(CreateBookDto command);
-        Task<BookDto?> GetMovieByIdAsync(Guid id);
-        Task<IEnumerable<BookDto>> GetAllMoviesAsync();
-        Task UpdateMovieAsync(Guid id, UpdateBookDto command);
-        Task DeleteMovieAsync(Guid id);
+        Task<BookDto> CreateBookAsync(CreateBookDto command);
+        Task<BookDto?> GetBookByIdAsync(Guid id);
+        Task<IEnumerable<BookDto>> GetAllBooksAsync();
+        Task UpdateBookAsync(Guid id, UpdateBookDto command);
+        Task DeleteBookAsync(Guid id);
     }
 }

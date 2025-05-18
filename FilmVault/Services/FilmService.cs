@@ -15,7 +15,7 @@ namespace BookVault.Services
             _logger = logger;
         }
 
-        public async Task<BookDto> CreateMovieAsync(CreateBookDto command)
+        public async Task<BookDto> CreateBookAsync(CreateBookDto command)
         {
             var book = Book.Create(command.Name, command.Genre, command.ReleaseDate, command.Rating);
 
@@ -31,22 +31,22 @@ namespace BookVault.Services
             );
         }
 
-        public Task DeleteMovieAsync(Guid id)
+        public Task DeleteBookAsync(Guid id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<BookDto>> GetAllMoviesAsync()
+        public Task<IEnumerable<BookDto>> GetAllBooksAsync()
         {
             throw new NotImplementedException();
         }
 
-        public Task<BookDto?> GetMovieByIdAsync(Guid id)
+        public Task<BookDto?> GetBookByIdAsync(Guid id)
         {
             throw new NotImplementedException();
         }
 
-        public Task UpdateMovieAsync(Guid id, UpdateBookDto command)
+        public Task UpdateBookAsync(Guid id, UpdateBookDto command)
         {
             throw new NotImplementedException();
         }
