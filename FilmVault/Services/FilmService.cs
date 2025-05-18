@@ -68,9 +68,13 @@ namespace BookVault.Services
             );
         }
 
-        public Task UpdateBookAsync(Guid id, UpdateBookDto command)
+        public async Task UpdateBookAsync(Guid id, UpdateBookDto command)
         {
-            throw new NotImplementedException();
+            var bookToUpdate = await _dbContext.Books.FindAsync(id);
+            if (bookToUpdate is null)
+                throw new ArgumentNullException($"Invalid Book Id.");
+            bookToUpdate.Update(command.Name, command.Genre, command.ReleaseDate, command.Rating);
+            await _dbContext.SaveChangesAsync();
         }
     }
 }
