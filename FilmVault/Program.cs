@@ -30,6 +30,14 @@ if (app.Environment.IsDevelopment())
     app.MapScalarApiReference();
 }
 
+// triggerring the seeding process
+// remove this when deploying to production
+await using (var serviceScope = app.Services.CreateAsyncScope())
+await using (var dbContext = serviceScope.ServiceProvider.GetRequiredService<FilmDbContext>())
+{
+    await dbContext.Database.EnsureCreatedAsync();
+}
+
 app.Run();
 
 internal record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
