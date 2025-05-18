@@ -68,9 +68,13 @@ namespace FilmVault.Services
             );
         }
 
-        public Task UpdateFilmAsync(Guid id, UpdateFilmDto command)
+        public async Task UpdateFilmAsync(Guid id, UpdateFilmDto command)
         {
-            throw new NotImplementedException();
+            var filmToUpdate = await _dbContext.Films.FindAsync(id);
+            if (filmToUpdate is null)
+                throw new ArgumentNullException($"Invalid Film Id.");
+            filmToUpdate.Update(command.Name, command.Genre, command.ReleaseDate, command.Rating);
+            await _dbContext.SaveChangesAsync();
         }
     }
 }
