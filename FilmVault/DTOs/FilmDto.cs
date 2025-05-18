@@ -1,4 +1,4 @@
 ﻿namespace FilmVault.DTOs
 {
-    public record FilmDto(Guid Id, string Title, string Genre, DateTimeOffset ReleaseDate, double Rating);
+    public record FilmDto(Guid Id, string Name, string Genre, DateTimeOffset ReleaseDate, double Rating);
 }
