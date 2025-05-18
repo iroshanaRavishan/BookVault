@@ -1,6 +1,7 @@
 ﻿using FilmVault.Data;
 using FilmVault.DTOs;
 using FilmVault.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace FilmVault.Services
 {
@@ -36,9 +37,18 @@ namespace FilmVault.Services
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<FilmDto>> GetAllFilmsAsync()
+        public async Task<IEnumerable<FilmDto>> GetAllFilmsAsync()
         {
-            throw new NotImplementedException();
+            return await _dbContext.Films
+                .AsNoTracking()
+                .Select(movie => new FilmDto(
+                    movie.Id,
+                    movie.Name,
+                    movie.Genre,
+                    movie.ReleaseDate,
+                    movie.Rating
+                ))
+                .ToListAsync();
         }
 
         public Task<FilmDto?> GetFilmByIdAsync(Guid id)
