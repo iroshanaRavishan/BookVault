@@ -47,7 +47,7 @@ export default function DeleteFilms() {
                 </p>
                 <button
                     onClick={() => deleteFilm(film.id)}
-                    className={{ ...styles.button}}
+                    className={ styles.button}
                     style={{ backgroundColor: '#d9534f' }}
                 >
                     Delete
