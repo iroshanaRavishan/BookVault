@@ -8,11 +8,13 @@ import styles from './componentstyles.module.css';
 
 import LandingPage from './LandingPage'
 
+import NavBar from './NavBar';
 
 export default function BookVaultApp() {
   return (
     <Router>
       <div className={styles.appContainer}>
+        <NavBar />
         <div className={styles.content}>
           <Routes>
             <Route path="/" element={<LandingPage />} />

@@ -1,3 +1,53 @@
+.appContainer {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #1c1c1c 0%, #292929 100%);
+    min-height: 100vh;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+}
+
+.navBar {
+    display: flex;
+    background-color: #222;
+    padding: 12px 24px;
+    box-shadow: 0px 2px 8px rgba(0,0,0,0.9);
+    justify-content: center;
+    gap: 24px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.navLink {
+    color: #ccc;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 16px;
+    padding: 6px 12px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+.activeNavLink {
+    color: #fff;
+    background-color: #f39c12;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 16px;
+    padding: 6px 12px;
+    border-radius: 6px;
+    box-shadow: 0 0 12px #f39c12aa;
+}
+
+.content {
+    flex-grow: 1;
+    padding: 24px;
+    max-width: 1000px;
+    margin: auto;
+    width: 100%;
+}
+
 .landingContainer {
     text-align: center;
     margin-top: 60px;
