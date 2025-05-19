@@ -72,7 +72,8 @@ return (
                   type="text"
                   value={editName}
                   onChange={(e) => setEditName(e.target.value)}
-                  className={{ ...styles.input, marginBottom: '8px' }}
+                  className={{ ...styles.input }}
+                  style={{ marginBottom: '8px' }}
                 />
                 <input
                   type="number"
@@ -81,13 +82,15 @@ return (
                   min="0"
                   max="10"
                   step="0.1"
-                  className={{ ...styles.input, marginBottom: '8px' }}
+                  className={{ ...styles.input }}
+                  style={{ marginBottom: '8px' }}
                 />
                 <input
                   type="url"
                   value={editImage}
                   onChange={(e) => setEditImage(e.target.value)}
-                  className={{ ...styles.input, marginBottom: '8px' }}
+                  className={{ ...styles.input }}
+                  style={{ marginBottom: '8px' }}
                 />
                 <label className={styles.checkboxLabel}>
                   <input
@@ -101,7 +104,8 @@ return (
                 <div>
                   <button
                     onClick={() => saveEdit(book.id)}
-                    className={{ ...styles.button, marginRight: '8px' }}
+                    className={{ ...styles.button }}
+                    style={{ marginBottom: '8px' }}
                   >
                     Save
                   </button>
