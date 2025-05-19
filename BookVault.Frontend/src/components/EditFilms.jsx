@@ -62,7 +62,7 @@ return (
     <div className={styles.pageContainer}>
       <h2 className={styles.pageTitle}>Edit Books</h2>
       {books.length === 0 ? (
-        <p className={{ fontStyle: 'italic' }}>No books available to edit.</p>
+        <p style={{ fontStyle: 'italic' }}>No books available to edit.</p>
       ) : (
         <div className={styles.bookList}>
           {books.map((book) =>
@@ -72,7 +72,7 @@ return (
                   type="text"
                   value={editName}
                   onChange={(e) => setEditName(e.target.value)}
-                  className={{ ...styles.input }}
+                  className={ styles.input }
                   style={{ marginBottom: '8px' }}
                 />
                 <input
@@ -82,14 +82,14 @@ return (
                   min="0"
                   max="10"
                   step="0.1"
-                  className={{ ...styles.input }}
+                  className={ styles.input }
                   style={{ marginBottom: '8px' }}
                 />
                 <input
                   type="url"
                   value={editImage}
                   onChange={(e) => setEditImage(e.target.value)}
-                  className={{ ...styles.input }}
+                  className={ styles.input }
                   style={{ marginBottom: '8px' }}
                 />
                 <label className={styles.checkboxLabel}>
@@ -97,14 +97,14 @@ return (
                     type="checkbox"
                     checked={editWatched}
                     onChange={() => setEditWatched(!editWatched)}
-                    className={{ marginRight: '8px' }}
+                    style={{ marginRight: '8px' }}
                   />
                   Watched
                 </label>
                 <div>
                   <button
                     onClick={() => saveEdit(book.id)}
-                    className={{ ...styles.button }}
+                    className={ styles.button }
                     style={{ marginBottom: '8px' }}
                   >
                     Save
@@ -127,7 +127,7 @@ return (
                 </p>
                 <p>
                   Watched:{' '}
-                  <strong className={{ color: book.watched ? 'green' : 'red' }}>
+                  <strong style={{ color: book.watched ? 'green' : 'red' }}>
                     {book.watched ? 'Yes' : 'No'}
                   </strong>
                 </p>

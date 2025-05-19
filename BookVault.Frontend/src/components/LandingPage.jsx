@@ -4,15 +4,15 @@ import styles from './componentstyles.module.css';
 export default function LandingPage() {
   return (
     <div className={styles.landingContainer}>
-      <h1 className={{...styles.title}} style={{ animation: 'fadeInDown 1s ease forwards' }}>
+      <h1 className={ styles.title} style={{ animation: 'fadeInDown 1s ease forwards' }}>
         Welcome to BookVault
       </h1>
-      <p className={{...styles.subtitle }} style={{ animation: 'fadeInUp 1s ease forwards' }}>
+      <p className={ styles.subtitle } style={{ animation: 'fadeInUp 1s ease forwards' }}>
         Your personal book collection manager.
       </p>
       <div className={styles.cinemaScreen}>
         <div className={styles.lightBeam}></div>
-        <div className={{...styles.projector}} style={{ animation: 'rotate 6s infinite linear' }}></div>
+        <div className={ styles.projector} style={{ animation: 'rotate 6s infinite linear' }}></div>
       </div>
       <style>
         {`

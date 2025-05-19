@@ -47,7 +47,7 @@ export default function DeleteBooks() {
                 </p>
                 <button
                     onClick={() => deleteBook(book.id)}
-                    className={{ ...styles.button}}
+                    className={ styles.button}
                     style={{ backgroundColor: '#d9534f' }}
                 >
                     Delete
