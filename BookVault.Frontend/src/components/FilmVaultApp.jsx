@@ -10,6 +10,7 @@ import LandingPage from './LandingPage'
 import CreateBook from './CreateBook';
 import EditBooks from './EditBooks';
 import GetBook from './GetBook';
+import DeleteBooks from './DeleteBooks';
 import NavBar from './NavBar';
 
 export default function BookVaultApp() {
@@ -23,6 +24,7 @@ export default function BookVaultApp() {
             <Route path="/create" element={<CreateBook />} />
             <Route path="/edit" element={<EditBooks />} />
             <Route path="/search" element={<GetBook />} />
+            <Route path="/delete" element={<DeleteBooks />} />
           </Routes>
         </div>
       </div>
