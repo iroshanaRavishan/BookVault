@@ -1,0 +1,24 @@
+import React from 'react';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route
+} from 'react-router-dom';
+import styles from './componentstyles.module.css';
+
+import LandingPage from './LandingPage'
+
+
+export default function FilmVaultApp() {
+  return (
+    <Router>
+      <div className={styles.appContainer}>
+        <div className={styles.content}>
+          <Routes>
+            <Route path="/" element={<LandingPage />} />
+          </Routes>
+        </div>
+      </div>
+    </Router>
+  )
+}
