@@ -157,6 +157,19 @@
     transition: transform 0.2s ease;
 }
 
+.buttonCancel {
+    background-color: #999;
+    color: #222;
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 1.1rem;
+    box-shadow: 0 0 6px #999999aa;
+    transition: transform 0.2s ease;
+}
+
 .message {
     margin-top: 16px;
     text-align: center;
@@ -164,4 +177,50 @@
     font-weight: 600;
     font-size: 1rem;
     text-shadow: 0 0 6px #f39c12aa;
+}
+
+.filmList {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(230px,1fr));
+    gap: 18px;
+}
+
+.filmCard {
+    background-color: #333;
+    border-radius: 12px;
+    box-shadow: 0 0 16px #f39c12bb;
+    padding: 18px;
+    text-align: center;
+    user-select: none;
+}
+
+.filmCardEditing {
+    background-color: #444;
+    border-radius: 12px;
+    box-shadow: 0 0 16px #f39c12bb;
+    padding: 18px;
+    user-select: none;
+}
+
+.filmImage {
+    width: 100%;
+    max-height: 140px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 12px;
+}
+
+
+.placeholderImage {
+    width: 100%;
+    height: 140px;
+    background-color: #555;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ccc;
+    font-style: italic;
+    font-size: 1rem;
 }

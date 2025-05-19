@@ -8,7 +8,7 @@ import styles from './componentstyles.module.css';
 
 import LandingPage from './LandingPage'
 import CreateFilm from './CreateFilm';
-
+import EditFilms from './EditFilms';
 import NavBar from './NavBar';
 
 export default function FilmVaultApp() {
@@ -20,6 +20,7 @@ export default function FilmVaultApp() {
           <Routes>
             <Route path="/" element={<LandingPage />} />
             <Route path="/create" element={<CreateFilm />} />
+            <Route path="/edit" element={<EditFilms />} />
           </Routes>
         </div>
       </div>
