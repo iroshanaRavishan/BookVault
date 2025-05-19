@@ -8,7 +8,7 @@ import styles from './componentstyles.module.css';
 
 import LandingPage from './LandingPage'
 import CreateBook from './CreateBook';
-
+import EditBooks from './EditBooks';
 import NavBar from './NavBar';
 
 export default function BookVaultApp() {
@@ -20,6 +20,7 @@ export default function BookVaultApp() {
           <Routes>
             <Route path="/" element={<LandingPage />} />
             <Route path="/create" element={<CreateBook />} />
+            <Route path="/edit" element={<EditBooks />} />
           </Routes>
         </div>
       </div>
