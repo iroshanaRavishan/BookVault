@@ -12,6 +12,7 @@ import EditBooks from './EditBooks';
 import GetBook from './GetBook';
 import DeleteBooks from './DeleteBooks';
 import NavBar from './NavBar';
+import AllBooks from './AllBooks';
 
 export default function BookVaultApp() {
   return (
@@ -21,6 +22,7 @@ export default function BookVaultApp() {
         <div className={styles.content}>
           <Routes>
             <Route path="/" element={<LandingPage />} />
+            <Route path="/" element={<AllBooks />} />
             <Route path="/create" element={<CreateBook />} />
             <Route path="/edit" element={<EditBooks />} />
             <Route path="/search" element={<GetBook />} />
