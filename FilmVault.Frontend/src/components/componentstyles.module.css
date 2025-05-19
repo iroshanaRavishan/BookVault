@@ -103,6 +103,8 @@
 
 .pageContainer {
     background-color: #222;
+    max-width: 900px;
+    margin: auto;
     padding: 24px;
     border-radius: 12px;
     box-shadow: 0 0 20px #f39c12aa;
@@ -186,12 +188,18 @@
 }
 
 .filmCard {
-    background-color: #333;
+    background-color: #fdfdfd;
     border-radius: 12px;
-    box-shadow: 0 0 16px #f39c12bb;
+    /* box-shadow: 0 0 16px #f39c12bb; */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
     padding: 18px;
     text-align: center;
     user-select: none;
+}
+
+.filmCard:hover {
+  transform: scale(1.03);
 }
 
 .filmCardEditing {
@@ -214,7 +222,8 @@
 
 .filmImage {
     width: 100%;
-    max-height: 140px;
+    /* max-height: 140px; */
+    height: 250px;
     object-fit: cover;
     border-radius: 8px;
     margin-bottom: 12px;
@@ -230,8 +239,9 @@
 
 .placeholderImage {
     width: 100%;
-    height: 140px;
-    background-color: #555;
+    /* height: 140px; */
+    height: 250px;
+    background-color: #ddd;
     border-radius: 8px;
     margin-bottom: 12px;
     display: flex;
@@ -254,4 +264,19 @@
     color: #ccc;
     font-style: italic;
     font-size: 1.2rem;
+}
+
+.filmGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.filmName {
+  margin-top: 1rem;
+  font-size: 1.1rem;
+}
+
+.filmText {
+  margin: 0.3rem 0;
 }

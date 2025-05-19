@@ -12,6 +12,7 @@ import EditFilms from './EditFilms';
 import GetFilm from './GetFilm';
 import DeleteFilms from './DeleteFilms';
 import NavBar from './NavBar';
+import AllFilms from './AllFilms';
 
 export default function FilmVaultApp() {
   return (
@@ -21,6 +22,7 @@ export default function FilmVaultApp() {
         <div className={styles.content}>
           <Routes>
             <Route path="/" element={<LandingPage />} />
+            <Route path="/" element={<AllFilms />} />
             <Route path="/create" element={<CreateFilm />} />
             <Route path="/edit" element={<EditFilms />} />
             <Route path="/search" element={<GetFilm />} />
