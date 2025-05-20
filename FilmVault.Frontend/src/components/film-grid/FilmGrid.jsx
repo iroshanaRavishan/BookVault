@@ -1,62 +1,52 @@
 import React, { useCallback, useEffect, useRef, useState } from "react"
-import styles from "./filmgrid.module.css"
-import FilmCard from "../film-card/FilmCard"
-
-// const mockFilms = [
-//   { id: 1, watched: true, title: "The Shawshank Redemption", year: 1994, genre: "Drama", director: "Frank Darabont", poster: "/placeholder.svg?height=450&width=300", rating: 9.3 },
-//   { id: 2, watched: false, title: "The Godfather", year: 1972, genre: "Crime, Drama", director: "Francis Ford Coppola", poster: "/placeholder.svg?height=450&width=300", rating: 9.2 },
-//   { id: 3, watched: true, title: "Pulp Fiction", year: 1994, genre: "Crime, Drama", director: "Quentin Tarantino", poster: "/placeholder.svg?height=450&width=300", rating: 8.9 },
-// ]
+import styles from "./filmgrid.module.css";
+import FilmCard from "../film-card/FilmCard";
+import { GoChevronLeft, GoChevronRight } from "react-icons/go";
 
 export default function FilmGrid() {
+  const [films, setFilms] = useState([]);
+  const [visibleCount, setVisibleCount] = useState(10);
+  const [loading, setLoading] = useState(true);
+  const observer = useRef();
 
+  const [currentPage, setCurrentPage] = useState(1)
+  const filmsPerPage = 8
+  const totalPages = Math.ceil(films.length / filmsPerPage)
 
-      const [films, setFilms] = useState([]);
-      const [visibleCount, setVisibleCount] = useState(10);
-      const [loading, setLoading] = useState(true);
-      const observer = useRef();
+  const indexOfLastFilm = currentPage * filmsPerPage
+  const indexOfFirstFilm = indexOfLastFilm - filmsPerPage
+  const currentFilms = films.slice(indexOfFirstFilm, indexOfLastFilm)
 
-    
-      useEffect(() => {
-        fetchFilmsFromBackend();
-      }, []);
-    
-      const fetchFilmsFromBackend = async () => {
-        try {
-          const res = await fetch('https://localhost:7157/api/Films');
-          const data = await res.json();
-          setFilms(data);
-        } catch (error) {
-          console.error('Error fetching films:', error);
-        } finally {
-          setLoading(false);
+  useEffect(() => {
+    fetchFilmsFromBackend();
+  }, []);
+
+  const fetchFilmsFromBackend = async () => {
+    try {
+      const res = await fetch('https://localhost:7157/api/Films');
+      const data = await res.json();
+      setFilms(data);
+    } catch (error) {
+      console.error('Error fetching films:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const lastFilmRef = useCallback(
+    (node) => {
+      if (observer.current) observer.current.disconnect();
+
+      observer.current = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting && visibleCount < films.length) {
+          setVisibleCount((prev) => prev + 10);
         }
-      };
-    
-        const lastFilmRef = useCallback(
-        (node) => {
-          if (observer.current) observer.current.disconnect();
-    
-          observer.current = new IntersectionObserver((entries) => {
-            if (entries[0].isIntersecting && visibleCount < films.length) {
-              setVisibleCount((prev) => prev + 10);
-            }
-          });
-    
-          if (node) observer.current.observe(node);
-        },
-        [visibleCount, films.length]
-      );
+      });
 
-              const [currentPage, setCurrentPage] = useState(1)
-        const filmsPerPage = 8
-        const totalPages = Math.ceil(films.length / filmsPerPage)
-
-        const indexOfLastFilm = currentPage * filmsPerPage
-        const indexOfFirstFilm = indexOfLastFilm - filmsPerPage
-        const currentFilms = films.slice(indexOfFirstFilm, indexOfLastFilm)
-    
-
+      if (node) observer.current.observe(node);
+    },
+    [visibleCount, films.length]
+  );
 
   const handleNextPage = () => {
     if (currentPage < totalPages) {
@@ -72,7 +62,20 @@ export default function FilmGrid() {
 
   return (
     <div>
-         {loading && <p>Loading films...</p>}
+      {loading && (
+        <div className={styles.loadingWidget}>
+          <div className={styles.spinner}></div>
+          <span>Loading films...</span>
+        </div>
+      )}
+      
+      {films && films.length === 0 && !loading && (
+        <div className={styles.noFilms}>
+          <img src="../src/assets/disconnected.png" className={styles.disconnectedImage} alt="disconnected-image" />
+          <span>No films found</span>
+          <p>Please add some films to your collection.</p>
+        </div>
+      )}
 
       <div className={styles.gridContainer}>
         {currentFilms.map((film) => (
@@ -80,14 +83,13 @@ export default function FilmGrid() {
         ))}
       </div>
 
-
       <div className={styles.pagination}>
         <button className={styles.button} onClick={handlePrevPage} disabled={currentPage === 1}>
-          <span className={styles.icon}>⟨</span>
+          <GoChevronLeft size={20}/>
         </button>
         <span>Page {currentPage} of {totalPages}</span>
         <button className={styles.button} onClick={handleNextPage} disabled={currentPage === totalPages}>
-          <span className={styles.icon}>⟩</span>
+          <GoChevronRight size={20}/>
         </button>
       </div>
     </div>

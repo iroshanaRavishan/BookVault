@@ -1,51 +1,78 @@
 .card {
-  border-radius: 8px;
+  background-color: #fff;
+  border-radius: 16px;
   overflow: hidden;
-  transition: box-shadow 0.3s ease;
-  background: #cacaca;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 270px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  height: 300px;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
 }
 
 .imageWrapper {
   position: relative;
-  aspect-ratio: 2 / 3;
+  height: 200px;
   overflow: hidden;
 }
 
-.poster {
+.filmImage {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.5s ease;
+  display: block;
+  transition: transform 0.4s ease;
 }
 
-.scaleUp {
-  transform: scale(1.1);
+.card:hover .filmImage {
+  transform: scale(1.05);
+}
+
+.placeholderImage {
+  width: 100%;
+  height: 100%;
+  background-color: #ddd;
+  color: #666;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .gradientOverlay {
   position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
-  opacity: 0;
-  transition: opacity 0.3s ease;
+  bottom: 0;
+  width: 100%;
+  height: 60%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+  pointer-events: none;
 }
 
 .overlayText {
   position: absolute;
-  bottom: 0;
-  padding: 12px;
-  color: rgb(0, 0, 0);
+  bottom: 10px;
+  left: 16px;
+  color: #fff;
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
 }
 
 .show {
   opacity: 1;
+  transform: translateY(0);
 }
 
 .director {
-  font-size: 0.85rem;
+  font-weight: 500;
+  font-size: 14px;
   margin-bottom: 4px;
 }
 
@@ -53,61 +80,82 @@
   display: flex;
   align-items: center;
   gap: 4px;
-  font-size: 0.75rem;
+  font-size: 14px;
 }
 
 .starIcon {
-  color: #facc15;
+  color: gold;
+}
+
+.cardHeader {
+  padding-top: 8px;
 }
 
 .cardContent {
-  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 150px;
 }
 
 .title {
-  font-weight: 600;
-  font-size: 1rem;
-  margin: 0;
-  white-space: nowrap;
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #333;
+  width: 100%;
   overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .infoRow {
+  position: absolute;
+  top: 10px;
+  right: 10px;
   display: flex;
-  justify-content: space-between;
-  margin-top: 6px;
-  font-size: 0.85rem;
-}
-
-.year {
-  color: #888;
+  flex-direction: row;
+  font-size: 14px;
+  color: #666;
 }
 
 .badge {
-  padding: 2px 8px;
-  background: #eee;
+  background-color: #eee;
   border-radius: 12px;
-  font-size: 0.75rem;
+  padding: 2px 8px;
+  font-size: 12px;
+  color: #444;
+}
+
+.filmText {
+  padding: 0 16px;
+  font-size: 14px;
+  margin: 4px 0px;
+  color: #555;
+}
+
+.filmName {
+  padding: 0 16px;
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0px;
+  color: #222;
 }
 
 .cardFooter {
-  padding: 12px 16px 16px;
+  padding: 16px;
+  text-align: center;
 }
 
 .button {
-  width: 100%;
-  padding: 8px 12px;
-  background-color: #e11d48;
-  color: white;
+  background-color: #1e90ff;
+  color: #fff;
   border: none;
-  border-radius: 6px;
-  font-size: 0.85rem;
-  font-weight: 500;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: 14px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background 0.3s ease;
 }
 
 .button:hover {
-  background-color: #be123c;
-}
+  background-color: #0f78d1;
+} 
