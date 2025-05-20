@@ -1,29 +1,48 @@
 import React, { useState } from "react";
-import { FaSearch, FaFilter } from "react-icons/fa";
+import { FaSearch, FaFilter, FaTimes } from "react-icons/fa";
 import styles from "./searchfilter.module.css"; // Fixed typo in import
+import FilterModal from "../filter-modal/FilterModal";
 
 export default function SearchFilters() {
-  const [yearRange, setYearRange] = useState([1950, 2025]);
-  const [ratingRange, setRatingRange] = useState([0, 10]);
-  const [showFilterPanel, setShowFilterPanel] = useState(false);
+  const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
+  const [searchText, setSearchText] = useState('');
+  const [filters, setFilters] = useState({
+    yearRange: 2025,
+    rating: 2.6,
+    director: ''
+  });
 
-  const handleYearChange = (index, value) => {
-    const updated = [...yearRange];
-    updated[index] = Number(value);
-    setYearRange(updated);
+  function handleClear() {
+    setSearchText('');
   };
 
-  const handleRatingChange = (index, value) => {
-    const updated = [...ratingRange];
-    updated[index] = Number(value);
-    setRatingRange(updated);
+  function openFilterModal() {
+    setIsFilterModalOpen(true);
+  };
+
+  function closeFilterModal() {
+    setIsFilterModalOpen(false);
+  };
+
+  function handleApplyFilters(newFilters){
+    setFilters(newFilters);
+    console.log('Applied filters:', newFilters);
+    // Here you would typically filter your book data based on these filters
   };
 
   return (
     <div className={styles.searchFilters}>
       <div className={styles.searchInputWrapper}>
         <FaSearch className={styles.icon} />
-        <input type="text" placeholder="Search books..." className={styles.searchInput} />
+        <input   type="text"
+          placeholder="Search books..."
+          className={styles.searchInput}
+          value={searchText}
+          onChange={(e) => setSearchText(e.target.value)} />
+
+        {searchText && (
+          <FaTimes className={styles.clearIcon} onClick={handleClear} />
+        )}
       </div>
 
       <div className={styles.filters}>
@@ -48,78 +67,16 @@ export default function SearchFilters() {
           <option value="rating-asc">Rating (Lowest)</option>
         </select>
 
-        <button className={styles.filterBtn} onClick={() => setShowFilterPanel(!showFilterPanel)}>
+        <button className={styles.filterBtn} onClick={openFilterModal}   > 
           <FaFilter />
         </button>
       </div>
 
-      {showFilterPanel && (
-        <div className={styles.filterPanel}>
-          <h3>Filter Books</h3>
-          <p>Refine your book collection with advanced filters.</p>
-
-          <div className={styles.filterSection}>
-            <label>Year Range</label>
-            <div className={styles.rangeSliders}>
-              <input
-                type="range"
-                min="1900"
-                max="2025"
-                step="1"
-                value={yearRange[0]}
-                onChange={(e) => handleYearChange(0, e.target.value)}
-              />
-              <input
-                type="range"
-                min="1900"
-                max="2025"
-                step="1"
-                value={yearRange[1]}
-                onChange={(e) => handleYearChange(1, e.target.value)}
-              />
-            </div>
-            <div className={styles.rangeValues}>
-              <span>{yearRange[0]}</span>
-              <span>{yearRange[1]}</span>
-            </div>
-          </div>
-
-          <div className={styles.filterSection}>
-            <label>Rating</label>
-            <div className={styles.rangeSliders}>
-              <input
-                type="range"
-                min="0"
-                max="10"
-                step="0.1"
-                value={ratingRange[0]}
-                onChange={(e) => handleRatingChange(0, e.target.value)}
-              />
-              <input
-                type="range"
-                min="0"
-                max="10"
-                step="0.1"
-                value={ratingRange[1]}
-                onChange={(e) => handleRatingChange(1, e.target.value)}
-              />
-            </div>
-            <div className={styles.rangeValues}>
-              <span>{ratingRange[0].toFixed(1)}</span>
-              <span>{ratingRange[1].toFixed(1)}</span>
-            </div>
-          </div>
-
-          <div className={styles.filterSection}>
-            <label>Director</label>
-            <input type="text" placeholder="Search directors..." className={styles.directorInput} />
-          </div>
-
-          <button className={styles.applyBtn} onClick={() => setShowFilterPanel(false)}>
-            Apply Filters
-          </button>
-        </div>
-      )}
+      <FilterModal 
+        isOpen={isFilterModalOpen}
+        onClose={closeFilterModal}
+        onApplyFilters={handleApplyFilters}
+      />
     </div>
   );
 }
