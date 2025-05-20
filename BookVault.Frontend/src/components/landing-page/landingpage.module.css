@@ -1,0 +1,82 @@
+
+.landingPage {
+    display: flex;
+    flex-direction: column;
+}
+
+.title {
+    font-size: 72px;
+    font-weight: 900;
+    color: #f39c12;
+    margin-bottom: 12px;
+    text-shadow: 0 0 12px #f39d12be;
+}
+
+.subtitle {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 30px;
+    margin-bottom: 24px;
+    color: #ffffffb0;
+}
+
+.LandingPageIntroText {
+  position: absolute;
+  bottom: 150px;
+  left: 50%;
+  transform: translateX(-50%); /* Center horizontally */
+  font-size: 20px;
+  padding: 12px 20px;
+  border-radius: 10px;
+  line-height: 1.6;
+  letter-spacing: 0.5px;
+  text-align: center;
+}
+
+.landingIntro {
+  color: #ffffffa4;
+  font-size: 20px;
+  padding: 15px 25px;
+  width: 870px;
+  border-radius: 10px;
+  line-height: 1.8;
+  letter-spacing: 1px;
+}
+
+.typeText {
+  color: #f39c12;
+  font-weight: bold;
+  font-size: 35px;
+}
+
+.bouncingArrow {
+  position: absolute;
+  top: 250px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 32px;
+  color: #ffffffcc;
+  animation: bounce 1.5s infinite;
+  cursor: pointer;
+}
+
+.dancingFont {
+  font-family: 'Dancing Script', cursive;
+  word-spacing: 5px;
+}
+
+.landingContainer {
+    text-align: center;
+    margin-top: 60px;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translate(-50%, 0);
+  }
+  50% {
+    transform: translate(-50%, -10px);
+  }
+}

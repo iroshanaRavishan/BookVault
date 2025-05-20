@@ -1,8 +1,12 @@
 import React from 'react';
-import styles from './componentstyles.module.css';
-import AllBooks from './AllBooks';
+import styles from './landingpage.module.css';
+
 import { useTypewriter, Cursor } from 'react-simple-typewriter';
 import { FaAnglesDown } from "react-icons/fa6";
+import SearchFilters from '../search-filter/SearchFilters';
+import BookCard from '../book-card/BookCard';
+import BookGrid from '../book-grid/BookGrid';
+import AllBooks from '../all-books/AllBooks';
 
 export default function LandingPage() {
 
@@ -10,6 +14,36 @@ export default function LandingPage() {
     words: ['manage your personal book collection.', 'Add books,', 'Organize the colletion,', 'Search books', 'and keep track of the movies you have watched.'],
     loop: {},
   });
+
+  const mockBooks = [
+  {
+    id: 1,
+    title: "The Shawshank Redemption",
+    year: 1994,
+    genre: "Drama",
+    director: "Frank Darabont",
+    poster: "/placeholder.svg?height=450&width=300",
+    rating: 9.3,
+  },
+  {
+    id: 2,
+    title: "The Godfather",
+    year: 1972,
+    genre: "Crime, Drama",
+    director: "Francis Ford Coppola",
+    poster: "/placeholder.svg?height=450&width=300",
+    rating: 9.2,
+  },
+  {
+    id: 3,
+    title: "Pulp Fiction",
+    year: 1994,
+    genre: "Crime, Drama",
+    director: "Quentin Tarantino",
+    poster: "/placeholder.svg?height=450&width=300",
+    rating: 8.9,
+  },
+]
 
   return (
     <div className={styles.landingPage}>
