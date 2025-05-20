@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import './App.css'
-import BookVaultApp from './components/BookVaultApp'
+import BookVaultApp from './components/root-book-vault/BookVaultApp'
 
 function App() {
 
