@@ -4,15 +4,14 @@ import {
   Routes,
   Route
 } from 'react-router-dom';
-import styles from './componentstyles.module.css';
+import styles from './filmvaultapp.module.css';
 
-import LandingPage from './LandingPage'
-import CreateFilm from './CreateFilm';
-import EditFilms from './EditFilms';
-import GetFilm from './GetFilm';
-import DeleteFilms from './DeleteFilms';
-import NavBar from './NavBar';
-import AllFilms from './AllFilms';
+import LandingPage from '../landing-page/LandingPage'
+import CreateFilm from '../create-films/CreateFilm';
+import DeleteFilms from '../delete-films/DeleteFilms';
+import NavBar from '../nav-bar/NavBar';
+import AllFilms from '../all-films/AllFilms';
+import EditFilms from '../edit-films/EditFilms';
 
 export default function FilmVaultApp() {
   return (
@@ -25,7 +24,7 @@ export default function FilmVaultApp() {
             <Route path="/" element={<AllFilms />} />
             <Route path="/create" element={<CreateFilm />} />
             <Route path="/edit" element={<EditFilms />} />
-            <Route path="/search" element={<GetFilm />} />
+            <Route path="/search" element={<AllFilms />} />
             <Route path="/delete" element={<DeleteFilms />} />
           </Routes>
         </div>
