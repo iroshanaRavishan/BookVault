@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import styles from './componentstyles.module.css';
-import { getStoredBooks } from '../utils/storage';
-import { saveBooks } from '../utils/saveBooks';
+import styles from './editbooks.module.css';
+import { getStoredBooks } from '../../utils/storage';
+import { saveBooks } from '../../utils/saveBooks';
 
 export default function EditBooks() {
 
