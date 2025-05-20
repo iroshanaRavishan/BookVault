@@ -4,8 +4,8 @@ import styles from './componentstyles.module.css';
 export const BookCard = forwardRef(({ book }, ref) => {
   return (
     <div className={styles.bookCard} ref={ref}>
-      {book.image ? (
-        <img src={book.image} alt={book.name} className={styles.bookImage} />
+      {book.imageUrl ? (
+        <img src={book.imageUrl} alt={book.name} className={styles.bookImage} />
       ) : (
         <div className={styles.placeholderImage}>No Image</div>
       )}
@@ -14,7 +14,7 @@ export const BookCard = forwardRef(({ book }, ref) => {
         Rating: <strong>{book.rating}</strong>
       </p>
       <p className={styles.bookText}>
-        Read: <strong style={{ color: book.read ? 'green' : 'red' }}>
+        Read:{' '} <strong style={{ color: book.read ? 'green' : 'red' }}>
           {book.read ? 'Yes' : 'No'}
         </strong>
       </p>
