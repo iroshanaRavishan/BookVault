@@ -7,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
+builder.Services.AddCors();
 builder.Services.AddOpenApi();
 builder.Services.AddTransient<IFilmService, FilmService>();
 builder.Services.AddControllers();
@@ -35,6 +36,12 @@ await using (var dbContext = serviceScope.ServiceProvider.GetRequiredService<Fil
 {
     await dbContext.Database.EnsureCreatedAsync();
 }
+
+app.UseCors(policy => policy
+    .WithOrigins("https://localhost:5173", "http://localhost:5173")  // Replace with app URL
+    .AllowAnyHeader()
+    .AllowAnyMethod()
+    .AllowCredentials());
 
 app.UseHttpsRedirection();
 
