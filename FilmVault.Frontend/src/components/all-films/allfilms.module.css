@@ -1,0 +1,23 @@
+.pageContainer {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    max-width: 900px;
+    margin: auto;
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: 0 0 20px #f39c12aa;
+}
+
+.pageTitle {
+    font-size: 32px;
+    color: #f39c12;
+    margin-bottom: 18px;
+    text-align: center;
+}
+
+.pageContent {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
