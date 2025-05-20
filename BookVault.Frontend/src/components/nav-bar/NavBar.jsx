@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import styles from './componentstyles.module.css';
+import styles from './navbar.module.css';
 import { TbCopyPlus, TbCopyPlusFilled } from "react-icons/tb";
 import { RiEditBoxFill, RiHome9Fill, RiHome9Line } from "react-icons/ri";
 import { RiEditBoxLine } from "react-icons/ri";
