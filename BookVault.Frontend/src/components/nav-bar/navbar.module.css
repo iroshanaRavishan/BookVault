@@ -8,6 +8,7 @@
     position: sticky;
     top: 0;
     height: 45px;
+    background-color: #000000a9;
     z-index: 100;
 }
 

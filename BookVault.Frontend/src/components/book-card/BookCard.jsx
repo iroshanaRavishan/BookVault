@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { FaStar } from "react-icons/fa";
 import styles from "./Bookcard.module.css"; // Import your CSS module
 
 
@@ -20,33 +19,28 @@ export default function BookCard({ book }) {
         )}
 
         <div className={styles.gradientOverlay}></div>
-        <div className={`${styles.overlayText} ${isHovered ? styles.show : ""}`}>
-          <p className={styles.director}>{book.director}</p>
-          <div className={styles.rating}>
-            <FaStar className={styles.starIcon} />
-            <span>{book.rating.toFixed(1)}</span>
-          </div>
-        </div>
+        <div className={`${styles.overlayText} ${isHovered ? styles.show : ""}`}></div>
       </div>
       <div className={styles.cardContent}>
-        <h3 className={styles.title}>{book.title}</h3>
-        <div className={styles.infoRow}>
-          <span className={styles.year}>{book.year}</span>
-          <span className={styles.badge}>{book.genre.split(",")[0]}</span>
+         <div className={styles.infoRow}>
+            <span className={styles.badge}>{book.genre.split(",")[0]}</span>
+          </div>
+        <div className={styles.cardHeader}>
+          <h4 className={styles.bookName}>{book.name}</h4>
         </div>
-      </div>
-      <p className={styles.bookText}>
-        Read:{' '} <strong style={{ color: book.read == true ? 'green' : 'red' }}>
-          {book.read==true ? 'Yes' : 'No'}
-        </strong>
-      </p>
-      <h4 className={styles.bookName}>{book.name}</h4>
-      <p className={styles.bookText}>
-        Rating: <strong>{book.rating}</strong>
-      </p>
+        <p className={styles.bookText}>
+          Read:{' '} <strong style={{ color: book.read == true ? 'green' : 'red' }}>
+            {book.read==true ? 'Yes' : 'No'}
+          </strong>
+        </p>
+        
+        <p className={styles.bookText}>
+          Rating: <strong>{book.rating}</strong>
+        </p>
 
-      <div className={styles.cardFooter}>
-        <button className={styles.button}>View Details</button>
+        <div className={styles.cardFooter}>
+          <button className={styles.button}>View Details</button>
+        </div>
       </div>
     </div>
   );
