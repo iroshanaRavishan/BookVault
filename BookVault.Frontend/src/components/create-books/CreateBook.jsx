@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import styles from './componentstyles.module.css';
-import { getStoredBooks } from '../utils/storage';
-import { saveBooks } from '../utils/saveBooks';
+import styles from './createbooks.module.css';
+import { getStoredBooks } from '../../utils/storage';
+import { saveBooks } from '../../utils/saveBooks';
 
 export default function CreateBook() {
     const [name, setName] = useState('');
