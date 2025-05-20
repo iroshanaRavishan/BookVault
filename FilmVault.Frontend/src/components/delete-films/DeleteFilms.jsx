@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import styles from './componentstyles.module.css';
-import { getStoredFilms } from '../utils/storage';
-import { saveFilms } from '../utils/saveFilms';
+import styles from './deletefilms.module.css';
+import { getStoredFilms } from '../../utils/storage';
+import { saveFilms } from '../../utils/saveFilms';
 
 export default function DeleteFilms() {
     const [films, setFilms] = useState([]);

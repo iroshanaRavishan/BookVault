@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import styles from './componentstyles.module.css';
-import { getStoredFilms } from '../utils/storage';
-import { saveFilms } from '../utils/saveFilms';
+import styles from './createfilms.module.css';
+import { getStoredFilms } from '../../utils/storage';
+import { saveFilms } from '../../utils/saveFilms';
 
 export default function CreateFilm() {
     const [name, setName] = useState('');
