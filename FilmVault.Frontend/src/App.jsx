@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import './App.css'
-import FilmVaultApp from './components/FilmVaultApp'
+import FilmVaultApp from './components/root-film-vault/FilmVaultApp'
 
 function App() {
 
