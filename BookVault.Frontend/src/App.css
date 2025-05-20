@@ -7,4 +7,5 @@ body {
     background-position: center;
     height: 100vh; /* or any height */
     background-repeat: no-repeat;
+    background-color: #f5f5f5;
 }
