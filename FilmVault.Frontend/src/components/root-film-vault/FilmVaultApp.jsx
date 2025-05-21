@@ -12,6 +12,7 @@ import DeleteFilms from '../delete-films/DeleteFilms';
 import NavBar from '../nav-bar/NavBar';
 import AllFilms from '../all-films/AllFilms';
 import EditFilms from '../edit-films/EditFilms';
+import Footer from '../footer-section/Footer';
 
 export default function FilmVaultApp() {
   return (
@@ -28,6 +29,7 @@ export default function FilmVaultApp() {
             <Route path="/delete" element={<DeleteFilms />} />
           </Routes>
         </div>
+        <Footer />
       </div>
     </Router>
   )
