@@ -3,7 +3,7 @@ import styles from './filtermodal.module.css';
 
 export default function FilterModal({ isOpen, onClose, onApplyFilters }) {
   const [yearRange, setYearRange] = useState(2015);
-  const [rating, setRating] = useState(5.0);
+  const [rating, setRating] = useState(2.5);
   const [director, setDirector] = useState('');
   const modalRef = useRef(null);
 
@@ -13,7 +13,7 @@ export default function FilterModal({ isOpen, onClose, onApplyFilters }) {
   };
 
   const getRatingPercentage = () => {
-    return ((rating - 10) / (0 - 10)) * 100;
+    return ((rating - 5) / (0 - 5)) * 100;
   };
 
   useEffect(() => {
@@ -99,7 +99,7 @@ export default function FilterModal({ isOpen, onClose, onApplyFilters }) {
             <input
               type="range"
               min="0"
-              max="10"
+              max="5"
               step="0.1"
               value={rating}
               onChange={handleRatingChange}
@@ -108,7 +108,7 @@ export default function FilterModal({ isOpen, onClose, onApplyFilters }) {
             />
             <div className={styles.rangeValues}>
               <span>{parseFloat(rating).toFixed(1)}</span>
-              <span>10.0</span>
+              <span>5.0</span>
             </div>
           </div>
 
