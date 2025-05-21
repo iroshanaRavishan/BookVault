@@ -19,9 +19,12 @@
 .form {
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
+    width: 100%;
     gap: 14px;
     max-width: 400px;
-    margin: auto;
+    margin: 0 50px;
+    /* margin: auto; */
 }
 
 .label {
