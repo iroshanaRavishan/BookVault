@@ -5,14 +5,13 @@
     max-width: 900px;
     margin: auto;
     padding: 24px;
-    border-radius: 12px;
-    background-color: #f5f5f5;
+    background-color: rgb(255, 255, 255);
 }
 
 .pageTitle {
     font-size: 32px;
     color: #f39c12;
-    margin-bottom: 18px;
+    margin: 40px 0;
     text-align: center;
 }
 
