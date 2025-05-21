@@ -7,14 +7,13 @@
     max-width: 900px;
     margin: auto;
     padding: 24px;
-    border-radius: 12px;
-    box-shadow: 0 0 20px #f39c12aa;
+    background-color: rgb(255, 255, 255);
 }
 
 .pageTitle {
     font-size: 32px;
     color: #f39c12;
-    margin-bottom: 18px;
+    margin: 40px 0;
     text-align: center;
 }
 
