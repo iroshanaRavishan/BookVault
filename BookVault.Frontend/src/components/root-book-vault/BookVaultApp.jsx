@@ -12,6 +12,7 @@ import DeleteBooks from '../delete-books/DeleteBooks';
 import NavBar from '../nav-bar/NavBar';
 import AllBooks from '../all-books/AllBooks';
 import EditBooks from '../edit-books/EditBooks';
+import Footer from '../footer-section/Footer';
 
 export default function BookVaultApp() {
   return (
@@ -28,6 +29,7 @@ export default function BookVaultApp() {
             <Route path="/delete" element={<DeleteBooks />} />
           </Routes>
         </div>
+        <Footer />
       </div>
     </Router>
   )
