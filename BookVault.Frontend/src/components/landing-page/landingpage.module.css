@@ -4,10 +4,27 @@
     flex-direction: column;
 }
 
+.landingContainer {
+    text-align: center;
+    margin-top: -70px;
+    display: flex;
+    flex-direction: column;
+    background-image: 
+      linear-gradient(90deg, rgba(0, 0, 0, 0.5), rgba(255, 255, 255, 0)),
+      url('../src/assets/bacgroundImage.png');
+    background-size: cover;
+    background-position: center;
+    height: 101vh;
+    background-repeat: no-repeat;
+    top: -30px;
+    min-height: 800px;
+}
+
 .title {
     font-size: 72px;
     font-weight: 900;
     color: #f39c12;
+    margin-top: 150px;
     margin-bottom: 12px;
     text-shadow: 0 0 12px #f39d12be;
 }
@@ -64,13 +81,6 @@
   word-spacing: 5px;
 }
 
-.landingContainer {
-    text-align: center;
-    margin-top: 60px;
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-}
 
 @keyframes bounce {
   0%, 100% {
