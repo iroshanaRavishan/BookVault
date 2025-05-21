@@ -1,0 +1,35 @@
+.starRating {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.starWrapper {
+  display: inline-flex;
+  color: #FFA41C; /* Orange/gold star color */
+}
+
+.star {
+  width: 20px;
+  height: 20px;
+}
+
+.emptyStar {
+  color: #e0e0e0; /* Light gray for empty stars */
+}
+
+.ratingValue {
+  margin-left: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #555;
+}
+
+/* Optional: Add hover effect for interactive ratings */
+.starRating.interactive .starWrapper {
+  cursor: pointer;
+}
+
+.starRating.interactive .starWrapper:hover {
+  transform: scale(1.1);
+}
