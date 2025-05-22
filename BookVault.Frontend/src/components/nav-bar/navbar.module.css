@@ -1,0 +1,47 @@
+.navBar {
+    display: flex;
+    padding: 12px 24px;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    height: 45px;
+    background-color: #000000a9;
+    z-index: 100;
+}
+
+.navBarLinks {
+    display: flex;
+}
+
+.navBarLogo {
+    height: 185px;
+    width: 100%;
+}
+
+.navFlex {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 85px;
+}
+
+.navLink {
+    color: #e2e2e2;
+    text-decoration: none;
+    font-size: 14px;
+    padding: 6px 12px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+.activeNavLink {
+    color: #f29b28;
+    text-decoration: none;
+    font-size: 14px;
+    padding: 6px 12px;
+    border-radius: 25px;
+}

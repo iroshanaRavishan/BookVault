@@ -1,0 +1,392 @@
+.bookCard {
+  width: 280px;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+}
+
+.bookCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+}
+
+.imageContainer {
+  position: relative;
+  height: 380px;
+  overflow: hidden;
+}
+
+.bookImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.placeholderImage {
+  width: 100%;
+  height: 100%;
+  background-color: #ddd;
+  color: #666;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bookCard:hover .bookImage {
+  transform: scale(1.05);
+}
+
+.overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+  padding: 20px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  height: 100%;
+}
+
+.bookCard:hover .overlay {
+  opacity: 1;
+}
+
+.detailsButton {
+  background: #e50914;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.detailsButton:hover {
+  background: #f40612;
+}
+
+.readBadge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 6px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.readIcon {
+  width: 16px;
+  height: 16px;
+  color: #4caf50;
+}
+
+.contentContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 16px;
+}
+
+.genresContainer {
+  max-width: 100px;
+  margin-left: 20px;
+}
+
+.titleRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 8px;
+}
+
+.bookName {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: #333;
+  line-height: 1.3;
+  flex: 1;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  border-radius: 4px;
+  font-weight: 600;
+  color: #333;
+}
+
+.genreBadgesList {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: flex-end;
+}
+
+.starIcon {
+  width: 16px;
+  height: 16px;
+  color: #ffc107;
+}
+
+.yearContainer {
+  margin-bottom: 5px;
+}
+
+.year {
+  color: #666;
+  font-size: 13px;
+}
+
+.genreContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.genreTag {
+  background: #f0f0f0;
+  color: #555;
+  padding: 4px 10px;
+  border-radius: 16px;
+  font-size: 11px;
+  font-weight: 500;
+  text-align: right;
+}
+
+/* Modal/Popup Styles */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 20px;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.modalContent {
+  background: white;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 800px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  animation: slideUp 0.4s ease;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(30px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.closeButton {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 10;
+  transition: background 0.2s ease;
+}
+
+.closeButton:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.modalGrid {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 30px;
+}
+
+@media (max-width: 768px) {
+  .modalGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.modalImageContainer {
+  position: relative;
+  height: 100%;
+}
+
+.modalImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px 0 0 12px;
+}
+
+@media (max-width: 768px) {
+  .modalImage {
+    height: 400px;
+    border-radius: 12px 12px 0 0;
+  }
+}
+
+.modalReadBadge {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.modalDetails {
+  padding: 30px 30px 30px 0;
+}
+
+@media (max-width: 768px) {
+  .modalDetails {
+    padding: 0 20px 30px;
+  }
+}
+
+.modalTitleRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 15px;
+}
+
+.modalTitle {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 700;
+  color: #222;
+  line-height: 1.2;
+}
+
+.modalRating {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 16px;
+  color: #333;
+}
+
+.modalInfo {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.modalYear, .modalDuration {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  color: #666;
+  font-size: 16px;
+}
+
+.modalGenres {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 25px;
+}
+
+.modalGenreTag {
+  background: #f0f0f0;
+  color: #555;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.modalSection {
+  margin-bottom: 20px;
+}
+
+.modalSectionTitle {
+  font-size: 16px;
+  font-weight: 600;
+  color: #444;
+  margin: 0 0 8px 0;
+}
+
+.modalPlot {
+  line-height: 1.6;
+  color: #555;
+  margin: 0;
+  font-size: 14px;
+}
+
+.modalReadSection {
+  margin-top: 30px;
+}
+
+.readButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #e50914;
+  color: white;
+  text-decoration: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: background 0.2s ease;
+  margin-top: 10px;
+}
+
+.readButton:hover {
+  background: #f40612;
+}
+
+.playIcon {
+  width: 20px;
+  height: 20px;
+}
