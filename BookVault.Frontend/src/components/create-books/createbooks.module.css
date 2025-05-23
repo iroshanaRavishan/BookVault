@@ -1,70 +1,448 @@
 .pageContainer {
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    max-width: 900px;
-    margin: auto;
-    padding: 25px 25px 60px 25px;
-    background-color: rgb(255, 255, 255);
-    min-height: 368px;
+  min-height: 100vh;
+  padding: 40px 20px;
+  background-color: #f8f9fa;
+  display: flex;
+  justify-content: center;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.formCard {
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  max-width: 900px;
+  padding: 30px;
+  margin-bottom: 40px;
+}
+
+.formHeader {
+  text-align: center;
+  margin-bottom: 30px;
 }
 
 .pageTitle {
-    font-size: 32px;
-    color: #f39c12;
-    margin: 40px 0;
-    text-align: center;
+  margin: 0;
+  font-size: 28px;
+  font-weight: 700;
+  color: #333;
+}
+
+.subtitle {
+  margin: 8px 0 0;
+  color: #666;
+  font-size: 16px;
+}
+
+.messageBox {
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 24px;
+  font-size: 15px;
+  animation: fadeIn 0.3s ease;
+}
+
+.success {
+  background-color: #e7f7ed;
+  color: #1d6f42;
+  border-left: 4px solid #28a745;
+}
+
+.error {
+  background-color: #feeaea;
+  color: #d63031;
+  border-left: 4px solid #ff4d4d;
 }
 
 .form {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    width: 100%;
-    gap: 14px;
-    max-width: 400px;
-    margin: 0 50px;
-    /* margin: auto; */
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+
+.formColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.formRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
 .label {
-    font-weight: 600;
-    font-size: 16px;
-    color: #f39c12;
+  font-size: 14px;
+  font-weight: 600;
+  color: #444;
 }
 
 .input {
-    padding: 10px;
-    border-radius: 6px;
-    border: none;
-    font-size: 16px;
+  padding: 12px 14px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 15px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  background-color: #fff;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #4a6fa5;
+  box-shadow: 0 0 0 3px rgba(74, 111, 165, 0.15);
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.helpText {
+  font-size: 12px;
+  color: #777;
+  margin-top: 4px;
+}
+
+.formDivider {
+  height: 1px;
+  background-color: #eee;
+  margin: 10px 0;
+}
+
+.fileUpload {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.fileInput {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+.fileInputLabel {
+  flex: 1;
+  padding: 12px 14px;
+  border: 1px dashed #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #666;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  background-color: #f9f9f9;
+}
+
+.browseButton {
+  padding: 12px 20px;
+  background-color: #f0f0f0;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #444;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.browseButton:hover {
+  background-color: #e0e0e0;
+}
+
+.checkboxContainer {
+  margin: 10px 0;
 }
 
 .checkboxLabel {
-    font-size: 16px;
-    color: #f39c12;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding-left: 30px;
+  cursor: pointer;
+  font-size: 15px;
+  user-select: none;
+    color: #666;
+
 }
 
-.button {
-    background-color: #f39c12;
-    color: #222;
-    padding: 12px;
-    border-radius: 8px;
-    border: none;
-    font-weight: 700;
-    cursor: pointer;
-    box-shadow: 0 0 12px #f39c12aa;
-    transition: transform 0.2s ease;
+.checkbox {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
 }
 
-.message {
-    margin-top: 16px;
-    text-align: center;
-    color: #ffffffcc;
-    font-weight: 600;
-    font-size: 16px;
-    text-shadow: 0 0 6px #f39c12aa;
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: #fff;
+  border: 2px solid #ddd;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.checkboxLabel:hover .checkmark {
+  border-color: #4a6fa5;
+}
+
+.checkbox:checked ~ .checkmark {
+  background-color: #4a6fa5;
+  border-color: #4a6fa5;
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.checkbox:checked ~ .checkmark:after {
+  display: block;
+  left: 6px;
+  top: 2px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.formActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.cancelButton {
+  padding: 12px 24px;
+  background-color: transparent;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #666;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.cancelButton:hover {
+  background-color: #f5f5f5;
+}
+
+.submitButton {
+  padding: 12px 30px;
+  background-color: #4a6fa5;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.submitButton:hover {
+  background-color: #3a5a8c;
+}
+
+.submitButton:disabled {
+  background-color: #a0b4d0;
+  cursor: not-allowed;
+}
+
+.clearButton {
+  padding: 12px 20px;
+  background-color: #f8d7da;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #721c24;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin-left: 10px;
+}
+
+.clearButton:hover {
+  background-color: #f5c6cb;
+}
+
+.fileUpload {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+/* Add these styles to your existing createbooks.module.css file */
+
+.select {
+  padding: 12px 14px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 15px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.select:focus {
+  outline: none;
+  border-color: #4a6fa5;
+  box-shadow: 0 0 0 3px rgba(74, 111, 165, 0.15);
+}
+
+.imagePreview {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.previewImage {
+  max-width: 150px;
+  max-height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.accessSection {
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+  margin: 20px 0;
+}
+
+.sectionTitle {
+  margin: 0 0 5px 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+}
+
+.sectionSubtitle {
+  margin: 0 0 20px 0;
+  font-size: 14px;
+  color: #666;
+}
+
+.clearButton {
+  padding: 12px;
+  background-color: #f8d7da;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  color: #721c24;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.clearButton:hover {
+  background-color: #f5c6cb;
+}
+
+/* Update fileUpload to handle the clear button better */
+.fileUpload {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 576px) {
+  .clearButton {
+    margin-left: 0;
+    margin-top: 10px;
+  }
+  
+  .imagePreview {
+    margin-top: 15px;
+  }
+  
+  .previewImage {
+    max-width: 120px;
+    max-height: 160px;
+  }
+}
+
+
+
+
+
+
+
+
+@media (max-width: 576px) {
+  .clearButton {
+    margin-left: 0;
+    margin-top: 10px;
+    width: 100%;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 768px) {
+  .formCard {
+    padding: 20px;
+  }
+  
+  .formGrid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .formRow {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .formActions {
+    flex-direction: column-reverse;
+  }
+  
+  .submitButton, .cancelButton {
+    width: 100%;
+  }
 }
