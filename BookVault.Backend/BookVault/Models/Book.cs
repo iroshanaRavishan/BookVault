@@ -78,9 +78,6 @@ namespace BookVault.Models
             if (string.IsNullOrWhiteSpace(name))
                 throw new ArgumentException("Name cannot be null or empty.", nameof(name));
 
-            if (genres != null && genres.Any(g => string.IsNullOrWhiteSpace(g)))
-                throw new ArgumentException("Genres cannot contain null or empty values.", nameof(genres));
-
             if (releaseDate.HasValue && releaseDate > DateTimeOffset.UtcNow)
                 throw new ArgumentException("Release date cannot be in the future.", nameof(releaseDate));
 
