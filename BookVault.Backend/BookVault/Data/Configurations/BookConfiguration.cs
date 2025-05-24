@@ -23,11 +23,30 @@ namespace BookVault.Data.Configurations
                    .IsRequired()
                    .HasMaxLength(100);
 
-            builder.Property(m => m.ReleaseDate)
-                   .IsRequired();
+            // ReleaseDate is now nullable
+            builder.Property(m => m.ReleaseDate);
 
-            builder.Property(m => m.Rating)
-                   .IsRequired();
+            // Configure new properties
+            builder.Property(m => m.Author)
+                   .HasMaxLength(200);
+
+            builder.Property(m => m.Plot)
+                   .HasMaxLength(2000);
+
+            builder.Property(m => m.Length);
+
+            builder.Property(m => m.IsRead)
+                   .IsRequired()
+                   .HasDefaultValue(false);
+
+            builder.Property(m => m.ReadUrl)
+                   .HasMaxLength(500);
+
+            builder.Property(m => m.CoverImagePath)
+                   .HasMaxLength(500);
+
+            builder.Property(m => m.PdfFilePath)
+                   .HasMaxLength(500);
 
             // Configuring Created and LastModified properties to be handled as immutable and modifiable timestamps
             builder.Property(m => m.Created)
@@ -40,6 +59,8 @@ namespace BookVault.Data.Configurations
 
             // Optional: Adding index for better query performance
             builder.HasIndex(m => m.Name);
+            builder.HasIndex(m => m.Author);
+            builder.HasIndex(m => m.Genre);
         }
     }
 }

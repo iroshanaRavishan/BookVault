@@ -21,7 +21,19 @@ namespace BookVault.Data
                     var sampleBook = await context.Set<Book>().FirstOrDefaultAsync(b => b.Name == "Harry Potter 12-i");
                     if (sampleBook == null)
                     {
-                        sampleBook = Book.Create("Harry Potter 12-i", "Fantasy", new DateTimeOffset(new DateTime(2025, 1, 3), TimeSpan.Zero), 7);
+                        // Updated Create method call with all required parameters
+                        sampleBook = Book.Create(
+                            name: "Harry Potter 12-i",
+                            genre: "Fantasy",
+                            releaseDate: new DateTimeOffset(new DateTime(2025, 1, 3), TimeSpan.Zero),
+                            author: "J.K. Rowling",
+                            plot: "The continuing adventures of Harry Potter in his 12th year.",
+                            length: 450,
+                            isRead: false,
+                            readUrl: "https://example.com/harrypotter12",
+                            coverImagePath: "",
+                            pdfFilePath: ""
+                        );
                         await context.Set<Book>().AddAsync(sampleBook);
                         await context.SaveChangesAsync();
                     }
@@ -31,7 +43,19 @@ namespace BookVault.Data
                     var sampleBook = context.Set<Book>().FirstOrDefault(b => b.Name == "Harry Potter 12-i");
                     if (sampleBook == null)
                     {
-                        sampleBook = Book.Create("Harry Potter 12-i", "Fantasy", new DateTimeOffset(new DateTime(2025, 1, 3), TimeSpan.Zero), 7);
+                        // Updated Create method call with all required parameters
+                        sampleBook = Book.Create(
+                            name: "Harry Potter 12-i",
+                            genre: "Fantasy",
+                            releaseDate: new DateTimeOffset(new DateTime(2025, 1, 3), TimeSpan.Zero),
+                            author: "J.K. Rowling",
+                            plot: "The continuing adventures of Harry Potter in his 12th year.",
+                            length: 450,
+                            isRead: false,
+                            readUrl: "https://example.com/harrypotter12",
+                            coverImagePath: "",
+                            pdfFilePath: ""
+                        );
                         context.Set<Book>().Add(sampleBook);
                         context.SaveChanges();
                     }
