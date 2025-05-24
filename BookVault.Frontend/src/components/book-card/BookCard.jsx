@@ -23,6 +23,10 @@ export default function BookCard({ book }) {
   //   readUrl: "https://www.websitename.com/read/books"
   // };
 
+  function ImagePathReviser(path){
+    return `https://localhost:7157/uploads/${path.replace(/\\/g, '/')}`;
+  }
+
   useEffect(() => {
     console.log(('book', book));
   },[]);
@@ -35,7 +39,7 @@ export default function BookCard({ book }) {
       <div className={styles.bookCard}>
         <div className={styles.imageContainer}>
           {book.coverImagePath ? (
-            <img src={book.coverImagePath} alt={book.name} className={styles.bookImage} />
+            <img src={ImagePathReviser(book.coverImagePath)} alt={book.name} className={styles.bookImage} />
           ) : (
             <div className={styles.placeholderImage}>No Image</div>
           )}
