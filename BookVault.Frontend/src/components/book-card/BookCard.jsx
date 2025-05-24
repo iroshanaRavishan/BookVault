@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import styles from './bookcard.module.css';
 import { FaCalendarAlt } from "react-icons/fa";
 import { GoClockFill } from "react-icons/go";
+import GenreScroll from '../genre-scroll-buttons/GenreScroll';
+import { TbClock } from "react-icons/tb";
 // import StarRating from '../star-rating/StartRating';
 
 export default function BookCard({ book }) {
@@ -65,25 +67,16 @@ export default function BookCard({ book }) {
               <h3 className={styles.bookName}>{book.name}</h3>
             </div>
             
-            <div className={styles.yearContainer}>
-              <span className={styles.year}>{book.year}</span>
-            </div>
-            
-            <div className={styles.ratingRow}>
-              <div className={styles.rating}>
-                {/* <StarRating rating={book.rating} /> */}
+            <div className={styles.readprogressDetailContainer}>
+              <div >
+                <span className={styles.estTime}><TbClock size={15} style={{marginRight: '5px', marginTop: '2px'}}/>27 mins read</span>
+              </div>               
+              <div className={styles.inProgressContainer}>
+                <span className={styles.inprogressStatus} style={{fontStyle:"italic", fontSize: "12px", color: "#858585"}}>progress: 0%</span>
               </div>
             </div>
           </div>
-          <div className={styles.genresContainer}>
-            <div className={styles.genreBadgesList}>
-              {book.genres.map((genre, index) => (
-                <span key={index} className={styles.genreTag}>
-                  {genre}
-                </span>
-              ))}
-            </div>
-          </div>
+          <GenreScroll genres={book.genres} />
         </div>
       </div>
 
@@ -96,7 +89,7 @@ export default function BookCard({ book }) {
             <div className={styles.modalGrid}>
               <div className={styles.modalImageContainer}>
                 {book.coverImagePath ? (
-                  <img src={book.coverImagePath} alt={book.name} className={styles.bookImage} />
+                  <img src={ImagePathReviser(book.coverImagePath)} alt={book.name} className={styles.bookImage} />
                 ) : (
                   <div className={styles.placeholderImage}>No Image</div>
                 )}
@@ -113,20 +106,16 @@ export default function BookCard({ book }) {
               
               <div className={styles.modalDetails}>
                 <div className={styles.modalTitleRow}>
-                  <h2 className={styles.modalTitle}>{book.title}</h2>
-                 
+                  <h2 className={styles.modalTitle}>{book.name}</h2>
                 </div>
                 
                 <div className={styles.modalInfo}>
                   <span className={styles.modalYear}><FaCalendarAlt size={15} style={{marginRight: '5px'}}/>{book.year}</span>
                   <span className={styles.modalDuration}><GoClockFill size={15} style={{marginRight: '5px'}}/>{book.duration}</span>
-                   <div className={styles.modalRating}>
-                    {/* <StarRating rating={book.rating} /> */}
-                  </div>
                 </div>
                 
-                <div className={styles.genresContainer} style={{ margin: '0px 0px 20px 0px' }}>
-                  <div className={styles.genreBadgesList}>
+                <div className={styles.genresContainer} style={{ margin: '0px 0px 20px 0px'}}>
+                  <div className={styles.modelGenreBadgesList}>
                     {book.genres.map((genre, index) => (
                       <span key={index} className={styles.genreTag} style={{ textAlign: 'left', width: 'fit-content' }}>
                         {genre}
@@ -141,8 +130,8 @@ export default function BookCard({ book }) {
                 </div>
                 
                 <div className={styles.modalSection}>
-                  <h4 className={styles.modalSectionTitle}>Director</h4>
-                  <p className={styles.modalPlot}>{book.director}</p>
+                  <h4 className={styles.modalSectionTitle}>Author</h4>
+                  <p className={styles.modalPlot}>{book.author}</p>
                 </div>
                 
                 <div className={styles.modalReadSection}>
