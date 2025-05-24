@@ -126,8 +126,10 @@
 }
 
 .modelGenreBadgesList{
-  display: block;
   width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
 }
 
 .starIcon {
@@ -317,6 +319,8 @@
   display: flex;
   gap: 15px;
   margin-bottom: 20px;
+  color: #666;
+    font-size: 13px;
 }
 
 .modalYear, .modalDuration {
