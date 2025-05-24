@@ -1,6 +1,7 @@
 ﻿using BookVault.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System.Text.Json;
 
 namespace BookVault.Data.Configurations
 {
@@ -19,9 +20,13 @@ namespace BookVault.Data.Configurations
                    .IsRequired()
                    .HasMaxLength(200);
 
-            builder.Property(m => m.Genre)
-                   .IsRequired()
-                   .HasMaxLength(100);
+            // Configure Genres as JSON column for PostgreSQL
+            builder.Property(m => m.Genres)
+                   .HasConversion(
+                       v => JsonSerializer.Serialize(v, (JsonSerializerOptions)null),
+                       v => JsonSerializer.Deserialize<List<string>>(v, (JsonSerializerOptions)null) ?? new List<string>())
+                   .HasColumnType("jsonb")
+                   .IsRequired();
 
             // ReleaseDate is now nullable
             builder.Property(m => m.ReleaseDate);
@@ -60,7 +65,10 @@ namespace BookVault.Data.Configurations
             // Optional: Adding index for better query performance
             builder.HasIndex(m => m.Name);
             builder.HasIndex(m => m.Author);
-            builder.HasIndex(m => m.Genre);
+
+            // Create GIN index for JSONB genres column for better search performance
+            builder.HasIndex(m => m.Genres)
+                   .HasMethod("gin");
         }
     }
 }

@@ -7,8 +7,8 @@ namespace BookVault.DTOs
         [StringLength(200, ErrorMessage = "Name cannot exceed 200 characters")]
         public string? Name { get; init; }
 
-        [StringLength(100, ErrorMessage = "Genre cannot exceed 100 characters")]
-        public string? Genre { get; init; }
+        // Changed to accept array of strings for genres
+        public List<string>? Genres { get; init; }
 
         public DateTimeOffset? ReleaseDate { get; init; }
 
