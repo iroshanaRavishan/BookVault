@@ -1,9 +1,11 @@
-﻿namespace BookVault.Models
+﻿using System.Text.Json;
+
+namespace BookVault.Models
 {
     public sealed class Book : EntityBase
     {
         public string Name { get; private set; }
-        public string Genre { get; private set; }
+        public List<string> Genres { get; private set; } = new();
         public DateTimeOffset? ReleaseDate { get; private set; }
         public string Author { get; private set; }
         public string Plot { get; private set; }
@@ -17,7 +19,7 @@
         private Book()
         {
             Name = string.Empty;
-            Genre = string.Empty;
+            Genres = new List<string>();
             Author = string.Empty;
             Plot = string.Empty;
             ReadUrl = string.Empty;
@@ -25,12 +27,12 @@
             PdfFilePath = string.Empty;
         }
 
-        private Book(string name, string genre, DateTimeOffset? releaseDate, string author,
+        private Book(string name, List<string> genres, DateTimeOffset? releaseDate, string author,
                     string plot, int? length, bool isRead, string readUrl,
                     string coverImagePath, string pdfFilePath)
         {
             Name = name;
-            Genre = genre;
+            Genres = genres ?? new List<string>();
             ReleaseDate = releaseDate;
             Author = author;
             Plot = plot;
@@ -41,23 +43,23 @@
             PdfFilePath = pdfFilePath;
         }
 
-        public static Book Create(string name, string genre, DateTimeOffset? releaseDate,
+        public static Book Create(string name, List<string> genres, DateTimeOffset? releaseDate,
                                  string author, string plot, int? length, bool isRead,
                                  string readUrl, string coverImagePath, string pdfFilePath)
         {
-            ValidateInputs(name, genre, releaseDate, author, readUrl, pdfFilePath, length);
-            return new Book(name, genre, releaseDate, author, plot, length, isRead,
+            ValidateInputs(name, genres, releaseDate, author, readUrl, pdfFilePath, length);
+            return new Book(name, genres, releaseDate, author, plot, length, isRead,
                           readUrl, coverImagePath, pdfFilePath);
         }
 
-        public void Update(string name, string genre, DateTimeOffset? releaseDate,
+        public void Update(string name, List<string> genres, DateTimeOffset? releaseDate,
                           string author, string plot, int? length, bool isRead,
                           string readUrl, string coverImagePath, string pdfFilePath)
         {
-            ValidateInputs(name, genre, releaseDate, author, readUrl, pdfFilePath, length);
+            ValidateInputs(name, genres, releaseDate, author, readUrl, pdfFilePath, length);
 
             Name = name;
-            Genre = genre;
+            Genres = genres ?? new List<string>();
             ReleaseDate = releaseDate;
             Author = author;
             Plot = plot;
@@ -65,15 +67,19 @@
             IsRead = isRead;
             ReadUrl = readUrl;
             CoverImagePath = coverImagePath;
+            PdfFilePath = pdfFilePath;
 
             UpdateLastModified();
         }
 
-        private static void ValidateInputs(string name, string genre, DateTimeOffset? releaseDate,
+        private static void ValidateInputs(string name, List<string> genres, DateTimeOffset? releaseDate,
                                          string author, string readUrl, string pdfFilePath, int? length)
         {
             if (string.IsNullOrWhiteSpace(name))
                 throw new ArgumentException("Name cannot be null or empty.", nameof(name));
+
+            if (genres != null && genres.Any(g => string.IsNullOrWhiteSpace(g)))
+                throw new ArgumentException("Genres cannot contain null or empty values.", nameof(genres));
 
             if (releaseDate.HasValue && releaseDate > DateTimeOffset.UtcNow)
                 throw new ArgumentException("Release date cannot be in the future.", nameof(releaseDate));

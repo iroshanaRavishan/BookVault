@@ -3,7 +3,7 @@
     public record BookDto(
         Guid Id,
         string Name,
-        string Genre,
+        List<string> Genres,
         DateTimeOffset? ReleaseDate,
         string Author,
         string Plot,

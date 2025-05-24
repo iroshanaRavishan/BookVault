@@ -61,10 +61,10 @@ namespace BookVault.Services
                     pdfFilePath = await SaveFileAsync(command.PdfFile, "pdfs");
                 }
 
-                // Create book
+                // Create book with genres list
                 var book = Book.Create(
                     name: command.Name,
-                    genre: command.Genres ?? string.Empty,
+                    genres: command.Genres ?? new List<string>(),
                     releaseDate: releaseDate,
                     author: command.Author ?? string.Empty,
                     plot: command.Plot ?? string.Empty,
@@ -81,7 +81,7 @@ namespace BookVault.Services
                 return new BookDto(
                     book.Id,
                     book.Name,
-                    book.Genre,
+                    book.Genres,
                     book.ReleaseDate,
                     book.Author,
                     book.Plot,
@@ -129,7 +129,7 @@ namespace BookVault.Services
                 .Select(book => new BookDto(
                     book.Id,
                     book.Name,
-                    book.Genre,
+                    book.Genres,
                     book.ReleaseDate,
                     book.Author,
                     book.Plot,
@@ -155,7 +155,7 @@ namespace BookVault.Services
             return new BookDto(
                 book.Id,
                 book.Name,
-                book.Genre,
+                book.Genres,
                 book.ReleaseDate,
                 book.Author,
                 book.Plot,
@@ -182,7 +182,7 @@ namespace BookVault.Services
             // Update the book
             bookToUpdate.Update(
                 name: command.Name ?? bookToUpdate.Name,
-                genre: command.Genre ?? bookToUpdate.Genre,
+                genres: command.Genres ?? bookToUpdate.Genres,
                 releaseDate: command.ReleaseDate ?? bookToUpdate.ReleaseDate,
                 author: command.Author ?? bookToUpdate.Author,
                 plot: command.Plot ?? bookToUpdate.Plot,
