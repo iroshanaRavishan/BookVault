@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './createbooks.module.css';
-import { MdClear } from "react-icons/md";
+import { MdClear, MdAdd, MdClose } from "react-icons/md";
 
 export default function CreateBook() {
   const [name, setName] = useState('');
   const [imageFile, setImageFile] = useState(null);
   const [year, setYear] = useState('');
   const [read, setRead] = useState(false);
-  const [genres, setGenres] = useState('');
+  const [genres, setGenres] = useState([]);
+  const [genreInput, setGenreInput] = useState('');
   const [author, setAuthor] = useState('');
   const [plot, setPlot] = useState('');
   const [length, setLength] = useState('');
@@ -18,6 +19,39 @@ export default function CreateBook() {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const navigate = useNavigate();
+
+  // Predefined genre options
+  const predefinedGenres = [
+    "Fiction",
+    "Non-Fiction",
+    "Mystery",
+    "Thriller",
+    "Romance",
+    "Fantasy",
+    "Science Fiction",
+    "Horror",
+    "Biography",
+    "History",
+    "Self-Help",
+    "Business",
+    "Health",
+    "Travel",
+    "Cooking",
+    "Art",
+    "Poetry",
+    "Drama",
+    "Adventure",
+    "Young Adult",
+    "Children",
+    "Comedy",
+    "Crime",
+    "Philosophy",
+    "Psychology",
+    "Religion",
+    "Politics",
+    "Technology",
+    "Education",
+  ]
 
   // Generate years from 1900 to current year + 1
   const currentYear = new Date().getFullYear();
@@ -32,19 +66,58 @@ export default function CreateBook() {
     if (value === '' || /^\d+$/.test(value)) {
       setLength(value);
     }
-  };
+  }
+
+  // Genre chip functions
+  const addGenre = (genre) => {
+    const trimmedGenre = genre.trim()
+    if (trimmedGenre && !genres.includes(trimmedGenre)) {
+      setGenres([...genres, trimmedGenre])
+    }
+    setGenreInput('')
+  }
+
+  const removeGenre = (genreToRemove) => {
+    setGenres(genres.filter((genre) => genre !== genreToRemove))
+  }
+
+  const handleGenreInputKeyPress = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault()
+      addGenre(genreInput)
+    } else if (e.key === "Backspace" && genreInput === '' && genres.length > 0) {
+      // Remove last genre if backspace is pressed on empty input
+      removeGenre(genres[genres.length - 1])
+    }
+  }
+
+  const handlePredefinedGenreClick = (genre) => {
+    addGenre(genre)
+  }
 
   const createBookAPI = async (bookData) => {
     console.log('Creating book with data:', bookData);
     try {
-      const response = await fetch('/api/books', {
+      const response = await fetch('https://localhost:7157/api/Books', {
         method: 'POST',
         body: bookData, // FormData object
-      });
+      })
 
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || 'Failed to create book');
+        const errorData = await response.json()
+
+        let errorMessage = "Failed to create book"
+
+        if (errorData.errors && typeof errorData.errors === "object") {
+          // Flatten and join all error messages
+          const messages = Object.values(errorData.errors).flat();
+          errorMessage = messages.join(" | ");
+        } else if (typeof errorData.message === "string") {
+          // Use single message
+          errorMessage = errorData.message;
+        }
+
+        throw new Error(errorMessage)
       }
 
       return await response.json();
@@ -79,7 +152,12 @@ export default function CreateBook() {
       formData.append('name', name.trim());
       formData.append('year', year || '');
       formData.append('read', read.toString());
-      formData.append('genres', genres.trim());
+
+      // Send genres as JSON array
+      genres.forEach((genre, index) => {
+        formData.append(`genres[${index}]`, genre);
+      })
+
       formData.append('author', author.trim());
       formData.append('plot', plot.trim());
       formData.append('length', length || '');
@@ -110,7 +188,7 @@ export default function CreateBook() {
       setTimeout(() => {
         setMessage('');
         setIsSubmitting(false);
-        navigate('/books'); // Navigate to books list or wherever appropriate
+        navigate('/'); // Navigate to books list or wherever appropriate
       }, 1500);
 
     } catch (error) {
@@ -124,7 +202,8 @@ export default function CreateBook() {
     setImageFile(null);
     setYear('');
     setRead(false);
-    setGenres('');
+    setGenres([]);
+    setGenreInput('');
     setAuthor('');
     setPlot('');
     setLength('');
@@ -140,7 +219,7 @@ export default function CreateBook() {
 
   const handleCancel = () => {
     resetForm();
-    navigate('/books'); // Navigate back to books list
+    navigate('/'); // Navigate back to books list
   };
 
   return (
@@ -166,7 +245,7 @@ export default function CreateBook() {
                   id="name"
                   type="text" 
                   value={name} 
-                  onChange={e => setName(e.target.value)} 
+                  onChange={(e) => setName(e.target.value)} 
                   className={styles.input} 
                   placeholder="Enter book title"
                   required 
@@ -180,7 +259,7 @@ export default function CreateBook() {
                     id="imageFile"
                     type="file" 
                     accept="image/*" 
-                    onChange={e => setImageFile(e.target.files[0])} 
+                    onChange={(e) => setImageFile(e.target.files[0])} 
                     className={styles.fileInput}
                   />
                   <div className={styles.fileInputLabel}>
@@ -224,11 +303,11 @@ export default function CreateBook() {
                   <select 
                     id="year"
                     value={year} 
-                    onChange={e => setYear(e.target.value)} 
+                    onChange={(e) => setYear(e.target.value)} 
                     className={styles.select}
                   >
                     <option value="">Select Year</option>
-                    {years.map(yearOption => (
+                    {years.map((yearOption) => (
                       <option key={yearOption} value={yearOption}>
                         {yearOption}
                       </option>
@@ -250,27 +329,81 @@ export default function CreateBook() {
               </div>
 
               <div className={styles.formGroup}>
-                <label className={styles.label} htmlFor="genres">Genres</label>
-                <input 
-                  id="genres"
-                  type="text" 
-                  value={genres} 
-                  onChange={e => setGenres(e.target.value)} 
-                  className={styles.input} 
-                  placeholder="Fiction, Mystery, Thriller, etc."
-                />
-                <span className={styles.helpText}>Separate multiple genres with commas</span>
+                <label className={styles.label} htmlFor="genres">
+                  Genres
+                </label>
+
+                {/* Selected Genres Chips */}
+                <div className={styles.genreChipsContainer}>
+                  {genres.map((genre, index) => (
+                    <div key={index} className={styles.genreChip}>
+                      <span>{genre}</span>
+                      <button
+                        type="button"
+                        onClick={() => removeGenre(genre)}
+                        className={styles.genreChipRemove}
+                        aria-label={`Remove ${genre}`}
+                      >
+                        <MdClose size={16} />
+                      </button>
+                    </div>
+                  ))}
+
+                  {/* Input for adding new genres */}
+                  <input
+                    id="genres"
+                    type="text" 
+                    value={genreInput}
+                    onChange={(e) => setGenreInput(e.target.value)}
+                    onKeyDown={handleGenreInputKeyPress}
+                    className={styles.genreInput}
+                    placeholder={genres.length === 0 ? "Type a genre and press Enter" : "Add another genre..."}
+                  />
+
+                  {genreInput.trim() && (
+                    <button
+                      type="button"
+                      onClick={() => addGenre(genreInput)}
+                      className={styles.addGenreButton}
+                      aria-label="Add genre"
+                    >
+                      <MdAdd size={16} />
+                    </button>
+                  )}
+                </div>
+
+                {/* Predefined Genre Suggestions */}
+                <div className={styles.genreSuggestions}>
+                  <span className={styles.suggestionsLabel}>Popular genres:</span>
+                  <div className={styles.suggestionChips}>
+                    {predefinedGenres
+                      .filter((genre) => !genres.includes(genre))
+                      .slice(0, 8)
+                      .map((genre) => (
+                        <button
+                          key={genre}
+                          type="button"
+                          onClick={() => handlePredefinedGenreClick(genre)}
+                          className={styles.suggestionChip}
+                        >
+                          {genre}
+                        </button>
+                      ))}
+                  </div>
+                </div>
+
+                <span className={styles.helpText}>Type a genre and press Enter, or click on suggestions above</span>
               </div>
             </div>
 
             <div className={styles.formColumn}>
               <div className={styles.formGroup}>
                 <label className={styles.label} htmlFor="author">Author</label>
-                <input 
+                <input
                   id="author"
                   type="text" 
                   value={author} 
-                  onChange={e => setAuthor(e.target.value)} 
+                  onChange={(e) => setAuthor(e.target.value)} 
                   className={styles.input} 
                   placeholder="Author name"
                 />
@@ -281,7 +414,7 @@ export default function CreateBook() {
                 <textarea 
                   id="plot"
                   value={plot} 
-                  onChange={e => setPlot(e.target.value)} 
+                  onChange={(e) => setPlot(e.target.value)} 
                   className={`${styles.input} ${styles.textarea}`} 
                   rows="4"
                   placeholder="Brief description of the book's plot"
@@ -302,7 +435,7 @@ export default function CreateBook() {
                 id="readUrl"
                 type="url" 
                 value={readUrl} 
-                onChange={e => setReadUrl(e.target.value)} 
+                onChange={(e) => setReadUrl(e.target.value)}
                 className={styles.input} 
                 placeholder="https://example.com/read-online"
               />
@@ -315,7 +448,7 @@ export default function CreateBook() {
                   id="pdfFile"
                   type="file" 
                   accept=".pdf" 
-                  onChange={e => setPdfFile(e.target.files[0])} 
+                  onChange={(e) => setPdfFile(e.target.files[0])}
                   className={styles.fileInput}
                 />
                 <div className={styles.fileInputLabel}>
@@ -359,23 +492,15 @@ export default function CreateBook() {
           </div>
 
           <div className={styles.formActions}>
-            <button 
-              type="button" 
-              className={styles.cancelButton}
-              onClick={handleCancel}
-            >
+            <button type="button" className={styles.cancelButton} onClick={handleCancel}>
               Cancel
             </button>
-            <button 
-              type="submit" 
-              className={styles.submitButton}
-              disabled={isSubmitting}
-            >
-              {isSubmitting ? 'Adding...' : 'Add Book'}
+            <button type="submit" className={styles.submitButton} disabled={isSubmitting}>
+              {isSubmitting ? "Adding..." : "Add Book"}
             </button>
           </div>
         </form>
       </div>
     </div>
-  );
+  )
 }
