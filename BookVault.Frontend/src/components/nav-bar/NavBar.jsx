@@ -37,7 +37,7 @@ export default function NavBar() {
             </>
           )}
         </NavLink>
-        <NavLink
+        {/* <NavLink
           to="/edit"
           className={({ isActive }) => `${isActive ? styles.activeNavLink : styles.navLink} ${styles.navFlex}`}
         >
@@ -47,7 +47,7 @@ export default function NavBar() {
               <span>Edit Books</span>
             </>
           )}
-        </NavLink>
+        </NavLink> */}
         <NavLink
           to="/search"
           className={({ isActive }) => `${isActive ? styles.activeNavLink : styles.navLink} ${styles.navFlex}`}

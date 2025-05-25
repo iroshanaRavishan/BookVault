@@ -4,6 +4,7 @@ import { FaCalendarAlt } from "react-icons/fa";
 import { GoClockFill } from "react-icons/go";
 import GenreScroll from '../genre-scroll-buttons/GenreScroll';
 import { TbClock } from "react-icons/tb";
+import { Link } from 'react-router-dom';
 // import StarRating from '../star-rating/StartRating';
 
 export default function BookCard({ book }) {
@@ -107,6 +108,9 @@ export default function BookCard({ book }) {
               <div className={styles.modalDetails}>
                 <div className={styles.modalTitleRow}>
                   <h2 className={styles.modalTitle}>{book.name}</h2>
+                  <Link to={`/edit/${book.id}`}>
+                    <span className={styles.editBookRec}>Edit this book?</span>
+                  </Link>
                 </div>
                 
                 <div className={styles.modalInfo}>
