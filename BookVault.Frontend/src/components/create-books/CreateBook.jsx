@@ -139,11 +139,11 @@ export default function CreateBook() {
         return;
       }
 
-      if (!readUrl.trim() && !pdfFile) {
-        setMessage('Please provide either a read online URL or upload a PDF file.');
-        setIsSubmitting(false);
-        return;
-      }
+      // if (!readUrl.trim() && !pdfFile) {
+      //   setMessage('Please provide either a read online URL or upload a PDF file.');
+      //   setIsSubmitting(false);
+      //   return;
+      // }
 
       // Create FormData for file uploads
       const formData = new FormData();
