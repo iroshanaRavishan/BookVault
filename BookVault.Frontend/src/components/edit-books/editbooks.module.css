@@ -4,7 +4,8 @@
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   display: flex;
   justify-content: center;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
+    "Helvetica Neue", sans-serif;
 }
 
 .formCard {
@@ -27,6 +28,14 @@
   font-size: 28px;
   font-weight: 700;
   color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.titleIcon {
+  margin-right: 0.5rem;
+  vertical-align: middle;
 }
 
 .subtitle {
@@ -44,13 +53,13 @@
 }
 
 .success {
-  background-color: #e7f7ed;
+  background: linear-gradient(135deg, #f0fff4 0%, #c6f6d5 100%);
   color: #1d6f42;
   border-left: 4px solid #28a745;
 }
 
 .error {
-  background-color: #feeaea;
+  background: linear-gradient(135deg, #fed7d7 0%, #feb2b2 100%);
   color: #d63031;
   border-left: 4px solid #ff4d4d;
 }
@@ -111,6 +120,22 @@
   min-height: 100px;
 }
 
+.select {
+  padding: 12px 14px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 15px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.select:focus {
+  outline: none;
+  border-color: #4a6fa5;
+  box-shadow: 0 0 0 3px rgba(74, 111, 165, 0.15);
+}
+
 .helpText {
   font-size: 12px;
   color: #777;
@@ -126,6 +151,7 @@
 .fileUpload {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 10px;
 }
 
@@ -166,6 +192,40 @@
 
 .browseButton:hover {
   background: #5a67d8;
+}
+
+.deleteButton {
+  padding: 0.5rem;
+  background: #e53e3e;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+}
+
+.deleteButton:hover {
+  background: #c53030;
+}
+
+.clearButton {
+  padding: 0.5rem;
+  background: #e53e3e;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+}
+
+.clearButton:hover {
+  background: #c53030;
 }
 
 .checkboxContainer {
@@ -271,8 +331,8 @@
   transition: background-color 0.2s;
 }
 
-.submitButton:hover {
-  background-color: #3a5a8c;
+.submitButton:hover:not(:disabled) {
+  background: #5a67d8;
 }
 
 .submitButton:disabled {
@@ -281,56 +341,11 @@
   opacity: 0.6;
 }
 
-.submitButton:hover:not(:disabled) {
-  background: #5a67d8;
-}
-
-.clearButton {
-  padding: 0.5rem;
-  background: #e53e3e;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background-color 0.2s;
-}
-
-.clearButton:hover {
-  background: #c53030;
-}
-
-.fileUpload {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-/* Add these styles to your existing createbooks.module.css file */
-
-.select {
-  padding: 12px 14px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  font-size: 15px;
-  transition: border-color 0.2s, box-shadow 0.2s;
-  background-color: #fff;
-  cursor: pointer;
-}
-
-.select:focus {
-  outline: none;
-  border-color: #4a6fa5;
-  box-shadow: 0 0 0 3px rgba(74, 111, 165, 0.15);
-}
-
 .imagePreview {
   margin-top: 10px;
   display: flex;
   justify-content: center;
+  position: relative;
 }
 
 .previewImage {
@@ -339,6 +354,34 @@
   object-fit: cover;
   border-radius: 8px;
   border: 1px solid #ddd;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.previewImage:hover {
+  transform: scale(1.02);
+}
+
+.previewZoomButton {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.imagePreview:hover .previewZoomButton {
+  opacity: 1;
 }
 
 .accessSection {
@@ -476,14 +519,6 @@
   border-color: #cbd5e0;
 }
 
-/* Update fileUpload to handle the clear button better */
-.fileUpload {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
 .loadingContainer {
   display: flex;
   flex-direction: column;
@@ -518,11 +553,6 @@
   margin: 0;
 }
 
-.titleIcon {
-  margin-right: 0.5rem;
-  vertical-align: middle;
-}
-
 .existingFileContainer {
   margin-bottom: 1rem;
   padding: 1rem;
@@ -542,6 +572,40 @@
   object-fit: cover;
   border-radius: 6px;
   border: 2px solid #e2e8f0;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.existingImage:hover {
+  transform: scale(1.05);
+}
+
+.imageActions {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  display: flex;
+  gap: 4px;
+}
+
+.actionButton {
+  background: #4299e1;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.actionButton:hover {
+  background: #3182ce;
 }
 
 .existingPdfInfo {
@@ -554,6 +618,11 @@
   border: 1px solid #e2e8f0;
 }
 
+.pdfActions {
+  display: flex;
+  gap: 4px;
+}
+
 .existingFileText {
   font-size: 0.875rem;
   color: #4a5568;
@@ -561,9 +630,6 @@
 }
 
 .removeExistingButton {
-  position: absolute;
-  top: -8px;
-  right: -8px;
   background: #e53e3e;
   color: white;
   border: none;
@@ -583,29 +649,101 @@
   background: #c53030;
 }
 
-.existingPdfInfo .removeExistingButton {
-  position: static;
-  margin-left: 0.5rem;
-}
-
-/* Update form styling for better visual hierarchy */
-.formHeader .pageTitle {
+/* Modal Styles */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease;
 }
 
-/* Enhanced message styling for updates */
-.messageBox.success {
-  background: linear-gradient(135deg, #f0fff4 0%, #c6f6d5 100%);
+.modalContent {
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 }
 
-.messageBox.error {
-  background: linear-gradient(135deg, #fed7d7 0%, #feb2b2 100%);
+.modalClose {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #e53e3e;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 18px;
+  transition: background-color 0.2s;
+  z-index: 1001;
+}
+
+.modalClose:hover {
+  background: #c53030;
+}
+
+.modalImage {
+  max-width: 100%;
+  max-height: 80vh;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
+  .formCard {
+    padding: 20px;
+  }
+
+  .formGrid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .formRow {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .formActions {
+    flex-direction: column-reverse;
+  }
+
+  .submitButton,
+  .cancelButton {
+    width: 100%;
+  }
+
+  .suggestionChips {
+    justify-content: center;
+  }
+
   .existingImagePreview {
     text-align: center;
     width: 100%;
@@ -616,69 +754,39 @@
     height: 84px;
   }
 
-  .removeExistingButton {
+  .imageActions {
     top: -6px;
     right: -6px;
+  }
+
+  .actionButton,
+  .removeExistingButton {
     width: 20px;
     height: 20px;
     font-size: 12px;
   }
+
+  .modalContent {
+    margin: 20px;
+    max-width: calc(100vw - 40px);
+    max-height: calc(100vh - 40px);
+  }
 }
 
-/* Responsive adjustments */
 @media (max-width: 576px) {
+  .deleteButton,
   .clearButton {
     margin-left: 0;
     margin-top: 10px;
+    width: 100%;
   }
-  
+
   .imagePreview {
     margin-top: 15px;
   }
-  
+
   .previewImage {
     max-width: 120px;
     max-height: 160px;
-  }
-}
-
-@media (max-width: 576px) {
-  .clearButton {
-    margin-left: 0;
-    margin-top: 10px;
-    width: 100%;
-  }
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@media (max-width: 768px) {
-  .formCard {
-    padding: 20px;
-  }
-  
-  .formGrid {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-  
-  .formRow {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-  
-  .formActions {
-    flex-direction: column-reverse;
-  }
-  
-  .submitButton, .cancelButton {
-    width: 100%;
-  }
-
-  .suggestionChips {
-    justify-content: center;
   }
 }
