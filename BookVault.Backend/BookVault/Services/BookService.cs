@@ -188,7 +188,7 @@ namespace BookVault.Services
                 plot: command.Plot ?? bookToUpdate.Plot,
                 length: command.Length ?? bookToUpdate.Length,
                 isRead: command.IsRead ?? bookToUpdate.IsRead,
-                readUrl: command.ReadUrl ?? bookToUpdate.ReadUrl,
+                readUrl: command.ReadUrl,
                 coverImagePath: command.CoverImagePath ?? bookToUpdate.CoverImagePath,
                 pdfFilePath: command.PdfFilePath ?? bookToUpdate.PdfFilePath
             );
