@@ -311,52 +311,35 @@ export default function EditBooks() {
         length: length ? Number.parseInt(length) : null,
         isRead: read,
         readUrl: readUrl.trim() === "" ? null : readUrl.trim(),
-      }
+        coverImagePath: null,
+        pdfFilePath: null,
+      };
 
       // Handle release date
       if (year) {
         updateData.releaseDate = new Date(Number.parseInt(year), 0, 1).toISOString()
       }
 
-      // Handle cover image upload/removal
-      if (imageFile) {
-        console.log("Uploading new image...")
-        const imagePath = await uploadFile(imageFile, "image")
-        updateData.coverImagePath = imagePath
-
-        // Delete old image if it exists
-        if (existingImagePath) {
-          await deleteFile(existingImagePath)
-        }
-
-        console.log("Image uploaded successfully:", imagePath)
-      } else if (removeExistingImage && existingImagePath) {
-        console.log("Removing existing image...")
-        await deleteFile(existingImagePath)
-        updateData.coverImagePath = null
-      }
-
-      // Handle PDF upload/removal
-      if (pdfFile) {
-        console.log("Uploading new PDF...")
-        const pdfPath = await uploadFile(pdfFile, "pdf")
-        updateData.pdfFilePath = pdfPath
-
-        // Delete old PDF if it exists
-        if (existingPdfPath) {
-          await deleteFile(existingPdfPath)
-        }
-
-        console.log("PDF uploaded successfully:", pdfPath)
-      } else if (removeExistingPdf && existingPdfPath) {
-        console.log("Removing existing PDF...")
-        await deleteFile(existingPdfPath)
-        updateData.pdfFilePath = null
-      }
-
       console.log("Final update payload:", updateData)
-
       const result = await updateBookAPI(updateData)
+
+      if (imageFile) {
+        const imagePath = await uploadFile(imageFile, "image");
+        await updateBookAPI({ id: result.id, coverImagePath: imagePath });
+        if (existingImagePath) await deleteFile(existingImagePath);
+      } else if (removeExistingImage && existingImagePath) {
+        await deleteFile(existingImagePath);
+        await updateBookAPI({ id: result.id, coverImagePath: null });
+      }
+
+      if (pdfFile) {
+        const pdfPath = await uploadFile(pdfFile, "pdf");
+        await updateBookAPI({ id: result.id, pdfFilePath: pdfPath });
+        if (existingPdfPath) await deleteFile(existingPdfPath);
+      } else if (removeExistingPdf && existingPdfPath) {
+        await deleteFile(existingPdfPath);
+        await updateBookAPI({ id: result.id, pdfFilePath: null });
+      }
 
       if (isRemoveImageAtUpdate) {
         // If we are removing the existing image, we need to delete it from the server
