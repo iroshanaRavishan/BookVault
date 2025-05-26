@@ -10,7 +10,7 @@ export default function BookGrid() {
   const observer = useRef();
 
   const [currentPage, setCurrentPage] = useState(1)
-  const booksPerPage = 8
+  const booksPerPage = 9
   const totalPages = Math.ceil(books.length / booksPerPage)
 
   const indexOfLastBook = currentPage * booksPerPage

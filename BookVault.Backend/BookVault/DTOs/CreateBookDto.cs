@@ -11,8 +11,8 @@ namespace BookVault.DTOs
         [StringLength(4, ErrorMessage = "Year should be 4 digits")]
         public string? Year { get; set; }
 
-        [StringLength(100, ErrorMessage = "Genre cannot exceed 100 characters")]
-        public string? Genres { get; set; }
+        // Changed to accept array of strings for genres
+        public List<string>? Genres { get; set; } = new();
 
         [StringLength(200, ErrorMessage = "Author name cannot exceed 200 characters")]
         public string? Author { get; set; }

@@ -21,10 +21,10 @@ namespace BookVault.Data
                     var sampleBook = await context.Set<Book>().FirstOrDefaultAsync(b => b.Name == "Harry Potter 12-i");
                     if (sampleBook == null)
                     {
-                        // Updated Create method call with all required parameters
+                        // Updated Create method call with genres as List<string>
                         sampleBook = Book.Create(
                             name: "Harry Potter 12-i",
-                            genre: "Fantasy",
+                            genres: new List<string> { "Fantasy", "Adventure", "Young Adult" },
                             releaseDate: new DateTimeOffset(new DateTime(2025, 1, 3), TimeSpan.Zero),
                             author: "J.K. Rowling",
                             plot: "The continuing adventures of Harry Potter in his 12th year.",
@@ -43,10 +43,10 @@ namespace BookVault.Data
                     var sampleBook = context.Set<Book>().FirstOrDefault(b => b.Name == "Harry Potter 12-i");
                     if (sampleBook == null)
                     {
-                        // Updated Create method call with all required parameters
+                        // Updated Create method call with genres as List<string>
                         sampleBook = Book.Create(
                             name: "Harry Potter 12-i",
-                            genre: "Fantasy",
+                            genres: new List<string> { "Fantasy", "Adventure", "Young Adult" },
                             releaseDate: new DateTimeOffset(new DateTime(2025, 1, 3), TimeSpan.Zero),
                             author: "J.K. Rowling",
                             plot: "The continuing adventures of Harry Potter in his 12th year.",
@@ -73,6 +73,5 @@ namespace BookVault.Data
             }
             return base.SaveChangesAsync(cancellationToken);
         }
-
     }
 }
