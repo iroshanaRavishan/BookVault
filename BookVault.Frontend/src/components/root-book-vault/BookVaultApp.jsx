@@ -24,7 +24,7 @@ export default function BookVaultApp() {
             <Route path="/" element={<LandingPage />} />
             <Route path="/" element={<AllBooks />} />
             <Route path="/create" element={<CreateBook />} />
-            <Route path="/edit" element={<EditBooks />} />
+            <Route path="/edit/:id" element={<EditBooks />} />
             <Route path="/search" element={<AllBooks />} />
             <Route path="/delete" element={<DeleteBooks />} />
           </Routes>
