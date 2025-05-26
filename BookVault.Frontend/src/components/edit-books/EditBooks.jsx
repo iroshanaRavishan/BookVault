@@ -374,16 +374,6 @@ export default function EditBooks() {
     navigate("/") // Navigate back to books list
   }
 
-  const handleRemoveExistingImage = () => {
-    setExistingImageUrl("")
-    setRemoveExistingImage(true)
-  }
-
-  const handleRemoveExistingPdf = () => {
-    setExistingPdfUrl("")
-    setRemoveExistingPdf(true)
-  }
-
   const handleImageFileChange = (e) => {
     const file = e.target.files[0]
     if (file) {
@@ -589,7 +579,7 @@ export default function EditBooks() {
                   </button>
                   {imageFile && (
                     <button type="button" className={styles.deleteButton} onClick={deleteUploadedImage}>
-                      <MdDelete />
+                      <MdClose />
                     </button>
                   )}
                 </div>
@@ -790,14 +780,6 @@ export default function EditBooks() {
                       >
                         <MdDelete />
                       </button>
-                      <button
-                        type="button"
-                        className={styles.removeExistingButton}
-                        onClick={handleRemoveExistingPdf}
-                        title="Remove current PDF"
-                      >
-                        <MdClose />
-                      </button>
                     </div>
                   </div>
                 </div>
@@ -827,7 +809,7 @@ export default function EditBooks() {
                 </button>
                 {pdfFile && (
                   <button type="button" className={styles.deleteButton} onClick={deleteUploadedPdf}>
-                    <MdDelete />
+                    <MdClose />
                   </button>
                 )}
               </div>
