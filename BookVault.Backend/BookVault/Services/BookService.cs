@@ -188,9 +188,9 @@ namespace BookVault.Services
                 plot: command.Plot ?? bookToUpdate.Plot,
                 length: command.Length ?? bookToUpdate.Length,
                 isRead: command.IsRead ?? bookToUpdate.IsRead,
-                readUrl: command.ReadUrl ?? bookToUpdate.ReadUrl,
-                coverImagePath: command.CoverImagePath ?? bookToUpdate.CoverImagePath,
-                pdfFilePath: command.PdfFilePath ?? bookToUpdate.PdfFilePath
+                readUrl: command.ReadUrl,
+                coverImagePath: command.CoverImagePath != null ? command.CoverImagePath : bookToUpdate.CoverImagePath,
+                pdfFilePath: command.PdfFilePath != null ? command.PdfFilePath : bookToUpdate.PdfFilePath
             );
 
             await _dbContext.SaveChangesAsync();
