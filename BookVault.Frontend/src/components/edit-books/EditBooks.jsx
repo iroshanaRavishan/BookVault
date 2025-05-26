@@ -294,13 +294,14 @@ export default function EditBooks() {
         return
       }
 
-      // TODO : Need to handle this logic
-      // // Fixed validation: Check if there's no readUrl AND no pdfFile AND (no existingPdf OR removing existing pdf)
-      // if (!readUrl.trim() && !pdfFile && (!existingPdfUrl || removeExistingPdf)) {
-      //   setMessage("Please provide either a read online URL or upload a PDF file.")
-      //   setIsSubmitting(false)
-      //   return
-      // }
+      const noReadUrl = !readUrl || readUrl.trim() === "";
+      const noPdf = !pdfFile && (!existingPdfUrl || removeExistingPdf);
+
+      if (noReadUrl && noPdf) {
+        setMessage("Please provide either a Read Online URL or upload a PDF file.");
+        setIsSubmitting(false);
+        return;
+      }
 
       // Prepare update data
       const updateData = {
@@ -321,25 +322,26 @@ export default function EditBooks() {
       }
 
       console.log("Final update payload:", updateData)
-      const result = await updateBookAPI(updateData)
 
       if (imageFile) {
         const imagePath = await uploadFile(imageFile, "image");
-        await updateBookAPI({ id: result.id, coverImagePath: imagePath });
+        updateData.coverImagePath = imagePath;
         if (existingImagePath) await deleteFile(existingImagePath);
       } else if (removeExistingImage && existingImagePath) {
+        updateData.coverImagePath = null;
         await deleteFile(existingImagePath);
-        await updateBookAPI({ id: result.id, coverImagePath: null });
       }
 
       if (pdfFile) {
         const pdfPath = await uploadFile(pdfFile, "pdf");
-        await updateBookAPI({ id: result.id, pdfFilePath: pdfPath });
+        updateData.pdfFilePath = pdfPath;
         if (existingPdfPath) await deleteFile(existingPdfPath);
       } else if (removeExistingPdf && existingPdfPath) {
+        updateData.pdfFilePath = null;
         await deleteFile(existingPdfPath);
-        await updateBookAPI({ id: result.id, pdfFilePath: null });
       }
+
+      const result = await updateBookAPI(updateData);
 
       if (isRemoveImageAtUpdate) {
         // If we are removing the existing image, we need to delete it from the server
@@ -357,7 +359,7 @@ export default function EditBooks() {
         setMessage("")
         setIsSubmitting(false)
         navigate("/") // Navigate to books list or book detail page
-      }, 1500)
+      }, 1000)
     } catch (error) {
       console.error("Update error:", error)
       setMessage(error.message || "Failed to update book. Please try again.")
