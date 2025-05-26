@@ -25,6 +25,8 @@ export default function EditBooks() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
   const [bookId, setBookId] = useState(null)
+  const [isRemoveImageAtUpdate, setRemoveImageAtUpdate] = useState(false)
+  const [isRemovePdfAtUpdate, setRemovePdfAtUpdate] = useState(false)
 
   // Modal states
   const [showImageModal, setShowImageModal] = useState(false)
@@ -356,6 +358,16 @@ export default function EditBooks() {
 
       const result = await updateBookAPI(updateData)
 
+      if (isRemoveImageAtUpdate) {
+        // If we are removing the existing image, we need to delete it from the server
+        deleteExistingImage();
+      }
+
+      if (isRemovePdfAtUpdate) {
+        // If we are removing the existing PDF, we need to delete it from the server
+        deleteExistingPdf();
+      }
+
       setMessage("Book updated successfully!")
 
       setTimeout(() => {
@@ -372,6 +384,18 @@ export default function EditBooks() {
 
   const handleCancel = () => {
     navigate("/") // Navigate back to books list
+  }
+
+  const handleRemoveExistingImage = () => {
+    setExistingImageUrl("")
+    setRemoveExistingImage(true)
+    setRemoveImageAtUpdate(true) // Set flag to indicate image removal
+  }
+
+  const handleRemoveExistingPdf = () => {
+    setExistingPdfUrl("")
+    setRemoveExistingPdf(true)
+    setRemovePdfAtUpdate(true) // Set flag to indicate pdf removal
   }
 
   const handleImageFileChange = (e) => {
@@ -543,9 +567,9 @@ export default function EditBooks() {
                         </button>
                         <button
                           type="button"
-                          className={styles.deleteButton}
-                          onClick={deleteExistingImage}
-                          title="Delete image from server and database"
+                          className={styles.removeExistingButton}
+                          onClick={handleRemoveExistingImage}
+                          title="Remove current Image"
                         >
                           <MdDelete />
                         </button>
@@ -774,9 +798,9 @@ export default function EditBooks() {
                       </button>
                       <button
                         type="button"
-                        className={styles.deleteButton}
-                        onClick={deleteExistingPdf}
-                        title="Delete PDF from server and database"
+                        className={styles.removeExistingButton}
+                        onClick={handleRemoveExistingPdf}
+                        title="Remove current PDF"
                       >
                         <MdDelete />
                       </button>
