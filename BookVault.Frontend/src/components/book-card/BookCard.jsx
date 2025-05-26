@@ -114,8 +114,8 @@ export default function BookCard({ book }) {
                 </div>
                 
                 <div className={styles.modalInfo}>
-                  <span className={styles.modalYear}><FaCalendarAlt size={15} style={{marginRight: '5px'}}/>{book.year}</span>
-                  <span className={styles.modalDuration}><GoClockFill size={15} style={{marginRight: '5px'}}/>{book.duration}</span>
+                  <span className={styles.estTime}><TbClock size={15} style={{marginRight: '5px', marginTop: '2px'}}/>27 mins read</span>
+                  <span className={styles.inprogressStatus} style={{fontStyle:"italic", fontSize: "12px", color: "#858585"}}>progress: 0%</span>
                 </div>
                 
                 <div className={styles.genresContainer} style={{ margin: '0px 0px 20px 0px'}}>

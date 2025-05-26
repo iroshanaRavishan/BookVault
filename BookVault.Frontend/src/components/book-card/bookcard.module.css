@@ -126,8 +126,10 @@
 }
 
 .modelGenreBadgesList{
-  display: block;
   width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
 }
 
 .starIcon {
@@ -289,16 +291,26 @@
 
 .modalTitleRow {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
+  color: #222;
+  justify-content: flex-start;
+  align-items: baseline;
   margin-bottom: 15px;
+}
+
+.editBookRec{
+  margin-left: 20px;
+  font-size: 14px;
+}
+
+.editBookRec:hover {
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 .modalTitle {
   margin: 0;
   font-size: 28px;
   font-weight: 700;
-  color: #222;
   line-height: 1.2;
 }
 
@@ -317,6 +329,8 @@
   display: flex;
   gap: 15px;
   margin-bottom: 20px;
+  color: #666;
+    font-size: 13px;
 }
 
 .modalYear, .modalDuration {
