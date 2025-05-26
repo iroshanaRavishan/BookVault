@@ -84,10 +84,6 @@ namespace BookVault.Models
             if (length.HasValue && length <= 0)
                 throw new ArgumentException("Length must be a positive number.", nameof(length));
 
-            // At least one access method must be provided
-            if (string.IsNullOrWhiteSpace(readUrl) && string.IsNullOrWhiteSpace(pdfFilePath))
-                throw new ArgumentException("Either read URL or PDF file must be provided.");
-
             // Validate URL format if provided
             if (!string.IsNullOrWhiteSpace(readUrl) && !Uri.TryCreate(readUrl, UriKind.Absolute, out _))
                 throw new ArgumentException("Read URL must be a valid URL.", nameof(readUrl));
