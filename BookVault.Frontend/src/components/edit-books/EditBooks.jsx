@@ -310,7 +310,7 @@ export default function EditBooks() {
         plot: plot.trim(),
         length: length ? Number.parseInt(length) : null,
         isRead: read,
-        readUrl: readUrl.trim(),
+        readUrl: readUrl.trim() === "" ? null : readUrl.trim(),
       }
 
       // Handle release date
