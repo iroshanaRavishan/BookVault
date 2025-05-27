@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from "react"
 import styles from "./confirmdialogmodal.module.css"
 
-export default function ConfirmDeleteModal({ isOpen, onClose, onConfirm }) {
+export default function ConfirmDeleteModal({ bookId, isOpen, onClose, onConfirm }) {
   const modalRef = useRef(null)
 
   useEffect(() => {
@@ -20,7 +20,30 @@ export default function ConfirmDeleteModal({ isOpen, onClose, onConfirm }) {
     }
   }, [isOpen, onClose])
 
-  if (!isOpen) return null
+  const handleDelete = async () => {
+    if (!bookId) return;
+
+    try {
+      const response = await fetch(`https://localhost:7157/api/Books/${bookId}`, {
+        method: 'DELETE',
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Failed to delete the book.');
+      }
+
+      if (onConfirm) {
+        onConfirm();
+      }
+      onClose(); // Close the modal
+    } catch (error) {
+      console.error("Error deleting book:", error.message);
+      alert("Failed to delete book: " + error.message);
+    }
+  };
+
+  if (!isOpen) return null;
 
   return (
     <div className={styles.modalOverlay}>
@@ -37,7 +60,7 @@ export default function ConfirmDeleteModal({ isOpen, onClose, onConfirm }) {
 
           <div className={styles.modalActions}>
             <button className={styles.cancelButton} onClick={onClose}>Cancel</button>
-            <button className={styles.deleteButton} onClick={onConfirm}>Delete</button>
+            <button className={styles.deleteButton} onClick={handleDelete}>Delete</button>
           </div>
         </div>
       </div>

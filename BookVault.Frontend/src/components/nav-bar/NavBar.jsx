@@ -59,7 +59,7 @@ export default function NavBar() {
             </>
           )}
         </NavLink>
-        <NavLink
+        {/* <NavLink
           to="/delete"
           className={({ isActive }) => `${isActive ? styles.activeNavLink : styles.navLink} ${styles.navFlex}`}
         >
@@ -69,7 +69,7 @@ export default function NavBar() {
               <span>Delete Books</span>
             </>
           )}
-        </NavLink>
+        </NavLink> */}
       </div>
     </nav>
   );
