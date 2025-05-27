@@ -11,7 +11,7 @@ namespace BookVault.Models
         public string Plot { get; private set; }
         public int? Length { get; private set; } // Number of pages
         public bool IsRead { get; private set; }
-        public string ReadUrl { get; private set; }
+        public string? ReadUrl { get; private set; }
         public string CoverImagePath { get; private set; }
         public string PdfFilePath { get; private set; }
 
@@ -28,7 +28,7 @@ namespace BookVault.Models
         }
 
         private Book(string name, List<string> genres, DateTimeOffset? releaseDate, string author,
-                    string plot, int? length, bool isRead, string readUrl,
+                    string plot, int? length, bool isRead, string? readUrl,
                     string coverImagePath, string pdfFilePath)
         {
             Name = name;
@@ -45,7 +45,7 @@ namespace BookVault.Models
 
         public static Book Create(string name, List<string> genres, DateTimeOffset? releaseDate,
                                  string author, string plot, int? length, bool isRead,
-                                 string readUrl, string coverImagePath, string pdfFilePath)
+                                 string? readUrl, string coverImagePath, string pdfFilePath)
         {
             ValidateInputs(name, genres, releaseDate, author, readUrl, pdfFilePath, length);
             return new Book(name, genres, releaseDate, author, plot, length, isRead,
@@ -54,7 +54,7 @@ namespace BookVault.Models
 
         public void Update(string name, List<string> genres, DateTimeOffset? releaseDate,
                           string author, string plot, int? length, bool isRead,
-                          string readUrl, string coverImagePath, string pdfFilePath)
+                          string? readUrl, string coverImagePath, string pdfFilePath)
         {
             ValidateInputs(name, genres, releaseDate, author, readUrl, pdfFilePath, length);
 
@@ -73,7 +73,7 @@ namespace BookVault.Models
         }
 
         private static void ValidateInputs(string name, List<string> genres, DateTimeOffset? releaseDate,
-                                         string author, string readUrl, string pdfFilePath, int? length)
+                                         string author, string? readUrl, string pdfFilePath, int? length)
         {
             if (string.IsNullOrWhiteSpace(name))
                 throw new ArgumentException("Name cannot be null or empty.", nameof(name));
@@ -83,10 +83,6 @@ namespace BookVault.Models
 
             if (length.HasValue && length <= 0)
                 throw new ArgumentException("Length must be a positive number.", nameof(length));
-
-            // At least one access method must be provided
-            if (string.IsNullOrWhiteSpace(readUrl) && string.IsNullOrWhiteSpace(pdfFilePath))
-                throw new ArgumentException("Either read URL or PDF file must be provided.");
 
             // Validate URL format if provided
             if (!string.IsNullOrWhiteSpace(readUrl) && !Uri.TryCreate(readUrl, UriKind.Absolute, out _))
