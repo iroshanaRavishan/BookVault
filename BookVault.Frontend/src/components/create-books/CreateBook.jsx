@@ -56,7 +56,7 @@ export default function CreateBook() {
   // Generate years from 1900 to current year + 1
   const currentYear = new Date().getFullYear();
   const years = [];
-  for (let i = currentYear + 1; i >= 1900; i--) {
+  for (let i = currentYear; i >= 1900; i--) {
     years.push(i);
   }
 
