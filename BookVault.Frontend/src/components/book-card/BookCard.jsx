@@ -6,25 +6,28 @@ import GenreScroll from '../genre-scroll-buttons/GenreScroll';
 import { TbClock } from "react-icons/tb";
 import { Link } from 'react-router-dom';
 import ConfirmDeleteModal from '../confirm-dialog/ConfirmDialogModal';
+import useBooks from "../../hooks/useBook";
 
-export default function BookCard({ book }) {
+export default function BookCard({ book, refreshBooks }) {
   const [showModal, setShowModal] = useState(false);
   const [showDeleteConfirmModal, setShowDeleteConfirmModal] = useState(false);
+    const { books, loading, fetchBooks } = useBooks(); // custom hook
 
   function ImagePathReviser(path){
     return `https://localhost:7157/uploads/${path.replace(/\\/g, '/')}`;
   }
 
-  const handleDeleteClick = () => {
+  function handleDeleteClick() {
     setShowDeleteConfirmModal(true);   // Show the confirmation modal
     closeModal(); // Open the modal to confirm deletion           
   };
   
-  const handleCloseModal = () => {
+  function handleCloseModal() {
     setShowDeleteConfirmModal(false);
   };
 
-  const handleConfirmDelete = () => {
+  async function handleConfirmDelete() {
+    await fetchBooks(); // refresh after successful delete
     setShowDeleteConfirmModal(false);
     // TODO : Implement the logic of opening the book modal if the modal is closed or cancel. 
     // now the book modal is closing when close or cancel. so to delete have to start fro the begininghere
@@ -159,7 +162,10 @@ export default function BookCard({ book }) {
         bookId={book.id}
         isOpen={showDeleteConfirmModal}
         onClose={handleCloseModal}
-        onConfirm={handleConfirmDelete}
+        onConfirm={()=> {
+          handleConfirmDelete();
+          refreshBooks();
+        }}
       />
     </>
   );
