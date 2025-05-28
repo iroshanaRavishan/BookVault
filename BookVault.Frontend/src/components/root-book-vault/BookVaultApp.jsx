@@ -8,7 +8,6 @@ import styles from './bookvaultapp.module.css';
 
 import LandingPage from '../landing-page/LandingPage'
 import CreateBook from '../create-books/CreateBook';
-import DeleteBooks from '../delete-books/DeleteBooks';
 import NavBar from '../nav-bar/NavBar';
 import AllBooks from '../all-books/AllBooks';
 import EditBooks from '../edit-books/EditBooks';
@@ -26,7 +25,6 @@ export default function BookVaultApp() {
             <Route path="/create" element={<CreateBook />} />
             <Route path="/edit/:id" element={<EditBooks />} />
             <Route path="/search" element={<AllBooks />} />
-            <Route path="/delete" element={<DeleteBooks />} />
           </Routes>
         </div>
         <Footer />

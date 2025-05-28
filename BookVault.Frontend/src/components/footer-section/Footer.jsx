@@ -17,10 +17,6 @@ export default function Footer() {
             <input type="email" placeholder="Enter your email" />
             <button className={styles.subscribeBtn}>Subscribe</button>
           </div>
-          <div className={styles.consentCheckbox}>
-            <input type="checkbox" id="consent" />
-            <label htmlFor="consent">By checking this box, you agree that you are at least 18 years of age</label>
-          </div>
           <div className={styles.socialIcons}>
             <Link to="#" aria-label="Email"><MdEmail /></Link>
             <Link to="#" aria-label="Twitter"><FaSquareXTwitter /></Link>
@@ -45,9 +41,7 @@ export default function Footer() {
             <ul>
               <li><Link to="/">Home</Link></li>
               <li><Link to="/create">Add Books</Link></li>
-              <li><Link to="/edit">Edit Books</Link></li>
-              <li><Link to="/search">Search Added Books</Link></li>
-              <li><Link to="/delete">Delete Books</Link></li>
+              <li><Link to="/search">Search Books</Link></li>
             </ul>
           </div>
           

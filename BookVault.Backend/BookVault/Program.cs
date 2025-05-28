@@ -1,7 +1,9 @@
+using BookVault.Application.Services;
 using BookVault.Data;
-using BookVault.Services;
 using Microsoft.EntityFrameworkCore;
 using Scalar.AspNetCore;
+using BookVault.Application;
+using BookVault.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +11,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddCors();
 builder.Services.AddOpenApi();
 builder.Services.AddEndpointsApiExplorer(); // Add this for better API documentation
+builder.Services.AddApplication();
+builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddTransient<IBookService, BookService>();
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
@@ -71,6 +75,8 @@ app.UseStaticFiles(new StaticFileOptions
 });
 
 app.UseHttpsRedirection();
+
+app.UseAuthorization();
 
 app.MapControllers();
 

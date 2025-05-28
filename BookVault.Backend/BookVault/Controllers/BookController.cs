@@ -1,6 +1,7 @@
-﻿using BookVault.DTOs;
+﻿using BookVault.Application.DTOs;
+using BookVault.Application.Services;
+using BookVault.DTOs;
 using BookVault.Models;
-using BookVault.Services;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
