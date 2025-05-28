@@ -693,7 +693,7 @@ export default function EditBooks() {
                   <div className={styles.suggestionChips}>
                     {predefinedGenres
                       .filter((genre) => !genres.includes(genre))
-                      .slice(0, 8)
+                      // .slice(0, 8) // limiting number of chips to show
                       .map((genre) => (
                         <button
                           key={genre}
