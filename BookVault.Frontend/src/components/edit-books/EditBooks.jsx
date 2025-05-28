@@ -312,8 +312,8 @@ export default function EditBooks() {
         length: length ? Number.parseInt(length) : null,
         isRead: read,
         readUrl: readUrl.trim() === "" ? null : readUrl.trim(),
-        coverImagePath: null,
-        pdfFilePath: null,
+        // coverImagePath: null,
+        // pdfFilePath: null,
       };
 
       // Handle release date
@@ -323,25 +323,47 @@ export default function EditBooks() {
 
       console.log("Final update payload:", updateData)
 
+      // ----------------------------------------------------------------------------
+      // if (imageFile) {
+      //   const imagePath = await uploadFile(imageFile, "image");
+      //   updateData.coverImagePath = imagePath;
+      //   if (existingImagePath) await deleteFile(existingImagePath);
+      // } else if (removeExistingImage && existingImagePath) {
+      //   updateData.coverImagePath = null;
+      //   await deleteFile(existingImagePath);
+      // }
+
+      // if (pdfFile) {
+      //   const pdfPath = await uploadFile(pdfFile, "pdf");
+      //   updateData.pdfFilePath = pdfPath;
+      //   if (existingPdfPath) await deleteFile(existingPdfPath);
+      // } else if (removeExistingPdf && existingPdfPath) {
+      //   updateData.pdfFilePath = null;
+      //   await deleteFile(existingPdfPath);
+      // }
+
+      // const result = await updateBookAPI(updateData);
+      // ----------------------------------------------------------------------------
+
+      const result = await updateBookAPI(updateData);
+
       if (imageFile) {
         const imagePath = await uploadFile(imageFile, "image");
         updateData.coverImagePath = imagePath;
         if (existingImagePath) await deleteFile(existingImagePath);
-      } else if (removeExistingImage && existingImagePath) {
-        updateData.coverImagePath = null;
-        await deleteFile(existingImagePath);
       }
 
       if (pdfFile) {
         const pdfPath = await uploadFile(pdfFile, "pdf");
         updateData.pdfFilePath = pdfPath;
         if (existingPdfPath) await deleteFile(existingPdfPath);
-      } else if (removeExistingPdf && existingPdfPath) {
-        updateData.pdfFilePath = null;
-        await deleteFile(existingPdfPath);
       }
 
-      const result = await updateBookAPI(updateData);
+      if (result){
+        console.log("updated data in the if ", updateData)
+        // Update full record again with image/pdf paths included
+        await updateBookAPI(updateData);
+      }
 
       if (isRemoveImageAtUpdate) {
         // If we are removing the existing image, we need to delete it from the server
