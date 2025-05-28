@@ -56,7 +56,7 @@ export default function CreateBook() {
   // Generate years from 1900 to current year + 1
   const currentYear = new Date().getFullYear();
   const years = [];
-  for (let i = currentYear + 1; i >= 1900; i--) {
+  for (let i = currentYear; i >= 1900; i--) {
     years.push(i);
   }
 
@@ -139,11 +139,11 @@ export default function CreateBook() {
         return;
       }
 
-      if (!readUrl.trim() && !pdfFile) {
-        setMessage('Please provide either a read online URL or upload a PDF file.');
-        setIsSubmitting(false);
-        return;
-      }
+      // if (!readUrl.trim() && !pdfFile) {
+      //   setMessage('Please provide either a read online URL or upload a PDF file.');
+      //   setIsSubmitting(false);
+      //   return;
+      // }
 
       // Create FormData for file uploads
       const formData = new FormData();
@@ -378,7 +378,7 @@ export default function CreateBook() {
                   <div className={styles.suggestionChips}>
                     {predefinedGenres
                       .filter((genre) => !genres.includes(genre))
-                      .slice(0, 8)
+                      // .slice(0, 8) // limiting number of chips to show  
                       .map((genre) => (
                         <button
                           key={genre}

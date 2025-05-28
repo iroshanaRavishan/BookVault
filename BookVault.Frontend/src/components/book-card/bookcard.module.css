@@ -291,6 +291,7 @@
 
 .modalTitleRow {
   display: flex;
+  flex-direction: column;
   color: #222;
   justify-content: flex-start;
   align-items: baseline;
@@ -298,7 +299,6 @@
 }
 
 .editBookRec{
-  margin-left: 20px;
   font-size: 14px;
 }
 
