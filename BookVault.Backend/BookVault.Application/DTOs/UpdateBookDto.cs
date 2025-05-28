@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Http;
 
-namespace BookVault.DTOs
+namespace BookVault.Application.DTOs
 {
     public class UpdateBookDto
     {
@@ -27,6 +28,11 @@ namespace BookVault.DTOs
         [StringLength(500, ErrorMessage = "URL cannot exceed 500 characters")]
         public string? ReadUrl { get; init; }
 
+        // File upload properties
+        public IFormFile? CoverImage { get; init; }
+        public IFormFile? PdfFile { get; init; }
+
+        // Keep these for when you want to update paths directly (optional)
         [StringLength(500, ErrorMessage = "Cover image path cannot exceed 500 characters")]
         public string? CoverImagePath { get; init; }
 
