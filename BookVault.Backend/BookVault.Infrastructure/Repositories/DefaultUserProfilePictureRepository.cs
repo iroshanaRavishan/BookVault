@@ -18,9 +18,17 @@ namespace BookVault.Infrastructure.Repositories
         {
             _defaultUserProfilePictureDbContext = defaultUserProfilePictureDbContext;
         }
-        public Task<bool> DeleteImageAsync(int id)
+        public async Task<bool> DeleteImageAsync(int id)
         {
-            throw new NotImplementedException();
+            var image = await _defaultUserProfilePictureDbContext.DefaultUserProfilePictures
+                .FirstOrDefaultAsync(img => img.Id == id);
+
+            if (image == null)
+                return false;
+
+            _defaultUserProfilePictureDbContext.DefaultUserProfilePictures.Remove(image);
+            await _defaultUserProfilePictureDbContext.SaveChangesAsync();
+            return true;
         }
 
         public async Task<IEnumerable<byte[]>> GetAllImageDataAsync()
