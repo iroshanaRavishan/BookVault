@@ -1,5 +1,4 @@
-﻿using BookVault.Application.DTOs;
-using BookVault.DTOs;
+﻿using BookVault.Application.DTOs.BookDTOs;
 
 namespace BookVault.Application.Services
 {

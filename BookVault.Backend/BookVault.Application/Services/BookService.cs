@@ -1,9 +1,8 @@
-﻿using BookVault.Application.DTOs;
-using BookVault.Domain.Interfaces;
-using BookVault.DTOs;
+﻿using BookVault.Domain.Interfaces;
 using BookVault.Models;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Http;
+using BookVault.Application.DTOs.BookDTOs;
 
 
 namespace BookVault.Application.Services
