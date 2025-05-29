@@ -18,19 +18,36 @@ namespace BookVault.Infrastructure.Repositories
         {
             _defaultUserProfilePictureDbContext = defaultUserProfilePictureDbContext;
         }
-        public Task<bool> DeleteImageAsync(int id)
+        public async Task<bool> DeleteImageAsync(int id)
         {
-            throw new NotImplementedException();
+            var image = await _defaultUserProfilePictureDbContext.DefaultUserProfilePictures
+                .FirstOrDefaultAsync(img => img.Id == id);
+
+            if (image == null)
+                return false;
+
+            _defaultUserProfilePictureDbContext.DefaultUserProfilePictures.Remove(image);
+            await _defaultUserProfilePictureDbContext.SaveChangesAsync();
+            return true;
         }
 
-        public Task<IEnumerable<byte[]>> GetAllImageDataAsync()
+        public async Task<IEnumerable<byte[]>> GetAllImageDataAsync()
         {
-            throw new NotImplementedException();
+            return await _defaultUserProfilePictureDbContext.DefaultUserProfilePictures
+                .Select(img => img.Data)
+                .ToListAsync();
         }
 
-        public Task<IEnumerable<DefaultUserProfileImage>> GetAllImagesAsync()
+        public async Task<IEnumerable<DefaultUserProfileImage>> GetAllImagesAsync()
         {
-            throw new NotImplementedException();
+            return await _defaultUserProfilePictureDbContext.DefaultUserProfilePictures
+                .Select(i => new DefaultUserProfileImage
+                {
+                    Id = i.Id,
+                    FileName = i.FileName,
+                    ContentType = i.ContentType
+                })
+                .ToListAsync();
         }
 
         public async Task<IEnumerable<DefaultUserProfileImage>> GetAllImagesWithDataAsync()
@@ -38,14 +55,18 @@ namespace BookVault.Infrastructure.Repositories
             return await _defaultUserProfilePictureDbContext.DefaultUserProfilePictures.ToListAsync();
         }
 
-        public Task<DefaultUserProfileImage?> GetImageByIdAsync(int id)
+        public async Task<DefaultUserProfileImage?> GetImageByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _defaultUserProfilePictureDbContext.DefaultUserProfilePictures
+                .FirstOrDefaultAsync(img => img.Id == id);
         }
 
-        public Task<byte[]?> GetImageDataByIdAsync(int id)
+        public async Task<byte[]?> GetImageDataByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _defaultUserProfilePictureDbContext.DefaultUserProfilePictures
+                .Where(img => img.Id == id)
+                .Select(img => img.Data)
+                .FirstOrDefaultAsync();
         }
 
         public async Task<int> UploadImageAsync(IFormFile file)
