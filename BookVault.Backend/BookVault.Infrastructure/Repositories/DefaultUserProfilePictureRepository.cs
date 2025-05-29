@@ -1,6 +1,8 @@
 ﻿using BookVault.Domain.Entities;
 using BookVault.Domain.Interfaces;
+using BookVault.Infrastructure.Data;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +13,11 @@ namespace BookVault.Infrastructure.Repositories
 {
     public class DefaultUserProfilePictureRepository : IDefaultUserProfilePictureRepository
     {
+        private readonly DefaultUserProfilePictureDbContext _defaultUserProfilePictureDbContext;
+        public DefaultUserProfilePictureRepository(DefaultUserProfilePictureDbContext defaultUserProfilePictureDbContext)
+        {
+            _defaultUserProfilePictureDbContext = defaultUserProfilePictureDbContext;
+        }
         public Task<bool> DeleteImageAsync(int id)
         {
             throw new NotImplementedException();
@@ -26,9 +33,9 @@ namespace BookVault.Infrastructure.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<DefaultUserProfileImage>> GetAllImagesWithDataAsync()
+        public async Task<IEnumerable<DefaultUserProfileImage>> GetAllImagesWithDataAsync()
         {
-            throw new NotImplementedException();
+            return await _defaultUserProfilePictureDbContext.DefaultUserProfilePictures.ToListAsync();
         }
 
         public Task<DefaultUserProfileImage?> GetImageByIdAsync(int id)
@@ -41,9 +48,26 @@ namespace BookVault.Infrastructure.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<int> UploadImageAsync(IFormFile file)
+        public async Task<int> UploadImageAsync(IFormFile file)
         {
-            throw new NotImplementedException();
+            if (file == null || file.Length == 0)
+                throw new ArgumentException("No file uploaded!");
+
+            using (var memoryStream = new MemoryStream())
+            {
+                await file.CopyToAsync(memoryStream);
+                var image = new DefaultUserProfileImage
+                {
+                    FileName = file.FileName,
+                    ContentType = file.ContentType,
+                    Data = memoryStream.ToArray()
+                };
+
+                _defaultUserProfilePictureDbContext.DefaultUserProfilePictures.Add(image);
+                await _defaultUserProfilePictureDbContext.SaveChangesAsync();
+
+                return image.Id;
+            }
         }
     }
 }
