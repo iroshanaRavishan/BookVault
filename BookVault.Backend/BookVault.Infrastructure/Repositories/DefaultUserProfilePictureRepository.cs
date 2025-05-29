@@ -51,9 +51,12 @@ namespace BookVault.Infrastructure.Repositories
                 .FirstOrDefaultAsync(img => img.Id == id);
         }
 
-        public Task<byte[]?> GetImageDataByIdAsync(int id)
+        public async Task<byte[]?> GetImageDataByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _defaultUserProfilePictureDbContext.DefaultUserProfilePictures
+                .Where(img => img.Id == id)
+                .Select(img => img.Data)
+                .FirstOrDefaultAsync();
         }
 
         public async Task<int> UploadImageAsync(IFormFile file)
