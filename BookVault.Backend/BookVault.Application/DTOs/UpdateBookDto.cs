@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace BookVault.DTOs
+namespace BookVault.Application.DTOs
 {
     public class UpdateBookDto
     {
