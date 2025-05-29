@@ -23,9 +23,11 @@ namespace BookVault.Infrastructure.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<byte[]>> GetAllImageDataAsync()
+        public async Task<IEnumerable<byte[]>> GetAllImageDataAsync()
         {
-            throw new NotImplementedException();
+            return await _defaultUserProfilePictureDbContext.DefaultUserProfilePictures
+                .Select(img => img.Data)
+                .ToListAsync();
         }
 
         public async Task<IEnumerable<DefaultUserProfileImage>> GetAllImagesAsync()
