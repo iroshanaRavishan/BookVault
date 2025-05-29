@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System.ComponentModel.DataAnnotations;
 
-namespace BookVault.DTOs
+namespace BookVault.Application.DTOs.BookDTOs
 {
     public class CreateBookDto
     {
