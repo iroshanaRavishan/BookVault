@@ -38,10 +38,10 @@ namespace BookVault.Infrastructure.Repositories
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<DefaultUserProfileImage>> GetAllImagesAsync()
+        public async Task<IEnumerable<DefaultUserProfilePicture>> GetAllImagesAsync()
         {
             return await _defaultUserProfilePictureDbContext.DefaultUserProfilePictures
-                .Select(i => new DefaultUserProfileImage
+                .Select(i => new DefaultUserProfilePicture
                 {
                     Id = i.Id,
                     FileName = i.FileName,
@@ -50,12 +50,12 @@ namespace BookVault.Infrastructure.Repositories
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<DefaultUserProfileImage>> GetAllImagesWithDataAsync()
+        public async Task<IEnumerable<DefaultUserProfilePicture>> GetAllImagesWithDataAsync()
         {
             return await _defaultUserProfilePictureDbContext.DefaultUserProfilePictures.ToListAsync();
         }
 
-        public async Task<DefaultUserProfileImage?> GetImageByIdAsync(int id)
+        public async Task<DefaultUserProfilePicture?> GetImageByIdAsync(int id)
         {
             return await _defaultUserProfilePictureDbContext.DefaultUserProfilePictures
                 .FirstOrDefaultAsync(img => img.Id == id);
@@ -77,7 +77,7 @@ namespace BookVault.Infrastructure.Repositories
             using (var memoryStream = new MemoryStream())
             {
                 await file.CopyToAsync(memoryStream);
-                var image = new DefaultUserProfileImage
+                var image = new DefaultUserProfilePicture
                 {
                     FileName = file.FileName,
                     ContentType = file.ContentType,
