@@ -42,5 +42,29 @@ namespace BookVault.API.Controllers
             return Ok(images);
         }
 
+        // [HttpGet("{id}")]
+        // public async Task<IActionResult> GetImage(int id)
+        // {
+        //    var image = await _defaultUserProfilePictureService.GetImageAsync(id);
+        //    if (image == null)
+        //        return NotFound();
+
+        //    var result = new
+        //    {
+        //        Id = image.Id,
+        //        Data = Convert.ToBase64String(image.Data),
+        //        ContentType = image.ContentType,
+        //        FileName = image.FileName
+        //    };
+
+        //    return Ok(result);
+        // }
+
+        // [HttpGet("all-files")]
+        // public async Task<IActionResult> GetAllImageFiles()
+        // {
+        //    var fileResults = await _defaultUserProfilePictureService.GetAllImageFilesAsync();
+        //    return Ok(fileResults);
+        // }
     }
 }
