@@ -50,7 +50,7 @@ namespace BookVault.Infrastructure.Data
 
                     if (defaultPic == null)
                     {
-                        var bytes = File.ReadAllBytes("BookVault/BookVault.Backend/BookVault/Default images/default-user.png");
+                        var bytes = File.ReadAllBytes("Default images/default-user.png");
 
                         defaultPic = new DefaultUserProfilePicture
                         {
