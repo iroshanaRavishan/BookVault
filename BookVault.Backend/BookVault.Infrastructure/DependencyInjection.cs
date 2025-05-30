@@ -1,5 +1,6 @@
 ﻿using BookVault.Data;
 using BookVault.Domain.Interfaces;
+using BookVault.Infrastructure.Data;
 using BookVault.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -19,13 +20,18 @@ namespace BookVault.Infrastructure
             IConfiguration configuration)
         {
             // Register DbContext
+            var connectionString = configuration.GetConnectionString("DefaultConnection");
+
             services.AddDbContext<BookDbContext>(options =>
-                options.UseNpgsql(
-                    configuration.GetConnectionString("DefaultConnection"),
-                    b => b.MigrationsAssembly(typeof(BookDbContext).Assembly.FullName)));
+                options.UseNpgsql(connectionString, b => b.MigrationsAssembly(typeof(BookDbContext).Assembly.FullName)));
+
+            services.AddDbContext<DefaultUserProfilePictureDbContext>(options =>
+                options.UseNpgsql(connectionString, d => d.MigrationsAssembly(typeof(DefaultUserProfilePictureDbContext).Assembly.FullName)));
+
 
             // Register repositories
             services.AddScoped<IBookRepository, BookRepository>();
+            services.AddScoped<IDefaultUserProfilePictureRepository, DefaultUserProfilePictureRepository>();
 
             return services;
         }
