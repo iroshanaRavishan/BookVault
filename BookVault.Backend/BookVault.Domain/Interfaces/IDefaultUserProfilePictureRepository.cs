@@ -10,12 +10,12 @@ namespace BookVault.Domain.Interfaces
 {
     public interface IDefaultUserProfilePictureRepository
     {
-        Task<int> UploadImageAsync(IFormFile file);
-        Task<DefaultUserProfilePicture?> GetImageByIdAsync(int id);
+        Task<Guid> UploadImageAsync(IFormFile file);
+        Task<DefaultUserProfilePicture?> GetImageByIdAsync(Guid id);
         Task<IEnumerable<DefaultUserProfilePicture>> GetAllImagesAsync();
         Task<IEnumerable<DefaultUserProfilePicture>> GetAllImagesWithDataAsync();
         Task<IEnumerable<byte[]>> GetAllImageDataAsync();
-        Task<byte[]?> GetImageDataByIdAsync(int id);
-        Task<bool> DeleteImageAsync(int id);
+        Task<byte[]?> GetImageDataByIdAsync(Guid id);
+        Task<bool> DeleteImageAsync(Guid id);
     }
 }
