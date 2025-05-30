@@ -27,5 +27,12 @@ namespace BookVault.API.Controllers
                 return BadRequest(e.Message);
             }
         }
+
+        [HttpGet("all")]
+        public async Task<IActionResult> GetAllImages()
+        {
+            var images = await _defaultUserProfilePictureService.GetAllImagesAsync();
+            return Ok(images);
+        }
     }
 }
