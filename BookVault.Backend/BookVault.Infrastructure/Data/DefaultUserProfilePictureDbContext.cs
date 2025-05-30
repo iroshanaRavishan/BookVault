@@ -1,4 +1,5 @@
 ﻿using BookVault.Domain.Entities;
+using BookVault.Infrastructure.Data.Configurations;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -16,7 +17,7 @@ namespace BookVault.Infrastructure.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasDefaultSchema("app");
-            modelBuilder.ApplyConfigurationsFromAssembly(typeof(DefaultUserProfilePictureDbContext).Assembly);
+            modelBuilder.ApplyConfiguration(new DefaultUserProfilePictureConfiguration());
             base.OnModelCreating(modelBuilder);
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -49,7 +50,7 @@ namespace BookVault.Infrastructure.Data
 
                     if (defaultPic == null)
                     {
-                        var bytes = File.ReadAllBytes("BookVault/BookVault.Backend/BookVault/Default images/default-user.png");
+                        var bytes = File.ReadAllBytes("Default images/default-user.png");
 
                         defaultPic = new DefaultUserProfilePicture
                         {
