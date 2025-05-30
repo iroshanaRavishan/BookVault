@@ -24,47 +24,91 @@ namespace BookVault.Infrastructure.Data
         {
             // for async-compatible environments (like During runtime initialization via code), runs asynchronously
             optionsBuilder
-                .UseAsyncSeeding(async (context, _, cancellationToken) =>
+            .UseAsyncSeeding(async (context, _, cancellationToken) =>
+            {
+                var imageFileNames = new[]
                 {
-                    var defaultPic = await context.Set<DefaultUserProfilePicture>()
-                        .FirstOrDefaultAsync(p => p.FileName == "default-user.png", cancellationToken);
+                    "default-user1.png",
+                    "default-user2.png",
+                    "default-user3.png",
+                    "default-user4.png",
+                    "default-user5.png",
+                    "default-user6.png",
+                    "default-user7.png",
+                    "default-user8.png",
+                    "default-user9.png"
+                };
 
-                    if (defaultPic == null)
-                    {
-                        var bytes = await File.ReadAllBytesAsync("Default images/default-user.png", cancellationToken);
-
-                        defaultPic = new DefaultUserProfilePicture
-                        {
-                            FileName = "default-user.png",
-                            ContentType = "image/png",
-                            Data = bytes
-                        };
-
-                        await context.Set<DefaultUserProfilePicture>().AddAsync(defaultPic, cancellationToken);
-                        await context.SaveChangesAsync(cancellationToken);
-                    }
-                })
-                // for sync environments (tools that don’t support async methods),  runs synchronously
-                .UseSeeding((context, _) =>
+                foreach (var fileName in imageFileNames)
                 {
-                    var defaultPic = context.Set<DefaultUserProfilePicture>()
-                        .FirstOrDefault(p => p.FileName == "default-user.png");
+                    var existing = await context.Set<DefaultUserProfilePicture>()
+                        .FirstOrDefaultAsync(p => p.FileName == fileName, cancellationToken);
 
-                    if (defaultPic == null)
+                    if (existing != null)
+                        continue;
+
+                    var filePath = Path.Combine("Default images", fileName);
+                    if (!File.Exists(filePath))
+                        continue;
+
+                    var bytes = await File.ReadAllBytesAsync(filePath, cancellationToken);
+
+                    var picture = new DefaultUserProfilePicture
                     {
-                        var bytes = File.ReadAllBytes("Default images/default-user.png");
+                        FileName = fileName,
+                        ContentType = "image/png", // or determine from extension
+                        Data = bytes
+                    };
 
-                        defaultPic = new DefaultUserProfilePicture
-                        {
-                            FileName = "default-user.png",
-                            ContentType = "image/png",
-                            Data = bytes
-                        };
+                    await context.Set<DefaultUserProfilePicture>().AddAsync(picture, cancellationToken);
+                }
 
-                        context.Set<DefaultUserProfilePicture>().Add(defaultPic);
-                        context.SaveChanges();
-                    }
-                });
+                await context.SaveChangesAsync(cancellationToken);
+            })
+
+            // for sync environments (tools that don’t support async methods),  runs synchronously
+            .UseSeeding((context, _) =>
+            {
+                var imageFileNames = new[]
+                {
+                    "default-user1.png",
+                    "default-user2.png",
+                    "default-user3.png",
+                    "default-user4.png",
+                    "default-user5.png",
+                    "default-user6.png",
+                    "default-user7.png",
+                    "default-user8.png",
+                    "default-user9.png"
+                };
+
+                foreach (var fileName in imageFileNames)
+                {
+                    var existing = context.Set<DefaultUserProfilePicture>()
+                        .FirstOrDefault(p => p.FileName == fileName);
+
+                    if (existing != null)
+                        continue;
+
+                    var filePath = Path.Combine("Default images", fileName);
+                    if (!File.Exists(filePath))
+                        continue;
+
+                    var bytes = File.ReadAllBytes(filePath);
+
+                    var picture = new DefaultUserProfilePicture
+                    {
+                        FileName = fileName,
+                        ContentType = "image/png",
+                        Data = bytes
+                    };
+
+                    context.Set<DefaultUserProfilePicture>().Add(picture);
+                }
+
+                context.SaveChanges();
+            });
+
         }
 
     }
