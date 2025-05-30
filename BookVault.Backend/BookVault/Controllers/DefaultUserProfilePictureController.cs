@@ -13,5 +13,19 @@ namespace BookVault.API.Controllers
         {
             _defaultUserProfilePictureService = defaultUserProfilePictureService;
         }
+
+        [HttpPost("upload")]
+        public async Task<IActionResult> UploadImage(IFormFile file)
+        {
+            try
+            {
+                var imageId = await _defaultUserProfilePictureService.UploadImageAsync(file);
+                return Ok(new { imageId });
+            }
+            catch (ArgumentException e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
     }
 }
