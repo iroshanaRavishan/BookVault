@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BookVault.Domain.Entities
 {
-    public class DefaultUserProfileImage
+    public class DefaultUserProfilePicture
     {
         public int Id { get; set; }
 

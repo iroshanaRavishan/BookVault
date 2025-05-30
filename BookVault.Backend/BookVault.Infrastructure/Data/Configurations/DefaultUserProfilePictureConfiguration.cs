@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace BookVault.Infrastructure.Data.Configurations
 {
-    public class DefaultUserProfilePictureConfiguration : IEntityTypeConfiguration<DefaultUserProfileImage>
+    public class DefaultUserProfilePictureConfiguration : IEntityTypeConfiguration<DefaultUserProfilePicture>
     {
-        public void Configure(EntityTypeBuilder<DefaultUserProfileImage> builder)
+        public void Configure(EntityTypeBuilder<DefaultUserProfilePicture> builder)
         {
             builder.ToTable("DefaultUserProfilePictures");
 
