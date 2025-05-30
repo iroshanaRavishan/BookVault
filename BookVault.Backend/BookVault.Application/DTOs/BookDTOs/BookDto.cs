@@ -1,4 +1,4 @@
-﻿namespace BookVault.DTOs
+﻿namespace BookVault.Application.DTOs.BookDTOs
 {
     public record BookDto(
         Guid Id,

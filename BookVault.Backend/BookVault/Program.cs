@@ -1,9 +1,12 @@
+using BookVault.Application;
 using BookVault.Application.Services;
 using BookVault.Data;
+using BookVault.Domain.Interfaces;
+using BookVault.Infrastructure;
+using BookVault.Infrastructure.Data;
+using BookVault.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Scalar.AspNetCore;
-using BookVault.Application;
-using BookVault.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,11 +24,6 @@ builder.Services.AddControllers()
         options.JsonSerializerOptions.PropertyNamingPolicy = System.Text.Json.JsonNamingPolicy.CamelCase;
     });
 
-builder.Services.AddDbContext<BookDbContext>(options =>
-{
-    var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-    options.UseNpgsql(connectionString);
-});
 
 var app = builder.Build();
 
@@ -43,14 +41,19 @@ if (app.Environment.IsDevelopment())
 // Apply migrations
 await using (var serviceScope = app.Services.CreateAsyncScope())
 {
-    var dbContext = serviceScope.ServiceProvider.GetRequiredService<BookDbContext>();
+    var defaultPicContext = serviceScope.ServiceProvider.GetRequiredService<DefaultUserProfilePictureDbContext>();
+    var bookContext = serviceScope.ServiceProvider.GetRequiredService<BookDbContext>();
     var logger = serviceScope.ServiceProvider.GetRequiredService<ILogger<Program>>();
 
     try
     {
-        logger.LogInformation("Applying database migrations...");
-        await dbContext.Database.MigrateAsync();
-        logger.LogInformation("Database migrations applied successfully");
+        logger.LogInformation("Applying DefaultUserProfilePictureDbContext migrations...");
+        await defaultPicContext.Database.MigrateAsync();
+        logger.LogInformation("DefaultUserProfilePictureDbContext migrations applied successfully");
+
+        logger.LogInformation("Applying BookDbContext migrations...");
+        await bookContext.Database.MigrateAsync();
+        logger.LogInformation("BookDbContext migrations applied successfully");
     }
     catch (Exception ex)
     {
