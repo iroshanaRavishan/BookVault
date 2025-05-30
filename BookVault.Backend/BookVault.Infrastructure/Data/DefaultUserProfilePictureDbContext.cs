@@ -22,6 +22,7 @@ namespace BookVault.Infrastructure.Data
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            // for async-compatible environments (like During runtime initialization via code), runs asynchronously
             optionsBuilder
                 .UseAsyncSeeding(async (context, _, cancellationToken) =>
                 {
@@ -30,7 +31,7 @@ namespace BookVault.Infrastructure.Data
 
                     if (defaultPic == null)
                     {
-                        var bytes = await File.ReadAllBytesAsync("BookVault/BookVault.Backend/BookVault/Default images/default-user.png", cancellationToken);
+                        var bytes = await File.ReadAllBytesAsync("Default images/default-user.png", cancellationToken);
 
                         defaultPic = new DefaultUserProfilePicture
                         {
@@ -43,6 +44,7 @@ namespace BookVault.Infrastructure.Data
                         await context.SaveChangesAsync(cancellationToken);
                     }
                 })
+                // for sync environments (tools that don’t support async methods),  runs synchronously
                 .UseSeeding((context, _) =>
                 {
                     var defaultPic = context.Set<DefaultUserProfilePicture>()
