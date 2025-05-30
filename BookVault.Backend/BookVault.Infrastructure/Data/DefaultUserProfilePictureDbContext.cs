@@ -1,4 +1,5 @@
 ﻿using BookVault.Domain.Entities;
+using BookVault.Infrastructure.Data.Configurations;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -16,7 +17,7 @@ namespace BookVault.Infrastructure.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasDefaultSchema("app");
-            modelBuilder.ApplyConfigurationsFromAssembly(typeof(DefaultUserProfilePictureDbContext).Assembly);
+            modelBuilder.ApplyConfiguration(new DefaultUserProfilePictureConfiguration());
             base.OnModelCreating(modelBuilder);
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
