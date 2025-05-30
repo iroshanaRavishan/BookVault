@@ -42,29 +42,52 @@ namespace BookVault.API.Controllers
             return Ok(images);
         }
 
-        // [HttpGet("{id}")]
-        // public async Task<IActionResult> GetImage(int id)
-        // {
-        //    var image = await _defaultUserProfilePictureService.GetImageAsync(id);
-        //    if (image == null)
-        //        return NotFound();
+        [HttpGet("{id}/file")]
+        public async Task<IActionResult> GetImageFile(int id)
+        {
+            var image = await _defaultUserProfilePictureService.GetImageByIdAsync(id);
 
-        //    var result = new
-        //    {
-        //        Id = image.Id,
-        //        Data = Convert.ToBase64String(image.Data),
-        //        ContentType = image.ContentType,
-        //        FileName = image.FileName
-        //    };
+            if (image == null)
+                return NotFound();
 
-        //    return Ok(result);
-        // }
+            return File(image.Data, image.ContentType, image.FileName);
+        }
 
-        // [HttpGet("all-files")]
-        // public async Task<IActionResult> GetAllImageFiles()
-        // {
-        //    var fileResults = await _defaultUserProfilePictureService.GetAllImageFilesAsync();
-        //    return Ok(fileResults);
-        // }
+        [HttpGet("all-image-data")]
+        public async Task<IActionResult> GetAllImageData()
+        {
+            var imageDataList = await _defaultUserProfilePictureService.GetAllImageDataAsync();
+
+            // Convert byte arrays to base64 strings for frontend consumption
+            var base64Images = imageDataList.Select(data => Convert.ToBase64String(data));
+
+            return Ok(base64Images);
+        }
+
+        [HttpGet("{id}/data")]
+        public async Task<IActionResult> GetImageData(int id)
+        {
+            var imageData = await _defaultUserProfilePictureService.GetImageDataByIdAsync(id);
+            if (imageData == null)
+                return NotFound();
+
+            // Optional: Fetch the content type from another method if needed
+            var image = await _defaultUserProfilePictureService.GetImageByIdAsync(id);
+            var contentType = image?.ContentType ?? "application/octet-stream";
+
+            return File(imageData, contentType); // returns image binary as file
+        }
+
+        // this is to delete the default images and this will not be used by the users of the application
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteImage(int id)
+        {
+            var deleted = await _defaultUserProfilePictureService.DeleteImageAsync(id);
+
+            if (!deleted)
+                return NotFound(new { message = $"Image with ID {id} not found." });
+
+            return NoContent(); // 204 No Content
+        }
     }
 }
