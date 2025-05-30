@@ -1,39 +1,39 @@
-import { useState, useEffect } from "react"
-import styles from "./editbooks.module.css"
-import { useNavigate, useParams } from "react-router-dom"
-import { MdAdd, MdClose, MdEdit, MdZoomIn, MdDownload, MdDelete } from "react-icons/md"
+import { useState, useEffect } from "react";
+import styles from "./editbooks.module.css";
+import { useNavigate, useParams } from "react-router-dom";
+import { MdAdd, MdClose, MdEdit, MdZoomIn, MdDownload, MdDelete } from "react-icons/md";
 
 export default function EditBooks() {
-  const [name, setName] = useState("")
-  const [imageFile, setImageFile] = useState(null)
-  const [existingImageUrl, setExistingImageUrl] = useState("")
-  const [existingImagePath, setExistingImagePath] = useState("")
-  const [removeExistingImage, setRemoveExistingImage] = useState(false)
-  const [year, setYear] = useState("")
-  const [read, setRead] = useState(false)
-  const [genres, setGenres] = useState([])
-  const [genreInput, setGenreInput] = useState("")
-  const [author, setAuthor] = useState("")
-  const [plot, setPlot] = useState("")
-  const [length, setLength] = useState("")
-  const [readUrl, setReadUrl] = useState("")
-  const [pdfFile, setPdfFile] = useState(null)
-  const [existingPdfUrl, setExistingPdfUrl] = useState("")
-  const [existingPdfPath, setExistingPdfPath] = useState("")
-  const [removeExistingPdf, setRemoveExistingPdf] = useState(false)
-  const [message, setMessage] = useState("")
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [isLoading, setIsLoading] = useState(true)
-  const [bookId, setBookId] = useState(null)
-  const [isRemoveImageAtUpdate, setRemoveImageAtUpdate] = useState(false)
-  const [isRemovePdfAtUpdate, setRemovePdfAtUpdate] = useState(false)
+  const [name, setName] = useState("");
+  const [imageFile, setImageFile] = useState(null);
+  const [existingImageUrl, setExistingImageUrl] = useState("");
+  const [existingImagePath, setExistingImagePath] = useState("");
+  const [removeExistingImage, setRemoveExistingImage] = useState(false);
+  const [year, setYear] = useState("");
+  const [read, setRead] = useState(false);
+  const [genres, setGenres] = useState([]);
+  const [genreInput, setGenreInput] = useState("");
+  const [author, setAuthor] = useState("");
+  const [plot, setPlot] = useState("");
+  const [length, setLength] = useState("");
+  const [readUrl, setReadUrl] = useState("");
+  const [pdfFile, setPdfFile] = useState(null);
+  const [existingPdfUrl, setExistingPdfUrl] = useState("");
+  const [existingPdfPath, setExistingPdfPath] = useState("");
+  const [removeExistingPdf, setRemoveExistingPdf] = useState(false);
+  const [message, setMessage] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [bookId, setBookId] = useState(null);
+  const [isRemoveImageAtUpdate, setIsRemoveImageAtUpdate] = useState(false);
+  const [isRemovePdfAtUpdate, setIsRemovePdfAtUpdate] = useState(false);
 
   // Modal states
-  const [showImageModal, setShowImageModal] = useState(false)
-  const [modalImageUrl, setModalImageUrl] = useState("")
+  const [showImageModal, setShowImageModal] = useState(false);
+  const [modalImageUrl, setModalImageUrl] = useState("");
 
-  const navigate = useNavigate()
-  const { id } = useParams()
+  const navigate = useNavigate();
+  const { id } = useParams();
 
   // Predefined genre options
   const predefinedGenres = [
@@ -69,7 +69,7 @@ export default function EditBooks() {
   ]
 
   // Generate years from 1900 to current year + 1
-  const currentYear = new Date().getFullYear()
+  const currentYear = new Date().getFullYear();
   const years = []
   for (let i = currentYear + 1; i >= 1900; i--) {
     years.push(i)
@@ -312,8 +312,8 @@ export default function EditBooks() {
         length: length ? Number.parseInt(length) : null,
         isRead: read,
         readUrl: readUrl.trim() === "" ? null : readUrl.trim(),
-        coverImagePath: null,
-        pdfFilePath: null,
+        // coverImagePath: null,
+        // pdfFilePath: null,
       };
 
       // Handle release date
@@ -323,25 +323,47 @@ export default function EditBooks() {
 
       console.log("Final update payload:", updateData)
 
+      // ----------------------------------------------------------------------------
+      // if (imageFile) {
+      //   const imagePath = await uploadFile(imageFile, "image");
+      //   updateData.coverImagePath = imagePath;
+      //   if (existingImagePath) await deleteFile(existingImagePath);
+      // } else if (removeExistingImage && existingImagePath) {
+      //   updateData.coverImagePath = null;
+      //   await deleteFile(existingImagePath);
+      // }
+
+      // if (pdfFile) {
+      //   const pdfPath = await uploadFile(pdfFile, "pdf");
+      //   updateData.pdfFilePath = pdfPath;
+      //   if (existingPdfPath) await deleteFile(existingPdfPath);
+      // } else if (removeExistingPdf && existingPdfPath) {
+      //   updateData.pdfFilePath = null;
+      //   await deleteFile(existingPdfPath);
+      // }
+
+      // const result = await updateBookAPI(updateData);
+      // ----------------------------------------------------------------------------
+
+      const result = await updateBookAPI(updateData);
+
       if (imageFile) {
         const imagePath = await uploadFile(imageFile, "image");
         updateData.coverImagePath = imagePath;
         if (existingImagePath) await deleteFile(existingImagePath);
-      } else if (removeExistingImage && existingImagePath) {
-        updateData.coverImagePath = null;
-        await deleteFile(existingImagePath);
       }
 
       if (pdfFile) {
         const pdfPath = await uploadFile(pdfFile, "pdf");
         updateData.pdfFilePath = pdfPath;
         if (existingPdfPath) await deleteFile(existingPdfPath);
-      } else if (removeExistingPdf && existingPdfPath) {
-        updateData.pdfFilePath = null;
-        await deleteFile(existingPdfPath);
       }
 
-      const result = await updateBookAPI(updateData);
+      if (result){
+        console.log("updated data in the if ", updateData)
+        // Update full record again with image/pdf paths included
+        await updateBookAPI(updateData);
+      }
 
       if (isRemoveImageAtUpdate) {
         // If we are removing the existing image, we need to delete it from the server
@@ -374,13 +396,13 @@ export default function EditBooks() {
   const handleRemoveExistingImage = () => {
     setExistingImageUrl("")
     setRemoveExistingImage(true)
-    setRemoveImageAtUpdate(true) // Set flag to indicate image removal
+    setIsRemoveImageAtUpdate(true) // Set flag to indicate image removal
   }
 
   const handleRemoveExistingPdf = () => {
     setExistingPdfUrl("")
     setRemoveExistingPdf(true)
-    setRemovePdfAtUpdate(true) // Set flag to indicate pdf removal
+    setIsRemovePdfAtUpdate(true) // Set flag to indicate pdf removal
   }
 
   const handleImageFileChange = (e) => {
@@ -389,6 +411,7 @@ export default function EditBooks() {
       console.log("Image file selected:", file.name, file.type, file.size)
       setImageFile(file)
       setRemoveExistingImage(false)
+      setIsRemoveImageAtUpdate(false)
     }
   }
 
@@ -398,6 +421,7 @@ export default function EditBooks() {
       console.log("PDF file selected:", file.name, file.type, file.size)
       setPdfFile(file)
       setRemoveExistingPdf(false)
+      setIsRemovePdfAtUpdate(false)
     }
   }
 
@@ -693,7 +717,7 @@ export default function EditBooks() {
                   <div className={styles.suggestionChips}>
                     {predefinedGenres
                       .filter((genre) => !genres.includes(genre))
-                      .slice(0, 8)
+                      // .slice(0, 8) // limiting number of chips to show
                       .map((genre) => (
                         <button
                           key={genre}
