@@ -15,6 +15,7 @@ namespace BookVault.Application
         {
             // Register services
             services.AddScoped<IBookService, BookService>();
+            services.AddScoped<IDefaultUserProfilePictureService, DefaultUserProfilePictureService>();
 
             return services;
         }
