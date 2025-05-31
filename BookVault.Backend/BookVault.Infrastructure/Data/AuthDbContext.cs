@@ -1,5 +1,6 @@
 ﻿using BookVault.Data;
 using BookVault.Domain.Entities;
+using BookVault.Infrastructure.Data.Configurations;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -19,31 +20,8 @@ namespace BookVault.Infrastructure.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasDefaultSchema("app");
-            modelBuilder.ApplyConfigurationsFromAssembly(typeof(AuthDbContext).Assembly);
+            modelBuilder.ApplyConfiguration(new AuthConfiguration());
             base.OnModelCreating(modelBuilder);
-
-            // Seed Admin User
-            var adminId = Guid.NewGuid().ToString();
-            var hasher = new PasswordHasher<User>();
-
-            var adminUser = new User
-            {
-                Id = adminId,
-                UserName = "admin@bookvault.com",
-                NormalizedUserName = "ADMIN@BOOKVAULT.COM",
-                Email = "admin@bookvault.com",
-                NormalizedEmail = "ADMIN@BOOKVAULT.COM",
-                EmailConfirmed = true,
-                Name = "Super Admin",
-                IsAdmin = true,
-                CreatedDate = DateTime.UtcNow,
-                ModifiedDate = DateTime.UtcNow,
-                LastLogin = DateTime.UtcNow,
-                SecurityStamp = Guid.NewGuid().ToString("D")
-            };
-            adminUser.PasswordHash = hasher.HashPassword(adminUser, "Admin@123");
-
-            modelBuilder.Entity<User>().HasData(adminUser);
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
