@@ -41,12 +41,6 @@ namespace BookVault.Infrastructure.Repositories
         public async Task<IEnumerable<DefaultUserProfilePicture>> GetAllImagesAsync()
         {
             return await _defaultUserProfilePictureDbContext.DefaultUserProfilePictures
-                .Select(i => new DefaultUserProfilePicture
-                {
-                    Id = i.Id,
-                    FileName = i.FileName,
-                    ContentType = i.ContentType
-                })
                 .ToListAsync();
         }
 
@@ -69,26 +63,15 @@ namespace BookVault.Infrastructure.Repositories
                 .FirstOrDefaultAsync();
         }
 
-        public async Task<Guid> UploadImageAsync(IFormFile file)
+        public async Task<Guid> UploadImageAsync(DefaultUserProfilePicture picture)
         {
-            if (file == null || file.Length == 0)
-                throw new ArgumentException("No file uploaded!");
+            if (picture == null)
+                throw new ArgumentNullException(nameof(picture));
 
-            using (var memoryStream = new MemoryStream())
-            {
-                await file.CopyToAsync(memoryStream);
-                var image = new DefaultUserProfilePicture
-                {
-                    FileName = file.FileName,
-                    ContentType = file.ContentType,
-                    Data = memoryStream.ToArray()
-                };
+            _defaultUserProfilePictureDbContext.DefaultUserProfilePictures.Add(picture);
+            await _defaultUserProfilePictureDbContext.SaveChangesAsync();
 
-                _defaultUserProfilePictureDbContext.DefaultUserProfilePictures.Add(image);
-                await _defaultUserProfilePictureDbContext.SaveChangesAsync();
-
-                return image.Id;
-            }
+            return picture.Id;
         }
     }
 }
