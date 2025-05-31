@@ -43,7 +43,7 @@ namespace BookVault.API.Controllers
         }
 
         [HttpGet("{id}/file")]
-        public async Task<IActionResult> GetImageFile(int id)
+        public async Task<IActionResult> GetImageFile(Guid id)
         {
             var image = await _defaultUserProfilePictureService.GetImageByIdAsync(id);
 
@@ -65,7 +65,7 @@ namespace BookVault.API.Controllers
         }
 
         [HttpGet("{id}/data")]
-        public async Task<IActionResult> GetImageData(int id)
+        public async Task<IActionResult> GetImageData(Guid id)
         {
             var imageData = await _defaultUserProfilePictureService.GetImageDataByIdAsync(id);
             if (imageData == null)
@@ -80,7 +80,7 @@ namespace BookVault.API.Controllers
 
         // this is to delete the default images and this will not be used by the users of the application
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteImage(int id)
+        public async Task<IActionResult> DeleteImage(Guid id)
         {
             var deleted = await _defaultUserProfilePictureService.DeleteImageAsync(id);
 

@@ -9,7 +9,8 @@ namespace BookVault.Domain.Entities
 {
     public class DefaultUserProfilePicture
     {
-        public int Id { get; set; }
+        [Key]
+        public Guid Id { get; set; } = Guid.NewGuid();
 
         [Required]
         public string FileName { get; set; }

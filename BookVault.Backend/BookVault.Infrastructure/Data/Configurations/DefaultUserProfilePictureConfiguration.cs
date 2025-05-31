@@ -16,6 +16,10 @@ namespace BookVault.Infrastructure.Data.Configurations
             builder.ToTable("DefaultUserProfilePictures");
 
             builder.HasKey(p => p.Id);
+            
+            // Disable DB generation for Guid ID
+            builder.Property(p => p.Id)
+                   .ValueGeneratedNever(); // Tells EF not to generate it via identity
 
             builder.Property(p => p.FileName)
                    .HasMaxLength(255)
