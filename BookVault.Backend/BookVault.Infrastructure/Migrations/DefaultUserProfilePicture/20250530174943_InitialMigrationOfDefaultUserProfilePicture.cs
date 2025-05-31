@@ -1,5 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -19,8 +19,7 @@ namespace BookVault.Infrastructure.Migrations.DefaultUserProfilePicture
                 schema: "app",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
                     FileName = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
                     ContentType = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
                     Data = table.Column<byte[]>(type: "bytea", nullable: false)
