@@ -32,7 +32,7 @@ namespace BookVault.Infrastructure.Data.Configurations
                    .HasDefaultValue(false);
 
             builder.Property(u => u.ProfilePicture)
-                   .HasColumnType("varbinary(max)")
+                   .HasColumnType("bytea")
                    .IsRequired(false); // Allow null if no image is uploaded
 
             builder.Property(u => u.ProfilePictureContentType)
