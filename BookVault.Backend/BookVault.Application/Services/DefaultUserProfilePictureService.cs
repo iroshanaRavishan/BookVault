@@ -28,21 +28,13 @@ namespace BookVault.Application.Services
 
             var bytes = Convert.FromBase64String(uploadDto.Base64Data);
 
-            var image = new DefaultUserProfilePicture
-            {
-                FileName = uploadDto.FileName,
-                ContentType = uploadDto.ContentType,
-                Data = bytes
-            };
+            var image = DefaultUserProfilePicture.Create(
+                uploadDto.FileName,
+                uploadDto.ContentType,
+                bytes
+            );
 
-            // Instead of rewriting repository, call a custom method if needed, otherwise map it to repository logic
-            var formFile = new FormFile(new MemoryStream(bytes), 0, bytes.Length, "file", uploadDto.FileName)
-            {
-                Headers = new HeaderDictionary(),
-                ContentType = uploadDto.ContentType
-            };
-
-            return await _repository.UploadImageAsync(formFile);
+            return await _repository.UploadImageAsync(image);
         }
 
         public async Task<IEnumerable<DefaultUserProfilePictureDTO>> GetAllImagesAsync()
