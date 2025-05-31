@@ -1,4 +1,5 @@
 using BookVault.Application;
+using BookVault.Application.Interfaces;
 using BookVault.Application.Services;
 using BookVault.Data;
 using BookVault.Domain.Interfaces;
