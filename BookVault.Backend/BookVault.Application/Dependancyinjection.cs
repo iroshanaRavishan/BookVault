@@ -1,4 +1,5 @@
-﻿using BookVault.Application.Services;
+﻿using BookVault.Application.Interfaces;
+using BookVault.Application.Services;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,7 @@ namespace BookVault.Application
         {
             // Register services
             services.AddScoped<IBookService, BookService>();
+            services.AddScoped<IDefaultUserProfilePictureService, DefaultUserProfilePictureService>();
 
             return services;
         }
