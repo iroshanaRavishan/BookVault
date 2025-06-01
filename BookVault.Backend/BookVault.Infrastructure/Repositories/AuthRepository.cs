@@ -48,9 +48,17 @@ namespace BookVault.Infrastructure.Repositories
             throw new NotImplementedException();
         }
 
-        public Task LogoutUserAsync()
+        public async Task LogoutUserAsync()
         {
-            throw new NotImplementedException();
+            try
+            {
+                await _signInManager.SignOutAsync();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error logging out the user: {Message}", ex.Message);
+                throw;
+            }
         }
 
         public async Task<IdentityResult> RegisterUserAsync(User user, string password)

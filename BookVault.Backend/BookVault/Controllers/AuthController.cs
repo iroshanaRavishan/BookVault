@@ -37,6 +37,20 @@ namespace BookVault.API.Controllers
             return Ok(new { message = "Registration Successful!", isSuccess = true });
         }
 
+        [HttpGet("logout")]
+        public async Task<IActionResult> LogoutUser()
+        {
+            try
+            {
+                await _authService.LogoutUserAsync();
+                return Ok(new { message = "Successfully looged out!", isSuccess = true });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = "Something went wrong! Please try again. " + ex.Message, isSuccess = false });
+            }
+        }
+
         [HttpGet("authuser")]
         public async Task<IActionResult> CheckUser()
         {
