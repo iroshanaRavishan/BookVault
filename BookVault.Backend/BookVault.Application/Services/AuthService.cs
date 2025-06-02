@@ -47,8 +47,8 @@ namespace BookVault.Application.Services
             {
                 var user = new User
                 {
-                    UserName = login.Username,
-                    PasswordHash = login.Password // Raw password; passed here temporarily
+                    Email = login.Email,
+                    RawPassword = login.Password // Raw password; passed here temporarily
                 };
 
                 return await _authRepository.LoginUserAsync(user);
