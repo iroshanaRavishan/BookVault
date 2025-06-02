@@ -37,6 +37,16 @@ namespace BookVault.API.Controllers
             return Ok(new { message = "Registration Successful!", isSuccess = true });
         }
 
+        [HttpPost("login")]
+        public async Task<IActionResult> LoginUser(UserLoginDto user)
+        {
+            var (isSuccess, message) = await _authService.LoginUserAsync(user);
+            if (!isSuccess)
+                return Unauthorized(new { message, isSuccess = false });
+
+            return Ok(new { message, isSuccess = true });
+        }
+
         [HttpGet("logout")]
         public async Task<IActionResult> LogoutUser()
         {
