@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,5 +25,9 @@ namespace BookVault.Domain.Entities
         public byte[] ProfilePicture { get; set; }
 
         public string ProfilePictureContentType { get; set; }
+
+
+        [NotMapped] // This ensures EF won't treat it as a DB column
+        public string RawPassword { get; set; }
     }
 }
