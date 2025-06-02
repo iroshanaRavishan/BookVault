@@ -36,6 +36,8 @@ namespace BookVault.Infrastructure
             // Register repositories
             services.AddScoped<IBookRepository, BookRepository>();
             services.AddScoped<IDefaultUserProfilePictureRepository, DefaultUserProfilePictureRepository>();
+            services.AddScoped<IAuthRepository, AuthRepository>();
+
             services.AddIdentity<User, IdentityRole>(options =>
             {
                 options.SignIn.RequireConfirmedAccount = true;
