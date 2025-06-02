@@ -41,9 +41,23 @@ namespace BookVault.Application.Services
             throw new NotImplementedException();
         }
 
-        public Task<(bool IsSuccess, string Message)> LoginUserAsync(UserLoginDto login)
+        public async Task<(bool IsSuccess, string Message)> LoginUserAsync(UserLoginDto login)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var user = new User
+                {
+                    UserName = login.Username,
+                    PasswordHash = login.Password // Raw password; passed here temporarily
+                };
+
+                return await _authRepository.LoginUserAsync(user);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error logging in user: {Message}", ex.Message);
+                return (false, "Internal server error.");
+            }
         }
 
         public async Task LogoutUserAsync()
