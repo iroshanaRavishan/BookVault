@@ -45,13 +45,22 @@ namespace BookVault.Infrastructure.Repositories
 
         public async Task<(bool IsSuccess, string Message)> LoginUserAsync(User userLogin)
         {
-            var user = await _userManager.FindByNameAsync(userLogin.UserName);
+            // Find user by email
+            var user = await _userManager.FindByEmailAsync(userLogin.Email);
             if (user == null)
-                return (false, "User not found.");
+                return (false, "The Email does not exist. Please check your credentials and try again!");
 
-            var isPasswordValid = await _userManager.CheckPasswordAsync(user, userLogin.PasswordHash);
-            if (!isPasswordValid)
-                return (false, "Invalid password.");
+            // Optionally confirm the email
+            if (!user.EmailConfirmed)
+            {
+                user.EmailConfirmed = true;
+                await _userManager.UpdateAsync(user);
+            }
+
+            // Validate password (make sure userLogin.Password is plain text, not hashed)
+            var result = await _signInManager.PasswordSignInAsync(user.UserName, userLogin.RawPassword, isPersistent: false, lockoutOnFailure: false);
+            if (!result.Succeeded)
+                return (false, "Invalid credentials. Please check your credentials and try again!");
 
             return (true, "Login successful.");
         }
