@@ -43,9 +43,17 @@ namespace BookVault.Infrastructure.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<(bool IsSuccess, string Message)> LoginUserAsync(User userLogin)
+        public async Task<(bool IsSuccess, string Message)> LoginUserAsync(User userLogin)
         {
-            throw new NotImplementedException();
+            var user = await _userManager.FindByNameAsync(userLogin.UserName);
+            if (user == null)
+                return (false, "User not found.");
+
+            var isPasswordValid = await _userManager.CheckPasswordAsync(user, userLogin.PasswordHash);
+            if (!isPasswordValid)
+                return (false, "Invalid password.");
+
+            return (true, "Login successful.");
         }
 
         public async Task LogoutUserAsync()
