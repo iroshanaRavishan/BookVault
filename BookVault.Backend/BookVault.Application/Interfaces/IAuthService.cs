@@ -16,6 +16,5 @@ namespace BookVault.Application.Interfaces
         Task<(bool IsSuccess, string Message)> LoginUserAsync(UserLoginDto login);
         Task LogoutUserAsync();
         Task<User> GetAuthenticatedUserAsync(ClaimsPrincipal user);
-        Task<User> GetProfilePictureAsync(string userId);
     }
 }

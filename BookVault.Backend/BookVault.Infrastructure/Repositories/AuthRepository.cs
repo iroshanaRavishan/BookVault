@@ -43,14 +43,39 @@ namespace BookVault.Infrastructure.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<(bool IsSuccess, string Message)> LoginUserAsync(User userLogin)
+        public async Task<(bool IsSuccess, string Message)> LoginUserAsync(User userLogin)
         {
-            throw new NotImplementedException();
+            // Find user by email
+            var user = await _userManager.FindByEmailAsync(userLogin.Email);
+            if (user == null)
+                return (false, "The Email does not exist. Please check your credentials and try again!");
+
+            // Optionally confirm the email
+            if (!user.EmailConfirmed)
+            {
+                user.EmailConfirmed = true;
+                await _userManager.UpdateAsync(user);
+            }
+
+            // Validate password (make sure userLogin.Password is plain text, not hashed)
+            var result = await _signInManager.PasswordSignInAsync(user.UserName, userLogin.RawPassword, isPersistent: false, lockoutOnFailure: false);
+            if (!result.Succeeded)
+                return (false, "Invalid credentials. Please check your credentials and try again!");
+
+            return (true, "Login successful.");
         }
 
-        public Task LogoutUserAsync()
+        public async Task LogoutUserAsync()
         {
-            throw new NotImplementedException();
+            try
+            {
+                await _signInManager.SignOutAsync();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error logging out the user: {Message}", ex.Message);
+                throw;
+            }
         }
 
         public async Task<IdentityResult> RegisterUserAsync(User user, string password)

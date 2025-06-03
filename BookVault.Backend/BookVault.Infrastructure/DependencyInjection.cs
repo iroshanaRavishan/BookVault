@@ -3,13 +3,18 @@ using BookVault.Domain.Entities;
 using BookVault.Domain.Interfaces;
 using BookVault.Infrastructure.Data;
 using BookVault.Infrastructure.Repositories;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -33,10 +38,26 @@ namespace BookVault.Infrastructure
             services.AddDbContext<AuthDbContext>(options =>
                 options.UseNpgsql(connectionString, u => u.MigrationsAssembly(typeof(AuthDbContext).Assembly.FullName)));
 
-            // Register repositories
-            services.AddScoped<IBookRepository, BookRepository>();
-            services.AddScoped<IDefaultUserProfilePictureRepository, DefaultUserProfilePictureRepository>();
-            services.AddScoped<IAuthRepository, AuthRepository>();
+            // Configures the authentication services to use JWT Bearer as the default scheme
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                // Adds JWT Bearer authentication handler
+                .AddJwtBearer(options =>
+                {
+                    // Defines the parameters used to validate the incoming JWT token
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true, // Ensures the token was issued by a trusted issuer
+                        ValidateAudience = true, // Ensures the token was intended for this application
+                        ValidateLifetime = true, // Ensures the token has not expired
+                        ValidateIssuerSigningKey = true, // Ensures the token was signed with a valid key
+
+                        ValidIssuer = configuration["AuthSettings:Issuer"],
+                        ValidAudience = configuration["AuthSettings:Audience"],
+                        IssuerSigningKey = new SymmetricSecurityKey(
+                            Encoding.UTF8.GetBytes(configuration["AuthSettings:SecretKey"])
+                        )
+                    };
+                });
 
             services.AddIdentity<User, IdentityRole>(options =>
             {
@@ -51,7 +72,14 @@ namespace BookVault.Infrastructure
                 options.Lockout.AllowedForNewUsers = true;
                 options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvqxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-._@";
                 options.User.RequireUniqueEmail = true;
-            }).AddEntityFrameworkStores<AuthDbContext>().AddDefaultTokenProviders();
+            })
+                .AddEntityFrameworkStores<AuthDbContext>()
+                .AddDefaultTokenProviders();
+
+            // Register repositories
+            services.AddScoped<IBookRepository, BookRepository>();
+            services.AddScoped<IDefaultUserProfilePictureRepository, DefaultUserProfilePictureRepository>();
+            services.AddScoped<IAuthRepository, AuthRepository>();
 
             return services;
         }
