@@ -31,7 +31,7 @@ namespace BookVault.Application.Services
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error retrieving all books: {Message}", ex.Message);
+                _logger.LogError(ex, "Error getting authenticated user: {Message}", ex.Message);
                 throw;
             }
         }
@@ -41,14 +41,36 @@ namespace BookVault.Application.Services
             throw new NotImplementedException();
         }
 
-        public Task<(bool IsSuccess, string Message)> LoginUserAsync(UserLoginDto login)
+        public async Task<(bool IsSuccess, string Message)> LoginUserAsync(UserLoginDto login)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var user = new User
+                {
+                    Email = login.Email,
+                    RawPassword = login.Password // Raw password; passed here temporarily
+                };
+
+                return await _authRepository.LoginUserAsync(user);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error logging in user: {Message}", ex.Message);
+                return (false, "Internal server error.");
+            }
         }
 
-        public Task LogoutUserAsync()
+        public async Task LogoutUserAsync()
         {
-            throw new NotImplementedException();
+            try
+            {
+                await _authRepository.LogoutUserAsync();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error logging out the user: {Message}", ex.Message);
+                throw;
+            }
         }
 
         public async Task<IdentityResult> RegisterUserAsync(UserRegistrationDto model)
@@ -82,8 +104,9 @@ namespace BookVault.Application.Services
                 var result = await _authRepository.RegisterUserAsync(user, model.Password);
                 return result;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                _logger.LogError(ex, "Error registering the user: {Message}", ex.Message);
                 throw; // Or log and rethrow
             }
         }
