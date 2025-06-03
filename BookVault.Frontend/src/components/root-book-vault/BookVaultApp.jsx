@@ -12,6 +12,7 @@ import NavBar from '../nav-bar/NavBar';
 import AllBooks from '../all-books/AllBooks';
 import EditBooks from '../edit-books/EditBooks';
 import Footer from '../footer-section/Footer';
+import Auth from '../auth/Auth';
 
 export default function BookVaultApp() {
   return (
@@ -25,6 +26,7 @@ export default function BookVaultApp() {
             <Route path="/create" element={<CreateBook />} />
             <Route path="/edit/:id" element={<EditBooks />} />
             <Route path="/search" element={<AllBooks />} />
+            <Route path="/auth" element={<Auth />} />
           </Routes>
         </div>
         <Footer />
