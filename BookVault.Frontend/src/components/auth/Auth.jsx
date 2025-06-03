@@ -220,72 +220,73 @@ export default function Auth() {
           <div className={`${styles.formContainer} ${styles.signIn}`}> 
             <form action="#" className={styles.form} onSubmit={loginHandler}>
               <h1>Sign In</h1>
-                <input type="text" name="Email" placeholder='example@hello.com' onChange={handleLoginChange} />
-                {errors.Email && <span className={styles.errorMessage}>{errors.Email}</span>}<br />
+              <input type="text" name="Email" placeholder='example@hello.com' onChange={handleLoginChange} />
+              {errors.Email && <span className={styles.errorMessage}>{errors.Email}</span>}<br />
 
-                <input type="password" name="Password" placeholder="******" onChange={handleLoginChange} />
-                {errors.Password && <span className={styles.errorMessage}>{errors.Password}</span>}
-                <br />
-                
-                <button type="submit" disabled={isLoding}>
-                  { isLoding?
-                    <div className={styles.loadingSpinner}></div> : 
-                    "Login" 
-                  }
-                </button>
-                <p className={`login-message ${styles.message}`}></p>
-              </form>
+              <input type="password" name="Password" placeholder="******" onChange={handleLoginChange} />
+              {errors.Password && <span className={styles.errorMessage}>{errors.Password}</span>}
+              <br />
+              
+              <button type="submit" disabled={isLoding}>
+                { isLoding?
+                  <div className={styles.loadingSpinner}></div> : 
+                  "Login" 
+                }
+              </button>
+              <p className={`login-message ${styles.message}`}></p>
+            </form>
           </div>
           <div className={`${styles.formContainer} ${styles.signUp}`}> 
-              <form action="#" className={styles.form} onSubmit={registerHandler} autoComplete="off">
+            <form action="#" className={styles.form} onSubmit={registerHandler} autoComplete="off">
               <h1>Create Account</h1>
-                <input type="text" name="Name" id="name" placeholder="Enter your name" onChange={handleRegChange}  />
-                {errors.Name && <span className={styles.errorMessage}>{errors.Name}</span>}<br />
+              <input type="text" name="Name" id="name" placeholder="Enter your name" onChange={handleRegChange}  />
+              {errors.Name && <span className={styles.errorMessage}>{errors.Name}</span>}<br />
 
-                <input type="text" name="Email" id="email" placeholder="example@hello.com" onChange={handleRegChange}  />
-                {errors.Email && <span className={styles.errorMessage}>{errors.Email}</span>}<br />
+              <input type="text" name="Email" id="email" placeholder="example@hello.com" onChange={handleRegChange}  />
+              {errors.Email && <span className={styles.errorMessage}>{errors.Email}</span>}<br />
 
-                <input type="password" name="PasswordHash" id="password" placeholder="******" onChange={handleRegChange} />
-                {errors.PasswordHash && <span className={styles.errorMessage}>{errors.PasswordHash}</span>} <br />
+              <input type="password" name="PasswordHash" id="password" placeholder="******" onChange={handleRegChange} />
+              {errors.PasswordHash && <span className={styles.errorMessage}>{errors.PasswordHash}</span>} <br />
 
-                <div className={styles.selectingProfilePic}>
-                  <ProfilePicSelectorModal 
-                    onDataSend={handleModelProfileImgData} 
-                    setLocallyUploadedProfileImg={setLocallyUploadedProfileImg} 
-                    locallyUploadedProfileImg={locallyUploadedProfileImg} 
-                    fileName={fileName} 
-                    setFileName={setFileName}
-                  />
+              <div className={styles.selectingProfilePic}>
+                <ProfilePicSelectorModal 
+                  onDataSend={handleModelProfileImgData} 
+                  setLocallyUploadedProfileImg={setLocallyUploadedProfileImg} 
+                  locallyUploadedProfileImg={locallyUploadedProfileImg} 
+                  fileName={fileName} 
+                  setFileName={setFileName}
+                />
 
-                  { errors.ProfilePicture && <span className={styles.errorMessage} style={{marginLeft: "10px"}}>{errors.ProfilePicture}</span> } 
-                  { profileImgData && 
-                    <div className='selectedImageContainer'>
-                      <IoCloseCircleSharp size={20} className='cancel-profile-picture' color="#e53e3e" onClick={handleCloseSelectedImage}/>
-                      <img className="profile-picture"  src={profileImgData} alt="select-profile" /> 
-                    </div>
-                  } 
-                </div>
-                <button type="submit" disabled={isLoding}>
-                  { isLoding?
-                    <div className={styles.loadingSpinner}></div>
-                    : "Register" }
-                </button>
-                <p className={`reg-message ${styles.message}`}></p>
-              </form>
+                { errors.ProfilePicture && <span className={styles.errorMessage} style={{marginLeft: "10px"}}>{errors.ProfilePicture}</span> } 
+                { profileImgData && 
+                  <div className='selectedImageContainer'>
+                    <IoCloseCircleSharp size={20} className='cancel-profile-picture' color="#e53e3e" onClick={handleCloseSelectedImage}/>
+                    <img className="profile-picture"  src={profileImgData} alt="select-profile" /> 
+                  </div>
+                } 
+              </div>
+              <button type="submit" disabled={isLoding}>
+                { isLoding?
+                  <div className={styles.loadingSpinner}></div>
+                  : "Register" }
+              </button>
+              <p className={`reg-message ${styles.message}`}></p>
+            </form>
           </div>
           <div className={styles.toggleContainer}>
             <div className={styles.toggle}>
+              <img src="../src/assets/book-stack.png" className={styles.authBackground} alt="book background" />
               <div className={`${styles.togglePanel} ${styles.toggleLeft}`}>
-              <h1>Welcome Back!</h1>
-              <p>Enter your personal details to use all of site features. Enter your personal details to use all of site features</p>
+                <h1>Welcome Back!</h1>
+                <p>Enter your personal details to use all of site features. Enter your personal details to use all of site features</p>
                 <button className={ isLoding ? `${styles.loading}` : `${styles.hidden}`} disabled={isLoding} onClick={activateContainer}> Sign In </button>
               </div>
 
-              <div className={`${styles.togglePanel} ${styles.toggleRight}`}>
-              <h1>Hello, Friend!</h1>
-              <p>Register with your personal details to use all of site features</p>
-                <button className={ isLoding ? `${styles.loading}` : `${styles.hidden}`} disabled={isLoding} onClick={deactivateContainer}> Sign Up </button>
-              </div>
+              <div className={`${styles.togglePanel} ${styles.toggleRight}`} style={{ color: "black" }}>
+                <h1>Hello, Friend!</h1>
+                <p>Register with your personal details to use all of site features</p>
+                  <button  className={ isLoding ? `${styles.loading}` : `${styles.hidden}`} disabled={isLoding} onClick={deactivateContainer} > Sign Up </button>
+                </div>
             </div>
           </div>
         </div>
