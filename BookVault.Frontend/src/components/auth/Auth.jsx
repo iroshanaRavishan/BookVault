@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import styles from './auth.module.css';
+import ProfilePicSelectorModal from '../profile-picture-select-modal/ProfilePicSelectorModal';
 import { IoCloseCircleSharp } from "react-icons/io5";
 
 export default function Auth() {
@@ -248,6 +249,13 @@ export default function Auth() {
                 {errors.PasswordHash && <span className={styles.errorMessage}>{errors.PasswordHash}</span>} <br />
 
                 <div className={styles.selectingProfilePic}>
+                  <ProfilePicSelectorModal 
+                    onDataSend={handleModelProfileImgData} 
+                    setLocallyUploadedProfileImg={setLocallyUploadedProfileImg} 
+                    locallyUploadedProfileImg={locallyUploadedProfileImg} 
+                    fileName={fileName} 
+                    setFileName={setFileName}
+                  />
 
                   { errors.ProfilePicture && <span className={styles.errorMessage} style={{marginLeft: "10px"}}>{errors.ProfilePicture}</span> } 
                   { profileImgData && 
