@@ -25,6 +25,7 @@ namespace BookVault.Infrastructure.Repositories
             _userManager = userManager;
             _signInManager = signInManager;
         }
+
         public async Task<User> GetAuthenticatedUserAsync(ClaimsPrincipal user)
         {
             try
@@ -36,11 +37,6 @@ namespace BookVault.Infrastructure.Repositories
                 _logger.LogError(ex, "Error retrieving the user: {Message}", ex.Message);
                 throw;
             }
-        }
-
-        public Task<User> GetProfilePictureAsync(string userId)
-        {
-            throw new NotImplementedException();
         }
 
         public async Task<(bool IsSuccess, string Message)> LoginUserAsync(User userLogin)
@@ -61,6 +57,9 @@ namespace BookVault.Infrastructure.Repositories
             var result = await _signInManager.PasswordSignInAsync(user.UserName, userLogin.RawPassword, isPersistent: false, lockoutOnFailure: false);
             if (!result.Succeeded)
                 return (false, "Invalid credentials. Please check your credentials and try again!");
+
+            user.LastLogin = DateTime.UtcNow;
+            await _userManager.UpdateAsync(user);
 
             return (true, "Login successful.");
         }

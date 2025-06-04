@@ -22,6 +22,7 @@ namespace BookVault.Application.Services
             _authRepository = authRepository;
             _logger = logger;
         }
+
         public async Task<User> GetAuthenticatedUserAsync(ClaimsPrincipal user)
         {
             try
@@ -34,11 +35,6 @@ namespace BookVault.Application.Services
                 _logger.LogError(ex, "Error getting authenticated user: {Message}", ex.Message);
                 throw;
             }
-        }
-
-        public Task<User> GetProfilePictureAsync(string userId)
-        {
-            throw new NotImplementedException();
         }
 
         public async Task<(bool IsSuccess, string Message)> LoginUserAsync(UserLoginDto login)
