@@ -38,26 +38,36 @@ namespace BookVault.Infrastructure
             services.AddDbContext<AuthDbContext>(options =>
                 options.UseNpgsql(connectionString, u => u.MigrationsAssembly(typeof(AuthDbContext).Assembly.FullName)));
 
-            // Configures the authentication services to use JWT Bearer as the default scheme
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                // Adds JWT Bearer authentication handler
-                .AddJwtBearer(options =>
+            // Configure authentication
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddCookie(options =>
+            {
+                options.Cookie.HttpOnly = true;
+                options.Cookie.SameSite = SameSiteMode.None; // Allow cross-site requests
+                options.Cookie.SecurePolicy = Microsoft.AspNetCore.Http.CookieSecurePolicy.Always;
+                options.Cookie.Name = "BookVaultCookies";
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
+            })
+            .AddJwtBearer(options =>
+            {
+                 // Defines the parameters used to validate the incoming JWT token
+                options.TokenValidationParameters = new TokenValidationParameters
                 {
-                    // Defines the parameters used to validate the incoming JWT token
-                    options.TokenValidationParameters = new TokenValidationParameters
-                    {
-                        ValidateIssuer = true, // Ensures the token was issued by a trusted issuer
-                        ValidateAudience = true, // Ensures the token was intended for this application
-                        ValidateLifetime = true, // Ensures the token has not expired
-                        ValidateIssuerSigningKey = true, // Ensures the token was signed with a valid key
+                    ValidateIssuer = true, // Ensures the token was issued by a trusted issuer
+                    ValidateAudience = true, // Ensures the token was intended for this application
+                    ValidateLifetime = true, // Ensures the token has not expired
+                    ValidateIssuerSigningKey = true, // Ensures the token was signed with a valid key
 
-                        ValidIssuer = configuration["AuthSettings:Issuer"],
-                        ValidAudience = configuration["AuthSettings:Audience"],
-                        IssuerSigningKey = new SymmetricSecurityKey(
-                            Encoding.UTF8.GetBytes(configuration["AuthSettings:SecretKey"])
-                        )
-                    };
-                });
+                    ValidIssuer = configuration["AuthSettings:Issuer"],
+                    ValidAudience = configuration["AuthSettings:Audience"],
+                    IssuerSigningKey = new SymmetricSecurityKey(
+                        Encoding.UTF8.GetBytes(configuration["AuthSettings:SecretKey"])
+                    )
+                };
+            });
 
             services.AddIdentity<User, IdentityRole>(options =>
             {
