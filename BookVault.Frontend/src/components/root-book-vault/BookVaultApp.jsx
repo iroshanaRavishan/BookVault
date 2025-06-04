@@ -10,10 +10,8 @@ import {
 
 import LandingPage from '../landing-page/LandingPage'
 import CreateBook from '../create-books/CreateBook';
-import NavBar from '../nav-bar/NavBar';
 import AllBooks from '../all-books/AllBooks';
 import EditBooks from '../edit-books/EditBooks';
-import Footer from '../footer-section/Footer';
 import Auth from '../auth/Auth';
 import ProtectedRouter from '../protected-router/ProtectedRouter';
 import { UserProvider } from '../../context/UserContext';
