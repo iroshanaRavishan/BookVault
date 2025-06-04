@@ -59,6 +59,8 @@ await using (var serviceScope = app.Services.CreateAsyncScope())
     }
 }
 
+app.UseHttpsRedirection();
+
 // Configure CORS
 app.UseCors(policy => policy
     .WithOrigins("https://localhost:5173", "http://localhost:5173")
@@ -74,7 +76,9 @@ app.UseStaticFiles(new StaticFileOptions
     RequestPath = "/uploads"
 });
 
-app.UseHttpsRedirection();
+app.UseRouting();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 
