@@ -111,6 +111,71 @@ export default function NavBar() {
             <SlMenu size={20} />
             <span>Menu</span>
           </NavLink>
+
+          <div className={`${styles.sideMenu} ${isSideMenuOpen ? styles.open : ""}`}>
+              <div className={styles.sideMenuFirstContent}>
+                  <span className={styles.closeBtn} onClick={sideMenu}> 
+                        <IoCloseCircleSharp size={26} className={styles.closeIcon} />
+                  </span>
+                  <div className={styles.menuHeader}>
+                      <img src="../src/assets/profile-image.jpg" alt="Profile" className={styles.profilePicture}/>  {/*  src={profilePictureUrl} */}
+                      <span>Hello, <br /> Iroshana Ravishan</span> {/*  {username} */}
+                  </div>
+                  <li href="/" className={styles.menuIconWrapper}>
+                      <img className={styles.menuIcon} src="./src/assets/images/order.png" alt="Orders"/>
+                      <a>Orders <br />
+                          <span>Check out the current ongoing orders</span> 
+                      </a>
+                  </li>
+                  <li href="/menu" className={styles.menuIconWrapper}>
+                      <img className={styles.menuIcon} src="./src/assets/images/history.png" alt="History"/>
+                      <a >History <br />
+                          <span>Access the past, completed orders</span>
+                      </a>
+                  </li>
+                  <li href="/contact" className={styles.menuIconWrapper}>
+                      <img className={styles.menuIcon} src="./src/assets/images/promotion.png" alt="Promotion"/>
+                      <a>Promotion <br />
+                          <span>Check you luck here</span>
+                      </a>
+                  </li>
+                  <li href="/profile" className={styles.menuIconWrapper}>
+                      <img className={styles.menuIcon} src="./src/assets/images/settings.png" alt="Settings"/>
+                      <a >Settings </a>
+                  </li>
+                  <li href="/contact" className={styles.menuIconWrapper}>
+                      <img className={styles.menuIcon} src="./src/assets/images/help.png" alt="Contact"/>
+                      <a >Contact</a>
+                  </li>
+                  <li href="/feedback" className={styles.menuIconWrapper}>
+                      <img className={styles.menuIcon} src="./src/assets/images/faq.png" alt="FAQ"/>
+                      <a >FAQ<br />
+                          <span>Any question, expore here</span>
+                      </a>
+                  </li>
+                  <li href="/feedback" className={styles.menuIconWrapper}>
+                      <img className={styles.menuIcon} src="./src/assets/images/feedback.png" alt="Feedback"/>
+                      <a >Feedback<br />
+                          <span>Feedbacks and suggestions are welcome!</span>
+                      </a>
+                  </li>
+              </div>
+              <div className={styles.sideMenuMiddleContent}>
+                  <span>
+                      <p>There is more to love in the Mobile Application</p>
+                      <img src='./src/assets/images/logo.png' />
+                      <a href=""><img src='./src/assets/images/mobile-app-options.png' /></a>
+                  </span>
+              </div>
+              <div className={styles.sideMenuLastContent}>
+                  <div >
+                      <img className={styles.menuIcon} id="invite-friends" src="./src/assets/images/invite-friends.png" alt="Feedback"/>    
+                      <span>Invite Friends?</span>
+                  </div>
+                  <img className={styles.logOutBtn} src="./src/assets/images/logout.png" alt="signout" onClick={logOutHandler}/>
+              </div>
+          </div>
+          {isSideMenuOpen && <div className={styles.overlay} onClick={sideMenu}></div>}
         </div>
       )}
     </nav>
