@@ -12,6 +12,7 @@ import { IoCloseCircleSharp } from 'react-icons/io5';
 
 export default function NavBar() {
     const { user } = useUser();
+    const [isLoading, setIsLoading] = useState(false);
     const [loggedUser, setLoggedUser] = useState(null);
     const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
 
@@ -23,6 +24,30 @@ export default function NavBar() {
     function sideMenu() {
       setIsSideMenuOpen(!isSideMenuOpen);
     };
+
+    async function logOutHandler() {
+      sideMenu();
+      setIsLoading(true);
+      setTimeout(async () => {
+          try {
+              const response = await fetch("https://localhost:7157/api/Auth/logout", {
+                  method: "GET",
+                  credentials: "include"
+              });
+              const data = await response.json();
+              if (response.ok) {
+                  localStorage.removeItem("userEmail");
+                  document.location = "/";
+              } else {
+                  console.log("Could not log out: ", response);
+              }
+          } catch (error) {
+              console.error("Error logging out:", error);
+          } finally {
+              setIsLoading(false);
+          }
+      }, 400);
+    }
 
   return (
     <nav className={styles.navBar}>
