@@ -225,7 +225,7 @@ span span {
 .sideMenuLastContent {
     padding-bottom: 40px;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
 }
 
