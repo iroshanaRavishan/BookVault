@@ -24,6 +24,13 @@ export default function NavBar() {
     function sideMenu() {
       setIsSideMenuOpen(!isSideMenuOpen);
     };
+    
+    const profilePictureUrl = user?.profilePicture 
+    ? `data:${user.profilePictureContentType};base64,${user.profilePicture}` 
+    : null;
+
+    const username = user?.name ? user.name: null;
+
 
     async function logOutHandler() {
       sideMenu();
@@ -118,8 +125,8 @@ export default function NavBar() {
                         <IoCloseCircleSharp size={26} className={styles.closeIcon} />
                   </span>
                   <div className={styles.menuHeader}>
-                      <img src="../src/assets/profile-image.jpg" alt="Profile" className={styles.profilePicture}/>  {/*  src={profilePictureUrl} */}
-                      <span>Hello, <br /> Iroshana Ravishan</span> {/*  {username} */}
+                      <img src={profilePictureUrl} alt="Profile" className={styles.profilePicture}/>
+                      <span>Hello, <br /> {username}</span>
                   </div>
                   <li href="/" className={styles.menuIconWrapper}>
                       <img className={styles.menuIcon} src="./src/assets/images/order.png" alt="Orders"/>
