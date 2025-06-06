@@ -9,6 +9,7 @@ import { useUser } from '../../context/UserContext';
 import { FaUserCircle } from "react-icons/fa";
 import { FaRegUserCircle } from "react-icons/fa";
 import { IoCloseCircleSharp } from 'react-icons/io5';
+import { IoIosPower } from "react-icons/io";
 
 export default function NavBar() {
     const { user } = useUser();
@@ -175,11 +176,7 @@ export default function NavBar() {
                   </span>
               </div>
               <div className={styles.sideMenuLastContent}>
-                  <div >
-                      <img className={styles.menuIcon} id="invite-friends" src="./src/assets/images/invite-friends.png" alt="Feedback"/>    
-                      <span>Invite Friends?</span>
-                  </div>
-                  <img className={styles.logOutBtn} src="./src/assets/images/logout.png" alt="signout" onClick={logOutHandler}/>
+                  <IoIosPower size={20} className={styles.logOutBtn} onClick={logOutHandler}/>
               </div>
           </div>
           {isSideMenuOpen && <div className={styles.overlay} onClick={sideMenu}></div>}
