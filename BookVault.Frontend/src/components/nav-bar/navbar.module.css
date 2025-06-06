@@ -143,6 +143,19 @@ span span {
     font-size: 16px;
 }
 
+.menuHeader::after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 1px;
+    background-color: #ccc;
+    position: absolute;
+    left: 0;
+    /* top: 10px; */
+    margin-top: 80px;
+    z-index: -1;
+} 
+
 .menuIconWrapper {
     display: flex;
     flex-direction: row;
@@ -161,10 +174,13 @@ span span {
 
 .menuIconWrapper:hover {
     background-color: rgb(238, 238, 238);
+    cursor: pointer;
 }
 
 .menuIcon {
     height: 20px;
+    width: 20px;
+    margin-right: 10px;
 }
 
 .sideMenuFirstContent{

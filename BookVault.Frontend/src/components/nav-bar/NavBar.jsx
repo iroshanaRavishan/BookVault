@@ -10,6 +10,10 @@ import { FaUserCircle } from "react-icons/fa";
 import { FaRegUserCircle } from "react-icons/fa";
 import { IoCloseCircleSharp } from 'react-icons/io5';
 import { IoIosPower } from "react-icons/io";
+import { HiMiniCog6Tooth } from "react-icons/hi2";
+import { IoIosColorPalette } from "react-icons/io";
+import { IoCall } from "react-icons/io5";
+import { RiInformationFill } from "react-icons/ri";
 
 export default function NavBar() {
     const { user } = useUser();
@@ -130,49 +134,33 @@ export default function NavBar() {
                       <span>Hello, <br /> {username}</span>
                   </div>
                   <li href="/" className={styles.menuIconWrapper}>
-                      <img className={styles.menuIcon} src="./src/assets/images/order.png" alt="Orders"/>
-                      <a>Orders <br />
-                          <span>Check out the current ongoing orders</span> 
+                      <HiMiniCog6Tooth className={styles.menuIcon} size={18}/>
+                      <a>Settings <br />
+                          <span>Account related settings</span> 
                       </a>
                   </li>
                   <li href="/menu" className={styles.menuIconWrapper}>
-                      <img className={styles.menuIcon} src="./src/assets/images/history.png" alt="History"/>
-                      <a >History <br />
-                          <span>Access the past, completed orders</span>
+                      <IoIosColorPalette className={styles.menuIcon} size={18}/>
+                      <a >Appearance <br />
+                          <span>take control of your view</span>
                       </a>
                   </li>
                   <li href="/contact" className={styles.menuIconWrapper}>
-                      <img className={styles.menuIcon} src="./src/assets/images/promotion.png" alt="Promotion"/>
-                      <a>Promotion <br />
-                          <span>Check you luck here</span>
-                      </a>
-                  </li>
-                  <li href="/profile" className={styles.menuIconWrapper}>
-                      <img className={styles.menuIcon} src="./src/assets/images/settings.png" alt="Settings"/>
-                      <a >Settings </a>
-                  </li>
-                  <li href="/contact" className={styles.menuIconWrapper}>
-                      <img className={styles.menuIcon} src="./src/assets/images/help.png" alt="Contact"/>
+                      <IoCall className={styles.menuIcon} size={18}/>
                       <a >Contact</a>
                   </li>
                   <li href="/feedback" className={styles.menuIconWrapper}>
-                      <img className={styles.menuIcon} src="./src/assets/images/faq.png" alt="FAQ"/>
-                      <a >FAQ<br />
+                      <RiInformationFill className={styles.menuIcon} size={18}/>
+                      <a >FAQs<br />
                           <span>Any question, expore here</span>
-                      </a>
-                  </li>
-                  <li href="/feedback" className={styles.menuIconWrapper}>
-                      <img className={styles.menuIcon} src="./src/assets/images/feedback.png" alt="Feedback"/>
-                      <a >Feedback<br />
-                          <span>Feedbacks and suggestions are welcome!</span>
                       </a>
                   </li>
               </div>
               <div className={styles.sideMenuMiddleContent}>
                   <span>
                       <p>There is more to love in the Mobile Application</p>
-                      <img src='./src/assets/images/logo.png' />
-                      <a href=""><img src='./src/assets/images/mobile-app-options.png' /></a>
+                      <img src='./src/assets/logo.png' />
+                      <a href=""><img src='./src/assets/mobile-app-options.png' /></a>
                   </span>
               </div>
               <div className={styles.sideMenuLastContent}>
