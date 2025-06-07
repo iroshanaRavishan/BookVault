@@ -9,13 +9,13 @@ import { useUser } from '../../context/UserContext';
 
 export default function Footer() {
 
-    const { user } = useUser();
-    const [loggedUser, setLoggedUser] = useState(null);
+  const { user } = useUser();
+  const [loggedUser, setLoggedUser] = useState(null);
 
-    useEffect(()=>{
-      const userEmail = localStorage.getItem('userEmail');
-      setLoggedUser(userEmail);
-    },[user]);
+  useEffect(()=>{
+    const userEmail = localStorage.getItem('userEmail');
+    setLoggedUser(userEmail);
+  },[user]);
 
   return (
     <footer className={styles.bookVaultFooter}>
@@ -53,7 +53,7 @@ export default function Footer() {
               <li><Link to="/search">Search Books</Link></li>
             </ul>
           </div>
-          
+
           <div className={styles.footerColumn}>
             <h4>BookVault News</h4>
             <ul>
