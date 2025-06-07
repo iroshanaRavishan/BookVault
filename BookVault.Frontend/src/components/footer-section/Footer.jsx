@@ -55,6 +55,16 @@ export default function Footer() {
           </div>
 
           <div className={styles.footerColumn}>
+            <h4>Menu</h4>
+            <ul>
+              <li><Link to="/">Settings</Link></li>
+              <li><Link to="/">Appearance</Link></li>
+              <li><Link to="/">Contact</Link></li>
+              <li><Link to="/">FAQs</Link></li>
+            </ul>
+          </div>
+
+          <div className={styles.footerColumn}>
             <h4>BookVault News</h4>
             <ul>
               <li><Link to="#">Book Industry</Link></li>
