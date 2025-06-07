@@ -147,8 +147,7 @@ namespace BookVault.Infrastructure.Repositories
             try
             {
                 return await _dbContext.Books
-                    .AsNoTracking()
-                    .FirstOrDefaultAsync(b => b.Id == id);
+                   .FindAsync(id);
             }
             catch (Exception ex)
             {

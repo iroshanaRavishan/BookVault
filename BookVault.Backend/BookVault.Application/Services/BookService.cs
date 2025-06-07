@@ -1,9 +1,9 @@
-﻿using BookVault.Application.DTOs;
-using BookVault.Domain.Interfaces;
-using BookVault.DTOs;
+﻿using BookVault.Domain.Interfaces;
 using BookVault.Models;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Http;
+using BookVault.Application.DTOs.BookDTOs;
+using BookVault.Application.Interfaces;
 
 
 namespace BookVault.Application.Services
@@ -175,32 +175,6 @@ namespace BookVault.Application.Services
                 string oldCoverImagePath = bookToUpdate.CoverImagePath;
                 string oldPdfFilePath = bookToUpdate.PdfFilePath;
 
-                // Handle new file uploads if provided
-                //string newCoverImagePath = bookToUpdate.CoverImagePath;
-                //string newPdfFilePath = bookToUpdate.PdfFilePath;
-
-                //// Handle cover image upload
-                //if (command.CoverImage != null)
-                //{
-                //    newCoverImagePath = await SaveFileAsync(command.CoverImage, "images");
-                //}
-                //// Or use provided path if no file upload
-                //else if (!string.IsNullOrEmpty(command.CoverImagePath))
-                //{
-                //    newCoverImagePath = command.CoverImagePath;
-                //}
-
-                //// Handle PDF file upload
-                //if (command.PdfFile != null)
-                //{
-                //    newPdfFilePath = await SaveFileAsync(command.PdfFile, "pdfs");
-                //}
-                //// Or use provided path if no file upload
-                //else if (!string.IsNullOrEmpty(command.PdfFilePath))
-                //{
-                //    newPdfFilePath = command.PdfFilePath;
-                //}
-
                 // Update the book
                 bookToUpdate.Update(
                     name: command.Name ?? bookToUpdate.Name,
@@ -218,13 +192,13 @@ namespace BookVault.Application.Services
                 //await _bookRepository.UpdateAsync(bookToUpdate);
                 await _bookRepository.SaveChangesAsync();
 
-                // Delete old files if they were replaced with new uploads
-                if (command.CoverImage != null && !string.IsNullOrEmpty(oldCoverImagePath))
+                // Delete old files if they were replaced
+                if (!string.IsNullOrEmpty(command.CoverImagePath) && command.CoverImagePath != oldCoverImagePath)
                 {
                     DeleteFileIfExists(oldCoverImagePath);
                 }
 
-                if (command.PdfFile != null && !string.IsNullOrEmpty(oldPdfFilePath))
+                if (!string.IsNullOrEmpty(command.PdfFilePath) && command.PdfFilePath != oldPdfFilePath)
                 {
                     DeleteFileIfExists(oldPdfFilePath);
                 }

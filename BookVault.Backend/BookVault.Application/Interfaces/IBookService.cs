@@ -1,7 +1,6 @@
-﻿using BookVault.Application.DTOs;
-using BookVault.DTOs;
+﻿using BookVault.Application.DTOs.BookDTOs;
 
-namespace BookVault.Application.Services
+namespace BookVault.Application.Interfaces
 {
     public interface IBookService
     {
