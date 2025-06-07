@@ -7,6 +7,7 @@ import { TbClock } from "react-icons/tb";
 import { Link } from 'react-router-dom';
 import ConfirmDeleteModal from '../confirm-dialog/ConfirmDialogModal';
 import useBooks from "../../hooks/useBook";
+import { IoCloseCircleSharp } from "react-icons/io5";
 
 export default function BookCard({ book, refreshBooks }) {
   const [showModal, setShowModal] = useState(false);
@@ -84,7 +85,7 @@ export default function BookCard({ book, refreshBooks }) {
       {showModal && (
         <div className={styles.modalOverlay} onClick={closeModal}>
           <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
-            <button className={styles.closeButton} onClick={closeModal}>×</button>
+            <span className={styles.closeButton} onClick={closeModal}><IoCloseCircleSharp size={30}/></span>
             
             <div className={styles.modalGrid}>
               <div className={styles.modalImageContainer}>

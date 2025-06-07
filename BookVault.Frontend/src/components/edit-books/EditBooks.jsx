@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import styles from "./editbooks.module.css";
 import { useNavigate, useParams } from "react-router-dom";
-import { MdAdd, MdClose, MdEdit, MdZoomIn, MdDownload, MdDelete } from "react-icons/md";
+import { MdAdd, MdEdit, MdZoomIn, MdDownload, MdDelete } from "react-icons/md";
+import { IoCloseCircleSharp } from "react-icons/io5";
 
 export default function EditBooks() {
   const [name, setName] = useState("");
@@ -612,7 +613,7 @@ export default function EditBooks() {
                   </button>
                   {imageFile && (
                     <button type="button" className={styles.deleteButton} onClick={deleteUploadedImage}>
-                      <MdClose />
+                      <IoCloseCircleSharp size={20}/>
                     </button>
                   )}
                 </div>
@@ -683,7 +684,7 @@ export default function EditBooks() {
                         className={styles.genreChipRemove}
                         aria-label={`Remove ${genre}`}
                       >
-                        <MdClose size={16} />
+                        <IoCloseCircleSharp size={16} />
                       </button>
                     </div>
                   ))}
@@ -842,7 +843,7 @@ export default function EditBooks() {
                 </button>
                 {pdfFile && (
                   <button type="button" className={styles.deleteButton} onClick={deleteUploadedPdf}>
-                    <MdClose />
+                    <IoCloseCircleSharp size={20} />
                   </button>
                 )}
               </div>
@@ -871,9 +872,9 @@ export default function EditBooks() {
       {showImageModal && (
         <div className={styles.modal} onClick={closeImageModal}>
           <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
-            <button className={styles.modalClose} onClick={closeImageModal}>
-              <MdClose />
-            </button>
+            <span className={styles.modalClose} onClick={closeImageModal}>
+              <IoCloseCircleSharp size={30} color="#e53e3e"/>
+            </span>
             <img src={modalImageUrl || "/placeholder.svg"} alt="Large view" className={styles.modalImage} />
           </div>
         </div>

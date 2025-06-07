@@ -1,10 +1,7 @@
 using BookVault.Application;
-using BookVault.Application.Services;
 using BookVault.Data;
-using BookVault.Domain.Interfaces;
 using BookVault.Infrastructure;
 using BookVault.Infrastructure.Data;
-using BookVault.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Scalar.AspNetCore;
 
@@ -14,16 +11,16 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddCors();
 builder.Services.AddOpenApi();
 builder.Services.AddEndpointsApiExplorer(); // Add this for better API documentation
+
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
-builder.Services.AddTransient<IBookService, BookService>();
+
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
     {
         // Configure JSON serialization for better API documentation
         options.JsonSerializerOptions.PropertyNamingPolicy = System.Text.Json.JsonNamingPolicy.CamelCase;
     });
-
 
 var app = builder.Build();
 
@@ -58,9 +55,11 @@ await using (var serviceScope = app.Services.CreateAsyncScope())
     catch (Exception ex)
     {
         logger.LogError(ex, "An error occurred while applying migrations");
-        // Don't throw here to allow app to start
+        // not throwing here to allow app to start
     }
 }
+
+app.UseHttpsRedirection();
 
 // Configure CORS
 app.UseCors(policy => policy
@@ -77,7 +76,9 @@ app.UseStaticFiles(new StaticFileOptions
     RequestPath = "/uploads"
 });
 
-app.UseHttpsRedirection();
+app.UseRouting();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 
