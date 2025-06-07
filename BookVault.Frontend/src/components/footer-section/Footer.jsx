@@ -1,13 +1,22 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './footer.module.css';
 import { MdEmail } from "react-icons/md";
 import { FaSquareXTwitter } from "react-icons/fa6";
 import { PiInstagramLogoFill } from "react-icons/pi";
 import { IoLogoYoutube } from "react-icons/io";
 import { Link } from 'react-router-dom';
-
+import { useUser } from '../../context/UserContext';
 
 export default function Footer() {
+
+    const { user } = useUser();
+    const [loggedUser, setLoggedUser] = useState(null);
+
+    useEffect(()=>{
+      const userEmail = localStorage.getItem('userEmail');
+      setLoggedUser(userEmail);
+    },[user]);
+
   return (
     <footer className={styles.bookVaultFooter}>
       <div className={styles.footerMain}>
