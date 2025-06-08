@@ -59,6 +59,7 @@ span span {
     right: -10px;
     cursor: pointer;
     transition: all 400ms;
+    position: absolute;
 }
 
 .closeIcon:hover{
@@ -166,10 +167,16 @@ span span {
     border-radius: 5px;
 }
 
-.menuIconWrapper a span {
+.menuIconWrapper a {
     font-size: 12px !important;
     color: #7e7e7e;
     font-weight : 700;
+}
+
+.menuIconWrapper span {
+    font-size: 12px !important;
+    color: #7e7e7e;
+    font-weight : 500;
 }
 
 .menuIconWrapper:hover {
@@ -178,8 +185,6 @@ span span {
 }
 
 .menuIcon {
-    height: 20px;
-    width: 20px;
     margin-right: 10px;
 }
 

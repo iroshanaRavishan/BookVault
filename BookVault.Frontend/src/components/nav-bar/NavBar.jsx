@@ -14,6 +14,7 @@ import { HiMiniCog6Tooth } from "react-icons/hi2";
 import { IoIosColorPalette } from "react-icons/io";
 import { IoCall } from "react-icons/io5";
 import { RiInformationFill } from "react-icons/ri";
+import { MdDownloadForOffline } from "react-icons/md";
 
 export default function NavBar() {
     const { user } = useUser();
@@ -134,23 +135,35 @@ export default function NavBar() {
                       <span>Hello, <br /> {username}</span>
                   </div>
                   <li href="/" className={styles.menuIconWrapper}>
-                      <HiMiniCog6Tooth className={styles.menuIcon} size={18}/>
+                      <HiMiniCog6Tooth className={styles.menuIcon} size={21}/>
                       <a>Settings <br />
-                          <span>Account related settings</span> 
+                          <span>App settings</span> 
+                      </a>
+                  </li>
+                  <li href="/" className={styles.menuIconWrapper}>
+                      <FaUserCircle className={styles.menuIcon} size={20}/>
+                      <a>Profile <br />
+                          <span>Profile related settings</span> 
                       </a>
                   </li>
                   <li href="/menu" className={styles.menuIconWrapper}>
-                      <IoIosColorPalette className={styles.menuIcon} size={18}/>
+                      <IoIosColorPalette className={styles.menuIcon} size={22}/>
                       <a >Appearance <br />
-                          <span>take control of your view</span>
+                          <span>Take control of your view</span>
                       </a>
                   </li>
+                  <li href="/" className={styles.menuIconWrapper}>
+                    <MdDownloadForOffline className={styles.menuIcon} size={21}/>
+                    <a>Downloads <br />
+                        <span>A quick access to downloaded files</span> 
+                    </a>
+                  </li>
                   <li href="/contact" className={styles.menuIconWrapper}>
-                      <IoCall className={styles.menuIcon} size={18}/>
+                      <IoCall className={styles.menuIcon} size={20}/>
                       <a >Contact</a>
                   </li>
                   <li href="/feedback" className={styles.menuIconWrapper}>
-                      <RiInformationFill className={styles.menuIcon} size={18}/>
+                      <RiInformationFill className={styles.menuIcon} size={21}/>
                       <a >FAQs<br />
                           <span>Any question, expore here</span>
                       </a>
