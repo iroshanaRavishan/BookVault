@@ -59,7 +59,9 @@ export default function Footer() {
               <h4>Menu</h4>
               <ul>
                 <li><Link to="/">Settings</Link></li>
+                <li><Link to="/">Profile</Link></li>
                 <li><Link to="/">Appearance</Link></li>
+                <li><Link to="/">Downloads</Link></li>
                 <li><Link to="/">Contact</Link></li>
                 <li><Link to="/">FAQs</Link></li>
               </ul>
