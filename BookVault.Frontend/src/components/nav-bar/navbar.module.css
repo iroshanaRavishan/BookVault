@@ -1,0 +1,310 @@
+.navBar {
+    display: flex;
+    padding: 12px 0px 12px 20px;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    height: 45px;
+    background-color: #000000a9;
+    z-index: 100;
+}
+
+.navBarLinks {
+    display: flex;
+}
+
+.navBarLogo {
+    height: 55px;
+    width: 100%;
+}
+
+.navFlex {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 85px;
+}
+
+.navLink {
+    color: #e2e2e2;
+    text-decoration: none;
+    font-size: 14px;
+    padding: 6px 12px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+.activeNavLink {
+    color: #f29b28;
+    text-decoration: none;
+    font-size: 14px;
+    padding: 6px 12px;
+    border-radius: 25px;
+}
+
+span span {
+    cursor: pointer;
+}
+
+.closeBtn {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    position: relative;
+    top: -10px;
+    right: -10px;
+    cursor: pointer;
+    transition: all 400ms;
+    position: absolute;
+}
+
+.closeIcon:hover{
+    transform: scale(1.05);
+    transition: all 400ms;
+}
+
+.logOutBtn {
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    transition: all 400ms;
+}
+
+.logOutBtn:hover{
+    transform: scale(1.2);
+}
+
+.sideMenu {
+    width: 250px;
+    height: 100%;
+    background-color: #ffffff;
+    position: fixed;
+    top: 0;
+    right: -290px;
+    z-index: 1000;
+    transition: right 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px 20px 100px 20px;
+    box-shadow: -6px 0 10px rgba(0, 0, 0, 0.35);
+}
+
+.sideMenu a {
+    color: #3b3b3b;
+    text-decoration: none;
+    margin: 10px 0;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.sideMenu.open {
+    right: 0px;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 900;
+}
+
+.profilePicture {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+    transition: all 200ms;
+    padding: 2px;
+    border: 3px solid #f29b28;
+    margin-right: 15px;
+}
+
+.menuHeader {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    margin: 0 0 20px 5px;
+    color: white;
+    font-size: 14px;
+    color: #3b3b3b;
+    align-items: center;
+}
+
+.menuHeader span {
+    margin-bottom: 5px;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.menuHeader::after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 1px;
+    background-color: #ccc;
+    position: absolute;
+    left: 0;
+    /* top: 10px; */
+    margin-top: 80px;
+    z-index: -1;
+} 
+
+.menuIconWrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+}
+
+.menuIconWrapper a {
+    font-size: 12px !important;
+    color: #7e7e7e;
+    font-weight : 700;
+}
+
+.menuIconWrapper span {
+    font-size: 12px !important;
+    color: #7e7e7e;
+    font-weight : 500;
+}
+
+.menuIconWrapper:hover {
+    background-color: rgb(238, 238, 238);
+    cursor: pointer;
+}
+
+.menuIcon {
+    margin-right: 10px;
+}
+
+.sideMenuFirstContent{
+    position: relative;
+}
+
+.sideMenuFirstContent::after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 1px;
+    background-color: #ccc;
+    position: absolute;
+    left: 0;
+    z-index: -1;
+} 
+
+.sideMenuMiddleContent {
+    position: relative;
+    padding-bottom: 20px;
+}
+
+.sideMenuMiddleContent span {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 600;
+    color: #666666;
+}
+
+.sideMenuMiddleContent span img{
+    height: 50px;
+    /* background-color: #bbbbbb33; */
+    border-radius: 15px;
+    margin: 0 20px;
+}
+
+.sideMenuLastContent {
+    position: relative;
+    padding-top: 20px;
+}
+
+.sideMenuLastContent::before {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 1px;
+    background-color: #ccc;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+} 
+
+.sideMenuLastContent {
+    padding-bottom: 40px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.sideMenuLastContent div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sideMenuLastContent div img{
+    margin: 0 10px;
+}
+
+.sideMenuLastContent span {
+    color: rgb(255, 217, 0);
+    font-weight: 400;
+}
+
+.sideMenuLastContent span,
+.sideMenuLastContent img.menuIcon {
+    animation: blink 1s infinite;
+}
+
+.sideMenuMiddleContent img[src='./src/assets/images/logo.png']:hover {
+    animation: blink-logo 1s infinite;
+}
+  
+@keyframes blink {
+  0% {
+    opacity: 1;
+    transform: scale(1.05);
+    color: rgba(163,107,31,255);
+  }
+  50% {
+    opacity: 0.6;
+    color: rgba(163,107,31,255);
+    transform: scale(1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1.05);
+    color: rgba(163,107,31,255);
+  }
+}
+
+@keyframes blink-logo {
+    0% {
+      opacity: 1;
+      transform: scale(1.05);
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.090);
+    }
+    50% {
+      opacity: 0.6;
+      transform: scale(1);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1.05);
+     box-shadow: 0 0 10px rgba(0, 0, 0, 0.090);
+    }
+}

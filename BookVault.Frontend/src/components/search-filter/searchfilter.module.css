@@ -1,0 +1,120 @@
+.searchFilters {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  color: black;
+}
+
+.searchInputWrapper {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+}
+
+.searchInputWrapper .icon {
+  position: absolute;
+  top: 15px;
+  left: 20px;
+  color: #888;
+}
+
+.searchInput {
+  min-width: 100px;
+  height: 27px;
+  width: 100%;
+  padding: 8px 8px 8px 50px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.filters {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.dropdown {
+  height: 45px;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.dropdown:focus,
+.searchInput:focus {
+  outline: none;
+}
+
+.filterBtn {
+  height: 45px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.filterPanel {
+  margin-top: 1rem;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fafafa;
+}
+
+.filterPanel h3 {
+  margin-bottom: 0.25rem;
+}
+
+.filterSection {
+  margin-top: 1rem;
+}
+
+.rangeSliders {
+  display: flex;
+  gap: 1rem;
+}
+
+.rangeValues {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.directorInput {
+  width: 100%;
+  padding: 6px;
+  margin-top: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.applyBtn {
+  margin-top: 1rem;
+  padding: 8px 16px;
+  background-color: #1e40af;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.clearIcon {
+  position: absolute;
+  right: -40px;
+  top: 15px;
+  color: #888;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.clearIcon:hover {
+  color: #000;
+}
