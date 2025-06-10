@@ -134,35 +134,35 @@ export default function NavBar() {
                       <img src={profilePictureUrl} alt="Profile" className={styles.profilePicture}/>
                       <span>Hello, <br /> {username}</span>
                   </div>
-                  <Link to="/" className={styles.menuIconWrapper}>
+                  <Link to="/" className={styles.menuIconWrapper} onClick={ ()=>setIsSideMenuOpen(!isSideMenuOpen) }>
                       <HiMiniCog6Tooth className={styles.menuIcon} size={21}/>
                       <span className={styles.menuTitle}>Settings <br />
                           <span className={styles.menuSubTitle}>App settings</span> 
                       </span>
                   </Link>
-                  <Link to="/" className={styles.menuIconWrapper}>
+                  <Link to="/" className={styles.menuIconWrapper} onClick={ ()=>setIsSideMenuOpen(!isSideMenuOpen) }>
                       <FaUserCircle className={styles.menuIcon} size={20}/>
                       <span className={styles.menuTitle}>Profile <br />
                           <span className={styles.menuSubTitle}>Profile related settings</span> 
                       </span>
                   </Link>
-                  <Link to="/" className={styles.menuIconWrapper}>
+                  <Link to="/" className={styles.menuIconWrapper} onClick={ ()=>setIsSideMenuOpen(!isSideMenuOpen) }>
                       <IoIosColorPalette className={styles.menuIcon} size={22}/>
                       <span className={styles.menuTitle}>Appearance <br />
                           <span className={styles.menuSubTitle}>Take control of your view</span>
                       </span>
                   </Link>
-                  <Link to="/" className={styles.menuIconWrapper}>
+                  <Link to="/" className={styles.menuIconWrapper} onClick={ ()=>setIsSideMenuOpen(!isSideMenuOpen) }>
                     <MdDownloadForOffline className={styles.menuIcon} size={21}/>
                     <span className={styles.menuTitle}>Downloads <br />
                         <span className={styles.menuSubTitle}>A quick access to downloaded files</span> 
                     </span>
                   </Link>
-                  <Link to="/contact" className={styles.menuIconWrapper}>
+                  <Link to="/contact" className={styles.menuIconWrapper} onClick={ ()=>setIsSideMenuOpen(!isSideMenuOpen) }>
                       <IoCall className={styles.menuIcon} size={20}/>
                       <span className={styles.menuTitle}>Contact</span>
                   </Link>
-                  <Link to="/" className={styles.menuIconWrapper}>
+                  <Link to="/" className={styles.menuIconWrapper} onClick={ ()=>setIsSideMenuOpen(!isSideMenuOpen) }>
                       <RiInformationFill className={styles.menuIcon} size={21}/>
                       <span className={styles.menuTitle}>FAQs<br />
                           <span className={styles.menuSubTitle}>Any question, expore here</span>
