@@ -77,20 +77,6 @@ export default function Footer() {
               <li><Link to="#">Awards</Link></li>
             </ul>
           </div>
-          
-          <div className={styles.footerColumn}>
-            <div className={styles.regionSelector}>
-              <select>
-                <option>Choose region</option>
-                <option>United States</option>
-                <option>United Kingdom</option>
-                <option>Canada</option>
-                <option>Australia</option>
-                <option>Europe</option>
-                <option>Asia</option>
-              </select>
-            </div>
-          </div>
         </div>
       </div>
       

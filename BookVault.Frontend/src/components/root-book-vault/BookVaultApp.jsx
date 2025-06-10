@@ -16,6 +16,7 @@ import Auth from '../auth/Auth';
 import ProtectedRouter from '../protected-router/ProtectedRouter';
 import { UserProvider } from '../../context/UserContext';
 import Layout from '../layout/layout';
+import ContactForm from '../contact/ContactForm';
 
 export default function BookVaultApp() {
 
@@ -29,6 +30,7 @@ export default function BookVaultApp() {
           <Route path="/create" element={<CreateBook />} />
           <Route path="/edit/:id" element={<EditBooks />} />
           <Route path="/search" element={<AllBooks />} />
+          <Route path="/contact" element={<ContactForm />} />
         </Route>
 
         {/* Public routes */}

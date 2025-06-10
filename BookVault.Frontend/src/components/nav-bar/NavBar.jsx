@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import styles from './navbar.module.css';
 import { TbCopyPlus, TbCopyPlusFilled } from "react-icons/tb";
 import { RiHome9Fill, RiHome9Line } from "react-icons/ri";
@@ -134,40 +134,40 @@ export default function NavBar() {
                       <img src={profilePictureUrl} alt="Profile" className={styles.profilePicture}/>
                       <span>Hello, <br /> {username}</span>
                   </div>
-                  <li href="/" className={styles.menuIconWrapper}>
+                  <Link to="/" className={styles.menuIconWrapper} onClick={ ()=>setIsSideMenuOpen(!isSideMenuOpen) }>
                       <HiMiniCog6Tooth className={styles.menuIcon} size={21}/>
                       <a>Settings <br />
                           <span>App settings</span> 
                       </a>
-                  </li>
-                  <li href="/" className={styles.menuIconWrapper}>
+                  </Link>
+                  <Link to="/" className={styles.menuIconWrapper} onClick={ ()=>setIsSideMenuOpen(!isSideMenuOpen) }>
                       <FaUserCircle className={styles.menuIcon} size={20}/>
                       <a>Profile <br />
                           <span>Profile related settings</span> 
                       </a>
-                  </li>
-                  <li href="/menu" className={styles.menuIconWrapper}>
+                  </Link>
+                  <Link to="/" className={styles.menuIconWrapper} onClick={ ()=>setIsSideMenuOpen(!isSideMenuOpen) }>
                       <IoIosColorPalette className={styles.menuIcon} size={22}/>
                       <a >Appearance <br />
                           <span>Take control of your view</span>
                       </a>
-                  </li>
-                  <li href="/" className={styles.menuIconWrapper}>
+                  </Link>
+                  <Link to="/" className={styles.menuIconWrapper} onClick={ ()=>setIsSideMenuOpen(!isSideMenuOpen) }>
                     <MdDownloadForOffline className={styles.menuIcon} size={21}/>
                     <a>Downloads <br />
                         <span>A quick access to downloaded files</span> 
                     </a>
-                  </li>
-                  <li href="/contact" className={styles.menuIconWrapper}>
+                  </Link>
+                  <Link to="/contact" className={styles.menuIconWrapper} onClick={ ()=>setIsSideMenuOpen(!isSideMenuOpen) }>
                       <IoCall className={styles.menuIcon} size={20}/>
                       <a >Contact</a>
-                  </li>
-                  <li href="/feedback" className={styles.menuIconWrapper}>
+                  </Link>
+                  <Link to="/" className={styles.menuIconWrapper} onClick={ ()=>setIsSideMenuOpen(!isSideMenuOpen) }>
                       <RiInformationFill className={styles.menuIcon} size={21}/>
                       <a >FAQs<br />
                           <span>Any question, expore here</span>
                       </a>
-                  </li>
+                  </Link>
               </div>
               <div className={styles.sideMenuMiddleContent}>
                   <span>
