@@ -24,8 +24,12 @@ export default function ContactForm() {
   };
 
   return (
-    <div className={styles.container}>
-      <h2>Contact Us</h2>
+    <div className={styles.pageContainer}>
+      <div className={styles.formCard}>
+        <div className={styles.formHeader}>
+          <h2 className={styles.pageTitle}>Contact Us</h2>
+          <p className={styles.subtitle}>connect us for your inqueries</p>
+        </div>
       <form onSubmit={handleSubmit} className={styles.form}>
         <input
           type="text"
@@ -50,11 +54,12 @@ export default function ContactForm() {
           placeholder="Your Message"
           value={formData.message}
           onChange={handleChange}
-          className={styles.textarea}
+          className={`${styles.input} ${styles.textarea}`} 
           required
         ></textarea>
-        <button type="submit" className={styles.button}>Send</button>
+        <button type="submit" className={styles.submitButton}>Send</button>
       </form>
+    </div>
     </div>
   );
 };
