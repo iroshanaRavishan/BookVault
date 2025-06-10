@@ -98,8 +98,6 @@ span span {
     color: #3b3b3b;
     text-decoration: none;
     margin: 10px 0;
-    font-size: 14px;
-    font-weight: 600;
 }
 
 .sideMenu.open {
@@ -167,13 +165,15 @@ span span {
     border-radius: 5px;
 }
 
-.menuIconWrapper a {
-    font-size: 12px !important;
-    color: #7e7e7e;
-    font-weight : 700;
+.menuTitle {
+    font-size: 13px !important;
+    color: #3b3b3b;
+    text-decoration: none;
+    margin: 10px 0;
+    font-weight: 600;
 }
 
-.menuIconWrapper span {
+.menuSubTitle {
     font-size: 12px !important;
     color: #7e7e7e;
     font-weight : 500;
