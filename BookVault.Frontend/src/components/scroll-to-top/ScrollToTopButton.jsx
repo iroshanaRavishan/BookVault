@@ -26,6 +26,11 @@ export default function ScrollToTopButton() {
       className={Styles.button}  
       onClick={scrollToTop}
       aria-label="Scroll to top"
+      style={{
+        opacity: isVisible ? 1 : 0,
+        pointerEvents: isVisible ? 'auto' : 'none',
+        transition: 'opacity 0.3s ease-in-out'
+      }}
     >
       ↑
     </button>
