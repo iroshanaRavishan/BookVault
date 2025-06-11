@@ -1,16 +1,28 @@
 .button {
     position: fixed;
-    bottom: 2rem;
-    right: 2rem;
+    bottom: 30px;
+    right: 30px;
     background-color: #007bff;
     color: #fff;
     border: none;
-    padding: 0.75rem 1.2rem;
+    padding: 12px 12px;
     border-radius: 50%;
-    font-size: 1.5rem;
+    font-size: 24px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     cursor: pointer;
     z-index: 1000;
     opacity: 1;
     transition: opacity 0.4s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    animation: bounce 1.5s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translate(-50%, 0);
+  }
+  50% {
+    transform: translate(-50%, -10px);
+  }
 }

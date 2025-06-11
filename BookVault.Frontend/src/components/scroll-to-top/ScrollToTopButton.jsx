@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Styles from './scrolltotopbutton.module.css';
+import { FaChevronUp } from "react-icons/fa6";
 
 export default function ScrollToTopButton() {
   const [isVisible, setIsVisible] = useState(false);
@@ -26,8 +27,13 @@ export default function ScrollToTopButton() {
       className={Styles.button}  
       onClick={scrollToTop}
       aria-label="Scroll to top"
+      style={{
+        opacity: isVisible ? 1 : 0,
+        pointerEvents: isVisible ? 'auto' : 'none',
+        transition: 'opacity 0.3s ease-in-out'
+      }}
     >
-      ↑
+      <FaChevronUp />
     </button>
   );
 }
