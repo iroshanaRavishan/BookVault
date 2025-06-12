@@ -13,6 +13,7 @@ namespace BookVault.Models
         public bool IsRead { get; private set; }
         public string? ReadUrl { get; private set; }
         public string CoverImagePath { get; private set; }
+        public string ThumbnailPath { get; private set; }
         public string PdfFilePath { get; private set; }
 
         // Private constructor for ORM frameworks
@@ -25,13 +26,14 @@ namespace BookVault.Models
             Plot = string.Empty;
             ReadUrl = string.Empty;
             CoverImagePath = string.Empty;
+            ThumbnailPath = string.Empty;
             PdfFilePath = string.Empty;
         }
 
         // Private constructor used by the factory method
         private Book(string name, List<string> genres, DateTimeOffset? releaseDate, string author,
-                    string plot, int? length, bool isRead, string? readUrl,
-                    string coverImagePath, string pdfFilePath)
+                    string plot, int? length, bool isRead, string? readUrl, string coverImagePath,
+                    string thumbnailPath, string pdfFilePath)
         {
             Name = name;
             Genres = genres ?? new List<string>();
@@ -42,23 +44,24 @@ namespace BookVault.Models
             IsRead = isRead;
             ReadUrl = readUrl;
             CoverImagePath = coverImagePath;
+            ThumbnailPath = thumbnailPath;
             PdfFilePath = pdfFilePath;
         }
 
         // Static factory method
         public static Book Create(string name, List<string> genres, DateTimeOffset? releaseDate,
                                  string author, string plot, int? length, bool isRead,
-                                 string? readUrl, string coverImagePath, string pdfFilePath)
+                                 string? readUrl, string coverImagePath, string thumbnailPath, string pdfFilePath)
         {
             ValidateInputs(name, releaseDate, readUrl, length);
             return new Book(name, genres, releaseDate, author, plot, length, isRead,
-                          readUrl, coverImagePath, pdfFilePath);
+                          readUrl, coverImagePath, thumbnailPath, pdfFilePath);
         }
 
         // Update method (for modifying the object after creation)
         public void Update(string name, List<string> genres, DateTimeOffset? releaseDate,
                           string author, string plot, int? length, bool isRead,
-                          string? readUrl, string coverImagePath, string pdfFilePath)
+                          string? readUrl, string coverImagePath, string thumbnailPath, string pdfFilePath)
         {
             ValidateInputs(name, releaseDate, readUrl, length);
 
@@ -71,6 +74,7 @@ namespace BookVault.Models
             IsRead = isRead;
             ReadUrl = readUrl;
             CoverImagePath = coverImagePath;
+            ThumbnailPath = thumbnailPath;
             PdfFilePath = pdfFilePath;
 
             UpdateLastModified();
