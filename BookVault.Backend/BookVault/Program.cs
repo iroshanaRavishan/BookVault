@@ -40,6 +40,7 @@ await using (var serviceScope = app.Services.CreateAsyncScope())
 {
     var defaultPicContext = serviceScope.ServiceProvider.GetRequiredService<DefaultUserProfilePictureDbContext>();
     var bookContext = serviceScope.ServiceProvider.GetRequiredService<BookDbContext>();
+    var authContext = serviceScope.ServiceProvider.GetRequiredService<AuthDbContext>();
     var logger = serviceScope.ServiceProvider.GetRequiredService<ILogger<Program>>();
 
     try
@@ -51,6 +52,10 @@ await using (var serviceScope = app.Services.CreateAsyncScope())
         logger.LogInformation("Applying BookDbContext migrations...");
         await bookContext.Database.MigrateAsync();
         logger.LogInformation("BookDbContext migrations applied successfully");
+
+        logger.LogInformation("Applying Auth migrations...");
+        await authContext.Database.MigrateAsync();
+        logger.LogInformation("AuthDbContext migrations applied successfully");
     }
     catch (Exception ex)
     {
