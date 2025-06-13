@@ -31,6 +31,8 @@ namespace BookVault.Application.DTOs.BookDTOs
 
         public IFormFile? CoverImage { get; set; }
 
+        public string? Thumbnail { get; set; }
+
         public IFormFile? PdfFile { get; set; }
     }
 }
