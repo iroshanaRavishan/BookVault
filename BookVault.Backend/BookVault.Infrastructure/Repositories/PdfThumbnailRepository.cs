@@ -18,7 +18,7 @@ namespace BookVault.Infrastructure.Repositories
             _env = env;
         }
 
-        public async Task<byte[]> GenerateThumbnailAsync(string filename)
+        public async Task<string> GenerateThumbnailAsync(string filename)
         {
             string uploadsPath = Path.Combine(_env.ContentRootPath, "uploads", "pdfs");
             string filePath = Path.Combine(uploadsPath, filename);
@@ -26,16 +26,23 @@ namespace BookVault.Infrastructure.Repositories
             if (!File.Exists(filePath))
                 return null;
 
-            // PdfiumViewer is synchronous, so wrap in Task.Run to avoid blocking
             return await Task.Run(() =>
             {
                 using var stream = File.OpenRead(filePath);
                 using var pdfDocument = PdfDocument.Load(stream);
-                using var image = pdfDocument.Render(0, 200, 200, true); // Render first page as 200x200 thumbnail
+                using var image = pdfDocument.Render(0, 200, 200, true);
 
-                using var ms = new NoTimeoutMemoryStream();
-                image.Save(ms, ImageFormat.Png);
-                return ms.ToArray();
+                // Save the thumbnail
+                string thumbnailsDir = Path.Combine(_env.ContentRootPath, "uploads", "thumbnails");
+                Directory.CreateDirectory(thumbnailsDir);
+
+                string thumbnailFilename = Path.GetFileNameWithoutExtension(filename) + "-thumbnail.png";
+                string thumbnailPath = Path.Combine(thumbnailsDir, thumbnailFilename);
+
+                image.Save(thumbnailPath, ImageFormat.Png); // <--- This saves it to disk
+
+                // Return the relative path to store in DB or send to frontend
+                return Path.Combine("thumbnails", thumbnailFilename);
             });
         }
     }
