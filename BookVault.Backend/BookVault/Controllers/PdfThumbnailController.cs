@@ -23,15 +23,16 @@ namespace BookVault.API.Controllers
             if (string.IsNullOrWhiteSpace(filename))
                 return BadRequest("Filename is required.");
 
-            var (isSuccess, imageBytes, message) = await _thumbnailService.GenerateThumbnailAsync(filename);
+            var (isSuccess, thumbnailPath, message) = await _thumbnailService.GenerateThumbnailAsync(filename);
 
-            if (!isSuccess)
+            if (!isSuccess || thumbnailPath == null)
             {
                 _logger.LogWarning("Thumbnail generation failed for {filename}: {message}", filename, message);
                 return NotFound(message);
             }
 
-            return File(imageBytes, "image/png");
+            // Return just the path so the frontend can access /thumbnails/xyz.png
+            return Ok(new { thumbnailPath });
         }
     }
 }

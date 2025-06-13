@@ -12,7 +12,7 @@ import { IoCloseCircleSharp } from "react-icons/io5";
 export default function BookCard({ book, refreshBooks }) {
   const [showModal, setShowModal] = useState(false);
   const [showDeleteConfirmModal, setShowDeleteConfirmModal] = useState(false);
-    const { books, loading, fetchBooks } = useBooks(); // custom hook
+  const { books, loading, fetchBooks } = useBooks(); // custom hook
 
   function ImagePathReviser(path){
     return `https://localhost:7157/uploads/${path.replace(/\\/g, '/')}`;
@@ -44,7 +44,13 @@ export default function BookCard({ book, refreshBooks }) {
           {book.coverImagePath ? (
             <img src={ImagePathReviser(book.coverImagePath)} alt={book.name} className={styles.bookImage} />
           ) : (
-            <div className={styles.placeholderImage}>No Image</div>
+             book.thumbnailPath ? (
+              <img src={ImagePathReviser(book.thumbnailPath)} alt={book.name} className={styles.bookImage} />
+            ) : (
+              <div className={styles.placeholderImage}>
+                <span className={styles.placeholderText}>No Image</span>
+              </div>
+            )
           )}
           <div className={styles.overlay}>
             <button className={styles.detailsButton} onClick={openModal}>
@@ -92,7 +98,13 @@ export default function BookCard({ book, refreshBooks }) {
                 {book.coverImagePath ? (
                   <img src={ImagePathReviser(book.coverImagePath)} alt={book.name} className={styles.bookImage} />
                 ) : (
-                  <div className={styles.placeholderImage}>No Image</div>
+                  book.thumbnailPath ? (
+                    <img src={ImagePathReviser(book.thumbnailPath)} alt={book.name} className={styles.bookImage} />
+                  ) : (
+                    <div className={styles.placeholderImage}>
+                      <span className={styles.placeholderText}>No Image</span>
+                    </div>
+                  )
                 )}
                 {book.isRead && (
                   <div className={styles.modalReadBadge}>
