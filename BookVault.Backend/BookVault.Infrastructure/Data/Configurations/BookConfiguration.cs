@@ -50,6 +50,10 @@ namespace BookVault.Data.Configurations
             builder.Property(m => m.CoverImagePath)
                    .HasMaxLength(500);
 
+            builder.Property(m => m.ThumbnailPath)
+                   .HasMaxLength(500)
+                   .IsRequired(false);
+
             builder.Property(m => m.PdfFilePath)
                    .HasMaxLength(500);
 
