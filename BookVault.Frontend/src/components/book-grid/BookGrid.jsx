@@ -1,37 +1,21 @@
-import React, { useCallback, useEffect, useRef, useState } from "react"
+import React, { useCallback, useRef, useState } from "react";
 import styles from "./bookgrid.module.css";
 import BookCard from "../book-card/BookCard";
 import { GoChevronLeft, GoChevronRight } from "react-icons/go";
+import useBooks from "../../hooks/useBook"; // adjust path based on your structure
 
 export default function BookGrid() {
-  const [books, setBooks] = useState([]);
+const { books, loading, fetchBooks } = useBooks();
   const [visibleCount, setVisibleCount] = useState(10);
-  const [loading, setLoading] = useState(true);
   const observer = useRef();
 
   const [currentPage, setCurrentPage] = useState(1)
-  const booksPerPage = 8
+  const booksPerPage = 9
   const totalPages = Math.ceil(books.length / booksPerPage)
 
   const indexOfLastBook = currentPage * booksPerPage
   const indexOfFirstBook = indexOfLastBook - booksPerPage
   const currentBooks = books.slice(indexOfFirstBook, indexOfLastBook)
-
-  useEffect(() => {
-    fetchBooksFromBackend();
-  }, []);
-
-  const fetchBooksFromBackend = async () => {
-    try {
-      const res = await fetch('https://localhost:7157/api/Books');
-      const data = await res.json();
-      setBooks(data);
-    } catch (error) {
-      console.error('Error fetching books:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const lastBookRef = useCallback(
     (node) => {
@@ -69,7 +53,7 @@ export default function BookGrid() {
         </div>
       )}
       
-      {books && books.length === 0 && !loading && (
+      {books.length === 0 && !loading && (
         <div className={styles.noBooks}>
           <img src="../src/assets/disconnected.png" className={styles.disconnectedImage} alt="disconnected-image" />
           <span>No books found</span>
@@ -79,7 +63,7 @@ export default function BookGrid() {
 
       <div className={styles.gridContainer}>
         {currentBooks.map((book) => (
-          <BookCard key={book.id} book={book} />
+          <BookCard key={book.id} book={book} refreshBooks={fetchBooks} />
         ))}
       </div>
 
