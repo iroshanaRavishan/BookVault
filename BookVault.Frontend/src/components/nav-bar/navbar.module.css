@@ -38,6 +38,12 @@
     transition: all 0.3s ease;
 }
 
+.navLinkButton {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
 .activeNavLink {
     color: #f29b28;
     text-decoration: none;
