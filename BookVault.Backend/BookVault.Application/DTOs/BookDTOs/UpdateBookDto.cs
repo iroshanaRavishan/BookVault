@@ -30,6 +30,9 @@ namespace BookVault.Application.DTOs.BookDTOs
         [StringLength(500, ErrorMessage = "Cover image path cannot exceed 500 characters")]
         public string? CoverImagePath { get; init; }
 
+        [StringLength(500, ErrorMessage = "Thumbnail path cannot exceed 500 characters")]
+        public string? ThumbnailPath { get; init; }
+
         [StringLength(500, ErrorMessage = "PDF file path cannot exceed 500 characters")]
         public string? PdfFilePath { get; init; }
     }

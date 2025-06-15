@@ -21,6 +21,7 @@ export default function EditBooks() {
   const [pdfFile, setPdfFile] = useState(null);
   const [existingPdfUrl, setExistingPdfUrl] = useState("");
   const [existingPdfPath, setExistingPdfPath] = useState("");
+  const [existingThumbnailPath, setExistingThumbnailPath] = useState("");
   const [removeExistingPdf, setRemoveExistingPdf] = useState(false);
   const [message, setMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -121,6 +122,10 @@ export default function EditBooks() {
           setExistingPdfUrl(`https://localhost:7157/uploads/${bookData.pdfFilePath}`)
         }
 
+        if (bookData.thumbnailPath) {
+          setExistingThumbnailPath(bookData.thumbnailPath)
+        }
+
         setIsLoading(false)
       } catch (error) {
         console.error("Error loading book:", error)
@@ -189,12 +194,42 @@ export default function EditBooks() {
 
       const result = await response.json()
       console.log("Upload result:", result)
-      return result.filePath
+
+      const filePathToBeCleaned = result.filePath;
+      // Split by backslash and get last part
+      const cleanedFilePath = filePathToBeCleaned.split('\\').pop();
+
+      let generatedThumbnailPath = null;
+
+      if (fileType == "pdf") {
+        try {
+          const thumbnailResponse = await fetch(`https://localhost:7157/api/PdfThumbnail/${cleanedFilePath}`, {
+            method: "GET"
+          })
+
+          if (!thumbnailResponse.ok) {
+            throw new Error("Failed to generate thumbnail");
+          }
+
+        const thumbnailResult = await thumbnailResponse.json();
+        console.log("Thumbnail generated:", thumbnailResult);
+
+        generatedThumbnailPath = thumbnailResult.thumbnailPath;
+        setExistingThumbnailPath(generatedThumbnailPath); 
+        } catch (thumbnailError) {
+          console.error("Error generating thumbnail:", thumbnailError);
+          throw new Error("Failed to generate thumbnail for PDF");
+        }
+      } else {
+        generatedThumbnailPath = null; // No thumbnail for image files
+      }
+
+      return { filePath: result.filePath, thumbnailPath: generatedThumbnailPath };
     } catch (error) {
-      console.error(`Error uploading ${fileType}:`, error)
-      throw error
+      console.error(`Error uploading ${fileType}:`, error);
+      throw error;
     }
-  }
+  };
 
   // Delete file function (only deletes file, not database)
   const deleteFile = async (filePath) => {
@@ -350,14 +385,17 @@ export default function EditBooks() {
 
       if (imageFile) {
         const imagePath = await uploadFile(imageFile, "image");
-        updateData.coverImagePath = imagePath;
+        updateData.coverImagePath = imagePath.filePath;
         if (existingImagePath) await deleteFile(existingImagePath);
       }
 
       if (pdfFile) {
         const pdfPath = await uploadFile(pdfFile, "pdf");
-        updateData.pdfFilePath = pdfPath;
+        updateData.pdfFilePath = pdfPath.filePath;
         if (existingPdfPath) await deleteFile(existingPdfPath);
+        if (existingThumbnailPath) await deleteFile(existingThumbnailPath);
+        
+        updateData.thumbnailPath = pdfPath.thumbnailPath; // update existing thumbnail if PDF is updated
       }
 
       if (result){
@@ -493,6 +531,7 @@ export default function EditBooks() {
     if (existingPdfPath) {
       const success = await deleteBookFile(existingPdfPath, "pdf")
       if (success) {
+        await deleteBookFile(existingThumbnailPath, "thumbnail")
         setExistingPdfUrl("")
         setExistingPdfPath("")
         setRemoveExistingPdf(true)
