@@ -117,13 +117,13 @@ export default function NavBar() {
               </>
             )}
           </NavLink>
-          <NavLink
-            className={`${styles.navLink} ${styles.navFlex}`}
+          <div
+            className={`${styles.navLinkButton} ${styles.navLink} ${styles.navFlex}`}
             onClick={sideMenu}
           >
             <SlMenu size={20} />
             <span>Menu</span>
-          </NavLink>
+          </div>
 
           <div className={`${styles.sideMenu} ${isSideMenuOpen ? styles.open : ""}`}>
               <div className={styles.sideMenuFirstContent}>
