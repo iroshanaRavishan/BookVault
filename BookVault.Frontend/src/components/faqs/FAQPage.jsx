@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import styles from './faq.module.css';
+import styles from './faqpage.module.css';
+import { FaAngleUp } from "react-icons/fa6";
+import { FaAngleDown } from "react-icons/fa6";
 
 export default function FAQPage() {
   const [openIndex, setOpenIndex] = useState(null);
@@ -43,7 +45,11 @@ export default function FAQPage() {
               >
                 {faq.question}
                 <span className={styles.arrow}>
-                  {openIndex === index ? '−' : '+'}
+                  <span
+                    className={`${styles.arrowIcon} ${openIndex === index ? styles.rotated : ''}`}
+                  >
+                    <FaAngleUp />
+                  </span>
                 </span>
               </button>
               {openIndex === index && (
