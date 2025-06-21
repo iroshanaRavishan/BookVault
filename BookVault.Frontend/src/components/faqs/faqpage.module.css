@@ -80,6 +80,15 @@
   line-height: 1;
 }
 
+.arrowIcon {
+  display: inline-flex;
+  transition: transform 0.3s ease;
+}
+
+.rotated {
+  transform: rotate(180deg);
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .faqCard {
