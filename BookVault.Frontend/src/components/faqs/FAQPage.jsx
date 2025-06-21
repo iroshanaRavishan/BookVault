@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styles from './faqpage.module.css';
+import styles from './faq.module.css';
 
 export default function FAQPage() {
   const [openIndex, setOpenIndex] = useState(null);
@@ -8,6 +8,18 @@ export default function FAQPage() {
     {
       question: "How can I contact support?",
       answer: "You can contact our support team using the contact form on this page or email us directly at support@example.com."
+    },
+    {
+      question: "What services do you offer?",
+      answer: "We provide a wide range of services including web development, design, and consulting."
+    },
+    {
+      question: "How long does it take to receive a response?",
+      answer: "Typically, we respond within 24-48 hours during business days."
+    },
+    {
+      question: "Can I request a custom solution?",
+      answer: "Absolutely! Just fill out the contact form with your requirements, and we’ll get in touch with a tailored proposal."
     }
   ];
 
