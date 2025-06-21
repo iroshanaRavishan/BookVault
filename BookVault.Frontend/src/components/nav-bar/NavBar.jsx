@@ -162,7 +162,7 @@ export default function NavBar() {
                       <IoCall className={styles.menuIcon} size={20}/>
                       <span className={styles.menuTitle}>Contact</span>
                   </Link>
-                  <Link to="/" className={styles.menuIconWrapper} onClick={ ()=>setIsSideMenuOpen(!isSideMenuOpen) }>
+                  <Link to="/faq" className={styles.menuIconWrapper} onClick={ ()=>setIsSideMenuOpen(!isSideMenuOpen) }>
                       <RiInformationFill className={styles.menuIcon} size={21}/>
                       <span className={styles.menuTitle}>FAQs<br />
                           <span className={styles.menuSubTitle}>Any question, expore here</span>
