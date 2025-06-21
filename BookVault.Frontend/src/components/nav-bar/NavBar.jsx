@@ -117,13 +117,13 @@ export default function NavBar() {
               </>
             )}
           </NavLink>
-          <NavLink
-            className={`${styles.navLink} ${styles.navFlex}`}
+          <div
+            className={`${styles.navLinkButton} ${styles.navLink} ${styles.navFlex}`}
             onClick={sideMenu}
           >
             <SlMenu size={20} />
             <span>Menu</span>
-          </NavLink>
+          </div>
 
           <div className={`${styles.sideMenu} ${isSideMenuOpen ? styles.open : ""}`}>
               <div className={styles.sideMenuFirstContent}>
@@ -162,7 +162,7 @@ export default function NavBar() {
                       <IoCall className={styles.menuIcon} size={20}/>
                       <span className={styles.menuTitle}>Contact</span>
                   </Link>
-                  <Link to="/" className={styles.menuIconWrapper} onClick={ ()=>setIsSideMenuOpen(!isSideMenuOpen) }>
+                  <Link to="/faq" className={styles.menuIconWrapper} onClick={ ()=>setIsSideMenuOpen(!isSideMenuOpen) }>
                       <RiInformationFill className={styles.menuIcon} size={21}/>
                       <span className={styles.menuTitle}>FAQs<br />
                           <span className={styles.menuSubTitle}>Any question, expore here</span>
