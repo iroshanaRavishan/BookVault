@@ -140,7 +140,7 @@ export default function NavBar() {
                           <span className={styles.menuSubTitle}>App settings</span> 
                       </span>
                   </Link>
-                  <Link to="/" className={styles.menuIconWrapper} onClick={ ()=>setIsSideMenuOpen(!isSideMenuOpen) }>
+                  <Link to="/profile-settings" className={styles.menuIconWrapper} onClick={ ()=>setIsSideMenuOpen(!isSideMenuOpen) }>
                       <FaUserCircle className={styles.menuIcon} size={20}/>
                       <span className={styles.menuTitle}>Profile <br />
                           <span className={styles.menuSubTitle}>Profile related settings</span> 
