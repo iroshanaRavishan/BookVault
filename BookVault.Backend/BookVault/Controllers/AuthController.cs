@@ -78,5 +78,23 @@ namespace BookVault.API.Controllers
             }
 
         }
+
+        [HttpPut("update-profile")]
+        [Consumes("multipart/form-data")]
+        public async Task<IActionResult> UpdateUserProfile([FromForm] UserUpdateDto userUpdateDto)
+        {
+            try
+            {
+                var result = await _authService.UpdateUserProfileAsync(User, userUpdateDto);
+                if (!result.IsSuccess)
+                    return BadRequest(result);
+
+                return Ok(new { message = "Profile updated successfully!", isSuccess = true });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = "Something went wrong. " + ex.Message, isSuccess = false });
+            }
+        }
     }
 }
