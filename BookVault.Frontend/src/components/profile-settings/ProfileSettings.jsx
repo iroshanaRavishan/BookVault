@@ -1,10 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import styles from './profilesettings.module.css';
 import { useUser } from '../../context/UserContext';
+import ProfilePicSelectorModal from '../profile-picture-select-modal/ProfilePicSelectorModal';
+import { IoCloseCircleSharp } from "react-icons/io5";
 
 export default function ProfileSettings() {
   const { user } = useUser();
 
+  const [errors, setErrors] = useState({});
+  const [profileImgData, setProfileImgData] = useState("");
+  const [locallyUploadedProfileImg, setLocallyUploadedProfileImg] = useState("");
+  const [fileName, setFileName] = useState("");
+  
   const [formData, setFormData] = useState({
     name: '',
     userName: '',
@@ -34,6 +41,17 @@ export default function ProfileSettings() {
       [name]: files ? files[0] : value,
     }));
   };
+
+  function handleModelProfileImgData(data) {
+    setProfileImgData(data);
+    setErrors(prevErrors => ({ ...prevErrors, ProfilePicture: "" })); // Clear the validation error
+  };
+
+  function handleCloseSelectedImage () {
+    setLocallyUploadedProfileImg("")
+    setProfileImgData("");
+    setFileName("");
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -126,6 +144,24 @@ export default function ProfileSettings() {
             onChange={handleChange}
             className={styles.input}
           />
+          <div className={styles.selectingProfilePic}>
+            <ProfilePicSelectorModal 
+              onDataSend={handleModelProfileImgData} 
+              setLocallyUploadedProfileImg={setLocallyUploadedProfileImg} 
+              locallyUploadedProfileImg={locallyUploadedProfileImg} 
+              fileName={fileName} 
+              setFileName={setFileName}
+            />
+
+            { errors.ProfilePicture && <span className={styles.errorMessage} style={{marginLeft: "10px"}}>{errors.ProfilePicture}</span> } 
+            { profileImgData && 
+              <div className='selectedImageContainer'>
+                <IoCloseCircleSharp size={20} className='cancel-profile-picture' color="#e53e3e" onClick={handleCloseSelectedImage}/>
+                <img className="profile-picture"  src={profileImgData} alt="select-profile" /> 
+              </div>
+            } 
+          </div>
+
           <button type="submit" className={styles.submitButton}>Save Changes</button>
         </form>
       </div>

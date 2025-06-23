@@ -15,5 +15,8 @@ namespace BookVault.Domain.Interfaces
         Task<(bool IsSuccess, string Message)> LoginUserAsync(User userLogin);
         Task LogoutUserAsync();
         Task<User> GetAuthenticatedUserAsync(ClaimsPrincipal user);
+        Task<IdentityResult> UpdateUserAsync(User user);
+        Task<IdentityResult> RemoveUserPasswordAsync(User user);
+        Task<IdentityResult> AddUserPasswordAsync(User user, string newPassword);
     }
 }
