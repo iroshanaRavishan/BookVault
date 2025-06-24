@@ -3,6 +3,7 @@ import styles from './profilesettings.module.css';
 import { useUser } from '../../context/UserContext';
 import ProfilePicSelectorModal from '../profile-picture-select-modal/ProfilePicSelectorModal';
 import { IoCloseCircleSharp } from "react-icons/io5";
+import { convertUserImageToBase64 } from '../../utils/convertUserImageToBase64';
 
 export default function ProfileSettings() {
   const { user } = useUser();
@@ -31,6 +32,7 @@ export default function ProfileSettings() {
         confirmPassword: '',
         profilePicture: null,
       });
+      const profilePictureUrl = convertUserImageToBase64(user);
     }
   }, [user]);
 
