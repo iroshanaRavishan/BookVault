@@ -76,12 +76,10 @@ export default function ProfileSettings() {
     }
 
     try {
-      const res = await fetch('https://yourapi.com/api/users/update-profile', {
+      const res = await fetch('https://localhost:7157/api/Auth/update-profile', {
         method: 'PUT',
         body: data,
-        headers: {
-          Authorization: `Bearer YOUR_TOKEN_HERE`,
-        },
+        credentials: 'include',
       });
 
       if (res.ok) {
