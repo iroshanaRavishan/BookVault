@@ -115,7 +115,6 @@ namespace BookVault.Application.Services
                 if (user == null)
                     return (false, "User not found");
 
-                user.Name = dto.Name;
                 user.UserName = dto.UserName;
                 user.Email = dto.Email;
                 user.ModifiedDate = DateTime.UtcNow;
