@@ -4,7 +4,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    backdrop-filter: blur(10px); 
+    backdrop-filter: blur(2px); 
     display: flex;
     justify-content: center;
     align-items: center;
