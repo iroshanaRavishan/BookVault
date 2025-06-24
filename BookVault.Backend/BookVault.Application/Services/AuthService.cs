@@ -17,10 +17,18 @@ namespace BookVault.Application.Services
     {
         private readonly IAuthRepository _authRepository;
         private readonly ILogger<AuthService> _logger;
-        public AuthService(IAuthRepository authRepository, ILogger<AuthService> logger)
+        private readonly IPasswordValidator<User> _passwordValidator;
+        private readonly UserManager<User> _userManager;
+        public AuthService(
+            IAuthRepository authRepository, 
+            ILogger<AuthService> logger, 
+            IPasswordValidator<User> passwordValidator,
+            UserManager<User> userManager)
         {
             _authRepository = authRepository;
             _logger = logger;
+            _passwordValidator = passwordValidator;
+            _userManager = userManager;
         }
 
         public async Task<User> GetAuthenticatedUserAsync(ClaimsPrincipal user)
