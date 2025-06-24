@@ -17,10 +17,18 @@ namespace BookVault.Application.Services
     {
         private readonly IAuthRepository _authRepository;
         private readonly ILogger<AuthService> _logger;
-        public AuthService(IAuthRepository authRepository, ILogger<AuthService> logger)
+        private readonly IPasswordValidator<User> _passwordValidator;
+        private readonly UserManager<User> _userManager;
+        public AuthService(
+            IAuthRepository authRepository, 
+            ILogger<AuthService> logger, 
+            IPasswordValidator<User> passwordValidator,
+            UserManager<User> userManager)
         {
             _authRepository = authRepository;
             _logger = logger;
+            _passwordValidator = passwordValidator;
+            _userManager = userManager;
         }
 
         public async Task<User> GetAuthenticatedUserAsync(ClaimsPrincipal user)
@@ -107,13 +115,13 @@ namespace BookVault.Application.Services
             }
         }
 
-        public async Task<(bool IsSuccess, string Message)> UpdateUserProfileAsync(ClaimsPrincipal principal, UserUpdateDto dto)
+        public async Task<(bool IsSuccess, string Message, IdentityResult? Result)> UpdateUserProfileAsync(ClaimsPrincipal principal, UserUpdateDto dto)
         {
             try
             {
                 var user = await _authRepository.GetAuthenticatedUserAsync(principal);
                 if (user == null)
-                    return (false, "User not found");
+                    return (false, "User not found", null);
 
                 user.UserName = dto.UserName;
                 user.Email = dto.Email;
@@ -124,11 +132,11 @@ namespace BookVault.Application.Services
                 {
                     var removeResult = await _authRepository.RemoveUserPasswordAsync(user);
                     if (!removeResult.Succeeded)
-                        return (false, "Failed to remove old password");
+                        return (false, "Failed to remove old password", removeResult);
 
                     var addResult = await _authRepository.AddUserPasswordAsync(user, dto.Password);
                     if (!addResult.Succeeded)
-                        return (false, "Failed to update password");
+                        return (false, "Failed to update password", addResult);
                 }
 
                 // Handle profile picture update (convert to byte[])
@@ -144,14 +152,14 @@ namespace BookVault.Application.Services
 
                 var updateResult = await _authRepository.UpdateUserAsync(user);
                 if (!updateResult.Succeeded)
-                    return (false, "Failed to update user");
+                    return (false, "Failed to update user", updateResult);
 
-                return (true, "Profile updated successfully.");
+                return (true, "Profile updated successfully.", IdentityResult.Success);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error updating user profile: {Message}", ex.Message);
-                return (false, "Internal server error");
+                return (false, "Internal server error", IdentityResult.Failed());
             }
         }
 

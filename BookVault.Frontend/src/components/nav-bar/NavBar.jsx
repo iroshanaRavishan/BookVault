@@ -15,6 +15,7 @@ import { IoIosColorPalette } from "react-icons/io";
 import { IoCall } from "react-icons/io5";
 import { RiInformationFill } from "react-icons/ri";
 import { MdDownloadForOffline } from "react-icons/md";
+import { convertUserImageToBase64 } from '../../utils/convertUserImageToBase64';
 
 export default function NavBar() {
     const { user } = useUser();
@@ -31,9 +32,7 @@ export default function NavBar() {
       setIsSideMenuOpen(!isSideMenuOpen);
     };
     
-    const profilePictureUrl = user?.profilePicture 
-    ? `data:${user.profilePictureContentType};base64,${user.profilePicture}` 
-    : null;
+    const profilePictureUrl = convertUserImageToBase64(user);
 
     const username = user?.userName ? user.userName: null;
 
