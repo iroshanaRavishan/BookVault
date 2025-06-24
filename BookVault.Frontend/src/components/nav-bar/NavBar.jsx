@@ -35,7 +35,7 @@ export default function NavBar() {
     ? `data:${user.profilePictureContentType};base64,${user.profilePicture}` 
     : null;
 
-    const username = user?.name ? user.name: null;
+    const username = user?.userName ? user.userName: null;
 
 
     async function logOutHandler() {
