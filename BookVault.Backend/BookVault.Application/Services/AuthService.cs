@@ -107,5 +107,54 @@ namespace BookVault.Application.Services
             }
         }
 
+        public async Task<(bool IsSuccess, string Message)> UpdateUserProfileAsync(ClaimsPrincipal principal, UserUpdateDto dto)
+        {
+            try
+            {
+                var user = await _authRepository.GetAuthenticatedUserAsync(principal);
+                if (user == null)
+                    return (false, "User not found");
+
+                user.UserName = dto.UserName;
+                user.Email = dto.Email;
+                user.ModifiedDate = DateTime.UtcNow;
+
+                // Update password if provided
+                if (!string.IsNullOrWhiteSpace(dto.Password))
+                {
+                    var removeResult = await _authRepository.RemoveUserPasswordAsync(user);
+                    if (!removeResult.Succeeded)
+                        return (false, "Failed to remove old password");
+
+                    var addResult = await _authRepository.AddUserPasswordAsync(user, dto.Password);
+                    if (!addResult.Succeeded)
+                        return (false, "Failed to update password");
+                }
+
+                // Handle profile picture update (convert to byte[])
+                if (dto.ProfilePicture != null && dto.ProfilePicture.Length > 0)
+                {
+                    using (var memoryStream = new MemoryStream())
+                    {
+                        await dto.ProfilePicture.CopyToAsync(memoryStream);
+                        user.ProfilePicture = memoryStream.ToArray();
+                        user.ProfilePictureContentType = dto.ProfilePicture.ContentType;
+                    }
+                }
+
+                var updateResult = await _authRepository.UpdateUserAsync(user);
+                if (!updateResult.Succeeded)
+                    return (false, "Failed to update user");
+
+                return (true, "Profile updated successfully.");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error updating user profile: {Message}", ex.Message);
+                return (false, "Internal server error");
+            }
+        }
+
+
     }
 }
