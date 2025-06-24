@@ -12,6 +12,8 @@ export default function ProfileSettings() {
   const [profileImgData, setProfileImgData] = useState("");
   const [locallyUploadedProfileImg, setLocallyUploadedProfileImg] = useState("");
   const [fileName, setFileName] = useState("");
+
+  const regMessageElement = document.querySelector(".user-password-update-message");
   
   const [formData, setFormData] = useState({
     name: '',
@@ -19,7 +21,7 @@ export default function ProfileSettings() {
     email: '',
     password: '',
     confirmPassword: '',
-    profilePicture: null,
+    profilePicture: profileImgData,
   });
 
   useEffect(() => {
@@ -33,6 +35,7 @@ export default function ProfileSettings() {
         profilePicture: null,
       });
       const profilePictureUrl = convertUserImageToBase64(user);
+      setProfileImgData(profilePictureUrl);
     }
   }, [user]);
 
@@ -74,7 +77,7 @@ export default function ProfileSettings() {
       data.append('Password', formData.password);
     }
     if (formData.profilePicture) {
-      data.append('ProfilePicture', formData.profilePicture);
+      data.append('ProfilePicture', locallyUploadedProfileImg);
     }
 
     try {
@@ -83,10 +86,20 @@ export default function ProfileSettings() {
         body: data,
         credentials: 'include',
       });
+      const updatedData = await res.json();
+
+      if(!updatedData.message) {
+        let errorMessages = "<div><span style='font-size: 15px;'>Attention:</span></div> <ul>"
+        updatedData.errors.forEach(error=> {
+          errorMessages += "<li>"+error.description + "</li>"
+        })
+
+        errorMessages += "</ul>"
+        regMessageElement.innerHTML = errorMessages;
+      }
 
       if (res.ok) {
         alert('Profile updated!');
-        // You can optionally update context here
       } else {
         alert('Update failed');
       }
@@ -163,6 +176,7 @@ export default function ProfileSettings() {
           </div>
 
           <button type="submit" className={styles.submitButton}>Save Changes</button>
+          <p className={`user-password-update-message message`}></p>
         </form>
       </div>
     </div>
