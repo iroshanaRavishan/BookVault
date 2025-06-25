@@ -32,14 +32,6 @@
   font-weight: 600;
 }
 
-.message {
-  color: rgb(243, 61, 61);
-  font-size: 12px !important;
-  font-weight: 600;
-  margin: 20px 0 !important;
-  width: 100%;
-}
-
 .selectingProfilePic {
   width: 100%;
   display: flex;

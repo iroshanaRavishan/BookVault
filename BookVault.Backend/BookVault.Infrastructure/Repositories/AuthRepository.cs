@@ -89,5 +89,44 @@ namespace BookVault.Infrastructure.Repositories
                 throw;
             }
         }
+
+        public async Task<IdentityResult> UpdateUserAsync(User user)
+        {
+            try
+            {
+                return await _userManager.UpdateAsync(user);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error updating user: {Message}", ex.Message);
+                throw;
+            }
+        }
+
+        public async Task<IdentityResult> RemoveUserPasswordAsync(User user)
+        {
+            try
+            {
+                return await _userManager.RemovePasswordAsync(user);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error removing user password: {Message}", ex.Message);
+                throw;
+            }
+        }
+
+        public async Task<IdentityResult> AddUserPasswordAsync(User user, string newPassword)
+        {
+            try
+            {
+                return await _userManager.AddPasswordAsync(user, newPassword);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error adding new user password: {Message}", ex.Message);
+                throw;
+            }
+        }
     }
 }

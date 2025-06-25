@@ -233,7 +233,7 @@ export default function Auth() {
                   "Login" 
                 }
               </button>
-              <p className={`login-message ${styles.message}`}></p>
+              <p className={`login-message message`}></p>
             </form>
           </div>
           <div className={`${styles.formContainer} ${styles.signUp}`}> 
@@ -270,7 +270,7 @@ export default function Auth() {
                   <div className={styles.loadingSpinner}></div>
                   : "Register" }
               </button>
-              <p className={`reg-message ${styles.message}`}></p>
+              <p className={`reg-message message`}></p>
             </form>
           </div>
           <div className={styles.toggleContainer}>
