@@ -32,6 +32,10 @@
   font-weight: 600;
 }
 
+.errorBorder {
+  border: 1px solid #ff8383 !important;
+}
+
 .selectingProfilePic {
   width: 100%;
   display: flex;
@@ -76,7 +80,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 80%;
+  width: 107.5%;
   background-color: #21c372;
   color: #fff;
   font-size: 15px;
@@ -122,7 +126,7 @@
   height: 100%;
 }
 
-.container input {
+.formInput {
   background-color: #e8f0fe;
   border: none;
   margin: 5px 0;

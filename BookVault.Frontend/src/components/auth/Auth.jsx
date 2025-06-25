@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import styles from './auth.module.css';
 import ProfilePicSelectorModal from '../profile-picture-select-modal/ProfilePicSelectorModal';
 import { IoCloseCircleSharp } from "react-icons/io5";
+import PasswordInput from '../password-input/PasswordInput';
 
 export default function Auth() {
   const navigate = useNavigate(); // Hook to programmatically navigate
@@ -16,6 +17,7 @@ export default function Auth() {
     Email: "",
     Name: "",
     PasswordHash: "",
+    confirmPassword: "",
     UserName: ""
   });
 
@@ -159,8 +161,19 @@ export default function Auth() {
       validationErrors.PasswordHash = "Password is required!";
     }
 
+    if(!regFormData.confirmPassword.trim()) {
+      validationErrors.confirmPassword = "Confirm Password is required!";
+    }
+
     if(!profileImgData) {
       validationErrors.ProfilePicture = "Required field!";
+    }
+
+    // Password match validation
+    if (regFormData.PasswordHash || regFormData.confirmPassword) {
+      if (regFormData.PasswordHash !== regFormData.confirmPassword) {
+        validationErrors.passwordMatch = "Passwords do not match";
+      }
     }
 
     // creating the user name
@@ -220,10 +233,10 @@ export default function Auth() {
           <div className={`${styles.formContainer} ${styles.signIn}`}> 
             <form action="#" className={styles.form} onSubmit={loginHandler}>
               <h1>Sign In</h1>
-              <input type="text" name="Email" placeholder='example@hello.com' onChange={handleLoginChange} />
+              <input type="text" name="Email" className={`${styles.formInput} ${errors.Email? styles.errorBorder: ''}`} placeholder='example@hello.com' onChange={handleLoginChange} />
               {errors.Email && <span className={styles.errorMessage}>{errors.Email}</span>}<br />
 
-              <input type="password" name="Password" placeholder="******" onChange={handleLoginChange} />
+              <input type="password" name="Password" className={`${styles.formInput} ${errors.Password? styles.errorBorder: ''}`} placeholder="******" onChange={handleLoginChange} />
               {errors.Password && <span className={styles.errorMessage}>{errors.Password}</span>}
               <br />
               
@@ -239,14 +252,32 @@ export default function Auth() {
           <div className={`${styles.formContainer} ${styles.signUp}`}> 
             <form action="#" className={styles.form} onSubmit={registerHandler} autoComplete="off">
               <h1>Create Account</h1>
-              <input type="text" name="Name" id="name" placeholder="Enter your name" onChange={handleRegChange}  />
+              <input type="text" name="Name" id="name" className={`${styles.formInput} ${errors.Name? styles.errorBorder: ''}`} placeholder="Enter your name" onChange={handleRegChange}  />
               {errors.Name && <span className={styles.errorMessage}>{errors.Name}</span>}<br />
 
-              <input type="text" name="Email" id="email" placeholder="example@hello.com" onChange={handleRegChange}  />
+              <input type="text" name="Email" id="email" className={`${styles.formInput} ${errors.Email? styles.errorBorder: ''}`} placeholder="example@hello.com" onChange={handleRegChange}  />
               {errors.Email && <span className={styles.errorMessage}>{errors.Email}</span>}<br />
 
-              <input type="password" name="PasswordHash" id="password" placeholder="******" onChange={handleRegChange} />
+              <PasswordInput
+                name="PasswordHash"
+                style={{ alignItems: 'center' }}
+                value={regFormData.PasswordHash}
+                onChange={handleRegChange}
+                placeholder="Password"
+                className={`${styles.formInput} ${(errors.PasswordHash || errors.passwordMatch)? styles.errorBorder: ''}`}
+              />
               {errors.PasswordHash && <span className={styles.errorMessage}>{errors.PasswordHash}</span>} <br />
+
+              <PasswordInput
+                name="confirmPassword"
+                value={regFormData.confirmPassword}
+                onChange={handleRegChange}
+                placeholder="Confirm Password"
+                style={{ alignItems: 'center'}}
+                className={`${styles.formInput} ${(errors.confirmPassword || errors.passwordMatch)? styles.errorBorder: ''}`}
+              />
+              {errors.confirmPassword && <span className={styles.errorMessage}>{errors.confirmPassword}</span>} <br />
+              {errors.passwordMatch && <span className={styles.errorMessage}>{errors.passwordMatch}</span>} <br />
 
               <div className={styles.selectingProfilePic}>
                 <ProfilePicSelectorModal 
@@ -279,13 +310,13 @@ export default function Auth() {
               <div className={`${styles.togglePanel} ${styles.toggleLeft}`}>
                 <h1>Welcome Back!</h1>
                 <p>Enter your personal details to use all of site features. Enter your personal details to use all of site features</p>
-                <button className={ isLoding ? `${styles.loading}` : `${styles.hidden}`} disabled={isLoding} onClick={activateContainer}> Sign In </button>
+                <button className={ isLoding ? `${styles.loading}` : `${styles.hidden}`} style={{width: '80%'}} disabled={isLoding} onClick={activateContainer}> Sign In </button>
               </div>
 
               <div className={`${styles.togglePanel} ${styles.toggleRight}`} style={{ color: "black" }}>
                 <h1>Hello, Friend!</h1>
                 <p>Register with your personal details to use all of site features</p>
-                  <button  className={ isLoding ? `${styles.loading}` : `${styles.hidden}`} disabled={isLoding} onClick={deactivateContainer} > Sign Up </button>
+                  <button  className={ isLoding ? `${styles.loading}` : `${styles.hidden}`} style={{width: '80%'}} disabled={isLoding} onClick={deactivateContainer} > Sign Up </button>
                 </div>
             </div>
           </div>
