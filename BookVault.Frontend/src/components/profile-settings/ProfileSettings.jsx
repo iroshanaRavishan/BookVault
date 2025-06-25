@@ -6,14 +6,14 @@ import { IoCloseCircleSharp } from "react-icons/io5";
 import { convertUserImageToBase64 } from '../../utils/convertUserImageToBase64';
 
 export default function ProfileSettings() {
-  const { user } = useUser();
+  const { user, refreshUser } = useUser(); 
 
   const [errors, setErrors] = useState({});
   const [profileImgData, setProfileImgData] = useState("");
   const [locallyUploadedProfileImg, setLocallyUploadedProfileImg] = useState("");
   const [fileName, setFileName] = useState("");
 
-  const regMessageElement = document.querySelector(".user-password-update-message");
+  const userPasswordUpdateMessageElement = document.querySelector(".user-password-update-message");
   
   const [formData, setFormData] = useState({
     name: '',
@@ -21,7 +21,6 @@ export default function ProfileSettings() {
     email: '',
     password: '',
     confirmPassword: '',
-    profilePicture: profileImgData,
   });
 
   useEffect(() => {
@@ -32,7 +31,6 @@ export default function ProfileSettings() {
         email: user.email || '',
         password: '',
         confirmPassword: '',
-        profilePicture: null,
       });
       const profilePictureUrl = convertUserImageToBase64(user);
       setProfileImgData(profilePictureUrl);
@@ -76,9 +74,11 @@ export default function ProfileSettings() {
     if (formData.password) {
       data.append('Password', formData.password);
     }
-    if (formData.profilePicture) {
-      data.append('ProfilePicture', locallyUploadedProfileImg);
-    }
+
+    if (profileImgData) {
+      const imageBlob = await fetch(profileImgData).then(r => r.blob());
+      data.append('ProfilePicture', imageBlob, fileName);
+    } 
 
     try {
       const res = await fetch('https://localhost:7157/api/Auth/update-profile', {
@@ -95,11 +95,13 @@ export default function ProfileSettings() {
         })
 
         errorMessages += "</ul>"
-        regMessageElement.innerHTML = errorMessages;
+        userPasswordUpdateMessageElement.innerHTML = errorMessages;
       }
 
       if (res.ok) {
         alert('Profile updated!');
+        userPasswordUpdateMessageElement.innerHTML = '';
+        await refreshUser(); // Refresh context
       } else {
         alert('Update failed');
       }
