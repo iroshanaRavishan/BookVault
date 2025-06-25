@@ -233,10 +233,10 @@ export default function Auth() {
           <div className={`${styles.formContainer} ${styles.signIn}`}> 
             <form action="#" className={styles.form} onSubmit={loginHandler}>
               <h1>Sign In</h1>
-              <input type="text" name="Email" className={errors.Email? styles.errorBorder: ''} placeholder='example@hello.com' onChange={handleLoginChange} />
+              <input type="text" name="Email" className={`${styles.formInput} ${errors.Email? styles.errorBorder: ''}`} placeholder='example@hello.com' onChange={handleLoginChange} />
               {errors.Email && <span className={styles.errorMessage}>{errors.Email}</span>}<br />
 
-              <input type="password" name="Password" className={errors.Password? styles.errorBorder: ''} placeholder="******" onChange={handleLoginChange} />
+              <input type="password" name="Password" className={`${styles.formInput} ${errors.Password? styles.errorBorder: ''}`} placeholder="******" onChange={handleLoginChange} />
               {errors.Password && <span className={styles.errorMessage}>{errors.Password}</span>}
               <br />
               
@@ -252,10 +252,10 @@ export default function Auth() {
           <div className={`${styles.formContainer} ${styles.signUp}`}> 
             <form action="#" className={styles.form} onSubmit={registerHandler} autoComplete="off">
               <h1>Create Account</h1>
-              <input type="text" name="Name" id="name" className={errors.Name? styles.errorBorder: ''} placeholder="Enter your name" onChange={handleRegChange}  />
+              <input type="text" name="Name" id="name" className={`${styles.formInput} ${errors.Name? styles.errorBorder: ''}`} placeholder="Enter your name" onChange={handleRegChange}  />
               {errors.Name && <span className={styles.errorMessage}>{errors.Name}</span>}<br />
 
-              <input type="text" name="Email" id="email" className={errors.Email? styles.errorBorder: ''} placeholder="example@hello.com" onChange={handleRegChange}  />
+              <input type="text" name="Email" id="email" className={`${styles.formInput} ${errors.Email? styles.errorBorder: ''}`} placeholder="example@hello.com" onChange={handleRegChange}  />
               {errors.Email && <span className={styles.errorMessage}>{errors.Email}</span>}<br />
 
               <PasswordInput
@@ -317,13 +317,13 @@ export default function Auth() {
               <div className={`${styles.togglePanel} ${styles.toggleLeft}`}>
                 <h1>Welcome Back!</h1>
                 <p>Enter your personal details to use all of site features. Enter your personal details to use all of site features</p>
-                <button className={ isLoding ? `${styles.loading}` : `${styles.hidden}`} disabled={isLoding} onClick={activateContainer}> Sign In </button>
+                <button className={ isLoding ? `${styles.loading}` : `${styles.hidden}`} style={{width: '80%'}} disabled={isLoding} onClick={activateContainer}> Sign In </button>
               </div>
 
               <div className={`${styles.togglePanel} ${styles.toggleRight}`} style={{ color: "black" }}>
                 <h1>Hello, Friend!</h1>
                 <p>Register with your personal details to use all of site features</p>
-                  <button  className={ isLoding ? `${styles.loading}` : `${styles.hidden}`} disabled={isLoding} onClick={deactivateContainer} > Sign Up </button>
+                  <button  className={ isLoding ? `${styles.loading}` : `${styles.hidden}`} style={{width: '80%'}} disabled={isLoding} onClick={deactivateContainer} > Sign Up </button>
                 </div>
             </div>
           </div>
