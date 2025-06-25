@@ -236,7 +236,14 @@ export default function Auth() {
               <input type="text" name="Email" className={`${styles.formInput} ${errors.Email? styles.errorBorder: ''}`} placeholder='example@hello.com' onChange={handleLoginChange} />
               {errors.Email && <span className={styles.errorMessage}>{errors.Email}</span>}<br />
 
-              <input type="password" name="Password" className={`${styles.formInput} ${errors.Password? styles.errorBorder: ''}`} placeholder="******" onChange={handleLoginChange} />
+              <PasswordInput
+                name="Password"
+                style={{ alignItems: 'center' }}
+                value={regFormData.Password}
+                onChange={handleLoginChange}
+                placeholder="Password"
+                className={`${styles.formInput} ${errors.Password ? styles.errorBorder: ''}`}
+              />
               {errors.Password && <span className={styles.errorMessage}>{errors.Password}</span>}
               <br />
               
