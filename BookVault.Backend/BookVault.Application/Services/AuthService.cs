@@ -130,6 +130,14 @@ namespace BookVault.Application.Services
                 // Update password if provided
                 if (!string.IsNullOrWhiteSpace(dto.Password))
                 {
+                    // First validate the new password before removing the old one
+                    var passwordValidationResult = await _passwordValidator.ValidateAsync(_userManager, user, dto.Password);
+                    if (!passwordValidationResult.Succeeded)
+                    {
+                        return (false, "Password does not meet security requirements", passwordValidationResult);
+                    }
+
+                    // Only now remove the old password
                     var removeResult = await _authRepository.RemoveUserPasswordAsync(user);
                     if (!removeResult.Succeeded)
                         return (false, "Failed to remove old password", removeResult);
