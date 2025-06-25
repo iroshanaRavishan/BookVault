@@ -279,13 +279,6 @@ export default function Auth() {
               {errors.confirmPassword && <span className={styles.errorMessage}>{errors.confirmPassword}</span>} <br />
               {errors.passwordMatch && <span className={styles.errorMessage}>{errors.passwordMatch}</span>} <br />
 
-              {/* <input type="password" name="PasswordHash" id="password" className={(errors.PasswordHash || errors.passwordMatch)? styles.errorBorder: ''} placeholder="******" onChange={handleRegChange} />
-              {errors.PasswordHash && <span className={styles.errorMessage}>{errors.PasswordHash}</span>} <br /> */}
-
-              {/* <input type="password" name="confirmPassword" id="confirmPassword" className={(errors.confirmPassword || errors.passwordMatch)? styles.errorBorder: ''} placeholder="******" onChange={handleRegChange} />
-              {errors.confirmPassword && <span className={styles.errorMessage}>{errors.confirmPassword}</span>} <br />
-              {errors.passwordMatch && <span className={styles.errorMessage}>{errors.passwordMatch}</span>} <br /> */}
-
               <div className={styles.selectingProfilePic}>
                 <ProfilePicSelectorModal 
                   onDataSend={handleModelProfileImgData} 
