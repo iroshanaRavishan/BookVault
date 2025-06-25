@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import styles from './auth.module.css';
 import ProfilePicSelectorModal from '../profile-picture-select-modal/ProfilePicSelectorModal';
 import { IoCloseCircleSharp } from "react-icons/io5";
+import PasswordInput from '../password-input/PasswordInput';
 
 export default function Auth() {
   const navigate = useNavigate(); // Hook to programmatically navigate
@@ -257,12 +258,33 @@ export default function Auth() {
               <input type="text" name="Email" id="email" className={errors.Email? styles.errorBorder: ''} placeholder="example@hello.com" onChange={handleRegChange}  />
               {errors.Email && <span className={styles.errorMessage}>{errors.Email}</span>}<br />
 
-              <input type="password" name="PasswordHash" id="password" className={(errors.PasswordHash || errors.passwordMatch)? styles.errorBorder: ''} placeholder="******" onChange={handleRegChange} />
+              <PasswordInput
+                name="PasswordHash"
+                style={{ alignItems: 'center' }}
+                value={regFormData.PasswordHash}
+                onChange={handleRegChange}
+                placeholder="Password"
+                className={`${styles.formInput} ${(errors.PasswordHash || errors.passwordMatch)? styles.errorBorder: ''}`}
+              />
               {errors.PasswordHash && <span className={styles.errorMessage}>{errors.PasswordHash}</span>} <br />
 
-              <input type="password" name="confirmPassword" id="confirmPassword" className={(errors.confirmPassword || errors.passwordMatch)? styles.errorBorder: ''} placeholder="******" onChange={handleRegChange} />
+              <PasswordInput
+                name="confirmPassword"
+                value={regFormData.confirmPassword}
+                onChange={handleRegChange}
+                placeholder="Confirm Password"
+                style={{ alignItems: 'center'}}
+                className={`${styles.formInput} ${(errors.confirmPassword || errors.passwordMatch)? styles.errorBorder: ''}`}
+              />
               {errors.confirmPassword && <span className={styles.errorMessage}>{errors.confirmPassword}</span>} <br />
               {errors.passwordMatch && <span className={styles.errorMessage}>{errors.passwordMatch}</span>} <br />
+
+              {/* <input type="password" name="PasswordHash" id="password" className={(errors.PasswordHash || errors.passwordMatch)? styles.errorBorder: ''} placeholder="******" onChange={handleRegChange} />
+              {errors.PasswordHash && <span className={styles.errorMessage}>{errors.PasswordHash}</span>} <br /> */}
+
+              {/* <input type="password" name="confirmPassword" id="confirmPassword" className={(errors.confirmPassword || errors.passwordMatch)? styles.errorBorder: ''} placeholder="******" onChange={handleRegChange} />
+              {errors.confirmPassword && <span className={styles.errorMessage}>{errors.confirmPassword}</span>} <br />
+              {errors.passwordMatch && <span className={styles.errorMessage}>{errors.passwordMatch}</span>} <br /> */}
 
               <div className={styles.selectingProfilePic}>
                 <ProfilePicSelectorModal 
