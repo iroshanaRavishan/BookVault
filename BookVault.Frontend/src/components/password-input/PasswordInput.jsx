@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import { IoEyeOff, IoEye } from 'react-icons/io5';
 import styles from './passwordinput.module.css';
 
-export default function PasswordInput({ name, value, onChange, placeholder, required = false, className }) {
+export default function PasswordInput({ name, value, style,  onChange, placeholder, required = false, className }) {
   const [visible, setVisible] = useState(false);
 
   const toggleVisibility = () => setVisible((prev) => !prev);
 
   return (
     <div className={styles.inputContainer}>
-      <div className={styles.passwordWrapper}>
+      <div className={styles.passwordWrapper} style={style}>
         <input
           type={visible ? 'text' : 'password'}
           name={name}
