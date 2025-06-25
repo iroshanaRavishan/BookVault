@@ -16,6 +16,7 @@ export default function Auth() {
     Email: "",
     Name: "",
     PasswordHash: "",
+    confirmPassword: "",
     UserName: ""
   });
 
@@ -159,8 +160,19 @@ export default function Auth() {
       validationErrors.PasswordHash = "Password is required!";
     }
 
+    if(!regFormData.confirmPassword.trim()) {
+      validationErrors.confirmPassword = "Confirm Password is required!";
+    }
+
     if(!profileImgData) {
       validationErrors.ProfilePicture = "Required field!";
+    }
+
+    // Password match validation
+    if (regFormData.PasswordHash || regFormData.confirmPassword) {
+      if (regFormData.PasswordHash !== regFormData.confirmPassword) {
+        validationErrors.passwordMatch = "Passwords do not match";
+      }
     }
 
     // creating the user name
@@ -220,10 +232,10 @@ export default function Auth() {
           <div className={`${styles.formContainer} ${styles.signIn}`}> 
             <form action="#" className={styles.form} onSubmit={loginHandler}>
               <h1>Sign In</h1>
-              <input type="text" name="Email" placeholder='example@hello.com' onChange={handleLoginChange} />
+              <input type="text" name="Email" className={errors.Email? styles.errorBorder: ''} placeholder='example@hello.com' onChange={handleLoginChange} />
               {errors.Email && <span className={styles.errorMessage}>{errors.Email}</span>}<br />
 
-              <input type="password" name="Password" placeholder="******" onChange={handleLoginChange} />
+              <input type="password" name="Password" className={errors.Password? styles.errorBorder: ''} placeholder="******" onChange={handleLoginChange} />
               {errors.Password && <span className={styles.errorMessage}>{errors.Password}</span>}
               <br />
               
@@ -239,14 +251,18 @@ export default function Auth() {
           <div className={`${styles.formContainer} ${styles.signUp}`}> 
             <form action="#" className={styles.form} onSubmit={registerHandler} autoComplete="off">
               <h1>Create Account</h1>
-              <input type="text" name="Name" id="name" placeholder="Enter your name" onChange={handleRegChange}  />
+              <input type="text" name="Name" id="name" className={errors.Name? styles.errorBorder: ''} placeholder="Enter your name" onChange={handleRegChange}  />
               {errors.Name && <span className={styles.errorMessage}>{errors.Name}</span>}<br />
 
-              <input type="text" name="Email" id="email" placeholder="example@hello.com" onChange={handleRegChange}  />
+              <input type="text" name="Email" id="email" className={errors.Email? styles.errorBorder: ''} placeholder="example@hello.com" onChange={handleRegChange}  />
               {errors.Email && <span className={styles.errorMessage}>{errors.Email}</span>}<br />
 
-              <input type="password" name="PasswordHash" id="password" placeholder="******" onChange={handleRegChange} />
+              <input type="password" name="PasswordHash" id="password" className={(errors.PasswordHash || errors.passwordMatch)? styles.errorBorder: ''} placeholder="******" onChange={handleRegChange} />
               {errors.PasswordHash && <span className={styles.errorMessage}>{errors.PasswordHash}</span>} <br />
+
+              <input type="password" name="confirmPassword" id="confirmPassword" className={(errors.confirmPassword || errors.passwordMatch)? styles.errorBorder: ''} placeholder="******" onChange={handleRegChange} />
+              {errors.confirmPassword && <span className={styles.errorMessage}>{errors.confirmPassword}</span>} <br />
+              {errors.passwordMatch && <span className={styles.errorMessage}>{errors.passwordMatch}</span>} <br />
 
               <div className={styles.selectingProfilePic}>
                 <ProfilePicSelectorModal 

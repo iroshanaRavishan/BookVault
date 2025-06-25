@@ -32,6 +32,10 @@
   font-weight: 600;
 }
 
+.errorBorder {
+  border: 1px solid #ff8383 !important;
+}
+
 .selectingProfilePic {
   width: 100%;
   display: flex;
