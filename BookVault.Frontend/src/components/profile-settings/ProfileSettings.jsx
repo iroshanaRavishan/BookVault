@@ -4,6 +4,7 @@ import { useUser } from '../../context/UserContext';
 import ProfilePicSelectorModal from '../profile-picture-select-modal/ProfilePicSelectorModal';
 import { IoCloseCircleSharp } from "react-icons/io5";
 import { convertUserImageToBase64 } from '../../utils/convertUserImageToBase64';
+import PasswordInput from '../password-input/PasswordInput';
 
 export default function ProfileSettings() {
   const { user, refreshUser } = useUser(); 
@@ -141,24 +142,23 @@ export default function ProfileSettings() {
           />
 
           <label className={styles.label}>New Password</label>
-          <input
-            type="password"
+          <PasswordInput
             name="password"
-            placeholder="New Password"
             value={formData.password}
             onChange={handleChange}
+            placeholder="New Password"
             className={styles.input}
           />
 
           <label className={styles.label}>Confirm Password</label>
-          <input
-            type="password"
+          <PasswordInput
             name="confirmPassword"
-            placeholder="Confirm Password"
             value={formData.confirmPassword}
             onChange={handleChange}
+            placeholder="Confirm Password"
             className={styles.input}
           />
+
           <div className={styles.selectingProfilePic}>
             <ProfilePicSelectorModal 
               onDataSend={handleModelProfileImgData} 
