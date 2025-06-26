@@ -42,7 +42,7 @@
 }
 
 .input {
-  padding: 12px 14px;
+  padding: 10px 15px;
   border: 1px solid #ddd;
   border-radius: 8px;
   font-size: 15px;
@@ -95,6 +95,17 @@
 
 .submitButton:hover {
   background-color: #3a5a8c;
+}
+
+.selectingProfilePic {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.selectingProfilePic img {
+  margin: 0 10px;
 }
 
 @media (max-width: 768px) {
