@@ -284,10 +284,10 @@ export default function Auth() {
                   style={{ alignItems: 'center'}}
                   className={`${styles.formInput} ${(errors.confirmPassword || errors.passwordMatch)? styles.errorBorder: ''}`}
                 />
-                {errors.confirmPassword && <span className={styles.errorMessage}>{errors.confirmPassword}</span>} <br />
+                {errors.confirmPassword && <span className={styles.errorMessage}>{errors.confirmPassword}</span>}
                 {errors.passwordMatch && <span className={styles.errorMessage}>{errors.passwordMatch}</span>}
 
-                <div className={styles.selectingProfilePic}>
+                <div className={styles.selectingProfilePic} style={ profileImgData ? {} : { marginTop: '20px' } }>
                   <ProfilePicSelectorModal 
                     onDataSend={handleModelProfileImgData} 
                     setLocallyUploadedProfileImg={setLocallyUploadedProfileImg} 
