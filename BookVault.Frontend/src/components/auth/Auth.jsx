@@ -257,59 +257,61 @@ export default function Auth() {
             </form>
           </div>
           <div className={`${styles.formContainer} ${styles.signUp}`}> 
-            <form action="#" className={styles.form} onSubmit={registerHandler} autoComplete="off">
-              <h1>Create Account</h1>
-              <input type="text" name="Name" id="name" className={`${styles.formInput} ${errors.Name? styles.errorBorder: ''}`} placeholder="Enter your name" onChange={handleRegChange}  />
-              {errors.Name && <span className={styles.errorMessage}>{errors.Name}</span>}<br />
+            <h1>Create Account</h1>
+            <div class={styles.scrollWrapper}>
+              <form action="#" className={styles.form} style={{paddingRight: '34px'}} onSubmit={registerHandler} autoComplete="off">
+                <input type="text" name="Name" id="name" className={`${styles.formInput} ${errors.Name? styles.errorBorder: ''}`} placeholder="Enter your name" onChange={handleRegChange}  />
+                {errors.Name && <span className={styles.errorMessage}>{errors.Name}</span>}<br />
 
-              <input type="text" name="Email" id="email" className={`${styles.formInput} ${errors.Email? styles.errorBorder: ''}`} placeholder="example@hello.com" onChange={handleRegChange}  />
-              {errors.Email && <span className={styles.errorMessage}>{errors.Email}</span>}<br />
+                <input type="text" name="Email" id="email" className={`${styles.formInput} ${errors.Email? styles.errorBorder: ''}`} placeholder="example@hello.com" onChange={handleRegChange}  />
+                {errors.Email && <span className={styles.errorMessage}>{errors.Email}</span>}<br />
 
-              <PasswordInput
-                name="PasswordHash"
-                style={{ alignItems: 'center' }}
-                value={regFormData.PasswordHash}
-                onChange={handleRegChange}
-                placeholder="Password"
-                className={`${styles.formInput} ${(errors.PasswordHash || errors.passwordMatch)? styles.errorBorder: ''}`}
-              />
-              {errors.PasswordHash && <span className={styles.errorMessage}>{errors.PasswordHash}</span>} <br />
-
-              <PasswordInput
-                name="confirmPassword"
-                value={regFormData.confirmPassword}
-                onChange={handleRegChange}
-                placeholder="Confirm Password"
-                style={{ alignItems: 'center'}}
-                className={`${styles.formInput} ${(errors.confirmPassword || errors.passwordMatch)? styles.errorBorder: ''}`}
-              />
-              {errors.confirmPassword && <span className={styles.errorMessage}>{errors.confirmPassword}</span>} <br />
-              {errors.passwordMatch && <span className={styles.errorMessage}>{errors.passwordMatch}</span>} <br />
-
-              <div className={styles.selectingProfilePic}>
-                <ProfilePicSelectorModal 
-                  onDataSend={handleModelProfileImgData} 
-                  setLocallyUploadedProfileImg={setLocallyUploadedProfileImg} 
-                  locallyUploadedProfileImg={locallyUploadedProfileImg} 
-                  fileName={fileName} 
-                  setFileName={setFileName}
+                <PasswordInput
+                  name="PasswordHash"
+                  style={{ alignItems: 'center' }}
+                  value={regFormData.PasswordHash}
+                  onChange={handleRegChange}
+                  placeholder="Password"
+                  className={`${styles.formInput} ${(errors.PasswordHash || errors.passwordMatch)? styles.errorBorder: ''}`}
                 />
+                {errors.PasswordHash && <span className={styles.errorMessage}>{errors.PasswordHash}</span>} <br />
 
-                { errors.ProfilePicture && <span className={styles.errorMessage} style={{marginLeft: "10px"}}>{errors.ProfilePicture}</span> } 
-                { profileImgData && 
-                  <div className='selectedImageContainer'>
-                    <IoCloseCircleSharp size={20} className='cancel-profile-picture' color="#e53e3e" onClick={handleCloseSelectedImage}/>
-                    <img className="profile-picture"  src={profileImgData} alt="select-profile" /> 
-                  </div>
-                } 
-              </div>
-              <button type="submit" disabled={isLoding}>
-                { isLoding?
-                  <div className={styles.loadingSpinner}></div>
-                  : "Register" }
-              </button>
-              <p className={`reg-message message`}></p>
-            </form>
+                <PasswordInput
+                  name="confirmPassword"
+                  value={regFormData.confirmPassword}
+                  onChange={handleRegChange}
+                  placeholder="Confirm Password"
+                  style={{ alignItems: 'center'}}
+                  className={`${styles.formInput} ${(errors.confirmPassword || errors.passwordMatch)? styles.errorBorder: ''}`}
+                />
+                {errors.confirmPassword && <span className={styles.errorMessage}>{errors.confirmPassword}</span>} <br />
+                {errors.passwordMatch && <span className={styles.errorMessage}>{errors.passwordMatch}</span>}
+
+                <div className={styles.selectingProfilePic}>
+                  <ProfilePicSelectorModal 
+                    onDataSend={handleModelProfileImgData} 
+                    setLocallyUploadedProfileImg={setLocallyUploadedProfileImg} 
+                    locallyUploadedProfileImg={locallyUploadedProfileImg} 
+                    fileName={fileName} 
+                    setFileName={setFileName}
+                  />
+
+                  { errors.ProfilePicture && <span className={styles.errorMessage} style={{marginLeft: "10px"}}>{errors.ProfilePicture}</span> } 
+                  { profileImgData && 
+                    <div className='selectedImageContainer'>
+                      <IoCloseCircleSharp size={20} className='cancel-profile-picture' color="#e53e3e" onClick={handleCloseSelectedImage}/>
+                      <img className="profile-picture"  src={profileImgData} alt="select-profile" /> 
+                    </div>
+                  } 
+                </div>
+                <button type="submit" disabled={isLoding}>
+                  { isLoding?
+                    <div className={styles.loadingSpinner}></div>
+                    : "Register" }
+                </button>
+                <p className={`reg-message message`}></p>
+              </form>
+            </div>
           </div>
           <div className={styles.toggleContainer}>
             <div className={styles.toggle}>
