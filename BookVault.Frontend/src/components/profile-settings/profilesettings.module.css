@@ -38,7 +38,6 @@
 .form {
   display: flex;
   flex-direction: column;
-  gap: 20px;
 }
 
 .input {
@@ -66,6 +65,8 @@
   font-size: 16px;
   font-weight: 600;
   color: #333;
+  margin-top: 20px;
+  margin-bottom: 5px;
 }
 
 .uploadLabel {
