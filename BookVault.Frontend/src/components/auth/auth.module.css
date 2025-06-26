@@ -27,15 +27,6 @@
   left: 25%;
 }
 
-.errorMessage {
-  color: rgb(243, 61, 61);
-  font-weight: 600;
-}
-
-.errorBorder {
-  border: 1px solid #ff8383 !important;
-}
-
 .selectingProfilePic {
   width: 100%;
   display: flex;
