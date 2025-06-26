@@ -20,6 +20,7 @@ export default function ProfileSettings() {
     name: '',
     userName: '',
     email: '',
+    currentPassword: '',
     password: '',
     confirmPassword: '',
   });
@@ -30,6 +31,7 @@ export default function ProfileSettings() {
         name: user.name || '',
         userName: user.userName || '',
         email: user.email || '',
+        currentPassword: '',
         password: '',
         confirmPassword: '',
       });
@@ -75,6 +77,7 @@ export default function ProfileSettings() {
     if (formData.password) {
       data.append('Password', formData.password);
     }
+    data.append('CurrentPassword', formData.currentPassword?.trim() || '');
 
     if (profileImgData) {
       const imageBlob = await fetch(profileImgData).then(r => r.blob());
@@ -119,7 +122,7 @@ export default function ProfileSettings() {
           <p className={styles.subtitle}>Edit your details</p>
         </div>
         <form onSubmit={handleSubmit} className={styles.form}>
-          <label className={styles.label}>Username</label>
+          <label className={styles.label}>Username <span style={{ color: 'red' }}>*</span></label>
           <input
             type="text"
             name="userName"
@@ -130,7 +133,7 @@ export default function ProfileSettings() {
             required
           />
 
-          <label className={styles.label}>Email</label>
+          <label className={styles.label}>Email <span style={{ color: 'red' }}>*</span></label>
           <input
             type="email"
             name="email"
@@ -139,6 +142,15 @@ export default function ProfileSettings() {
             onChange={handleChange}
             className={styles.input}
             required
+          />
+
+          <label className={styles.label}>Current Password <span style={{ color: 'red' }}>*</span></label>
+          <PasswordInput
+            name="currentPassword"
+            value={formData.currentPassword || ''}
+            onChange={handleChange}
+            placeholder="Current Password"
+            className={styles.input}
           />
 
           <label className={styles.label}>New Password</label>
