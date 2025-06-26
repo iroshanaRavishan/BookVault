@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styles from './profilesettings.module.css';
 import { useUser } from '../../context/UserContext';
 import ProfilePicSelectorModal from '../profile-picture-select-modal/ProfilePicSelectorModal';
@@ -14,7 +14,7 @@ export default function ProfileSettings() {
   const [locallyUploadedProfileImg, setLocallyUploadedProfileImg] = useState("");
   const [fileName, setFileName] = useState("");
 
-  const userPasswordUpdateMessageElement = document.querySelector(".user-password-update-message");
+  const userPasswordUpdateMessageElement = useRef(null);
   
   const [formData, setFormData] = useState({
     userName: '',
@@ -96,13 +96,15 @@ export default function ProfileSettings() {
           errorMessages += "<li>"+error.description + "</li>"
         })
 
-        errorMessages += "</ul>"
-        userPasswordUpdateMessageElement.innerHTML = errorMessages;
-      }
+          errorMessages += "</ul>"
+          userPasswordUpdateMessageElement.current.innerHTML = errorMessages;
+        }
 
       if (res.ok) {
-        alert('Profile updated!');
-        userPasswordUpdateMessageElement.innerHTML = '';
+        // TODO: need to add proper message upon successful update
+        if (userPasswordUpdateMessageElement.current) {
+          userPasswordUpdateMessageElement.current.innerHTML = '';
+        }
         await refreshUser(); // Refresh context
       } else {
         alert('Update failed');
@@ -188,7 +190,7 @@ export default function ProfileSettings() {
           </div>
 
           <button type="submit" className={styles.submitButton}>Save Changes</button>
-          <p className={`user-password-update-message message`}></p>
+          <p ref={userPasswordUpdateMessageElement} className={`message`}></p>
         </form>
       </div>
     </div>
