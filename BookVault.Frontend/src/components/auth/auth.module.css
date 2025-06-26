@@ -27,20 +27,12 @@
   left: 25%;
 }
 
-.errorMessage {
-  color: rgb(243, 61, 61);
-  font-weight: 600;
-}
-
-.errorBorder {
-  border: 1px solid #ff8383 !important;
-}
-
 .selectingProfilePic {
   width: 100%;
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  margin-left: -30px;
 }
 
 .selectingProfilePic img {
@@ -116,14 +108,38 @@
   font-size: 14px;
 }
 
-.container form {
+.scrollWrapper {
+  position: relative;
+  padding-right: 6px;
+}
+
+.form {
   background-color: #fff;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   flex-direction: column;
-  padding: 0 40px;
-  height: 100%;
+  padding: 10px 40px;
+  max-height: 415px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.form::-webkit-scrollbar {
+    width: 7px;
+}
+
+.form::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+}
+
+.form::-webkit-scrollbar-thumb {
+    background: #888; 
+    border-radius: 4px;
+}
+
+.form::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }
 
 .formInput {
@@ -142,6 +158,16 @@
   top: 0;
   height: 100%;
   transition: all 0.6s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.formContainer h1 {
+  font-weight: 600;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
 }
 
 .signIn {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import styles from './auth.module.css';
 import ProfilePicSelectorModal from '../profile-picture-select-modal/ProfilePicSelectorModal';
@@ -29,8 +29,8 @@ export default function Auth() {
   const [fileName, setFileName] = useState("");
 
   const validationErrors = {};
-  const loginMessageElement = document.querySelector(".login-message");
-  const regMessageElement = document.querySelector(".reg-message");
+  const loginMessageRef = useRef(null);
+  const regMessageRef = useRef(null);
   
   // here, it does not ask an already logged in user to the login over and over again
   useEffect(()=>{
@@ -63,6 +63,15 @@ export default function Auth() {
     setLoginFormData({
       ...loginFormData, [name] : value
     });
+    
+    // Clear specific error on input
+    if (errors[name]) {
+      setErrors(prevErrors => {
+        const updatedErrors = { ...prevErrors };
+        delete updatedErrors[name];
+        return updatedErrors;
+      });
+    }
   }
 
   function handleRegChange(e){
@@ -70,6 +79,24 @@ export default function Auth() {
     setRegFormData({
       ...regFormData, [name] : value
     });
+
+    // Clear specific error on input
+    if (errors[name]) {
+      setErrors(prevErrors => {
+        const updatedErrors = { ...prevErrors };
+        delete updatedErrors[name];
+        return updatedErrors;
+      });
+    }
+
+    // Special case for password mismatch
+    if ((name === 'PasswordHash' || name === 'confirmPassword') && errors.passwordMatch) {
+      setErrors(prevErrors => {
+        const updatedErrors = { ...prevErrors };
+        delete updatedErrors.passwordMatch;
+        return updatedErrors;
+      });
+    }
   }
 
   function validateEmail(email) {
@@ -80,13 +107,13 @@ export default function Auth() {
   function deactivateContainer() {
     setFormActive(true);
     setErrors({})
-    loginMessageElement.innerHTML = '';
+    if (loginMessageRef.current) loginMessageRef.current.innerHTML = '';
   }
 
   function activateContainer() {
     setFormActive(false);
     setErrors({})
-    regMessageElement.innerHTML = '';
+    if (regMessageRef.current) regMessageRef.current.innerHTML = '';
   }
 
   async function loginHandler(e){
@@ -122,10 +149,10 @@ export default function Auth() {
         setIsLoading(false);
       }
 
-      if(data.message) {
+      if (loginMessageRef.current) {
         let errorMessages = "<div><span style='font-size: 15px;'>Attention:</span></div> <ul>";
         errorMessages += "<li>" + data.message + "</li></ul>";
-        loginMessageElement.innerHTML = errorMessages;
+        loginMessageRef.current.innerHTML = errorMessages;
       }
   
       console.log("login status: ", data);
@@ -135,7 +162,9 @@ export default function Auth() {
         navigate('/');
       }
     }else {
-      loginMessageElement.innerHTML = '';
+      if (loginMessageRef.current) {
+        loginMessageRef.current.innerHTML = '';
+      }
     }
     setIsLoading(false);
   }
@@ -218,11 +247,13 @@ export default function Auth() {
         })
 
         errorMessages += "</ul>"
-        regMessageElement.innerHTML = errorMessages;
+        regMessageRef.current.innerHTML = errorMessages;
       }
       console.log("register status: ", data);
     } else {
-      regMessageElement.innerHTML = '';
+      if (regMessageRef.current) {
+        regMessageRef.current.innerHTML = '';
+      }
     }
     setIsLoading(false);
   }
@@ -233,11 +264,18 @@ export default function Auth() {
           <div className={`${styles.formContainer} ${styles.signIn}`}> 
             <form action="#" className={styles.form} onSubmit={loginHandler}>
               <h1>Sign In</h1>
-              <input type="text" name="Email" className={`${styles.formInput} ${errors.Email? styles.errorBorder: ''}`} placeholder='example@hello.com' onChange={handleLoginChange} />
-              {errors.Email && <span className={styles.errorMessage}>{errors.Email}</span>}<br />
+              <input type="text" name="Email" className={`${styles.formInput} ${errors.Email? "errorBorder": ''}`} placeholder='example@hello.com' onChange={handleLoginChange} />
+              {errors.Email && <span className={"errorMessage"}>{errors.Email}</span>}<br />
 
-              <input type="password" name="Password" className={`${styles.formInput} ${errors.Password? styles.errorBorder: ''}`} placeholder="******" onChange={handleLoginChange} />
-              {errors.Password && <span className={styles.errorMessage}>{errors.Password}</span>}
+              <PasswordInput
+                name="Password"
+                style={{ alignItems: 'center' }}
+                value={regFormData.Password}
+                onChange={handleLoginChange}
+                placeholder="Password"
+                className={`${styles.formInput} ${errors.Password ? "errorBorder": ''}`}
+              />
+              {errors.Password && <span className={"errorMessage"}>{errors.Password}</span>}
               <br />
               
               <button type="submit" disabled={isLoding}>
@@ -246,63 +284,65 @@ export default function Auth() {
                   "Login" 
                 }
               </button>
-              <p className={`login-message message`}></p>
+              <p ref={loginMessageRef} className={`message`}></p>
             </form>
           </div>
           <div className={`${styles.formContainer} ${styles.signUp}`}> 
-            <form action="#" className={styles.form} onSubmit={registerHandler} autoComplete="off">
-              <h1>Create Account</h1>
-              <input type="text" name="Name" id="name" className={`${styles.formInput} ${errors.Name? styles.errorBorder: ''}`} placeholder="Enter your name" onChange={handleRegChange}  />
-              {errors.Name && <span className={styles.errorMessage}>{errors.Name}</span>}<br />
+            <h1>Create Account</h1>
+            <div className={styles.scrollWrapper}>
+              <form action="#" className={styles.form} style={{paddingRight: '34px'}} onSubmit={registerHandler} autoComplete="off">
+                <input type="text" name="Name" id="name" className={`${styles.formInput} ${errors.Name? "errorBorder": ''}`} placeholder="Enter your name" onChange={handleRegChange}  />
+                {errors.Name && <span className={"errorMessage"}>{errors.Name}</span>}<br />
 
-              <input type="text" name="Email" id="email" className={`${styles.formInput} ${errors.Email? styles.errorBorder: ''}`} placeholder="example@hello.com" onChange={handleRegChange}  />
-              {errors.Email && <span className={styles.errorMessage}>{errors.Email}</span>}<br />
+                <input type="text" name="Email" id="email" className={`${styles.formInput} ${errors.Email? "errorBorder": ''}`} placeholder="example@hello.com" onChange={handleRegChange}  />
+                {errors.Email && <span className={"errorMessage"}>{errors.Email}</span>}<br />
 
-              <PasswordInput
-                name="PasswordHash"
-                style={{ alignItems: 'center' }}
-                value={regFormData.PasswordHash}
-                onChange={handleRegChange}
-                placeholder="Password"
-                className={`${styles.formInput} ${(errors.PasswordHash || errors.passwordMatch)? styles.errorBorder: ''}`}
-              />
-              {errors.PasswordHash && <span className={styles.errorMessage}>{errors.PasswordHash}</span>} <br />
-
-              <PasswordInput
-                name="confirmPassword"
-                value={regFormData.confirmPassword}
-                onChange={handleRegChange}
-                placeholder="Confirm Password"
-                style={{ alignItems: 'center'}}
-                className={`${styles.formInput} ${(errors.confirmPassword || errors.passwordMatch)? styles.errorBorder: ''}`}
-              />
-              {errors.confirmPassword && <span className={styles.errorMessage}>{errors.confirmPassword}</span>} <br />
-              {errors.passwordMatch && <span className={styles.errorMessage}>{errors.passwordMatch}</span>} <br />
-
-              <div className={styles.selectingProfilePic}>
-                <ProfilePicSelectorModal 
-                  onDataSend={handleModelProfileImgData} 
-                  setLocallyUploadedProfileImg={setLocallyUploadedProfileImg} 
-                  locallyUploadedProfileImg={locallyUploadedProfileImg} 
-                  fileName={fileName} 
-                  setFileName={setFileName}
+                <PasswordInput
+                  name="PasswordHash"
+                  style={{ alignItems: 'center' }}
+                  value={regFormData.PasswordHash}
+                  onChange={handleRegChange}
+                  placeholder="Password"
+                  className={`${styles.formInput} ${(errors.PasswordHash || errors.passwordMatch)? "errorBorder": ''}`}
                 />
+                {errors.PasswordHash && <span className={"errorMessage"}>{errors.PasswordHash}</span>} <br />
 
-                { errors.ProfilePicture && <span className={styles.errorMessage} style={{marginLeft: "10px"}}>{errors.ProfilePicture}</span> } 
-                { profileImgData && 
-                  <div className='selectedImageContainer'>
-                    <IoCloseCircleSharp size={20} className='cancel-profile-picture' color="#e53e3e" onClick={handleCloseSelectedImage}/>
-                    <img className="profile-picture"  src={profileImgData} alt="select-profile" /> 
-                  </div>
-                } 
-              </div>
-              <button type="submit" disabled={isLoding}>
-                { isLoding?
-                  <div className={styles.loadingSpinner}></div>
-                  : "Register" }
-              </button>
-              <p className={`reg-message message`}></p>
-            </form>
+                <PasswordInput
+                  name="confirmPassword"
+                  value={regFormData.confirmPassword}
+                  onChange={handleRegChange}
+                  placeholder="Confirm Password"
+                  style={{ alignItems: 'center'}}
+                  className={`${styles.formInput} ${(errors.confirmPassword || errors.passwordMatch)? "errorBorder": ''}`}
+                />
+                {errors.confirmPassword && <span className={"errorMessage"}>{errors.confirmPassword}</span>}
+                {errors.passwordMatch && <span className={"errorMessage"}>{errors.passwordMatch}</span>}
+
+                <div className={styles.selectingProfilePic} style={ profileImgData ? {} : { marginTop: '20px' } }>
+                  <ProfilePicSelectorModal 
+                    onDataSend={handleModelProfileImgData} 
+                    setLocallyUploadedProfileImg={setLocallyUploadedProfileImg} 
+                    locallyUploadedProfileImg={locallyUploadedProfileImg} 
+                    fileName={fileName} 
+                    setFileName={setFileName}
+                  />
+
+                  { errors.ProfilePicture && <span className={"errorMessage"} style={{marginLeft: "10px"}}>{errors.ProfilePicture}</span> } 
+                  { profileImgData && 
+                    <div className='selectedImageContainer'>
+                      <IoCloseCircleSharp size={20} className='cancel-profile-picture' color="#e53e3e" onClick={handleCloseSelectedImage}/>
+                      <img className="profile-picture"  src={profileImgData} alt="select-profile" /> 
+                    </div>
+                  } 
+                </div>
+                <button type="submit" disabled={isLoding}>
+                  { isLoding?
+                    <div className={styles.loadingSpinner}></div>
+                    : "Register" }
+                </button>
+                <p ref={regMessageRef}  className={`message`}></p>
+              </form>
+            </div>
           </div>
           <div className={styles.toggleContainer}>
             <div className={styles.toggle}>

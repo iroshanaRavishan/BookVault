@@ -18,12 +18,13 @@ body {
 }
   
 .cancel-profile-picture {
-  position: absolute;
+  position: relative;
   cursor: pointer;
   border: 0px solid #fff;
   border-radius: 50%;
   background: #fff;
   margin-right: 5px;
+  top: 15px;
 }
 
 .selectedImageContainer {
@@ -64,4 +65,15 @@ body {
   font-weight: 600;
   margin: 20px 0 !important;
   width: 100%;
+}
+
+.errorMessage {
+  color: rgb(243, 61, 61);
+  font-weight: 600;
+  font-size: 14px;
+  text-align: center;
+}
+
+.errorBorder {
+  border: 1px solid #ff8383 !important;
 }

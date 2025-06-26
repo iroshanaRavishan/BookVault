@@ -38,7 +38,6 @@
 .form {
   display: flex;
   flex-direction: column;
-  gap: 20px;
 }
 
 .input {
@@ -66,6 +65,8 @@
   font-size: 16px;
   font-weight: 600;
   color: #333;
+  margin-top: 20px;
+  margin-bottom: 5px;
 }
 
 .uploadLabel {
@@ -95,6 +96,17 @@
 
 .submitButton:hover {
   background-color: #3a5a8c;
+}
+
+.selectingProfilePic {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.selectingProfilePic img {
+  margin: 0 10px;
 }
 
 @media (max-width: 768px) {

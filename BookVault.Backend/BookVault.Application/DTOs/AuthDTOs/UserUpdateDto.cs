@@ -16,6 +16,8 @@ namespace BookVault.Application.DTOs.AuthDTOs
 
         public string? Password { get; set; }
 
+        public string CurrentPassword { get; set; }
+
         public IFormFile? ProfilePicture { get; set; }
     }
 }
