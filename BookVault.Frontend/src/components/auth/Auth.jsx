@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import styles from './auth.module.css';
 import ProfilePicSelectorModal from '../profile-picture-select-modal/ProfilePicSelectorModal';
@@ -29,8 +29,8 @@ export default function Auth() {
   const [fileName, setFileName] = useState("");
 
   const validationErrors = {};
-  const loginMessageElement = document.querySelector(".login-message");
-  const regMessageElement = document.querySelector(".reg-message");
+  const loginMessageRef = useRef(null);
+  const regMessageRef = useRef(null);
   
   // here, it does not ask an already logged in user to the login over and over again
   useEffect(()=>{
@@ -107,13 +107,13 @@ export default function Auth() {
   function deactivateContainer() {
     setFormActive(true);
     setErrors({})
-    loginMessageElement.innerHTML = '';
+    if (loginMessageRef.current) loginMessageRef.current.innerHTML = '';
   }
 
   function activateContainer() {
     setFormActive(false);
     setErrors({})
-    regMessageElement.innerHTML = '';
+    if (regMessageRef.current) regMessageRef.current.innerHTML = '';
   }
 
   async function loginHandler(e){
@@ -149,10 +149,10 @@ export default function Auth() {
         setIsLoading(false);
       }
 
-      if(data.message) {
+      if (loginMessageRef.current) {
         let errorMessages = "<div><span style='font-size: 15px;'>Attention:</span></div> <ul>";
         errorMessages += "<li>" + data.message + "</li></ul>";
-        loginMessageElement.innerHTML = errorMessages;
+        loginMessageRef.current.innerHTML = errorMessages;
       }
   
       console.log("login status: ", data);
@@ -162,7 +162,9 @@ export default function Auth() {
         navigate('/');
       }
     }else {
-      loginMessageElement.innerHTML = '';
+      if (loginMessageRef.current) {
+        loginMessageRef.current.innerHTML = '';
+      }
     }
     setIsLoading(false);
   }
@@ -245,11 +247,13 @@ export default function Auth() {
         })
 
         errorMessages += "</ul>"
-        regMessageElement.innerHTML = errorMessages;
+        regMessageRef.current.innerHTML = errorMessages;
       }
       console.log("register status: ", data);
     } else {
-      regMessageElement.innerHTML = '';
+      if (regMessageRef.current) {
+        regMessageRef.current.innerHTML = '';
+      }
     }
     setIsLoading(false);
   }
@@ -280,12 +284,12 @@ export default function Auth() {
                   "Login" 
                 }
               </button>
-              <p className={`login-message message`}></p>
+              <p ref={loginMessageRef} className={`message`}></p>
             </form>
           </div>
           <div className={`${styles.formContainer} ${styles.signUp}`}> 
             <h1>Create Account</h1>
-            <div class={styles.scrollWrapper}>
+            <div className={styles.scrollWrapper}>
               <form action="#" className={styles.form} style={{paddingRight: '34px'}} onSubmit={registerHandler} autoComplete="off">
                 <input type="text" name="Name" id="name" className={`${styles.formInput} ${errors.Name? styles.errorBorder: ''}`} placeholder="Enter your name" onChange={handleRegChange}  />
                 {errors.Name && <span className={styles.errorMessage}>{errors.Name}</span>}<br />
@@ -336,7 +340,7 @@ export default function Auth() {
                     <div className={styles.loadingSpinner}></div>
                     : "Register" }
                 </button>
-                <p className={`reg-message message`}></p>
+                <p ref={regMessageRef}  className={`message`}></p>
               </form>
             </div>
           </div>
