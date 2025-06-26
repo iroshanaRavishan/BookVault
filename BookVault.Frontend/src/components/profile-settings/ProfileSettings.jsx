@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styles from './profilesettings.module.css';
 import { useUser } from '../../context/UserContext';
 import ProfilePicSelectorModal from '../profile-picture-select-modal/ProfilePicSelectorModal';
@@ -14,10 +14,9 @@ export default function ProfileSettings() {
   const [locallyUploadedProfileImg, setLocallyUploadedProfileImg] = useState("");
   const [fileName, setFileName] = useState("");
 
-  const userPasswordUpdateMessageElement = document.querySelector(".user-password-update-message");
+  const userPasswordUpdateMessageElement = useRef(null);
   
   const [formData, setFormData] = useState({
-    name: '',
     userName: '',
     email: '',
     currentPassword: '',
@@ -28,7 +27,6 @@ export default function ProfileSettings() {
   useEffect(() => {
     if (user) {
       setFormData({
-        name: user.name || '',
         userName: user.userName || '',
         email: user.email || '',
         currentPassword: '',
@@ -40,17 +38,40 @@ export default function ProfileSettings() {
     }
   }, [user]);
 
+  function validateEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
   const handleChange = (e) => {
     const { name, value, files } = e.target;
     setFormData((prev) => ({
       ...prev,
       [name]: files ? files[0] : value,
     }));
+
+    // Clear specific error on input
+    if (errors[name]) {
+      setErrors(prevErrors => {
+        const updatedErrors = { ...prevErrors };
+        delete updatedErrors[name];
+        return updatedErrors;
+      });
+    }
+
+    // Special case for password mismatch
+    if ((name === 'password' || name === 'confirmPassword') && errors.passwordMatch) {
+      setErrors(prevErrors => {
+        const updatedErrors = { ...prevErrors };
+        delete updatedErrors.passwordMatch;
+        return updatedErrors;
+      });
+    }
   };
 
   function handleModelProfileImgData(data) {
     setProfileImgData(data);
-    setErrors(prevErrors => ({ ...prevErrors, ProfilePicture: "" })); // Clear the validation error
+    setErrors(prevErrors => ({ ...prevErrors, profilePicture: "" }));
   };
 
   function handleCloseSelectedImage () {
@@ -62,55 +83,86 @@ export default function ProfileSettings() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    const validationErrors = {};
+
+    if(!formData.userName.trim()) {
+      validationErrors.userName = "Username is required!";
+    } else if (formData.userName.length < 4) {
+      validationErrors.userName = "Minimum character length is 4!";
+    }
+
+    if(!formData.email.trim()){
+      validationErrors.email = "Email is required!";
+    } else if (!validateEmail(formData.email)) {
+      validationErrors.email = 'Email is not valid!';
+    }
+
+    if(!formData.currentPassword.trim()) {
+      validationErrors.currentPassword = "Current Password is required!";
+    }
+
+    if(!profileImgData) {
+      validationErrors.profilePicture = "Required field!";
+    }
+
     // Password match validation
     if (formData.password || formData.confirmPassword) {
       if (formData.password !== formData.confirmPassword) {
-        alert('Passwords do not match');
-        return;
+        validationErrors.passwordMatch = "Passwords do not match";
       }
     }
 
-    const data = new FormData();
-    data.append('Name', formData.name);
-    data.append('UserName', formData.userName);
-    data.append('Email', formData.email);
-    if (formData.password) {
-      data.append('Password', formData.password);
-    }
-    data.append('CurrentPassword', formData.currentPassword?.trim() || '');
+    setErrors(validationErrors);
 
-    if (profileImgData) {
-      const imageBlob = await fetch(profileImgData).then(r => r.blob());
-      data.append('ProfilePicture', imageBlob, fileName);
-    } 
-
-    try {
-      const res = await fetch('https://localhost:7157/api/Auth/update-profile', {
-        method: 'PUT',
-        body: data,
-        credentials: 'include',
-      });
-      const updatedData = await res.json();
-
-      if(!updatedData.message) {
-        let errorMessages = "<div><span style='font-size: 15px;'>Attention:</span></div> <ul>"
-        updatedData.errors.forEach(error=> {
-          errorMessages += "<li>"+error.description + "</li>"
-        })
-
-        errorMessages += "</ul>"
-        userPasswordUpdateMessageElement.innerHTML = errorMessages;
+    if (Object.keys(validationErrors).length === 0) {
+      const data = new FormData();
+      data.append('Name', formData.name);
+      data.append('UserName', formData.userName);
+      data.append('Email', formData.email);
+      if (formData.password) {
+        data.append('Password', formData.password);
       }
+      data.append('CurrentPassword', formData.currentPassword?.trim() || '');
 
-      if (res.ok) {
-        alert('Profile updated!');
-        userPasswordUpdateMessageElement.innerHTML = '';
-        await refreshUser(); // Refresh context
-      } else {
-        alert('Update failed');
+      if (profileImgData) {
+        const imageBlob = await fetch(profileImgData).then(r => r.blob());
+        data.append('ProfilePicture', imageBlob, fileName);
+      } 
+
+      try {
+        const res = await fetch('https://localhost:7157/api/Auth/update-profile', {
+          method: 'PUT',
+          body: data,
+          credentials: 'include',
+        });
+        const updatedData = await res.json();
+
+        if(!updatedData.message) {
+          let errorMessages = "<div><span style='font-size: 15px;'>Attention:</span></div> <ul>"
+          updatedData.errors.forEach(error=> {
+            errorMessages += "<li>"+error.description + "</li>"
+          })
+
+          errorMessages += "</ul>"
+          userPasswordUpdateMessageElement.current.innerHTML = errorMessages;
+        }
+
+        if (res.ok) {
+          // TODO: need to add proper message upon successful update
+          if (userPasswordUpdateMessageElement.current) {
+            userPasswordUpdateMessageElement.current.innerHTML = '';
+          }
+          await refreshUser(); // Refresh context
+        } else {
+          // TODO: need to add proper message upon fail response
+        }
+      } catch (err) {
+        console.error(err);
       }
-    } catch (err) {
-      console.error(err);
+    } else {
+      if (userPasswordUpdateMessageElement.current) {
+        userPasswordUpdateMessageElement.current.innerHTML = '';
+      }
     }
   };
 
@@ -122,27 +174,27 @@ export default function ProfileSettings() {
           <p className={styles.subtitle}>Edit your details</p>
         </div>
         <form onSubmit={handleSubmit} className={styles.form}>
-          <label className={styles.label}>Username <span style={{ color: 'red' }}>*</span></label>
+          <label className={styles.label} style={{marginTop: '0px'}}>Username <span style={{ color: 'red' }}>*</span></label>
           <input
             type="text"
             name="userName"
             value={formData.userName}
             placeholder="Username"
             onChange={handleChange}
-            className={styles.input}
-            required
+            className={`${styles.input} ${errors.userName? "errorBorder": ''}`} 
           />
+          {errors.userName && <span className={"errorMessage"}>{errors.userName}</span>}
 
           <label className={styles.label}>Email <span style={{ color: 'red' }}>*</span></label>
           <input
-            type="email"
+            type="text"
             name="email"
             value={formData.email}
             placeholder="Email"
             onChange={handleChange}
-            className={styles.input}
-            required
+            className={`${styles.input} ${errors.userName? "errorBorder": ''}`} 
           />
+          {errors.email && <span className={"errorMessage"}>{errors.email}</span>}
 
           <label className={styles.label}>Current Password <span style={{ color: 'red' }}>*</span></label>
           <PasswordInput
@@ -150,16 +202,17 @@ export default function ProfileSettings() {
             value={formData.currentPassword || ''}
             onChange={handleChange}
             placeholder="Current Password"
-            className={styles.input}
+            className={`${styles.input} ${errors.currentPassword? "errorBorder": ''}`} 
           />
-
+          {errors.currentPassword && <span className={"errorMessage"}>{errors.currentPassword}</span>} 
+        
           <label className={styles.label}>New Password</label>
           <PasswordInput
             name="password"
             value={formData.password}
             onChange={handleChange}
             placeholder="New Password"
-            className={styles.input}
+             className={`${styles.input} ${(errors.password || errors.passwordMatch)? "errorBorder": ''}`}
           />
 
           <label className={styles.label}>Confirm Password</label>
@@ -168,10 +221,11 @@ export default function ProfileSettings() {
             value={formData.confirmPassword}
             onChange={handleChange}
             placeholder="Confirm Password"
-            className={styles.input}
+            className={`${styles.input} ${(errors.confirmPassword || errors.passwordMatch)? "errorBorder": ''}`}
           />
+          {errors.passwordMatch && <span className={"errorMessage"}>{errors.passwordMatch}</span>}
 
-          <div className={styles.selectingProfilePic}>
+          <div className={styles.selectingProfilePic} style={ profileImgData ? { margin: '14px 0px' }  : { margin: '40px 0px' } }>
             <ProfilePicSelectorModal 
               onDataSend={handleModelProfileImgData} 
               setLocallyUploadedProfileImg={setLocallyUploadedProfileImg} 
@@ -180,7 +234,7 @@ export default function ProfileSettings() {
               setFileName={setFileName}
             />
 
-            { errors.ProfilePicture && <span className={styles.errorMessage} style={{marginLeft: "10px"}}>{errors.ProfilePicture}</span> } 
+            { errors.profilePicture && <span className={"errorMessage"} style={{marginLeft: "10px"}}>{errors.profilePicture}</span> } 
             { profileImgData && 
               <div className='selectedImageContainer'>
                 <IoCloseCircleSharp size={20} className='cancel-profile-picture' color="#e53e3e" onClick={handleCloseSelectedImage}/>
@@ -190,7 +244,7 @@ export default function ProfileSettings() {
           </div>
 
           <button type="submit" className={styles.submitButton}>Save Changes</button>
-          <p className={`user-password-update-message message`}></p>
+          <p ref={userPasswordUpdateMessageElement} className={`message`}></p>
         </form>
       </div>
     </div>
