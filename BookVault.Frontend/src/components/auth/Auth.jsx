@@ -63,6 +63,15 @@ export default function Auth() {
     setLoginFormData({
       ...loginFormData, [name] : value
     });
+    
+    // Clear specific error on input
+    if (errors[name]) {
+      setErrors(prevErrors => {
+        const updatedErrors = { ...prevErrors };
+        delete updatedErrors[name];
+        return updatedErrors;
+      });
+    }
   }
 
   function handleRegChange(e){
@@ -70,6 +79,24 @@ export default function Auth() {
     setRegFormData({
       ...regFormData, [name] : value
     });
+
+    // Clear specific error on input
+    if (errors[name]) {
+      setErrors(prevErrors => {
+        const updatedErrors = { ...prevErrors };
+        delete updatedErrors[name];
+        return updatedErrors;
+      });
+    }
+
+    // Special case for password mismatch
+    if ((name === 'PasswordHash' || name === 'confirmPassword') && errors.passwordMatch) {
+      setErrors(prevErrors => {
+        const updatedErrors = { ...prevErrors };
+        delete updatedErrors.passwordMatch;
+        return updatedErrors;
+      });
+    }
   }
 
   function validateEmail(email) {
@@ -284,10 +311,10 @@ export default function Auth() {
                   style={{ alignItems: 'center'}}
                   className={`${styles.formInput} ${(errors.confirmPassword || errors.passwordMatch)? styles.errorBorder: ''}`}
                 />
-                {errors.confirmPassword && <span className={styles.errorMessage}>{errors.confirmPassword}</span>} <br />
+                {errors.confirmPassword && <span className={styles.errorMessage}>{errors.confirmPassword}</span>}
                 {errors.passwordMatch && <span className={styles.errorMessage}>{errors.passwordMatch}</span>}
 
-                <div className={styles.selectingProfilePic}>
+                <div className={styles.selectingProfilePic} style={ profileImgData ? {} : { marginTop: '20px' } }>
                   <ProfilePicSelectorModal 
                     onDataSend={handleModelProfileImgData} 
                     setLocallyUploadedProfileImg={setLocallyUploadedProfileImg} 
