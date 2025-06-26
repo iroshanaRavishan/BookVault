@@ -123,6 +123,20 @@ namespace BookVault.Application.Services
                 if (user == null)
                     return (false, "User not found", null);
 
+                // Require current password for any update
+                if (string.IsNullOrWhiteSpace(dto.CurrentPassword))
+                {
+                    return (false, "Current password is required", IdentityResult.Failed(
+                        new IdentityError { Description = "Current password is required" }));
+                }
+
+                var passwordCheck = await _userManager.CheckPasswordAsync(user, dto.CurrentPassword);
+                if (!passwordCheck)
+                {
+                    return (false, "Current password is incorrect", IdentityResult.Failed(
+                        new IdentityError { Description = "Current password is incorrect" }));
+                }
+
                 user.UserName = dto.UserName;
                 user.Email = dto.Email;
                 user.ModifiedDate = DateTime.UtcNow;
@@ -130,14 +144,14 @@ namespace BookVault.Application.Services
                 // Update password if provided
                 if (!string.IsNullOrWhiteSpace(dto.Password))
                 {
-                    // First validate the new password before removing the old one
+                    // Validate new password
                     var passwordValidationResult = await _passwordValidator.ValidateAsync(_userManager, user, dto.Password);
                     if (!passwordValidationResult.Succeeded)
                     {
                         return (false, "Password does not meet security requirements", passwordValidationResult);
                     }
 
-                    // Only now remove the old password
+                    // Remove and add new password
                     var removeResult = await _authRepository.RemoveUserPasswordAsync(user);
                     if (!removeResult.Succeeded)
                         return (false, "Failed to remove old password", removeResult);
@@ -170,7 +184,5 @@ namespace BookVault.Application.Services
                 return (false, "Internal server error", IdentityResult.Failed());
             }
         }
-
-
     }
 }

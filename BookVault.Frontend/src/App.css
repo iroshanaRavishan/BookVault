@@ -66,3 +66,14 @@ body {
   margin: 20px 0 !important;
   width: 100%;
 }
+
+.errorMessage {
+  color: rgb(243, 61, 61);
+  font-weight: 600;
+  font-size: 14px;
+  text-align: center;
+}
+
+.errorBorder {
+  border: 1px solid #ff8383 !important;
+}

@@ -264,8 +264,8 @@ export default function Auth() {
           <div className={`${styles.formContainer} ${styles.signIn}`}> 
             <form action="#" className={styles.form} onSubmit={loginHandler}>
               <h1>Sign In</h1>
-              <input type="text" name="Email" className={`${styles.formInput} ${errors.Email? styles.errorBorder: ''}`} placeholder='example@hello.com' onChange={handleLoginChange} />
-              {errors.Email && <span className={styles.errorMessage}>{errors.Email}</span>}<br />
+              <input type="text" name="Email" className={`${styles.formInput} ${errors.Email? "errorBorder": ''}`} placeholder='example@hello.com' onChange={handleLoginChange} />
+              {errors.Email && <span className={"errorMessage"}>{errors.Email}</span>}<br />
 
               <PasswordInput
                 name="Password"
@@ -273,9 +273,9 @@ export default function Auth() {
                 value={regFormData.Password}
                 onChange={handleLoginChange}
                 placeholder="Password"
-                className={`${styles.formInput} ${errors.Password ? styles.errorBorder: ''}`}
+                className={`${styles.formInput} ${errors.Password ? "errorBorder": ''}`}
               />
-              {errors.Password && <span className={styles.errorMessage}>{errors.Password}</span>}
+              {errors.Password && <span className={"errorMessage"}>{errors.Password}</span>}
               <br />
               
               <button type="submit" disabled={isLoding}>
@@ -291,11 +291,11 @@ export default function Auth() {
             <h1>Create Account</h1>
             <div className={styles.scrollWrapper}>
               <form action="#" className={styles.form} style={{paddingRight: '34px'}} onSubmit={registerHandler} autoComplete="off">
-                <input type="text" name="Name" id="name" className={`${styles.formInput} ${errors.Name? styles.errorBorder: ''}`} placeholder="Enter your name" onChange={handleRegChange}  />
-                {errors.Name && <span className={styles.errorMessage}>{errors.Name}</span>}<br />
+                <input type="text" name="Name" id="name" className={`${styles.formInput} ${errors.Name? "errorBorder": ''}`} placeholder="Enter your name" onChange={handleRegChange}  />
+                {errors.Name && <span className={"errorMessage"}>{errors.Name}</span>}<br />
 
-                <input type="text" name="Email" id="email" className={`${styles.formInput} ${errors.Email? styles.errorBorder: ''}`} placeholder="example@hello.com" onChange={handleRegChange}  />
-                {errors.Email && <span className={styles.errorMessage}>{errors.Email}</span>}<br />
+                <input type="text" name="Email" id="email" className={`${styles.formInput} ${errors.Email? "errorBorder": ''}`} placeholder="example@hello.com" onChange={handleRegChange}  />
+                {errors.Email && <span className={"errorMessage"}>{errors.Email}</span>}<br />
 
                 <PasswordInput
                   name="PasswordHash"
@@ -303,9 +303,9 @@ export default function Auth() {
                   value={regFormData.PasswordHash}
                   onChange={handleRegChange}
                   placeholder="Password"
-                  className={`${styles.formInput} ${(errors.PasswordHash || errors.passwordMatch)? styles.errorBorder: ''}`}
+                  className={`${styles.formInput} ${(errors.PasswordHash || errors.passwordMatch)? "errorBorder": ''}`}
                 />
-                {errors.PasswordHash && <span className={styles.errorMessage}>{errors.PasswordHash}</span>} <br />
+                {errors.PasswordHash && <span className={"errorMessage"}>{errors.PasswordHash}</span>} <br />
 
                 <PasswordInput
                   name="confirmPassword"
@@ -313,10 +313,10 @@ export default function Auth() {
                   onChange={handleRegChange}
                   placeholder="Confirm Password"
                   style={{ alignItems: 'center'}}
-                  className={`${styles.formInput} ${(errors.confirmPassword || errors.passwordMatch)? styles.errorBorder: ''}`}
+                  className={`${styles.formInput} ${(errors.confirmPassword || errors.passwordMatch)? "errorBorder": ''}`}
                 />
-                {errors.confirmPassword && <span className={styles.errorMessage}>{errors.confirmPassword}</span>}
-                {errors.passwordMatch && <span className={styles.errorMessage}>{errors.passwordMatch}</span>}
+                {errors.confirmPassword && <span className={"errorMessage"}>{errors.confirmPassword}</span>}
+                {errors.passwordMatch && <span className={"errorMessage"}>{errors.passwordMatch}</span>}
 
                 <div className={styles.selectingProfilePic} style={ profileImgData ? {} : { marginTop: '20px' } }>
                   <ProfilePicSelectorModal 
@@ -327,7 +327,7 @@ export default function Auth() {
                     setFileName={setFileName}
                   />
 
-                  { errors.ProfilePicture && <span className={styles.errorMessage} style={{marginLeft: "10px"}}>{errors.ProfilePicture}</span> } 
+                  { errors.ProfilePicture && <span className={"errorMessage"} style={{marginLeft: "10px"}}>{errors.ProfilePicture}</span> } 
                   { profileImgData && 
                     <div className='selectedImageContainer'>
                       <IoCloseCircleSharp size={20} className='cancel-profile-picture' color="#e53e3e" onClick={handleCloseSelectedImage}/>
