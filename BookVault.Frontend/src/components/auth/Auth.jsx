@@ -63,6 +63,15 @@ export default function Auth() {
     setLoginFormData({
       ...loginFormData, [name] : value
     });
+    
+    // Clear specific error on input
+    if (errors[name]) {
+      setErrors(prevErrors => {
+        const updatedErrors = { ...prevErrors };
+        delete updatedErrors[name];
+        return updatedErrors;
+      });
+    }
   }
 
   function handleRegChange(e){
@@ -70,6 +79,24 @@ export default function Auth() {
     setRegFormData({
       ...regFormData, [name] : value
     });
+
+    // Clear specific error on input
+    if (errors[name]) {
+      setErrors(prevErrors => {
+        const updatedErrors = { ...prevErrors };
+        delete updatedErrors[name];
+        return updatedErrors;
+      });
+    }
+
+    // Special case for password mismatch
+    if ((name === 'PasswordHash' || name === 'confirmPassword') && errors.passwordMatch) {
+      setErrors(prevErrors => {
+        const updatedErrors = { ...prevErrors };
+        delete updatedErrors.passwordMatch;
+        return updatedErrors;
+      });
+    }
   }
 
   function validateEmail(email) {
