@@ -48,7 +48,7 @@ export default function ProfileSettings() {
 
   function handleModelProfileImgData(data) {
     setProfileImgData(data);
-    setErrors(prevErrors => ({ ...prevErrors, ProfilePicture: "" })); // Clear the validation error
+    setErrors(prevErrors => ({ ...prevErrors, profilePicture: "" }));
   };
 
   function handleCloseSelectedImage () {
