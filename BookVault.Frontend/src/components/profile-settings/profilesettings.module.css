@@ -109,6 +109,11 @@
   margin: 0 10px;
 }
 
+.submitButton:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
 @media (max-width: 768px) {
   .formCard {
     padding: 20px;
