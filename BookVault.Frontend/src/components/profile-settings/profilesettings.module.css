@@ -97,6 +97,17 @@
   background-color: #3a5a8c;
 }
 
+.selectingProfilePic {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.selectingProfilePic img {
+  margin: 0 10px;
+}
+
 @media (max-width: 768px) {
   .formCard {
     padding: 20px;

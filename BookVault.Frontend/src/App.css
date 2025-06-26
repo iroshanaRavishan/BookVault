@@ -18,12 +18,13 @@ body {
 }
   
 .cancel-profile-picture {
-  position: absolute;
+  position: relative;
   cursor: pointer;
   border: 0px solid #fff;
   border-radius: 50%;
   background: #fff;
   margin-right: 5px;
+  top: 15px;
 }
 
 .selectedImageContainer {
