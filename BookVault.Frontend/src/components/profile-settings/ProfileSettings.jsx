@@ -17,7 +17,6 @@ export default function ProfileSettings() {
   const userPasswordUpdateMessageElement = document.querySelector(".user-password-update-message");
   
   const [formData, setFormData] = useState({
-    name: '',
     userName: '',
     email: '',
     currentPassword: '',
@@ -28,7 +27,6 @@ export default function ProfileSettings() {
   useEffect(() => {
     if (user) {
       setFormData({
-        name: user.name || '',
         userName: user.userName || '',
         email: user.email || '',
         currentPassword: '',
