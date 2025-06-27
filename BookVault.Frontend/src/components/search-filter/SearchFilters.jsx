@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { FaSearch, FaFilter, FaTimes } from "react-icons/fa";
 import styles from "./searchfilter.module.css"; // Fixed typo in import
 import FilterModal from "../filter-modal/FilterModal";
+import { predefinedGenres } from '../../constants/constants';
 
 export default function SearchFilters() {
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
@@ -34,7 +35,7 @@ export default function SearchFilters() {
     <div className={styles.searchFilters}>
       <div className={styles.searchInputWrapper}>
         <FaSearch className={styles.icon} />
-        <input   type="text"
+        <input type="text"
           placeholder="Search books..."
           className={styles.searchInput}
           value={searchText}
@@ -46,15 +47,10 @@ export default function SearchFilters() {
       </div>
 
       <div className={styles.filters}>
-        <select className={styles.dropdown}>
-          <option value="">Genre</option>
-          <option value="all">All Genres</option>
-          <option value="action">Action</option>
-          <option value="comedy">Comedy</option>
-          <option value="drama">Drama</option>
-          <option value="horror">Horror</option>
-          <option value="sci-fi">Sci-Fi</option>
-          <option value="thriller">Thriller</option>
+        <select className={styles.dropdown} >
+            {predefinedGenres.map((genre) => (
+              <option key={genre} value={genre}>{genre}</option>
+            ))}
         </select>
 
         <select className={styles.dropdown}>
