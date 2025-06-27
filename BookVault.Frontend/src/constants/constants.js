@@ -26,3 +26,10 @@ export const GENRE_OPTIONS = [
   { value: "technology", label: "Technology" },
   { value: "education", label: "Education" },
 ];
+
+export const SORT_OPTIONS = [
+  { value: "title-asc", label: "Title (A-Z)" },
+  { value: "title-desc", label: "Title (Z-A)" },
+  { value: "year-desc", label: "Added date (Newest)" },
+  { value: "year-asc", label: "Added date (Oldest)" },
+];
