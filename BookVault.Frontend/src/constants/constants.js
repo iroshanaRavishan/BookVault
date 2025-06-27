@@ -1,9 +1,9 @@
-export const predefinedGenres = [
+export const GENRES = [
     "Mystery",
     "Thriller",
     "Romance",
     "Fantasy",
-    "Science Fiction",
+    "Science",
     "Horror",
     "Biography",
     "History",
