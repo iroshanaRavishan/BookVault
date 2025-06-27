@@ -4,20 +4,22 @@
     flex-direction: column;
     max-width: 900px;
     margin: auto;
-    padding: 24px;
-    border-radius: 12px;
-    box-shadow: 0 0 20px #f39c12aa;
+    padding: 25px 25px 60px 25px;
+    background-color: rgb(255, 255, 255);
+    min-height: 368px;
 }
 
 .pageTitle {
     font-size: 32px;
     color: #f39c12;
-    margin-bottom: 18px;
+    margin: 40px 0;
     text-align: center;
 }
 
 .pageContent {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     gap: 20px;
+    min-height: 50vh;
 }

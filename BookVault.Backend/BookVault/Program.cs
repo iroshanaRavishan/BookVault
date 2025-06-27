@@ -1,49 +1,91 @@
+using BookVault.Application;
 using BookVault.Data;
-using BookVault.Services;
+using BookVault.Infrastructure;
+using BookVault.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddCors();
 builder.Services.AddOpenApi();
-builder.Services.AddTransient<IBookService, BookService>();
-builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer(); // Add this for better API documentation
 
-builder.Services.AddDbContext<BookDbContext>(options =>
-{
-    var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-    options.UseNpgsql(connectionString);
-});
+builder.Services.AddApplication();
+builder.Services.AddInfrastructure(builder.Configuration);
+
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        // Configure JSON serialization for better API documentation
+        options.JsonSerializerOptions.PropertyNamingPolicy = System.Text.Json.JsonNamingPolicy.CamelCase;
+    });
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-app.UseHttpsRedirection();
-
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
-    app.MapScalarApiReference();
+    app.MapScalarApiReference(options =>
+    {
+        options.Title = "BookVault API";
+        options.Theme = ScalarTheme.BluePlanet;
+    });
 }
 
-// triggering the seeding process
-// remove this when deploying to production
+// Apply migrations
 await using (var serviceScope = app.Services.CreateAsyncScope())
-await using (var dbContext = serviceScope.ServiceProvider.GetRequiredService<BookDbContext>())
 {
-    await dbContext.Database.EnsureCreatedAsync();
+    var defaultPicContext = serviceScope.ServiceProvider.GetRequiredService<DefaultUserProfilePictureDbContext>();
+    var bookContext = serviceScope.ServiceProvider.GetRequiredService<BookDbContext>();
+    var authContext = serviceScope.ServiceProvider.GetRequiredService<AuthDbContext>();
+    var logger = serviceScope.ServiceProvider.GetRequiredService<ILogger<Program>>();
+
+    try
+    {
+        logger.LogInformation("Applying DefaultUserProfilePictureDbContext migrations...");
+        await defaultPicContext.Database.MigrateAsync();
+        logger.LogInformation("DefaultUserProfilePictureDbContext migrations applied successfully");
+
+        logger.LogInformation("Applying BookDbContext migrations...");
+        await bookContext.Database.MigrateAsync();
+        logger.LogInformation("BookDbContext migrations applied successfully");
+
+        logger.LogInformation("Applying Auth migrations...");
+        await authContext.Database.MigrateAsync();
+        logger.LogInformation("AuthDbContext migrations applied successfully");
+    }
+    catch (Exception ex)
+    {
+        logger.LogError(ex, "An error occurred while applying migrations");
+        // not throwing here to allow app to start
+    }
 }
 
+app.UseHttpsRedirection();
+
+// Configure CORS
 app.UseCors(policy => policy
-    .WithOrigins("https://localhost:5173", "http://localhost:5173")  // Replace with app URL
+    .WithOrigins("https://localhost:5173", "http://localhost:5173")
     .AllowAnyHeader()
     .AllowAnyMethod()
     .AllowCredentials());
 
-app.UseHttpsRedirection();
+// Add static files middleware to serve uploaded files
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new Microsoft.Extensions.FileProviders.PhysicalFileProvider(
+        Path.Combine(Directory.GetCurrentDirectory(), "uploads")),
+    RequestPath = "/uploads"
+});
+
+app.UseRouting();
+
+app.UseAuthentication();
+
+app.UseAuthorization();
 
 app.MapControllers();
 
