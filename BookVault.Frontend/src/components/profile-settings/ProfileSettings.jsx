@@ -15,6 +15,7 @@ export default function ProfileSettings() {
   const [fileName, setFileName] = useState("");
 
   const userPasswordUpdateMessageElement = useRef(null);
+  const [isModified, setIsModified] = useState(false);
   
   const [formData, setFormData] = useState({
     userName: '',
@@ -38,6 +39,16 @@ export default function ProfileSettings() {
     }
   }, [user]);
 
+  function checkIfModified(updatedFormData, imageData) {
+    const isFormChanged =
+      updatedFormData.userName !== (user?.userName || '') ||
+      updatedFormData.email !== (user?.email || '') ||
+      updatedFormData.password.trim() !== '' ||
+      imageData !== convertUserImageToBase64(user);
+
+    setIsModified(isFormChanged);
+  }
+
   function validateEmail(email) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
@@ -45,10 +56,14 @@ export default function ProfileSettings() {
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: files ? files[0] : value,
-    }));
+    const newValue = files ? files[0] : value;
+
+    const updatedFormData = {
+      ...formData,
+      [name]: newValue,
+    };
+
+    setFormData(updatedFormData);
 
     // Clear specific error on input
     if (errors[name]) {
@@ -67,11 +82,14 @@ export default function ProfileSettings() {
         return updatedErrors;
       });
     }
+    // Use updated data
+    checkIfModified(updatedFormData, profileImgData);
   };
 
   function handleModelProfileImgData(data) {
     setProfileImgData(data);
     setErrors(prevErrors => ({ ...prevErrors, profilePicture: "" }));
+    checkIfModified(formData, data);
   };
 
   function handleCloseSelectedImage () {
@@ -153,6 +171,7 @@ export default function ProfileSettings() {
             userPasswordUpdateMessageElement.current.innerHTML = '';
           }
           await refreshUser(); // Refresh context
+          setIsModified(false);
         } else {
           // TODO: need to add proper message upon fail response
         }
@@ -243,7 +262,7 @@ export default function ProfileSettings() {
             } 
           </div>
 
-          <button type="submit" className={styles.submitButton}>Save Changes</button>
+          <button type="submit" className={styles.submitButton} disabled={!isModified}>Save Changes</button>
           <p ref={userPasswordUpdateMessageElement} className={`message`}></p>
         </form>
       </div>
