@@ -1,6 +1,4 @@
 export const predefinedGenres = [
-    "Fiction",
-    "Non-Fiction",
     "Mystery",
     "Thriller",
     "Romance",
@@ -18,7 +16,6 @@ export const predefinedGenres = [
     "Poetry",
     "Drama",
     "Adventure",
-    "Young Adult",
     "Children",
     "Comedy",
     "Crime",
