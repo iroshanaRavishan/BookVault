@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import { FaSearch, FaFilter, FaTimes } from "react-icons/fa";
 import styles from "./searchfilter.module.css"; // Fixed typo in import
 import FilterModal from "../filter-modal/FilterModal";
-import { predefinedGenres } from '../../constants/constants';
+import GenreSelector from "../genre-selector/GenreSelector";
 
 export default function SearchFilters() {
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
   const [searchText, setSearchText] = useState('');
+  const [selectedGenre, setSelectedGenre] = useState("");
   const [filters, setFilters] = useState({
     yearRange: 2025,
     rating: 2.6,
@@ -35,7 +36,7 @@ export default function SearchFilters() {
     <div className={styles.searchFilters}>
       <div className={styles.searchInputWrapper}>
         <FaSearch className={styles.icon} />
-        <input type="text"
+        <input   type="text"
           placeholder="Search books..."
           className={styles.searchInput}
           value={searchText}
@@ -47,11 +48,10 @@ export default function SearchFilters() {
       </div>
 
       <div className={styles.filters}>
-        <select className={styles.dropdown} >
-            {predefinedGenres.map((genre) => (
-              <option key={genre} value={genre}>{genre}</option>
-            ))}
-        </select>
+        <GenreSelector
+          selectedGenre={selectedGenre}
+          onSelect={(genre) => setSelectedGenre(genre)}
+        />
 
         <select className={styles.dropdown}>
           <option value="">Sort by</option>
