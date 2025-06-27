@@ -16,7 +16,6 @@ export const GENRES = [
     "Poetry",
     "Drama",
     "Adventure",
-    "Young Adult",
     "Children",
     "Comedy",
     "Crime",
