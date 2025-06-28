@@ -18,8 +18,10 @@ export default function CreateBook() {
     readUrl: '',
     pdfFile: null,
   });
+  const validationErrors = {};
   const [message, setMessage] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errors, setErrors] = useState({});
 
   const navigate = useNavigate();
 
@@ -41,6 +43,15 @@ export default function CreateBook() {
           ? files[0]
           : value
     }));
+
+    // Clear specific error on input
+    if (errors[name]) {
+      setErrors(prevErrors => {
+        const updatedErrors = { ...prevErrors };
+        delete updatedErrors[name];
+        return updatedErrors;
+      });
+    }
   };
 
   const handleLengthChange = (e) => {
@@ -125,20 +136,36 @@ export default function CreateBook() {
     e.preventDefault();
     setIsSubmitting(true);
 
-    try {
-      // Validation
-      if (!createBookFormData.name.trim()) {
-        setMessage('Please enter a book title.');
-        setIsSubmitting(false);
-        return;
+    // Validation
+    // if (!createBookFormData.name.trim()) {
+    //   setMessage('Please enter a book title.');
+    //   setIsSubmitting(false);
+    //   return;
+    // }
+
+    // if (!createBookFormData.readUrl.trim() && !createBookFormData.pdfFile) {
+    //   setMessage('Please provide either a read online URL or upload a PDF file.');
+    //   setIsSubmitting(false);
+    //   return;
+    // }
+
+    if(!createBookFormData.name.trim()) {
+      validationErrors.name = "Name is required!";
+    } 
+
+    if(!createBookFormData.readUrl.trim() && !createBookFormData.pdfFile) {
+      if(!createBookFormData.readUrl) {
+        validationErrors.readUrl = "Either url or pdf is required!";
       }
 
-      if (!createBookFormData.readUrl.trim() && !createBookFormData.pdfFile) {
-        setMessage('Please provide either a read online URL or upload a PDF file.');
-        setIsSubmitting(false);
-        return;
+      if(!createBookFormData.pdfFile) {
+        validationErrors.pdfFile = "Either url or pdf is required!";
       }
+    }
 
+    setErrors(validationErrors);
+
+    if (Object.keys(validationErrors).length === 0) {
       // Create payload for file uploads
       const payload = new FormData();
       
@@ -166,28 +193,35 @@ export default function CreateBook() {
         payload.append('pdfFile', createBookFormData.pdfFile);
       }
 
-      // Call API
-      console.log('payload:');
-      for (let pair of payload.entries()) {
-        console.log(`${pair[0]}:`, pair[1]);
-      }
+      try {
+        // Call API
+        console.log('payload:');
+        for (let pair of payload.entries()) {
+          console.log(`${pair[0]}:`, pair[1]);
+        }
 
-      const result = await createBookAPI(payload);
-      
-      setMessage('Book added successfully!');
+        const result = await createBookAPI(payload);
+        
+        setMessage('Book added successfully!');
 
-      // Reset form
-      resetForm();
+        // Reset form
+        resetForm();
 
-      setTimeout(() => {
-        setMessage('');
+        setTimeout(() => {
+          setMessage('');
+          setIsSubmitting(false);
+          navigate('/'); // Navigate to books list or wherever appropriate
+        }, 1500);
+
+      } catch (error) {
+        setMessage(error.message || 'Failed to add book. Please try again.');
         setIsSubmitting(false);
-        navigate('/'); // Navigate to books list or wherever appropriate
-      }, 1500);
-
-    } catch (error) {
-      setMessage(error.message || 'Failed to add book. Please try again.');
+      }
+    } else {
       setIsSubmitting(false);
+      if (createBookMessageRef.current) {
+        createBookMessageRef.current.innerHTML = '';
+      }
     }
   };
 
@@ -236,17 +270,17 @@ export default function CreateBook() {
           <div className={styles.formGrid}>
             <div className={styles.formColumn}>
               <div className={styles.formGroup}>
-                <label className={styles.label} htmlFor="name">Book Title *</label>
+                <label className={styles.label} htmlFor="name">Book Title <span style={{ color: 'red' }}>*</span></label>
                 <input 
                   id="name"
                   name="name"
                   type="text" 
                   value={createBookFormData.name} 
                   onChange={handleInputChange}
-                  className={styles.input} 
+                  className={`${styles.input} ${(errors.name || errors.name)? "errorBorder": ''}`}
                   placeholder="Enter book title"
-                  required 
                 />
+                {errors.name && <span className={"errorMessage"}>{errors.name}</span>}
               </div>
 
               <div className={styles.formGroup}>
@@ -432,8 +466,8 @@ export default function CreateBook() {
 
           <div className={styles.formDivider}></div>
 
-          <div className={styles.accessSection}>
-            <h3 className={styles.sectionTitle}>Book Access (Required) *</h3>
+          <div className={`${styles.accessSection} ${(errors.readUrl && errors.pdfFile)? "errorBorder": ''}`}>
+            <h3 className={styles.sectionTitle}>Book Access (Required) <span style={{ color: 'red' }}>*</span></h3>
             <p className={styles.sectionSubtitle}>Provide at least one way to access the book</p>
             
             <div className={styles.formGroup}>
@@ -486,6 +520,7 @@ export default function CreateBook() {
               </div>
             </div>
           </div>
+          {(errors.readUrl && errors.pdfFile ) && <span className={"errorMessage"}>{errors.readUrl}</span>}
 
           <div className={styles.checkboxContainer}>
             <label className={styles.checkboxLabel}>
