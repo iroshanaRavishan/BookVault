@@ -226,6 +226,7 @@ export default function CreateBook() {
                 <label className={styles.label} htmlFor="name">Book Title *</label>
                 <input 
                   id="name"
+                  name="name"
                   type="text" 
                   value={createBookFormData.name} 
                   onChange={(e) => setCreateBookFormData(prev => ({ ...prev, name: e.target.value }))} 
@@ -240,6 +241,7 @@ export default function CreateBook() {
                 <div className={styles.fileUpload}>
                   <input 
                     id="imageFile"
+                    name="imageFile"
                     type="file" 
                     accept="image/*" 
                     onChange={(e) => setCreateBookFormData(prev => ({ ...prev, imageFile: e.target.files[0] }))} 
@@ -285,6 +287,7 @@ export default function CreateBook() {
                   <label className={styles.label} htmlFor="year">Publication Year</label>
                   <select 
                     id="year"
+                    name="year"
                     value={createBookFormData.year} 
                     onChange={(e) => setCreateBookFormData(prev => ({ ...prev, year: e.target.value }))}
                     className={styles.select}
@@ -302,6 +305,7 @@ export default function CreateBook() {
                   <label className={styles.label} htmlFor="length">Number of Pages</label>
                   <input 
                     id="length"
+                    name="length"
                     type="text" 
                     value={createBookFormData.length} 
                     onChange={handleLengthChange} 
@@ -335,6 +339,7 @@ export default function CreateBook() {
                   {/* Input for adding new genres */}
                   <input
                     id="genres"
+                    name="genres"
                     type="text" 
                     value={createBookFormData.genreInput}
                     onChange={(e) =>
@@ -390,6 +395,7 @@ export default function CreateBook() {
                 <label className={styles.label} htmlFor="author">Author</label>
                 <input
                   id="author"
+                  name="author"
                   type="text" 
                   value={createBookFormData.author} 
                   onChange={(e) => setCreateBookFormData(prev => ({ ...prev, author: e.target.value }))}
@@ -402,6 +408,7 @@ export default function CreateBook() {
                 <label className={styles.label} htmlFor="plot">Plot Summary</label>
                 <textarea 
                   id="plot"
+                  name="plot"
                   value={createBookFormData.plot} 
                   onChange={(e) => setCreateBookFormData(prev => ({ ...prev, plot: e.target.value }))} 
                   className={`${styles.input} ${styles.textarea}`} 
@@ -422,6 +429,7 @@ export default function CreateBook() {
               <label className={styles.label} htmlFor="readUrl">Read Online URL</label>
               <input 
                 id="readUrl"
+                name="readUrl"
                 type="url" 
                 value={createBookFormData.readUrl} 
                 onChange={(e) => setCreateBookFormData(prev => ({ ...prev, readUrl: e.target.value }))}
@@ -435,6 +443,7 @@ export default function CreateBook() {
               <div className={styles.fileUpload}>
                 <input 
                   id="pdfFile"
+                  name="pdfFile"
                   type="file" 
                   accept=".pdf" 
                   onChange={(e) =>
@@ -472,6 +481,8 @@ export default function CreateBook() {
           <div className={styles.checkboxContainer}>
             <label className={styles.checkboxLabel}>
               <input 
+                id="read"
+                name="read"
                 type="checkbox" 
                 checked={createBookFormData.read} 
                 onChange={() => setCreateBookFormData(prev => ({ ...prev, read: !prev.read }))} 
