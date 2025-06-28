@@ -11,6 +11,7 @@
         bool IsRead,
         string ReadUrl,
         string CoverImagePath,
+        string ThumbnailPath,
         string PdfFilePath,
         DateTimeOffset Created,
         DateTimeOffset LastModified);

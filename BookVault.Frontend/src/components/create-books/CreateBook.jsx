@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './createbooks.module.css';
 import { MdClear, MdAdd, MdClose } from "react-icons/md";
+import { GENRE_OPTIONS } from '../../constants/constants';
 
 export default function CreateBook() {
   const [name, setName] = useState('');
@@ -19,39 +20,6 @@ export default function CreateBook() {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const navigate = useNavigate();
-
-  // Predefined genre options
-  const predefinedGenres = [
-    "Fiction",
-    "Non-Fiction",
-    "Mystery",
-    "Thriller",
-    "Romance",
-    "Fantasy",
-    "Science Fiction",
-    "Horror",
-    "Biography",
-    "History",
-    "Self-Help",
-    "Business",
-    "Health",
-    "Travel",
-    "Cooking",
-    "Art",
-    "Poetry",
-    "Drama",
-    "Adventure",
-    "Young Adult",
-    "Children",
-    "Comedy",
-    "Crime",
-    "Philosophy",
-    "Psychology",
-    "Religion",
-    "Politics",
-    "Technology",
-    "Education",
-  ]
 
   // Generate years from 1900 to current year + 1
   const currentYear = new Date().getFullYear();
@@ -376,7 +344,7 @@ export default function CreateBook() {
                 <div className={styles.genreSuggestions}>
                   <span className={styles.suggestionsLabel}>Popular genres:</span>
                   <div className={styles.suggestionChips}>
-                    {predefinedGenres
+                    {GENRE_OPTIONS
                       .filter((genre) => !genres.includes(genre))
                       // .slice(0, 8) // limiting number of chips to show  
                       .map((genre) => (

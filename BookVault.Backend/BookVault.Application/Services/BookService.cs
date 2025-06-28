@@ -3,6 +3,7 @@ using BookVault.Models;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Http;
 using BookVault.Application.DTOs.BookDTOs;
+using BookVault.Application.Interfaces;
 
 
 namespace BookVault.Application.Services
@@ -12,17 +13,20 @@ namespace BookVault.Application.Services
         private readonly IBookRepository _bookRepository;
         private readonly ILogger<BookService> _logger;
         private readonly string _uploadsFolder;
+        private readonly IPdfThumbnailService _thumbnailService;
 
 
-        public BookService(IBookRepository bookRepository, ILogger<BookService> logger, Microsoft.AspNetCore.Hosting.IHostingEnvironment environment)
+        public BookService(IBookRepository bookRepository, IPdfThumbnailService thumbnailService, ILogger<BookService> logger, Microsoft.AspNetCore.Hosting.IHostingEnvironment environment)
         {
             _bookRepository = bookRepository;
+            _thumbnailService = thumbnailService;
             _logger = logger;
             _uploadsFolder = Path.Combine(environment.ContentRootPath, "uploads");
 
             // Ensure uploads directory exists
             Directory.CreateDirectory(_uploadsFolder);
             Directory.CreateDirectory(Path.Combine(_uploadsFolder, "images"));
+            Directory.CreateDirectory(Path.Combine(_uploadsFolder, "thumbnails"));
             Directory.CreateDirectory(Path.Combine(_uploadsFolder, "pdfs"));
         }
 
@@ -43,6 +47,7 @@ namespace BookVault.Application.Services
                     book.IsRead,
                     book.ReadUrl,
                     book.CoverImagePath,
+                    book.ThumbnailPath,
                     book.PdfFilePath,
                     book.Created,
                     book.LastModified
@@ -74,6 +79,7 @@ namespace BookVault.Application.Services
                     book.IsRead,
                     book.ReadUrl,
                     book.CoverImagePath,
+                    book.ThumbnailPath,
                     book.PdfFilePath,
                     book.Created,
                     book.LastModified
@@ -121,6 +127,8 @@ namespace BookVault.Application.Services
                     pdfFilePath = await SaveFileAsync(command.PdfFile, "pdfs");
                 }
 
+                var (isSuccess, thumbnailPath, message) = await GenerateThumbnailAsync(pdfFilePath);
+
                 // Create book with genres list
                 var book = Book.Create(
                     name: command.Name,
@@ -132,6 +140,7 @@ namespace BookVault.Application.Services
                     isRead: isRead,
                     readUrl: command.ReadUrl ?? string.Empty,
                     coverImagePath: coverImagePath,
+                    thumbnailPath: thumbnailPath,
                     pdfFilePath: pdfFilePath
                 );
 
@@ -150,6 +159,7 @@ namespace BookVault.Application.Services
                     createdBook.IsRead,
                     createdBook.ReadUrl,
                     createdBook.CoverImagePath,
+                    createdBook.ThumbnailPath,
                     createdBook.PdfFilePath,
                     createdBook.Created,
                     createdBook.LastModified
@@ -162,6 +172,8 @@ namespace BookVault.Application.Services
             }
         }
 
+
+
         public async Task UpdateBookAsync(Guid id, UpdateBookDto command)
         {
             try
@@ -172,6 +184,7 @@ namespace BookVault.Application.Services
 
                 // Store old file paths to delete if they're being replaced
                 string oldCoverImagePath = bookToUpdate.CoverImagePath;
+                string oldThumbnailPath = bookToUpdate.ThumbnailPath;
                 string oldPdfFilePath = bookToUpdate.PdfFilePath;
 
                 // Update the book
@@ -185,6 +198,7 @@ namespace BookVault.Application.Services
                     isRead: command.IsRead ?? bookToUpdate.IsRead,
                     readUrl: command.ReadUrl,
                     coverImagePath: command.CoverImagePath != null ? command.CoverImagePath : bookToUpdate.CoverImagePath,
+                    thumbnailPath: command.ThumbnailPath != null ? command.ThumbnailPath : bookToUpdate.ThumbnailPath,
                     pdfFilePath: command.PdfFilePath != null ? command.PdfFilePath : bookToUpdate.PdfFilePath
                 );
 
@@ -195,6 +209,11 @@ namespace BookVault.Application.Services
                 if (!string.IsNullOrEmpty(command.CoverImagePath) && command.CoverImagePath != oldCoverImagePath)
                 {
                     DeleteFileIfExists(oldCoverImagePath);
+                }
+
+                if (!string.IsNullOrEmpty(command.ThumbnailPath) && command.ThumbnailPath != oldThumbnailPath)
+                {
+                    DeleteFileIfExists(oldThumbnailPath);
                 }
 
                 if (!string.IsNullOrEmpty(command.PdfFilePath) && command.PdfFilePath != oldPdfFilePath)
@@ -220,6 +239,11 @@ namespace BookVault.Application.Services
                     if (!string.IsNullOrEmpty(bookToDelete.CoverImagePath))
                     {
                         DeleteFileIfExists(bookToDelete.CoverImagePath);
+                    }
+
+                    if (!string.IsNullOrEmpty(bookToDelete.ThumbnailPath))
+                    {
+                        DeleteFileIfExists(bookToDelete.ThumbnailPath);
                     }
 
                     if (!string.IsNullOrEmpty(bookToDelete.PdfFilePath))
@@ -271,6 +295,24 @@ namespace BookVault.Application.Services
                     _logger.LogWarning(ex, "Failed to delete file: {Path}", fullPath);
                 }
             }
+        }
+
+        private async Task<(bool isSuccess, string? thumbnailPath, string message)> GenerateThumbnailAsync(string filename)
+        {
+            string fileName = Path.GetFileName(filename);
+
+            if (string.IsNullOrWhiteSpace(filename))
+                return (false, null, "Filename is required.");
+
+            var (isSuccess, thumbnailPath, message) = await _thumbnailService.GenerateThumbnailAsync(fileName);
+
+            if (!isSuccess || thumbnailPath == null)
+            {
+                _logger.LogWarning("Thumbnail generation failed for {filename}: {message}", filename, message);
+                return (false, null, message);
+            }
+
+            return (true, thumbnailPath, string.Empty);
         }
     }
 }

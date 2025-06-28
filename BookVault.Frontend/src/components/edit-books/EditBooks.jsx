@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import styles from "./editbooks.module.css";
 import { useNavigate, useParams } from "react-router-dom";
-import { MdAdd, MdClose, MdEdit, MdZoomIn, MdDownload, MdDelete } from "react-icons/md";
+import { MdAdd, MdEdit, MdZoomIn, MdDownload, MdDelete } from "react-icons/md";
+import { IoCloseCircleSharp } from "react-icons/io5";
+import { GENRE_OPTIONS } from '../../constants/constants';
 
 export default function EditBooks() {
   const [name, setName] = useState("");
@@ -20,6 +22,7 @@ export default function EditBooks() {
   const [pdfFile, setPdfFile] = useState(null);
   const [existingPdfUrl, setExistingPdfUrl] = useState("");
   const [existingPdfPath, setExistingPdfPath] = useState("");
+  const [existingThumbnailPath, setExistingThumbnailPath] = useState("");
   const [removeExistingPdf, setRemoveExistingPdf] = useState(false);
   const [message, setMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -34,39 +37,6 @@ export default function EditBooks() {
 
   const navigate = useNavigate();
   const { id } = useParams();
-
-  // Predefined genre options
-  const predefinedGenres = [
-    "Fiction",
-    "Non-Fiction",
-    "Mystery",
-    "Thriller",
-    "Romance",
-    "Fantasy",
-    "Science Fiction",
-    "Horror",
-    "Biography",
-    "History",
-    "Self-Help",
-    "Business",
-    "Health",
-    "Travel",
-    "Cooking",
-    "Art",
-    "Poetry",
-    "Drama",
-    "Adventure",
-    "Young Adult",
-    "Children",
-    "Comedy",
-    "Crime",
-    "Philosophy",
-    "Psychology",
-    "Religion",
-    "Politics",
-    "Technology",
-    "Education",
-  ]
 
   // Generate years from 1900 to current year + 1
   const currentYear = new Date().getFullYear();
@@ -118,6 +88,10 @@ export default function EditBooks() {
         if (bookData.pdfFilePath) {
           setExistingPdfPath(bookData.pdfFilePath)
           setExistingPdfUrl(`https://localhost:7157/uploads/${bookData.pdfFilePath}`)
+        }
+
+        if (bookData.thumbnailPath) {
+          setExistingThumbnailPath(bookData.thumbnailPath)
         }
 
         setIsLoading(false)
@@ -188,12 +162,42 @@ export default function EditBooks() {
 
       const result = await response.json()
       console.log("Upload result:", result)
-      return result.filePath
+
+      const filePathToBeCleaned = result.filePath;
+      // Split by backslash and get last part
+      const cleanedFilePath = filePathToBeCleaned.split('\\').pop();
+
+      let generatedThumbnailPath = null;
+
+      if (fileType == "pdf") {
+        try {
+          const thumbnailResponse = await fetch(`https://localhost:7157/api/PdfThumbnail/${cleanedFilePath}`, {
+            method: "GET"
+          })
+
+          if (!thumbnailResponse.ok) {
+            throw new Error("Failed to generate thumbnail");
+          }
+
+        const thumbnailResult = await thumbnailResponse.json();
+        console.log("Thumbnail generated:", thumbnailResult);
+
+        generatedThumbnailPath = thumbnailResult.thumbnailPath;
+        setExistingThumbnailPath(generatedThumbnailPath); 
+        } catch (thumbnailError) {
+          console.error("Error generating thumbnail:", thumbnailError);
+          throw new Error("Failed to generate thumbnail for PDF");
+        }
+      } else {
+        generatedThumbnailPath = null; // No thumbnail for image files
+      }
+
+      return { filePath: result.filePath, thumbnailPath: generatedThumbnailPath };
     } catch (error) {
-      console.error(`Error uploading ${fileType}:`, error)
-      throw error
+      console.error(`Error uploading ${fileType}:`, error);
+      throw error;
     }
-  }
+  };
 
   // Delete file function (only deletes file, not database)
   const deleteFile = async (filePath) => {
@@ -349,14 +353,17 @@ export default function EditBooks() {
 
       if (imageFile) {
         const imagePath = await uploadFile(imageFile, "image");
-        updateData.coverImagePath = imagePath;
+        updateData.coverImagePath = imagePath.filePath;
         if (existingImagePath) await deleteFile(existingImagePath);
       }
 
       if (pdfFile) {
         const pdfPath = await uploadFile(pdfFile, "pdf");
-        updateData.pdfFilePath = pdfPath;
+        updateData.pdfFilePath = pdfPath.filePath;
         if (existingPdfPath) await deleteFile(existingPdfPath);
+        if (existingThumbnailPath) await deleteFile(existingThumbnailPath);
+        
+        updateData.thumbnailPath = pdfPath.thumbnailPath; // update existing thumbnail if PDF is updated
       }
 
       if (result){
@@ -492,6 +499,7 @@ export default function EditBooks() {
     if (existingPdfPath) {
       const success = await deleteBookFile(existingPdfPath, "pdf")
       if (success) {
+        await deleteBookFile(existingThumbnailPath, "thumbnail")
         setExistingPdfUrl("")
         setExistingPdfPath("")
         setRemoveExistingPdf(true)
@@ -612,7 +620,7 @@ export default function EditBooks() {
                   </button>
                   {imageFile && (
                     <button type="button" className={styles.deleteButton} onClick={deleteUploadedImage}>
-                      <MdClose />
+                      <IoCloseCircleSharp size={20}/>
                     </button>
                   )}
                 </div>
@@ -683,7 +691,7 @@ export default function EditBooks() {
                         className={styles.genreChipRemove}
                         aria-label={`Remove ${genre}`}
                       >
-                        <MdClose size={16} />
+                        <IoCloseCircleSharp size={16} />
                       </button>
                     </div>
                   ))}
@@ -715,7 +723,7 @@ export default function EditBooks() {
                 <div className={styles.genreSuggestions}>
                   <span className={styles.suggestionsLabel}>Popular genres:</span>
                   <div className={styles.suggestionChips}>
-                    {predefinedGenres
+                    {GENRE_OPTIONS
                       .filter((genre) => !genres.includes(genre))
                       // .slice(0, 8) // limiting number of chips to show
                       .map((genre) => (
@@ -842,7 +850,7 @@ export default function EditBooks() {
                 </button>
                 {pdfFile && (
                   <button type="button" className={styles.deleteButton} onClick={deleteUploadedPdf}>
-                    <MdClose />
+                    <IoCloseCircleSharp size={20} />
                   </button>
                 )}
               </div>
@@ -871,9 +879,9 @@ export default function EditBooks() {
       {showImageModal && (
         <div className={styles.modal} onClick={closeImageModal}>
           <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
-            <button className={styles.modalClose} onClick={closeImageModal}>
-              <MdClose />
-            </button>
+            <span className={styles.modalClose} onClick={closeImageModal}>
+              <IoCloseCircleSharp size={30} color="#e53e3e"/>
+            </span>
             <img src={modalImageUrl || "/placeholder.svg"} alt="Large view" className={styles.modalImage} />
           </div>
         </div>

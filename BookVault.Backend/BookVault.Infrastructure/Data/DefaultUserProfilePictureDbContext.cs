@@ -53,12 +53,11 @@ namespace BookVault.Infrastructure.Data
 
                     var bytes = await File.ReadAllBytesAsync(filePath, cancellationToken);
 
-                    var picture = new DefaultUserProfilePicture
-                    {
-                        FileName = fileName,
-                        ContentType = "image/png", // or determine from extension
-                        Data = bytes
-                    };
+                    var picture = DefaultUserProfilePicture.Create(
+                        fileName,
+                        "image/png",
+                        bytes
+                    );
 
                     await context.Set<DefaultUserProfilePicture>().AddAsync(picture, cancellationToken);
                 }
@@ -96,12 +95,11 @@ namespace BookVault.Infrastructure.Data
 
                     var bytes = File.ReadAllBytes(filePath);
 
-                    var picture = new DefaultUserProfilePicture
-                    {
-                        FileName = fileName,
-                        ContentType = "image/png",
-                        Data = bytes
-                    };
+                    var picture = DefaultUserProfilePicture.Create(
+                        fileName,
+                        "image/png",
+                        bytes
+                    );
 
                     context.Set<DefaultUserProfilePicture>().Add(picture);
                 }
