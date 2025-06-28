@@ -30,6 +30,19 @@ export default function CreateBook() {
     years.push(i);
   }
 
+  const handleInputChange = (e) => {
+    const { name, value, type, checked, files } = e.target;
+
+    setCreateBookFormData(prev => ({
+      ...prev,
+      [name]: type === 'checkbox'
+        ? checked
+        : type === 'file'
+          ? files[0]
+          : value
+    }));
+  };
+
   const handleLengthChange = (e) => {
     const value = e.target.value;
     // Only allow numbers
@@ -229,7 +242,7 @@ export default function CreateBook() {
                   name="name"
                   type="text" 
                   value={createBookFormData.name} 
-                  onChange={(e) => setCreateBookFormData(prev => ({ ...prev, name: e.target.value }))} 
+                  onChange={handleInputChange}
                   className={styles.input} 
                   placeholder="Enter book title"
                   required 
@@ -244,7 +257,7 @@ export default function CreateBook() {
                     name="imageFile"
                     type="file" 
                     accept="image/*" 
-                    onChange={(e) => setCreateBookFormData(prev => ({ ...prev, imageFile: e.target.files[0] }))} 
+                    onChange={handleInputChange}
                     className={styles.fileInput}
                   />
                   <div className={styles.fileInputLabel}>
@@ -289,7 +302,7 @@ export default function CreateBook() {
                     id="year"
                     name="year"
                     value={createBookFormData.year} 
-                    onChange={(e) => setCreateBookFormData(prev => ({ ...prev, year: e.target.value }))}
+                    onChange={handleInputChange}
                     className={styles.select}
                   >
                     <option value="">Select Year</option>
@@ -342,9 +355,7 @@ export default function CreateBook() {
                     name="genres"
                     type="text" 
                     value={createBookFormData.genreInput}
-                    onChange={(e) =>
-                      setCreateBookFormData(prev => ({ ...prev, genreInput: e.target.value }))
-                    }
+                    onChange={handleInputChange}
                     onKeyDown={handleGenreInputKeyPress}
                     className={styles.genreInput}
                     placeholder={
@@ -398,7 +409,7 @@ export default function CreateBook() {
                   name="author"
                   type="text" 
                   value={createBookFormData.author} 
-                  onChange={(e) => setCreateBookFormData(prev => ({ ...prev, author: e.target.value }))}
+                  onChange={handleInputChange}
                   className={styles.input} 
                   placeholder="Author name"
                 />
@@ -410,7 +421,7 @@ export default function CreateBook() {
                   id="plot"
                   name="plot"
                   value={createBookFormData.plot} 
-                  onChange={(e) => setCreateBookFormData(prev => ({ ...prev, plot: e.target.value }))} 
+                  onChange={handleInputChange}
                   className={`${styles.input} ${styles.textarea}`} 
                   rows="4"
                   placeholder="Brief description of the book's plot"
@@ -432,7 +443,7 @@ export default function CreateBook() {
                 name="readUrl"
                 type="url" 
                 value={createBookFormData.readUrl} 
-                onChange={(e) => setCreateBookFormData(prev => ({ ...prev, readUrl: e.target.value }))}
+                onChange={handleInputChange}
                 className={styles.input} 
                 placeholder="https://example.com/read-online"
               />
@@ -446,9 +457,7 @@ export default function CreateBook() {
                   name="pdfFile"
                   type="file" 
                   accept=".pdf" 
-                  onChange={(e) =>
-                    setCreateBookFormData(prev => ({ ...prev, pdfFile: e.target.files[0] }))
-                  }
+                  onChange={handleInputChange}
                   className={styles.fileInput}
                 />
                 <div className={styles.fileInputLabel}>
@@ -485,7 +494,7 @@ export default function CreateBook() {
                 name="read"
                 type="checkbox" 
                 checked={createBookFormData.read} 
-                onChange={() => setCreateBookFormData(prev => ({ ...prev, read: !prev.read }))} 
+                onChange={handleInputChange}
                 className={styles.checkbox}
               />
               <span className={styles.checkmark}></span>
