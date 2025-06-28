@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { FaSearch, FaFilter, FaTimes } from "react-icons/fa";
 import styles from "./searchfilters.module.css";
 import FilterModal from "../filter-modal/FilterModal";
-import FilterPopupSelect from "../genre-selector/FilterPopupSelect";
+import FilterPopupSelect from "../popup-select/FilterPopupSelect";
 import { GENRE_OPTIONS, SORT_OPTIONS } from '../../constants/constants';
 
 export default function SearchFilters() {
