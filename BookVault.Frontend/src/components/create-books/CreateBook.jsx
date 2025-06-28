@@ -18,8 +18,10 @@ export default function CreateBook() {
     readUrl: '',
     pdfFile: null,
   });
+  const validationErrors = {};
   const [message, setMessage] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errors, setErrors] = useState({});
 
   const navigate = useNavigate();
 
@@ -29,6 +31,28 @@ export default function CreateBook() {
   for (let i = currentYear; i >= 1900; i--) {
     years.push(i);
   }
+
+  const handleInputChange = (e) => {
+    const { name, value, type, checked, files } = e.target;
+
+    setCreateBookFormData(prev => ({
+      ...prev,
+      [name]: type === 'checkbox'
+        ? checked
+        : type === 'file'
+          ? files[0]
+          : value
+    }));
+
+    // Clear specific error on input
+    if (errors[name]) {
+      setErrors(prevErrors => {
+        const updatedErrors = { ...prevErrors };
+        delete updatedErrors[name];
+        return updatedErrors;
+      });
+    }
+  };
 
   const handleLengthChange = (e) => {
     const value = e.target.value;
@@ -112,20 +136,36 @@ export default function CreateBook() {
     e.preventDefault();
     setIsSubmitting(true);
 
-    try {
-      // Validation
-      if (!createBookFormData.name.trim()) {
-        setMessage('Please enter a book title.');
-        setIsSubmitting(false);
-        return;
+    // Validation
+    // if (!createBookFormData.name.trim()) {
+    //   setMessage('Please enter a book title.');
+    //   setIsSubmitting(false);
+    //   return;
+    // }
+
+    // if (!createBookFormData.readUrl.trim() && !createBookFormData.pdfFile) {
+    //   setMessage('Please provide either a read online URL or upload a PDF file.');
+    //   setIsSubmitting(false);
+    //   return;
+    // }
+
+    if(!createBookFormData.name.trim()) {
+      validationErrors.name = "Name is required!";
+    } 
+
+    if(!createBookFormData.readUrl.trim() && !createBookFormData.pdfFile) {
+      if(!createBookFormData.readUrl) {
+        validationErrors.readUrl = "Either url or pdf is required!";
       }
 
-      if (!createBookFormData.readUrl.trim() && !createBookFormData.pdfFile) {
-        setMessage('Please provide either a read online URL or upload a PDF file.');
-        setIsSubmitting(false);
-        return;
+      if(!createBookFormData.pdfFile) {
+        validationErrors.pdfFile = "Either url or pdf is required!";
       }
+    }
 
+    setErrors(validationErrors);
+
+    if (Object.keys(validationErrors).length === 0) {
       // Create payload for file uploads
       const payload = new FormData();
       
@@ -153,28 +193,35 @@ export default function CreateBook() {
         payload.append('pdfFile', createBookFormData.pdfFile);
       }
 
-      // Call API
-      console.log('payload:');
-      for (let pair of payload.entries()) {
-        console.log(`${pair[0]}:`, pair[1]);
-      }
+      try {
+        // Call API
+        console.log('payload:');
+        for (let pair of payload.entries()) {
+          console.log(`${pair[0]}:`, pair[1]);
+        }
 
-      const result = await createBookAPI(payload);
-      
-      setMessage('Book added successfully!');
+        const result = await createBookAPI(payload);
+        
+        setMessage('Book added successfully!');
 
-      // Reset form
-      resetForm();
+        // Reset form
+        resetForm();
 
-      setTimeout(() => {
-        setMessage('');
+        setTimeout(() => {
+          setMessage('');
+          setIsSubmitting(false);
+          navigate('/'); // Navigate to books list or wherever appropriate
+        }, 1500);
+
+      } catch (error) {
+        setMessage(error.message || 'Failed to add book. Please try again.');
         setIsSubmitting(false);
-        navigate('/'); // Navigate to books list or wherever appropriate
-      }, 1500);
-
-    } catch (error) {
-      setMessage(error.message || 'Failed to add book. Please try again.');
+      }
+    } else {
       setIsSubmitting(false);
+      if (createBookMessageRef.current) {
+        createBookMessageRef.current.innerHTML = '';
+      }
     }
   };
 
@@ -223,16 +270,17 @@ export default function CreateBook() {
           <div className={styles.formGrid}>
             <div className={styles.formColumn}>
               <div className={styles.formGroup}>
-                <label className={styles.label} htmlFor="name">Book Title *</label>
+                <label className={styles.label} htmlFor="name">Book Title <span style={{ color: 'red' }}>*</span></label>
                 <input 
                   id="name"
+                  name="name"
                   type="text" 
                   value={createBookFormData.name} 
-                  onChange={(e) => setCreateBookFormData(prev => ({ ...prev, name: e.target.value }))} 
-                  className={styles.input} 
+                  onChange={handleInputChange}
+                  className={`${styles.input} ${(errors.name || errors.name)? "errorBorder": ''}`}
                   placeholder="Enter book title"
-                  required 
                 />
+                {errors.name && <span className={"errorMessage"}>{errors.name}</span>}
               </div>
 
               <div className={styles.formGroup}>
@@ -240,9 +288,10 @@ export default function CreateBook() {
                 <div className={styles.fileUpload}>
                   <input 
                     id="imageFile"
+                    name="imageFile"
                     type="file" 
                     accept="image/*" 
-                    onChange={(e) => setCreateBookFormData(prev => ({ ...prev, imageFile: e.target.files[0] }))} 
+                    onChange={handleInputChange}
                     className={styles.fileInput}
                   />
                   <div className={styles.fileInputLabel}>
@@ -285,8 +334,9 @@ export default function CreateBook() {
                   <label className={styles.label} htmlFor="year">Publication Year</label>
                   <select 
                     id="year"
+                    name="year"
                     value={createBookFormData.year} 
-                    onChange={(e) => setCreateBookFormData(prev => ({ ...prev, year: e.target.value }))}
+                    onChange={handleInputChange}
                     className={styles.select}
                   >
                     <option value="">Select Year</option>
@@ -302,6 +352,7 @@ export default function CreateBook() {
                   <label className={styles.label} htmlFor="length">Number of Pages</label>
                   <input 
                     id="length"
+                    name="length"
                     type="text" 
                     value={createBookFormData.length} 
                     onChange={handleLengthChange} 
@@ -335,11 +386,10 @@ export default function CreateBook() {
                   {/* Input for adding new genres */}
                   <input
                     id="genres"
+                    name="genres"
                     type="text" 
                     value={createBookFormData.genreInput}
-                    onChange={(e) =>
-                      setCreateBookFormData(prev => ({ ...prev, genreInput: e.target.value }))
-                    }
+                    onChange={handleInputChange}
                     onKeyDown={handleGenreInputKeyPress}
                     className={styles.genreInput}
                     placeholder={
@@ -390,9 +440,10 @@ export default function CreateBook() {
                 <label className={styles.label} htmlFor="author">Author</label>
                 <input
                   id="author"
+                  name="author"
                   type="text" 
                   value={createBookFormData.author} 
-                  onChange={(e) => setCreateBookFormData(prev => ({ ...prev, author: e.target.value }))}
+                  onChange={handleInputChange}
                   className={styles.input} 
                   placeholder="Author name"
                 />
@@ -402,8 +453,9 @@ export default function CreateBook() {
                 <label className={styles.label} htmlFor="plot">Plot Summary</label>
                 <textarea 
                   id="plot"
+                  name="plot"
                   value={createBookFormData.plot} 
-                  onChange={(e) => setCreateBookFormData(prev => ({ ...prev, plot: e.target.value }))} 
+                  onChange={handleInputChange}
                   className={`${styles.input} ${styles.textarea}`} 
                   rows="4"
                   placeholder="Brief description of the book's plot"
@@ -414,17 +466,18 @@ export default function CreateBook() {
 
           <div className={styles.formDivider}></div>
 
-          <div className={styles.accessSection}>
-            <h3 className={styles.sectionTitle}>Book Access (Required) *</h3>
+          <div className={`${styles.accessSection} ${(errors.readUrl && errors.pdfFile)? "errorBorder": ''}`}>
+            <h3 className={styles.sectionTitle}>Book Access (Required) <span style={{ color: 'red' }}>*</span></h3>
             <p className={styles.sectionSubtitle}>Provide at least one way to access the book</p>
             
             <div className={styles.formGroup}>
               <label className={styles.label} htmlFor="readUrl">Read Online URL</label>
               <input 
                 id="readUrl"
+                name="readUrl"
                 type="url" 
                 value={createBookFormData.readUrl} 
-                onChange={(e) => setCreateBookFormData(prev => ({ ...prev, readUrl: e.target.value }))}
+                onChange={handleInputChange}
                 className={styles.input} 
                 placeholder="https://example.com/read-online"
               />
@@ -435,11 +488,10 @@ export default function CreateBook() {
               <div className={styles.fileUpload}>
                 <input 
                   id="pdfFile"
+                  name="pdfFile"
                   type="file" 
                   accept=".pdf" 
-                  onChange={(e) =>
-                    setCreateBookFormData(prev => ({ ...prev, pdfFile: e.target.files[0] }))
-                  }
+                  onChange={handleInputChange}
                   className={styles.fileInput}
                 />
                 <div className={styles.fileInputLabel}>
@@ -468,13 +520,16 @@ export default function CreateBook() {
               </div>
             </div>
           </div>
+          {(errors.readUrl && errors.pdfFile ) && <span className={"errorMessage"}>{errors.readUrl}</span>}
 
           <div className={styles.checkboxContainer}>
             <label className={styles.checkboxLabel}>
               <input 
+                id="read"
+                name="read"
                 type="checkbox" 
                 checked={createBookFormData.read} 
-                onChange={() => setCreateBookFormData(prev => ({ ...prev, read: !prev.read }))} 
+                onChange={handleInputChange}
                 className={styles.checkbox}
               />
               <span className={styles.checkmark}></span>
