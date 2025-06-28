@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import { FaSearch, FaFilter, FaTimes } from "react-icons/fa";
-import styles from "./searchfilter.module.css"; // Fixed typo in import
+import styles from "./searchfilters.module.css";
 import FilterModal from "../filter-modal/FilterModal";
-import GenreSelector from "../genre-selector/GenreSelector";
+import FilterPopupSelect from "../genre-selector/FilterPopupSelect";
+import { GENRE_OPTIONS, SORT_OPTIONS } from '../../constants/constants';
 
 export default function SearchFilters() {
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
   const [searchText, setSearchText] = useState('');
-  const [selectedGenre, setSelectedGenre] = useState("");
+  const [sortValue, setSortValue] = useState("");
+  const [genreValue, setGenreValue] = useState("");
   const [filters, setFilters] = useState({
     yearRange: 2025,
     rating: 2.6,
@@ -48,20 +50,20 @@ export default function SearchFilters() {
       </div>
 
       <div className={styles.filters}>
-        <GenreSelector
-          selectedGenre={selectedGenre}
-          onSelect={(genre) => setSelectedGenre(genre)}
+        <FilterPopupSelect
+          options={GENRE_OPTIONS}
+          selectedValue={genreValue}
+          onSelect={setGenreValue}
+          placeholder="Select Genre"
+          twoColumns={true}
         />
 
-        <select className={styles.dropdown}>
-          <option value="">Sort by</option>
-          <option value="title-asc">Title (A-Z)</option>
-          <option value="title-desc">Title (Z-A)</option>
-          <option value="year-desc">Year (Newest)</option>
-          <option value="year-asc">Year (Oldest)</option>
-          <option value="rating-desc">Rating (Highest)</option>
-          <option value="rating-asc">Rating (Lowest)</option>
-        </select>
+        <FilterPopupSelect
+          options={SORT_OPTIONS}
+          selectedValue={sortValue}
+          onSelect={setSortValue}
+          placeholder="Sort by"
+        />
 
         <button className={styles.filterBtn} onClick={openFilterModal}   > 
           <FaFilter />

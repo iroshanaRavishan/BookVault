@@ -4,6 +4,9 @@
 }
 
 .button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   width: 150px;
   height: 45px;
   text-align: left;
@@ -27,13 +30,18 @@
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.4);
   padding: 12px;
   width: 220px;
+}
 
+.optionsList {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
 .optionsGrid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); 
-  gap: 8px 12px; 
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px 12px;
 }
 
 .option {
@@ -53,6 +61,18 @@
 .selected {
   background-color: #cacaca;
   font-weight: bold;
+}
+
+.closeIcon {
+  font-size: 18px;
+  margin-left: 8px;
+  cursor: pointer;
+  color: #707070;
+  transition: color 0.2s ease;
+}
+
+.closeIcon:hover {
+  color: #ff6b6b;
 }
 
 @keyframes fadeIn {
