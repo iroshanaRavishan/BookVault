@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System.ComponentModel.DataAnnotations;
 
-namespace BookVault.DTOs
+namespace BookVault.Application.DTOs.BookDTOs
 {
     public class CreateBookDto
     {
@@ -30,6 +30,8 @@ namespace BookVault.DTOs
         public string? ReadUrl { get; set; }
 
         public IFormFile? CoverImage { get; set; }
+
+        public string? Thumbnail { get; set; }
 
         public IFormFile? PdfFile { get; set; }
     }
