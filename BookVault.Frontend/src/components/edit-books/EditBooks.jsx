@@ -3,6 +3,7 @@ import styles from "./editbooks.module.css";
 import { useNavigate, useParams } from "react-router-dom";
 import { MdAdd, MdEdit, MdZoomIn, MdDownload, MdDelete } from "react-icons/md";
 import { IoCloseCircleSharp } from "react-icons/io5";
+import { GENRE_OPTIONS } from '../../constants/constants';
 
 export default function EditBooks() {
   const [name, setName] = useState("");
@@ -36,39 +37,6 @@ export default function EditBooks() {
 
   const navigate = useNavigate();
   const { id } = useParams();
-
-  // Predefined genre options
-  const predefinedGenres = [
-    "Fiction",
-    "Non-Fiction",
-    "Mystery",
-    "Thriller",
-    "Romance",
-    "Fantasy",
-    "Science Fiction",
-    "Horror",
-    "Biography",
-    "History",
-    "Self-Help",
-    "Business",
-    "Health",
-    "Travel",
-    "Cooking",
-    "Art",
-    "Poetry",
-    "Drama",
-    "Adventure",
-    "Young Adult",
-    "Children",
-    "Comedy",
-    "Crime",
-    "Philosophy",
-    "Psychology",
-    "Religion",
-    "Politics",
-    "Technology",
-    "Education",
-  ]
 
   // Generate years from 1900 to current year + 1
   const currentYear = new Date().getFullYear();
@@ -755,7 +723,7 @@ export default function EditBooks() {
                 <div className={styles.genreSuggestions}>
                   <span className={styles.suggestionsLabel}>Popular genres:</span>
                   <div className={styles.suggestionChips}>
-                    {predefinedGenres
+                    {GENRE_OPTIONS
                       .filter((genre) => !genres.includes(genre))
                       // .slice(0, 8) // limiting number of chips to show
                       .map((genre) => (
