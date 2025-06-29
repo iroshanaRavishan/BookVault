@@ -4,6 +4,7 @@ import styles from './auth.module.css';
 import ProfilePicSelectorModal from '../profile-picture-select-modal/ProfilePicSelectorModal';
 import { IoCloseCircleSharp } from "react-icons/io5";
 import PasswordInput from '../password-input/PasswordInput';
+import { LoadingAnimation } from '../loading-animation/LoadingAnimation';
 
 export default function Auth() {
   const navigate = useNavigate(); // Hook to programmatically navigate
@@ -360,6 +361,7 @@ export default function Auth() {
                 </div>
             </div>
           </div>
+          <LoadingAnimation />
         </div>
       </div>
   )
