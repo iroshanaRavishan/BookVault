@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import styles from './auth.module.css';
 import ProfilePicSelectorModal from '../profile-picture-select-modal/ProfilePicSelectorModal';
 import { IoCloseCircleSharp } from "react-icons/io5";
+import PasswordInput from '../password-input/PasswordInput';
 
 export default function Auth() {
   const navigate = useNavigate(); // Hook to programmatically navigate
@@ -16,6 +17,7 @@ export default function Auth() {
     Email: "",
     Name: "",
     PasswordHash: "",
+    confirmPassword: "",
     UserName: ""
   });
 
@@ -27,8 +29,8 @@ export default function Auth() {
   const [fileName, setFileName] = useState("");
 
   const validationErrors = {};
-  const loginMessageElement = document.querySelector(".login-message");
-  const regMessageElement = document.querySelector(".reg-message");
+  const loginMessageRef = useRef(null);
+  const regMessageRef = useRef(null);
   
   // here, it does not ask an already logged in user to the login over and over again
   useEffect(()=>{
@@ -61,6 +63,15 @@ export default function Auth() {
     setLoginFormData({
       ...loginFormData, [name] : value
     });
+    
+    // Clear specific error on input
+    if (errors[name]) {
+      setErrors(prevErrors => {
+        const updatedErrors = { ...prevErrors };
+        delete updatedErrors[name];
+        return updatedErrors;
+      });
+    }
   }
 
   function handleRegChange(e){
@@ -68,6 +79,24 @@ export default function Auth() {
     setRegFormData({
       ...regFormData, [name] : value
     });
+
+    // Clear specific error on input
+    if (errors[name]) {
+      setErrors(prevErrors => {
+        const updatedErrors = { ...prevErrors };
+        delete updatedErrors[name];
+        return updatedErrors;
+      });
+    }
+
+    // Special case for password mismatch
+    if ((name === 'PasswordHash' || name === 'confirmPassword') && errors.passwordMatch) {
+      setErrors(prevErrors => {
+        const updatedErrors = { ...prevErrors };
+        delete updatedErrors.passwordMatch;
+        return updatedErrors;
+      });
+    }
   }
 
   function validateEmail(email) {
@@ -78,13 +107,13 @@ export default function Auth() {
   function deactivateContainer() {
     setFormActive(true);
     setErrors({})
-    loginMessageElement.innerHTML = '';
+    if (loginMessageRef.current) loginMessageRef.current.innerHTML = '';
   }
 
   function activateContainer() {
     setFormActive(false);
     setErrors({})
-    regMessageElement.innerHTML = '';
+    if (regMessageRef.current) regMessageRef.current.innerHTML = '';
   }
 
   async function loginHandler(e){
@@ -120,10 +149,10 @@ export default function Auth() {
         setIsLoading(false);
       }
 
-      if(data.message) {
+      if (loginMessageRef.current) {
         let errorMessages = "<div><span style='font-size: 15px;'>Attention:</span></div> <ul>";
         errorMessages += "<li>" + data.message + "</li></ul>";
-        loginMessageElement.innerHTML = errorMessages;
+        loginMessageRef.current.innerHTML = errorMessages;
       }
   
       console.log("login status: ", data);
@@ -133,7 +162,9 @@ export default function Auth() {
         navigate('/');
       }
     }else {
-      loginMessageElement.innerHTML = '';
+      if (loginMessageRef.current) {
+        loginMessageRef.current.innerHTML = '';
+      }
     }
     setIsLoading(false);
   }
@@ -159,8 +190,19 @@ export default function Auth() {
       validationErrors.PasswordHash = "Password is required!";
     }
 
+    if(!regFormData.confirmPassword.trim()) {
+      validationErrors.confirmPassword = "Confirm Password is required!";
+    }
+
     if(!profileImgData) {
       validationErrors.ProfilePicture = "Required field!";
+    }
+
+    // Password match validation
+    if (regFormData.PasswordHash || regFormData.confirmPassword) {
+      if (regFormData.PasswordHash !== regFormData.confirmPassword) {
+        validationErrors.passwordMatch = "Passwords do not match";
+      }
     }
 
     // creating the user name
@@ -205,11 +247,13 @@ export default function Auth() {
         })
 
         errorMessages += "</ul>"
-        regMessageElement.innerHTML = errorMessages;
+        regMessageRef.current.innerHTML = errorMessages;
       }
       console.log("register status: ", data);
     } else {
-      regMessageElement.innerHTML = '';
+      if (regMessageRef.current) {
+        regMessageRef.current.innerHTML = '';
+      }
     }
     setIsLoading(false);
   }
@@ -220,11 +264,18 @@ export default function Auth() {
           <div className={`${styles.formContainer} ${styles.signIn}`}> 
             <form action="#" className={styles.form} onSubmit={loginHandler}>
               <h1>Sign In</h1>
-              <input type="text" name="Email" placeholder='example@hello.com' onChange={handleLoginChange} />
-              {errors.Email && <span className={styles.errorMessage}>{errors.Email}</span>}<br />
+              <input type="text" name="Email" className={`${styles.formInput} ${errors.Email? "errorBorder": ''}`} placeholder='example@hello.com' onChange={handleLoginChange} />
+              {errors.Email && <span className={"errorMessage"}>{errors.Email}</span>}<br />
 
-              <input type="password" name="Password" placeholder="******" onChange={handleLoginChange} />
-              {errors.Password && <span className={styles.errorMessage}>{errors.Password}</span>}
+              <PasswordInput
+                name="Password"
+                style={{ alignItems: 'center' }}
+                value={regFormData.Password}
+                onChange={handleLoginChange}
+                placeholder="Password"
+                className={`${styles.formInput} ${errors.Password ? "errorBorder": ''}`}
+              />
+              {errors.Password && <span className={"errorMessage"}>{errors.Password}</span>}
               <br />
               
               <button type="submit" disabled={isLoding}>
@@ -233,45 +284,65 @@ export default function Auth() {
                   "Login" 
                 }
               </button>
-              <p className={`login-message ${styles.message}`}></p>
+              <p ref={loginMessageRef} className={`message`}></p>
             </form>
           </div>
           <div className={`${styles.formContainer} ${styles.signUp}`}> 
-            <form action="#" className={styles.form} onSubmit={registerHandler} autoComplete="off">
-              <h1>Create Account</h1>
-              <input type="text" name="Name" id="name" placeholder="Enter your name" onChange={handleRegChange}  />
-              {errors.Name && <span className={styles.errorMessage}>{errors.Name}</span>}<br />
+            <h1>Create Account</h1>
+            <div className={styles.scrollWrapper}>
+              <form action="#" className={styles.form} style={{paddingRight: '34px'}} onSubmit={registerHandler} autoComplete="off">
+                <input type="text" name="Name" id="name" className={`${styles.formInput} ${errors.Name? "errorBorder": ''}`} placeholder="Enter your name" onChange={handleRegChange}  />
+                {errors.Name && <span className={"errorMessage"}>{errors.Name}</span>}<br />
 
-              <input type="text" name="Email" id="email" placeholder="example@hello.com" onChange={handleRegChange}  />
-              {errors.Email && <span className={styles.errorMessage}>{errors.Email}</span>}<br />
+                <input type="text" name="Email" id="email" className={`${styles.formInput} ${errors.Email? "errorBorder": ''}`} placeholder="example@hello.com" onChange={handleRegChange}  />
+                {errors.Email && <span className={"errorMessage"}>{errors.Email}</span>}<br />
 
-              <input type="password" name="PasswordHash" id="password" placeholder="******" onChange={handleRegChange} />
-              {errors.PasswordHash && <span className={styles.errorMessage}>{errors.PasswordHash}</span>} <br />
-
-              <div className={styles.selectingProfilePic}>
-                <ProfilePicSelectorModal 
-                  onDataSend={handleModelProfileImgData} 
-                  setLocallyUploadedProfileImg={setLocallyUploadedProfileImg} 
-                  locallyUploadedProfileImg={locallyUploadedProfileImg} 
-                  fileName={fileName} 
-                  setFileName={setFileName}
+                <PasswordInput
+                  name="PasswordHash"
+                  style={{ alignItems: 'center' }}
+                  value={regFormData.PasswordHash}
+                  onChange={handleRegChange}
+                  placeholder="Password"
+                  className={`${styles.formInput} ${(errors.PasswordHash || errors.passwordMatch)? "errorBorder": ''}`}
                 />
+                {errors.PasswordHash && <span className={"errorMessage"}>{errors.PasswordHash}</span>} <br />
 
-                { errors.ProfilePicture && <span className={styles.errorMessage} style={{marginLeft: "10px"}}>{errors.ProfilePicture}</span> } 
-                { profileImgData && 
-                  <div className='selectedImageContainer'>
-                    <IoCloseCircleSharp size={20} className='cancel-profile-picture' color="#e53e3e" onClick={handleCloseSelectedImage}/>
-                    <img className="profile-picture"  src={profileImgData} alt="select-profile" /> 
-                  </div>
-                } 
-              </div>
-              <button type="submit" disabled={isLoding}>
-                { isLoding?
-                  <div className={styles.loadingSpinner}></div>
-                  : "Register" }
-              </button>
-              <p className={`reg-message ${styles.message}`}></p>
-            </form>
+                <PasswordInput
+                  name="confirmPassword"
+                  value={regFormData.confirmPassword}
+                  onChange={handleRegChange}
+                  placeholder="Confirm Password"
+                  style={{ alignItems: 'center'}}
+                  className={`${styles.formInput} ${(errors.confirmPassword || errors.passwordMatch)? "errorBorder": ''}`}
+                />
+                {errors.confirmPassword && <span className={"errorMessage"}>{errors.confirmPassword}</span>}
+                {errors.passwordMatch && <span className={"errorMessage"}>{errors.passwordMatch}</span>}
+
+                <div className={styles.selectingProfilePic} style={ profileImgData ? {} : { marginTop: '20px' } }>
+                  <ProfilePicSelectorModal 
+                    onDataSend={handleModelProfileImgData} 
+                    setLocallyUploadedProfileImg={setLocallyUploadedProfileImg} 
+                    locallyUploadedProfileImg={locallyUploadedProfileImg} 
+                    fileName={fileName} 
+                    setFileName={setFileName}
+                  />
+
+                  { errors.ProfilePicture && <span className={"errorMessage"} style={{marginLeft: "10px"}}>{errors.ProfilePicture}</span> } 
+                  { profileImgData && 
+                    <div className='selectedImageContainer'>
+                      <IoCloseCircleSharp size={20} className='cancel-profile-picture' color="#e53e3e" onClick={handleCloseSelectedImage}/>
+                      <img className="profile-picture"  src={profileImgData} alt="select-profile" /> 
+                    </div>
+                  } 
+                </div>
+                <button type="submit" disabled={isLoding}>
+                  { isLoding?
+                    <div className={styles.loadingSpinner}></div>
+                    : "Register" }
+                </button>
+                <p ref={regMessageRef}  className={`message`}></p>
+              </form>
+            </div>
           </div>
           <div className={styles.toggleContainer}>
             <div className={styles.toggle}>
@@ -279,13 +350,13 @@ export default function Auth() {
               <div className={`${styles.togglePanel} ${styles.toggleLeft}`}>
                 <h1>Welcome Back!</h1>
                 <p>Enter your personal details to use all of site features. Enter your personal details to use all of site features</p>
-                <button className={ isLoding ? `${styles.loading}` : `${styles.hidden}`} disabled={isLoding} onClick={activateContainer}> Sign In </button>
+                <button className={ isLoding ? `${styles.loading}` : `${styles.hidden}`} style={{width: '80%'}} disabled={isLoding} onClick={activateContainer}> Sign In </button>
               </div>
 
               <div className={`${styles.togglePanel} ${styles.toggleRight}`} style={{ color: "black" }}>
                 <h1>Hello, Friend!</h1>
                 <p>Register with your personal details to use all of site features</p>
-                  <button  className={ isLoding ? `${styles.loading}` : `${styles.hidden}`} disabled={isLoding} onClick={deactivateContainer} > Sign Up </button>
+                  <button  className={ isLoding ? `${styles.loading}` : `${styles.hidden}`} style={{width: '80%'}} disabled={isLoding} onClick={deactivateContainer} > Sign Up </button>
                 </div>
             </div>
           </div>

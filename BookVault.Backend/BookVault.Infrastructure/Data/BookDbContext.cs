@@ -1,4 +1,6 @@
-﻿using BookVault.Models;
+﻿using BookVault.Data.Configurations;
+using BookVault.Infrastructure.Data.Configurations;
+using BookVault.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace BookVault.Data
@@ -10,7 +12,8 @@ namespace BookVault.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasDefaultSchema("app");
-            modelBuilder.ApplyConfigurationsFromAssembly(typeof(BookDbContext).Assembly);
+            modelBuilder.ApplyConfiguration(new BookConfiguration()); // tells EF Core “Apply all the rules written for the Book entity in the BookConfiguration class”
+            // above line leads to avoid updating other tables inside the database
             base.OnModelCreating(modelBuilder);
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -32,6 +35,7 @@ namespace BookVault.Data
                             isRead: false,
                             readUrl: "https://example.com/harrypotter12",
                             coverImagePath: "",
+                            thumbnailPath: "",
                             pdfFilePath: ""
                         );
                         await context.Set<Book>().AddAsync(sampleBook);
@@ -54,6 +58,7 @@ namespace BookVault.Data
                             isRead: false,
                             readUrl: "https://example.com/harrypotter12",
                             coverImagePath: "",
+                            thumbnailPath: "",
                             pdfFilePath: ""
                         );
                         context.Set<Book>().Add(sampleBook);
