@@ -1,66 +1,45 @@
-import React, { useState, useEffect } from 'react';
-import styles from './editbooks.module.css';
+import { useState, useEffect } from "react";
+import styles from "./editbooks.module.css";
 import { useNavigate, useParams } from "react-router-dom";
-import { MdClear, MdAdd, MdClose, MdEdit } from "react-icons/md";
+import { MdAdd, MdEdit, MdZoomIn, MdDownload, MdDelete } from "react-icons/md";
+import { IoCloseCircleSharp } from "react-icons/io5";
+import { GENRE_OPTIONS } from '../../constants/constants';
 
 export default function EditBooks() {
+  const [name, setName] = useState("");
+  const [imageFile, setImageFile] = useState(null);
+  const [existingImageUrl, setExistingImageUrl] = useState("");
+  const [existingImagePath, setExistingImagePath] = useState("");
+  const [removeExistingImage, setRemoveExistingImage] = useState(false);
+  const [year, setYear] = useState("");
+  const [read, setRead] = useState(false);
+  const [genres, setGenres] = useState([]);
+  const [genreInput, setGenreInput] = useState("");
+  const [author, setAuthor] = useState("");
+  const [plot, setPlot] = useState("");
+  const [length, setLength] = useState("");
+  const [readUrl, setReadUrl] = useState("");
+  const [pdfFile, setPdfFile] = useState(null);
+  const [existingPdfUrl, setExistingPdfUrl] = useState("");
+  const [existingPdfPath, setExistingPdfPath] = useState("");
+  const [existingThumbnailPath, setExistingThumbnailPath] = useState("");
+  const [removeExistingPdf, setRemoveExistingPdf] = useState(false);
+  const [message, setMessage] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [bookId, setBookId] = useState(null);
+  const [isRemoveImageAtUpdate, setIsRemoveImageAtUpdate] = useState(false);
+  const [isRemovePdfAtUpdate, setIsRemovePdfAtUpdate] = useState(false);
 
-  const [name, setName] = useState("")
-  const [imageFile, setImageFile] = useState(null)
-  const [existingImageUrl, setExistingImageUrl] = useState("")
-  const [year, setYear] = useState("")
-  const [read, setRead] = useState(false)
-  const [genres, setGenres] = useState([])
-  const [genreInput, setGenreInput] = useState("")
-  const [author, setAuthor] = useState("")
-  const [plot, setPlot] = useState("")
-  const [length, setLength] = useState("")
-  const [readUrl, setReadUrl] = useState("")
-  const [pdfFile, setPdfFile] = useState(null)
-  const [existingPdfUrl, setExistingPdfUrl] = useState("")
-  const [message, setMessage] = useState("")
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [isLoading, setIsLoading] = useState(true)
-  const [bookId, setBookId] = useState(null)
+  // Modal states
+  const [showImageModal, setShowImageModal] = useState(false);
+  const [modalImageUrl, setModalImageUrl] = useState("");
 
-  const navigate = useNavigate()
-  const { id } = useParams() // Get book ID from URL params
-
-  // Predefined genre options
-  const predefinedGenres = [
-    "Fiction",
-    "Non-Fiction",
-    "Mystery",
-    "Thriller",
-    "Romance",
-    "Fantasy",
-    "Science Fiction",
-    "Horror",
-    "Biography",
-    "History",
-    "Self-Help",
-    "Business",
-    "Health",
-    "Travel",
-    "Cooking",
-    "Art",
-    "Poetry",
-    "Drama",
-    "Adventure",
-    "Young Adult",
-    "Children",
-    "Comedy",
-    "Crime",
-    "Philosophy",
-    "Psychology",
-    "Religion",
-    "Politics",
-    "Technology",
-    "Education",
-  ]
+  const navigate = useNavigate();
+  const { id } = useParams();
 
   // Generate years from 1900 to current year + 1
-  const currentYear = new Date().getFullYear()
+  const currentYear = new Date().getFullYear();
   const years = []
   for (let i = currentYear + 1; i >= 1900; i--) {
     years.push(i)
@@ -102,11 +81,17 @@ export default function EditBooks() {
 
         // Handle existing files
         if (bookData.coverImagePath) {
+          setExistingImagePath(bookData.coverImagePath)
           setExistingImageUrl(`https://localhost:7157/uploads/${bookData.coverImagePath}`)
         }
 
         if (bookData.pdfFilePath) {
+          setExistingPdfPath(bookData.pdfFilePath)
           setExistingPdfUrl(`https://localhost:7157/uploads/${bookData.pdfFilePath}`)
+        }
+
+        if (bookData.thumbnailPath) {
+          setExistingThumbnailPath(bookData.thumbnailPath)
         }
 
         setIsLoading(false)
@@ -155,6 +140,114 @@ export default function EditBooks() {
     addGenre(genre)
   }
 
+  // Upload file function
+  const uploadFile = async (file, fileType) => {
+    console.log(`Uploading ${fileType}:`, file.name, file.type, file.size)
+
+    const formData = new FormData()
+    formData.append("file", file)
+    formData.append("fileType", fileType)
+
+    try {
+      const response = await fetch("https://localhost:7157/api/Books/upload", {
+        method: "POST",
+        body: formData,
+      })
+
+      if (!response.ok) {
+        const errorText = await response.text()
+        console.error("Upload error response:", errorText)
+        throw new Error(`Failed to upload ${fileType}: ${response.status} ${response.statusText}`)
+      }
+
+      const result = await response.json()
+      console.log("Upload result:", result)
+
+      const filePathToBeCleaned = result.filePath;
+      // Split by backslash and get last part
+      const cleanedFilePath = filePathToBeCleaned.split('\\').pop();
+
+      let generatedThumbnailPath = null;
+
+      if (fileType == "pdf") {
+        try {
+          const thumbnailResponse = await fetch(`https://localhost:7157/api/PdfThumbnail/${cleanedFilePath}`, {
+            method: "GET"
+          })
+
+          if (!thumbnailResponse.ok) {
+            throw new Error("Failed to generate thumbnail");
+          }
+
+        const thumbnailResult = await thumbnailResponse.json();
+        console.log("Thumbnail generated:", thumbnailResult);
+
+        generatedThumbnailPath = thumbnailResult.thumbnailPath;
+        setExistingThumbnailPath(generatedThumbnailPath); 
+        } catch (thumbnailError) {
+          console.error("Error generating thumbnail:", thumbnailError);
+          throw new Error("Failed to generate thumbnail for PDF");
+        }
+      } else {
+        generatedThumbnailPath = null; // No thumbnail for image files
+      }
+
+      return { filePath: result.filePath, thumbnailPath: generatedThumbnailPath };
+    } catch (error) {
+      console.error(`Error uploading ${fileType}:`, error);
+      throw error;
+    }
+  };
+
+  // Delete file function (only deletes file, not database)
+  const deleteFile = async (filePath) => {
+    try {
+      const response = await fetch(`https://localhost:7157/api/Books/delete-file`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ filePath }),
+      })
+
+      if (!response.ok) {
+        throw new Error("Failed to delete file")
+      }
+
+      return true
+    } catch (error) {
+      console.error("Error deleting file:", error)
+      return false
+    }
+  }
+
+  // NEW: Delete book file function (deletes file AND updates database)
+  const deleteBookFile = async (filePath, fileType) => {
+    try {
+      const response = await fetch(`https://localhost:7157/api/Books/delete-book-file`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          bookId: bookId,
+          filePath: filePath,
+          fileType: fileType,
+        }),
+      })
+
+      if (!response.ok) {
+        throw new Error("Failed to delete file and update database")
+      }
+
+      return true
+    } catch (error) {
+      console.error("Error deleting book file:", error)
+      return false
+    }
+  }
+
+  // Update book API function
   const updateBookAPI = async (bookData) => {
     console.log("Updating book with data:", bookData)
     try {
@@ -167,17 +260,20 @@ export default function EditBooks() {
       })
 
       if (!response.ok) {
-        const errorData = await response.json()
+        const errorData = await response.text()
+        console.error("Update error response:", errorData)
 
         let errorMessage = "Failed to update book"
-
-        if (errorData.errors && typeof errorData.errors === "object") {
-          // Flatten and join all error messages
-          const messages = Object.values(errorData.errors).flat()
-          errorMessage = messages.join(" | ")
-        } else if (typeof errorData.message === "string") {
-          // Use single message
-          errorMessage = errorData.message
+        try {
+          const parsedError = JSON.parse(errorData)
+          if (parsedError.errors && typeof parsedError.errors === "object") {
+            const messages = Object.values(parsedError.errors).flat()
+            errorMessage = messages.join(" | ")
+          } else if (typeof parsedError.message === "string") {
+            errorMessage = parsedError.message
+          }
+        } catch {
+          errorMessage = `Failed to update book: ${response.status} ${response.statusText}`
         }
 
         throw new Error(errorMessage)
@@ -202,13 +298,16 @@ export default function EditBooks() {
         return
       }
 
-      if (!readUrl.trim() && !pdfFile && !existingPdfUrl) {
-        setMessage("Please provide either a read online URL or upload a PDF file.")
-        setIsSubmitting(false)
-        return
+      const noReadUrl = !readUrl || readUrl.trim() === "";
+      const noPdf = !pdfFile && (!existingPdfUrl || removeExistingPdf);
+
+      if (noReadUrl && noPdf) {
+        setMessage("Please provide either a Read Online URL or upload a PDF file.");
+        setIsSubmitting(false);
+        return;
       }
 
-      // Prepare update data (JSON format for PUT request)
+      // Prepare update data
       const updateData = {
         name: name.trim(),
         genres: genres,
@@ -216,20 +315,72 @@ export default function EditBooks() {
         plot: plot.trim(),
         length: length ? Number.parseInt(length) : null,
         isRead: read,
-        readUrl: readUrl.trim(),
-      }
+        readUrl: readUrl.trim() === "" ? null : readUrl.trim(),
+        // coverImagePath: null,
+        // pdfFilePath: null,
+      };
 
       // Handle release date
       if (year) {
         updateData.releaseDate = new Date(Number.parseInt(year), 0, 1).toISOString()
       }
 
-      // For file uploads, we'd need a separate endpoint or different handling
-      // This is a simplified version - you might want to handle file uploads separately
+      console.log("Final update payload:", updateData)
 
-      console.log("Update payload:", updateData)
+      // ----------------------------------------------------------------------------
+      // if (imageFile) {
+      //   const imagePath = await uploadFile(imageFile, "image");
+      //   updateData.coverImagePath = imagePath;
+      //   if (existingImagePath) await deleteFile(existingImagePath);
+      // } else if (removeExistingImage && existingImagePath) {
+      //   updateData.coverImagePath = null;
+      //   await deleteFile(existingImagePath);
+      // }
 
-      const result = await updateBookAPI(updateData)
+      // if (pdfFile) {
+      //   const pdfPath = await uploadFile(pdfFile, "pdf");
+      //   updateData.pdfFilePath = pdfPath;
+      //   if (existingPdfPath) await deleteFile(existingPdfPath);
+      // } else if (removeExistingPdf && existingPdfPath) {
+      //   updateData.pdfFilePath = null;
+      //   await deleteFile(existingPdfPath);
+      // }
+
+      // const result = await updateBookAPI(updateData);
+      // ----------------------------------------------------------------------------
+
+      const result = await updateBookAPI(updateData);
+
+      if (imageFile) {
+        const imagePath = await uploadFile(imageFile, "image");
+        updateData.coverImagePath = imagePath.filePath;
+        if (existingImagePath) await deleteFile(existingImagePath);
+      }
+
+      if (pdfFile) {
+        const pdfPath = await uploadFile(pdfFile, "pdf");
+        updateData.pdfFilePath = pdfPath.filePath;
+        if (existingPdfPath) await deleteFile(existingPdfPath);
+        if (existingThumbnailPath) await deleteFile(existingThumbnailPath);
+        
+        updateData.thumbnailPath = pdfPath.thumbnailPath; // update existing thumbnail if PDF is updated
+      }
+
+      if (result){
+        console.log("updated data in the if ", updateData)
+        // Update full record again with image/pdf paths included
+        await updateBookAPI(updateData);
+      }
+
+      if (isRemoveImageAtUpdate) {
+        // If we are removing the existing image, we need to delete it from the server
+        deleteExistingImage();
+      }
+
+      if (isRemovePdfAtUpdate) {
+        // If we are removing the existing PDF, we need to delete it from the server
+        deleteExistingPdf();
+      }
 
       setMessage("Book updated successfully!")
 
@@ -237,8 +388,9 @@ export default function EditBooks() {
         setMessage("")
         setIsSubmitting(false)
         navigate("/") // Navigate to books list or book detail page
-      }, 1500)
+      }, 1000)
     } catch (error) {
+      console.error("Update error:", error)
       setMessage(error.message || "Failed to update book. Please try again.")
       setIsSubmitting(false)
     }
@@ -248,14 +400,114 @@ export default function EditBooks() {
     navigate("/") // Navigate back to books list
   }
 
-  const removeExistingImage = () => {
+  const handleRemoveExistingImage = () => {
     setExistingImageUrl("")
-    // You might want to call an API to delete the image from server
+    setRemoveExistingImage(true)
+    setIsRemoveImageAtUpdate(true) // Set flag to indicate image removal
   }
 
-  const removeExistingPdf = () => {
+  const handleRemoveExistingPdf = () => {
     setExistingPdfUrl("")
-    // You might want to call an API to delete the PDF from server
+    setRemoveExistingPdf(true)
+    setIsRemovePdfAtUpdate(true) // Set flag to indicate pdf removal
+  }
+
+  const handleImageFileChange = (e) => {
+    const file = e.target.files[0]
+    if (file) {
+      console.log("Image file selected:", file.name, file.type, file.size)
+      setImageFile(file)
+      setRemoveExistingImage(false)
+      setIsRemoveImageAtUpdate(false)
+    }
+  }
+
+  const handlePdfFileChange = (e) => {
+    const file = e.target.files[0]
+    if (file) {
+      console.log("PDF file selected:", file.name, file.type, file.size)
+      setPdfFile(file)
+      setRemoveExistingPdf(false)
+      setIsRemovePdfAtUpdate(false)
+    }
+  }
+
+  const clearImageFile = () => {
+    setImageFile(null)
+    const fileInput = document.getElementById("imageFile")
+    if (fileInput) fileInput.value = ""
+  }
+
+  const clearPdfFile = () => {
+    setPdfFile(null)
+    const fileInput = document.getElementById("pdfFile")
+    if (fileInput) fileInput.value = ""
+  }
+
+  // Modal functions
+  const openImageModal = (imageUrl) => {
+    setModalImageUrl(imageUrl)
+    setShowImageModal(true)
+  }
+
+  const closeImageModal = () => {
+    setShowImageModal(false)
+    setModalImageUrl("")
+  }
+
+  // Download PDF function
+  const downloadPdf = (pdfUrl) => {
+    const link = document.createElement("a")
+    link.href = pdfUrl
+    link.download = pdfUrl.split("/").pop() || "book.pdf"
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+  }
+
+  // Delete uploaded file functions (immediately delete from server)
+  const deleteUploadedImage = async () => {
+    if (imageFile) {
+      clearImageFile()
+      setMessage("New image file removed.")
+    }
+  }
+
+  const deleteUploadedPdf = async () => {
+    if (pdfFile) {
+      clearPdfFile()
+      setMessage("New PDF file removed.")
+    }
+  }
+
+  // UPDATED: Delete existing files from server AND database
+  const deleteExistingImage = async () => {
+    if (existingImagePath) {
+      const success = await deleteBookFile(existingImagePath, "image")
+      if (success) {
+        setExistingImageUrl("")
+        setExistingImagePath("")
+        setRemoveExistingImage(true)
+        setMessage("Existing image deleted successfully from server and database.")
+      } else {
+        setMessage("Failed to delete existing image.")
+      }
+    }
+  }
+
+  const deleteExistingPdf = async () => {
+    if (existingPdfPath) {
+      const success = await deleteBookFile(existingPdfPath, "pdf")
+      if (success) {
+        await deleteBookFile(existingThumbnailPath, "thumbnail")
+        setExistingPdfUrl("")
+        setExistingPdfPath("")
+        setRemoveExistingPdf(true)
+        setMessage("Existing PDF deleted successfully from server and database.")
+      } else {
+        setMessage("Failed to delete existing PDF.")
+      }
+    }
   }
 
   if (isLoading) {
@@ -311,23 +563,34 @@ export default function EditBooks() {
                   Cover Image
                 </label>
 
-                {/* Show existing image if available */}
-                {existingImageUrl && !imageFile && (
+                {/* Show existing image if available and not being removed */}
+                {existingImageUrl && !imageFile && !removeExistingImage && (
                   <div className={styles.existingFileContainer}>
                     <div className={styles.existingImagePreview}>
                       <img
                         src={existingImageUrl || "/placeholder.svg"}
                         alt="Current cover"
                         className={styles.existingImage}
+                        onClick={() => openImageModal(existingImageUrl)}
                       />
-                      <button
-                        type="button"
-                        className={styles.removeExistingButton}
-                        onClick={removeExistingImage}
-                        title="Remove current image"
-                      >
-                        <MdClose />
-                      </button>
+                      <div className={styles.imageActions}>
+                        <button
+                          type="button"
+                          className={styles.actionButton}
+                          onClick={() => openImageModal(existingImageUrl)}
+                          title="View larger"
+                        >
+                          <MdZoomIn />
+                        </button>
+                        <button
+                          type="button"
+                          className={styles.removeExistingButton}
+                          onClick={handleRemoveExistingImage}
+                          title="Remove current Image"
+                        >
+                          <MdDelete />
+                        </button>
+                      </div>
                     </div>
                     <p className={styles.existingFileText}>Current cover image</p>
                   </div>
@@ -338,11 +601,15 @@ export default function EditBooks() {
                     id="imageFile"
                     type="file"
                     accept="image/*"
-                    onChange={(e) => setImageFile(e.target.files[0])}
+                    onChange={handleImageFileChange}
                     className={styles.fileInput}
                   />
                   <div className={styles.fileInputLabel}>
-                    {imageFile ? imageFile.name : existingImageUrl ? "Choose new image file" : "Choose an image file"}
+                    {imageFile
+                      ? imageFile.name
+                      : existingImageUrl && !removeExistingImage
+                        ? "Choose new image file"
+                        : "Choose an image file"}
                   </div>
                   <button
                     type="button"
@@ -352,16 +619,8 @@ export default function EditBooks() {
                     Browse
                   </button>
                   {imageFile && (
-                    <button
-                      type="button"
-                      className={styles.clearButton}
-                      onClick={() => {
-                        setImageFile(null)
-                        const fileInput = document.getElementById("imageFile")
-                        if (fileInput) fileInput.value = ""
-                      }}
-                    >
-                      <MdClear />
+                    <button type="button" className={styles.deleteButton} onClick={deleteUploadedImage}>
+                      <IoCloseCircleSharp size={20}/>
                     </button>
                   )}
                 </div>
@@ -372,7 +631,16 @@ export default function EditBooks() {
                       src={URL.createObjectURL(imageFile) || "/placeholder.svg"}
                       alt="New cover preview"
                       className={styles.previewImage}
+                      onClick={() => openImageModal(URL.createObjectURL(imageFile))}
                     />
+                    <button
+                      type="button"
+                      className={styles.previewZoomButton}
+                      onClick={() => openImageModal(URL.createObjectURL(imageFile))}
+                      title="View larger"
+                    >
+                      <MdZoomIn />
+                    </button>
                   </div>
                 )}
               </div>
@@ -423,7 +691,7 @@ export default function EditBooks() {
                         className={styles.genreChipRemove}
                         aria-label={`Remove ${genre}`}
                       >
-                        <MdClose size={16} />
+                        <IoCloseCircleSharp size={16} />
                       </button>
                     </div>
                   ))}
@@ -455,9 +723,9 @@ export default function EditBooks() {
                 <div className={styles.genreSuggestions}>
                   <span className={styles.suggestionsLabel}>Popular genres:</span>
                   <div className={styles.suggestionChips}>
-                    {predefinedGenres
+                    {GENRE_OPTIONS
                       .filter((genre) => !genres.includes(genre))
-                      .slice(0, 8)
+                      // .slice(0, 8) // limiting number of chips to show
                       .map((genre) => (
                         <button
                           key={genre}
@@ -531,19 +799,29 @@ export default function EditBooks() {
                 PDF File
               </label>
 
-              {/* Show existing PDF if available */}
-              {existingPdfUrl && !pdfFile && (
+              {/* Show existing PDF if available and not being removed */}
+              {existingPdfUrl && !pdfFile && !removeExistingPdf && (
                 <div className={styles.existingFileContainer}>
                   <div className={styles.existingPdfInfo}>
                     <span className={styles.existingFileText}>Current PDF file available</span>
-                    <button
-                      type="button"
-                      className={styles.removeExistingButton}
-                      onClick={removeExistingPdf}
-                      title="Remove current PDF"
-                    >
-                      <MdClose />
-                    </button>
+                    <div className={styles.pdfActions}>
+                      <button
+                        type="button"
+                        className={styles.actionButton}
+                        onClick={() => downloadPdf(existingPdfUrl)}
+                        title="Download PDF"
+                      >
+                        <MdDownload />
+                      </button>
+                      <button
+                        type="button"
+                        className={styles.removeExistingButton}
+                        onClick={handleRemoveExistingPdf}
+                        title="Remove current PDF"
+                      >
+                        <MdDelete />
+                      </button>
+                    </div>
                   </div>
                 </div>
               )}
@@ -553,11 +831,15 @@ export default function EditBooks() {
                   id="pdfFile"
                   type="file"
                   accept=".pdf"
-                  onChange={(e) => setPdfFile(e.target.files[0])}
+                  onChange={handlePdfFileChange}
                   className={styles.fileInput}
                 />
                 <div className={styles.fileInputLabel}>
-                  {pdfFile ? pdfFile.name : existingPdfUrl ? "Choose new PDF file" : "Choose a PDF file"}
+                  {pdfFile
+                    ? pdfFile.name
+                    : existingPdfUrl && !removeExistingPdf
+                      ? "Choose new PDF file"
+                      : "Choose a PDF file"}
                 </div>
                 <button
                   type="button"
@@ -567,16 +849,8 @@ export default function EditBooks() {
                   Browse
                 </button>
                 {pdfFile && (
-                  <button
-                    type="button"
-                    className={styles.clearButton}
-                    onClick={() => {
-                      setPdfFile(null)
-                      const fileInput = document.getElementById("pdfFile")
-                      if (fileInput) fileInput.value = ""
-                    }}
-                  >
-                    <MdClear />
+                  <button type="button" className={styles.deleteButton} onClick={deleteUploadedPdf}>
+                    <IoCloseCircleSharp size={20} />
                   </button>
                 )}
               </div>
@@ -600,6 +874,18 @@ export default function EditBooks() {
           </div>
         </form>
       </div>
+
+      {/* Image Modal */}
+      {showImageModal && (
+        <div className={styles.modal} onClick={closeImageModal}>
+          <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
+            <span className={styles.modalClose} onClick={closeImageModal}>
+              <IoCloseCircleSharp size={30} color="#e53e3e"/>
+            </span>
+            <img src={modalImageUrl || "/placeholder.svg"} alt="Large view" className={styles.modalImage} />
+          </div>
+        </div>
+      )}
     </div>
   )
 }
