@@ -4,17 +4,20 @@ import { RiEdit2Fill } from "react-icons/ri";
 import { RiDeleteBin6Fill } from "react-icons/ri";
 import GenreScroll from '../genre-scroll-buttons/GenreScroll';
 import { TbClock } from "react-icons/tb";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import ConfirmDeleteModal from '../confirm-dialog/ConfirmDialogModal';
 import useBooks from "../../hooks/useBook";
 import { IoCloseCircleSharp } from "react-icons/io5";
 import { FiCheckCircle } from "react-icons/fi";
 import { FaRegWindowMaximize, FaRegWindowRestore } from "react-icons/fa6";
+import { LoadingAnimation } from '../loading-animation/LoadingAnimation';
 
 export default function BookCard({ book, refreshBooks }) {
   const [showModal, setShowModal] = useState(false);
   const [showDeleteConfirmModal, setShowDeleteConfirmModal] = useState(false);
   const { books, loading, fetchBooks } = useBooks(); // custom hook
+  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
 
   function ImagePathReviser(path){
     return `https://localhost:7157/uploads/${path.replace(/\\/g, '/')}`;
@@ -34,6 +37,13 @@ export default function BookCard({ book, refreshBooks }) {
     setShowDeleteConfirmModal(false);
     // TODO : Implement the logic of opening the book modal if the modal is closed or cancel. 
     // now the book modal is closing when close or cancel. so to delete have to start fro the begininghere
+  };
+
+  function handleDelayedNavigation() {
+    setIsLoading(true);
+    setTimeout(() => {
+      navigate(`/read/${book.id}`);
+    }, 1500); // 1000ms = 1 second delay
   };
 
   const openModal = () => setShowModal(true);
@@ -158,7 +168,7 @@ export default function BookCard({ book, refreshBooks }) {
                 <div className={styles.modalReadSection}>
                   <h4 className={styles.modalSectionTitle}>Read Now</h4>
                   <div className={styles.readPlatformActionBtns}>
-                    <button className={styles.readButton}>
+                    <button className={styles.readButton} onClick={handleDelayedNavigation}>
                       <FaRegWindowMaximize className={styles.sourceIcon} />
                       Read on Platform
                     </button>
@@ -183,6 +193,7 @@ export default function BookCard({ book, refreshBooks }) {
           refreshBooks();
         }}
       />
+      { isLoading && <LoadingAnimation /> }
     </>
   );
 };
