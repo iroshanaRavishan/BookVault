@@ -8,6 +8,8 @@ import { Link } from 'react-router-dom';
 import ConfirmDeleteModal from '../confirm-dialog/ConfirmDialogModal';
 import useBooks from "../../hooks/useBook";
 import { IoCloseCircleSharp } from "react-icons/io5";
+import { FiCheckCircle } from "react-icons/fi";
+import { FaRegWindowMaximize, FaRegWindowRestore } from "react-icons/fa6";
 
 export default function BookCard({ book, refreshBooks }) {
   const [showModal, setShowModal] = useState(false);
@@ -59,10 +61,9 @@ export default function BookCard({ book, refreshBooks }) {
           </div>
           {book.isRead && (
             <div className={styles.readBadge}>
-              <svg viewBox="0 0 24 24" fill="none" className={styles.readIcon}>
-                <path d="M9 12l2 2 4-4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" />
-              </svg>
+              <span className={styles.readIcon}>
+                <FiCheckCircle size={16}/>
+              </span>
               <span>Read</span>
             </div>
           )}
@@ -108,10 +109,9 @@ export default function BookCard({ book, refreshBooks }) {
                 )}
                 {book.isRead && (
                   <div className={styles.modalReadBadge}>
-                    <svg viewBox="0 0 24 24" fill="none" className={styles.readIcon}>
-                      <path d="M9 12l2 2 4-4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                      <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" />
-                    </svg>
+                    <span className={styles.readIcon}>
+                      <FiCheckCircle size={16}/>
+                    </span>
                     <span>Read</span>
                   </div>
                 )}
@@ -157,13 +157,16 @@ export default function BookCard({ book, refreshBooks }) {
                 
                 <div className={styles.modalReadSection}>
                   <h4 className={styles.modalSectionTitle}>Read Now</h4>
-                  <a href={book.readUrl} target="_blank" rel="noopener noreferrer" className={styles.readButton}>
-                    <svg viewBox="0 0 24 24" fill="none" className={styles.playIcon}>
-                      <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" />
-                      <path d="M10 8l6 4-6 4V8z" fill="currentColor" />
-                    </svg>
-                    Read on Platform
-                  </a>
+                  <div className={styles.readPlatformActionBtns}>
+                    <button className={styles.readButton}>
+                      <FaRegWindowMaximize className={styles.sourceIcon} />
+                      Read on Platform
+                    </button>
+                    <button disabled={!book.readUrl} className={styles.readButton}>
+                      <FaRegWindowRestore className={styles.sourceIcon}/>
+                      Read on source
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
