@@ -281,7 +281,7 @@ export default function Auth() {
               
               <button type="submit" disabled={isLoding}>
                 { isLoding?
-                  <div className={styles.loadingSpinner}></div> : 
+                  "logging in..." : 
                   "Login" 
                 }
               </button>
@@ -338,7 +338,7 @@ export default function Auth() {
                 </div>
                 <button type="submit" disabled={isLoding}>
                   { isLoding?
-                    <div className={styles.loadingSpinner}></div>
+                    "Registering..."
                     : "Register" }
                 </button>
                 <p ref={regMessageRef}  className={`message`}></p>
@@ -361,7 +361,7 @@ export default function Auth() {
                 </div>
             </div>
           </div>
-          <LoadingAnimation />
+          { isLoding && <LoadingAnimation /> }
         </div>
       </div>
   )
