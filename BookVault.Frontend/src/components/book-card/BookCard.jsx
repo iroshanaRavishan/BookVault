@@ -43,7 +43,7 @@ export default function BookCard({ book, refreshBooks }) {
     setIsLoading(true);
     setTimeout(() => {
       navigate(`/read/${book.id}`);
-    }, 1500); // 1000ms = 1 second delay
+    }, 3000); // 1000ms = 1 second delay
   };
 
   const openModal = () => setShowModal(true);
