@@ -45,7 +45,17 @@ export default function BookReadingBorad() {
     }
 
     loadBookData()
-  }, [id])
+  }, [id]);
+
+  useEffect(()=>{
+    // Disable scroll when the component is mounted
+    document.body.style.overflow = 'hidden';
+
+    // Cleanup function to enable scroll when the component is unmounted
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, []);
 
   return (
     <div className={styles.container}>
