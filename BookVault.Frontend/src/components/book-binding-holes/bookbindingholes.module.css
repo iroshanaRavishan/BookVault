@@ -15,3 +15,35 @@
   right: 5px;
 }
 
+.hole {
+  width: 8px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: black;
+  position: relative;
+}
+
+/* Add two lines (threads/bindings) */
+.hole::before,
+.hole::after {
+  content: "";
+  position: absolute;
+  width: 1px;
+  height: 30px;
+  background-color: rgb(0, 0, 0);
+  transform: translateY(-50%);
+}
+
+/* Line to the left */
+.hole::before {
+  top: -190%;
+  left: -10px;
+  transform: rotate(-90deg);
+}
+
+/* Line to the right */
+.hole::after {
+  top: -140%;
+  left: -10px;
+  transform: rotate(-90deg);
+}
