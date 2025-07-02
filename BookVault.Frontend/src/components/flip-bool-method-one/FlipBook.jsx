@@ -42,16 +42,17 @@ const Page = forwardRef(({ children, number, totalPages, currentPage }, ref) => 
 });
 
 export default function FlipBook() {
-  const pages = [
-    <Page key={0} number={0} totalPages={8}><h2>FIRST COVER PAGE</h2></Page>,
-    <Page key={1} number={1} totalPages={8}></Page>,
-    <Page key={2} number={2} totalPages={8}><h3>1 st page </h3><h4>right</h4></Page>,
-    <Page key={3} number={3} totalPages={8}><h3>2 nd page </h3><h4>left</h4></Page>,
-    <Page key={3} number={4} totalPages={8}><h3>3 rd page </h3><h4>left</h4></Page>,
-    <Page key={3} number={5} totalPages={8}><h3>4 th page </h3><h4>right</h4></Page>,
-    <Page key={4} number={6} totalPages={8}></Page>,
-    <Page key={5} number={7} totalPages={8}><h2>LAST COVER PAGE</h2></Page>,
-  ];
+  const totalPages = 8;
+  const [currentPage, setCurrentPage] = useState(0);
+
+  const pages = [];
+  for (let i = 0; i < totalPages; i++) {
+    pages.push(
+      <Page key={i} number={i} totalPages={totalPages} currentPage={currentPage}>
+        <h3>Page {i + 1}</h3>
+      </Page>
+    );
+  }
 
   return (
     <div className={styles.wrapper}>
@@ -68,6 +69,7 @@ export default function FlipBook() {
         mobileScrollSupport={true}
         drawShadow={true}
         useMouseEvents={true}
+        onFlip={({ data }) => setCurrentPage(data)}
         className={styles.flipbook}
       >
         {pages}
