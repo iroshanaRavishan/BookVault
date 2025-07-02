@@ -25,6 +25,17 @@
   overflow: hidden;
   border: 1px solid #ddd;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+  border-radius: 0;
 }
 
+/* Right corners for front cover */
+.rightRounded {
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
 
+/* Left corners for back cover */
+.leftRounded {
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
