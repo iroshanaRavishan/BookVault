@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styles from './bookreadingborad.module.css';
 import { useParams } from 'react-router-dom';
+import FlipBook from '../flip-bool-method-one/FlipBook';
 
 export default function BookReadingBorad() {
   const { id } = useParams();
@@ -30,7 +31,10 @@ export default function BookReadingBorad() {
         // Populate form fields with existing data
         setBookId(bookData.id);
         setBookName(bookData.name || "");
-        setBookPdfUrl(bookData.pdfFilePath); // "pdfs\ad94cf9a-c6e0-40fd-a599-ae9ed8e30c4d.pdf"
+
+        // Normalize slashes and form the public URL
+        const normalizedPath = bookData.pdfFilePath.replace(/\\/g, '/');
+        setBookPdfUrl(`https://localhost:7157/uploads/${normalizedPath}`);
 
         setLoading(false)
       } catch (error) {
@@ -41,11 +45,21 @@ export default function BookReadingBorad() {
     }
 
     loadBookData()
-  }, [id])
+  }, [id]);
+
+  useEffect(()=>{
+    // Disable scroll when the component is mounted
+    document.body.style.overflow = 'hidden';
+
+    // Cleanup function to enable scroll when the component is unmounted
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, []);
 
   return (
     <div className={styles.container}>
-      {loading && <p>Loading PDF...</p>}
+      {/* {loading && <p>Loading PDF...</p>}
       {!loading && bookPdfUrl ? (
         <iframe
           src={bookPdfUrl}
@@ -56,7 +70,8 @@ export default function BookReadingBorad() {
         />
       ) : !loading && (
         <p>PDF not available for this book.</p>
-      )}
+      )} */}
+      <FlipBook />
     </div>
   )
 }
