@@ -1,8 +1,9 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useState } from 'react';
 import HTMLFlipBook from 'react-pageflip';
 import styles from './flipbook.module.css';
+import BookBindingHoles from '../book-binding-holes/BookBindingHoles';
 
-const Page = forwardRef(({ children, number, totalPages }, ref) => {
+const Page = forwardRef(({ children, number, totalPages, currentPage }, ref) => {
   let radiusClass = "";
 
   if (number === 0) {
@@ -17,8 +18,24 @@ const Page = forwardRef(({ children, number, totalPages }, ref) => {
     radiusClass = styles.leftRounded;
   }
 
+  // Determine where to show holes
+  const showLeftHoles = (
+    (number % 2 === 1 && number !== totalPages - 1 && number !== 0) || // right page of opened book
+    (number === totalPages - 2 && currentPage === totalPages - 2)      // back cover left page
+  );
+  const showRightHoles = (
+    (number % 2 === 0 && number !== 0)                                  // left page of opened book
+  );
+
+  const showLeftCoverHoles = number === 0 && currentPage === 0;
+  const showLastCoverHoles = number === totalPages - 1 && currentPage >= totalPages - 2;
+
   return (
     <div className={`${styles.page} ${radiusClass}`} ref={ref}>
+      {showLeftCoverHoles && <BookBindingHoles side="left" />}
+      {showLeftHoles && <BookBindingHoles side="right" />}
+      {showRightHoles && <BookBindingHoles side="left" />}
+      {showLastCoverHoles && <BookBindingHoles side="right" />}
       {children}
     </div>
   );
