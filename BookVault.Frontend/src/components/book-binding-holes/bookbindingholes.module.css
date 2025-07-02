@@ -1,0 +1,17 @@
+.holeContainer {
+  position: absolute;
+  top: 35px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  height: auto;
+}
+
+.left {
+  left: 5px;
+}
+
+.right {
+  right: 5px;
+}
+
