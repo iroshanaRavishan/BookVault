@@ -1,9 +1,9 @@
 .holeContainer {
   position: absolute;
-  top: 45px;
+  top: 35px;
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 20px;
   height: auto;
 }
 
