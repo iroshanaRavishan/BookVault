@@ -27,16 +27,27 @@ const Page = forwardRef(({ children, number, totalPages, currentPage }, ref) => 
     (number % 2 === 0 && number !== 0)                                  // left page of opened book
   );
 
-  const showLeftCoverHoles = number === 0 && currentPage === 0;
-  const showLastCoverHoles = number === totalPages - 1 && currentPage >= totalPages - 2;
+  const showLeftCoverHoles = number === 0;
+  const showLastCoverHoles = number === totalPages - 1;
 
   return (
     <div className={`${styles.page} ${radiusClass}`} ref={ref}>
+      {/* Front side */}
       {showLeftCoverHoles && <BookBindingHoles side="left" />}
       {showLeftHoles && <BookBindingHoles side="right" />}
       {showRightHoles && <BookBindingHoles side="left" />}
       {showLastCoverHoles && <BookBindingHoles side="right" />}
+
+      {/* Your content */}
       {children}
+
+      {/* Back side holes too (same logic to show during turn) */}
+      <div className={styles.backFace}>
+        {showLeftCoverHoles && <BookBindingHoles side="left" />}
+        {showLeftHoles && <BookBindingHoles side="right" />}
+        {showRightHoles && <BookBindingHoles side="left" />}
+        {showLastCoverHoles && <BookBindingHoles side="right" />}
+      </div>
     </div>
   );
 });
