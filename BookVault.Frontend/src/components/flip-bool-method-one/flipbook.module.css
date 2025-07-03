@@ -9,7 +9,8 @@
 }
 
 .flipbook {
-  transform: translateY(-5%) !important;
+  transform: translateX(0%) translateY(-5%) !important; /* push it right when opened */
+  transition: transform 0.3s ease;
 }
 
 .page {
@@ -67,11 +68,7 @@
 
 .pageNumberContainer {
   position: fixed;
-  /* display: flex; */
   bottom: 0%;
-  /* flex-direction: row; */
-  /* align-items: center; */
-  /* justify-content: center; */
   width: -webkit-fill-available;
   margin-right: 45px;
 }
@@ -82,4 +79,12 @@
   text-align: center;
   width: 100%;
   border-radius: 5px;
+}
+
+.centeredCoverpage {
+  transform: translateX(-25%) translateY(-5%) !important;
+}
+
+.centeredLastPage {
+  transform: translateX(25%) translateY(-5%) !important;
 }
