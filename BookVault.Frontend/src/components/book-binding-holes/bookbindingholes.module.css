@@ -19,7 +19,6 @@
   width: 8px;
   height: 7px;
   border-radius: 30%;
-  background-color: #8f8f8f;
   position: relative;
 }
 
@@ -30,7 +29,7 @@
   position: absolute;
   width: 1px;
   height: 30px;
-  background-color: #8f8f8f;
+  background: linear-gradient(to bottom, #7c7c7c,  #a3a3a3,   #d6d6d6,#a3a3a3, #7c7c7c);
   transform: translateY(-50%);
 }
 
