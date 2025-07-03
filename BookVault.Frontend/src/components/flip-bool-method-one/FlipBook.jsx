@@ -6,27 +6,15 @@ import BookBindingHoles from '../book-binding-holes/BookBindingHoles';
 const Page = forwardRef(({ children, number, totalPages, currentPage }, ref) => {
   let radiusClass = "";
 
-  if (number === 0) {
-    radiusClass = styles.rightRounded;
-  } else if (number === totalPages - 1) {
-    radiusClass = styles.leftRounded;
-  } else if (number % 2 === 0) {
-    // Left page (visible when open)
-    radiusClass = styles.rightRounded;
-  } else {
-    // Right page (visible when open)
-    radiusClass = styles.leftRounded;
-  }
+  if (number === 0) radiusClass = styles.rightRounded;
+  else if (number === totalPages - 1) radiusClass = styles.leftRounded;
+  else radiusClass = number % 2 === 0 ? styles.rightRounded : styles.leftRounded;
 
-  // Determine where to show holes
   const showLeftHoles = (
-    (number % 2 === 1 && number !== totalPages - 1 && number !== 0) || // right page of opened book
-    (number === totalPages - 2 && currentPage === totalPages - 2)      // back cover left page
+    (number % 2 === 1 && number !== totalPages - 1 && number !== 0) ||
+    (number === totalPages - 2 && currentPage === totalPages - 2)
   );
-  const showRightHoles = (
-    (number % 2 === 0 && number !== 0)                                  // left page of opened book
-  );
-
+  const showRightHoles = number % 2 === 0 && number !== 0;
   const showLeftCoverHoles = number === 0;
   const showLastCoverHoles = number === totalPages - 1;
 
@@ -38,7 +26,7 @@ const Page = forwardRef(({ children, number, totalPages, currentPage }, ref) => 
       {showRightHoles && <BookBindingHoles side="left" />}
       {showLastCoverHoles && <BookBindingHoles side="right" />}
 
-      {/* Your content */}
+      {/* the content */}
       {children}
 
       {/* Back side holes too (same logic to show during turn) */}
@@ -53,17 +41,35 @@ const Page = forwardRef(({ children, number, totalPages, currentPage }, ref) => 
 });
 
 export default function FlipBook() {
-  const totalPages = 8;
   const [currentPage, setCurrentPage] = useState(0);
+  const contentPages = 5;
+  const totalPages = 2 + contentPages + (contentPages % 2 === 1 ? 1 : 0) + 2;
 
   const pages = [];
-  for (let i = 0; i < totalPages; i++) {
-    pages.push(
-      <Page key={i} number={i} totalPages={totalPages} currentPage={currentPage}>
-        <h3>Page {i + 1}</h3>
-      </Page>
-    );
+
+  pages.push({ type: 'cover', content: <section>Cover Page</section> });
+  pages.push({ type: 'blank', content: null });
+
+  for (let i = 1; i <= contentPages; i++) {
+    pages.push({
+      type: 'content',
+      content: (
+        <div >
+          <section>Content Page {i}</section>
+          <span className={styles.pageNumberContainer}>
+            <p className={styles.pageNumber}>- {i} -</p>
+          </span>
+        </div>
+      )
+    });
   }
+
+  if (contentPages % 2 === 1) {
+    pages.push({ type: 'blank', content: null });
+  }
+
+  pages.push({ type: 'blank', content: null });
+  pages.push({ type: 'backCover', content: <section>Back Cover</section> });
 
   return (
     <div className={styles.wrapper}>
@@ -83,7 +89,11 @@ export default function FlipBook() {
         onFlip={({ data }) => setCurrentPage(data)}
         className={styles.flipbook}
       >
-        {pages}
+        {pages.map((page, i) => (
+          <Page key={i} number={i} totalPages={totalPages} currentPage={currentPage}>
+            <div className={styles.pageContent}>{page.content}</div>
+          </Page>
+        ))}
       </HTMLFlipBook>
     </div>
   );
