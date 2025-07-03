@@ -60,7 +60,9 @@ export default function FlipBook() {
   for (let i = 0; i < totalPages; i++) {
     pages.push(
       <Page key={i} number={i} totalPages={totalPages} currentPage={currentPage}>
-        <h3>Page {i + 1}</h3>
+        <div className={styles.pageContent}>
+          <h3>Page {i + 1}</h3>
+        </div>
       </Page>
     );
   }
