@@ -8,7 +8,7 @@ export default function BookBindingHoles({ side }) {
   return (
     <div className={`${styles.holeContainer} ${sideClass}`}>
       {holes.map((_, i) => (
-        <div key={i} className={styles.hole}></div>
+        <div key={i} className={styles.hole} style={side=='right'? {background: 'linear-gradient(to left, #d4d4d4, #8f8f8f)'}: {background: 'linear-gradient(to right, #d4d4d4, #8f8f8f)'}} ></div>
       ))}
     </div>
   );
