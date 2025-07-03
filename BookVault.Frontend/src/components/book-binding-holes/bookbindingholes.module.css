@@ -18,7 +18,7 @@
 .hole {
   width: 8px;
   height: 7px;
-  border-radius: 50%;
+  border-radius: 30%;
   background-color: #8f8f8f;
   position: relative;
 }
@@ -43,7 +43,7 @@
 
 /* Line to the right */
 .right .hole::after {
-  top: -140%;
+  top: -130%;
   left: 15px;
   transform: rotate(-90deg);
 }
@@ -57,7 +57,7 @@
 
 /* Line to the right */
 .left .hole::after {
-  top: -140%;
+  top: -130%;
   left: -8px;
   transform: rotate(-90deg);
 }
