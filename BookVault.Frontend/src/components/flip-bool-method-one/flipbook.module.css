@@ -24,7 +24,6 @@
   height: 100%;
   backface-visibility: hidden;
   /* overflow: hidden; */
-  border: 1px solid #ddd;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
   border-radius: 0;
 }
