@@ -3,7 +3,7 @@ import HTMLFlipBook from 'react-pageflip';
 import styles from './flipbook.module.css';
 import BookBindingHoles from '../book-binding-holes/BookBindingHoles';
 
-const Page = forwardRef(({ children, number, totalPages, currentPage }, ref) => {
+const Page = forwardRef(({ children, number, totalPages, currentPage, pageType }, ref) => {
   let radiusClass = "";
 
   if (number === 0) radiusClass = styles.rightRounded;
@@ -17,19 +17,20 @@ const Page = forwardRef(({ children, number, totalPages, currentPage }, ref) => 
   const showRightHoles = number % 2 === 0 && number !== 0;
   const showLeftCoverHoles = number === 0;
   const showLastCoverHoles = number === totalPages - 1;
+  const coverClass = pageType === "cover" || pageType === "backCover" ? styles.coverPage : "";
 
   return (
-    <div className={`${styles.page} ${radiusClass}`} ref={ref}>
-      {/* Front side */}
+    <div className={`${styles.page} ${radiusClass} ${coverClass}`} ref={ref}>
+      {/* Book holes */}
       {showLeftCoverHoles && <BookBindingHoles side="left" />}
       {showLeftHoles && <BookBindingHoles side="right" />}
       {showRightHoles && <BookBindingHoles side="left" />}
       {showLastCoverHoles && <BookBindingHoles side="right" />}
 
-      {/* the content */}
+      {/* Content */}
       {children}
 
-      {/* Back side holes too (same logic to show during turn) */}
+      {/* Back face during flip */}
       <div className={styles.backFace}>
         {showLeftCoverHoles && <BookBindingHoles side="left" />}
         {showLeftHoles && <BookBindingHoles side="right" />}
@@ -54,12 +55,12 @@ export default function FlipBook() {
     pages.push({
       type: 'content',
       content: (
-        <div >
+        <>
           <section>Content Page {i}</section>
           <span className={styles.pageNumberContainer}>
             <p className={styles.pageNumber}>- {i} -</p>
           </span>
-        </div>
+        </>
       )
     });
   }
@@ -87,10 +88,14 @@ export default function FlipBook() {
         drawShadow={true}
         useMouseEvents={true}
         onFlip={({ data }) => setCurrentPage(data)}
-        className={styles.flipbook}
+        className={`${styles.flipbook} ${
+          currentPage === 0 ?  styles.centeredCoverpage : ''
+        } ${
+          currentPage === totalPages - 1 ? styles.centeredLastPage : ''
+        }`}
       >
         {pages.map((page, i) => (
-          <Page key={i} number={i} totalPages={totalPages} currentPage={currentPage}>
+          <Page key={i} number={i} totalPages={totalPages} currentPage={currentPage} pageType={page.type}>
             <div className={styles.pageContent}>{page.content}</div>
           </Page>
         ))}
