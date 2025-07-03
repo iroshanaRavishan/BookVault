@@ -1,4 +1,4 @@
-import React, { forwardRef, useState } from 'react';
+import React, { forwardRef, useRef, useState } from 'react';
 import HTMLFlipBook from 'react-pageflip';
 import styles from './flipbook.module.css';
 import BookBindingHoles from '../book-binding-holes/BookBindingHoles';
@@ -45,6 +45,7 @@ export default function FlipBook() {
   const [currentPage, setCurrentPage] = useState(0);
   const contentPages = 5;
   const totalPages = 2 + contentPages + (contentPages % 2 === 1 ? 1 : 0) + 2;
+  const flipBookRef = useRef();
 
   const pages = [];
 
@@ -75,6 +76,7 @@ export default function FlipBook() {
   return (
     <div className={styles.wrapper}>
       <HTMLFlipBook
+        ref={flipBookRef}
         width={230}
         height={345}
         minWidth={180}
@@ -89,17 +91,33 @@ export default function FlipBook() {
         useMouseEvents={true}
         onFlip={({ data }) => setCurrentPage(data)}
         className={`${styles.flipbook} ${
-          currentPage === 0 ?  styles.centeredCoverpage : ''
+          currentPage === 0 ? styles.centeredCoverpage : ''
         } ${
           currentPage === totalPages - 1 ? styles.centeredLastPage : ''
         }`}
       >
         {pages.map((page, i) => (
-          <Page key={i} number={i} totalPages={totalPages} currentPage={currentPage} pageType={page.type}>
+          <Page
+            key={i}
+            number={i}
+            totalPages={totalPages}
+            currentPage={currentPage}
+            pageType={page.type}
+          >
             <div className={styles.pageContent}>{page.content}</div>
           </Page>
         ))}
       </HTMLFlipBook>
+
+      {/* Navigation Buttons */}
+      <div className={styles.navButtons}>
+        <span onClick={() => flipBookRef.current.pageFlip().flipPrev()} style={currentPage === 0 ? { display: 'none' } : {}  }>
+          Prev
+        </span>
+        <span onClick={() => flipBookRef.current.pageFlip().flipNext()} style={currentPage === totalPages - 1 ? { display: 'none' } : {} }>
+          Next
+        </span>
+      </div>
     </div>
   );
 }
