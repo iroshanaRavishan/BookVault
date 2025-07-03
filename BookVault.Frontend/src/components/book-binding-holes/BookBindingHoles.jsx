@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './bookbindingholes.module.css';
 
 export default function BookBindingHoles({ side }) {
-  const holes = new Array(17).fill(0);
+  const holes = new Array(24).fill(0);
   const sideClass = side === 'left' || side === 'right' ? styles[side] : '';
 
   return (
