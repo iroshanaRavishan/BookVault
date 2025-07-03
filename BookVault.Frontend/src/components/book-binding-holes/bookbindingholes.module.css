@@ -35,15 +35,29 @@
 }
 
 /* Line to the left */
-.hole::before {
+.right .hole::before {
   top: -190%;
-  left: -10px;
+  left: 15px;
   transform: rotate(-90deg);
 }
 
 /* Line to the right */
-.hole::after {
+.right .hole::after {
   top: -140%;
-  left: -10px;
+  left: 15px;
+  transform: rotate(-90deg);
+}
+
+/* Line to the left */
+.left .hole::before {
+  top: -190%;
+  left: -8px;
+  transform: rotate(-90deg);
+}
+
+/* Line to the right */
+.left .hole::after {
+  top: -140%;
+  left: -8px;
   transform: rotate(-90deg);
 }
