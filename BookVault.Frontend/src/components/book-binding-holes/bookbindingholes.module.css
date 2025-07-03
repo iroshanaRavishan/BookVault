@@ -18,7 +18,7 @@
 .hole {
   width: 8px;
   height: 7px;
-  border-radius: 50%;
+  border-radius: 30%;
   background-color: #8f8f8f;
   position: relative;
 }
@@ -35,15 +35,29 @@
 }
 
 /* Line to the left */
-.hole::before {
+.right .hole::before {
   top: -190%;
-  left: -10px;
+  left: 15px;
   transform: rotate(-90deg);
 }
 
 /* Line to the right */
-.hole::after {
-  top: -140%;
-  left: -10px;
+.right .hole::after {
+  top: -130%;
+  left: 15px;
+  transform: rotate(-90deg);
+}
+
+/* Line to the left */
+.left .hole::before {
+  top: -190%;
+  left: -8px;
+  transform: rotate(-90deg);
+}
+
+/* Line to the right */
+.left .hole::after {
+  top: -130%;
+  left: -8px;
   transform: rotate(-90deg);
 }
