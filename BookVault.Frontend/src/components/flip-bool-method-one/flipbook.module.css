@@ -55,12 +55,31 @@
 .pageContent {
   margin: 45px;
   height: -webkit-fill-available;
-  background-color: #f0f0f0;
+  background-color: #f3f3f375;
   overflow: hidden !important;
 }
 
-.pageContent h3 {
+.pageContent section {
   margin: 0;
   font-size: 24px;
   color: #333;
 } 
+
+.pageNumberContainer {
+  position: fixed;
+  /* display: flex; */
+  bottom: 0%;
+  /* flex-direction: row; */
+  /* align-items: center; */
+  /* justify-content: center; */
+  width: -webkit-fill-available;
+  margin-right: 45px;
+}
+
+.pageNumber {
+  font-size: 13px;
+  color: #333;
+  text-align: center;
+  width: 100%;
+  border-radius: 5px;
+}

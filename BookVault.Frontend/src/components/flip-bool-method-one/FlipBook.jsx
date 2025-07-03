@@ -61,7 +61,11 @@ export default function FlipBook() {
     pages.push(
       <Page key={i} number={i} totalPages={totalPages} currentPage={currentPage}>
         <div className={styles.pageContent}>
-          <h3>Page {i + 1}</h3>
+          <section>Page {i + 1}</section>
+
+          <span className={styles.pageNumberContainer}>
+            <p className={styles.pageNumber}>- {i} -</p>
+          </span>
         </div>
       </Page>
     );
