@@ -46,7 +46,6 @@ export default function FlipBook() {
   const contentPages = 5;
   const totalPages = 2 + contentPages + (contentPages % 2 === 1 ? 1 : 0) + 2;
   const flipBookRef = useRef();
-
   const pages = [];
 
   pages.push({ type: 'cover', content: <section>Cover Page</section> });
@@ -111,10 +110,30 @@ export default function FlipBook() {
 
       {/* Navigation Buttons */}
       <div className={styles.navButtons}>
-        <span onClick={() => flipBookRef.current.pageFlip().flipPrev()} className={styles.navButton} style={currentPage === 0 ? { display: 'none' } : {}  }>
+        <span
+          onClick={() => {
+            const newPage = currentPage - 1;
+            if (newPage >= 0) {
+              setCurrentPage(newPage);
+              flipBookRef.current.pageFlip().flipPrev();
+            }
+          }}
+          className={styles.navButton}
+          style={currentPage === 0 ? { display: 'none' } : {}}
+        >
           Prev
         </span>
-        <span onClick={() => flipBookRef.current.pageFlip().flipNext()} className={styles.navButton} style={currentPage === totalPages - 1 ? { display: 'none' } : {} }>
+        <span
+          onClick={() => {
+            const newPage = currentPage + 1;
+            if (newPage < totalPages) {
+              setCurrentPage(newPage); // manually update state immediately
+              flipBookRef.current.pageFlip().flipNext();
+            }
+          }}
+          className={styles.navButton}
+          style={currentPage >= totalPages - 2 ? { display: 'none' } : {}}
+        >
           Next
         </span>
       </div>
