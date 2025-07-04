@@ -111,10 +111,10 @@ export default function FlipBook() {
 
       {/* Navigation Buttons */}
       <div className={styles.navButtons}>
-        <span onClick={() => flipBookRef.current.pageFlip().flipPrev()} style={currentPage === 0 ? { display: 'none' } : {}  }>
+        <span onClick={() => flipBookRef.current.pageFlip().flipPrev()} className={styles.navButton} style={currentPage === 0 ? { display: 'none' } : {}  }>
           Prev
         </span>
-        <span onClick={() => flipBookRef.current.pageFlip().flipNext()} style={currentPage === totalPages - 1 ? { display: 'none' } : {} }>
+        <span onClick={() => flipBookRef.current.pageFlip().flipNext()} className={styles.navButton} style={currentPage === totalPages - 1 ? { display: 'none' } : {} }>
           Next
         </span>
       </div>
