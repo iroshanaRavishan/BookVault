@@ -107,6 +107,7 @@
   overflow: hidden;
   width: 100%;
   font-size: 45px;
+  font-weight: 100;
   text-align: center;
   cursor: pointer;
   color: rgba(255, 255, 255, 0.514);
@@ -140,4 +141,9 @@
 
 .navButton:hover::before {
   top: 0;
+}
+
+.navButton:hover {
+  transition: top 0.3s ease-out;
+  color: rgba(255, 255, 255, 0.767);
 }
