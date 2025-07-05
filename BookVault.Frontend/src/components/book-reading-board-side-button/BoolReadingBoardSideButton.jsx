@@ -1,8 +1,18 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import styles from './BoolReadingBoardSideButton.module.css';
+import { IoChevronUp } from 'react-icons/io5';
 
-export default function BoolReadingBoardSideButton() {
+const BoolReadingBoardSideButton = forwardRef(({ name, top }, ref) => {
   return (
-    <div className={styles.container}>side button</div>
-  )
-}
+    <div className={styles.container} style={{ top: `${top}px` }} ref={ref}>
+      <div className={styles.rotated}>
+        <span className={styles.sideButton}>
+          {name}
+          <IoChevronUp className={styles.arrowIcon} />
+        </span>
+      </div>
+    </div>
+  );
+});
+
+export default BoolReadingBoardSideButton;
