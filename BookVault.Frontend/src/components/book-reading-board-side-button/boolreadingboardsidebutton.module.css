@@ -5,13 +5,10 @@
   width: fit-content;
 }
 
-.rotated {
+.sideButton {
   transform: rotate(-90deg);
   transform-origin: right center;
   width: fit-content;
-}
-
-.sideButton {
   background-color: #333;
   color: white;
   cursor: pointer;
