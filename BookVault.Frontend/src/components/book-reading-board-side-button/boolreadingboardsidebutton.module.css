@@ -1,0 +1,24 @@
+.container {
+  position: fixed;
+  right: 15px;
+  z-index: 9999;
+  width: fit-content;
+}
+
+.rotated {
+  transform: rotate(-90deg);
+  transform-origin: right center;
+  width: fit-content;
+}
+
+.sideButton {
+  background-color: #333;
+  color: white;
+  cursor: pointer;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  padding: 8px 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
