@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styles from './bookreadingborad.module.css';
 import { useParams } from 'react-router-dom';
 import FlipBook from '../flip-bool-method-one/FlipBook';
-import SideButtonsWrapper from '../book-reading-board-side-button/SideButtonWrapper';
+import SideButtonsWrapper from '../side-button-wrapper/SideButtonWrapper';
 
 export default function BookReadingBorad() {
   const { id } = useParams();
