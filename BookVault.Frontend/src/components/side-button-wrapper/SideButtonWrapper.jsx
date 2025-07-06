@@ -1,18 +1,15 @@
 import React, { useRef, useEffect, useState } from "react";
-import BookReadingBoardSideButton from "./BookReadingBoardSideButton";
+import BookReadingBoardSideButton from "../book-reading-board-side-button/BookReadingBoardSideButton";
+import styles from "./sidebuttonwrapper.module.css";
+import { IoCloseCircleSharp } from "react-icons/io5";
 
-const rightButtonData = [
-  "Appearance",
-  "Reading Style",
-  "Bookmarks",
-  "Statistics",
-];
-
+const rightButtonData = ["Appearance", "Reading Style", "Bookmarks", "Statistics"];
 const leftButtonData = ["Notes"];
 
 export default function SideButtonsWrapper() {
   const [rightOffsets, setRightOffsets] = useState([]);
   const [leftOffsets, setLeftOffsets] = useState([]);
+  const [activePanel, setActivePanel] = useState(null); // { name, position }
 
   const rightRefs = useRef([]);
   const leftRefs = useRef([]);
@@ -37,6 +34,14 @@ export default function SideButtonsWrapper() {
     setLeftOffsets(calcOffsets(leftRefs.current));
   }, []);
 
+  const handleButtonClick = (name, position) => {
+    setActivePanel({ name, position });
+  };
+
+  const handleClosePanel = () => {
+    setActivePanel(null);
+  };
+
   return (
     <>
       {rightButtonData.map((label, index) => (
@@ -46,6 +51,8 @@ export default function SideButtonsWrapper() {
           top={rightOffsets[index] || 132}
           ref={(el) => (rightRefs.current[index] = el)}
           position="right"
+          onClick={() => handleButtonClick(label, "right")}
+          isActive={activePanel?.name === label}
         />
       ))}
       {leftButtonData.map((label, index) => (
@@ -55,8 +62,26 @@ export default function SideButtonsWrapper() {
           top={leftOffsets[index] || 132}
           ref={(el) => (leftRefs.current[index] = el)}
           position="left"
+          onClick={() => handleButtonClick(label, "left")}
+          isActive={activePanel?.name === label}
         />
       ))}
+      <BookReadingBoardSideButton
+        name="Ask AI"
+        position="bottom"
+        onClick={() => handleButtonClick("Ask AI", "bottom")}
+        isActive={activePanel?.name === "Ask AI"}
+      />
+
+      {activePanel && (
+        <div className={`${styles.panel} ${styles[activePanel.position]}`}>
+          <IoCloseCircleSharp className={styles.closeButton} onClick={handleClosePanel} size={30}/>
+          <div className={styles.panelContent}>
+            <h3>{activePanel.name}</h3>
+            <p>This is the {activePanel.name} panel.</p>
+          </div>
+        </div>
+      )}
     </>
   );
 }

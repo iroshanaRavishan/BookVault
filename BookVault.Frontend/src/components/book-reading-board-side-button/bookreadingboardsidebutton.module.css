@@ -34,3 +34,13 @@
   transform: rotate(90deg);
   transform-origin: left center;
 }
+
+.bottom {
+  bottom: 0px;
+  right: 200px;
+  position: fixed;
+}
+
+.bottom .sideButton {
+  transform: none;
+}
