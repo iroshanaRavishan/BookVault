@@ -1,17 +1,19 @@
 .container {
   position: fixed;
-  right: 15px;
   z-index: 9999;
   width: fit-content;
 }
 
-.rotated {
-  transform: rotate(-90deg);
-  transform-origin: right center;
-  width: fit-content;
+.right {
+  right: 15px;
+}
+
+.left {
+  left: 15px;
 }
 
 .sideButton {
+  width: fit-content;
   background-color: #333;
   color: white;
   cursor: pointer;
@@ -21,4 +23,14 @@
   display: inline-flex;
   align-items: center;
   gap: 5px;
+}
+
+.rightButton {
+  transform: rotate(-90deg);
+  transform-origin: right center;
+}
+
+.leftButton {
+  transform: rotate(90deg);
+  transform-origin: left center;
 }
