@@ -1,8 +1,8 @@
 import React, { forwardRef } from 'react';
-import styles from './BoolReadingBoardSideButton.module.css';
+import styles from './bookreadingboardsidebutton.module.css';
 import { IoChevronUp } from 'react-icons/io5';
 
-const BoolReadingBoardSideButton = forwardRef(({ name, top, position = 'right' }, ref) => {
+const BookReadingBoardSideButton = forwardRef(({ name, top, position = 'right' }, ref) => {
   const isLeft = position === 'left';
 
   return (
@@ -21,4 +21,4 @@ const BoolReadingBoardSideButton = forwardRef(({ name, top, position = 'right' }
   );
 });
 
-export default BoolReadingBoardSideButton;
+export default BookReadingBoardSideButton;

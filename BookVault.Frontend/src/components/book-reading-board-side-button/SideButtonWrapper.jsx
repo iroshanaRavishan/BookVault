@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from "react";
-import BoolReadingBoardSideButton from "./BoolReadingBoardSideButton";
+import BookReadingBoardSideButton from "./BookReadingBoardSideButton";
 
 const rightButtonData = [
   "Appearance",
@@ -40,7 +40,7 @@ export default function SideButtonsWrapper() {
   return (
     <>
       {rightButtonData.map((label, index) => (
-        <BoolReadingBoardSideButton
+        <BookReadingBoardSideButton
           key={`right-${index}`}
           name={label}
           top={rightOffsets[index] || 132}
@@ -49,7 +49,7 @@ export default function SideButtonsWrapper() {
         />
       ))}
       {leftButtonData.map((label, index) => (
-        <BoolReadingBoardSideButton
+        <BookReadingBoardSideButton
           key={`left-${index}`}
           name={label}
           top={leftOffsets[index] || 132}
