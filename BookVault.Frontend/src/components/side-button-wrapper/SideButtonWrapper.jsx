@@ -1,6 +1,8 @@
 import React, { useRef, useEffect, useState } from "react";
 import BookReadingBoardSideButton from "../book-reading-board-side-button/BookReadingBoardSideButton";
 import styles from "./sidebuttonwrapper.module.css";
+import { IoCloseCircleSharp } from "react-icons/io5";
+
 const rightButtonData = ["Appearance", "Reading Style", "Bookmarks", "Statistics"];
 const leftButtonData = ["Notes"];
 
@@ -32,11 +34,14 @@ export default function SideButtonsWrapper() {
     setLeftOffsets(calcOffsets(leftRefs.current));
   }, []);
 
-const handleButtonClick = (name, position) => {
-  setActivePanel((prev) =>
-    prev && prev.name === name ? null : { name, position }
-  );
-};
+  const handleButtonClick = (name, position) => {
+    setActivePanel({ name, position });
+  };
+
+  const handleClosePanel = () => {
+    setActivePanel(null);
+  };
+
   return (
     <>
       {rightButtonData.map((label, index) => (
@@ -70,6 +75,7 @@ const handleButtonClick = (name, position) => {
 
       {activePanel && (
         <div className={`${styles.panel} ${styles[activePanel.position]}`}>
+          <IoCloseCircleSharp className={styles.closeButton} onClick={handleClosePanel} size={30}/>
           <div className={styles.panelContent}>
             <h3>{activePanel.name}</h3>
             <p>This is the {activePanel.name} panel.</p>
