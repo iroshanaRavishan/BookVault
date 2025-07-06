@@ -1,0 +1,39 @@
+.panel {
+  position: fixed;
+  background-color: #222;
+  color: white;
+  z-index: 9998;
+  transition: transform 0.3s ease-in-out;
+  overflow: hidden;
+}
+
+.panelContent {
+  padding: 20px;
+}
+
+/* Positioning panels */
+.left {
+  top: 150px;
+  left: 0;
+  width: 350px;
+  height: 690px;
+}
+
+.right {
+  top: 150px;
+  right: 0;
+  width: 350px;
+  height: 690px;
+}
+
+.bottom {
+  bottom: 0;
+  right: 90px;
+  width: 350px;
+  height: 550px;
+}
+
+/* Extra z-index for active buttons so they appear above the panel */
+.active {
+  z-index: 10000 !important;
+}
