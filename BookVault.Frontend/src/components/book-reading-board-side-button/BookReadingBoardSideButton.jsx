@@ -4,15 +4,21 @@ import { IoChevronUp } from 'react-icons/io5';
 
 const BookReadingBoardSideButton = forwardRef(({ name, top, position = 'right' }, ref) => {
   const isLeft = position === 'left';
+  const isRight = position === 'right';
+  const isBottom = position === 'bottom';
 
   return (
     <div
-      className={`${styles.container} ${isLeft ? styles.left : styles.right}`}
-      style={{ top: `${top}px` }}
+      className={`${styles.container} ${
+        isLeft ? styles.left : isRight ? styles.right : isBottom ? styles.bottom : ''
+      }`}
+      style={isBottom ? {} : { top: `${top}px` }}
       ref={ref}
     >
       <span
-        className={`${styles.sideButton} ${isLeft ? styles.leftButton : styles.rightButton}`}
+        className={`${styles.sideButton} ${
+          isLeft ? styles.leftButton : isRight ? styles.rightButton : ''
+        }`}
       >
         {name}
         <IoChevronUp className={styles.arrowIcon} />
