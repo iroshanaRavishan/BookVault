@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from "react";
-import BookReadingBoardSideButton from "./BookReadingBoardSideButton";
+import BookReadingBoardSideButton from "../book-reading-board-side-button/BookReadingBoardSideButton";
 
 const rightButtonData = [
   "Appearance",
