@@ -57,6 +57,9 @@ export default function SideButtonsWrapper() {
           position="left"
         />
       ))}
+
+      <BookReadingBoardSideButton name="Ask AI" position="bottom" />
+
     </>
   );
 }
