@@ -2,21 +2,25 @@
   position: fixed;
   background-color: #222;
   color: white;
-  z-index: 9998;
+  z-index: 99999;
   transition: transform 0.3s ease-in-out;
   overflow: hidden;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
 }
 
 .panelContent {
   padding: 20px;
+  height: 100%;
+  overflow-y: auto;
 }
 
-/* Positioning panels */
 .left {
   top: 150px;
   left: 0;
   width: 350px;
   height: 690px;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
 }
 
 .right {
@@ -24,6 +28,8 @@
   right: 0;
   width: 350px;
   height: 690px;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
 }
 
 .bottom {
@@ -31,9 +37,19 @@
   right: 90px;
   width: 350px;
   height: 550px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
 }
 
-/* Extra z-index for active buttons so they appear above the panel */
-.active {
-  z-index: 10000 !important;
+/* Close button */
+.closeButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 22px;
+  cursor: pointer;
+  z-index: 100000;
 }
