@@ -152,19 +152,21 @@ export default function SideButtonsWrapper() {
             ${isLeftClosing ? styles.closing : ""}
           `}
         >
-          <IoCloseCircleSharp
-            className={"closeBtn"}
-            color="#e53e3e"
-            onClick={handleCloseLeftPanel}
-            size={25}
-          />
-          { isLeftPanlePinned ? 
-            <BsPinFill onClick={handlePinLeftPanel} className={"panelPinBtn"} size={18}/>
-            : <BsPinAngleFill onClick={handlePinLeftPanel} className={"panelPinBtn"} size={18} /> 
-          }
-         
-          <div className={styles.panelContent}>
-            <span>Notes</span>
+          <div>
+            <IoCloseCircleSharp
+              className={"closeBtn"}
+              color="#e53e3e"
+              onClick={handleCloseLeftPanel}
+              size={25}
+            />
+            { isLeftPanlePinned ? 
+              <BsPinFill onClick={handlePinLeftPanel} className={"panelPinBtn"} size={18}/>
+              : <BsPinAngleFill onClick={handlePinLeftPanel} className={"panelPinBtn"} size={18} /> 
+            }
+          
+            <div className={styles.panelContent}>
+              <span>Notes</span>
+            </div>
           </div>
         </div>
       )}
@@ -179,14 +181,16 @@ export default function SideButtonsWrapper() {
             ${isMainClosing ? styles.closing : ""}
           `}
         >
-          <IoCloseCircleSharp
-            className={`${styles.closeButton} closeBtn`}
-            color="#e53e3e"
-            onClick={() => handleCloseMainPanel()}
-            size={25}
-          />
-          <div className={styles.panelContent}>
-            <span>{mainPanel.name}</span>
+          <div>
+            <IoCloseCircleSharp
+              className={`${styles.closeButton} closeBtn`}
+              color="#e53e3e"
+              onClick={() => handleCloseMainPanel()}
+              size={25}
+            />
+            <div className={styles.panelContent}>
+              <span>{mainPanel.name}</span>
+            </div>
           </div>
         </div>
       )}

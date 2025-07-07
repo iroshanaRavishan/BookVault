@@ -12,8 +12,9 @@
 }
 
 .panelContent {
-  padding: 20px;
+  padding: 10px 10px 10px 12px;
   height: 100%;
+  font-weight: 600;
   overflow-y: auto;
 }
 
