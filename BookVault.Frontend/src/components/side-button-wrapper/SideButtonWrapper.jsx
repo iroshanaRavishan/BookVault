@@ -20,6 +20,8 @@ export default function SideButtonsWrapper() {
   const [isLeftClosing, setIsLeftClosing] = useState(false);
   const [pendingPanel, setPendingPanel] = useState(null);   // Panel to open next after closing
   const [isLeftPanlePinned, setLeftPanlePinned] = useState(null);
+  const [leftPanelWidth, setLeftPanelWidth] = useState(300); // default width
+  const [isResizing, setIsResizing] = useState(false);
 
   const rightRefs = useRef([]);
   const leftRefs = useRef([]);
@@ -130,6 +132,30 @@ export default function SideButtonsWrapper() {
     }
   }, [isMainClosing, pendingPanel]);
 
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      if (isResizing) {
+        const newWidth = e.clientX;
+        if (newWidth >= 300 && newWidth <= 600) {
+          setLeftPanelWidth(newWidth);
+        }
+      }
+    };
+
+    const handleMouseUp = () => {
+      if (isResizing) {
+        setIsResizing(false);
+      }
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mouseup", handleMouseUp);
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mouseup", handleMouseUp);
+    };
+  }, [isResizing]);
+
   return (
     <>
       {rightButtonData.map((label, index) => (
@@ -170,6 +196,11 @@ export default function SideButtonsWrapper() {
             ${isLeftOpening && !isLeftClosing ? styles.open : ""}
             ${isLeftClosing ? styles.closing : ""}
           `}
+          style={
+            isLeftPanlePinned
+              ? { width: `${leftPanelWidth}px`, minWidth: "300px", maxWidth: "600px", height: "100%", top: "69px", borderRadius: "0px", transition: 'all 0.3s ease-in-out'}
+              : {}
+          }
         >
           <div className={styles.panelHeader}>
             <IoCloseCircleSharp
@@ -178,15 +209,32 @@ export default function SideButtonsWrapper() {
               onClick={handleCloseLeftPanel}
               size={25}
             />
-            { isLeftPanlePinned ? 
-              <BsPinFill onClick={handlePinLeftPanel} className={"panelPinBtn"} size={18}/>
-              : <BsPinAngleFill onClick={handlePinLeftPanel} className={"panelPinBtn"} size={18} /> 
-            }
-          
+            {isLeftPanlePinned ? (
+              <BsPinFill
+                onClick={handlePinLeftPanel}
+                className={"panelPinBtn"}
+                size={18}
+              />
+            ) : (
+              <BsPinAngleFill
+                onClick={handlePinLeftPanel}
+                className={"panelPinBtn"}
+                size={18}
+              />
+            )}
             <div className={styles.panelContent}>
-              <span className={styles.headerTopic}><LuNotebookText size={20}/>Notes</span>
+              <span className={styles.headerTopic}>
+                <LuNotebookText size={20} /> Notes
+              </span>
             </div>
           </div>
+
+          {isLeftPanlePinned && (
+            <div
+              className={styles.resizer}
+              onMouseDown={() => setIsResizing(true)}
+            />
+          )}
         </div>
       )}
 
