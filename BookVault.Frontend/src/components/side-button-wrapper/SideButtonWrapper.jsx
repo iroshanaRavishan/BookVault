@@ -9,7 +9,8 @@ const leftButtonData = ["Notes"];
 export default function SideButtonsWrapper() {
   const [rightOffsets, setRightOffsets] = useState([]);
   const [leftOffsets, setLeftOffsets] = useState([]);
-  const [activePanel, setActivePanel] = useState(null);     // The currently active panel (mounted)
+  const [mainPanel, setMainPanel] = useState(null); // right or bottom panel
+  const [leftPanelOpen, setLeftPanelOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
   const [isOpening, setIsOpening] = useState(false);
   const [pendingPanel, setPendingPanel] = useState(null);   // Panel to open next after closing
@@ -17,7 +18,6 @@ export default function SideButtonsWrapper() {
   const rightRefs = useRef([]);
   const leftRefs = useRef([]);
 
-  // Calculate button offsets for vertical positioning
   useEffect(() => {
     const calcOffsets = (refs) => {
       const newOffsets = [];
@@ -38,47 +38,63 @@ export default function SideButtonsWrapper() {
     setLeftOffsets(calcOffsets(leftRefs.current));
   }, []);
 
-  // Handle button click
   const handleButtonClick = (name, position) => {
     const newPanel = { name, position };
 
-    if (activePanel) {
-      // If user clicks another panel while one is open, close it first
-      handleClosePanel(newPanel);
+    if (position === "left") {
+      setLeftPanelOpen(true);
+      return;
+    }
+
+    // Handle bottom + right conflict
+    if (mainPanel) {
+      // If trying to open right and bottom is open, or vice versa
+      if (
+        (mainPanel.position === "bottom" && position === "right") ||
+        (mainPanel.position === "right" && position === "bottom")
+      ) {
+        handleCloseMainPanel(newPanel);
+        return;
+      }
+
+      // Same panel clicked again
+      if (mainPanel.name === name) return;
+
+      // Close current panel and open new one
+      handleCloseMainPanel(newPanel);
     } else {
-      // No panel is open, open immediately
-      setActivePanel(newPanel);
+      setMainPanel(newPanel);
       setTimeout(() => setIsOpening(true), 0);
     }
   };
 
-  // When closing finishes, open the pending panel if any
+  const handleCloseMainPanel = (nextPanel = null) => {
+    setIsClosing(true);
+    setIsOpening(false);
+
+    if (nextPanel) {
+      setPendingPanel(nextPanel);
+    }
+
+    setTimeout(() => {
+      setMainPanel(null);
+      setIsClosing(false);
+    }, 300);
+  };
+
+  const handleCloseLeftPanel = () => {
+    setLeftPanelOpen(false);
+  };
+
   useEffect(() => {
     if (!isClosing && pendingPanel) {
-      setActivePanel(pendingPanel);
+      setMainPanel(pendingPanel);
       setPendingPanel(null);
-
-      // Wait for next paint to trigger `.open`
       requestAnimationFrame(() => {
         setIsOpening(true);
       });
     }
   }, [isClosing, pendingPanel]);
-
-  // Close panel handler
-  const handleClosePanel = (nextPanel = null) => {
-    setIsClosing(true);
-    setIsOpening(false);
-
-    if (nextPanel) {
-      setPendingPanel(nextPanel); // queue the next panel if provided
-    }
-
-    setTimeout(() => {
-      setActivePanel(null);
-      setIsClosing(false);
-    }, 300);
-  };
 
   return (
     <>
@@ -90,7 +106,7 @@ export default function SideButtonsWrapper() {
           ref={(el) => (rightRefs.current[index] = el)}
           position="right"
           onClick={() => handleButtonClick(label, "right")}
-          isActive={activePanel?.name === label}
+          isActive={mainPanel?.name === label}
         />
       ))}
       {leftButtonData.map((label, index) => (
@@ -101,21 +117,37 @@ export default function SideButtonsWrapper() {
           ref={(el) => (leftRefs.current[index] = el)}
           position="left"
           onClick={() => handleButtonClick(label, "left")}
-          isActive={activePanel?.name === label}
+          isActive={leftPanelOpen}
         />
       ))}
       <BookReadingBoardSideButton
         name="Ask AI"
         position="bottom"
         onClick={() => handleButtonClick("Ask AI", "bottom")}
-        isActive={activePanel?.name === "Ask AI"}
+        isActive={mainPanel?.name === "Ask AI"}
       />
 
-      {activePanel && (
+      {/* Left Panel */}
+      {leftPanelOpen && (
+        <div className={`${styles.panel} ${styles.left} ${styles.open}`}>
+          <IoCloseCircleSharp
+            className={`${styles.closeButton} closeBtn`}
+            color="#e53e3e"
+            onClick={handleCloseLeftPanel}
+            size={30}
+          />
+          <div className={styles.panelContent}>
+            <span>Notes</span>
+          </div>
+        </div>
+      )}
+
+      {/* Main Panel: right or bottom */}
+      {mainPanel && (
         <div
           className={`
             ${styles.panel}
-            ${styles[activePanel.position]}
+            ${styles[mainPanel.position]}
             ${isOpening && !isClosing ? styles.open : ""}
             ${isClosing ? styles.closing : ""}
           `}
@@ -123,11 +155,11 @@ export default function SideButtonsWrapper() {
           <IoCloseCircleSharp
             className={`${styles.closeButton} closeBtn`}
             color="#e53e3e"
-            onClick={() => handleClosePanel()}
+            onClick={() => handleCloseMainPanel()}
             size={30}
           />
           <div className={styles.panelContent}>
-            <span>{activePanel.name}</span>
+            <span>{mainPanel.name}</span>
           </div>
         </div>
       )}
