@@ -152,7 +152,7 @@ export default function SideButtonsWrapper() {
             ${isLeftClosing ? styles.closing : ""}
           `}
         >
-          <div>
+          <div className={styles.panelHeader}>
             <IoCloseCircleSharp
               className={"closeBtn"}
               color="#e53e3e"
@@ -181,7 +181,7 @@ export default function SideButtonsWrapper() {
             ${isMainClosing ? styles.closing : ""}
           `}
         >
-          <div>
+          <div className={styles.panelHeader}>
             <IoCloseCircleSharp
               className={`${styles.closeButton} closeBtn`}
               color="#e53e3e"
