@@ -10,9 +10,11 @@ export default function SideButtonsWrapper() {
   const [rightOffsets, setRightOffsets] = useState([]);
   const [leftOffsets, setLeftOffsets] = useState([]);
   const [mainPanel, setMainPanel] = useState(null); // right or bottom panel
+  const [isMainClosing, setIsMainClosing] = useState(false);
+  const [isMainOpening, setIsMainOpening] = useState(false);
   const [leftPanelOpen, setLeftPanelOpen] = useState(false);
-  const [isClosing, setIsClosing] = useState(false);
-  const [isOpening, setIsOpening] = useState(false);
+  const [isLeftOpening, setIsLeftOpening] = useState(false);
+  const [isLeftClosing, setIsLeftClosing] = useState(false);
   const [pendingPanel, setPendingPanel] = useState(null);   // Panel to open next after closing
 
   const rightRefs = useRef([]);
@@ -43,6 +45,7 @@ export default function SideButtonsWrapper() {
 
     if (position === "left") {
       setLeftPanelOpen(true);
+      setTimeout(() => setIsLeftOpening(true), 0);
       return;
     }
 
@@ -64,13 +67,13 @@ export default function SideButtonsWrapper() {
       handleCloseMainPanel(newPanel);
     } else {
       setMainPanel(newPanel);
-      setTimeout(() => setIsOpening(true), 0);
+      setTimeout(() => setIsMainOpening(true), 0);
     }
   };
 
   const handleCloseMainPanel = (nextPanel = null) => {
-    setIsClosing(true);
-    setIsOpening(false);
+    setIsMainClosing(true);
+    setIsMainOpening(false);
 
     if (nextPanel) {
       setPendingPanel(nextPanel);
@@ -78,23 +81,29 @@ export default function SideButtonsWrapper() {
 
     setTimeout(() => {
       setMainPanel(null);
-      setIsClosing(false);
+      setIsMainClosing(false);
     }, 300);
   };
 
   const handleCloseLeftPanel = () => {
-    setLeftPanelOpen(false);
+    setIsLeftClosing(true);
+    setIsLeftOpening(false);
+
+    setTimeout(() => {
+      setLeftPanelOpen(false);
+      setIsLeftClosing(false);
+    }, 300);
   };
 
   useEffect(() => {
-    if (!isClosing && pendingPanel) {
+    if (!isMainClosing && pendingPanel) {
       setMainPanel(pendingPanel);
       setPendingPanel(null);
       requestAnimationFrame(() => {
-        setIsOpening(true);
+        setIsMainOpening(true);
       });
     }
-  }, [isClosing, pendingPanel]);
+  }, [isMainClosing, pendingPanel]);
 
   return (
     <>
@@ -129,7 +138,14 @@ export default function SideButtonsWrapper() {
 
       {/* Left Panel */}
       {leftPanelOpen && (
-        <div className={`${styles.panel} ${styles.left} ${styles.open}`}>
+        <div
+          className={`
+            ${styles.panel}
+            ${styles.left}
+            ${isLeftOpening && !isLeftClosing ? styles.open : ""}
+            ${isLeftClosing ? styles.closing : ""}
+          `}
+        >
           <IoCloseCircleSharp
             className={`${styles.closeButton} closeBtn`}
             color="#e53e3e"
@@ -148,8 +164,8 @@ export default function SideButtonsWrapper() {
           className={`
             ${styles.panel}
             ${styles[mainPanel.position]}
-            ${isOpening && !isClosing ? styles.open : ""}
-            ${isClosing ? styles.closing : ""}
+            ${isMainOpening && !isMainClosing ? styles.open : ""}
+            ${isMainClosing ? styles.closing : ""}
           `}
         >
           <IoCloseCircleSharp
