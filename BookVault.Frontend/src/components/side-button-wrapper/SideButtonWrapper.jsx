@@ -3,13 +3,18 @@ import BookReadingBoardSideButton from "../book-reading-board-side-button/BookRe
 import styles from "./sidebuttonwrapper.module.css";
 import { IoCloseCircleSharp } from "react-icons/io5";
 
+// and add a style to the panels to grow from 0 to this size and then shrink to 0 when closed
+// notes hould be opebed when ask AI  OR  any right side panel is opened
 const rightButtonData = ["Appearance", "Reading Style", "Bookmarks", "Statistics"];
 const leftButtonData = ["Notes"];
 
 export default function SideButtonsWrapper() {
   const [rightOffsets, setRightOffsets] = useState([]);
   const [leftOffsets, setLeftOffsets] = useState([]);
-  const [activePanel, setActivePanel] = useState(null); // { name, position }
+  const [activePanel, setActivePanel] = useState(null);
+  const [visiblePanel, setVisiblePanel] = useState(null); 
+  const [isClosing, setIsClosing] = useState(false);
+  const [isOpening, setIsOpening] = useState(false);
 
   const rightRefs = useRef([]);
   const leftRefs = useRef([]);
@@ -35,11 +40,31 @@ export default function SideButtonsWrapper() {
   }, []);
 
   const handleButtonClick = (name, position) => {
-    setActivePanel({ name, position });
+    if (activePanel) {
+      // Close current first
+      setIsClosing(true);
+      setTimeout(() => {
+        setActivePanel({ name, position });
+        setVisiblePanel({ name, position });
+        setIsClosing(false);
+        setIsOpening(true); // trigger open on next tick
+      }, 300);
+    } else {
+      setActivePanel({ name, position });
+      setVisiblePanel({ name, position });
+      // Delay adding `.open` class to trigger transition
+      setTimeout(() => setIsOpening(true), 0);
+    }
   };
 
   const handleClosePanel = () => {
-    setActivePanel(null);
+    setIsClosing(true);
+    setIsOpening(false); // stop opening
+    setTimeout(() => {
+      setVisiblePanel(null);
+      setActivePanel(null);
+      setIsClosing(false);
+    }, 300);
   };
 
   return (
@@ -73,12 +98,23 @@ export default function SideButtonsWrapper() {
         isActive={activePanel?.name === "Ask AI"}
       />
 
-      {activePanel && (
-        <div className={`${styles.panel} ${styles[activePanel.position]}`}>
-          <IoCloseCircleSharp className={styles.closeButton} onClick={handleClosePanel} size={30}/>
+      {visiblePanel && (
+        <div
+          className={`
+            ${styles.panel}
+            ${styles[visiblePanel.position]}
+            ${isOpening && !isClosing ? styles.open : ""}
+            ${isClosing ? styles.closing : ""}
+          `}
+        >
+          <IoCloseCircleSharp
+            className={`${styles.closeButton} closeBtn`}
+            color="#e53e3e"
+            onClick={handleClosePanel}
+            size={30}
+          />
           <div className={styles.panelContent}>
-            <h3>{activePanel.name}</h3>
-            <p>This is the {activePanel.name} panel.</p>
+            <span>{visiblePanel.name}</span>
           </div>
         </div>
       )}
