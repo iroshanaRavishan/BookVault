@@ -27,7 +27,7 @@ export default function BookVaultApp() {
     createRoutesFromElements(
       <Route element={<Layout />}>
         {/* Protected route wrapper for authentication */}
-        <Route element={ <ProtectedRouter /> }>
+        {/* <Route element={ <ProtectedRouter /> }> */}
           <Route path="/" element={<LandingPage />} />
           <Route path="/" element={<AllBooks />} />
           <Route path="/create" element={<CreateBook />} />
@@ -37,8 +37,7 @@ export default function BookVaultApp() {
           <Route path="/faq" element={<FAQPage />} />
           <Route path="/profile-settings" element={<ProfileSettings />} />
           <Route path="/read/:id" element={<BookReadingBorad />} />
-          
-        </Route>
+        {/* </Route> */}
 
         {/* Public routes */}
         <Route path="/auth" element={ <Auth /> } /> 
