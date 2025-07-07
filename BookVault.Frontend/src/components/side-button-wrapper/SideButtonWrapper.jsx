@@ -1,10 +1,12 @@
 import React, { useRef, useEffect, useState } from "react";
 import BookReadingBoardSideButton from "../book-reading-board-side-button/BookReadingBoardSideButton";
 import styles from "./sidebuttonwrapper.module.css";
-import { IoCloseCircleSharp } from "react-icons/io5";
-import { BsPinAngleFill, BsPinFill } from "react-icons/bs";
+import { IoBookmarks, IoCloseCircleSharp, IoColorPaletteSharp } from "react-icons/io5";
+import { BsGrid1X2Fill, BsPinAngleFill, BsPinFill } from "react-icons/bs";
+import { LuNotebookText } from "react-icons/lu";
+import { FaChartBar } from "react-icons/fa";
 
-const rightButtonData = ["Appearance", "Reading Style", "Bookmarks", "Statistics"];
+const rightButtonData = ["Bookmarks", "Appearance", "Reading Style", "Statistics"];
 const leftButtonData = ["Notes"];
 
 export default function SideButtonsWrapper() {
@@ -152,7 +154,7 @@ export default function SideButtonsWrapper() {
             ${isLeftClosing ? styles.closing : ""}
           `}
         >
-          <div>
+          <div className={styles.panelHeader}>
             <IoCloseCircleSharp
               className={"closeBtn"}
               color="#e53e3e"
@@ -165,7 +167,7 @@ export default function SideButtonsWrapper() {
             }
           
             <div className={styles.panelContent}>
-              <span>Notes</span>
+              <span className={styles.headerTopic}><LuNotebookText size={20}/>Notes</span>
             </div>
           </div>
         </div>
@@ -181,7 +183,7 @@ export default function SideButtonsWrapper() {
             ${isMainClosing ? styles.closing : ""}
           `}
         >
-          <div>
+          <div className={styles.panelHeader}>
             <IoCloseCircleSharp
               className={`${styles.closeButton} closeBtn`}
               color="#e53e3e"
@@ -189,7 +191,7 @@ export default function SideButtonsWrapper() {
               size={25}
             />
             <div className={styles.panelContent}>
-              <span>{mainPanel.name}</span>
+              <span className={styles.headerTopic}> {mainPanel.name == 'Bookmarks'? <IoBookmarks size={20}/> : mainPanel.name == 'Appearance' ?  <IoColorPaletteSharp size={20}/>: mainPanel.name == 'Reading Style' ? <BsGrid1X2Fill size={20} /> : <FaChartBar size={20} />} {mainPanel.name}</span>
             </div>
           </div>
         </div>
