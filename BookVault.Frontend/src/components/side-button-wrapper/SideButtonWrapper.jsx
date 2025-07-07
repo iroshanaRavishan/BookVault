@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState } from "react";
 import BookReadingBoardSideButton from "../book-reading-board-side-button/BookReadingBoardSideButton";
 import styles from "./sidebuttonwrapper.module.css";
 import { IoBookmarks, IoCloseCircleSharp, IoColorPaletteSharp } from "react-icons/io5";
-import { BsGrid1X2Fill, BsPinAngleFill, BsPinFill } from "react-icons/bs";
+import { BsChatLeftDotsFill, BsGrid1X2Fill, BsPinAngleFill, BsPinFill } from "react-icons/bs";
 import { LuNotebookText } from "react-icons/lu";
 import { FaChartBar } from "react-icons/fa";
 
@@ -103,6 +103,23 @@ export default function SideButtonsWrapper() {
     }, 300);
   };
 
+  // Utility function
+  const getIconForPanel = (name) => {
+    switch (name) {
+      case "Bookmarks":
+        return <IoBookmarks size={20} />;
+      case "Appearance":
+        return <IoColorPaletteSharp size={20} />;
+      case "Reading Style":
+        return <BsGrid1X2Fill size={18} />;
+      case "Statistics":
+        return <FaChartBar size={20} />;
+      case "Ask AI":
+      default:
+        return <BsChatLeftDotsFill size={18} />;
+    }
+  };
+
   useEffect(() => {
     if (!isMainClosing && pendingPanel) {
       setMainPanel(pendingPanel);
@@ -191,7 +208,7 @@ export default function SideButtonsWrapper() {
               size={25}
             />
             <div className={styles.panelContent}>
-              <span className={styles.headerTopic}> {mainPanel.name == 'Bookmarks'? <IoBookmarks size={20}/> : mainPanel.name == 'Appearance' ?  <IoColorPaletteSharp size={20}/>: mainPanel.name == 'Reading Style' ? <BsGrid1X2Fill size={20} /> : <FaChartBar size={20} />} {mainPanel.name}</span>
+              <span className={styles.headerTopic}> {getIconForPanel(mainPanel.name)} {mainPanel.name}</span>
             </div>
           </div>
         </div>
