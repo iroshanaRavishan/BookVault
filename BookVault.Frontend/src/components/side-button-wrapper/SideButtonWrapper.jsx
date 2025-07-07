@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useState } from "react";
 import BookReadingBoardSideButton from "../book-reading-board-side-button/BookReadingBoardSideButton";
 import styles from "./sidebuttonwrapper.module.css";
 import { IoCloseCircleSharp } from "react-icons/io5";
+import { BsPinAngleFill, BsPinFill } from "react-icons/bs";
 
 const rightButtonData = ["Appearance", "Reading Style", "Bookmarks", "Statistics"];
 const leftButtonData = ["Notes"];
@@ -16,6 +17,7 @@ export default function SideButtonsWrapper() {
   const [isLeftOpening, setIsLeftOpening] = useState(false);
   const [isLeftClosing, setIsLeftClosing] = useState(false);
   const [pendingPanel, setPendingPanel] = useState(null);   // Panel to open next after closing
+  const [isLeftPanlePinned, setLeftPanlePinned] = useState(null);
 
   const rightRefs = useRef([]);
   const leftRefs = useRef([]);
@@ -85,6 +87,10 @@ export default function SideButtonsWrapper() {
     }, 300);
   };
 
+  const handlePinLeftPanel = () => {
+    setLeftPanlePinned(!isLeftPanlePinned);
+  }
+
   const handleCloseLeftPanel = () => {
     setIsLeftClosing(true);
     setIsLeftOpening(false);
@@ -147,11 +153,16 @@ export default function SideButtonsWrapper() {
           `}
         >
           <IoCloseCircleSharp
-            className={`${styles.closeButton} closeBtn`}
+            className={"closeBtn"}
             color="#e53e3e"
             onClick={handleCloseLeftPanel}
-            size={30}
+            size={25}
           />
+          { isLeftPanlePinned ? 
+            <BsPinFill onClick={handlePinLeftPanel} className={"panelPinBtn"} size={18}/>
+            : <BsPinAngleFill onClick={handlePinLeftPanel} className={"panelPinBtn"} size={18} /> 
+          }
+         
           <div className={styles.panelContent}>
             <span>Notes</span>
           </div>
@@ -172,7 +183,7 @@ export default function SideButtonsWrapper() {
             className={`${styles.closeButton} closeBtn`}
             color="#e53e3e"
             onClick={() => handleCloseMainPanel()}
-            size={30}
+            size={25}
           />
           <div className={styles.panelContent}>
             <span>{mainPanel.name}</span>
