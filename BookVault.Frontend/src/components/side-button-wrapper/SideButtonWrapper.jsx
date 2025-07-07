@@ -3,6 +3,7 @@ import BookReadingBoardSideButton from "../book-reading-board-side-button/BookRe
 import styles from "./sidebuttonwrapper.module.css";
 import { IoCloseCircleSharp } from "react-icons/io5";
 import { BsPinAngleFill, BsPinFill } from "react-icons/bs";
+import { LuNotebookText } from "react-icons/lu";
 
 const rightButtonData = ["Bookmarks", "Appearance", "Reading Style", "Statistics"];
 const leftButtonData = ["Notes"];
@@ -165,7 +166,7 @@ export default function SideButtonsWrapper() {
             }
           
             <div className={styles.panelContent}>
-              <span>Notes</span>
+              <span className={styles.headerTopic}><LuNotebookText size={20}/>Notes</span>
             </div>
           </div>
         </div>

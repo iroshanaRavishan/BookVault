@@ -79,3 +79,10 @@
   background-color: #333;
   border-bottom: 2px solid #646464;
 }
+
+.headerTopic {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+}
