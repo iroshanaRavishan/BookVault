@@ -22,7 +22,7 @@ const BookReadingBoardSideButton = forwardRef(({ name, top, position = 'right', 
         onClick={onClick}
       >
         {name}
-        <IoChevronUp className={styles.arrowIcon} />
+        <IoChevronUp size={15}/>
       </span>
     </div>
   );
