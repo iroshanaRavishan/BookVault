@@ -4,7 +4,7 @@ import styles from "./sidebuttonwrapper.module.css";
 import { IoCloseCircleSharp } from "react-icons/io5";
 import { BsPinAngleFill, BsPinFill } from "react-icons/bs";
 
-const rightButtonData = ["Appearance", "Reading Style", "Bookmarks", "Statistics"];
+const rightButtonData = ["Bookmarks", "Appearance", "Reading Style", "Statistics"];
 const leftButtonData = ["Notes"];
 
 export default function SideButtonsWrapper() {
@@ -152,7 +152,7 @@ export default function SideButtonsWrapper() {
             ${isLeftClosing ? styles.closing : ""}
           `}
         >
-          <div>
+          <div className={styles.panelHeader}>
             <IoCloseCircleSharp
               className={"closeBtn"}
               color="#e53e3e"
@@ -181,7 +181,7 @@ export default function SideButtonsWrapper() {
             ${isMainClosing ? styles.closing : ""}
           `}
         >
-          <div>
+          <div className={styles.panelHeader}>
             <IoCloseCircleSharp
               className={`${styles.closeButton} closeBtn`}
               color="#e53e3e"
