@@ -3,9 +3,12 @@
   background-color: #222;
   color: white;
   z-index: 99999;
-  transition: transform 0.3s ease-in-out;
   overflow: hidden;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+  width: 350px;
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  opacity: 0;
+  pointer-events: none;
 }
 
 .panelContent {
@@ -17,31 +20,36 @@
 .left {
   top: 150px;
   left: 0;
-  width: 350px;
   height: 690px;
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
+  transform: translateX(-100%);
 }
 
 .right {
   top: 150px;
   right: 0;
-  width: 350px;
   height: 690px;
   border-top-left-radius: 20px;
   border-bottom-left-radius: 20px;
+  transform: translateX(100%);
 }
 
 .bottom {
   bottom: 0;
   right: 90px;
-  width: 350px;
   height: 550px;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
+  transform: translateY(100%);
 }
 
-/* Close button */
+.open {
+  transform: translateX(0) translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
 .closeButton {
   position: absolute;
   top: 10px;
@@ -52,4 +60,19 @@
   font-size: 22px;
   cursor: pointer;
   z-index: 100000;
+}
+
+.left.closing {
+  transform: translateX(-100%);
+  opacity: 0;
+}
+
+.right.closing {
+  transform: translateX(100%);
+  opacity: 0;
+}
+
+.bottom.closing {
+  transform: translateY(100%);
+  opacity: 0;
 }
