@@ -9,7 +9,7 @@ import { FaChartBar } from "react-icons/fa";
 const rightButtonData = ["Bookmarks", "Appearance", "Reading Style", "Statistics"];
 const leftButtonData = ["Notes"];
 
-export default function SideButtonsWrapper() {
+export default function SideButtonsWrapper({bookWidth, setBookWidth, containerRef}) {
   const [rightOffsets, setRightOffsets] = useState([]);
   const [leftOffsets, setLeftOffsets] = useState([]);
   const [mainPanel, setMainPanel] = useState(null); // right or bottom panel
