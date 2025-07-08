@@ -91,6 +91,13 @@ export default function SideButtonsWrapper() {
 
   const handlePinLeftPanel = () => {
     setLeftPanlePinned(!isLeftPanlePinned);
+    if (isLeftPanlePinned) {
+      setBookWidth(100);
+    }
+
+    if (!isLeftPanlePinned) {
+      setBookWidth(79);
+    }
   }
 
   const handleCloseLeftPanel = () => {
