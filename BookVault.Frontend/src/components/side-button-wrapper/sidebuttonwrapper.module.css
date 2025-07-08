@@ -1,0 +1,103 @@
+.panel {
+  position: fixed;
+  background-color: #222;
+  color: white;
+  z-index: 99999;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+  width: 350px;
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.panelContent {
+  padding: 10px 10px 10px 12px;
+  height: 100%;
+  font-weight: 600;
+  overflow-y: auto;
+}
+
+.left {
+  top: 150px;
+  left: 0;
+  height: 690px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  transform: translateX(-100%);
+}
+
+.right {
+  top: 150px;
+  right: 0;
+  height: 690px;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  transform: translateX(100%);
+}
+
+.bottom {
+  bottom: 0;
+  right: 90px;
+  height: 550px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  transform: translateY(100%);
+}
+
+.open {
+  transform: translateX(0) translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.left.closing {
+  transform: translateX(-100%);
+  opacity: 0;
+}
+
+.right.closing {
+  transform: translateX(100%);
+  opacity: 0;
+}
+
+.bottom.closing {
+  transform: translateY(100%);
+  opacity: 0;
+}
+
+.left.open {
+  transform: translateX(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.panelHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #333;
+  border-bottom: 2px solid #646464;
+}
+
+.headerTopic {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+}
+
+.resizer {
+  width: 1px;
+  cursor: ew-resize;
+  background-color: #a3a3a3;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100;
+}
+
+.resizer:hover {
+  width: 5px;
+}

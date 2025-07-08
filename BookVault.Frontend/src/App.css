@@ -55,6 +55,21 @@ body {
   transform: scale(1.1);
 }
 
+.panelPinBtn {
+  position: absolute;
+  top: 14px;
+  right: 43px;
+  border: none;
+  background: none;
+  font-size: 16px;
+  cursor: pointer;
+  z-index: 10000;
+}
+
+.panelPinBtn:hover {
+  transform: scale(1.1);
+}
+
 .bold-text {
   font-weight: 800;
 }
