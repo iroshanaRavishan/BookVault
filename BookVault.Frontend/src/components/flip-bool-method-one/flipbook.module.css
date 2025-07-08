@@ -1,5 +1,5 @@
 .wrapper {
-  width: 100vw;
+  width: -webkit-fill-available;
   height: 100vh;
   background: #f1c40f;
   display: flex;
