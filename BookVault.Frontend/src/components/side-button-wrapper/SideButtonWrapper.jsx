@@ -9,7 +9,7 @@ import { FaChartBar } from "react-icons/fa";
 const rightButtonData = ["Bookmarks", "Appearance", "Reading Style", "Statistics"];
 const leftButtonData = ["Notes"];
 
-export default function SideButtonsWrapper() {
+export default function SideButtonsWrapper({bookWidth, setBookWidth, containerRef}) {
   const [rightOffsets, setRightOffsets] = useState([]);
   const [leftOffsets, setLeftOffsets] = useState([]);
   const [mainPanel, setMainPanel] = useState(null); // right or bottom panel
@@ -19,9 +19,7 @@ export default function SideButtonsWrapper() {
   const [isLeftOpening, setIsLeftOpening] = useState(false);
   const [isLeftClosing, setIsLeftClosing] = useState(false);
   const [pendingPanel, setPendingPanel] = useState(null);   // Panel to open next after closing
-  const [isLeftPanlePinned, setLeftPanlePinned] = useState(null);
-  const [leftPanelWidth, setLeftPanelWidth] = useState(300); // default width
-  const [isResizing, setIsResizing] = useState(false);
+  const [isLeftPanlePinned, setLeftPanlePinned] = useState(false);
 
   const rightRefs = useRef([]);
   const leftRefs = useRef([]);
@@ -93,15 +91,26 @@ export default function SideButtonsWrapper() {
 
   const handlePinLeftPanel = () => {
     setLeftPanlePinned(!isLeftPanlePinned);
+    if (isLeftPanlePinned) {
+      setBookWidth(100);
+    }
+
+    if (!isLeftPanlePinned) {
+      setBookWidth(79);
+    }
   }
 
   const handleCloseLeftPanel = () => {
     setIsLeftClosing(true);
     setIsLeftOpening(false);
+    if (isLeftPanlePinned) {
+      setBookWidth(100);
+    }
 
     setTimeout(() => {
       setLeftPanelOpen(false);
       setIsLeftClosing(false);
+      setLeftPanlePinned(false);
     }, 300);
   };
 
@@ -132,29 +141,35 @@ export default function SideButtonsWrapper() {
     }
   }, [isMainClosing, pendingPanel]);
 
-  useEffect(() => {
-    const handleMouseMove = (e) => {
-      if (isResizing) {
-        const newWidth = e.clientX;
-        if (newWidth >= 300 && newWidth <= 600) {
-          setLeftPanelWidth(newWidth);
-        }
+  const handleMouseDown = (e) => {
+    if (!containerRef?.current) return;
+
+    const startX = e.clientX;
+    const containerWidth = containerRef.current.offsetWidth;
+
+    // Initial book width in pixels
+    const initialBookWidthPx = (bookWidth / 100) * containerWidth;
+
+    const onMouseMove = (e) => {
+      const deltaX = e.clientX - startX;
+
+      // book is on the right, reduce width when moving left
+      const newBookWidthPx = initialBookWidthPx - deltaX;
+      const newBookWidthPercent = (newBookWidthPx / containerWidth) * 100;
+
+      if (newBookWidthPercent > 70 && newBookWidthPercent < 80) {
+        setBookWidth(newBookWidthPercent);
       }
     };
 
-    const handleMouseUp = () => {
-      if (isResizing) {
-        setIsResizing(false);
-      }
+    const onMouseUp = () => {
+      document.removeEventListener("mousemove", onMouseMove);
+      document.removeEventListener("mouseup", onMouseUp);
     };
 
-    window.addEventListener("mousemove", handleMouseMove);
-    window.addEventListener("mouseup", handleMouseUp);
-    return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-      window.removeEventListener("mouseup", handleMouseUp);
-    };
-  }, [isResizing]);
+    document.addEventListener("mousemove", onMouseMove);
+    document.addEventListener("mouseup", onMouseUp);
+  };
 
   return (
     <>
@@ -198,7 +213,7 @@ export default function SideButtonsWrapper() {
           `}
           style={
             isLeftPanlePinned
-              ? { width: `${leftPanelWidth}px`, minWidth: "300px", maxWidth: "600px", height: "100%", top: "69px", borderRadius: "0px", transition: 'all 0.3s ease-in-out'}
+              ? { width: `${100 - bookWidth}%`, minWidth: "20%", maxWidth: "30%", height: "100%", top: "69px", borderRadius: "0px"}  // transition: 'width 0.2s ease-in-out' , 
               : {}
           }
         >
@@ -230,10 +245,7 @@ export default function SideButtonsWrapper() {
           </div>
 
           {isLeftPanlePinned && (
-            <div
-              className={styles.resizer}
-              onMouseDown={() => setIsResizing(true)}
-            />
+            <div className={styles.resizer} onMouseDown={handleMouseDown} />
           )}
         </div>
       )}
