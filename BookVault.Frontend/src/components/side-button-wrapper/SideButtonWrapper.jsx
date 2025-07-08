@@ -141,29 +141,35 @@ export default function SideButtonsWrapper() {
     }
   }, [isMainClosing, pendingPanel]);
 
-  useEffect(() => {
-    const handleMouseMove = (e) => {
-      if (isResizing) {
-        const newWidth = e.clientX;
-        if (newWidth >= 300 && newWidth <= 600) {
-          setLeftPanelWidth(newWidth);
-        }
+  const handleMouseDown = (e) => {
+    if (!containerRef?.current) return;
+
+    const startX = e.clientX;
+    const containerWidth = containerRef.current.offsetWidth;
+
+    // Initial book width in pixels
+    const initialBookWidthPx = (bookWidth / 100) * containerWidth;
+
+    const onMouseMove = (e) => {
+      const deltaX = e.clientX - startX;
+
+      // book is on the right, reduce width when moving left
+      const newBookWidthPx = initialBookWidthPx - deltaX;
+      const newBookWidthPercent = (newBookWidthPx / containerWidth) * 100;
+
+      if (newBookWidthPercent > 70 && newBookWidthPercent < 80) {
+        setBookWidth(newBookWidthPercent);
       }
     };
 
-    const handleMouseUp = () => {
-      if (isResizing) {
-        setIsResizing(false);
-      }
+    const onMouseUp = () => {
+      document.removeEventListener("mousemove", onMouseMove);
+      document.removeEventListener("mouseup", onMouseUp);
     };
 
-    window.addEventListener("mousemove", handleMouseMove);
-    window.addEventListener("mouseup", handleMouseUp);
-    return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-      window.removeEventListener("mouseup", handleMouseUp);
-    };
-  }, [isResizing]);
+    document.addEventListener("mousemove", onMouseMove);
+    document.addEventListener("mouseup", onMouseUp);
+  };
 
   return (
     <>
