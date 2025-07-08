@@ -2,14 +2,14 @@ import React, { useRef, useEffect, useState } from "react";
 import BookReadingBoardSideButton from "../book-reading-board-side-button/BookReadingBoardSideButton";
 import styles from "./sidebuttonwrapper.module.css";
 import { IoBookmarks, IoCloseCircleSharp, IoColorPaletteSharp } from "react-icons/io5";
-import { BsGrid1X2Fill, BsPinAngleFill, BsPinFill } from "react-icons/bs";
+import { BsChatLeftDotsFill, BsGrid1X2Fill, BsPinAngleFill, BsPinFill } from "react-icons/bs";
 import { LuNotebookText } from "react-icons/lu";
 import { FaChartBar } from "react-icons/fa";
 
 const rightButtonData = ["Bookmarks", "Appearance", "Reading Style", "Statistics"];
 const leftButtonData = ["Notes"];
 
-export default function SideButtonsWrapper() {
+export default function SideButtonsWrapper({bookWidth, setBookWidth, containerRef}) {
   const [rightOffsets, setRightOffsets] = useState([]);
   const [leftOffsets, setLeftOffsets] = useState([]);
   const [mainPanel, setMainPanel] = useState(null); // right or bottom panel
@@ -19,7 +19,7 @@ export default function SideButtonsWrapper() {
   const [isLeftOpening, setIsLeftOpening] = useState(false);
   const [isLeftClosing, setIsLeftClosing] = useState(false);
   const [pendingPanel, setPendingPanel] = useState(null);   // Panel to open next after closing
-  const [isLeftPanlePinned, setLeftPanlePinned] = useState(null);
+  const [isLeftPanlePinned, setLeftPanlePinned] = useState(false);
 
   const rightRefs = useRef([]);
   const leftRefs = useRef([]);
@@ -91,16 +91,44 @@ export default function SideButtonsWrapper() {
 
   const handlePinLeftPanel = () => {
     setLeftPanlePinned(!isLeftPanlePinned);
+    if (isLeftPanlePinned) {
+      setBookWidth(100);
+    }
+
+    if (!isLeftPanlePinned) {
+      setBookWidth(79);
+    }
   }
 
   const handleCloseLeftPanel = () => {
     setIsLeftClosing(true);
     setIsLeftOpening(false);
+    if (isLeftPanlePinned) {
+      setBookWidth(100);
+    }
 
     setTimeout(() => {
       setLeftPanelOpen(false);
       setIsLeftClosing(false);
+      setLeftPanlePinned(false);
     }, 300);
+  };
+
+  // Utility function
+  const getIconForPanel = (name) => {
+    switch (name) {
+      case "Bookmarks":
+        return <IoBookmarks size={20} />;
+      case "Appearance":
+        return <IoColorPaletteSharp size={20} />;
+      case "Reading Style":
+        return <BsGrid1X2Fill size={18} />;
+      case "Statistics":
+        return <FaChartBar size={20} />;
+      case "Ask AI":
+      default:
+        return <BsChatLeftDotsFill size={18} />;
+    }
   };
 
   useEffect(() => {
@@ -112,6 +140,36 @@ export default function SideButtonsWrapper() {
       });
     }
   }, [isMainClosing, pendingPanel]);
+
+  const handleMouseDown = (e) => {
+    if (!containerRef?.current) return;
+
+    const startX = e.clientX;
+    const containerWidth = containerRef.current.offsetWidth;
+
+    // Initial book width in pixels
+    const initialBookWidthPx = (bookWidth / 100) * containerWidth;
+
+    const onMouseMove = (e) => {
+      const deltaX = e.clientX - startX;
+
+      // book is on the right, reduce width when moving left
+      const newBookWidthPx = initialBookWidthPx - deltaX;
+      const newBookWidthPercent = (newBookWidthPx / containerWidth) * 100;
+
+      if (newBookWidthPercent > 70 && newBookWidthPercent < 80) {
+        setBookWidth(newBookWidthPercent);
+      }
+    };
+
+    const onMouseUp = () => {
+      document.removeEventListener("mousemove", onMouseMove);
+      document.removeEventListener("mouseup", onMouseUp);
+    };
+
+    document.addEventListener("mousemove", onMouseMove);
+    document.addEventListener("mouseup", onMouseUp);
+  };
 
   return (
     <>
@@ -153,6 +211,11 @@ export default function SideButtonsWrapper() {
             ${isLeftOpening && !isLeftClosing ? styles.open : ""}
             ${isLeftClosing ? styles.closing : ""}
           `}
+          style={
+            isLeftPanlePinned
+              ? { width: `${100 - bookWidth}%`, minWidth: "20%", maxWidth: "30%", height: "100%", top: "69px", borderRadius: "0px"}  // transition: 'width 0.2s ease-in-out' , 
+              : {}
+          }
         >
           <div className={styles.panelHeader}>
             <IoCloseCircleSharp
@@ -161,15 +224,29 @@ export default function SideButtonsWrapper() {
               onClick={handleCloseLeftPanel}
               size={25}
             />
-            { isLeftPanlePinned ? 
-              <BsPinFill onClick={handlePinLeftPanel} className={"panelPinBtn"} size={18}/>
-              : <BsPinAngleFill onClick={handlePinLeftPanel} className={"panelPinBtn"} size={18} /> 
-            }
-          
+            {isLeftPanlePinned ? (
+              <BsPinFill
+                onClick={handlePinLeftPanel}
+                className={"panelPinBtn"}
+                size={18}
+              />
+            ) : (
+              <BsPinAngleFill
+                onClick={handlePinLeftPanel}
+                className={"panelPinBtn"}
+                size={18}
+              />
+            )}
             <div className={styles.panelContent}>
-              <span className={styles.headerTopic}><LuNotebookText size={20}/>Notes</span>
+              <span className={styles.headerTopic}>
+                <LuNotebookText size={20} /> Notes
+              </span>
             </div>
           </div>
+
+          {isLeftPanlePinned && (
+            <div className={styles.resizer} onMouseDown={handleMouseDown} />
+          )}
         </div>
       )}
 
@@ -191,7 +268,7 @@ export default function SideButtonsWrapper() {
               size={25}
             />
             <div className={styles.panelContent}>
-              <span className={styles.headerTopic}> {mainPanel.name == 'Bookmarks'? <IoBookmarks size={20}/> : mainPanel.name == 'Appearance' ?  <IoColorPaletteSharp size={20}/>: mainPanel.name == 'Reading Style' ? <BsGrid1X2Fill size={20} /> : <FaChartBar size={20} />} {mainPanel.name}</span>
+              <span className={styles.headerTopic}> {getIconForPanel(mainPanel.name)} {mainPanel.name}</span>
             </div>
           </div>
         </div>
