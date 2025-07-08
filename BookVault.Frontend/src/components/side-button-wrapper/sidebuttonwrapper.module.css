@@ -88,8 +88,8 @@
 }
 
 .resizer {
-  width: 1px;
-  cursor: ew-resize;
+  width: 3px;
+  cursor: col-resize;
   background-color: #a3a3a3;
   position: absolute;
   top: 0;
@@ -100,4 +100,5 @@
 
 .resizer:hover {
   width: 5px;
+  background-color: #cecece;
 }
