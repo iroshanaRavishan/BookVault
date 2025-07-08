@@ -207,7 +207,7 @@ export default function SideButtonsWrapper() {
           `}
           style={
             isLeftPanlePinned
-              ? { width: `${leftPanelWidth}px`, minWidth: "300px", maxWidth: "600px", height: "100%", top: "69px", borderRadius: "0px", transition: 'all 0.3s ease-in-out'}
+              ? { width: `${100 - bookWidth}%`, minWidth: "20%", maxWidth: "30%", height: "100%", top: "69px", borderRadius: "0px"}  // transition: 'width 0.2s ease-in-out' , 
               : {}
           }
         >
