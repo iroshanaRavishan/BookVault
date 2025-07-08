@@ -86,3 +86,18 @@
   align-items: center;
   gap: 10px;
 }
+
+.resizer {
+  width: 1px;
+  cursor: ew-resize;
+  background-color: #a3a3a3;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100;
+}
+
+.resizer:hover {
+  width: 5px;
+}

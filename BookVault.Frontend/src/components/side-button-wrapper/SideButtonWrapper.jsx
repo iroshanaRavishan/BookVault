@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState } from "react";
 import BookReadingBoardSideButton from "../book-reading-board-side-button/BookReadingBoardSideButton";
 import styles from "./sidebuttonwrapper.module.css";
 import { IoBookmarks, IoCloseCircleSharp, IoColorPaletteSharp } from "react-icons/io5";
-import { BsGrid1X2Fill, BsPinAngleFill, BsPinFill } from "react-icons/bs";
+import { BsChatLeftDotsFill, BsGrid1X2Fill, BsPinAngleFill, BsPinFill } from "react-icons/bs";
 import { LuNotebookText } from "react-icons/lu";
 import { FaChartBar } from "react-icons/fa";
 
@@ -20,6 +20,8 @@ export default function SideButtonsWrapper() {
   const [isLeftClosing, setIsLeftClosing] = useState(false);
   const [pendingPanel, setPendingPanel] = useState(null);   // Panel to open next after closing
   const [isLeftPanlePinned, setLeftPanlePinned] = useState(null);
+  const [leftPanelWidth, setLeftPanelWidth] = useState(300); // default width
+  const [isResizing, setIsResizing] = useState(false);
 
   const rightRefs = useRef([]);
   const leftRefs = useRef([]);
@@ -103,6 +105,23 @@ export default function SideButtonsWrapper() {
     }, 300);
   };
 
+  // Utility function
+  const getIconForPanel = (name) => {
+    switch (name) {
+      case "Bookmarks":
+        return <IoBookmarks size={20} />;
+      case "Appearance":
+        return <IoColorPaletteSharp size={20} />;
+      case "Reading Style":
+        return <BsGrid1X2Fill size={18} />;
+      case "Statistics":
+        return <FaChartBar size={20} />;
+      case "Ask AI":
+      default:
+        return <BsChatLeftDotsFill size={18} />;
+    }
+  };
+
   useEffect(() => {
     if (!isMainClosing && pendingPanel) {
       setMainPanel(pendingPanel);
@@ -112,6 +131,30 @@ export default function SideButtonsWrapper() {
       });
     }
   }, [isMainClosing, pendingPanel]);
+
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      if (isResizing) {
+        const newWidth = e.clientX;
+        if (newWidth >= 300 && newWidth <= 600) {
+          setLeftPanelWidth(newWidth);
+        }
+      }
+    };
+
+    const handleMouseUp = () => {
+      if (isResizing) {
+        setIsResizing(false);
+      }
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mouseup", handleMouseUp);
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mouseup", handleMouseUp);
+    };
+  }, [isResizing]);
 
   return (
     <>
@@ -153,6 +196,11 @@ export default function SideButtonsWrapper() {
             ${isLeftOpening && !isLeftClosing ? styles.open : ""}
             ${isLeftClosing ? styles.closing : ""}
           `}
+          style={
+            isLeftPanlePinned
+              ? { width: `${leftPanelWidth}px`, minWidth: "300px", maxWidth: "600px", height: "100%", top: "69px", borderRadius: "0px", transition: 'all 0.3s ease-in-out'}
+              : {}
+          }
         >
           <div className={styles.panelHeader}>
             <IoCloseCircleSharp
@@ -161,15 +209,32 @@ export default function SideButtonsWrapper() {
               onClick={handleCloseLeftPanel}
               size={25}
             />
-            { isLeftPanlePinned ? 
-              <BsPinFill onClick={handlePinLeftPanel} className={"panelPinBtn"} size={18}/>
-              : <BsPinAngleFill onClick={handlePinLeftPanel} className={"panelPinBtn"} size={18} /> 
-            }
-          
+            {isLeftPanlePinned ? (
+              <BsPinFill
+                onClick={handlePinLeftPanel}
+                className={"panelPinBtn"}
+                size={18}
+              />
+            ) : (
+              <BsPinAngleFill
+                onClick={handlePinLeftPanel}
+                className={"panelPinBtn"}
+                size={18}
+              />
+            )}
             <div className={styles.panelContent}>
-              <span className={styles.headerTopic}><LuNotebookText size={20}/>Notes</span>
+              <span className={styles.headerTopic}>
+                <LuNotebookText size={20} /> Notes
+              </span>
             </div>
           </div>
+
+          {isLeftPanlePinned && (
+            <div
+              className={styles.resizer}
+              onMouseDown={() => setIsResizing(true)}
+            />
+          )}
         </div>
       )}
 
@@ -191,7 +256,7 @@ export default function SideButtonsWrapper() {
               size={25}
             />
             <div className={styles.panelContent}>
-              <span className={styles.headerTopic}> {mainPanel.name == 'Bookmarks'? <IoBookmarks size={20}/> : mainPanel.name == 'Appearance' ?  <IoColorPaletteSharp size={20}/>: mainPanel.name == 'Reading Style' ? <BsGrid1X2Fill size={20} /> : <FaChartBar size={20} />} {mainPanel.name}</span>
+              <span className={styles.headerTopic}> {getIconForPanel(mainPanel.name)} {mainPanel.name}</span>
             </div>
           </div>
         </div>
