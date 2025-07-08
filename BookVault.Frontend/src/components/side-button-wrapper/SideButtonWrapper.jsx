@@ -245,10 +245,7 @@ export default function SideButtonsWrapper({bookWidth, setBookWidth, containerRe
           </div>
 
           {isLeftPanlePinned && (
-            <div
-              className={styles.resizer}
-              onMouseDown={() => setIsResizing(true)}
-            />
+            <div className={styles.resizer} onMouseDown={handleMouseDown} />
           )}
         </div>
       )}
