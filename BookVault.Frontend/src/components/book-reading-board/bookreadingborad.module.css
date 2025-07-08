@@ -3,10 +3,15 @@
     flex-direction: row;
     justify-content: center;
     min-height: 45.9vh;
+    width: 100%;
+    position: relative;
 }
 
-.pdfViewer {
-    border: none;
-    min-height: 100vh;
-    /* background-color: bisque; */
+.book {
+    background-color: lightcoral;
+    overflow: auto;
+}
+
+.wrapper {
+    overflow: auto;
 }

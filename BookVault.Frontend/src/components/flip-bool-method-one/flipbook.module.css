@@ -1,5 +1,5 @@
 .wrapper {
-  width: 100vw;
+  width: -webkit-fill-available;
   height: 100vh;
   background: #f1c40f;
   display: flex;
@@ -9,7 +9,9 @@
 }
 
 .flipbook {
-  transform: translateY(-5%) !important;
+  transform: translateX(0%) translateY(-5%) !important; /* push it right when opened */
+  transition: transform 0.3s ease;
+  z-index: 20;
 }
 
 .page {
@@ -22,9 +24,126 @@
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
-  overflow: hidden;
-  border: 1px solid #ddd;
+  /* overflow: hidden; */
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+  border-radius: 0;
 }
 
+/* Right corners for front cover */
+.rightRounded {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  margin-left: 3px;
+}
 
+/* Left corners for back cover */
+.leftRounded {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  margin-left: -3px;
+}
+
+.backFace {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.pageContent {
+  margin: 45px;
+  height: -webkit-fill-available;
+  background-color: #f3f3f375;
+  overflow: hidden !important;
+}
+
+.pageContent section {
+  margin: 0;
+  font-size: 24px;
+  color: #333;
+} 
+
+.pageNumberContainer {
+  position: fixed;
+  bottom: 0%;
+  width: -webkit-fill-available;
+  margin-right: 45px;
+}
+
+.pageNumber {
+  font-size: 13px;
+  color: #333;
+  text-align: center;
+  width: 100%;
+  border-radius: 5px;
+}
+
+.centeredCoverpage {
+  transform: translateX(-25%) translateY(-5%) !important;
+}
+
+.centeredLastPage {
+  transform: translateX(25%) translateY(-5%) !important;
+}
+
+.navButtons {
+  position: absolute;
+  bottom: 0px;
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  justify-content: space-evenly;
+  width: 920px;
+  z-index: 3;
+}
+
+.navButton {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  overflow: hidden;
+  width: 100%;
+  font-size: 45px;
+  font-weight: 100;
+  text-align: center;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.514);
+  border-radius: 4px;
+  transition: background 0.3s ease;
+  height: 80px;
+  clip-path: ellipse(200px 80% at top center);
+  z-index: -1;
+} 
+
+.navButton {
+  position: relative;
+  width: 100%;
+  height: 80px;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.navButton::before {
+  content: "";
+  position: absolute;
+  top: -100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #9abe1652;
+  clip-path: ellipse(200px 80% at top center);
+  transition: top 0.3s ease-out;
+  z-index: -1;
+}
+
+.navButton:hover::before {
+  top: 0;
+}
+
+.navButton:hover {
+  transition: top 0.3s ease-out;
+  color: rgba(255, 255, 255, 0.767);
+}

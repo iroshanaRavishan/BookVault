@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styles from './bookreadingborad.module.css';
 import { useParams } from 'react-router-dom';
 import FlipBook from '../flip-bool-method-one/FlipBook';
+import SideButtonsWrapper from '../side-button-wrapper/SideButtonWrapper';
 
 export default function BookReadingBorad() {
   const { id } = useParams();
@@ -9,6 +10,8 @@ export default function BookReadingBorad() {
   const [bookName, setBookName] = useState('');
   const [bookPdfUrl, setBookPdfUrl] = useState('');
   const [loading, setLoading] = useState(true);
+  const containerRef = useRef(null);
+  const [bookWidth, setBookWidth] = useState(100); // in percent
 
   // Load existing book data
   useEffect(() => {
@@ -58,20 +61,13 @@ export default function BookReadingBorad() {
   }, []);
 
   return (
-    <div className={styles.container}>
-      {/* {loading && <p>Loading PDF...</p>}
-      {!loading && bookPdfUrl ? (
-        <iframe
-          src={bookPdfUrl}
-          title="PDF Viewer"
-          width="100%"
-          height="100%"
-          className={styles.pdfViewer}
-        />
-      ) : !loading && (
-        <p>PDF not available for this book.</p>
-      )} */}
-      <FlipBook />
+    <div className={styles.container} ref={containerRef}>
+      <div className={styles.wrapper} style={{ width: `${100 - bookWidth}%` }}>
+        <SideButtonsWrapper bookWidth={bookWidth} setBookWidth={setBookWidth} containerRef={containerRef} />
+      </div>
+      <div className={styles.book} style={{ width: `${bookWidth}%` }}>
+        <FlipBook />
+      </div>
     </div>
-  )
+  );
 }
