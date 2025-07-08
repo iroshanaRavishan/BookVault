@@ -19,9 +19,7 @@ export default function SideButtonsWrapper() {
   const [isLeftOpening, setIsLeftOpening] = useState(false);
   const [isLeftClosing, setIsLeftClosing] = useState(false);
   const [pendingPanel, setPendingPanel] = useState(null);   // Panel to open next after closing
-  const [isLeftPanlePinned, setLeftPanlePinned] = useState(null);
-  const [leftPanelWidth, setLeftPanelWidth] = useState(300); // default width
-  const [isResizing, setIsResizing] = useState(false);
+  const [isLeftPanlePinned, setLeftPanlePinned] = useState(false);
 
   const rightRefs = useRef([]);
   const leftRefs = useRef([]);
