@@ -90,15 +90,10 @@ export default function SideButtonsWrapper({bookWidth, setBookWidth, containerRe
   };
 
   const handlePinLeftPanel = () => {
-    setLeftPanlePinned(!isLeftPanlePinned);
-    if (isLeftPanlePinned) {
-      setBookWidth(100);
-    }
-
-    if (!isLeftPanlePinned) {
-      setBookWidth(79);
-    }
-  }
+    const nextPinnedState = !isLeftPanlePinned;
+    setLeftPanlePinned(nextPinnedState);
+    setBookWidth(nextPinnedState ? 79 : 100);
+  };
 
   const handleCloseLeftPanel = () => {
     setIsLeftClosing(true);
@@ -162,8 +157,6 @@ export default function SideButtonsWrapper({bookWidth, setBookWidth, containerRe
     const onMouseUp = () => {
       document.removeEventListener("mousemove", onMouseMove);
       document.removeEventListener("mouseup", onMouseUp);
-
-      // 🧹 Optional: Reset any state if needed
     };
 
     document.addEventListener("mousemove", onMouseMove);
