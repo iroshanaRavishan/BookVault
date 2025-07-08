@@ -41,7 +41,7 @@ const Page = forwardRef(({ children, number, totalPages, currentPage, pageType }
   );
 });
 
-export default function FlipBook() {
+export default function FlipBook({ isRightPanelOpen }) {
   const [currentPage, setCurrentPage] = useState(0);
   const contentPages = 5;
   const totalPages = 2 + contentPages + (contentPages % 2 === 1 ? 1 : 0) + 2;
@@ -73,7 +73,7 @@ export default function FlipBook() {
   pages.push({ type: 'backCover', content: <section>Back Cover</section> });
 
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.wrapper} style={{ width: isRightPanelOpen ? 'calc(100% - 350px)' : '100%' }}>
       <HTMLFlipBook
         ref={flipBookRef}
         width={230}
