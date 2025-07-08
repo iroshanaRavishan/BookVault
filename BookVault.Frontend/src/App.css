@@ -92,3 +92,8 @@ body {
 .errorBorder {
   border: 1px solid #ff8383 !important;
 }
+
+body.resizing {
+  cursor: col-resize !important;
+  user-select: none;
+}
