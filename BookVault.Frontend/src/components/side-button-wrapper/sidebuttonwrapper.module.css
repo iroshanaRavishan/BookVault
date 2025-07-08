@@ -88,14 +88,15 @@
 }
 
 .resizer {
-  width: 3px;
+  width: 4px;
   cursor: col-resize;
-  background-color: #a3a3a3;
+  background-color: #a7a7a7;
   position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
   z-index: 100;
+  user-select: none;
 }
 
 .resizer:hover {

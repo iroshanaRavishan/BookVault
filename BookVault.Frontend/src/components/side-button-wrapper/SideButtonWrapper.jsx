@@ -142,29 +142,28 @@ export default function SideButtonsWrapper({bookWidth, setBookWidth, containerRe
   }, [isMainClosing, pendingPanel]);
 
   const handleMouseDown = (e) => {
-    if (!containerRef?.current) return;
+    e.preventDefault();
 
     const startX = e.clientX;
     const containerWidth = containerRef.current.offsetWidth;
-
-    // Initial book width in pixels
     const initialBookWidthPx = (bookWidth / 100) * containerWidth;
 
     const onMouseMove = (e) => {
       const deltaX = e.clientX - startX;
-
-      // book is on the right, reduce width when moving left
       const newBookWidthPx = initialBookWidthPx - deltaX;
       const newBookWidthPercent = (newBookWidthPx / containerWidth) * 100;
 
-      if (newBookWidthPercent > 70 && newBookWidthPercent < 80) {
-        setBookWidth(newBookWidthPercent);
-      }
+      // Clamp the width between 70% and 80%
+      const clampedWidth = Math.min(Math.max(newBookWidthPercent, 70), 80);
+
+      setBookWidth(clampedWidth);
     };
 
     const onMouseUp = () => {
       document.removeEventListener("mousemove", onMouseMove);
       document.removeEventListener("mouseup", onMouseUp);
+
+      // 🧹 Optional: Reset any state if needed
     };
 
     document.addEventListener("mousemove", onMouseMove);
