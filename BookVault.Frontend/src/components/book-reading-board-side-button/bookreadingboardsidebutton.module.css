@@ -36,13 +36,6 @@
   transform-origin: left center;
 }
 
-.bottom {
-  bottom: 0px;
-  right: 200px;
-  /* make thie above right attribute dynamic */
-  position: fixed;
-}
-
 .bottom .sideButton {
   transform: none;
 }
