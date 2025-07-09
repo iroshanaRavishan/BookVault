@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect, useState, useMemo } from "react";
 import BookReadingBoardSideButton from "../book-reading-board-side-button/BookReadingBoardSideButton";
 import styles from "./sidebuttonwrapper.module.css";
 import { IoBookmarks, IoCloseCircleSharp, IoColorPaletteSharp } from "react-icons/io5";
@@ -50,6 +50,21 @@ export default function SideButtonsWrapper({
     setRightOffsets(calcOffsets(rightRefs.current));
     setLeftOffsets(calcOffsets(leftRefs.current));
   }, []);
+
+  const bottomPanelRightOffset = useMemo(() => {
+    if (!isLeftPanelPinned || mainPanel?.position !== "bottom") return undefined;
+
+    const minBookWidth = 75;
+    const maxBookWidth = 85;
+    const minRight = 55;
+    const maxRight = 100;
+
+    const ratio = (bookWidth - minBookWidth) / (maxBookWidth - minBookWidth);
+    const clampedRatio = Math.min(Math.max(ratio, 0), 1);
+    const dynamicRight = minRight + (maxRight - minRight) * clampedRatio;
+
+    return `${dynamicRight}px`;
+  }, [bookWidth, isLeftPanelPinned, mainPanel]);
 
   const handleButtonClick = (name, position) => {
     const newPanel = { name, position };
@@ -263,6 +278,11 @@ export default function SideButtonsWrapper({
             ${isMainOpening && !isMainClosing ? styles.open : ""}
             ${isMainClosing ? styles.closing : ""}
           `}
+          style={
+            mainPanel.position === "bottom" && isLeftPanelPinned
+              ? { right: bottomPanelRightOffset }
+              : undefined
+          }
         >
           <div className={styles.panelHeader}>
             <IoCloseCircleSharp
