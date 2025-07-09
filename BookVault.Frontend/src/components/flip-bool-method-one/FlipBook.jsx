@@ -27,6 +27,14 @@ const Page = forwardRef(({ children, number, totalPages, currentPage, pageType }
       {showRightHoles && <BookBindingHoles side="left" />}
       {showLastCoverHoles && <BookBindingHoles side="right" />}
 
+      {/* Bookmark */}
+      {number % 2 === 0 && number !== 0 && number !== totalPages - 1 && (
+        <div className={`${styles.bookmark} ${styles.leftCorner}`} />
+      )}
+      {number % 2 === 1 && number !== 0 && number !== totalPages - 1 && (
+        <div className={`${styles.bookmark} ${styles.rightCorner}`} />
+      )}
+
       {/* Content */}
       {children}
 
