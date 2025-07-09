@@ -204,8 +204,15 @@ export default function SideButtonsWrapper({bookWidth, setBookWidth, containerRe
             ${isLeftClosing ? styles.closing : ""}
           `}
           style={
-            isLeftPanlePinned
-              ? { width: `${100 - bookWidth}%`, minWidth: "20%", maxWidth: "30%", height: "100%", top: "69px", borderRadius: "0px"}  // transition: 'width 0.2s ease-in-out' , 
+            isLeftPanelPinned
+              ? {
+                  width: `${100 - bookWidth}%`,
+                  minWidth: "15%",
+                  maxWidth: "25%",
+                  height: "100%",
+                  top: "69px",
+                  borderRadius: "0px",
+                }
               : {}
           }
         >
