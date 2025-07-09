@@ -27,6 +27,14 @@ const Page = forwardRef(({ children, number, totalPages, currentPage, pageType }
       {showRightHoles && <BookBindingHoles side="left" />}
       {showLastCoverHoles && <BookBindingHoles side="right" />}
 
+      {/* Bookmark */}
+      {number % 2 === 0 && number !== 0 && number !== totalPages - 1 && (
+        <div className={`${styles.bookmark} ${styles.leftCorner}`} />
+      )}
+      {number % 2 === 1 && number !== 0 && number !== totalPages - 1 && (
+        <div className={`${styles.bookmark} ${styles.rightCorner}`} />
+      )}
+
       {/* Content */}
       {children}
 
@@ -110,10 +118,18 @@ export default function FlipBook({ isRightPanelOpen }) {
 
       {/* Navigation Buttons */}
       <div className={styles.navButtons}>
-        <span onClick={() => flipBookRef.current.pageFlip().flipPrev()} className={styles.navButton} style={currentPage === 0 ? { display: 'none' } : {}  }>
+        <span
+          onClick={() => flipBookRef.current.pageFlip().flipPrev()}
+          className={styles.navButton}
+          style={currentPage === 0 ? { display: 'none' } : {}}
+        >
           Prev
         </span>
-        <span onClick={() => flipBookRef.current.pageFlip().flipNext()} className={styles.navButton} style={currentPage === totalPages - 1 ? { display: 'none' } : {} }>
+        <span
+          onClick={() => flipBookRef.current.pageFlip().flipNext()}
+          className={styles.navButton}
+          style={currentPage === totalPages - 1 ? { display: 'none' } : {}}
+        >
           Next
         </span>
       </div>
