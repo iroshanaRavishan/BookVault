@@ -148,8 +148,8 @@ export default function SideButtonsWrapper({bookWidth, setBookWidth, containerRe
       const newBookWidthPx = initialBookWidthPx - deltaX;
       const newBookWidthPercent = (newBookWidthPx / containerWidth) * 100;
 
-      // Clamp the width between 70% and 80%
-      const clampedWidth = Math.min(Math.max(newBookWidthPercent, 70), 80);
+      // Clamp the width between 75% and 85%
+      const clampedWidth = Math.min(Math.max(newBookWidthPercent, 75), 85);
 
       setBookWidth(clampedWidth);
     };
