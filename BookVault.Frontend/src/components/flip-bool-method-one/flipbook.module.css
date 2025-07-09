@@ -116,14 +116,6 @@
   height: 80px;
   clip-path: ellipse(200px 80% at top center);
   z-index: -1;
-} 
-
-.navButton {
-  position: relative;
-  width: 100%;
-  height: 80px;
-  cursor: pointer;
-  overflow: hidden;
 }
 
 .navButton::before {
