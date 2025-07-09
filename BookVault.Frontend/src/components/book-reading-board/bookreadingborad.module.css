@@ -7,10 +7,11 @@
 }
 
 .book {
-    background-color: lightcoral;
+    background: #f1c40f;
     overflow: auto;
 }
 
 .wrapper {
     overflow: auto;
+    background: #f1c40f;
 }
