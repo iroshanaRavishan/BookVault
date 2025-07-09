@@ -9,17 +9,24 @@ import { FaChartBar } from "react-icons/fa";
 const rightButtonData = ["Bookmarks", "Appearance", "Reading Style", "Statistics"];
 const leftButtonData = ["Notes"];
 
-export default function SideButtonsWrapper({bookWidth, setBookWidth, containerRef}) {
+export default function SideButtonsWrapper({
+  bookWidth,
+  setBookWidth,
+  containerRef,
+  mainPanel,
+  setMainPanel,
+  leftPanelOpen,
+  setLeftPanelOpen,
+  isLeftPanelPinned,
+  setIsLeftPanelPinned,
+}) {
   const [rightOffsets, setRightOffsets] = useState([]);
   const [leftOffsets, setLeftOffsets] = useState([]);
-  const [mainPanel, setMainPanel] = useState(null); // right or bottom panel
   const [isMainClosing, setIsMainClosing] = useState(false);
   const [isMainOpening, setIsMainOpening] = useState(false);
-  const [leftPanelOpen, setLeftPanelOpen] = useState(false);
   const [isLeftOpening, setIsLeftOpening] = useState(false);
   const [isLeftClosing, setIsLeftClosing] = useState(false);
   const [pendingPanel, setPendingPanel] = useState(null);   // Panel to open next after closing
-  const [isLeftPanlePinned, setLeftPanlePinned] = useState(false);
 
   const rightRefs = useRef([]);
   const leftRefs = useRef([]);

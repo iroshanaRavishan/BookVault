@@ -12,7 +12,9 @@ export default function BookReadingBorad() {
   const [loading, setLoading] = useState(true);
   const containerRef = useRef(null);
   const [bookWidth, setBookWidth] = useState(100); // in percent
-  const [isRightPanelOpen, setIsRightPanelOpen] = useState(false);
+  const [mainPanel, setMainPanel] = useState(null);
+  const [leftPanelOpen, setLeftPanelOpen] = useState(false);
+  const [isLeftPanelPinned, setIsLeftPanelPinned] = useState(false);
 
   // Load existing book data
   useEffect(() => {
@@ -64,7 +66,17 @@ export default function BookReadingBorad() {
   return (
     <div className={styles.container} ref={containerRef}>
       <div className={styles.wrapper} style={{ width: `${100 - bookWidth}%` }}>
-        <SideButtonsWrapper bookWidth={bookWidth} setBookWidth={setBookWidth} containerRef={containerRef} setIsRightPanelOpen={setIsRightPanelOpen} />
+        <SideButtonsWrapper
+          bookWidth={bookWidth}
+          setBookWidth={setBookWidth}
+          containerRef={containerRef}
+          mainPanel={mainPanel}
+          setMainPanel={setMainPanel}
+          leftPanelOpen={leftPanelOpen}
+          setLeftPanelOpen={setLeftPanelOpen}
+          isLeftPanelPinned={isLeftPanelPinned}
+          setIsLeftPanelPinned={setIsLeftPanelPinned}
+        />
       </div>
       <div className={styles.book} style={{ width: `${bookWidth}%` }}>
         <FlipBook isRightPanelOpen={isRightPanelOpen}/>
