@@ -90,8 +90,8 @@ export default function SideButtonsWrapper({bookWidth, setBookWidth, containerRe
   };
 
   const handlePinLeftPanel = () => {
-    const nextPinnedState = !isLeftPanlePinned;
-    setLeftPanlePinned(nextPinnedState);
+    const nextPinnedState = !isLeftPanelPinned;
+    setIsLeftPanelPinned(nextPinnedState);
     setBookWidth(nextPinnedState ? 79 : 100);
   };
 
@@ -105,7 +105,7 @@ export default function SideButtonsWrapper({bookWidth, setBookWidth, containerRe
     setTimeout(() => {
       setLeftPanelOpen(false);
       setIsLeftClosing(false);
-      setLeftPanlePinned(false);
+      setIsLeftPanelPinned(false);
     }, 300);
   };
 
@@ -223,7 +223,7 @@ export default function SideButtonsWrapper({bookWidth, setBookWidth, containerRe
               onClick={handleCloseLeftPanel}
               size={25}
             />
-            {isLeftPanlePinned ? (
+            {isLeftPanelPinned ? (
               <BsPinFill
                 onClick={handlePinLeftPanel}
                 className={"panelPinBtn"}
@@ -243,7 +243,7 @@ export default function SideButtonsWrapper({bookWidth, setBookWidth, containerRe
             </div>
           </div>
 
-          {isLeftPanlePinned && (
+          {isLeftPanelPinned && (
             <div className={styles.resizer} onMouseDown={handleMouseDown} />
           )}
         </div>
