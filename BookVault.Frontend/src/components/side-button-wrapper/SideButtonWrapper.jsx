@@ -98,14 +98,12 @@ export default function SideButtonsWrapper({bookWidth, setBookWidth, containerRe
   const handleCloseLeftPanel = () => {
     setIsLeftClosing(true);
     setIsLeftOpening(false);
-    if (isLeftPanlePinned) {
-      setBookWidth(100);
-    }
 
     setTimeout(() => {
       setLeftPanelOpen(false);
       setIsLeftClosing(false);
       setIsLeftPanelPinned(false);
+      setBookWidth(100);
     }, 300);
   };
 
