@@ -39,6 +39,7 @@
 .bottom {
   bottom: 0px;
   right: 200px;
+  /* make thie above right attribute dynamic */
   position: fixed;
 }
 
