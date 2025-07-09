@@ -90,22 +90,20 @@ export default function SideButtonsWrapper({bookWidth, setBookWidth, containerRe
   };
 
   const handlePinLeftPanel = () => {
-    const nextPinnedState = !isLeftPanlePinned;
-    setLeftPanlePinned(nextPinnedState);
+    const nextPinnedState = !isLeftPanelPinned;
+    setIsLeftPanelPinned(nextPinnedState);
     setBookWidth(nextPinnedState ? 79 : 100);
   };
 
   const handleCloseLeftPanel = () => {
     setIsLeftClosing(true);
     setIsLeftOpening(false);
-    if (isLeftPanlePinned) {
-      setBookWidth(100);
-    }
 
     setTimeout(() => {
       setLeftPanelOpen(false);
       setIsLeftClosing(false);
-      setLeftPanlePinned(false);
+      setIsLeftPanelPinned(false);
+      setBookWidth(100);
     }, 300);
   };
 
@@ -148,8 +146,8 @@ export default function SideButtonsWrapper({bookWidth, setBookWidth, containerRe
       const newBookWidthPx = initialBookWidthPx - deltaX;
       const newBookWidthPercent = (newBookWidthPx / containerWidth) * 100;
 
-      // Clamp the width between 70% and 80%
-      const clampedWidth = Math.min(Math.max(newBookWidthPercent, 70), 80);
+      // Clamp the width between 75% and 85%
+      const clampedWidth = Math.min(Math.max(newBookWidthPercent, 75), 85);
 
       setBookWidth(clampedWidth);
     };
@@ -204,8 +202,15 @@ export default function SideButtonsWrapper({bookWidth, setBookWidth, containerRe
             ${isLeftClosing ? styles.closing : ""}
           `}
           style={
-            isLeftPanlePinned
-              ? { width: `${100 - bookWidth}%`, minWidth: "20%", maxWidth: "30%", height: "100%", top: "69px", borderRadius: "0px"}  // transition: 'width 0.2s ease-in-out' , 
+            isLeftPanelPinned
+              ? {
+                  width: `${100 - bookWidth}%`,
+                  minWidth: "15%",
+                  maxWidth: "25%",
+                  height: "100%",
+                  top: "69px",
+                  borderRadius: "0px",
+                }
               : {}
           }
         >
@@ -216,7 +221,7 @@ export default function SideButtonsWrapper({bookWidth, setBookWidth, containerRe
               onClick={handleCloseLeftPanel}
               size={25}
             />
-            {isLeftPanlePinned ? (
+            {isLeftPanelPinned ? (
               <BsPinFill
                 onClick={handlePinLeftPanel}
                 className={"panelPinBtn"}
@@ -236,7 +241,7 @@ export default function SideButtonsWrapper({bookWidth, setBookWidth, containerRe
             </div>
           </div>
 
-          {isLeftPanlePinned && (
+          {isLeftPanelPinned && (
             <div className={styles.resizer} onMouseDown={handleMouseDown} />
           )}
         </div>
