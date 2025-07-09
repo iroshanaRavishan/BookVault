@@ -51,19 +51,32 @@ export default function SideButtonsWrapper({
     setLeftOffsets(calcOffsets(leftRefs.current));
   }, []);
 
-  const bottomPanelRightOffset = useMemo(() => {
-    if (!isLeftPanelPinned || mainPanel?.position !== "bottom") return undefined;
+  const { dynamicPanelRight, dynamicButtonRight } = useMemo(() => {
+    // If the left panel isn’t pinned, neither offset should apply
+    if (!isLeftPanelPinned) {
+      return { dynamicPanelRight: undefined, dynamicButtonRight: undefined };
+    }
 
+    // Compute the shared ratio for both button and panel
     const minBookWidth = 75;
     const maxBookWidth = 85;
-    const minRight = 55;
-    const maxRight = 100;
-
     const ratio = (bookWidth - minBookWidth) / (maxBookWidth - minBookWidth);
     const clampedRatio = Math.min(Math.max(ratio, 0), 1);
-    const dynamicRight = minRight + (maxRight - minRight) * clampedRatio;
 
-    return `${dynamicRight}px`;
+    // Button always follows bookWidth when pinned
+    const buttonRange = { min: 175, max: 220 };
+    const dynamicButtonRight = 
+      `${buttonRange.min + (buttonRange.max - buttonRange.min) * clampedRatio}px`;
+
+    // Panel only when bottom panel is open
+    let dynamicPanelRight;
+    if (mainPanel?.position === "bottom") {
+      const panelRange = { min: 55, max: 100 };
+      dynamicPanelRight = 
+        `${panelRange.min + (panelRange.max - panelRange.min) * clampedRatio}px`;
+    }
+
+    return { dynamicPanelRight, dynamicButtonRight };
   }, [bookWidth, isLeftPanelPinned, mainPanel]);
 
   const handleButtonClick = (name, position) => {
@@ -212,6 +225,7 @@ export default function SideButtonsWrapper({
         position="bottom"
         onClick={() => handleButtonClick("Ask AI", "bottom")}
         isActive={mainPanel?.name === "Ask AI"}
+        rightOffset={dynamicButtonRight} // Pass the dynamic button offset 
       />
 
       {/* Left Panel */}
@@ -280,7 +294,7 @@ export default function SideButtonsWrapper({
           `}
           style={
             mainPanel.position === "bottom" && isLeftPanelPinned
-              ? { right: bottomPanelRightOffset }
+              ? { right: dynamicPanelRight  }
               : undefined
           }
         >
