@@ -1,11 +1,11 @@
-import React, { forwardRef, useRef, useState } from 'react';
+import React, { forwardRef, useEffect, useRef, useState } from 'react';
 import HTMLFlipBook from 'react-pageflip';
 import styles from './flipbook.module.css';
 import BookBindingHoles from '../book-binding-holes/BookBindingHoles';
 
 const Page = forwardRef(({ children, number, totalPages, currentPage, pageType }, ref) => {
+  const [showRotatedCopy, setShowRotatedCopy] = useState(false);
   let radiusClass = "";
-
   if (number === 0) radiusClass = styles.rightRounded;
   else if (number === totalPages - 1) radiusClass = styles.leftRounded;
   else radiusClass = number % 2 === 0 ? styles.rightRounded : styles.leftRounded;
@@ -19,6 +19,9 @@ const Page = forwardRef(({ children, number, totalPages, currentPage, pageType }
   const showLastCoverHoles = number === totalPages - 1;
   const coverClass = pageType === "cover" || pageType === "backCover" ? styles.coverPage : "";
 
+  const isContentPage = pageType === "content";
+  const cornerClass = number % 2 === 0 ? styles.leftCorner : styles.rightCorner;
+
   return (
     <div className={`${styles.page} ${radiusClass} ${coverClass}`} ref={ref}>
       {/* Book holes */}
@@ -27,12 +30,35 @@ const Page = forwardRef(({ children, number, totalPages, currentPage, pageType }
       {showRightHoles && <BookBindingHoles side="left" />}
       {showLastCoverHoles && <BookBindingHoles side="right" />}
 
-      {/* Bookmark */}
-      {number % 2 === 0 && number !== 0 && number !== totalPages - 1 && (
-        <div className={`${styles.bookmark} ${styles.leftCorner}`} />
-      )}
-      {number % 2 === 1 && number !== 0 && number !== totalPages - 1 && (
-        <div className={`${styles.bookmark} ${styles.rightCorner}`} />
+      {/* Bookmark (block page turn via onMouseDown) */}
+      {isContentPage && (
+        <>
+          <div
+            className={`${styles.bookmark} ${cornerClass}`}
+            onPointerDown={(e) => {
+              e.stopPropagation();
+              e.preventDefault();
+            }}
+            onClick={(e) => {
+              e.stopPropagation();
+              e.preventDefault();
+              setShowRotatedCopy((prev) => !prev); // toggle bookmark copy
+            }}
+          />
+          {showRotatedCopy && (
+            <div
+              className={`${styles.bookmark} ${cornerClass} ${styles.rotatedCopy}`}
+              onPointerDown={(e) => {
+                e.stopPropagation();
+                e.preventDefault();
+              }}
+              onClick={(e) => {
+                e.stopPropagation();
+                e.preventDefault();
+              }}
+            />
+          )}
+        </>
       )}
 
       {/* Content */}
@@ -51,7 +77,8 @@ const Page = forwardRef(({ children, number, totalPages, currentPage, pageType }
 
 export default function FlipBook({ isRightPanelOpen }) {
   const [currentPage, setCurrentPage] = useState(0);
-  const contentPages = 5;
+  const contentPages = 7;
+
   const totalPages = 2 + contentPages + (contentPages % 2 === 1 ? 1 : 0) + 2;
   const flipBookRef = useRef();
   const pages = [];
