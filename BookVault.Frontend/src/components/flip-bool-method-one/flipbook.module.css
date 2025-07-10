@@ -143,8 +143,12 @@
 
 /* === Bookmark === */
 .bookmark {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
   position: absolute;
-  width: 30px;
+  width: 32px;
   height: 40px;
   background-color: rgba(0, 0, 0, 0.11);
   clip-path: polygon(0 100%, 0 0, 100% 0, 100% 100%, 50% 70%);
@@ -152,11 +156,19 @@
   transform-origin: center bottom;
   z-index: 10;
   cursor: pointer;
+  transition: background-color 0.2s ease;
 }
 
+.bookmarkActionButton {
+  color: rgba(44, 44, 44, 0.445);
+  margin-bottom: 12px;
+  background-color: white;
+  border-radius: 50%;
+  font-size: 20px !important;
+}
 
 .bookmark:hover {
-  background-color: rgba(0, 0, 0, 0.514);
+  background-color: rgba(0, 0, 0, 0.315);
 }
 
 .leftCorner {
@@ -170,8 +182,12 @@
 }
 
 .rotatedCopy {
-  background-color: rgb(182, 2, 2);
+  background-color: rgb(2, 182, 47);
   transform: rotateX(180deg) translateY(200%);
   z-index: 20;
   pointer-events: auto; /* allow events */
+}
+
+.rotatedCopy:hover {
+  background-color: rgb(2, 182, 47);
 }
