@@ -30,9 +30,18 @@ const Page = forwardRef(({ children, number, totalPages, currentPage, pageType }
       {showRightHoles && <BookBindingHoles side="left" />}
       {showLastCoverHoles && <BookBindingHoles side="right" />}
 
-      {/* Bookmarks only for content pages */}
+      {/* Bookmark (block page turn via onMouseDown) */}
       {isContentPage && (
-        <div className={`${styles.bookmark} ${cornerClass}`} />
+        <div
+          className={`${styles.bookmark} ${cornerClass}`}
+          onPointerDown={(e) => {
+            e.stopPropagation();     // stop bubbling
+            e.preventDefault();      // prevent default flip behavior
+          }}
+          onClick={() => {
+            console.log(`Bookmark clicked on page ${number}`);
+          }}
+        />
       )}
 
       {/* Content */}
@@ -52,6 +61,7 @@ const Page = forwardRef(({ children, number, totalPages, currentPage, pageType }
 export default function FlipBook({ isRightPanelOpen }) {
   const [currentPage, setCurrentPage] = useState(0);
   const contentPages = 5;
+
   const totalPages = 2 + contentPages + (contentPages % 2 === 1 ? 1 : 0) + 2;
   const flipBookRef = useRef();
   const pages = [];
