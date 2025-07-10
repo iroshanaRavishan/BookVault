@@ -191,3 +191,14 @@
 .rotatedCopy:hover {
   background-color: rgb(2, 182, 47);
 }
+
+.bookmarkLabel {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: rotateX(180deg) translateX(-50%);
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
+  pointer-events: none;
+}
