@@ -154,10 +154,6 @@
   cursor: pointer;
 }
 
-.rotated {
-  background-color: crimson;
-  transform: rotateX(180deg) translateY(200%);
-}
 
 .bookmark:hover {
   background-color: rgba(0, 0, 0, 0.514);
@@ -171,4 +167,11 @@
 .rightCorner {
   top: 0;
   right: 30px;
+}
+
+.rotatedCopy {
+  background-color: rgb(182, 2, 2);
+  transform: rotateX(180deg) translateY(200%);
+  z-index: 20;
+  pointer-events: auto; /* allow events */
 }
