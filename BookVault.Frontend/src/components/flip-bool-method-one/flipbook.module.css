@@ -146,17 +146,29 @@
   position: absolute;
   width: 30px;
   height: 40px;
-  background-color: crimson;
+  background-color: rgba(0, 0, 0, 0.11);
   clip-path: polygon(0 100%, 0 0, 100% 0, 100% 100%, 50% 70%);
+  transform-style: preserve-3d;
+  transform-origin: center bottom;
   z-index: 10;
+  cursor: pointer;
+}
+
+.rotated {
+  background-color: crimson;
+  transform: rotateX(180deg) translateY(200%);
+}
+
+.bookmark:hover {
+  background-color: rgba(0, 0, 0, 0.514);
 }
 
 .leftCorner {
-  top: 00px;
+  top: 0;
   left: 30px;
 }
 
 .rightCorner {
-  top: 00px;
+  top: 0;
   right: 30px;
 }
