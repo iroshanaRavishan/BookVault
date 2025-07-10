@@ -59,7 +59,9 @@ const Page = forwardRef(({ children, number, totalPages, currentPage, pageType }
                 e.stopPropagation();
                 e.preventDefault();
               }}
-            />
+            >
+             <span className={styles.bookmarkLabel}>{number - 1}</span>
+            </div>
           )}
         </>
       )}
