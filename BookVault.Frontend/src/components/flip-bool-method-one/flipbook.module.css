@@ -144,19 +144,19 @@
 /* === Bookmark === */
 .bookmark {
   position: absolute;
-  width: 36px;
-  height: 48px;
+  width: 30px;
+  height: 40px;
   background-color: crimson;
-  clip-path: polygon(0 0, 100% 0, 100% 80%, 50% 100%, 0 80%);
+  clip-path: polygon(0 100%, 0 0, 100% 0, 100% 100%, 50% 70%);
   z-index: 10;
 }
 
 .leftCorner {
-  top: 10px;
-  left: 10px;
+  top: 00px;
+  left: 30px;
 }
 
 .rightCorner {
-  top: 10px;
-  right: 10px;
+  top: 00px;
+  right: 30px;
 }
