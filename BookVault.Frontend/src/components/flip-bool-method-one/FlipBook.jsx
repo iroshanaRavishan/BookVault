@@ -4,7 +4,7 @@ import styles from './flipbook.module.css';
 import BookBindingHoles from '../book-binding-holes/BookBindingHoles';
 import { IoAddCircleSharp, IoCloseCircleSharp } from "react-icons/io5";
 
-const Page = forwardRef(({ children, number, totalPages, currentPage, pageType }, ref) => {
+const Page = forwardRef(({ children, number, totalPages, currentPage, pageType, onBookmarkAdd, activeBookmarks }, ref) => {
   const [showRotatedCopy, setShowRotatedCopy] = useState(false);
   let radiusClass = "";
   if (number === 0) radiusClass = styles.rightRounded;
@@ -22,6 +22,10 @@ const Page = forwardRef(({ children, number, totalPages, currentPage, pageType }
 
   const isContentPage = pageType === "content";
   const cornerClass = number % 2 === 0 ? styles.leftCorner : styles.rightCorner;
+
+  useEffect(() => {
+    setShowRotatedCopy(activeBookmarks.includes(number));
+  }, [activeBookmarks, number]);
 
   return (
     <div className={`${styles.page} ${radiusClass} ${coverClass}`} ref={ref}>
@@ -43,10 +47,10 @@ const Page = forwardRef(({ children, number, totalPages, currentPage, pageType }
             onClick={(e) => {
               e.stopPropagation();
               e.preventDefault();
-              setShowRotatedCopy((prev) => !prev); // toggle bookmark copy
+              onBookmarkAdd(number);
             }}
           >
-            { showRotatedCopy ? <IoCloseCircleSharp className={styles.bookmarkActionButton} /> : <IoAddCircleSharp className={styles.bookmarkActionButton} />}
+            {showRotatedCopy ? <IoCloseCircleSharp className={styles.bookmarkActionButton} /> : <IoAddCircleSharp className={styles.bookmarkActionButton} />}
           </div>
           {showRotatedCopy && (
             <div
@@ -60,7 +64,7 @@ const Page = forwardRef(({ children, number, totalPages, currentPage, pageType }
                 e.preventDefault();
               }}
             >
-             <span className={styles.bookmarkLabel}>{number - 1}</span>
+              <span className={styles.bookmarkLabel}>{number - 1}</span>
             </div>
           )}
         </>
@@ -82,8 +86,9 @@ const Page = forwardRef(({ children, number, totalPages, currentPage, pageType }
 
 export default function FlipBook({ isRightPanelOpen }) {
   const [currentPage, setCurrentPage] = useState(0);
-  const contentPages = 7;
+  const [bookmarks, setBookmarks] = useState([]);
 
+  const contentPages = 20;
   const totalPages = 2 + contentPages + (contentPages % 2 === 1 ? 1 : 0) + 2;
   const flipBookRef = useRef();
   const pages = [];
@@ -112,8 +117,33 @@ export default function FlipBook({ isRightPanelOpen }) {
   pages.push({ type: 'blank', content: null });
   pages.push({ type: 'backCover', content: <section>Back Cover</section> });
 
+  const leftPage = currentPage % 2 === 0 ? currentPage : currentPage - 1;
+  const rightPage = leftPage + 1;
+  const isSinglePage = rightPage >= totalPages;
+
+  const handleAddBookmark = (pageNumber) => {
+    setBookmarks(prev => (
+      prev.includes(pageNumber)
+        ? prev.filter(n => n !== pageNumber)
+        : [...prev, pageNumber]
+    ));
+  };
+
   return (
     <div className={styles.wrapper} style={{ width: isRightPanelOpen ? 'calc(100% - 350px)' : '100%' }}>
+      <div className={styles.bookmarkContainers}>
+        <div className={styles.leftBookmarkContainer}>
+          {bookmarks.filter((n) => n < leftPage || (n === leftPage && currentPage !== leftPage)).map((n) => (
+            <div key={n} className={styles.bookmarkMini}>{n - 1}</div>
+          ))}
+        </div>
+        <div className={styles.rightBookmarkContainer}>
+          {bookmarks.filter((n) => n > rightPage+1 || (n === rightPage && currentPage !== rightPage)).map((n) => (
+            <div key={n} className={styles.bookmarkMini}>{n - 1}</div>
+          ))}
+        </div>
+      </div>
+
       <HTMLFlipBook
         ref={flipBookRef}
         width={230}
@@ -142,6 +172,8 @@ export default function FlipBook({ isRightPanelOpen }) {
             totalPages={totalPages}
             currentPage={currentPage}
             pageType={page.type}
+            onBookmarkAdd={handleAddBookmark}
+            activeBookmarks={bookmarks}
           >
             <div className={styles.pageContent}>{page.content}</div>
           </Page>
