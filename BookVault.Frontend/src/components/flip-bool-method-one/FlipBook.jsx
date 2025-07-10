@@ -19,6 +19,9 @@ const Page = forwardRef(({ children, number, totalPages, currentPage, pageType }
   const showLastCoverHoles = number === totalPages - 1;
   const coverClass = pageType === "cover" || pageType === "backCover" ? styles.coverPage : "";
 
+  const isContentPage = pageType === "content";
+  const cornerClass = number % 2 === 0 ? styles.leftCorner : styles.rightCorner;
+
   return (
     <div className={`${styles.page} ${radiusClass} ${coverClass}`} ref={ref}>
       {/* Book holes */}
@@ -27,12 +30,9 @@ const Page = forwardRef(({ children, number, totalPages, currentPage, pageType }
       {showRightHoles && <BookBindingHoles side="left" />}
       {showLastCoverHoles && <BookBindingHoles side="right" />}
 
-      {/* Bookmark */}
-      {number % 2 === 0 && number !== 0 && number !== totalPages - 1 && (
-        <div className={`${styles.bookmark} ${styles.leftCorner}`} />
-      )}
-      {number % 2 === 1 && number !== 0 && number !== totalPages - 1 && (
-        <div className={`${styles.bookmark} ${styles.rightCorner}`} />
+      {/* Bookmarks only for content pages */}
+      {isContentPage && (
+        <div className={`${styles.bookmark} ${cornerClass}`} />
       )}
 
       {/* Content */}
