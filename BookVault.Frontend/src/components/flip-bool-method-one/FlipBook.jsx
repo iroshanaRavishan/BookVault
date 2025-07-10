@@ -172,6 +172,8 @@ export default function FlipBook({ isRightPanelOpen }) {
             totalPages={totalPages}
             currentPage={currentPage}
             pageType={page.type}
+            onBookmarkAdd={handleAddBookmark}
+            activeBookmarks={bookmarks}
           >
             <div className={styles.pageContent}>{page.content}</div>
           </Page>
