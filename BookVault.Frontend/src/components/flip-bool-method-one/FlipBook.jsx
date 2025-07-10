@@ -2,6 +2,7 @@ import React, { forwardRef, useEffect, useRef, useState } from 'react';
 import HTMLFlipBook from 'react-pageflip';
 import styles from './flipbook.module.css';
 import BookBindingHoles from '../book-binding-holes/BookBindingHoles';
+import { IoAddCircleSharp, IoCloseCircleSharp } from "react-icons/io5";
 
 const Page = forwardRef(({ children, number, totalPages, currentPage, pageType }, ref) => {
   const [showRotatedCopy, setShowRotatedCopy] = useState(false);
@@ -44,7 +45,9 @@ const Page = forwardRef(({ children, number, totalPages, currentPage, pageType }
               e.preventDefault();
               setShowRotatedCopy((prev) => !prev); // toggle bookmark copy
             }}
-          />
+          >
+            { showRotatedCopy ? <IoCloseCircleSharp className={styles.bookmarkActionButton} /> : <IoAddCircleSharp className={styles.bookmarkActionButton} />}
+          </div>
           {showRotatedCopy && (
             <div
               className={`${styles.bookmark} ${cornerClass} ${styles.rotatedCopy}`}
@@ -56,7 +59,9 @@ const Page = forwardRef(({ children, number, totalPages, currentPage, pageType }
                 e.stopPropagation();
                 e.preventDefault();
               }}
-            />
+            >
+             <span className={styles.bookmarkLabel}>{number - 1}</span>
+            </div>
           )}
         </>
       )}
