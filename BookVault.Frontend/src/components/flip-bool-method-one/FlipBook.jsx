@@ -47,10 +47,10 @@ const Page = forwardRef(({ children, number, totalPages, currentPage, pageType, 
             onClick={(e) => {
               e.stopPropagation();
               e.preventDefault();
-              setShowRotatedCopy((prev) => !prev); // toggle bookmark copy
+              onBookmarkAdd(number);
             }}
           >
-            { showRotatedCopy ? <IoCloseCircleSharp className={styles.bookmarkActionButton} /> : <IoAddCircleSharp className={styles.bookmarkActionButton} />}
+            {showRotatedCopy ? <IoCloseCircleSharp className={styles.bookmarkActionButton} /> : <IoAddCircleSharp className={styles.bookmarkActionButton} />}
           </div>
           {showRotatedCopy && (
             <div
@@ -64,7 +64,7 @@ const Page = forwardRef(({ children, number, totalPages, currentPage, pageType, 
                 e.preventDefault();
               }}
             >
-             <span className={styles.bookmarkLabel}>{number - 1}</span>
+              <span className={styles.bookmarkLabel}>{number - 1}</span>
             </div>
           )}
         </>
