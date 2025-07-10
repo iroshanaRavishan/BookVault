@@ -86,7 +86,7 @@ const Page = forwardRef(({ children, number, totalPages, currentPage, pageType, 
 
 export default function FlipBook({ isRightPanelOpen }) {
   const [currentPage, setCurrentPage] = useState(0);
-  const contentPages = 7;
+  const [bookmarks, setBookmarks] = useState([]);
 
   const contentPages = 20;
   const totalPages = 2 + contentPages + (contentPages % 2 === 1 ? 1 : 0) + 2;
@@ -117,8 +117,33 @@ export default function FlipBook({ isRightPanelOpen }) {
   pages.push({ type: 'blank', content: null });
   pages.push({ type: 'backCover', content: <section>Back Cover</section> });
 
+  const leftPage = currentPage % 2 === 0 ? currentPage : currentPage - 1;
+  const rightPage = leftPage + 1;
+  const isSinglePage = rightPage >= totalPages;
+
+  const handleAddBookmark = (pageNumber) => {
+    setBookmarks(prev => (
+      prev.includes(pageNumber)
+        ? prev.filter(n => n !== pageNumber)
+        : [...prev, pageNumber]
+    ));
+  };
+
   return (
     <div className={styles.wrapper} style={{ width: isRightPanelOpen ? 'calc(100% - 350px)' : '100%' }}>
+      <div className={styles.bookmarkContainers}>
+        <div className={styles.leftBookmarkContainer}>
+          {bookmarks.filter((n) => n < leftPage || (n === leftPage && currentPage !== leftPage)).map((n) => (
+            <div key={n} className={styles.bookmarkMini}>{n - 1}</div>
+          ))}
+        </div>
+        <div className={styles.rightBookmarkContainer}>
+          {bookmarks.filter((n) => n > rightPage+1 || (n === rightPage && currentPage !== rightPage)).map((n) => (
+            <div key={n} className={styles.bookmarkMini}>{n - 1}</div>
+          ))}
+        </div>
+      </div>
+
       <HTMLFlipBook
         ref={flipBookRef}
         width={230}
