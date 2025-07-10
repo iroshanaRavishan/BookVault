@@ -1,10 +1,11 @@
-import React, { forwardRef, useRef, useState } from 'react';
+import React, { forwardRef, useEffect, useRef, useState } from 'react';
 import HTMLFlipBook from 'react-pageflip';
 import styles from './flipbook.module.css';
 import BookBindingHoles from '../book-binding-holes/BookBindingHoles';
 
 const Page = forwardRef(({ children, number, totalPages, currentPage, pageType }, ref) => {
   let radiusClass = "";
+  const [rotated, setRotated] = useState(false);
 
   if (number === 0) radiusClass = styles.rightRounded;
   else if (number === totalPages - 1) radiusClass = styles.leftRounded;
@@ -22,6 +23,18 @@ const Page = forwardRef(({ children, number, totalPages, currentPage, pageType }
   const isContentPage = pageType === "content";
   const cornerClass = number % 2 === 0 ? styles.leftCorner : styles.rightCorner;
 
+  // Reset rotation if page changes to avoid stale state
+  useEffect(() => {
+    setRotated(false);
+  }, [number]);
+
+  // Handle bookmark click and toggle rotation
+  const handleBookmarkClick = (e) => {
+    e.stopPropagation();
+    e.preventDefault();
+    setRotated(!rotated);
+  };
+
   return (
     <div className={`${styles.page} ${radiusClass} ${coverClass}`} ref={ref}>
       {/* Book holes */}
@@ -33,13 +46,15 @@ const Page = forwardRef(({ children, number, totalPages, currentPage, pageType }
       {/* Bookmark (block page turn via onMouseDown) */}
       {isContentPage && (
         <div
-          className={`${styles.bookmark} ${cornerClass}`}
+          className={`${styles.bookmark} ${cornerClass} ${rotated ? styles.rotated : ''}`}
           onPointerDown={(e) => {
-            e.stopPropagation();     // stop bubbling
-            e.preventDefault();      // prevent default flip behavior
+            e.stopPropagation();
+            e.preventDefault();
           }}
-          onClick={() => {
-            console.log(`Bookmark clicked on page ${number}`);
+          onClick={(e) => {
+            e.stopPropagation();
+            e.preventDefault();
+            setRotated((prev) => !prev);
           }}
         />
       )}
