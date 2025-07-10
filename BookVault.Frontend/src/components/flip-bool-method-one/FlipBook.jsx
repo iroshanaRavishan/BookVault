@@ -4,7 +4,7 @@ import styles from './flipbook.module.css';
 import BookBindingHoles from '../book-binding-holes/BookBindingHoles';
 import { IoAddCircleSharp, IoCloseCircleSharp } from "react-icons/io5";
 
-const Page = forwardRef(({ children, number, totalPages, currentPage, pageType }, ref) => {
+const Page = forwardRef(({ children, number, totalPages, currentPage, pageType, onBookmarkAdd, activeBookmarks }, ref) => {
   const [showRotatedCopy, setShowRotatedCopy] = useState(false);
   let radiusClass = "";
   if (number === 0) radiusClass = styles.rightRounded;
@@ -22,6 +22,10 @@ const Page = forwardRef(({ children, number, totalPages, currentPage, pageType }
 
   const isContentPage = pageType === "content";
   const cornerClass = number % 2 === 0 ? styles.leftCorner : styles.rightCorner;
+
+  useEffect(() => {
+    setShowRotatedCopy(activeBookmarks.includes(number));
+  }, [activeBookmarks, number]);
 
   return (
     <div className={`${styles.page} ${radiusClass} ${coverClass}`} ref={ref}>
