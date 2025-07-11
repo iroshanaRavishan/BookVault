@@ -52,7 +52,7 @@ const Page = forwardRef(({ children, number, totalPages, currentPage, pageType, 
           >
             {showRotatedCopy ? <IoCloseCircleSharp className={styles.bookmarkActionButton} /> : <IoAddCircleSharp className={styles.bookmarkActionButton} />}
           </div>
-          {showRotatedCopy && (
+          {/* {showRotatedCopy && (
             <div
               className={`${styles.bookmark} ${cornerClass} ${styles.rotatedCopy}`}
               onPointerDown={(e) => {
@@ -66,7 +66,7 @@ const Page = forwardRef(({ children, number, totalPages, currentPage, pageType, 
             >
               <span className={styles.bookmarkLabel}>{number - 1}</span>
             </div>
-          )}
+          )} */}
         </>
       )}
 
