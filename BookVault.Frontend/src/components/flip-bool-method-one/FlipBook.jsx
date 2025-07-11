@@ -88,6 +88,7 @@ export default function FlipBook({ isRightPanelOpen }) {
   const [currentPage, setCurrentPage] = useState(0);
   const [bookmarks, setBookmarks] = useState([]);
   const [animatingPages, setAnimatingPages] = useState([]);
+  const [removingPages, setRemovingPages] = useState([]);
 
   const contentPages = 20;
   const totalPages = 2 + contentPages + (contentPages % 2 === 1 ? 1 : 0) + 2;
@@ -122,10 +123,14 @@ export default function FlipBook({ isRightPanelOpen }) {
   const rightPage = leftPage + 1;
 
   const handleAddBookmark = (pageNumber) => {
-    setBookmarks(prev => {
-      const exists = prev.find(b => b.page === pageNumber);
+      const exists = bookmarks.find(b => b.page === pageNumber);
       if (exists) {
-        return prev.filter(b => b.page !== pageNumber);
+        // Trigger removal animation
+        setRemovingPages(prev => [...prev, pageNumber]);
+        setTimeout(() => {
+          setBookmarks(prev => prev.filter(b => b.page !== pageNumber));
+          setRemovingPages(prev => prev.filter(p => p !== pageNumber));
+        }, 300); // Match with animation duration
       } else {
         const getCustomRandomInt = () => {
           const validNumbers = [
@@ -139,14 +144,14 @@ export default function FlipBook({ isRightPanelOpen }) {
         const hue = getCustomRandomInt() * 10; // scale to 10–350 with large gaps
         const randomColor = `hsl(${hue}, 70%, 60%, 0.8)`;
 
-        return [...prev, { page: pageNumber, color: randomColor }];
-      }
-    });
+      setBookmarks(prev => [...prev, { page: pageNumber, color: randomColor }]);
 
+    // Trigger entry animation
     setAnimatingPages(prev => [...prev, pageNumber]);
     setTimeout(() => {
       setAnimatingPages(prev => prev.filter(p => p !== pageNumber));
     }, 300);
+  }
   };
 
   return (
@@ -160,9 +165,15 @@ export default function FlipBook({ isRightPanelOpen }) {
             .map((b) => (
               <div
                 key={b.page}
-                className={`${styles.bookmarkMini} ${animatingPages.includes(b.page) ? styles.bookmarkMiniAnimated : ''}`}
+                className={`
+                  ${styles.bookmarkMini}
+                  ${animatingPages.includes(b.page) ? styles.bookmarkMiniAnimated : ''}
+                  ${removingPages.includes(b.page) ? styles.bookmarkMiniRemoving : ''}
+                `}
                 style={{
-                  backgroundColor: currentPage === b.page ? b.color.replace(/hsl\(([^)]+),\s*([^)]+),\s*([^)]+),\s*[^)]+\)/, 'hsl($1, $2, $3, 1)'): b.color,
+                  backgroundColor: currentPage === b.page
+                    ? b.color.replace(/hsl\(([^)]+),\s*([^)]+),\s*([^)]+),\s*[^)]+\)/, 'hsl($1, $2, $3, 1)')
+                    : b.color,
                   width: currentPage === b.page ? '32px' : '20px'
                 }}
               >
@@ -191,9 +202,15 @@ export default function FlipBook({ isRightPanelOpen }) {
             .map((b) => (
               <div
                 key={b.page}
-                className={`${styles.bookmarkMini} ${animatingPages.includes(b.page) ? styles.bookmarkMiniAnimated : ''}`}
+                className={`
+                  ${styles.bookmarkMini}
+                  ${animatingPages.includes(b.page) ? styles.bookmarkMiniAnimated : ''}
+                  ${removingPages.includes(b.page) ? styles.bookmarkMiniRemoving : ''}
+                `}
                 style={{
-                   backgroundColor: currentPage === b.page - 1 ? b.color.replace(/hsl\(([^)]+),\s*([^)]+),\s*([^)]+),\s*[^)]+\)/, 'hsl($1, $2, $3, 1)'): b.color,
+                  backgroundColor: currentPage === b.page - 1
+                    ? b.color.replace(/hsl\(([^)]+),\s*([^)]+),\s*([^)]+),\s*[^)]+\)/, 'hsl($1, $2, $3, 1)')
+                    : b.color,
                   width: currentPage === b.page - 1 ? '32px' : '20px'
                 }}
               >

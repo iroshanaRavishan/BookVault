@@ -255,6 +255,10 @@
   animation: bookmarkEnter .3s ease;
 }
 
+.bookmarkMiniRemoving {
+  animation: fadeOutUp 0.3s ease forwards;
+}
+
 @keyframes bookmarkEnter {
   0% {
     transform: translateY(20px) rotateX(180deg);
@@ -263,5 +267,16 @@
   100% {
     transform: translateY(0px) rotateX(180deg);
     opacity: 1;
+  }
+}
+
+@keyframes fadeOutUp {
+  0% {
+    opacity: 1;
+    transform: translateY(0) rotateX(180deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-10px) rotateX(180deg);
   }
 }
