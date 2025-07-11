@@ -165,9 +165,15 @@ export default function FlipBook({ isRightPanelOpen }) {
             .map((b) => (
               <div
                 key={b.page}
-                className={`${styles.bookmarkMini} ${animatingPages.includes(b.page) ? styles.bookmarkMiniAnimated : ''}`}
+                className={`
+                  ${styles.bookmarkMini}
+                  ${animatingPages.includes(b.page) ? styles.bookmarkMiniAnimated : ''}
+                  ${removingPages.includes(b.page) ? styles.bookmarkMiniRemoving : ''}
+                `}
                 style={{
-                  backgroundColor: currentPage === b.page ? b.color.replace(/hsl\(([^)]+),\s*([^)]+),\s*([^)]+),\s*[^)]+\)/, 'hsl($1, $2, $3, 1)'): b.color,
+                  backgroundColor: currentPage === b.page
+                    ? b.color.replace(/hsl\(([^)]+),\s*([^)]+),\s*([^)]+),\s*[^)]+\)/, 'hsl($1, $2, $3, 1)')
+                    : b.color,
                   width: currentPage === b.page ? '32px' : '20px'
                 }}
               >
@@ -196,9 +202,15 @@ export default function FlipBook({ isRightPanelOpen }) {
             .map((b) => (
               <div
                 key={b.page}
-                className={`${styles.bookmarkMini} ${animatingPages.includes(b.page) ? styles.bookmarkMiniAnimated : ''}`}
+                className={`
+                  ${styles.bookmarkMini}
+                  ${animatingPages.includes(b.page) ? styles.bookmarkMiniAnimated : ''}
+                  ${removingPages.includes(b.page) ? styles.bookmarkMiniRemoving : ''}
+                `}
                 style={{
-                   backgroundColor: currentPage === b.page - 1 ? b.color.replace(/hsl\(([^)]+),\s*([^)]+),\s*([^)]+),\s*[^)]+\)/, 'hsl($1, $2, $3, 1)'): b.color,
+                  backgroundColor: currentPage === b.page - 1
+                    ? b.color.replace(/hsl\(([^)]+),\s*([^)]+),\s*([^)]+),\s*[^)]+\)/, 'hsl($1, $2, $3, 1)')
+                    : b.color,
                   width: currentPage === b.page - 1 ? '32px' : '20px'
                 }}
               >
