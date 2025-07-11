@@ -126,7 +126,18 @@ export default function FlipBook({ isRightPanelOpen }) {
       if (exists) {
         return prev.filter(b => b.page !== pageNumber);
       } else {
-        const randomColor = `hsl(${Math.floor(Math.random() * 360)}, 70%, 60%)`;
+        const getCustomRandomInt = () => {
+          const validNumbers = [
+            ...Array.from({ length: 3 }, (_, i) => i + 1),   // 1–3
+            ...Array.from({ length: 29 }, (_, i) => i + 7)   // 7–35
+          ];
+          const index = Math.floor(Math.random() * validNumbers.length);
+          return validNumbers[index];
+        };
+
+        const hue = getCustomRandomInt() * 10; // scale to 10–350 with large gaps
+        const randomColor = `hsl(${hue}, 70%, 60%)`;
+
         return [...prev, { page: pageNumber, color: randomColor }];
       }
     });
