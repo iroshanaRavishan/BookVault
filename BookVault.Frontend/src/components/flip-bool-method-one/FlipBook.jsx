@@ -133,12 +133,12 @@ export default function FlipBook({ isRightPanelOpen }) {
     <div className={styles.wrapper} style={{ width: isRightPanelOpen ? 'calc(100% - 350px)' : '100%' }}>
       <div className={styles.bookmarkContainers}>
         <div className={styles.leftBookmarkContainer}>
-          {bookmarks.filter((n) => n < leftPage || (n === leftPage && currentPage !== leftPage)).map((n) => (
+          {bookmarks.filter((n) => n < leftPage + 2 || (n === leftPage && currentPage !== leftPage)).map((n) => (
             <div key={n} className={styles.bookmarkMini}>{n - 1}</div>
           ))}
         </div>
         <div className={styles.rightBookmarkContainer}>
-          {bookmarks.filter((n) => n > rightPage+1 || (n === rightPage && currentPage !== rightPage)).map((n) => (
+          {bookmarks.filter((n) => n > rightPage || (n === rightPage && currentPage !== rightPage)).map((n) => (
             <div key={n} className={styles.bookmarkMini}>{n - 1}</div>
           ))}
         </div>
