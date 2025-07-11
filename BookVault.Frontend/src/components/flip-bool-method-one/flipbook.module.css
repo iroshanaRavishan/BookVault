@@ -280,3 +280,19 @@
     transform: translateY(-10px) rotateX(180deg);
   }
 }
+
+.bookmark,
+.bookmarkContainers,
+.leftBookmarkContainer,
+.rightBookmarkContainer,
+.bookmarkMini {
+  z-index: 1;
+}
+
+.flipbook,
+.page,
+.rotatedCopy {
+  z-index: 20;
+}
+
+/* need to have a slow transition when the book is fully opened or closed */
