@@ -247,3 +247,7 @@
 .rightBookmarkContainer {
   background-color: rgb(45, 17, 207);
 }
+
+.rightBookmarkContainer {
+  flex-direction: row-reverse; /* for left-right visual order */
+}
