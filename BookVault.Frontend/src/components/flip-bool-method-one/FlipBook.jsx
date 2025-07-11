@@ -24,7 +24,7 @@ const Page = forwardRef(({ children, number, totalPages, currentPage, pageType, 
   const cornerClass = number % 2 === 0 ? styles.leftCorner : styles.rightCorner;
 
   useEffect(() => {
-    setShowRotatedCopy(activeBookmarks.includes(number));
+    setShowRotatedCopy(activeBookmarks.some(b => b.page === number));
   }, [activeBookmarks, number]);
 
   return (
@@ -52,7 +52,7 @@ const Page = forwardRef(({ children, number, totalPages, currentPage, pageType, 
           >
             {showRotatedCopy ? <IoCloseCircleSharp className={styles.bookmarkActionButton} /> : <IoAddCircleSharp className={styles.bookmarkActionButton} />}
           </div>
-          {showRotatedCopy && (
+          {/* {showRotatedCopy && (
             <div
               className={`${styles.bookmark} ${cornerClass} ${styles.rotatedCopy}`}
               onPointerDown={(e) => {
@@ -66,7 +66,7 @@ const Page = forwardRef(({ children, number, totalPages, currentPage, pageType, 
             >
               <span className={styles.bookmarkLabel}>{number - 1}</span>
             </div>
-          )}
+          )} */}
         </>
       )}
 
@@ -87,6 +87,7 @@ const Page = forwardRef(({ children, number, totalPages, currentPage, pageType, 
 export default function FlipBook({ isRightPanelOpen }) {
   const [currentPage, setCurrentPage] = useState(0);
   const [bookmarks, setBookmarks] = useState([]);
+  const [animatingPages, setAnimatingPages] = useState([]);
 
   const contentPages = 20;
   const totalPages = 2 + contentPages + (contentPages % 2 === 1 ? 1 : 0) + 2;
@@ -119,28 +120,97 @@ export default function FlipBook({ isRightPanelOpen }) {
 
   const leftPage = currentPage % 2 === 0 ? currentPage : currentPage - 1;
   const rightPage = leftPage + 1;
-  const isSinglePage = rightPage >= totalPages;
 
   const handleAddBookmark = (pageNumber) => {
-    setBookmarks(prev => (
-      prev.includes(pageNumber)
-        ? prev.filter(n => n !== pageNumber)
-        : [...prev, pageNumber]
-    ));
+    setBookmarks(prev => {
+      const exists = prev.find(b => b.page === pageNumber);
+      if (exists) {
+        return prev.filter(b => b.page !== pageNumber);
+      } else {
+        const getCustomRandomInt = () => {
+          const validNumbers = [
+            ...Array.from({ length: 3 }, (_, i) => i + 1),   // 1–3
+            ...Array.from({ length: 29 }, (_, i) => i + 7)   // 7–35
+          ];
+          const index = Math.floor(Math.random() * validNumbers.length);
+          return validNumbers[index];
+        };
+
+        const hue = getCustomRandomInt() * 10; // scale to 10–350 with large gaps
+        const randomColor = `hsl(${hue}, 70%, 60%, 0.8)`;
+
+        return [...prev, { page: pageNumber, color: randomColor }];
+      }
+    });
+
+    setAnimatingPages(prev => [...prev, pageNumber]);
+    setTimeout(() => {
+      setAnimatingPages(prev => prev.filter(p => p !== pageNumber));
+    }, 300);
   };
 
   return (
     <div className={styles.wrapper} style={{ width: isRightPanelOpen ? 'calc(100% - 350px)' : '100%' }}>
       <div className={styles.bookmarkContainers}>
+        {/* Left container: append at bottom, ascending order */}
         <div className={styles.leftBookmarkContainer}>
-          {bookmarks.filter((n) => n < leftPage || (n === leftPage && currentPage !== leftPage)).map((n) => (
-            <div key={n} className={styles.bookmarkMini}>{n - 1}</div>
-          ))}
+          {[...bookmarks]
+            .filter(b => b.page < leftPage + 2 || (b.page === leftPage && currentPage !== leftPage))
+            .sort((a, b) => a.page - b.page)
+            .map((b) => (
+              <div
+                key={b.page}
+                className={`${styles.bookmarkMini} ${animatingPages.includes(b.page) ? styles.bookmarkMiniAnimated : ''}`}
+                style={{
+                  backgroundColor: currentPage === b.page ? b.color.replace(/hsl\(([^)]+),\s*([^)]+),\s*([^)]+),\s*[^)]+\)/, 'hsl($1, $2, $3, 1)'): b.color,
+                  width: currentPage === b.page ? '32px' : '20px'
+                }}
+              >
+                <span 
+                  className={styles.bookmarkContainerLabel}
+                  style={{
+                      ...(currentPage === b.page && {
+                      fontSize: '15px',
+                      fontWeight: "bold" ,
+                      paddingBottom: '4px'
+                    }),
+                  }}
+                >
+                  {b.page - 1}
+                </span>
+              </div>
+            ))}
         </div>
+
+        {/* Right container: add to top, ascending order */}
         <div className={styles.rightBookmarkContainer}>
-          {bookmarks.filter((n) => n > rightPage+1 || (n === rightPage && currentPage !== rightPage)).map((n) => (
-            <div key={n} className={styles.bookmarkMini}>{n - 1}</div>
-          ))}
+          {[...bookmarks
+            .filter(b => b.page > rightPage || (b.page === rightPage && currentPage !== rightPage))
+            .sort((a, b) => a.page - b.page)] // spread to reverse
+            .reverse() // reversing after sort to render from top down visually
+            .map((b) => (
+              <div
+                key={b.page}
+                className={`${styles.bookmarkMini} ${animatingPages.includes(b.page) ? styles.bookmarkMiniAnimated : ''}`}
+                style={{
+                   backgroundColor: currentPage === b.page - 1 ? b.color.replace(/hsl\(([^)]+),\s*([^)]+),\s*([^)]+),\s*[^)]+\)/, 'hsl($1, $2, $3, 1)'): b.color,
+                  width: currentPage === b.page - 1 ? '32px' : '20px'
+                }}
+              >
+                <span 
+                  className={styles.bookmarkContainerLabel} 
+                  style={{
+                      ...(currentPage === b.page - 1 && {
+                      fontSize: '15px',
+                      fontWeight: "bold",
+                      paddingBottom: '4px'
+                    }),
+                  }}
+                >
+                  {b.page - 1}
+                </span>
+              </div>
+            ))}
         </div>
       </div>
 
