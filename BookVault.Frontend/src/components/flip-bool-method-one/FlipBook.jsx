@@ -138,7 +138,11 @@ export default function FlipBook({ isRightPanelOpen }) {
             .filter((n) => n < leftPage + 2 || (n === leftPage && currentPage !== leftPage))
             .sort((a, b) => a - b)
             .map((n) => (
-              <div key={n} className={styles.bookmarkMini}>{n - 1}</div>
+              <div key={n} className={styles.bookmarkMini}>
+                <span className={styles.bookmarkContainerLabel}>
+                  {n - 1}
+                </span>
+              </div>
             ))}
         </div>
 
@@ -149,7 +153,11 @@ export default function FlipBook({ isRightPanelOpen }) {
             .sort((a, b) => a - b)
             .reverse() // reversing after sort to render from top down visually
             .map((n) => (
-              <div key={n} className={styles.bookmarkMini}>{n - 1}</div>
+              <div key={n} className={styles.bookmarkMini}>
+                <span className={styles.bookmarkContainerLabel}>
+                  {n - 1}
+                </span>
+              </div>
             ))}
         </div>
       </div>

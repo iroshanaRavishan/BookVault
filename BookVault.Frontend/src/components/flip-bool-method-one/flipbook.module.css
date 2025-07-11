@@ -251,3 +251,14 @@
 .rightBookmarkContainer {
   flex-direction: row-reverse; /* for left-right visual order */
 }
+
+.bookmarkContainerLabel {
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
+  transform: rotateX(180deg) !important;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
