@@ -155,9 +155,21 @@ export default function FlipBook({ isRightPanelOpen }) {
               <div
                 key={b.page}
                 className={styles.bookmarkMini}
-                style={{ backgroundColor: b.color }}
+                style={{
+                  backgroundColor: currentPage === b.page ? b.color.replace(/hsl\(([^)]+),\s*([^)]+),\s*([^)]+),\s*[^)]+\)/, 'hsl($1, $2, $3, 1)'): b.color,
+                  width: currentPage === b.page ? '32px' : '20px'
+                }}
               >
-                <span className={styles.bookmarkContainerLabel}>
+                <span 
+                  className={styles.bookmarkContainerLabel}
+                  style={{
+                      ...(currentPage === b.page && {
+                      fontSize: '15px',
+                      fontWeight: "bold" ,
+                      paddingBottom: '4px'
+                    }),
+                  }}
+                >
                   {b.page - 1}
                 </span>
               </div>
@@ -174,9 +186,21 @@ export default function FlipBook({ isRightPanelOpen }) {
               <div
                 key={b.page}
                 className={styles.bookmarkMini}
-                style={{ backgroundColor: b.color }}
+                style={{
+                   backgroundColor: currentPage === b.page - 1 ? b.color.replace(/hsl\(([^)]+),\s*([^)]+),\s*([^)]+),\s*[^)]+\)/, 'hsl($1, $2, $3, 1)'): b.color,
+                  width: currentPage === b.page - 1 ? '32px' : '20px'
+                }}
               >
-                <span className={styles.bookmarkContainerLabel}>
+                <span 
+                  className={styles.bookmarkContainerLabel} 
+                  style={{
+                      ...(currentPage === b.page - 1 && {
+                      fontSize: '15px',
+                      fontWeight: "bold",
+                      paddingBottom: '4px'
+                    }),
+                  }}
+                >
                   {b.page - 1}
                 </span>
               </div>
