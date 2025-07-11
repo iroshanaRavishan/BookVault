@@ -203,49 +203,37 @@
   pointer-events: none;
 }
 
-
 .bookmarkContainers {
   position: absolute;
-  top: 70px;
-  left: 30px;
-  width: 20%;
+  top: 110px;
+  width: 800px;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   pointer-events: none;
   z-index: 50;
 }
 
 .leftBookmarkContainer,
 .rightBookmarkContainer {
+  margin: 0 29px;
   position: relative;
   min-width: 50%;
-  padding: 10px;
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  pointer-events: none;
-}
-
-.rightBookmarkContainer {
+  flex-direction: row;
   align-items: flex-end;
+  pointer-events: none;
+  justify-content: flex-end;
 }
 
 .bookmarkMini {
   background-color: crimson;
-  color: white;
-  font-size: 12px;
-  padding: 4px 8px;
-  margin: 4px;
-  border-radius: 4px;
+  width: 32px;
+  height: 35px;
+  clip-path: polygon(0 100%, 0 0, 100% 0, 100% 100%, 50% 70%);
+  transform: rotateX(180deg);
+  margin: 0 4px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.3);
   pointer-events: auto;
-}
-
-.leftBookmarkContainer {
-  background-color: rgb(53, 187, 0);
-}
-.rightBookmarkContainer {
-  background-color: rgb(45, 17, 207);
 }
 
 .rightBookmarkContainer {
