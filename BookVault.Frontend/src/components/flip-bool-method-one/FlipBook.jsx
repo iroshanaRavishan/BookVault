@@ -158,7 +158,7 @@ export default function FlipBook({ isRightPanelOpen }) {
     <div className={styles.wrapper} style={{ width: isRightPanelOpen ? 'calc(100% - 350px)' : '100%' }}>
       <div className={styles.bookmarkContainers}>
         {/* Left container: show if page > 0 */}
-        {currentPage > 0 && (
+        {/* {currentPage > 0 && ( */}
           <div className={styles.leftBookmarkContainer}>
             {[...bookmarks]
               .filter(b => b.page < leftPage + 2 || (b.page === leftPage && currentPage !== leftPage))
@@ -193,10 +193,10 @@ export default function FlipBook({ isRightPanelOpen }) {
                 </div>
               ))}
           </div>
-        )}
+        {/* )} */}
 
         {/* Right container: show only if not on last page */}
-        {currentPage < totalPages - 1 && (
+        {/* {currentPage < totalPages - 1 && ( */}
           <div className={styles.rightBookmarkContainer}>
             {[...bookmarks
               .filter(b => b.page > rightPage || (b.page === rightPage && currentPage !== rightPage))
@@ -232,7 +232,7 @@ export default function FlipBook({ isRightPanelOpen }) {
                 </div>
               ))}
           </div>
-        )}
+        {/* )} */}
       </div>
 
       <HTMLFlipBook
