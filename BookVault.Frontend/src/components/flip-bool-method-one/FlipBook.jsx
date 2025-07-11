@@ -149,12 +149,16 @@ export default function FlipBook({ isRightPanelOpen }) {
         {/* Left container: append at bottom, ascending order */}
         <div className={styles.leftBookmarkContainer}>
           {[...bookmarks]
-            .filter((n) => n < leftPage + 2 || (n === leftPage && currentPage !== leftPage))
-            .sort((a, b) => a - b)
-            .map((n) => (
-              <div key={n} className={styles.bookmarkMini}>
+            .filter(b => b.page < leftPage + 2 || (b.page === leftPage && currentPage !== leftPage))
+            .sort((a, b) => a.page - b.page)
+            .map((b) => (
+              <div
+                key={b.page}
+                className={styles.bookmarkMini}
+                style={{ backgroundColor: b.color }}
+              >
                 <span className={styles.bookmarkContainerLabel}>
-                  {n - 1}
+                  {b.page - 1}
                 </span>
               </div>
             ))}
@@ -162,14 +166,18 @@ export default function FlipBook({ isRightPanelOpen }) {
 
         {/* Right container: add to top, ascending order */}
         <div className={styles.rightBookmarkContainer}>
-          {[...bookmarks]
-            .filter((n) => n > rightPage || (n === rightPage && currentPage !== rightPage))
-            .sort((a, b) => a - b)
+          {[...bookmarks
+            .filter(b => b.page > rightPage || (b.page === rightPage && currentPage !== rightPage))
+            .sort((a, b) => a.page - b.page)] // spread to reverse
             .reverse() // reversing after sort to render from top down visually
-            .map((n) => (
-              <div key={n} className={styles.bookmarkMini}>
+            .map((b) => (
+              <div
+                key={b.page}
+                className={styles.bookmarkMini}
+                style={{ backgroundColor: b.color }}
+              >
                 <span className={styles.bookmarkContainerLabel}>
-                  {n - 1}
+                  {b.page - 1}
                 </span>
               </div>
             ))}
