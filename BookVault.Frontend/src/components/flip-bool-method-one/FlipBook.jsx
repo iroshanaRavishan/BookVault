@@ -160,7 +160,16 @@ export default function FlipBook({ isRightPanelOpen }) {
                   width: currentPage === b.page ? '32px' : '20px'
                 }}
               >
-                <span className={styles.bookmarkContainerLabel}>
+                <span 
+                  className={styles.bookmarkContainerLabel}
+                  style={{
+                      ...(currentPage === b.page && {
+                      fontSize: '15px',
+                      fontWeight: "bold" ,
+                      paddingBottom: '4px'
+                    }),
+                  }}
+                >
                   {b.page - 1}
                 </span>
               </div>
@@ -182,7 +191,16 @@ export default function FlipBook({ isRightPanelOpen }) {
                   width: currentPage === b.page - 1 ? '32px' : '20px'
                 }}
               >
-                <span className={styles.bookmarkContainerLabel}>
+                <span 
+                  className={styles.bookmarkContainerLabel} 
+                  style={{
+                      ...(currentPage === b.page - 1 && {
+                      fontSize: '15px',
+                      fontWeight: "bold",
+                      paddingBottom: '4px'
+                    }),
+                  }}
+                >
                   {b.page - 1}
                 </span>
               </div>
