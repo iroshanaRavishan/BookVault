@@ -132,15 +132,33 @@ export default function FlipBook({ isRightPanelOpen }) {
   return (
     <div className={styles.wrapper} style={{ width: isRightPanelOpen ? 'calc(100% - 350px)' : '100%' }}>
       <div className={styles.bookmarkContainers}>
+        {/* Left container: append at bottom, ascending order */}
         <div className={styles.leftBookmarkContainer}>
-          {bookmarks.filter((n) => n < leftPage || (n === leftPage && currentPage !== leftPage)).map((n) => (
-            <div key={n} className={styles.bookmarkMini}>{n - 1}</div>
-          ))}
+          {[...bookmarks]
+            .filter((n) => n < leftPage + 2 || (n === leftPage && currentPage !== leftPage))
+            .sort((a, b) => a - b)
+            .map((n) => (
+              <div key={n} className={styles.bookmarkMini}>
+                <span className={styles.bookmarkContainerLabel}>
+                  {n - 1}
+                </span>
+              </div>
+            ))}
         </div>
+
+        {/* Right container: add to top, ascending order */}
         <div className={styles.rightBookmarkContainer}>
-          {bookmarks.filter((n) => n > rightPage+1 || (n === rightPage && currentPage !== rightPage)).map((n) => (
-            <div key={n} className={styles.bookmarkMini}>{n - 1}</div>
-          ))}
+          {[...bookmarks]
+            .filter((n) => n > rightPage || (n === rightPage && currentPage !== rightPage))
+            .sort((a, b) => a - b)
+            .reverse() // reversing after sort to render from top down visually
+            .map((n) => (
+              <div key={n} className={styles.bookmarkMini}>
+                <span className={styles.bookmarkContainerLabel}>
+                  {n - 1}
+                </span>
+              </div>
+            ))}
         </div>
       </div>
 
