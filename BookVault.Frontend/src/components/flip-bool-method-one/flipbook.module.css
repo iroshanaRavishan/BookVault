@@ -295,4 +295,6 @@
   z-index: 20;
 }
 
-/* need to have a slow transition when the book is fully opened or closed */
+.bookmarkContainers {
+  transition: transform 0.3s ease;
+}

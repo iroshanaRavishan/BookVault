@@ -122,6 +122,24 @@ export default function FlipBook({ isRightPanelOpen }) {
   const leftPage = currentPage % 2 === 0 ? currentPage : currentPage - 1;
   const rightPage = leftPage + 1;
 
+  const isAnimating = animatingPages.includes(currentPage);
+  const isFirstPage = currentPage === 0;
+  const isLastPage = currentPage >= totalPages - 2;
+
+  // book is flat only if it's not animating AND not on first/last page
+  const isBookOpenedFlat = !isAnimating && !isFirstPage && !isLastPage;
+
+  // Final transform decision
+  let containerTransform = 'translateX(0%)'; // default to center
+
+  if (!isBookOpenedFlat) {
+    if (isFirstPage) {
+      containerTransform = 'translateX(-28%)';
+    } else if (isLastPage) {
+      containerTransform = 'translateX(28%)';
+    }
+  }
+
   const handleAddBookmark = (pageNumber) => {
       const exists = bookmarks.find(b => b.page === pageNumber);
       if (exists) {
