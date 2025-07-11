@@ -52,7 +52,7 @@ const Page = forwardRef(({ children, number, totalPages, currentPage, pageType, 
           >
             {showRotatedCopy ? <IoCloseCircleSharp className={styles.bookmarkActionButton} /> : <IoAddCircleSharp className={styles.bookmarkActionButton} />}
           </div>
-          {showRotatedCopy && (
+          {/* {showRotatedCopy && (
             <div
               className={`${styles.bookmark} ${cornerClass} ${styles.rotatedCopy}`}
               onPointerDown={(e) => {
@@ -66,7 +66,7 @@ const Page = forwardRef(({ children, number, totalPages, currentPage, pageType, 
             >
               <span className={styles.bookmarkLabel}>{number - 1}</span>
             </div>
-          )}
+          )} */}
         </>
       )}
 
@@ -136,7 +136,7 @@ export default function FlipBook({ isRightPanelOpen }) {
         };
 
         const hue = getCustomRandomInt() * 10; // scale to 10–350 with large gaps
-        const randomColor = `hsl(${hue}, 70%, 60%)`;
+        const randomColor = `hsl(${hue}, 70%, 60%, 0.8)`;
 
         return [...prev, { page: pageNumber, color: randomColor }];
       }
