@@ -136,7 +136,7 @@ export default function FlipBook({ isRightPanelOpen }) {
         };
 
         const hue = getCustomRandomInt() * 10; // scale to 10–350 with large gaps
-        const randomColor = `hsl(${hue}, 70%, 60%)`;
+        const randomColor = `hsl(${hue}, 70%, 60%, 0.8)`;
 
         return [...prev, { page: pageNumber, color: randomColor }];
       }
