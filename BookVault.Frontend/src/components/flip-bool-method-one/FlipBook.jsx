@@ -119,7 +119,6 @@ export default function FlipBook({ isRightPanelOpen }) {
 
   const leftPage = currentPage % 2 === 0 ? currentPage : currentPage - 1;
   const rightPage = leftPage + 1;
-  const isSinglePage = rightPage >= totalPages;
 
   const handleAddBookmark = (pageNumber) => {
     setBookmarks(prev => (
