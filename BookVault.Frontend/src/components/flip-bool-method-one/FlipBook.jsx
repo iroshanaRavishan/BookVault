@@ -24,7 +24,7 @@ const Page = forwardRef(({ children, number, totalPages, currentPage, pageType, 
   const cornerClass = number % 2 === 0 ? styles.leftCorner : styles.rightCorner;
 
   useEffect(() => {
-    setShowRotatedCopy(activeBookmarks.includes(number));
+    setShowRotatedCopy(activeBookmarks.some(b => b.page === number));
   }, [activeBookmarks, number]);
 
   return (
@@ -119,14 +119,17 @@ export default function FlipBook({ isRightPanelOpen }) {
 
   const leftPage = currentPage % 2 === 0 ? currentPage : currentPage - 1;
   const rightPage = leftPage + 1;
-  const isSinglePage = rightPage >= totalPages;
 
   const handleAddBookmark = (pageNumber) => {
-    setBookmarks(prev => (
-      prev.includes(pageNumber)
-        ? prev.filter(n => n !== pageNumber)
-        : [...prev, pageNumber]
-    ));
+    setBookmarks(prev => {
+      const exists = prev.find(b => b.page === pageNumber);
+      if (exists) {
+        return prev.filter(b => b.page !== pageNumber);
+      } else {
+        const randomColor = `hsl(${Math.floor(Math.random() * 360)}, 70%, 60%)`;
+        return [...prev, { page: pageNumber, color: randomColor }];
+      }
+    });
   };
 
   return (
