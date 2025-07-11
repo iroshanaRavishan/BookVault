@@ -157,78 +157,82 @@ export default function FlipBook({ isRightPanelOpen }) {
   return (
     <div className={styles.wrapper} style={{ width: isRightPanelOpen ? 'calc(100% - 350px)' : '100%' }}>
       <div className={styles.bookmarkContainers}>
-        {/* Left container: append at bottom, ascending order */}
-        <div className={styles.leftBookmarkContainer}>
-          {[...bookmarks]
-            .filter(b => b.page < leftPage + 2 || (b.page === leftPage && currentPage !== leftPage))
-            .sort((a, b) => a.page - b.page)
-            .map((b) => (
-              <div
-                key={b.page}
-                className={`
-                  ${styles.bookmarkMini}
-                  ${animatingPages.includes(b.page) ? styles.bookmarkMiniAnimated : ''}
-                  ${removingPages.includes(b.page) ? styles.bookmarkMiniRemoving : ''}
-                `}
-                style={{
-                  backgroundColor: currentPage === b.page
-                    ? b.color.replace(/hsl\(([^)]+),\s*([^)]+),\s*([^)]+),\s*[^)]+\)/, 'hsl($1, $2, $3, 1)')
-                    : b.color,
-                  width: currentPage === b.page ? '32px' : '20px'
-                }}
-              >
-                <span 
-                  className={styles.bookmarkContainerLabel}
+        {/* Left container: show if page > 0 */}
+        {currentPage > 0 && (
+          <div className={styles.leftBookmarkContainer}>
+            {[...bookmarks]
+              .filter(b => b.page < leftPage + 2 || (b.page === leftPage && currentPage !== leftPage))
+              .sort((a, b) => a.page - b.page)
+              .map((b) => (
+                <div
+                  key={b.page}
+                  className={`
+                    ${styles.bookmarkMini}
+                    ${animatingPages.includes(b.page) ? styles.bookmarkMiniAnimated : ''}
+                    ${removingPages.includes(b.page) ? styles.bookmarkMiniRemoving : ''}
+                  `}
                   style={{
+                    backgroundColor: currentPage === b.page
+                      ? b.color.replace(/hsl\(([^)]+),\s*([^)]+),\s*([^)]+),\s*[^)]+\)/, 'hsl($1, $2, $3, 1)')
+                      : b.color,
+                    width: currentPage === b.page ? '32px' : '20px'
+                  }}
+                >
+                  <span
+                    className={styles.bookmarkContainerLabel}
+                    style={{
                       ...(currentPage === b.page && {
-                      fontSize: '15px',
-                      fontWeight: "bold" ,
-                      paddingBottom: '4px'
-                    }),
-                  }}
-                >
-                  {b.page - 1}
-                </span>
-              </div>
-            ))}
-        </div>
+                        fontSize: '15px',
+                        fontWeight: "bold",
+                        paddingBottom: '4px'
+                      }),
+                    }}
+                  >
+                    {b.page - 1}
+                  </span>
+                </div>
+              ))}
+          </div>
+        )}
 
-        {/* Right container: add to top, ascending order */}
-        <div className={styles.rightBookmarkContainer}>
-          {[...bookmarks
-            .filter(b => b.page > rightPage || (b.page === rightPage && currentPage !== rightPage))
-            .sort((a, b) => a.page - b.page)] // spread to reverse
-            .reverse() // reversing after sort to render from top down visually
-            .map((b) => (
-              <div
-                key={b.page}
-                className={`
-                  ${styles.bookmarkMini}
-                  ${animatingPages.includes(b.page) ? styles.bookmarkMiniAnimated : ''}
-                  ${removingPages.includes(b.page) ? styles.bookmarkMiniRemoving : ''}
-                `}
-                style={{
-                  backgroundColor: currentPage === b.page - 1
-                    ? b.color.replace(/hsl\(([^)]+),\s*([^)]+),\s*([^)]+),\s*[^)]+\)/, 'hsl($1, $2, $3, 1)')
-                    : b.color,
-                  width: currentPage === b.page - 1 ? '32px' : '20px'
-                }}
-              >
-                <span 
-                  className={styles.bookmarkContainerLabel} 
+        {/* Right container: show only if not on last page */}
+        {currentPage < totalPages - 1 && (
+          <div className={styles.rightBookmarkContainer}>
+            {[...bookmarks
+              .filter(b => b.page > rightPage || (b.page === rightPage && currentPage !== rightPage))
+              .sort((a, b) => a.page - b.page)]
+              .reverse()
+              .map((b) => (
+                <div
+                  key={b.page}
+                  className={`
+                    ${styles.bookmarkMini}
+                    ${animatingPages.includes(b.page) ? styles.bookmarkMiniAnimated : ''}
+                    ${removingPages.includes(b.page) ? styles.bookmarkMiniRemoving : ''}
+                  `}
                   style={{
-                      ...(currentPage === b.page - 1 && {
-                      fontSize: '15px',
-                      fontWeight: "bold",
-                      paddingBottom: '4px'
-                    }),
+                    backgroundColor: currentPage === b.page - 1
+                      ? b.color.replace(/hsl\(([^)]+),\s*([^)]+),\s*([^)]+),\s*[^)]+\)/, 'hsl($1, $2, $3, 1)')
+                      : b.color,
+                    width: currentPage === b.page - 1 ? '32px' : '20px'
                   }}
                 >
-                  {b.page - 1}
-                </span>
-              </div>
-            ))}
-        </div>
+                  <span
+                    className={styles.bookmarkContainerLabel}
+                    style={{
+                      ...(currentPage === b.page - 1 && {
+                        fontSize: '15px',
+                        fontWeight: "bold",
+                        paddingBottom: '4px'
+                      }),
+                    }}
+                  >
+                    {b.page - 1}
+                  </span>
+                </div>
+              ))}
+          </div>
+        )}
       </div>
 
       <HTMLFlipBook
