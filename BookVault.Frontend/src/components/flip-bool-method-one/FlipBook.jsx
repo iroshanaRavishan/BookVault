@@ -122,6 +122,24 @@ export default function FlipBook({ isRightPanelOpen }) {
   const leftPage = currentPage % 2 === 0 ? currentPage : currentPage - 1;
   const rightPage = leftPage + 1;
 
+  const isAnimating = animatingPages.includes(currentPage);
+  const isFirstPage = currentPage === 0;
+  const isLastPage = currentPage >= totalPages - 2;
+
+  // book is flat only if it's not animating AND not on first/last page
+  const isBookOpenedFlat = !isAnimating && !isFirstPage && !isLastPage;
+
+  // Final transform decision
+  let containerTransform = 'translateX(0%)'; // default to center
+
+  if (!isBookOpenedFlat) {
+    if (isFirstPage) {
+      containerTransform = 'translateX(-28%)';
+    } else if (isLastPage) {
+      containerTransform = 'translateX(28%)';
+    }
+  }
+
   const handleAddBookmark = (pageNumber) => {
       const exists = bookmarks.find(b => b.page === pageNumber);
       if (exists) {
@@ -154,85 +172,97 @@ export default function FlipBook({ isRightPanelOpen }) {
   }
   };
 
+  const goToPage = (targetPage) => {
+    if (!flipBookRef.current) return;
+
+    const instance = flipBookRef.current.pageFlip();
+
+    // Prevent unnecessary flip
+    if (instance.getCurrentPageIndex() === targetPage) return;
+
+    instance.flip(targetPage); // ← this triggers the flip animation
+  };
+
   return (
     <div className={styles.wrapper} style={{ width: isRightPanelOpen ? 'calc(100% - 350px)' : '100%' }}>
-      <div className={styles.bookmarkContainers}>
-        {/* Left container: show if page > 0 */}
-        {currentPage > 0 && (
-          <div className={styles.leftBookmarkContainer}>
-            {[...bookmarks]
-              .filter(b => b.page < leftPage + 2 || (b.page === leftPage && currentPage !== leftPage))
-              .sort((a, b) => a.page - b.page)
-              .map((b) => (
-                <div
-                  key={b.page}
-                  className={`
-                    ${styles.bookmarkMini}
-                    ${animatingPages.includes(b.page) ? styles.bookmarkMiniAnimated : ''}
-                    ${removingPages.includes(b.page) ? styles.bookmarkMiniRemoving : ''}
-                  `}
+      <div 
+        className={styles.bookmarkContainers}
+        style={{ transform: containerTransform }}
+      >
+        <div className={styles.leftBookmarkContainer}>
+          {[...bookmarks]
+            .filter(b => b.page < leftPage + 2 || (b.page === leftPage && currentPage !== leftPage))
+            .sort((a, b) => a.page - b.page)
+            .map((b) => (
+              <div
+                key={b.page}
+                className={`
+                  ${styles.bookmarkMini}
+                  ${animatingPages.includes(b.page) ? styles.bookmarkMiniAnimated : ''}
+                  ${removingPages.includes(b.page) ? styles.bookmarkMiniRemoving : ''}
+                `}
+                onClick={() => goToPage(b.page)}
+                style={{
+                  backgroundColor: currentPage === b.page
+                    ? b.color.replace(/hsl\(([^)]+),\s*([^)]+),\s*([^)]+),\s*[^)]+\)/, 'hsl($1, $2, $3, 1)')
+                    : b.color,
+                  width: currentPage === b.page ? '32px' : '20px',
+                  cursor: 'pointer' // optional for better UX
+                }}
+              >
+                <span
+                  className={styles.bookmarkContainerLabel}
                   style={{
-                    backgroundColor: currentPage === b.page
-                      ? b.color.replace(/hsl\(([^)]+),\s*([^)]+),\s*([^)]+),\s*[^)]+\)/, 'hsl($1, $2, $3, 1)')
-                      : b.color,
-                    width: currentPage === b.page ? '32px' : '20px'
+                    ...(currentPage === b.page && {
+                      fontSize: '15px',
+                      fontWeight: "bold",
+                      paddingBottom: '4px'
+                    }),
                   }}
                 >
-                  <span
-                    className={styles.bookmarkContainerLabel}
-                    style={{
-                      ...(currentPage === b.page && {
-                        fontSize: '15px',
-                        fontWeight: "bold",
-                        paddingBottom: '4px'
-                      }),
-                    }}
-                  >
-                    {b.page - 1}
-                  </span>
-                </div>
-              ))}
-          </div>
-        )}
+                  {b.page - 1}
+                </span>
+              </div>
+            ))}
+        </div>
 
-        {/* Right container: show only if not on last page */}
-        {currentPage < totalPages - 1 && (
-          <div className={styles.rightBookmarkContainer}>
-            {[...bookmarks
-              .filter(b => b.page > rightPage || (b.page === rightPage && currentPage !== rightPage))
-              .sort((a, b) => a.page - b.page)]
-              .reverse()
-              .map((b) => (
-                <div
-                  key={b.page}
-                  className={`
-                    ${styles.bookmarkMini}
-                    ${animatingPages.includes(b.page) ? styles.bookmarkMiniAnimated : ''}
-                    ${removingPages.includes(b.page) ? styles.bookmarkMiniRemoving : ''}
-                  `}
+        <div className={styles.rightBookmarkContainer}>
+          {[...bookmarks
+            .filter(b => b.page > rightPage || (b.page === rightPage && currentPage !== rightPage))
+            .sort((a, b) => a.page - b.page)]
+            .reverse()
+            .map((b) => (
+              <div
+                key={b.page}
+                className={`
+                  ${styles.bookmarkMini}
+                  ${animatingPages.includes(b.page) ? styles.bookmarkMiniAnimated : ''}
+                  ${removingPages.includes(b.page) ? styles.bookmarkMiniRemoving : ''}
+                `}
+                onClick={() => goToPage(b.page)}
+                style={{
+                  backgroundColor: currentPage === b.page - 1
+                    ? b.color.replace(/hsl\(([^)]+),\s*([^)]+),\s*([^)]+),\s*[^)]+\)/, 'hsl($1, $2, $3, 1)')
+                    : b.color,
+                  width: currentPage === b.page - 1 ? '32px' : '20px',
+                  cursor: 'pointer' // optional for better UX
+                }}
+              >
+                <span
+                  className={styles.bookmarkContainerLabel}
                   style={{
-                    backgroundColor: currentPage === b.page - 1
-                      ? b.color.replace(/hsl\(([^)]+),\s*([^)]+),\s*([^)]+),\s*[^)]+\)/, 'hsl($1, $2, $3, 1)')
-                      : b.color,
-                    width: currentPage === b.page - 1 ? '32px' : '20px'
+                    ...(currentPage === b.page - 1 && {
+                      fontSize: '15px',
+                      fontWeight: "bold",
+                      paddingBottom: '4px'
+                    }),
                   }}
                 >
-                  <span
-                    className={styles.bookmarkContainerLabel}
-                    style={{
-                      ...(currentPage === b.page - 1 && {
-                        fontSize: '15px',
-                        fontWeight: "bold",
-                        paddingBottom: '4px'
-                      }),
-                    }}
-                  >
-                    {b.page - 1}
-                  </span>
-                </div>
-              ))}
-          </div>
-        )}
+                  {b.page - 1}
+                </span>
+              </div>
+            ))}
+        </div>
       </div>
 
       <HTMLFlipBook
