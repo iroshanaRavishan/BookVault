@@ -2,17 +2,21 @@ import React, { forwardRef } from 'react';
 import styles from './bookreadingboardsidebutton.module.css';
 import { IoChevronUp } from 'react-icons/io5';
 
-const BookReadingBoardSideButton = forwardRef(({ name, top, position = 'right', onClick, isActive }, ref) => {
+const BookReadingBoardSideButton = forwardRef(({ name, top, position = 'right', onClick, isActive, rightOffset }, ref) => {
   const isLeft = position === 'left';
   const isRight = position === 'right';
   const isBottom = position === 'bottom';
+
+  const dynamicStyle = isBottom
+  ? { right: rightOffset || '210px', bottom: 0 } // default to 170px if not passed
+  : { top: `${top}px` };
 
   return (
     <div
       className={`${styles.container} ${
         isLeft ? styles.left : isRight ? styles.right : isBottom ? styles.bottom : ''
       } ${isActive ? styles.active : ''}`}
-      style={isBottom ? {} : { top: `${top}px` }}
+      style={dynamicStyle}
       ref={ref}
     >
       <span
@@ -22,7 +26,7 @@ const BookReadingBoardSideButton = forwardRef(({ name, top, position = 'right', 
         onClick={onClick}
       >
         {name}
-        <IoChevronUp className={styles.arrowIcon} />
+        <IoChevronUp size={15}/>
       </span>
     </div>
   );
