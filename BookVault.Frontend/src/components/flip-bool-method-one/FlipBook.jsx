@@ -172,6 +172,17 @@ export default function FlipBook({ isRightPanelOpen }) {
   }
   };
 
+  const goToPage = (targetPage) => {
+    if (!flipBookRef.current) return;
+
+    const instance = flipBookRef.current.pageFlip();
+
+    // Prevent unnecessary flip
+    if (instance.getCurrentPageIndex() === targetPage) return;
+
+    instance.flip(targetPage); // ← this triggers the flip animation
+  };
+
   return (
     <div className={styles.wrapper} style={{ width: isRightPanelOpen ? 'calc(100% - 350px)' : '100%' }}>
       <div 
@@ -190,11 +201,13 @@ export default function FlipBook({ isRightPanelOpen }) {
                   ${animatingPages.includes(b.page) ? styles.bookmarkMiniAnimated : ''}
                   ${removingPages.includes(b.page) ? styles.bookmarkMiniRemoving : ''}
                 `}
+                onClick={() => goToPage(b.page)}
                 style={{
                   backgroundColor: currentPage === b.page
                     ? b.color.replace(/hsl\(([^)]+),\s*([^)]+),\s*([^)]+),\s*[^)]+\)/, 'hsl($1, $2, $3, 1)')
                     : b.color,
-                  width: currentPage === b.page ? '32px' : '20px'
+                  width: currentPage === b.page ? '32px' : '20px',
+                  cursor: 'pointer' // optional for better UX
                 }}
               >
                 <span
@@ -226,11 +239,13 @@ export default function FlipBook({ isRightPanelOpen }) {
                   ${animatingPages.includes(b.page) ? styles.bookmarkMiniAnimated : ''}
                   ${removingPages.includes(b.page) ? styles.bookmarkMiniRemoving : ''}
                 `}
+                onClick={() => goToPage(b.page)}
                 style={{
                   backgroundColor: currentPage === b.page - 1
                     ? b.color.replace(/hsl\(([^)]+),\s*([^)]+),\s*([^)]+),\s*[^)]+\)/, 'hsl($1, $2, $3, 1)')
                     : b.color,
-                  width: currentPage === b.page - 1 ? '32px' : '20px'
+                  width: currentPage === b.page - 1 ? '32px' : '20px',
+                  cursor: 'pointer' // optional for better UX
                 }}
               >
                 <span
