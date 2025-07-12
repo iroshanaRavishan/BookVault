@@ -310,6 +310,19 @@ export default function SideButtonsWrapper({
               <span className={styles.headerTopic}> {getIconForPanel(mainPanel.name)} {mainPanel.name}</span>
             </div>
           </div>
+          <div>
+            {mainPanel.name === 'Bookmarks' ?
+              <span>this is the content of the boooook mark</span>
+            : mainPanel.name === 'Appearance' ? 
+              <span>this is the content of the Appearance</span>
+            : mainPanel.name === 'Reading Style' ?  
+              <span>this is the content of the Reading Styles</span> 
+            : mainPanel.name === 'Statistics' ?  
+              <span>this is the content of the Statistics</span> 
+            : mainPanel.name === 'Ask AI' ? 
+              <span>this is the content of the Ask AI</span> 
+            : ''}
+          </div>
         </div>
       )}
     </>
