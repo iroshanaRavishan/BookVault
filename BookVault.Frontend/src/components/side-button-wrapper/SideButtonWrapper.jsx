@@ -318,7 +318,7 @@ export default function SideButtonsWrapper({
               <span className={styles.headerTopic}> {getIconForPanel(mainPanel.name)} {mainPanel.name}</span>
             </div>
           </div>
-          <div>
+          <div className={styles.panelBody}>
             {panelContentMap[mainPanel.name] || ''}
           </div>
         </div>
