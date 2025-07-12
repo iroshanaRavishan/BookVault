@@ -275,7 +275,9 @@ export default function SideButtonsWrapper({
               </span>
             </div>
           </div>
-
+          <div>
+            <span>this is the note section</span>
+          </div>
           {isLeftPanelPinned && (
             <div className={styles.resizer} onMouseDown={handleMouseDown} />
           )}
