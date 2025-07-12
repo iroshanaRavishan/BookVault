@@ -99,6 +99,7 @@
   justify-content: space-evenly;
   width: 920px;
   z-index: 3;
+  transition: width 0.3s ease;
 }
 
 .navButton {

@@ -205,6 +205,8 @@ export default function FlipBook({ isRightPanelOpen }) {
     instance.flip(targetPage);
   };
 
+  const navButtonWidth = isFirstPage || isLastPage ? '480px' : '920px';
+
   return (
     <div className={styles.wrapper} style={{ width: isRightPanelOpen ? 'calc(100% - 350px)' : '100%' }}>
       <div 
@@ -324,9 +326,9 @@ export default function FlipBook({ isRightPanelOpen }) {
       </HTMLFlipBook>
 
       {/* Navigation Buttons */}
-      <div className={styles.navButtons}>
-        <span  style={currentPage === 0 ? { display: 'none' } : {}}>
-          <LuChevronFirst className={styles.toTheFirst} style={{left: "0px"}}/>
+      <div className={styles.navButtons} style={{ width: navButtonWidth }}>
+        <span style={currentPage === 0 ? { display: 'none' } : {}}>
+          <LuChevronFirst className={styles.toTheFirst} style={{ left: "0px" }} />
         </span>
         <span
           onClick={() => flipBookRef.current.pageFlip().flipPrev()}
@@ -343,7 +345,7 @@ export default function FlipBook({ isRightPanelOpen }) {
           Next
         </span>
         <span style={currentPage === totalPages - 1 ? { display: 'none' } : {}}>
-          <LuChevronLast className={styles.toTheLast} style={{right: "0px"}} />
+          <LuChevronLast className={styles.toTheLast} style={{ right: "0px" }} />
         </span>
       </div>
     </div>
