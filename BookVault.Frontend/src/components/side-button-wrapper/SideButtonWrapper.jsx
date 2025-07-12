@@ -154,7 +154,6 @@ export default function SideButtonsWrapper({
       case "Statistics":
         return <FaChartBar size={20} />;
       case "Ask AI":
-      default:
         return <BsChatLeftDotsFill size={18} />;
     }
   };
