@@ -195,6 +195,14 @@ export default function SideButtonsWrapper({
     document.addEventListener("mouseup", onMouseUp);
   };
 
+  const panelContentMap = {
+  'Bookmarks': <span>this is the content of the Bookmark panel</span>,
+  'Appearance': <span>this is the content of the Appearance</span>,
+  'Reading Style': <span>this is the content of the Reading Styles</span>,
+  'Statistics': <span>this is the content of the Statistics</span>,
+  'Ask AI': <span>this is the content of the Ask AI</span>
+};
+
   return (
     <>
       {rightButtonData.map((label, index) => (
@@ -311,17 +319,7 @@ export default function SideButtonsWrapper({
             </div>
           </div>
           <div>
-            {mainPanel.name === 'Bookmarks' ?
-              <span>this is the content of the boooook mark</span>
-            : mainPanel.name === 'Appearance' ? 
-              <span>this is the content of the Appearance</span>
-            : mainPanel.name === 'Reading Style' ?  
-              <span>this is the content of the Reading Styles</span> 
-            : mainPanel.name === 'Statistics' ?  
-              <span>this is the content of the Statistics</span> 
-            : mainPanel.name === 'Ask AI' ? 
-              <span>this is the content of the Ask AI</span> 
-            : ''}
+            {panelContentMap[mainPanel.name] || ''}
           </div>
         </div>
       )}
