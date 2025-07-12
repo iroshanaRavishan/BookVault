@@ -103,3 +103,23 @@
   width: 5px;
   background-color: #cecece;
 }
+
+.panelBody {
+  padding: 15px 10px;
+  overflow-y: auto;
+  height: 100%;
+  font-size: 15px;
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.panelBody::-webkit-scrollbar {
+  width: 6px;
+}
+
+.panelBody::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
