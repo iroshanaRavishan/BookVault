@@ -176,11 +176,32 @@ export default function FlipBook({ isRightPanelOpen }) {
     if (!flipBookRef.current) return;
 
     const instance = flipBookRef.current.pageFlip();
+    const current = instance.getCurrentPageIndex();
 
-    // Prevent unnecessary flip
-    if (instance.getCurrentPageIndex() === targetPage) return;
+    if (current === targetPage) return;
 
-    instance.flip(targetPage); // ← this triggers the flip animation
+    const total = instance.getPageCount();
+
+    // If currently on the front cover (page 0)
+    if (current === 0) {
+      instance.flipNext(); // flip cover
+      setTimeout(() => {
+        instance.flip(targetPage);
+      }, 1000); // small delay to allow cover flip to complete
+      return;
+    }
+
+    // If currently on the back cover (last page)
+    if (current === total - 1) {
+      instance.flipPrev(); // flip cover
+      setTimeout(() => {
+        instance.flip(targetPage);
+      }, 1000); // delay to allow cover flip to complete
+      return;
+    }
+
+    // Otherwise, just do the normal flip
+    instance.flip(targetPage);
   };
 
   return (
@@ -207,7 +228,7 @@ export default function FlipBook({ isRightPanelOpen }) {
                     ? b.color.replace(/hsl\(([^)]+),\s*([^)]+),\s*([^)]+),\s*[^)]+\)/, 'hsl($1, $2, $3, 1)')
                     : b.color,
                   width: currentPage === b.page ? '32px' : '20px',
-                  cursor: 'pointer' // optional for better UX
+                  cursor: 'pointer'
                 }}
               >
                 <span
@@ -245,7 +266,7 @@ export default function FlipBook({ isRightPanelOpen }) {
                     ? b.color.replace(/hsl\(([^)]+),\s*([^)]+),\s*([^)]+),\s*[^)]+\)/, 'hsl($1, $2, $3, 1)')
                     : b.color,
                   width: currentPage === b.page - 1 ? '32px' : '20px',
-                  cursor: 'pointer' // optional for better UX
+                  cursor: 'pointer'
                 }}
               >
                 <span
