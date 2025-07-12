@@ -283,7 +283,7 @@ export default function SideButtonsWrapper({
               </span>
             </div>
           </div>
-          <div>
+          <div className={styles.panelBody}>
             <span>this is the note section</span>
           </div>
           {isLeftPanelPinned && (
