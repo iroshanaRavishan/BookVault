@@ -280,3 +280,35 @@
     transform: translateY(-10px) rotateX(180deg);
   }
 }
+
+.bookmark,
+.bookmarkContainers,
+.leftBookmarkContainer,
+.rightBookmarkContainer,
+.bookmarkMini {
+  z-index: 1;
+}
+
+.flipbook,
+.page,
+.rotatedCopy {
+  z-index: 20;
+}
+
+.bookmarkContainers {
+  transition: transform 0.3s ease;
+}
+
+.toTheLast {
+  position: absolute;
+  top: 15px;
+  font-size: 40px;
+  color: rgba(255, 255, 255, 0.514);
+}
+
+.toTheFirst {
+  position: absolute;
+  top: 15px;
+  font-size: 40px;
+  color: rgba(255, 255, 255, 0.514);
+}

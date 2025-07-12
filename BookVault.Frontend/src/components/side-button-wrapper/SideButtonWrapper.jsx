@@ -154,7 +154,6 @@ export default function SideButtonsWrapper({
       case "Statistics":
         return <FaChartBar size={20} />;
       case "Ask AI":
-      default:
         return <BsChatLeftDotsFill size={18} />;
     }
   };
@@ -195,6 +194,14 @@ export default function SideButtonsWrapper({
     document.addEventListener("mousemove", onMouseMove);
     document.addEventListener("mouseup", onMouseUp);
   };
+
+  const panelContentMap = {
+  'Bookmarks': <span>this is the content of the Bookmark panel</span>,
+  'Appearance': <span>this is the content of the Appearance</span>,
+  'Reading Style': <span>this is the content of the Reading Styles</span>,
+  'Statistics': <span>this is the content of the Statistics</span>,
+  'Ask AI': <span>this is the content of the Ask AI</span>
+};
 
   return (
     <>
@@ -276,7 +283,9 @@ export default function SideButtonsWrapper({
               </span>
             </div>
           </div>
-
+          <div className={styles.panelBody}>
+            <span>this is the note section</span>
+          </div>
           {isLeftPanelPinned && (
             <div className={styles.resizer} onMouseDown={handleMouseDown} />
           )}
@@ -308,6 +317,9 @@ export default function SideButtonsWrapper({
             <div className={styles.panelContent}>
               <span className={styles.headerTopic}> {getIconForPanel(mainPanel.name)} {mainPanel.name}</span>
             </div>
+          </div>
+          <div className={styles.panelBody}>
+            {panelContentMap[mainPanel.name] || ''}
           </div>
         </div>
       )}
