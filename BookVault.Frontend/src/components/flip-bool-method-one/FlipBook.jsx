@@ -3,6 +3,7 @@ import HTMLFlipBook from 'react-pageflip';
 import styles from './flipbook.module.css';
 import BookBindingHoles from '../book-binding-holes/BookBindingHoles';
 import { IoAddCircleSharp, IoCloseCircleSharp } from "react-icons/io5";
+import { LuChevronFirst, LuChevronLast } from 'react-icons/lu';
 
 const Page = forwardRef(({ children, number, totalPages, currentPage, pageType, onBookmarkAdd, activeBookmarks }, ref) => {
   const [showRotatedCopy, setShowRotatedCopy] = useState(false);
@@ -90,7 +91,7 @@ export default function FlipBook({ isRightPanelOpen }) {
   const [animatingPages, setAnimatingPages] = useState([]);
   const [removingPages, setRemovingPages] = useState([]);
 
-  const contentPages = 20;
+  const contentPages = 3;
   const totalPages = 2 + contentPages + (contentPages % 2 === 1 ? 1 : 0) + 2;
   const flipBookRef = useRef();
   const pages = [];
@@ -324,6 +325,9 @@ export default function FlipBook({ isRightPanelOpen }) {
 
       {/* Navigation Buttons */}
       <div className={styles.navButtons}>
+        <span  style={currentPage === 0 ? { display: 'none' } : {}}>
+          <LuChevronFirst className={styles.toTheFirst} style={{left: "0px"}}/>
+        </span>
         <span
           onClick={() => flipBookRef.current.pageFlip().flipPrev()}
           className={styles.navButton}
@@ -337,6 +341,9 @@ export default function FlipBook({ isRightPanelOpen }) {
           style={currentPage === totalPages - 1 ? { display: 'none' } : {}}
         >
           Next
+        </span>
+        <span style={currentPage === totalPages - 1 ? { display: 'none' } : {}}>
+          <LuChevronLast className={styles.toTheLast} style={{right: "0px"}} />
         </span>
       </div>
     </div>
