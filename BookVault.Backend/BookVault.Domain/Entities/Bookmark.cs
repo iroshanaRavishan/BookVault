@@ -28,5 +28,41 @@ namespace BookVault.Domain.Entities
 
         // EF Core parameterless constructor
         private Bookmark() { }
+
+        private Bookmark(Guid id, Guid userId, Guid bookId, int pageNumber, DateTimeOffset createdAt, string? thumbnailPath)
+        {
+            Id = id;
+            UserId = userId;
+            BookId = bookId;
+            PageNumber = pageNumber;
+            CreatedAt = createdAt;
+            BookmarkThumbnailPath = thumbnailPath;
+        }
+
+        public static Bookmark Create(Guid userId, Guid bookId, int pageNumber, string? thumbnailPath)
+        {
+            ValidateInputs(userId, bookId, pageNumber);
+
+            return new Bookmark(
+                Guid.NewGuid(),
+                userId,
+                bookId,
+                pageNumber,
+                DateTimeOffset.UtcNow,
+                thumbnailPath
+            );
+        }
+
+        private static void ValidateInputs(Guid userId, Guid bookId, int pageNumber)
+        {
+            if (userId == Guid.Empty)
+                throw new ArgumentException("UserId cannot be empty.", nameof(userId));
+
+            if (bookId == Guid.Empty)
+                throw new ArgumentException("BookId cannot be empty.", nameof(bookId));
+
+            if (pageNumber <= 0)
+                throw new ArgumentException("Page number must be greater than zero.", nameof(pageNumber));
+        }
     }
 }
