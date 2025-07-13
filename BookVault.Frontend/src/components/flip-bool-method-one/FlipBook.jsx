@@ -91,7 +91,7 @@ export default function FlipBook({ isRightPanelOpen }) {
   const [animatingPages, setAnimatingPages] = useState([]);
   const [removingPages, setRemovingPages] = useState([]);
 
-  const contentPages = 3;
+  const contentPages = 20;
   const totalPages = 2 + contentPages + (contentPages % 2 === 1 ? 1 : 0) + 2;
   const flipBookRef = useRef();
   const pages = [];
@@ -327,8 +327,11 @@ export default function FlipBook({ isRightPanelOpen }) {
 
       {/* Navigation Buttons */}
       <div className={styles.navButtons} style={{ width: navButtonWidth }}>
-        <span style={currentPage === 0 ? { display: 'none' } : {}}>
-          <LuChevronFirst className={styles.toTheFirst} style={{ left: "0px" }} />
+        <span
+          style={currentPage === 0 ? { display: 'none' } : {}}
+          onClick={() => goToPage(0)}
+        >
+          <LuChevronFirst className={styles.toTheFirst} style={{ left: "0px", cursor: "pointer" }} />
         </span>
         <span
           onClick={() => flipBookRef.current.pageFlip().flipPrev()}
@@ -344,8 +347,11 @@ export default function FlipBook({ isRightPanelOpen }) {
         >
           Next
         </span>
-        <span style={currentPage === totalPages - 1 ? { display: 'none' } : {}}>
-          <LuChevronLast className={styles.toTheLast} style={{ right: "0px" }} />
+        <span
+          style={currentPage === totalPages - 1 ? { display: 'none' } : {}}
+          onClick={() => goToPage(totalPages - 1)}
+        >
+          <LuChevronLast className={styles.toTheLast} style={{ right: "0px", cursor: "pointer" }} />
         </span>
       </div>
     </div>
