@@ -180,26 +180,30 @@ export default function FlipBook({ isRightPanelOpen }) {
     const current = instance.getCurrentPageIndex();
     const total = instance.getPageCount();
 
-    // If currently on the front cover (page 0)
-    if (current === 0) {
-      instance.flipNext(); // flip cover
-      setTimeout(() => {
-        instance.flip(targetPage);
-      }, 1000); // small delay to allow cover flip to complete
-      return;
+    if (targetPage < 0 || targetPage >= total || current === targetPage) return;
+
+    const delay = (ms) => new Promise(res => setTimeout(res, ms));
+
+    const firstContentPage = 2;
+    const lastContentPage = total - 3;
+    const firstCover = 0;
+    const lastCover = total - 1;
+
+    // === First Cover Navigation ===
+    if (targetPage === firstCover) {
+      if (current === lastCover) {
+        await instance.flip(lastContentPage);
+        await delay(1000);
+        await instance.flip(firstContentPage);
+        await delay(800);
+      } else if (current !== firstContentPage && current !== firstCover) {
+        await instance.flip(firstContentPage);
+        await delay(1000);
+      }
+      await delay(100);
+      await instance.flip(firstCover);
     }
 
-    // If currently on the back cover (last page)
-    if (current === total - 1) {
-      instance.flipPrev(); // flip cover
-      setTimeout(() => {
-        instance.flip(targetPage);
-      }, 1000); // delay to allow cover flip to complete
-      return;
-    }
-
-    // Otherwise, just do the normal flip
-    instance.flip(targetPage);
   };
 
   const navButtonWidth = isFirstPage || isLastPage ? '480px' : '920px';
