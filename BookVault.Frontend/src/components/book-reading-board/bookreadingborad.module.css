@@ -4,15 +4,14 @@
     justify-content: center;
     min-height: 45.9vh;
     width: 100%;
-    position: relative;
 }
 
 .book {
-    background-color: lightcoral;
+    background: #f1c40f;
     overflow: auto;
 }
 
 .wrapper {
-    background-color: aqua;
     overflow: auto;
+    background: #f1c40f;
 }

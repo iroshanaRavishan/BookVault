@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect, useState, useMemo } from "react";
 import BookReadingBoardSideButton from "../book-reading-board-side-button/BookReadingBoardSideButton";
 import styles from "./sidebuttonwrapper.module.css";
 import { IoBookmarks, IoCloseCircleSharp, IoColorPaletteSharp } from "react-icons/io5";
@@ -9,19 +9,24 @@ import { FaChartBar } from "react-icons/fa";
 const rightButtonData = ["Bookmarks", "Appearance", "Reading Style", "Statistics"];
 const leftButtonData = ["Notes"];
 
-export default function SideButtonsWrapper() {
+export default function SideButtonsWrapper({
+  bookWidth,
+  setBookWidth,
+  containerRef,
+  mainPanel,
+  setMainPanel,
+  leftPanelOpen,
+  setLeftPanelOpen,
+  isLeftPanelPinned,
+  setIsLeftPanelPinned,
+}) {
   const [rightOffsets, setRightOffsets] = useState([]);
   const [leftOffsets, setLeftOffsets] = useState([]);
-  const [mainPanel, setMainPanel] = useState(null); // right or bottom panel
   const [isMainClosing, setIsMainClosing] = useState(false);
   const [isMainOpening, setIsMainOpening] = useState(false);
-  const [leftPanelOpen, setLeftPanelOpen] = useState(false);
   const [isLeftOpening, setIsLeftOpening] = useState(false);
   const [isLeftClosing, setIsLeftClosing] = useState(false);
   const [pendingPanel, setPendingPanel] = useState(null);   // Panel to open next after closing
-  const [isLeftPanlePinned, setLeftPanlePinned] = useState(null);
-  const [leftPanelWidth, setLeftPanelWidth] = useState(300); // default width
-  const [isResizing, setIsResizing] = useState(false);
 
   const rightRefs = useRef([]);
   const leftRefs = useRef([]);
@@ -45,6 +50,34 @@ export default function SideButtonsWrapper() {
     setRightOffsets(calcOffsets(rightRefs.current));
     setLeftOffsets(calcOffsets(leftRefs.current));
   }, []);
+
+  const { dynamicPanelRight, dynamicButtonRight } = useMemo(() => {
+    // If the left panel isn’t pinned, neither offset should apply
+    if (!isLeftPanelPinned) {
+      return { dynamicPanelRight: undefined, dynamicButtonRight: undefined };
+    }
+
+    // Compute the shared ratio for both button and panel
+    const minBookWidth = 75;
+    const maxBookWidth = 85;
+    const ratio = (bookWidth - minBookWidth) / (maxBookWidth - minBookWidth);
+    const clampedRatio = Math.min(Math.max(ratio, 0), 1);
+
+    // Button always follows bookWidth when pinned
+    const buttonRange = { min: 175, max: 220 };
+    const dynamicButtonRight = 
+      `${buttonRange.min + (buttonRange.max - buttonRange.min) * clampedRatio}px`;
+
+    // Panel only when bottom panel is open
+    let dynamicPanelRight;
+    if (mainPanel?.position === "bottom") {
+      const panelRange = { min: 55, max: 100 };
+      dynamicPanelRight = 
+        `${panelRange.min + (panelRange.max - panelRange.min) * clampedRatio}px`;
+    }
+
+    return { dynamicPanelRight, dynamicButtonRight };
+  }, [bookWidth, isLeftPanelPinned, mainPanel]);
 
   const handleButtonClick = (name, position) => {
     const newPanel = { name, position };
@@ -92,8 +125,10 @@ export default function SideButtonsWrapper() {
   };
 
   const handlePinLeftPanel = () => {
-    setLeftPanlePinned(!isLeftPanlePinned);
-  }
+    const nextPinnedState = !isLeftPanelPinned;
+    setIsLeftPanelPinned(nextPinnedState);
+    setBookWidth(nextPinnedState ? 79 : 100);
+  };
 
   const handleCloseLeftPanel = () => {
     setIsLeftClosing(true);
@@ -102,6 +137,8 @@ export default function SideButtonsWrapper() {
     setTimeout(() => {
       setLeftPanelOpen(false);
       setIsLeftClosing(false);
+      setIsLeftPanelPinned(false);
+      setBookWidth(100);
     }, 300);
   };
 
@@ -117,7 +154,6 @@ export default function SideButtonsWrapper() {
       case "Statistics":
         return <FaChartBar size={20} />;
       case "Ask AI":
-      default:
         return <BsChatLeftDotsFill size={18} />;
     }
   };
@@ -132,29 +168,40 @@ export default function SideButtonsWrapper() {
     }
   }, [isMainClosing, pendingPanel]);
 
-  useEffect(() => {
-    const handleMouseMove = (e) => {
-      if (isResizing) {
-        const newWidth = e.clientX;
-        if (newWidth >= 300 && newWidth <= 600) {
-          setLeftPanelWidth(newWidth);
-        }
-      }
+  const handleMouseDown = (e) => {
+    e.preventDefault();
+
+    const startX = e.clientX;
+    const containerWidth = containerRef.current.offsetWidth;
+    const initialBookWidthPx = (bookWidth / 100) * containerWidth;
+
+    const onMouseMove = (e) => {
+      const deltaX = e.clientX - startX;
+      const newBookWidthPx = initialBookWidthPx - deltaX;
+      const newBookWidthPercent = (newBookWidthPx / containerWidth) * 100;
+
+      // Clamp the width between 75% and 85%
+      const clampedWidth = Math.min(Math.max(newBookWidthPercent, 75), 85);
+
+      setBookWidth(clampedWidth);
     };
 
-    const handleMouseUp = () => {
-      if (isResizing) {
-        setIsResizing(false);
-      }
+    const onMouseUp = () => {
+      document.removeEventListener("mousemove", onMouseMove);
+      document.removeEventListener("mouseup", onMouseUp);
     };
 
-    window.addEventListener("mousemove", handleMouseMove);
-    window.addEventListener("mouseup", handleMouseUp);
-    return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-      window.removeEventListener("mouseup", handleMouseUp);
-    };
-  }, [isResizing]);
+    document.addEventListener("mousemove", onMouseMove);
+    document.addEventListener("mouseup", onMouseUp);
+  };
+
+  const panelContentMap = {
+  'Bookmarks': <span>this is the content of the Bookmark panel</span>,
+  'Appearance': <span>this is the content of the Appearance</span>,
+  'Reading Style': <span>this is the content of the Reading Styles</span>,
+  'Statistics': <span>this is the content of the Statistics</span>,
+  'Ask AI': <span>this is the content of the Ask AI</span>
+};
 
   return (
     <>
@@ -185,6 +232,7 @@ export default function SideButtonsWrapper() {
         position="bottom"
         onClick={() => handleButtonClick("Ask AI", "bottom")}
         isActive={mainPanel?.name === "Ask AI"}
+        rightOffset={dynamicButtonRight} // Pass the dynamic button offset 
       />
 
       {/* Left Panel */}
@@ -197,8 +245,15 @@ export default function SideButtonsWrapper() {
             ${isLeftClosing ? styles.closing : ""}
           `}
           style={
-            isLeftPanlePinned
-              ? { width: `${leftPanelWidth}px`, minWidth: "300px", maxWidth: "600px", height: "100%", top: "69px", borderRadius: "0px", transition: 'all 0.3s ease-in-out'}
+            isLeftPanelPinned
+              ? {
+                  width: `${100 - bookWidth}%`,
+                  minWidth: "15%",
+                  maxWidth: "25%",
+                  height: "100%",
+                  top: "69px",
+                  borderRadius: "0px",
+                }
               : {}
           }
         >
@@ -209,7 +264,7 @@ export default function SideButtonsWrapper() {
               onClick={handleCloseLeftPanel}
               size={25}
             />
-            {isLeftPanlePinned ? (
+            {isLeftPanelPinned ? (
               <BsPinFill
                 onClick={handlePinLeftPanel}
                 className={"panelPinBtn"}
@@ -228,12 +283,11 @@ export default function SideButtonsWrapper() {
               </span>
             </div>
           </div>
-
-          {isLeftPanlePinned && (
-            <div
-              className={styles.resizer}
-              onMouseDown={() => setIsResizing(true)}
-            />
+          <div className={styles.panelBody}>
+            <span>this is the note section</span>
+          </div>
+          {isLeftPanelPinned && (
+            <div className={styles.resizer} onMouseDown={handleMouseDown} />
           )}
         </div>
       )}
@@ -247,6 +301,11 @@ export default function SideButtonsWrapper() {
             ${isMainOpening && !isMainClosing ? styles.open : ""}
             ${isMainClosing ? styles.closing : ""}
           `}
+          style={
+            mainPanel.position === "bottom" && isLeftPanelPinned
+              ? { right: dynamicPanelRight  }
+              : undefined
+          }
         >
           <div className={styles.panelHeader}>
             <IoCloseCircleSharp
@@ -258,6 +317,9 @@ export default function SideButtonsWrapper() {
             <div className={styles.panelContent}>
               <span className={styles.headerTopic}> {getIconForPanel(mainPanel.name)} {mainPanel.name}</span>
             </div>
+          </div>
+          <div className={styles.panelBody}>
+            {panelContentMap[mainPanel.name] || ''}
           </div>
         </div>
       )}
