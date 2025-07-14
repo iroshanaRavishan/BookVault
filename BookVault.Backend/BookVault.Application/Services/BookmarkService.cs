@@ -18,16 +18,19 @@ namespace BookVault.Application.Services
             _bookmarkRepository = bookmarkRepository;
         }
 
-        public async Task<IEnumerable<Bookmark>> GetAllAsync(Guid userId, Guid bookId)
+        public async Task<IEnumerable<BookmarkResponseDto>> GetAllAsync(Guid userId, Guid bookId)
         {
-            return await _bookmarkRepository.GetAllAsync(userId, bookId);
-        }
+            var bookmarks = await _bookmarkRepository.GetAllAsync(userId, bookId);
 
-        public async Task<Bookmark> CreateAsync(Guid userId, Guid bookId, int pageNumber, string? thumbnailPath)
-        {
-            var bookmark = Bookmark.Create(userId, bookId, pageNumber, thumbnailPath);
-            await _bookmarkRepository.AddAsync(bookmark);
-            return bookmark;
+            return bookmarks.Select(b => new BookmarkResponseDto
+            {
+                Id = b.Id,
+                UserId = b.UserId,
+                BookId = b.BookId,
+                PageNumber = b.PageNumber,
+                CreatedAt = b.CreatedAt,
+                BookmarkThumbnailPath = b.BookmarkThumbnailPath
+            });
         }
 
         public async Task<bool> DeleteAsync(Guid bookmarkId)
