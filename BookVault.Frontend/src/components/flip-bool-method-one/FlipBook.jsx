@@ -91,7 +91,7 @@ export default function FlipBook({ isRightPanelOpen }) {
   const [animatingPages, setAnimatingPages] = useState([]);
   const [removingPages, setRemovingPages] = useState([]);
 
-  const contentPages = 3;
+  const contentPages = 20;
   const totalPages = 2 + contentPages + (contentPages % 2 === 1 ? 1 : 0) + 2;
   const flipBookRef = useRef();
   const pages = [];
@@ -173,36 +173,70 @@ export default function FlipBook({ isRightPanelOpen }) {
   }
   };
 
-  const goToPage = (targetPage) => {
+  const goToPage = async (targetPage) => {
     if (!flipBookRef.current) return;
 
     const instance = flipBookRef.current.pageFlip();
     const current = instance.getCurrentPageIndex();
-
-    if (current === targetPage) return;
-
     const total = instance.getPageCount();
 
-    // If currently on the front cover (page 0)
-    if (current === 0) {
-      instance.flipNext(); // flip cover
-      setTimeout(() => {
-        instance.flip(targetPage);
-      }, 1000); // small delay to allow cover flip to complete
-      return;
+    if (targetPage < 0 || targetPage >= total || current === targetPage) return;
+
+    const delay = (ms) => new Promise(res => setTimeout(res, ms));
+
+    const firstContentPage = 2;
+    const lastContentPage = total - 3;
+    const firstCover = 0;
+    const lastCover = total - 1;
+
+    // === First Cover Navigation ===
+    if (targetPage === firstCover) {
+      if (current === lastCover) {
+        await instance.flip(lastContentPage);
+        await delay(1000);
+        await instance.flip(firstContentPage);
+        await delay(800);
+      } else if (current !== firstContentPage && current !== firstCover) {
+        await instance.flip(firstContentPage);
+        await delay(1000);
+      }
+      await delay(100);
+      await instance.flip(firstCover);
     }
 
-    // If currently on the back cover (last page)
-    if (current === total - 1) {
-      instance.flipPrev(); // flip cover
-      setTimeout(() => {
-        instance.flip(targetPage);
-      }, 1000); // delay to allow cover flip to complete
-      return;
+    // === Last Cover Navigation ===
+    else if (targetPage === lastCover) {
+      if (current === firstCover) {
+        await instance.flip(firstContentPage);
+        await delay(1000);
+        await instance.flip(lastContentPage);
+        await delay(800);
+      } else if (current !== lastContentPage && current !== lastCover) {
+        await instance.flip(lastContentPage);
+        await delay(1000);
+      }
+      await delay(100);
+      await instance.flip(lastCover);
     }
 
-    // Otherwise, just do the normal flip
-    instance.flip(targetPage);
+    // === Front Cover Special Case ===
+    else if (current === firstCover) {
+      await instance.flipNext(); // turn front cover
+      await delay(1000);
+      await instance.flip(targetPage); // go to actual page
+    }
+
+    // === Back Cover Special Case ===
+    else if (current === lastCover) {
+      await instance.flipPrev(); // turn back cover
+      await delay(1000);
+      await instance.flip(targetPage);
+    }
+
+    // === Normal Flip ===
+    else {
+      await instance.flip(targetPage);
+    }
   };
 
   const navButtonWidth = isFirstPage || isLastPage ? '480px' : '920px';
@@ -327,8 +361,11 @@ export default function FlipBook({ isRightPanelOpen }) {
 
       {/* Navigation Buttons */}
       <div className={styles.navButtons} style={{ width: navButtonWidth }}>
-        <span style={currentPage === 0 ? { display: 'none' } : {}}>
-          <LuChevronFirst className={styles.toTheFirst} style={{ left: "0px" }} />
+        <span
+          style={currentPage === 0 ? { display: 'none' } : {}}
+          onClick={() => goToPage(0)}
+        >
+          <LuChevronFirst className={styles.toTheFirst} style={{ left: "0px", cursor: "pointer" }} />
         </span>
         <span
           onClick={() => flipBookRef.current.pageFlip().flipPrev()}
@@ -344,8 +381,11 @@ export default function FlipBook({ isRightPanelOpen }) {
         >
           Next
         </span>
-        <span style={currentPage === totalPages - 1 ? { display: 'none' } : {}}>
-          <LuChevronLast className={styles.toTheLast} style={{ right: "0px" }} />
+        <span
+          style={currentPage === totalPages - 1 ? { display: 'none' } : {}}
+          onClick={() => goToPage(totalPages - 1)}
+        >
+          <LuChevronLast className={styles.toTheLast} style={{ right: "0px", cursor: "pointer" }} />
         </span>
       </div>
     </div>
