@@ -204,6 +204,20 @@ export default function FlipBook({ isRightPanelOpen }) {
       await instance.flip(firstCover);
     }
 
+    // === Last Cover Navigation ===
+    else if (targetPage === lastCover) {
+      if (current === firstCover) {
+        await instance.flip(firstContentPage);
+        await delay(1000);
+        await instance.flip(lastContentPage);
+        await delay(800);
+      } else if (current !== lastContentPage && current !== lastCover) {
+        await instance.flip(lastContentPage);
+        await delay(1000);
+      }
+      await delay(100);
+      await instance.flip(lastCover);
+    }
   };
 
   const navButtonWidth = isFirstPage || isLastPage ? '480px' : '920px';
