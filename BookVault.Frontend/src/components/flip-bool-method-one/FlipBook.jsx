@@ -173,7 +173,7 @@ export default function FlipBook({ isRightPanelOpen }) {
   }
   };
 
-  const goToPage = (targetPage) => {
+  const goToPage = async (targetPage) => {
     if (!flipBookRef.current) return;
 
     const instance = flipBookRef.current.pageFlip();
