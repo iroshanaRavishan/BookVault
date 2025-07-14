@@ -33,6 +33,22 @@ namespace BookVault.Application.Services
             });
         }
 
+        public async Task<BookmarkResponseDto> CreateAsync(BookmarkCreateDto dto)
+        {
+            var bookmark = Bookmark.Create(dto.UserId, dto.BookId, dto.PageNumber, dto.BookmarkThumbnailPath);
+            await _bookmarkRepository.AddAsync(bookmark);
+
+            return new BookmarkResponseDto
+            {
+                Id = bookmark.Id,
+                UserId = bookmark.UserId,
+                BookId = bookmark.BookId,
+                PageNumber = bookmark.PageNumber,
+                CreatedAt = bookmark.CreatedAt,
+                BookmarkThumbnailPath = bookmark.BookmarkThumbnailPath
+            };
+        }
+
         public async Task<bool> DeleteAsync(Guid bookmarkId)
         {
             var bookmark = await _bookmarkRepository.GetByIdAsync(bookmarkId);
