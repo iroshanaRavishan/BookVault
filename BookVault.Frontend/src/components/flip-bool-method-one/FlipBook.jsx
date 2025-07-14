@@ -218,6 +218,13 @@ export default function FlipBook({ isRightPanelOpen }) {
       await delay(100);
       await instance.flip(lastCover);
     }
+
+    // === Front Cover Special Case ===
+    else if (current === firstCover) {
+      await instance.flipNext(); // turn front cover
+      await delay(1000);
+      await instance.flip(targetPage); // go to actual page
+    }
   };
 
   const navButtonWidth = isFirstPage || isLastPage ? '480px' : '920px';
