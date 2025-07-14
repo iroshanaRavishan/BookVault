@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using BookVault.Application.DTOs.BookDTOs;
+using BookVault.Application.DTOs.BookmarkDTOs;
+using BookVault.Application.Interfaces;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookVault.API.Controllers
@@ -50,6 +53,17 @@ namespace BookVault.API.Controllers
             };
 
             return CreatedAtAction(nameof(GetAll), new { userId = response.UserId, bookId = response.BookId }, response);
+        }
+
+        // DELETE: api/bookmarks
+        [HttpDelete]
+        public async Task<IActionResult> Delete([FromBody] BookmarkDeleteDto dto)
+        {
+            var success = await _bookmarkService.DeleteAsync(dto.Id);
+            if (!success)
+                return NotFound();
+
+            return NoContent();
         }
     }
 }
