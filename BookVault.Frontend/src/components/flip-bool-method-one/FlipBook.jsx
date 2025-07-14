@@ -178,9 +178,6 @@ export default function FlipBook({ isRightPanelOpen }) {
 
     const instance = flipBookRef.current.pageFlip();
     const current = instance.getCurrentPageIndex();
-
-    if (current === targetPage) return;
-
     const total = instance.getPageCount();
 
     // If currently on the front cover (page 0)
