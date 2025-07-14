@@ -32,5 +32,24 @@ namespace BookVault.API.Controllers
 
             return Ok(result);
         }
+
+        // POST: api/bookmarks
+        [HttpPost]
+        public async Task<ActionResult<BookmarkResponseDto>> Create([FromBody] BookmarkCreateDto dto)
+        {
+            var bookmark = await _bookmarkService.CreateAsync(dto);
+
+            var response = new BookmarkResponseDto
+            {
+                Id = bookmark.Id,
+                UserId = bookmark.UserId,
+                BookId = bookmark.BookId,
+                PageNumber = bookmark.PageNumber,
+                CreatedAt = bookmark.CreatedAt,
+                BookmarkThumbnailPath = bookmark.BookmarkThumbnailPath
+            };
+
+            return CreatedAtAction(nameof(GetAll), new { userId = response.UserId, bookId = response.BookId }, response);
+        }
     }
 }
