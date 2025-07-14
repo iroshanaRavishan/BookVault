@@ -5,6 +5,7 @@ import { IoBookmarks, IoCloseCircleSharp, IoColorPaletteSharp } from "react-icon
 import { BsChatLeftDotsFill, BsGrid1X2Fill, BsPinAngleFill, BsPinFill } from "react-icons/bs";
 import { LuNotebookText } from "react-icons/lu";
 import { FaChartBar } from "react-icons/fa";
+import Bookmarks from "../book-wrapper-side-panels/bookmark-panel/Bookmarks";
 
 const rightButtonData = ["Bookmarks", "Appearance", "Reading Style", "Statistics"];
 const leftButtonData = ["Notes"];
@@ -196,7 +197,7 @@ export default function SideButtonsWrapper({
   };
 
   const panelContentMap = {
-    'Bookmarks': <span>this is the content of the Bookmark panel</span>,
+    'Bookmarks': <Bookmarks />,
     'Appearance': <span>this is the content of the Appearance</span>,
     'Reading Style': <span>this is the content of the Reading Styles</span>,
     'Statistics': <span>this is the content of the Statistics</span>,
