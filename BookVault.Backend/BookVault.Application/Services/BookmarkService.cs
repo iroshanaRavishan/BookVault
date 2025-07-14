@@ -1,4 +1,5 @@
-﻿using BookVault.Application.Interfaces;
+﻿using BookVault.Application.DTOs.BookDTOs;
+using BookVault.Application.Interfaces;
 using BookVault.Domain.Entities;
 using BookVault.Domain.Interfaces;
 using System;
