@@ -149,7 +149,6 @@ export default function FlipBook({ isRightPanelOpen }) {
     const currentBookmaek = bookmarks.find(b => b.page === pageNumber);
     if (currentBookmaek) {
       // Trigger removal animation
-      console.log("bookmark to delete : " + bookmarks.id );
 
       try {
         const response = await fetch("https://localhost:7157/api/Bookmark", {
@@ -188,7 +187,6 @@ export default function FlipBook({ isRightPanelOpen }) {
       const randomColor = `hsl(${hue}, 70%, 60%, 0.8)`;
       console.log("user id is : " + user.id );
       console.log("book id : " + id );
-      console.log("bookmarkssss : " + bookmarks );
 
       const newBookmark = {
         userId: user.id,
