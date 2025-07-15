@@ -163,13 +163,37 @@ export default function FlipBook({ isRightPanelOpen }) {
       const hue = getCustomRandomInt() * 10;
       const randomColor = `hsl(${hue}, 70%, 60%, 0.8)`;
 
-      setBookmarks(prev => [...prev, { page: pageNumber, color: randomColor }]);
+      const newBookmark = {
+        userId: "123e4567-e89b-12d3-a456-426614174222", // replace with actual user ID
+        bookId: "123e4567-e89b-12d3-a456-426614174222", // replace with actual book ID
+        pageNumber: pageNumber-1,
+        bookmarkThumbnailPath: null
+      };
 
-      // Trigger entry animation
-      setAnimatingPages(prev => [...prev, pageNumber]);
-      setTimeout(() => {
-        setAnimatingPages(prev => prev.filter(p => p !== pageNumber));
-      }, 300);
+      try {
+        const response = await fetch("https://localhost:7157/api/Bookmark", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(newBookmark)
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to add bookmark to backend");
+        }
+
+        setBookmarks(prev => [...prev, { page: pageNumber, color: randomColor }]);
+
+        // Trigger entry animation
+        setAnimatingPages(prev => [...prev, pageNumber]);
+        setTimeout(() => {
+          setAnimatingPages(prev => prev.filter(p => p !== pageNumber));
+        }, 300);
+
+      } catch (error) {
+        console.error("Error adding bookmark:", error);
+      }
     }
   };
 
