@@ -159,8 +159,12 @@ export default function FlipBook({ isRightPanelOpen }) {
           body: JSON.stringify({ id: currentBookmaek.id })
         });
 
-        if (!response.ok) {
-          throw new Error("Failed to delete bookmark");
+        if (response.status === 204) {
+          console.log("Bookmark successfully deleted.");
+        } else if (response.status === 404) {
+          console.log("Bookmark not found. It may have already been deleted.");
+        } else {
+          throw new Error("Unexpected error occurred.");
         }
 
         setRemovingPages(prev => [...prev, pageNumber]);
@@ -171,6 +175,7 @@ export default function FlipBook({ isRightPanelOpen }) {
 
       } catch (error) {
         console.error("Error deleting bookmark:", error);
+        console.log("An error occurred while deleting the bookmark.");
         // TODO: show the error in a proper way in the frontend
       }
     } else {
