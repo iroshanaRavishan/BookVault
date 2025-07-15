@@ -8,6 +8,6 @@ export default function Bookmarks() {
   const {user} = useUser();
   
   return (
-    <div>Bookmark panel {user.id}</div>
+    <div>Bookmark panel {user.id} - {bookid}</div>
   )
 }
