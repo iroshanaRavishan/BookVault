@@ -4,6 +4,8 @@ import styles from './flipbook.module.css';
 import BookBindingHoles from '../book-binding-holes/BookBindingHoles';
 import { IoAddCircleSharp, IoCloseCircleSharp } from "react-icons/io5";
 import { LuChevronFirst, LuChevronLast } from 'react-icons/lu';
+import { useUser } from '../../context/UserContext';
+import { useParams } from 'react-router-dom';
 
 const Page = forwardRef(({ children, number, totalPages, currentPage, pageType, onBookmarkAdd, activeBookmarks }, ref) => {
   const [showRotatedCopy, setShowRotatedCopy] = useState(false);
@@ -90,6 +92,8 @@ export default function FlipBook({ isRightPanelOpen }) {
   const [bookmarks, setBookmarks] = useState([]);
   const [animatingPages, setAnimatingPages] = useState([]);
   const [removingPages, setRemovingPages] = useState([]);
+  const {user} = useUser();
+  const { id } = useParams();
 
   const contentPages = 20;
   const totalPages = 2 + contentPages + (contentPages % 2 === 1 ? 1 : 0) + 2;
@@ -164,8 +168,8 @@ export default function FlipBook({ isRightPanelOpen }) {
       const randomColor = `hsl(${hue}, 70%, 60%, 0.8)`;
 
       const newBookmark = {
-        userId: "123e4567-e89b-12d3-a456-426614174222", // replace with actual user ID
-        bookId: "123e4567-e89b-12d3-a456-426614174222", // replace with actual book ID
+        userId: user.id,
+        bookId: id, 
         pageNumber: pageNumber-1,
         bookmarkThumbnailPath: null
       };
@@ -193,6 +197,7 @@ export default function FlipBook({ isRightPanelOpen }) {
 
       } catch (error) {
         console.error("Error adding bookmark:", error);
+        // TODO: show the error in a proper way in the frontend
       }
     }
   };
