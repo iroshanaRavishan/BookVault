@@ -184,10 +184,12 @@ export default function FlipBook({ isRightPanelOpen }) {
         });
 
         if (!response.ok) {
-          throw new Error("Failed to add bookmark to backend");
+          throw new Error("Failed to add bookmark");
         }
 
-        setBookmarks(prev => [...prev, { page: pageNumber, color: randomColor }]);
+        const result = await response.json(); // Get the response body
+
+        setBookmarks(prev => [...prev, { page: pageNumber, color: randomColor, id: result.id, }]);
 
         // Trigger entry animation
         setAnimatingPages(prev => [...prev, pageNumber]);
