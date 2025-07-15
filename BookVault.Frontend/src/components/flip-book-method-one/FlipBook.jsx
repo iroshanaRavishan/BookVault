@@ -149,11 +149,35 @@ export default function FlipBook({ isRightPanelOpen }) {
     const currentBookmaek = bookmarks.find(b => b.page === pageNumber);
     if (currentBookmaek) {
       // Trigger removal animation
-      setRemovingPages(prev => [...prev, pageNumber]);
-      setTimeout(() => {
-        setBookmarks(prev => prev.filter(b => b.page !== pageNumber));
-        setRemovingPages(prev => prev.filter(p => p !== pageNumber));
-      }, 300);
+      console.log("bookmark to delete : " + bookmarks.id );
+
+      const removeBookmark = {
+        id: currentBookmaek.id
+      };
+
+      try {
+        const response = await fetch("https://localhost:7157/api/Bookmark", {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(removeBookmark)
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to delete bookmark");
+        }
+
+        setRemovingPages(prev => [...prev, pageNumber]);
+        setTimeout(() => {
+          setBookmarks(prev => prev.filter(b => b.page !== pageNumber));
+          setRemovingPages(prev => prev.filter(p => p !== pageNumber));
+        }, 300);
+
+      } catch (error) {
+        console.error("Error deleting bookmark:", error);
+        // TODO: show the error in a proper way in the frontend
+      }
     } else {
       const getCustomRandomInt = () => {
         const validNumbers = [
