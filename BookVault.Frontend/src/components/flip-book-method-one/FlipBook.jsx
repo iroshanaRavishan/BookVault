@@ -146,8 +146,8 @@ export default function FlipBook({ isRightPanelOpen }) {
   }
 
   const handleAddBookmark = async (pageNumber) => {
-    const currentBookmaek = bookmarks.find(b => b.page === pageNumber);
-    if (currentBookmaek) {
+    const currentBookmark = bookmarks.find(b => b.page === pageNumber);
+    if (currentBookmark) {
       // Trigger removal animation
 
       try {
@@ -156,7 +156,7 @@ export default function FlipBook({ isRightPanelOpen }) {
           headers: {
             "Content-Type": "application/json"
           },
-          body: JSON.stringify({ id: currentBookmaek.id })
+          body: JSON.stringify({ id: currentBookmark.id })
         });
 
         if (response.status === 204) {
