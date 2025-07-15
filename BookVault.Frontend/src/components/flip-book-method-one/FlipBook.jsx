@@ -151,17 +151,13 @@ export default function FlipBook({ isRightPanelOpen }) {
       // Trigger removal animation
       console.log("bookmark to delete : " + bookmarks.id );
 
-      const removeBookmark = {
-        id: currentBookmaek.id
-      };
-
       try {
         const response = await fetch("https://localhost:7157/api/Bookmark", {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json"
           },
-          body: JSON.stringify(removeBookmark)
+          body: JSON.stringify({ id: currentBookmaek.id })
         });
 
         if (!response.ok) {
@@ -190,6 +186,9 @@ export default function FlipBook({ isRightPanelOpen }) {
 
       const hue = getCustomRandomInt() * 10;
       const randomColor = `hsl(${hue}, 70%, 60%, 0.8)`;
+      console.log("user id is : " + user.id );
+      console.log("book id : " + id );
+      console.log("bookmarkssss : " + bookmarks );
 
       const newBookmark = {
         userId: user.id,
