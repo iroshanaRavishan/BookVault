@@ -149,11 +149,6 @@ export default function FlipBook({ isRightPanelOpen }) {
     const currentBookmaek = bookmarks.find(b => b.page === pageNumber);
     if (currentBookmaek) {
       // Trigger removal animation
-      console.log("bookmark to delete : " + bookmarks.id );
-
-      const removeBookmark = {
-        id: currentBookmaek.id
-      };
 
       try {
         const response = await fetch("https://localhost:7157/api/Bookmark", {
@@ -161,11 +156,15 @@ export default function FlipBook({ isRightPanelOpen }) {
           headers: {
             "Content-Type": "application/json"
           },
-          body: JSON.stringify(removeBookmark)
+          body: JSON.stringify({ id: currentBookmaek.id })
         });
 
-        if (!response.ok) {
-          throw new Error("Failed to delete bookmark");
+        if (response.status === 204) {
+          console.log("Bookmark successfully deleted.");
+        } else if (response.status === 404) {
+          console.log("Bookmark not found. It may have already been deleted.");
+        } else {
+          throw new Error("Unexpected error occurred.");
         }
 
         setRemovingPages(prev => [...prev, pageNumber]);
@@ -176,6 +175,7 @@ export default function FlipBook({ isRightPanelOpen }) {
 
       } catch (error) {
         console.error("Error deleting bookmark:", error);
+        console.log("An error occurred while deleting the bookmark.");
         // TODO: show the error in a proper way in the frontend
       }
     } else {
@@ -190,6 +190,8 @@ export default function FlipBook({ isRightPanelOpen }) {
 
       const hue = getCustomRandomInt() * 10;
       const randomColor = `hsl(${hue}, 70%, 60%, 0.8)`;
+      console.log("user id is : " + user.id );
+      console.log("book id : " + id );
 
       const newBookmark = {
         userId: user.id,
