@@ -141,36 +141,60 @@ export default function FlipBook({ isRightPanelOpen }) {
     }
   }
 
-  const handleAddBookmark = (pageNumber) => {
-      const exists = bookmarks.find(b => b.page === pageNumber);
-      if (exists) {
-        // Trigger removal animation
-        setRemovingPages(prev => [...prev, pageNumber]);
+  const handleAddBookmark = async (pageNumber) => {
+    const exists = bookmarks.find(b => b.page === pageNumber);
+    if (exists) {
+      // Trigger removal animation
+      setRemovingPages(prev => [...prev, pageNumber]);
+      setTimeout(() => {
+        setBookmarks(prev => prev.filter(b => b.page !== pageNumber));
+        setRemovingPages(prev => prev.filter(p => p !== pageNumber));
+      }, 300);
+    } else {
+      const getCustomRandomInt = () => {
+        const validNumbers = [
+          ...Array.from({ length: 3 }, (_, i) => i + 1),   // 1–3
+          ...Array.from({ length: 29 }, (_, i) => i + 7)   // 7–35
+        ];
+        const index = Math.floor(Math.random() * validNumbers.length);
+        return validNumbers[index];
+      };
+
+      const hue = getCustomRandomInt() * 10;
+      const randomColor = `hsl(${hue}, 70%, 60%, 0.8)`;
+
+      const newBookmark = {
+        userId: "123e4567-e89b-12d3-a456-426614174222", // replace with actual user ID
+        bookId: "123e4567-e89b-12d3-a456-426614174222", // replace with actual book ID
+        pageNumber: pageNumber-1,
+        bookmarkThumbnailPath: null
+      };
+
+      try {
+        const response = await fetch("https://localhost:7157/api/Bookmark", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(newBookmark)
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to add bookmark to backend");
+        }
+
+        setBookmarks(prev => [...prev, { page: pageNumber, color: randomColor }]);
+
+        // Trigger entry animation
+        setAnimatingPages(prev => [...prev, pageNumber]);
         setTimeout(() => {
-          setBookmarks(prev => prev.filter(b => b.page !== pageNumber));
-          setRemovingPages(prev => prev.filter(p => p !== pageNumber));
-        }, 300); // Match with animation duration
-      } else {
-        const getCustomRandomInt = () => {
-          const validNumbers = [
-            ...Array.from({ length: 3 }, (_, i) => i + 1),   // 1–3
-            ...Array.from({ length: 29 }, (_, i) => i + 7)   // 7–35
-          ];
-          const index = Math.floor(Math.random() * validNumbers.length);
-          return validNumbers[index];
-        };
+          setAnimatingPages(prev => prev.filter(p => p !== pageNumber));
+        }, 300);
 
-        const hue = getCustomRandomInt() * 10; // scale to 10–350 with large gaps
-        const randomColor = `hsl(${hue}, 70%, 60%, 0.8)`;
-
-      setBookmarks(prev => [...prev, { page: pageNumber, color: randomColor }]);
-
-    // Trigger entry animation
-    setAnimatingPages(prev => [...prev, pageNumber]);
-    setTimeout(() => {
-      setAnimatingPages(prev => prev.filter(p => p !== pageNumber));
-    }, 300);
-  }
+      } catch (error) {
+        console.error("Error adding bookmark:", error);
+      }
+    }
   };
 
   const goToPage = async (targetPage) => {
