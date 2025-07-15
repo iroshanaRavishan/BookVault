@@ -146,8 +146,8 @@ export default function FlipBook({ isRightPanelOpen }) {
   }
 
   const handleAddBookmark = async (pageNumber) => {
-    const exists = bookmarks.find(b => b.page === pageNumber);
-    if (exists) {
+    const currentBookmaek = bookmarks.find(b => b.page === pageNumber);
+    if (currentBookmaek) {
       // Trigger removal animation
       setRemovingPages(prev => [...prev, pageNumber]);
       setTimeout(() => {
