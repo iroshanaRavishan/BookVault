@@ -141,36 +141,36 @@ export default function FlipBook({ isRightPanelOpen }) {
     }
   }
 
-  const handleAddBookmark = (pageNumber) => {
-      const exists = bookmarks.find(b => b.page === pageNumber);
-      if (exists) {
-        // Trigger removal animation
-        setRemovingPages(prev => [...prev, pageNumber]);
-        setTimeout(() => {
-          setBookmarks(prev => prev.filter(b => b.page !== pageNumber));
-          setRemovingPages(prev => prev.filter(p => p !== pageNumber));
-        }, 300); // Match with animation duration
-      } else {
-        const getCustomRandomInt = () => {
-          const validNumbers = [
-            ...Array.from({ length: 3 }, (_, i) => i + 1),   // 1–3
-            ...Array.from({ length: 29 }, (_, i) => i + 7)   // 7–35
-          ];
-          const index = Math.floor(Math.random() * validNumbers.length);
-          return validNumbers[index];
-        };
+  const handleAddBookmark = async (pageNumber) => {
+    const exists = bookmarks.find(b => b.page === pageNumber);
+    if (exists) {
+      // Trigger removal animation
+      setRemovingPages(prev => [...prev, pageNumber]);
+      setTimeout(() => {
+        setBookmarks(prev => prev.filter(b => b.page !== pageNumber));
+        setRemovingPages(prev => prev.filter(p => p !== pageNumber));
+      }, 300);
+    } else {
+      const getCustomRandomInt = () => {
+        const validNumbers = [
+          ...Array.from({ length: 3 }, (_, i) => i + 1),   // 1–3
+          ...Array.from({ length: 29 }, (_, i) => i + 7)   // 7–35
+        ];
+        const index = Math.floor(Math.random() * validNumbers.length);
+        return validNumbers[index];
+      };
 
-        const hue = getCustomRandomInt() * 10; // scale to 10–350 with large gaps
-        const randomColor = `hsl(${hue}, 70%, 60%, 0.8)`;
+      const hue = getCustomRandomInt() * 10;
+      const randomColor = `hsl(${hue}, 70%, 60%, 0.8)`;
 
       setBookmarks(prev => [...prev, { page: pageNumber, color: randomColor }]);
 
-    // Trigger entry animation
-    setAnimatingPages(prev => [...prev, pageNumber]);
-    setTimeout(() => {
-      setAnimatingPages(prev => prev.filter(p => p !== pageNumber));
-    }, 300);
-  }
+      // Trigger entry animation
+      setAnimatingPages(prev => [...prev, pageNumber]);
+      setTimeout(() => {
+        setAnimatingPages(prev => prev.filter(p => p !== pageNumber));
+      }, 300);
+    }
   };
 
   const goToPage = async (targetPage) => {
