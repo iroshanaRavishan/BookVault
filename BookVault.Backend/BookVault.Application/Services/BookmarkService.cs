@@ -1,4 +1,5 @@
-﻿using BookVault.Application.Interfaces;
+﻿using BookVault.Application.DTOs.BookDTOs;
+using BookVault.Application.Interfaces;
 using BookVault.Domain.Entities;
 using BookVault.Domain.Interfaces;
 using System;
@@ -18,16 +19,35 @@ namespace BookVault.Application.Services
             _bookmarkRepository = bookmarkRepository;
         }
 
-        public async Task<IEnumerable<Bookmark>> GetAllAsync(Guid userId, Guid bookId)
+        public async Task<IEnumerable<BookmarkResponseDto>> GetAllAsync(Guid userId, Guid bookId)
         {
-            return await _bookmarkRepository.GetAllAsync(userId, bookId);
+            var bookmarks = await _bookmarkRepository.GetAllAsync(userId, bookId);
+
+            return bookmarks.Select(b => new BookmarkResponseDto
+            {
+                Id = b.Id,
+                UserId = b.UserId,
+                BookId = b.BookId,
+                PageNumber = b.PageNumber,
+                CreatedAt = b.CreatedAt,
+                BookmarkThumbnailPath = b.BookmarkThumbnailPath
+            });
         }
 
-        public async Task<Bookmark> CreateAsync(Guid userId, Guid bookId, int pageNumber, string? thumbnailPath)
+        public async Task<BookmarkResponseDto> CreateAsync(BookmarkCreateDto dto)
         {
-            var bookmark = Bookmark.Create(userId, bookId, pageNumber, thumbnailPath);
+            var bookmark = Bookmark.Create(dto.UserId, dto.BookId, dto.PageNumber, dto.BookmarkThumbnailPath);
             await _bookmarkRepository.AddAsync(bookmark);
-            return bookmark;
+
+            return new BookmarkResponseDto
+            {
+                Id = bookmark.Id,
+                UserId = bookmark.UserId,
+                BookId = bookmark.BookId,
+                PageNumber = bookmark.PageNumber,
+                CreatedAt = bookmark.CreatedAt,
+                BookmarkThumbnailPath = bookmark.BookmarkThumbnailPath
+            };
         }
 
         public async Task<bool> DeleteAsync(Guid bookmarkId)
