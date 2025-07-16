@@ -182,6 +182,7 @@ export default function FlipBook({ isRightPanelOpen }) {
         userId: user.id,
         bookId: id, 
         pageNumber: pageNumber-1,
+        color: randomColor,
         bookmarkThumbnailPath: null
       };
 
