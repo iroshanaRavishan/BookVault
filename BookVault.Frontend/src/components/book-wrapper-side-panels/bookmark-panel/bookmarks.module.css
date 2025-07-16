@@ -1,0 +1,92 @@
+.bookmarkPanel {
+    padding: 0 10px;
+}
+
+.bookmarkList {
+    list-style: none;
+    padding: 0;
+    margin-top: 0px;
+}
+
+.bookmarkItem {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0;
+    border-left: 6px solid var(--border-color);
+    transition: border-left-color 0.2s ease;
+    padding-left: 10px;
+    border-radius: 12px;
+    position: relative;
+    user-select: none;
+
+    /* Store original color with reduced opacity as fallback */
+    --border-hsl: var(--border-color, hsl(20, 70%, 60%, 0.8));
+}
+
+.bookmarkItem:hover {
+    cursor: pointer;
+    transform: scale(1.01);
+    /* Override opacity on hover */
+    border-left-color: var(--border-color-hover);
+}
+
+.bookmarkItem::after {
+    content: "";
+    position: absolute;
+    left: 15px;
+    bottom: -6px;
+    height: 1px;
+    width: 100%;
+    background-color: currentColor; 
+    opacity: 0.2; 
+}
+
+.pageNumber {
+    font-size: 40px;
+    font-weight: 700;
+    opacity: 0.6;
+    margin-left: 20px;
+    transform: translateY(-2px);
+}
+
+.bookmarkItem:hover .pageNumber { 
+    /* when the mouse is hovering over the bookmarkItem, below styles will be added to the pageNumber */
+    color: #ffffffd2; 
+    opacity: 1;      
+    transition: all 0.2s ease ;
+}
+
+.bookmarkRow {
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.pageText {
+    transform: rotate(-90deg) translateX(0px) !important;
+    position: absolute;
+    left: 0;
+    font-size: 14px;
+    opacity: 0.6;
+}
+
+.createdDate {
+    transform: translateY(-2px);
+    display: flex;
+    flex-direction: column;
+    margin: 0 10px;
+    color: rgb(221, 221, 221);
+}
+
+.bookmaekDeleteButton{
+    color:#dddddd
+}
+
+.bookmaekDeleteButton:hover {
+    color:#ffffff
+}
+
