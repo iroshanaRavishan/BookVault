@@ -22,6 +22,9 @@ namespace BookVault.Domain.Entities
         public int PageNumber { get; private set; }
 
         [Required]
+        public string Color { get; private set; }
+
+        [Required]
         public DateTimeOffset CreatedAt { get; private set; }
 
         public string? BookmarkThumbnailPath { get; private set; }
@@ -29,31 +32,33 @@ namespace BookVault.Domain.Entities
         // EF Core parameterless constructor
         private Bookmark() { }
 
-        private Bookmark(Guid id, Guid userId, Guid bookId, int pageNumber, DateTimeOffset createdAt, string? thumbnailPath)
+        private Bookmark(Guid id, Guid userId, Guid bookId, int pageNumber, string color, DateTimeOffset createdAt, string? thumbnailPath)
         {
             Id = id;
             UserId = userId;
             BookId = bookId;
             PageNumber = pageNumber;
+            Color = color;
             CreatedAt = createdAt;
             BookmarkThumbnailPath = thumbnailPath;
         }
 
-        public static Bookmark Create(Guid userId, Guid bookId, int pageNumber, string? thumbnailPath)
+        public static Bookmark Create(Guid userId, Guid bookId, int pageNumber, string color, string? thumbnailPath)
         {
-            ValidateInputs(userId, bookId, pageNumber);
+            ValidateInputs(userId, bookId, pageNumber, color);
 
             return new Bookmark(
                 Guid.NewGuid(),
                 userId,
                 bookId,
                 pageNumber,
+                color,
                 DateTimeOffset.UtcNow,
                 thumbnailPath
             );
         }
 
-        private static void ValidateInputs(Guid userId, Guid bookId, int pageNumber)
+        private static void ValidateInputs(Guid userId, Guid bookId, int pageNumber, string color)
         {
             if (userId == Guid.Empty)
                 throw new ArgumentException("UserId cannot be empty.", nameof(userId));
@@ -63,6 +68,9 @@ namespace BookVault.Domain.Entities
 
             if (pageNumber <= 0)
                 throw new ArgumentException("Page number must be greater than zero.", nameof(pageNumber));
+            
+            if (color == "")
+                throw new ArgumentException("Color cannot be empty.", nameof(color));
         }
     }
 }
