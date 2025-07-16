@@ -55,21 +55,6 @@ const Page = forwardRef(({ children, number, totalPages, currentPage, pageType, 
           >
             {showRotatedCopy ? <IoCloseCircleSharp className={styles.bookmarkActionButton} /> : <IoAddCircleSharp className={styles.bookmarkActionButton} />}
           </div>
-          {/* {showRotatedCopy && (
-            <div
-              className={`${styles.bookmark} ${cornerClass} ${styles.rotatedCopy}`}
-              onPointerDown={(e) => {
-                e.stopPropagation();
-                e.preventDefault();
-              }}
-              onClick={(e) => {
-                e.stopPropagation();
-                e.preventDefault();
-              }}
-            >
-              <span className={styles.bookmarkLabel}>{number - 1}</span>
-            </div>
-          )} */}
         </>
       )}
 
@@ -197,6 +182,7 @@ export default function FlipBook({ isRightPanelOpen }) {
         userId: user.id,
         bookId: id, 
         pageNumber: pageNumber-1,
+        color: randomColor,
         bookmarkThumbnailPath: null
       };
 

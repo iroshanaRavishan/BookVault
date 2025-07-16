@@ -29,6 +29,7 @@ namespace BookVault.API.Controllers
                 UserId = b.UserId,
                 BookId = b.BookId,
                 PageNumber = b.PageNumber,
+                Color = b.Color,
                 CreatedAt = b.CreatedAt,
                 BookmarkThumbnailPath = b.BookmarkThumbnailPath
             });
@@ -48,6 +49,7 @@ namespace BookVault.API.Controllers
                 UserId = bookmark.UserId,
                 BookId = bookmark.BookId,
                 PageNumber = bookmark.PageNumber,
+                Color = bookmark.Color,
                 CreatedAt = bookmark.CreatedAt,
                 BookmarkThumbnailPath = bookmark.BookmarkThumbnailPath
             };
