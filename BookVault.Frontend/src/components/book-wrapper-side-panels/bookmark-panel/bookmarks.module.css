@@ -14,16 +14,22 @@
     justify-content: space-between;
     align-items: center;
     margin: 10px 0;
-    border-left: 6px solid;
+    border-left: 6px solid var(--border-color);
+    transition: border-left-color 0.2s ease;
     padding-left: 10px;
     border-radius: 12px;
     position: relative;
     user-select: none;
+
+    /* Store original color with reduced opacity as fallback */
+    --border-hsl: var(--border-color, hsl(20, 70%, 60%, 0.8));
 }
 
 .bookmarkItem:hover {
     cursor: pointer;
     transform: scale(1.01);
+    /* Override opacity on hover */
+    border-left-color: var(--border-color-hover);
 }
 
 .bookmarkItem::after {
@@ -43,6 +49,13 @@
     opacity: 0.6;
     margin-left: 20px;
     transform: translateY(-2px);
+}
+
+.bookmarkItem:hover .pageNumber { 
+    /* when the mouse is hovering over the bookmarkItem, below styles will be added to the pageNumber */
+    color: #ffffffd2; 
+    opacity: 1;      
+    transition: all 0.2s ease ;
 }
 
 .bookmarkRow {
