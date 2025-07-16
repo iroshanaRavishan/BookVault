@@ -181,7 +181,7 @@ export default function FlipBook({ isRightPanelOpen }) {
       const newBookmark = {
         userId: user.id,
         bookId: id, 
-        pageNumber: pageNumber-1,
+        pageNumber: pageNumber - 1,
         color: randomColor,
         bookmarkThumbnailPath: null
       };
@@ -201,7 +201,7 @@ export default function FlipBook({ isRightPanelOpen }) {
 
         const result = await response.json(); // Get the response body
 
-        setBookmarks(prev => [...prev, { id: result.id, page: result.pageNumber, color: result.color, }]);
+        setBookmarks(prev => [...prev, { id: result.id, page: result.pageNumber + 1, color: result.color, }]);
 
         // Trigger entry animation
         setAnimatingPages(prev => [...prev, pageNumber]);
