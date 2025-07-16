@@ -4,6 +4,8 @@ import styles from './flipbook.module.css';
 import BookBindingHoles from '../book-binding-holes/BookBindingHoles';
 import { IoAddCircleSharp, IoCloseCircleSharp } from "react-icons/io5";
 import { LuChevronFirst, LuChevronLast } from 'react-icons/lu';
+import { useUser } from '../../context/UserContext';
+import { useParams } from 'react-router-dom';
 
 const Page = forwardRef(({ children, number, totalPages, currentPage, pageType, onBookmarkAdd, activeBookmarks }, ref) => {
   const [showRotatedCopy, setShowRotatedCopy] = useState(false);
@@ -90,6 +92,8 @@ export default function FlipBook({ isRightPanelOpen }) {
   const [bookmarks, setBookmarks] = useState([]);
   const [animatingPages, setAnimatingPages] = useState([]);
   const [removingPages, setRemovingPages] = useState([]);
+  const {user} = useUser();
+  const { id } = useParams();
 
   const contentPages = 20;
   const totalPages = 2 + contentPages + (contentPages % 2 === 1 ? 1 : 0) + 2;
@@ -141,36 +145,89 @@ export default function FlipBook({ isRightPanelOpen }) {
     }
   }
 
-  const handleAddBookmark = (pageNumber) => {
-      const exists = bookmarks.find(b => b.page === pageNumber);
-      if (exists) {
-        // Trigger removal animation
+  const handleAddBookmark = async (pageNumber) => {
+    const currentBookmark = bookmarks.find(b => b.page === pageNumber);
+    if (currentBookmark) {
+      // Trigger removal animation
+
+      try {
+        const response = await fetch("https://localhost:7157/api/Bookmark", {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ id: currentBookmark.id })
+        });
+
+        if (response.status === 204) {
+          console.log("Bookmark successfully deleted.");
+        } else if (response.status === 404) {
+          console.log("Bookmark not found. It may have already been deleted.");
+        } else {
+          throw new Error("Unexpected error occurred.");
+        }
+
         setRemovingPages(prev => [...prev, pageNumber]);
         setTimeout(() => {
           setBookmarks(prev => prev.filter(b => b.page !== pageNumber));
           setRemovingPages(prev => prev.filter(p => p !== pageNumber));
-        }, 300); // Match with animation duration
-      } else {
-        const getCustomRandomInt = () => {
-          const validNumbers = [
-            ...Array.from({ length: 3 }, (_, i) => i + 1),   // 1–3
-            ...Array.from({ length: 29 }, (_, i) => i + 7)   // 7–35
-          ];
-          const index = Math.floor(Math.random() * validNumbers.length);
-          return validNumbers[index];
-        };
+        }, 300);
 
-        const hue = getCustomRandomInt() * 10; // scale to 10–350 with large gaps
-        const randomColor = `hsl(${hue}, 70%, 60%, 0.8)`;
+      } catch (error) {
+        console.error("Error deleting bookmark:", error);
+        console.log("An error occurred while deleting the bookmark.");
+        // TODO: show the error in a proper way in the frontend
+      }
+    } else {
+      const getCustomRandomInt = () => {
+        const validNumbers = [
+          ...Array.from({ length: 3 }, (_, i) => i + 1),   // 1–3
+          ...Array.from({ length: 29 }, (_, i) => i + 7)   // 7–35
+        ];
+        const index = Math.floor(Math.random() * validNumbers.length);
+        return validNumbers[index];
+      };
 
-      setBookmarks(prev => [...prev, { page: pageNumber, color: randomColor }]);
+      const hue = getCustomRandomInt() * 10;
+      const randomColor = `hsl(${hue}, 70%, 60%, 0.8)`;
+      console.log("user id is : " + user.id );
+      console.log("book id : " + id );
 
-    // Trigger entry animation
-    setAnimatingPages(prev => [...prev, pageNumber]);
-    setTimeout(() => {
-      setAnimatingPages(prev => prev.filter(p => p !== pageNumber));
-    }, 300);
-  }
+      const newBookmark = {
+        userId: user.id,
+        bookId: id, 
+        pageNumber: pageNumber-1,
+        bookmarkThumbnailPath: null
+      };
+
+      try {
+        const response = await fetch("https://localhost:7157/api/Bookmark", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(newBookmark)
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to add bookmark");
+        }
+
+        const result = await response.json(); // Get the response body
+
+        setBookmarks(prev => [...prev, { page: pageNumber, color: randomColor, id: result.id, }]);
+
+        // Trigger entry animation
+        setAnimatingPages(prev => [...prev, pageNumber]);
+        setTimeout(() => {
+          setAnimatingPages(prev => prev.filter(p => p !== pageNumber));
+        }, 300);
+
+      } catch (error) {
+        console.error("Error adding bookmark:", error);
+        // TODO: show the error in a proper way in the frontend
+      }
+    }
   };
 
   const goToPage = async (targetPage) => {
