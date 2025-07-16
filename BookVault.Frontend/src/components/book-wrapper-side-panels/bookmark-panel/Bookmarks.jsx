@@ -39,6 +39,32 @@ export default function Bookmarks({ openedAt }) {
     }
   }, [openedAt]); 
 
+  async function handleDeleteBookmark (id) {
+      try {
+        const response = await fetch("https://localhost:7157/api/Bookmark", {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ id: id })
+        });
+
+        if (response.status === 204) {
+          // setBookmarks(prev => prev.filter(b => b.id !== id));
+          console.log("Bookmark successfully deleted.");
+        } else if (response.status === 404) {
+          console.log("Bookmark not found. It may have already been deleted.");
+        } else {
+          throw new Error("Unexpected error occurred.");
+        }
+
+      } catch (error) {
+        console.error("Error deleting bookmark:", error);
+        console.log("An error occurred while deleting the bookmark.");
+        // TODO: show the error in a proper way in the frontend
+      }
+  }
+
   return (
     <div className={styles.bookmarkPanel}>
       {bookmarks && bookmarks.length > 0 ? (
