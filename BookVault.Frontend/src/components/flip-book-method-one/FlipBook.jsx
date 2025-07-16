@@ -201,7 +201,7 @@ export default function FlipBook({ isRightPanelOpen }) {
 
         const result = await response.json(); // Get the response body
 
-        setBookmarks(prev => [...prev, { page: pageNumber, color: randomColor, id: result.id, }]);
+        setBookmarks(prev => [...prev, { id: result.id, page: result.pageNumber, color: result.color, }]);
 
         // Trigger entry animation
         setAnimatingPages(prev => [...prev, pageNumber]);
