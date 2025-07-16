@@ -37,7 +37,7 @@ export default function Bookmarks({ openedAt }) {
     if (user?.id && id) {
       fetchAllBookmarks();
     }
-  }, [openedAt]); 
+  }, [openedAt, user?.id, id]); 
 
   async function handleDeleteBookmark (id) {
       try {
