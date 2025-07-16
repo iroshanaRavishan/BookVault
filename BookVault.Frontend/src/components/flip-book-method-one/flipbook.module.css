@@ -80,6 +80,7 @@
   text-align: center;
   width: 100%;
   border-radius: 5px;
+  user-select: none;
 }
 
 .centeredCoverpage {
@@ -119,6 +120,7 @@
   height: 80px;
   clip-path: ellipse(200px 80% at top center);
   z-index: -1;
+  user-select: none;
 }
 
 .navButton::before {
@@ -182,17 +184,6 @@
   right: 30px;
 }
 
-.rotatedCopy {
-  background-color: rgb(2, 182, 47);
-  transform: rotateX(180deg) translateY(200%);
-  z-index: 20;
-  pointer-events: auto; /* allow events */
-}
-
-.rotatedCopy:hover {
-  background-color: rgb(2, 182, 47);
-}
-
 .bookmarkLabel {
   position: absolute;
   bottom: 16px;
@@ -235,6 +226,7 @@
   box-shadow: 0 2px 6px rgba(0,0,0,0.3);
   pointer-events: auto;
   transition: width .3s ease;
+  user-select: none;
 }
 
 .rightBookmarkContainer {
