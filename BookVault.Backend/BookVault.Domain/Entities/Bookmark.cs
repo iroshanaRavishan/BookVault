@@ -45,7 +45,7 @@ namespace BookVault.Domain.Entities
 
         public static Bookmark Create(Guid userId, Guid bookId, int pageNumber, string color, string? thumbnailPath)
         {
-            ValidateInputs(userId, bookId, pageNumber);
+            ValidateInputs(userId, bookId, pageNumber, color);
 
             return new Bookmark(
                 Guid.NewGuid(),
@@ -58,7 +58,7 @@ namespace BookVault.Domain.Entities
             );
         }
 
-        private static void ValidateInputs(Guid userId, Guid bookId, int pageNumber)
+        private static void ValidateInputs(Guid userId, Guid bookId, int pageNumber, string color)
         {
             if (userId == Guid.Empty)
                 throw new ArgumentException("UserId cannot be empty.", nameof(userId));
@@ -68,6 +68,9 @@ namespace BookVault.Domain.Entities
 
             if (pageNumber <= 0)
                 throw new ArgumentException("Page number must be greater than zero.", nameof(pageNumber));
+            
+            if (color == "")
+                throw new ArgumentException("Color cannot be empty.", nameof(color));
         }
     }
 }
