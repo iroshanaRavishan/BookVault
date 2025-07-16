@@ -29,6 +29,7 @@ namespace BookVault.Application.Services
                 UserId = b.UserId,
                 BookId = b.BookId,
                 PageNumber = b.PageNumber,
+                Color = b.Color,
                 CreatedAt = b.CreatedAt,
                 BookmarkThumbnailPath = b.BookmarkThumbnailPath
             });
@@ -36,7 +37,7 @@ namespace BookVault.Application.Services
 
         public async Task<BookmarkResponseDto> CreateAsync(BookmarkCreateDto dto)
         {
-            var bookmark = Bookmark.Create(dto.UserId, dto.BookId, dto.PageNumber, dto.BookmarkThumbnailPath);
+            var bookmark = Bookmark.Create(dto.UserId, dto.BookId, dto.PageNumber, dto.Color, dto.BookmarkThumbnailPath);
             await _bookmarkRepository.AddAsync(bookmark);
 
             return new BookmarkResponseDto
@@ -45,6 +46,7 @@ namespace BookVault.Application.Services
                 UserId = bookmark.UserId,
                 BookId = bookmark.BookId,
                 PageNumber = bookmark.PageNumber,
+                Color = bookmark.Color,
                 CreatedAt = bookmark.CreatedAt,
                 BookmarkThumbnailPath = bookmark.BookmarkThumbnailPath
             };
