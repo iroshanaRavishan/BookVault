@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import styles from './bookreadingborad.module.css';
 import { useParams } from 'react-router-dom';
-import FlipBook from '../flip-bool-method-one/FlipBook';
+import FlipBook from '../flip-book-method-one/FlipBook';
 import SideButtonsWrapper from '../side-button-wrapper/SideButtonWrapper';
 
 export default function BookReadingBorad() {
