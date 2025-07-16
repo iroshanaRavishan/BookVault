@@ -22,6 +22,9 @@ namespace BookVault.Domain.Entities
         public int PageNumber { get; private set; }
 
         [Required]
+        public string Color { get; private set; }
+
+        [Required]
         public DateTimeOffset CreatedAt { get; private set; }
 
         public string? BookmarkThumbnailPath { get; private set; }
@@ -29,17 +32,18 @@ namespace BookVault.Domain.Entities
         // EF Core parameterless constructor
         private Bookmark() { }
 
-        private Bookmark(Guid id, Guid userId, Guid bookId, int pageNumber, DateTimeOffset createdAt, string? thumbnailPath)
+        private Bookmark(Guid id, Guid userId, Guid bookId, int pageNumber, string color, DateTimeOffset createdAt, string? thumbnailPath)
         {
             Id = id;
             UserId = userId;
             BookId = bookId;
             PageNumber = pageNumber;
+            Color = color;
             CreatedAt = createdAt;
             BookmarkThumbnailPath = thumbnailPath;
         }
 
-        public static Bookmark Create(Guid userId, Guid bookId, int pageNumber, string? thumbnailPath)
+        public static Bookmark Create(Guid userId, Guid bookId, int pageNumber, string color, string? thumbnailPath)
         {
             ValidateInputs(userId, bookId, pageNumber);
 
@@ -48,6 +52,7 @@ namespace BookVault.Domain.Entities
                 userId,
                 bookId,
                 pageNumber,
+                color,
                 DateTimeOffset.UtcNow,
                 thumbnailPath
             );
