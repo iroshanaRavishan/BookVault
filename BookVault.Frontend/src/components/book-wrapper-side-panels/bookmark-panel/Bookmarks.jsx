@@ -44,7 +44,14 @@ export default function Bookmarks({ openedAt }) {
       {bookmarks && bookmarks.length > 0 ? (
         <ul className={styles.bookmarkList}>
           {bookmarks.map((bookmark, i) => (
-            <li key={bookmark.id} className={styles.bookmarkItem} style={{borderColor: bookmarks[i].color}}>
+            <li
+              key={bookmark.id}
+              className={styles.bookmarkItem}
+              style={{
+                '--border-color': bookmarks[i].color,
+                '--border-color-hover': bookmarks[i].color.replace(/,?\s*[\d.]+\)$/, ', 1)'),
+              }}
+            >
               <div className={styles.bookmarkRow}>
                 <span className={styles.pageText}>page</span> 
                 <span className={styles.pageNumber}> {bookmark.pageNumber} </span>
