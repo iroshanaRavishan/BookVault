@@ -87,7 +87,7 @@ export default function Bookmarks({ openedAt }) {
                 </span>
               </div>
               <div >
-                <RiDeleteBin6Fill size={16} className={styles.bookmarkDeleteButton} onClick={()=>handleDeleteBookmark(bookmarks[i].id)} />
+                <RiDeleteBin6Fill size={18} className={styles.bookmarkDeleteButton} onClick={()=>handleDeleteBookmark(bookmarks[i].id)} />
               </div>
             </li>
           ))}
