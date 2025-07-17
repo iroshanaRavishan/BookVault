@@ -98,7 +98,7 @@ export default function Bookmarks({ openedAt }) {
             <div className={styles.pagePreview}>
               <img src="../../../src/assets/profile-image.jpg" className={styles.pageThumbnail} alt="page-thumbnail" />
             </div>
-            <button>Jump to page</button>
+            <button className={styles.jumpToPageButton}>Jump to page</button>
           </div>
         </div>
       ) : (
