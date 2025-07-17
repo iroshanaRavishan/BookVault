@@ -55,21 +55,6 @@ const Page = forwardRef(({ children, number, totalPages, currentPage, pageType, 
           >
             {showRotatedCopy ? <IoCloseCircleSharp className={styles.bookmarkActionButton} /> : <IoAddCircleSharp className={styles.bookmarkActionButton} />}
           </div>
-          {/* {showRotatedCopy && (
-            <div
-              className={`${styles.bookmark} ${cornerClass} ${styles.rotatedCopy}`}
-              onPointerDown={(e) => {
-                e.stopPropagation();
-                e.preventDefault();
-              }}
-              onClick={(e) => {
-                e.stopPropagation();
-                e.preventDefault();
-              }}
-            >
-              <span className={styles.bookmarkLabel}>{number - 1}</span>
-            </div>
-          )} */}
         </>
       )}
 
@@ -196,7 +181,8 @@ export default function FlipBook({ isRightPanelOpen }) {
       const newBookmark = {
         userId: user.id,
         bookId: id, 
-        pageNumber: pageNumber-1,
+        pageNumber: pageNumber - 1,
+        color: randomColor,
         bookmarkThumbnailPath: null
       };
 
@@ -215,7 +201,7 @@ export default function FlipBook({ isRightPanelOpen }) {
 
         const result = await response.json(); // Get the response body
 
-        setBookmarks(prev => [...prev, { page: pageNumber, color: randomColor, id: result.id, }]);
+        setBookmarks(prev => [...prev, { id: result.id, page: result.pageNumber + 1, color: result.color, }]);
 
         // Trigger entry animation
         setAnimatingPages(prev => [...prev, pageNumber]);

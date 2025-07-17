@@ -197,7 +197,7 @@ export default function SideButtonsWrapper({
   };
 
   const panelContentMap = {
-    'Bookmarks': <Bookmarks />,
+    'Bookmarks': <Bookmarks openedAt={Date.now()} />,
     'Appearance': <span>this is the content of the Appearance</span>,
     'Reading Style': <span>this is the content of the Reading Styles</span>,
     'Statistics': <span>this is the content of the Statistics</span>,
