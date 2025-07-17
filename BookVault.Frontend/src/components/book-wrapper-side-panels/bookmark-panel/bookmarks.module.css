@@ -127,6 +127,19 @@
     justify-content: flex-start;
 }
 
+.pagePreview {
+    width: 50%;
+    height: 100%;
+    padding: 1px 6px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    border: 1px solid white;
+    border-radius: 8px;
+}
+
 .jumpToPageButton {
     height: 35px;
     font-size: 16px;
