@@ -69,30 +69,38 @@ export default function Bookmarks({ openedAt }) {
     <div className={styles.bookmarkPanel}>
       <span>Sort button</span>
       {bookmarks && bookmarks.length > 0 ? (
-        <ul className={styles.bookmarkList}>
-          {bookmarks.map((bookmark, i) => (
-            <li
-              key={bookmark.id}
-              className={styles.bookmarkItem}
-              style={{
-                '--border-color': bookmarks[i].color,
-                '--border-color-hover': bookmarks[i].color.replace(/,?\s*[\d.]+\)$/, ', 1)'),
-              }}
-            >
-              <div className={styles.bookmarkRow}>
-                <span className={styles.pageText}>page</span> 
-                <span className={styles.pageNumber}> {bookmark.pageNumber} </span>
-                <span className={styles.createdDate}>
-                  <small>Created at: </small>
-                  <small>{new Date(bookmark.createdAt).toLocaleString()}</small>
-                </span>
-              </div>
-              <div >
-                <RiDeleteBin6Fill size={18} className={styles.bookmarkDeleteButton} onClick={()=>handleDeleteBookmark(bookmarks[i].id)} />
-              </div>
-            </li>
-          ))}
-        </ul>
+        <div>
+          <ul className={styles.bookmarkList}>
+            {bookmarks.map((bookmark, i) => (
+              <li
+                key={bookmark.id}
+                className={styles.bookmarkItem}
+                style={{
+                  '--border-color': bookmarks[i].color,
+                  '--border-color-hover': bookmarks[i].color.replace(/,?\s*[\d.]+\)$/, ', 1)'),
+                }}
+              >
+                <div className={styles.bookmarkRow}>
+                  <span className={styles.pageText}>page</span> 
+                  <span className={styles.pageNumber}> {bookmark.pageNumber} </span>
+                  <span className={styles.createdDate}>
+                    <small>Created at: </small>
+                    <small>{new Date(bookmark.createdAt).toLocaleString()}</small>
+                  </span>
+                </div>
+                <div >
+                  <RiDeleteBin6Fill size={18} className={styles.bookmarkDeleteButton} onClick={()=>handleDeleteBookmark(bookmarks[i].id)} />
+                </div>
+              </li>
+            ))}
+          </ul>
+          <div>
+            <div className={styles.pagePreview}>
+            
+            </div>
+            <button>Jump to page</button>
+          </div>
+        </div>
       ) : (
         <p>No bookmarks found.</p>
       )}
