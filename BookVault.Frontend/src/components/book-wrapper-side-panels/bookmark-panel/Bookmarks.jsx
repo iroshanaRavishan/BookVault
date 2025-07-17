@@ -68,7 +68,19 @@ export default function Bookmarks({ openedAt }) {
 
   return (
     <div className={styles.bookmarkPanel}>
-      <span>Sort button</span>
+      <div>
+        <button onClick={() => setSortMenuOpen(!sortMenuOpen)} className={styles.sortButton}>
+          Sort
+        </button>
+        {sortMenuOpen && (
+          <ul className={styles.sortDropdown}>
+            <li >Newest First</li>
+            <li >Oldest First</li>
+            <li >Page Number ↑</li>
+            <li >Page Number ↓</li>
+          </ul>
+        )}
+      </div>
       {bookmarks && bookmarks.length > 0 ? (
         <div className={styles.bookmarkPanelContainer}>
           <ul className={styles.bookmarkList}>
