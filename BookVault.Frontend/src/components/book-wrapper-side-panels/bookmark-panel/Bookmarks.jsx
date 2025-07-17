@@ -69,7 +69,7 @@ export default function Bookmarks({ openedAt }) {
     <div className={styles.bookmarkPanel}>
       <span>Sort button</span>
       {bookmarks && bookmarks.length > 0 ? (
-        <div>
+        <div className={styles.bookmarkPanelContainer}>
           <ul className={styles.bookmarkList}>
             {bookmarks.map((bookmark, i) => (
               <li
@@ -94,7 +94,7 @@ export default function Bookmarks({ openedAt }) {
               </li>
             ))}
           </ul>
-          <div>
+          <div className={styles.pagePreviewContaienr}>
             <div className={styles.pagePreview}>
             
             </div>
