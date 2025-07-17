@@ -95,6 +95,7 @@ export default function Bookmarks({ openedAt }) {
             ))}
           </ul>
           <div className={styles.pagePreviewContaienr}>
+            <span className={styles.pagePreviewText}>Page preview</span>
             <div className={styles.pagePreview}>
               <img src="../../../src/assets/profile-image.jpg" className={styles.pageThumbnail} alt="page-thumbnail" />
             </div>
