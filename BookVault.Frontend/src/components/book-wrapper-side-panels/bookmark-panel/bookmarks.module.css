@@ -174,7 +174,11 @@
 }
 
 .sortButton {
+    display: flex;
+    justify-content: space-around;
     padding: 6px 12px;
+    width: 80px;
+    align-items: center;
     cursor: pointer;
     border: 1px solid #ccc;
     border-radius: 6px;
