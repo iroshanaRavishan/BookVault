@@ -10,7 +10,13 @@ export default function Bookmarks({ openedAt }) {
   const [bookmarks, setBookmarks] = useState(null);
   const [sortMenuOpen, setSortMenuOpen] = useState(false);
   const [sortType, setSortType] = useState(localStorage.getItem('bookmarkSort') || 'page-asc');
-  
+
+  function handleSortChange(type) {
+    setSortType(type);
+    localStorage.setItem('bookmarkSort', type);
+    setSortMenuOpen(false);
+  }
+    
   useEffect(() => {
     const fetchAllBookmarks = async () => {
       const url = `https://localhost:7157/api/Bookmark?userId=${user.id}&bookId=${id}`;
