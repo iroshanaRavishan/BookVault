@@ -3,6 +3,7 @@ import styles from './bookmarks.module.css';
 import { useParams } from 'react-router-dom';
 import { useUser } from '../../../context/UserContext';
 import { RiDeleteBin6Fill } from 'react-icons/ri';
+import { BsSortUp } from "react-icons/bs";
 
 export default function Bookmarks({ openedAt }) {
   const { id } =useParams(); 
@@ -74,7 +75,7 @@ export default function Bookmarks({ openedAt }) {
     <div className={styles.bookmarkPanel}>
       <div style={{ position: "relative", display: "inline-block" }}>
         <button onClick={() => setSortMenuOpen(!sortMenuOpen)} className={styles.sortButton}>
-          Sort
+          Sort <BsSortUp size={18} />
         </button>
         {sortMenuOpen && (
           <ul className={styles.sortDropdown}>
