@@ -34,9 +34,6 @@ export default function Bookmarks({ openedAt }) {
 
         const result = await response.json();
         setBookmarks(result);
-        console.log(result); 
-        console.log("the coloe: ", bookmarks?.color)
-        console.log(openedAt); 
       } catch (err) {
         console.error("Error fetching bookmarks:", err);
       }
