@@ -67,6 +67,7 @@ export default function Bookmarks({ openedAt }) {
 
   return (
     <div className={styles.bookmarkPanel}>
+      <span>Sort button</span>
       {bookmarks && bookmarks.length > 0 ? (
         <ul className={styles.bookmarkList}>
           {bookmarks.map((bookmark, i) => (
