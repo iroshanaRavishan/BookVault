@@ -172,3 +172,36 @@
     border-top: 1px solid #646464;
     margin: 10px 0;
 }
+
+.sortButton {
+    padding: 6px 12px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: white;
+    right: 0;
+}
+
+.sortDropdown {
+    width: 180px;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 100;
+    background-color: white;
+    border: 1px solid #ccc;
+    color: black;
+    border-radius: 6px;
+    padding: 8px 0;
+    list-style: none;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.sortDropdown li {
+    padding: 8px 16px;
+    cursor: pointer;
+}
+
+.sortDropdown li:hover {
+    background-color: #f0f0f0;
+}

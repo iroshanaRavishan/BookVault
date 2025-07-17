@@ -8,10 +8,18 @@ export default function Bookmarks({ openedAt }) {
   const { id } =useParams(); 
   const { user } = useUser();
   const [bookmarks, setBookmarks] = useState(null);
-  
+  const [sortMenuOpen, setSortMenuOpen] = useState(false);
+  const [sortType, setSortType] = useState(localStorage.getItem('bookmarkSort') || 'page-asc');
+
+  function handleSortChange(type) {
+    setSortType(type);
+    localStorage.setItem('bookmarkSort', type);
+    setSortMenuOpen(false);
+  }
+    
   useEffect(() => {
     const fetchAllBookmarks = async () => {
-      const url = `https://localhost:7157/api/Bookmark?userId=${user.id}&bookId=${id}`;
+      const url = `https://localhost:7157/api/Bookmark?userId=${user.id}&bookId=${id}&sortBy=${sortType}`;
       try {
         const response = await fetch(url, {
           method: "GET",
@@ -26,9 +34,6 @@ export default function Bookmarks({ openedAt }) {
 
         const result = await response.json();
         setBookmarks(result);
-        console.log(result); 
-        console.log("the coloe: ", bookmarks?.color)
-        console.log(openedAt); 
       } catch (err) {
         console.error("Error fetching bookmarks:", err);
       }
@@ -37,7 +42,7 @@ export default function Bookmarks({ openedAt }) {
     if (user?.id && id) {
       fetchAllBookmarks();
     }
-  }, [openedAt, user?.id, id]); 
+  }, [openedAt, user?.id, id, sortType]); 
 
   async function handleDeleteBookmark (id) {
       try {
@@ -67,7 +72,19 @@ export default function Bookmarks({ openedAt }) {
 
   return (
     <div className={styles.bookmarkPanel}>
-      <span>Sort button</span>
+      <div style={{ position: "relative", display: "inline-block" }}>
+        <button onClick={() => setSortMenuOpen(!sortMenuOpen)} className={styles.sortButton}>
+          Sort
+        </button>
+        {sortMenuOpen && (
+          <ul className={styles.sortDropdown}>
+            <li onClick={() => handleSortChange("newest")} className={sortType === 'newest' ? styles.active : ''}>Newest First</li>
+            <li onClick={() => handleSortChange("oldest")} className={sortType === 'oldest' ? styles.active : ''}>Oldest First</li>
+            <li onClick={() => handleSortChange("page-asc")} className={sortType === 'page-asc' ? styles.active : ''}>Page Number ↑</li>
+            <li onClick={() => handleSortChange("page-desc")} className={sortType === 'page-desc' ? styles.active : ''}>Page Number ↓</li>
+          </ul>
+        )}
+      </div>
       {bookmarks && bookmarks.length > 0 ? (
         <div className={styles.bookmarkPanelContainer}>
           <ul className={styles.bookmarkList}>
