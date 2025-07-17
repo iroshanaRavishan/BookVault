@@ -1,11 +1,36 @@
 .bookmarkPanel {
-    padding: 0 10px;
+    padding: 0 0 0 10px;
 }
 
 .bookmarkList {
     list-style: none;
     padding: 0;
     margin-top: 0px;
+    overflow-y: auto;
+    min-height: 200px;
+    max-height: 250px; 
+    padding-right: 25px;
+    position: relative;
+    overflow-x: hidden;
+    transition: all 500ms;
+}
+
+.bookmarkList::-webkit-scrollbar {
+    width: 7px;
+}
+
+.bookmarkList::-webkit-scrollbar-track {
+    background: #92929262; 
+    border-radius: 4px;
+}
+
+.bookmarkList::-webkit-scrollbar-thumb {
+    background: #b9b9b9; 
+    border-radius: 4px;
+}
+
+.bookmarkList::-webkit-scrollbar-thumb:hover {
+    background: #999999;
 }
 
 .bookmarkItem {
@@ -82,11 +107,11 @@
     color: rgb(221, 221, 221);
 }
 
-.bookmaekDeleteButton{
-    color:#dddddd
+.bookmarkDeleteButton{
+    color:#ddddddda
 }
 
-.bookmaekDeleteButton:hover {
+.bookmarkDeleteButton:hover {
     color:#ffffff
 }
 
