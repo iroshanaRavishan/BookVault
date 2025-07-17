@@ -126,3 +126,8 @@
     flex-direction: column;
     justify-content: flex-start;
 }
+
+.pageThumbnail {
+    height: 220px;
+    width: 160px;
+}
