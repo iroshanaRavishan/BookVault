@@ -19,12 +19,21 @@ namespace BookVault.Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task<IEnumerable<Bookmark>> GetAllAsync(Guid userId, Guid bookId)
+        public async Task<IEnumerable<Bookmark>> GetAllAsync(Guid userId, Guid bookId, string sortBy)
         {
-            return await _context.Bookmarks
-                .Where(b => b.UserId == userId && b.BookId == bookId)
-                .OrderByDescending(b => b.CreatedAt)
-                .ToListAsync();
+            var query = _context.Bookmarks
+                .Where(b => b.UserId == userId && b.BookId == bookId);
+
+            query = sortBy switch
+            {
+                "newest" => query.OrderByDescending(b => b.CreatedAt),
+                "oldest" => query.OrderBy(b => b.CreatedAt),
+                "page-asc" => query.OrderBy(b => b.PageNumber),
+                "page-desc" => query.OrderByDescending(b => b.PageNumber),
+                _ => query.OrderBy(b => b.PageNumber)
+            };
+
+            return await query.ToListAsync();
         }
 
         public async Task<Bookmark?> GetByIdAsync(Guid bookmarkId)
