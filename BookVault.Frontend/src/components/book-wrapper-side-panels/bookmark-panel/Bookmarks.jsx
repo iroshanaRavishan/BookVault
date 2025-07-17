@@ -8,6 +8,7 @@ export default function Bookmarks({ openedAt }) {
   const { id } =useParams(); 
   const { user } = useUser();
   const [bookmarks, setBookmarks] = useState(null);
+  const [sortMenuOpen, setSortMenuOpen] = useState(false);
   
   useEffect(() => {
     const fetchAllBookmarks = async () => {
