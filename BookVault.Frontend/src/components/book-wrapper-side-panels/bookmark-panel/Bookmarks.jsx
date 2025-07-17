@@ -42,7 +42,7 @@ export default function Bookmarks({ openedAt }) {
     if (user?.id && id) {
       fetchAllBookmarks();
     }
-  }, [openedAt, user?.id, id]); 
+  }, [openedAt, user?.id, id, sortType]); 
 
   async function handleDeleteBookmark (id) {
       try {
