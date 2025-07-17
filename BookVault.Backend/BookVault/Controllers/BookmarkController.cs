@@ -17,11 +17,12 @@ namespace BookVault.API.Controllers
             _bookmarkService = bookmarkService;
         }
 
-        // GET: api/bookmarks?userId={userId}&bookId={bookId}
+        // GET: api/bookmarks?userId={userId}&bookId={bookId}&sortBy={sortBy}
+        // Available sortBy values: "newest", "oldest", "page-asc", "page-desc"
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<BookmarkResponseDto>>> GetAll([FromQuery] Guid userId, [FromQuery] Guid bookId)
+        public async Task<ActionResult<IEnumerable<BookmarkResponseDto>>> GetAll([FromQuery] Guid userId, [FromQuery] Guid bookId, [FromQuery] string sortBy = "page-asc")
         {
-            var bookmarks = await _bookmarkService.GetAllAsync(userId, bookId);
+            var bookmarks = await _bookmarkService.GetAllAsync(userId, bookId, sortBy);
 
             var result = bookmarks.Select(b => new BookmarkResponseDto
             {
