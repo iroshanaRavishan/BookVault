@@ -4,6 +4,8 @@ import styles from './flipbook.module.css';
 import BookBindingHoles from '../book-binding-holes/BookBindingHoles';
 import { IoAddCircleSharp, IoCloseCircleSharp } from "react-icons/io5";
 import { LuChevronFirst, LuChevronLast } from 'react-icons/lu';
+import { useUser } from '../../context/UserContext';
+import { useParams } from 'react-router-dom';
 
 const Page = forwardRef(({ children, number, totalPages, currentPage, pageType, onBookmarkAdd, activeBookmarks }, ref) => {
   const [showRotatedCopy, setShowRotatedCopy] = useState(false);
@@ -53,21 +55,6 @@ const Page = forwardRef(({ children, number, totalPages, currentPage, pageType, 
           >
             {showRotatedCopy ? <IoCloseCircleSharp className={styles.bookmarkActionButton} /> : <IoAddCircleSharp className={styles.bookmarkActionButton} />}
           </div>
-          {/* {showRotatedCopy && (
-            <div
-              className={`${styles.bookmark} ${cornerClass} ${styles.rotatedCopy}`}
-              onPointerDown={(e) => {
-                e.stopPropagation();
-                e.preventDefault();
-              }}
-              onClick={(e) => {
-                e.stopPropagation();
-                e.preventDefault();
-              }}
-            >
-              <span className={styles.bookmarkLabel}>{number - 1}</span>
-            </div>
-          )} */}
         </>
       )}
 
@@ -90,8 +77,10 @@ export default function FlipBook({ isRightPanelOpen }) {
   const [bookmarks, setBookmarks] = useState([]);
   const [animatingPages, setAnimatingPages] = useState([]);
   const [removingPages, setRemovingPages] = useState([]);
+  const {user} = useUser();
+  const { id } = useParams();
 
-  const contentPages = 3;
+  const contentPages = 20;
   const totalPages = 2 + contentPages + (contentPages % 2 === 1 ? 1 : 0) + 2;
   const flipBookRef = useRef();
   const pages = [];
@@ -141,68 +130,156 @@ export default function FlipBook({ isRightPanelOpen }) {
     }
   }
 
-  const handleAddBookmark = (pageNumber) => {
-      const exists = bookmarks.find(b => b.page === pageNumber);
-      if (exists) {
-        // Trigger removal animation
+  const handleAddBookmark = async (pageNumber) => {
+    const currentBookmark = bookmarks.find(b => b.page === pageNumber);
+    if (currentBookmark) {
+      // Trigger removal animation
+
+      try {
+        const response = await fetch("https://localhost:7157/api/Bookmark", {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ id: currentBookmark.id })
+        });
+
+        if (response.status === 204) {
+          console.log("Bookmark successfully deleted.");
+        } else if (response.status === 404) {
+          console.log("Bookmark not found. It may have already been deleted.");
+        } else {
+          throw new Error("Unexpected error occurred.");
+        }
+
         setRemovingPages(prev => [...prev, pageNumber]);
         setTimeout(() => {
           setBookmarks(prev => prev.filter(b => b.page !== pageNumber));
           setRemovingPages(prev => prev.filter(p => p !== pageNumber));
-        }, 300); // Match with animation duration
-      } else {
-        const getCustomRandomInt = () => {
-          const validNumbers = [
-            ...Array.from({ length: 3 }, (_, i) => i + 1),   // 1–3
-            ...Array.from({ length: 29 }, (_, i) => i + 7)   // 7–35
-          ];
-          const index = Math.floor(Math.random() * validNumbers.length);
-          return validNumbers[index];
-        };
+        }, 300);
 
-        const hue = getCustomRandomInt() * 10; // scale to 10–350 with large gaps
-        const randomColor = `hsl(${hue}, 70%, 60%, 0.8)`;
+      } catch (error) {
+        console.error("Error deleting bookmark:", error);
+        console.log("An error occurred while deleting the bookmark.");
+        // TODO: show the error in a proper way in the frontend
+      }
+    } else {
+      const getCustomRandomInt = () => {
+        const validNumbers = [
+          ...Array.from({ length: 3 }, (_, i) => i + 1),   // 1–3
+          ...Array.from({ length: 29 }, (_, i) => i + 7)   // 7–35
+        ];
+        const index = Math.floor(Math.random() * validNumbers.length);
+        return validNumbers[index];
+      };
 
-      setBookmarks(prev => [...prev, { page: pageNumber, color: randomColor }]);
+      const hue = getCustomRandomInt() * 10;
+      const randomColor = `hsl(${hue}, 70%, 60%, 0.8)`;
+      console.log("user id is : " + user.id );
+      console.log("book id : " + id );
 
-    // Trigger entry animation
-    setAnimatingPages(prev => [...prev, pageNumber]);
-    setTimeout(() => {
-      setAnimatingPages(prev => prev.filter(p => p !== pageNumber));
-    }, 300);
-  }
+      const newBookmark = {
+        userId: user.id,
+        bookId: id, 
+        pageNumber: pageNumber - 1,
+        color: randomColor,
+        bookmarkThumbnailPath: null
+      };
+
+      try {
+        const response = await fetch("https://localhost:7157/api/Bookmark", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(newBookmark)
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to add bookmark");
+        }
+
+        const result = await response.json(); // Get the response body
+
+        setBookmarks(prev => [...prev, { id: result.id, page: result.pageNumber + 1, color: result.color, }]);
+
+        // Trigger entry animation
+        setAnimatingPages(prev => [...prev, pageNumber]);
+        setTimeout(() => {
+          setAnimatingPages(prev => prev.filter(p => p !== pageNumber));
+        }, 300);
+
+      } catch (error) {
+        console.error("Error adding bookmark:", error);
+        // TODO: show the error in a proper way in the frontend
+      }
+    }
   };
 
-  const goToPage = (targetPage) => {
+  const goToPage = async (targetPage) => {
     if (!flipBookRef.current) return;
 
     const instance = flipBookRef.current.pageFlip();
     const current = instance.getCurrentPageIndex();
-
-    if (current === targetPage) return;
-
     const total = instance.getPageCount();
 
-    // If currently on the front cover (page 0)
-    if (current === 0) {
-      instance.flipNext(); // flip cover
-      setTimeout(() => {
-        instance.flip(targetPage);
-      }, 1000); // small delay to allow cover flip to complete
-      return;
+    if (targetPage < 0 || targetPage >= total || current === targetPage) return;
+
+    const delay = (ms) => new Promise(res => setTimeout(res, ms));
+
+    const firstContentPage = 2;
+    const lastContentPage = total - 3;
+    const firstCover = 0;
+    const lastCover = total - 1;
+
+    // === First Cover Navigation ===
+    if (targetPage === firstCover) {
+      if (current === lastCover) {
+        await instance.flip(lastContentPage);
+        await delay(1000);
+        await instance.flip(firstContentPage);
+        await delay(800);
+      } else if (current !== firstContentPage && current !== firstCover) {
+        await instance.flip(firstContentPage);
+        await delay(1000);
+      }
+      await delay(100);
+      await instance.flip(firstCover);
     }
 
-    // If currently on the back cover (last page)
-    if (current === total - 1) {
-      instance.flipPrev(); // flip cover
-      setTimeout(() => {
-        instance.flip(targetPage);
-      }, 1000); // delay to allow cover flip to complete
-      return;
+    // === Last Cover Navigation ===
+    else if (targetPage === lastCover) {
+      if (current === firstCover) {
+        await instance.flip(firstContentPage);
+        await delay(1000);
+        await instance.flip(lastContentPage);
+        await delay(800);
+      } else if (current !== lastContentPage && current !== lastCover) {
+        await instance.flip(lastContentPage);
+        await delay(1000);
+      }
+      await delay(100);
+      await instance.flip(lastCover);
     }
 
-    // Otherwise, just do the normal flip
-    instance.flip(targetPage);
+    // === Front Cover Special Case ===
+    else if (current === firstCover) {
+      await instance.flipNext(); // turn front cover
+      await delay(1000);
+      await instance.flip(targetPage); // go to actual page
+    }
+
+    // === Back Cover Special Case ===
+    else if (current === lastCover) {
+      await instance.flipPrev(); // turn back cover
+      await delay(1000);
+      await instance.flip(targetPage);
+    }
+
+    // === Normal Flip ===
+    else {
+      await instance.flip(targetPage);
+    }
   };
 
   const navButtonWidth = isFirstPage || isLastPage ? '480px' : '920px';
@@ -327,8 +404,11 @@ export default function FlipBook({ isRightPanelOpen }) {
 
       {/* Navigation Buttons */}
       <div className={styles.navButtons} style={{ width: navButtonWidth }}>
-        <span style={currentPage === 0 ? { display: 'none' } : {}}>
-          <LuChevronFirst className={styles.toTheFirst} style={{ left: "0px" }} />
+        <span
+          style={currentPage === 0 ? { display: 'none' } : {}}
+          onClick={() => goToPage(0)}
+        >
+          <LuChevronFirst className={styles.toTheFirst} style={{ left: "0px", cursor: "pointer" }} />
         </span>
         <span
           onClick={() => flipBookRef.current.pageFlip().flipPrev()}
@@ -344,8 +424,11 @@ export default function FlipBook({ isRightPanelOpen }) {
         >
           Next
         </span>
-        <span style={currentPage === totalPages - 1 ? { display: 'none' } : {}}>
-          <LuChevronLast className={styles.toTheLast} style={{ right: "0px" }} />
+        <span
+          style={currentPage === totalPages - 1 ? { display: 'none' } : {}}
+          onClick={() => goToPage(totalPages - 1)}
+        >
+          <LuChevronLast className={styles.toTheLast} style={{ right: "0px", cursor: "pointer" }} />
         </span>
       </div>
     </div>

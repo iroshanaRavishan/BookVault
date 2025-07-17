@@ -6,14 +6,12 @@ using System.Threading.Tasks;
 
 namespace BookVault.Application.DTOs.BookDTOs
 {
-    public class BookmarkResponseDto
+    public class BookmarkCreateDto
     {
-        public Guid Id { get; set; }
         public Guid UserId { get; set; }
         public Guid BookId { get; set; }
         public int PageNumber { get; set; }
         public required string Color { get; set; }
-        public DateTimeOffset CreatedAt { get; set; }
         public string? BookmarkThumbnailPath { get; set; }
     }
 }
