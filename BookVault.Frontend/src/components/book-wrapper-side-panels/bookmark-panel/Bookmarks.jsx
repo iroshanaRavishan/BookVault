@@ -78,10 +78,10 @@ export default function Bookmarks({ openedAt }) {
         </button>
         {sortMenuOpen && (
           <ul className={styles.sortDropdown}>
-            <li >Newest First</li>
-            <li >Oldest First</li>
-            <li >Page Number ↑</li>
-            <li >Page Number ↓</li>
+            <li onClick={() => handleSortChange("newest")} className={sortType === 'newest' ? styles.active : ''}>Newest First</li>
+            <li onClick={() => handleSortChange("oldest")} className={sortType === 'oldest' ? styles.active : ''}>Oldest First</li>
+            <li onClick={() => handleSortChange("page-asc")} className={sortType === 'page-asc' ? styles.active : ''}>Page Number ↑</li>
+            <li onClick={() => handleSortChange("page-desc")} className={sortType === 'page-desc' ? styles.active : ''}>Page Number ↓</li>
           </ul>
         )}
       </div>
