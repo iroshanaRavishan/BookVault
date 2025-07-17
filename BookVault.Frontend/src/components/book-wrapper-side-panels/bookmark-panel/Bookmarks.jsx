@@ -9,6 +9,7 @@ export default function Bookmarks({ openedAt }) {
   const { user } = useUser();
   const [bookmarks, setBookmarks] = useState(null);
   const [sortMenuOpen, setSortMenuOpen] = useState(false);
+  const [sortType, setSortType] = useState(localStorage.getItem('bookmarkSort') || 'page-asc');
   
   useEffect(() => {
     const fetchAllBookmarks = async () => {
