@@ -72,7 +72,7 @@ export default function Bookmarks({ openedAt }) {
 
   return (
     <div className={styles.bookmarkPanel}>
-      <div>
+      <div style={{ position: "relative", display: "inline-block" }}>
         <button onClick={() => setSortMenuOpen(!sortMenuOpen)} className={styles.sortButton}>
           Sort
         </button>
