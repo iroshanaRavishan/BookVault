@@ -126,3 +126,49 @@
     flex-direction: column;
     justify-content: flex-start;
 }
+
+.pagePreview {
+    width: 50%;
+    height: 100%;
+    padding: 1px 6px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    border: 1px solid white;
+    border-radius: 8px;
+}
+
+.jumpToPageButton {
+    height: 35px;
+    font-size: 16px;
+    border-radius: 8px;
+    background-color: #ffffff;
+    border: none;
+}
+
+.jumpToPageButton:disabled {
+    cursor: not-allowed;
+    color: #ffffff;
+    background-color: #999999;
+}
+
+.pageThumbnail {
+    height: 220px;
+    width: 160px;
+}
+
+.pagePreviewText {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.pagePreviewText::before {
+    content: '';
+    display: flex;
+    border-top: 1px solid #646464;
+    margin: 10px 0;
+}
