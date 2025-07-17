@@ -19,9 +19,9 @@ namespace BookVault.Application.Services
             _bookmarkRepository = bookmarkRepository;
         }
 
-        public async Task<IEnumerable<BookmarkResponseDto>> GetAllAsync(Guid userId, Guid bookId)
+        public async Task<IEnumerable<BookmarkResponseDto>> GetAllAsync(Guid userId, Guid bookId, string sortBy)
         {
-            var bookmarks = await _bookmarkRepository.GetAllAsync(userId, bookId);
+            var bookmarks = await _bookmarkRepository.GetAllAsync(userId, bookId, sortBy);
 
             return bookmarks.Select(b => new BookmarkResponseDto
             {
