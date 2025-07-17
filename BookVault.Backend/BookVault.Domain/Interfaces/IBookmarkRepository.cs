@@ -9,7 +9,7 @@ namespace BookVault.Domain.Interfaces
 {
     public interface IBookmarkRepository
     {
-        Task<IEnumerable<Bookmark>> GetAllAsync(Guid userId, Guid bookId);
+        Task<IEnumerable<Bookmark>> GetAllAsync(Guid userId, Guid bookId, string sortBy);
         Task<Bookmark?> GetByIdAsync(Guid bookmarkId);
         Task AddAsync(Bookmark bookmark);
         Task<bool> DeleteByIdAsync(Guid id);
