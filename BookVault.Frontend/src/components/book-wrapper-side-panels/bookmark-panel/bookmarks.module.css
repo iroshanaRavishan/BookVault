@@ -5,9 +5,9 @@
 .bookmarkList {
     list-style: none;
     padding: 0;
-    margin-top: 0px;
+    margin: 10px 0px;
     overflow-y: auto;
-    min-height: 200px;
+    min-height: 240px;
     max-height: 250px; 
     padding-right: 25px;
     position: relative;
@@ -48,6 +48,10 @@
 
     /* Store original color with reduced opacity as fallback */
     --border-hsl: var(--border-color, hsl(20, 70%, 60%, 0.8));
+}
+
+.bookmarkItem:first-child {
+    margin-top: 0px;
 }
 
 .bookmarkItem:hover {
@@ -130,7 +134,7 @@
 .pagePreview {
     width: 50%;
     height: 100%;
-    padding: 1px 6px;
+    padding: 3px 6px;
     margin: auto;
     display: flex;
     align-items: center;
@@ -142,8 +146,9 @@
 
 .jumpToPageButton {
     height: 35px;
+    padding: 6px 12px;
     font-size: 16px;
-    border-radius: 8px;
+    border-radius: 6px;
     background-color: #ffffff;
     border: none;
 }
@@ -157,6 +162,7 @@
 .pageThumbnail {
     height: 220px;
     width: 160px;
+    border-radius: 6px;
 }
 
 .pagePreviewText {
@@ -170,14 +176,14 @@
     content: '';
     display: flex;
     border-top: 1px solid #646464;
-    margin: 10px 0;
+    margin: 5px 0 10px 0;
 }
 
 .sortButton {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     padding: 6px 12px;
-    width: 80px;
+    width: 185px;
     align-items: center;
     cursor: pointer;
     border: 1px solid #ccc;
@@ -186,19 +192,35 @@
     right: 0;
 }
 
+.sortIconWithText{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 65px;
+    align-items: center;
+    gap: 5px;
+}
+
+.sortTypeText{
+    width: 100px;
+     display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
 .sortDropdown {
-    width: 180px;
+    width: 185px;
     position: absolute;
     top: 100%;
     left: 0;
     z-index: 100;
     background-color: white;
-    border: 1px solid #ccc;
+    border: none;
     color: black;
     border-radius: 6px;
     padding: 8px 0;
     list-style: none;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
 .sortDropdown li {
@@ -207,5 +229,9 @@
 }
 
 .sortDropdown li:hover {
+    background-color: #f0f0f0;
+}
+
+.active {
     background-color: #f0f0f0;
 }
