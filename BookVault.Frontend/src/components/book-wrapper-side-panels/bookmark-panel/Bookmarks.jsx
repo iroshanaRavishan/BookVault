@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { useUser } from '../../../context/UserContext';
 import { RiDeleteBin6Fill } from 'react-icons/ri';
 import { BsSortUp } from "react-icons/bs";
+import { HiMiniArrowLongDown, HiMiniArrowLongUp, HiMiniArrowSmallDown, HiMiniArrowSmallUp } from "react-icons/hi2";
 
 export default function Bookmarks({ openedAt }) {
   const { id } =useParams(); 
@@ -99,7 +100,8 @@ export default function Bookmarks({ openedAt }) {
     <div className={styles.bookmarkPanel}>
       <div style={{ position: "relative", display: "inline-block" }}>
         <button onClick={() => setSortMenuOpen(!sortMenuOpen)} className={styles.sortButton}>
-          Sort <BsSortUp size={18} />
+          <span className={styles.sortIconWithText}><BsSortUp size={18} /> Sort : </span>  
+          <span className={styles.sortTypeText}>{getSortTypeName(sortType)}</span>
         </button>
         {sortMenuOpen && (
           <ul className={styles.sortDropdown}>
