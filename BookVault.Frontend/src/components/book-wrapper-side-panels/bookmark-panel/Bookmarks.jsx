@@ -116,9 +116,16 @@ export default function Bookmarks({ openedAt }) {
     return 'Sort'; // default fallback
   }
 
+  // Handle new bookmark from SignalR
+  const handleNewBookmark = (newBookmark) => {
+    setBookmarks((prev) => (prev ? [newBookmark, ...prev] : [newBookmark]));
+  };
+
   return (
     <div className={styles.bookmarkPanel}>
-      <div style={{ position: "relative", display: "inline-block" }}  ref={dropdownRef }>
+      {/* Listen for new bookmarks in real-time */}
+      <BookmarkListener onBookmarkCreated={handleNewBookmark} />
+      <div style={{ position: "relative", display: "inline-block" }} ref={dropdownRef}>
         <button onClick={() => setSortMenuOpen((prev) => !prev)} className={styles.sortButton}>
           <span className={styles.sortIconWithText}><BsSortUp size={18} /> Sort : </span>  
           <span className={styles.sortTypeText}>{getSortTypeName(sortType)}</span>
