@@ -78,6 +78,7 @@ export default function Bookmarks({ openedAt }) {
         if (response.status === 204) {
           // setBookmarks(prev => prev.filter(b => b.id !== id));
           console.log("Bookmark successfully deleted.");
+          setBookmarks((prev)=> prev.filter((b)=> b.id != id));
         } else if (response.status === 404) {
           console.log("Bookmark not found. It may have already been deleted.");
         } else {
