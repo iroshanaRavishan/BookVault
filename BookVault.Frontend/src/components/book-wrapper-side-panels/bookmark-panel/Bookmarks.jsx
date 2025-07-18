@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { useUser } from '../../../context/UserContext';
 import { RiDeleteBin6Fill } from 'react-icons/ri';
 import { BsSortUp } from "react-icons/bs";
+import { HiMiniArrowLongDown, HiMiniArrowLongUp, HiMiniArrowSmallDown, HiMiniArrowSmallUp } from "react-icons/hi2";
 
 export default function Bookmarks({ openedAt }) {
   const { id } =useParams(); 
@@ -71,18 +72,53 @@ export default function Bookmarks({ openedAt }) {
       }
   }
 
+  function getSortTypeName(type) {
+    if (type === 'newest') {
+      return 'Newest First';
+    } 
+    if (type === 'oldest') {
+      return 'Oldest First';
+    } 
+    if (type === 'page-asc') {
+      return (
+        <>
+          Page Number <HiMiniArrowLongUp size={14}/>
+        </>
+      );
+    } 
+    if (type === 'page-desc') {
+      return (
+        <>
+          Page Number <HiMiniArrowLongDown size={14}/>
+        </>
+      );
+    }
+    return 'Sort'; // default fallback
+  }
+
   return (
     <div className={styles.bookmarkPanel}>
       <div style={{ position: "relative", display: "inline-block" }}>
         <button onClick={() => setSortMenuOpen(!sortMenuOpen)} className={styles.sortButton}>
-          Sort <BsSortUp size={18} />
+          <span className={styles.sortIconWithText}><BsSortUp size={18} /> Sort : </span>  
+          <span className={styles.sortTypeText}>{getSortTypeName(sortType)}</span>
         </button>
         {sortMenuOpen && (
           <ul className={styles.sortDropdown}>
             <li onClick={() => handleSortChange("newest")} className={sortType === 'newest' ? styles.active : ''}>Newest First</li>
             <li onClick={() => handleSortChange("oldest")} className={sortType === 'oldest' ? styles.active : ''}>Oldest First</li>
-            <li onClick={() => handleSortChange("page-asc")} className={sortType === 'page-asc' ? styles.active : ''}>Page Number ↑</li>
-            <li onClick={() => handleSortChange("page-desc")} className={sortType === 'page-desc' ? styles.active : ''}>Page Number ↓</li>
+            <li onClick={() => handleSortChange("page-asc")} className={sortType === 'page-asc' ? styles.active : ''}> 
+              <span style={{display: 'flex', flexDirection: 'row' ,alignItems: "center"}}> 
+                Page Number 
+                <HiMiniArrowLongUp style={{marginTop: '4px'}} size={14}/>
+              </span>
+            </li>
+            <li onClick={() => handleSortChange("page-desc")} className={sortType === 'page-desc' ? styles.active : ''}> 
+              <span style={{display: 'flex', flexDirection: 'row' ,alignItems: "center"}}> 
+                Page Number 
+                <HiMiniArrowLongDown style={{marginTop: '4px'}} size={14}/>
+              </span>
+            </li>
           </ul>
         )}
       </div>
