@@ -134,7 +134,7 @@
 .pagePreview {
     width: 50%;
     height: 100%;
-    padding: 1px 6px;
+    padding: 3px 6px;
     margin: auto;
     display: flex;
     align-items: center;
@@ -162,6 +162,7 @@
 .pageThumbnail {
     height: 220px;
     width: 160px;
+    border-radius: 6px;
 }
 
 .pagePreviewText {
@@ -180,9 +181,9 @@
 
 .sortButton {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     padding: 6px 12px;
-    width: 80px;
+    width: 185px;
     align-items: center;
     cursor: pointer;
     border: 1px solid #ccc;
@@ -191,8 +192,25 @@
     right: 0;
 }
 
+.sortIconWithText{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 65px;
+    align-items: center;
+    gap: 5px;
+}
+
+.sortTypeText{
+    width: 100px;
+     display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
 .sortDropdown {
-    width: 180px;
+    width: 185px;
     position: absolute;
     top: 100%;
     left: 0;
@@ -211,5 +229,9 @@
 }
 
 .sortDropdown li:hover {
+    background-color: #f0f0f0;
+}
+
+.active {
     background-color: #f0f0f0;
 }
