@@ -71,6 +71,30 @@ export default function Bookmarks({ openedAt }) {
       }
   }
 
+  function getSortTypeName(type) {
+    if (type === 'newest') {
+      return 'Newest First';
+    } 
+    if (type === 'oldest') {
+      return 'Oldest First';
+    } 
+    if (type === 'page-asc') {
+      return (
+        <>
+          Page Number <HiMiniArrowLongUp size={14}/>
+        </>
+      );
+    } 
+    if (type === 'page-desc') {
+      return (
+        <>
+          Page Number <HiMiniArrowLongDown size={14}/>
+        </>
+      );
+    }
+    return 'Sort'; // default fallback
+  }
+
   return (
     <div className={styles.bookmarkPanel}>
       <div style={{ position: "relative", display: "inline-block" }}>
