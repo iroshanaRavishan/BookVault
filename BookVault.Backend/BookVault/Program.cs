@@ -1,9 +1,12 @@
 using BookVault.Application;
+using BookVault.Application.Interfaces;
 using BookVault.Data;
 using BookVault.Infrastructure;
 using BookVault.Infrastructure.Data;
+using BookVault.Infrastructure.Services.BookVault.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 using Scalar.AspNetCore;
+using BookVault.RealTimeNotification;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +17,12 @@ builder.Services.AddEndpointsApiExplorer(); // Add this for better API documenta
 
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
+
+// Add SignalR
+builder.Services.AddSignalR();
+
+// Add INotificationService
+builder.Services.AddScoped<INotificationService, SignalRNotificationService>();
 
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
@@ -93,5 +102,8 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+// Map SignalR hubs
+app.MapHub<NotificationHub>("/hubs/notifications");
 
 app.Run();
