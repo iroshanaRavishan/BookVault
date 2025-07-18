@@ -5,9 +5,9 @@
 .bookmarkList {
     list-style: none;
     padding: 0;
-    margin-top: 0px;
+    margin: 10px 0px;
     overflow-y: auto;
-    min-height: 200px;
+    min-height: 240px;
     max-height: 250px; 
     padding-right: 25px;
     position: relative;
@@ -48,6 +48,10 @@
 
     /* Store original color with reduced opacity as fallback */
     --border-hsl: var(--border-color, hsl(20, 70%, 60%, 0.8));
+}
+
+.bookmarkItem:first-child {
+    margin-top: 0px;
 }
 
 .bookmarkItem:hover {
@@ -142,8 +146,9 @@
 
 .jumpToPageButton {
     height: 35px;
+    padding: 6px 12px;
     font-size: 16px;
-    border-radius: 8px;
+    border-radius: 6px;
     background-color: #ffffff;
     border: none;
 }
@@ -170,7 +175,7 @@
     content: '';
     display: flex;
     border-top: 1px solid #646464;
-    margin: 10px 0;
+    margin: 5px 0 10px 0;
 }
 
 .sortButton {
@@ -193,12 +198,11 @@
     left: 0;
     z-index: 100;
     background-color: white;
-    border: 1px solid #ccc;
+    border: none;
     color: black;
     border-radius: 6px;
     padding: 8px 0;
     list-style: none;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
 .sortDropdown li {
