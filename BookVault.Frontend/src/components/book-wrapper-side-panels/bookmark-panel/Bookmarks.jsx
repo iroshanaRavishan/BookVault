@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styles from './bookmarks.module.css';
 import { useParams } from 'react-router-dom';
 import { useUser } from '../../../context/UserContext';
@@ -7,6 +7,7 @@ import { BsSortUp } from "react-icons/bs";
 import { HiMiniArrowLongDown, HiMiniArrowLongUp, HiMiniArrowSmallDown, HiMiniArrowSmallUp } from "react-icons/hi2";
 
 export default function Bookmarks({ openedAt }) {
+  const dropdownRef = useRef(null);
   const { id } =useParams(); 
   const { user } = useUser();
   const [bookmarks, setBookmarks] = useState(null);
@@ -45,6 +46,24 @@ export default function Bookmarks({ openedAt }) {
       fetchAllBookmarks();
     }
   }, [openedAt, user?.id, id, sortType]); 
+
+    useEffect(() => {
+    function handleClickOutside(event) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setSortMenuOpen(false);
+      }
+    }
+
+    if (sortMenuOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [sortMenuOpen]);
 
   async function handleDeleteBookmark (id) {
       try {
@@ -98,8 +117,8 @@ export default function Bookmarks({ openedAt }) {
 
   return (
     <div className={styles.bookmarkPanel}>
-      <div style={{ position: "relative", display: "inline-block" }}>
-        <button onClick={() => setSortMenuOpen(!sortMenuOpen)} className={styles.sortButton}>
+      <div style={{ position: "relative", display: "inline-block" }}  ref={dropdownRef }>
+        <button onClick={() => setSortMenuOpen((prev) => !prev)} className={styles.sortButton}>
           <span className={styles.sortIconWithText}><BsSortUp size={18} /> Sort : </span>  
           <span className={styles.sortTypeText}>{getSortTypeName(sortType)}</span>
         </button>
