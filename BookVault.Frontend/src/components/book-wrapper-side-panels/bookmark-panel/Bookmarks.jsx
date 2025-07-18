@@ -107,8 +107,18 @@ export default function Bookmarks({ openedAt }) {
           <ul className={styles.sortDropdown}>
             <li onClick={() => handleSortChange("newest")} className={sortType === 'newest' ? styles.active : ''}>Newest First</li>
             <li onClick={() => handleSortChange("oldest")} className={sortType === 'oldest' ? styles.active : ''}>Oldest First</li>
-            <li onClick={() => handleSortChange("page-asc")} className={sortType === 'page-asc' ? styles.active : ''}>Page Number ↑</li>
-            <li onClick={() => handleSortChange("page-desc")} className={sortType === 'page-desc' ? styles.active : ''}>Page Number ↓</li>
+            <li onClick={() => handleSortChange("page-asc")} className={sortType === 'page-asc' ? styles.active : ''}> 
+              <span style={{display: 'flex', flexDirection: 'row' ,alignItems: "center"}}> 
+                Page Number 
+                <HiMiniArrowLongUp style={{marginTop: '4px'}} size={14}/>
+              </span>
+            </li>
+            <li onClick={() => handleSortChange("page-desc")} className={sortType === 'page-desc' ? styles.active : ''}> 
+              <span style={{display: 'flex', flexDirection: 'row' ,alignItems: "center"}}> 
+                Page Number 
+                <HiMiniArrowLongDown style={{marginTop: '4px'}} size={14}/>
+              </span>
+            </li>
           </ul>
         )}
       </div>
