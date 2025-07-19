@@ -65,6 +65,10 @@ namespace BookVault.Application.Services
             if (bookmark is null) return false;
 
             await _bookmarkRepository.DeleteAsync(bookmark);
+
+            // Notify via SignalR
+            await _notificationService.NotifyBookmarkDeletedAsync(bookmarkId);
+
             return true;
         }
     }
