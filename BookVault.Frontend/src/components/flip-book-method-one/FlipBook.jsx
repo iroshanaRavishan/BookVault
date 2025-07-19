@@ -425,6 +425,40 @@ export default function FlipBook({ isRightPanelOpen }) {
                 </span>
               </div>
             ))}
+
+          {/* Right Navigation Arrows */}
+          {rightBookmarkPages.length > 1 && (
+            <>
+              {rightPageIndex > 0 && (
+                <div
+                  className={styles.arrowLeft}
+                  onClick={() => setRightPageIndex((p) => p - 1)}
+                >
+                  ◀
+                </div>
+              )}
+              {rightPageIndex < rightBookmarkPages.length - 1 && (
+                <div
+                  className={styles.arrowRight}
+                  onClick={() => setRightPageIndex((p) => p + 1)}
+                >
+                  ▶
+                </div>
+              )}
+
+              {/* Page Indicators */}
+              <div className={styles.pageIndicators}>
+                {rightBookmarkPages.map((_, i) => (
+                  <span
+                    key={i}
+                    className={`${styles.indicator} ${
+                      i === rightPageIndex ? styles.activeIndicator : ''
+                    }`}
+                  ></span>
+                ))}
+              </div>
+            </>
+          )}
         </div>
       </div>
 
