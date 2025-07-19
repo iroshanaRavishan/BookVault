@@ -1,4 +1,5 @@
 ﻿using BookVault.Application.DTOs.BookDTOs;
+using BookVault.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,5 +11,6 @@ namespace BookVault.Application.Interfaces
     public interface INotificationService
     {
         Task NotifyBookmarkCreatedAsync(BookmarkResponseDto bookmark);
+        Task NotifyBookmarkDeletedAsync(Guid bookmarkId);
     }
 }
