@@ -4,11 +4,12 @@ import { useParams } from 'react-router-dom';
 import { useUser } from '../../../context/UserContext';
 import { RiDeleteBin6Fill } from 'react-icons/ri';
 import { BsSortUp } from "react-icons/bs";
-import { HiMiniArrowLongDown, HiMiniArrowLongUp, HiMiniArrowSmallDown, HiMiniArrowSmallUp } from "react-icons/hi2";
+import { HiMiniArrowLongUp, HiMiniArrowLongDown } from "react-icons/hi2";
+import BookmarkListener from '../../bookmark-listener/BookmarkListener';
 
 export default function Bookmarks({ openedAt }) {
   const dropdownRef = useRef(null);
-  const { id } =useParams(); 
+  const { id } = useParams(); 
   const { user } = useUser();
   const [bookmarks, setBookmarks] = useState(null);
   const [sortMenuOpen, setSortMenuOpen] = useState(false);
@@ -47,7 +48,7 @@ export default function Bookmarks({ openedAt }) {
     }
   }, [openedAt, user?.id, id, sortType]); 
 
-    useEffect(() => {
+  useEffect(() => {
     function handleClickOutside(event) {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setSortMenuOpen(false);
@@ -65,31 +66,30 @@ export default function Bookmarks({ openedAt }) {
     };
   }, [sortMenuOpen]);
 
-  async function handleDeleteBookmark (id) {
-      try {
-        const response = await fetch("https://localhost:7157/api/Bookmark", {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({ id: id })
-        });
+  async function handleDeleteBookmark(id) {
+    try {
+      const response = await fetch("https://localhost:7157/api/Bookmark", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ id: id })
+      });
 
-        if (response.status === 204) {
-          // setBookmarks(prev => prev.filter(b => b.id !== id));
-          console.log("Bookmark successfully deleted.");
-          setBookmarks((prev)=> prev.filter((b)=> b.id != id));
-        } else if (response.status === 404) {
-          console.log("Bookmark not found. It may have already been deleted.");
-        } else {
-          throw new Error("Unexpected error occurred.");
-        }
-
-      } catch (error) {
-        console.error("Error deleting bookmark:", error);
-        console.log("An error occurred while deleting the bookmark.");
-        // TODO: show the error in a proper way in the frontend
+      if (response.status === 204) {
+        console.log("Bookmark successfully deleted.");
+        setBookmarks((prev) => prev.filter((b) => b.id !== id));
+      } else if (response.status === 404) {
+        console.log("Bookmark not found. It may have already been deleted.");
+      } else {
+        throw new Error("Unexpected error occurred.");
       }
+
+    } catch (error) {
+      console.error("Error deleting bookmark:", error);
+      console.log("An error occurred while deleting the bookmark.");
+      // TODO: show the error in a proper way in the frontend
+    }
   }
 
   function getSortTypeName(type) {
@@ -116,9 +116,16 @@ export default function Bookmarks({ openedAt }) {
     return 'Sort'; // default fallback
   }
 
+  // Handle new bookmark from SignalR
+  const handleNewBookmark = (newBookmark) => {
+    setBookmarks((prev) => (prev ? [newBookmark, ...prev] : [newBookmark]));
+  };
+
   return (
     <div className={styles.bookmarkPanel}>
-      <div style={{ position: "relative", display: "inline-block" }}  ref={dropdownRef }>
+      {/* Listen for new bookmarks in real-time */}
+      <BookmarkListener onBookmarkCreated={handleNewBookmark} />
+      <div style={{ position: "relative", display: "inline-block" }} ref={dropdownRef}>
         <button onClick={() => setSortMenuOpen((prev) => !prev)} className={styles.sortButton}>
           <span className={styles.sortIconWithText}><BsSortUp size={18} /> Sort : </span>  
           <span className={styles.sortTypeText}>{getSortTypeName(sortType)}</span>
@@ -162,8 +169,8 @@ export default function Bookmarks({ openedAt }) {
                     <small>{new Date(bookmark.createdAt).toLocaleString()}</small>
                   </span>
                 </div>
-                <div >
-                  <RiDeleteBin6Fill size={18} className={styles.bookmarkDeleteButton} onClick={()=>handleDeleteBookmark(bookmarks[i].id)} />
+                <div>
+                  <RiDeleteBin6Fill size={18} className={styles.bookmarkDeleteButton} onClick={() => handleDeleteBookmark(bookmarks[i].id)} />
                 </div>
               </li>
             ))}
@@ -180,5 +187,5 @@ export default function Bookmarks({ openedAt }) {
         <p>No bookmarks found.</p>
       )}
     </div>
-  )
+  );
 }
