@@ -311,3 +311,40 @@
   cursor: pointer;
   color: rgba(255, 255, 255, 0.767);
 }
+
+.arrowLeft, .arrowRight {
+  position: absolute;
+  top: 2px;
+  font-size: 24px;
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  z-index: 100;
+}
+
+.arrowLeft:hover, .arrowRight:hover {
+  color: white;
+}
+
+.arrowLeft { left: -20px; }
+.arrowRight { right: -20px; }
+
+.pageIndicators {
+  position: absolute;
+  top: -20px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+}
+
+.indicator {
+  width: 8px;
+  height: 8px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  transition: background-color 0.3s;
+}
+
+.activeIndicator {
+  background-color: white;
+}
