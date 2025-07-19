@@ -213,8 +213,15 @@
   display: flex;
   flex-direction: row;
   align-items: flex-end;
-  pointer-events: none;
+  pointer-events: auto;
+}
+
+.leftBookmarkContainer{
   justify-content: flex-end;
+}
+
+.rightBookmarkContainer {
+  justify-content: flex-start;
 }
 
 .bookmarkMini {
