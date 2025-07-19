@@ -326,10 +326,7 @@ export default function FlipBook({ isRightPanelOpen }) {
         style={{ transform: containerTransform }}
       >
         <div className={styles.leftBookmarkContainer}>
-          {[...bookmarks]
-            .filter(b => b.page < leftPage + 2 || (b.page === leftPage && currentPage !== leftPage))
-            .sort((a, b) => a.page - b.page)
-            .map((b) => (
+          {leftBookmarkPages[leftPageIndex] &&  leftBookmarkPages[leftPageIndex].map((b) => (
               <div
                 key={b.page}
                 className={`
@@ -363,11 +360,7 @@ export default function FlipBook({ isRightPanelOpen }) {
         </div>
 
         <div className={styles.rightBookmarkContainer}>
-          {[...bookmarks
-            .filter(b => b.page > rightPage || (b.page === rightPage && currentPage !== rightPage))
-            .sort((a, b) => a.page - b.page)]
-            .reverse()
-            .map((b) => (
+            {rightBookmarkPages[rightPageIndex]?.map((b) => (
               <div
                 key={b.page}
                 className={`
