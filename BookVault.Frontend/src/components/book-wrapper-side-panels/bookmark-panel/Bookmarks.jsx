@@ -121,10 +121,18 @@ export default function Bookmarks({ openedAt }) {
     setBookmarks((prev) => (prev ? [newBookmark, ...prev] : [newBookmark]));
   };
 
+  // Handle deletion from SignalR (real-time)
+  const handleDeletedBookmarkFromSignalR = (bookmarkId) => {
+    setBookmarks((prev) => prev.filter((b) => b.id !== bookmarkId));
+  };
+
   return (
     <div className={styles.bookmarkPanel}>
       {/* Listen for new bookmarks in real-time */}
-      <BookmarkListener onBookmarkCreated={handleNewBookmark} />
+      <BookmarkListener 
+        onBookmarkCreated={handleNewBookmark} 
+        onBookmarkDeleted={handleDeletedBookmarkFromSignalR} 
+      />
       <div style={{ position: "relative", display: "inline-block" }} ref={dropdownRef}>
         <button onClick={() => setSortMenuOpen((prev) => !prev)} className={styles.sortButton}>
           <span className={styles.sortIconWithText}><BsSortUp size={18} /> Sort : </span>  
