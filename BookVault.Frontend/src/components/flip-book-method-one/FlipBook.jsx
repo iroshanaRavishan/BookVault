@@ -282,6 +282,41 @@ export default function FlipBook({ isRightPanelOpen }) {
     }
   };
 
+  const leftBookmarks = [...bookmarks]
+    .filter(b => b.page < leftPage + 2 || (b.page === leftPage && currentPage !== leftPage))
+    .sort((a, b) => a.page - b.page);
+
+  const rightBookmarks = [...bookmarks]
+    .filter(b => b.page > rightPage || (b.page === rightPage && currentPage !== rightPage))
+    .sort((a, b) => a.page - b.page);
+
+  const firstPage = rightBookmarks.slice(0, BOOKMARKS_PER_PAGE);
+  const remaining = rightBookmarks.slice(BOOKMARKS_PER_PAGE);
+
+  // Split into pages
+  const leftBookmarkPages = Array.from({ length: Math.ceil(leftBookmarks.length / BOOKMARKS_PER_PAGE) }, (_, i) =>
+    leftBookmarks.slice(i * BOOKMARKS_PER_PAGE, (i + 1) * BOOKMARKS_PER_PAGE)
+  );
+
+  let rightBookmarkPages = [firstPage];
+  for (let i = 0; i < remaining.length; i += BOOKMARKS_PER_PAGE) {
+    rightBookmarkPages.push(remaining.slice(i, i + BOOKMARKS_PER_PAGE));
+  }
+
+  useEffect(() => {
+    const leftPageCount = Math.ceil(leftBookmarks.length / BOOKMARKS_PER_PAGE);
+    const rightPageCount = rightBookmarkPages.length;
+
+    if (leftPageIndex >= leftPageCount) {
+      setLeftPageIndex(leftPageCount > 0 ? leftPageCount - 1 : 0);
+    }
+
+    if (rightPageIndex >= rightPageCount) {
+      setRightPageIndex(rightPageCount > 0 ? rightPageCount - 1 : 0);
+    }
+  }, [bookmarks, leftBookmarks, rightBookmarkPages, leftPageIndex, rightPageIndex]);
+
+
   const navButtonWidth = isFirstPage || isLastPage ? '480px' : '920px';
 
   return (
@@ -291,10 +326,7 @@ export default function FlipBook({ isRightPanelOpen }) {
         style={{ transform: containerTransform }}
       >
         <div className={styles.leftBookmarkContainer}>
-          {[...bookmarks]
-            .filter(b => b.page < leftPage + 2 || (b.page === leftPage && currentPage !== leftPage))
-            .sort((a, b) => a.page - b.page)
-            .map((b) => (
+          {leftBookmarkPages[leftPageIndex] &&  leftBookmarkPages[leftPageIndex].map((b) => (
               <div
                 key={b.page}
                 className={`
@@ -325,14 +357,44 @@ export default function FlipBook({ isRightPanelOpen }) {
                 </span>
               </div>
             ))}
+          
+          {/* Left Navigation Arrows */}
+          {leftBookmarkPages.length > 1 && (
+            <>
+              {leftPageIndex > 0 && (
+                <div
+                  className={styles.arrowLeft}
+                  onClick={() => setLeftPageIndex(p => p - 1)}
+                >
+                  ◀
+                </div>
+              )}
+              {leftPageIndex < leftBookmarkPages.length - 1 && (
+                <div
+                  className={styles.arrowRight}
+                  onClick={() => setLeftPageIndex(p => p + 1)}
+                >
+                  ▶
+                </div>
+              )}
+
+              {/* Page Indicators */}
+              <div className={styles.pageIndicators}>
+                {leftBookmarkPages.map((_, i) => (
+                  <span 
+                    key={i}
+                    className={`${styles.indicator} ${
+                      i === leftPageIndex ? styles.activeIndicator : ''
+                    }`}
+                  ></span>
+                ))}
+              </div>
+            </>
+          )}
         </div>
 
         <div className={styles.rightBookmarkContainer}>
-          {[...bookmarks
-            .filter(b => b.page > rightPage || (b.page === rightPage && currentPage !== rightPage))
-            .sort((a, b) => a.page - b.page)]
-            .reverse()
-            .map((b) => (
+            {rightBookmarkPages[rightPageIndex]?.map((b) => (
               <div
                 key={b.page}
                 className={`
@@ -363,6 +425,40 @@ export default function FlipBook({ isRightPanelOpen }) {
                 </span>
               </div>
             ))}
+
+          {/* Right Navigation Arrows */}
+          {rightBookmarkPages.length > 1 && (
+            <>
+              {rightPageIndex > 0 && (
+                <div
+                  className={styles.arrowLeft}
+                  onClick={() => setRightPageIndex((p) => p - 1)}
+                >
+                  ◀
+                </div>
+              )}
+              {rightPageIndex < rightBookmarkPages.length - 1 && (
+                <div
+                  className={styles.arrowRight}
+                  onClick={() => setRightPageIndex((p) => p + 1)}
+                >
+                  ▶
+                </div>
+              )}
+
+              {/* Page Indicators */}
+              <div className={styles.pageIndicators}>
+                {rightBookmarkPages.map((_, i) => (
+                  <span
+                    key={i}
+                    className={`${styles.indicator} ${
+                      i === rightPageIndex ? styles.activeIndicator : ''
+                    }`}
+                  ></span>
+                ))}
+              </div>
+            </>
+          )}
         </div>
       </div>
 
