@@ -6,6 +6,7 @@ import { RiDeleteBin6Fill } from 'react-icons/ri';
 import { BsSortUp } from "react-icons/bs";
 import { HiMiniArrowLongUp, HiMiniArrowLongDown } from "react-icons/hi2";
 import BookmarkListener from '../../bookmark-listener/BookmarkListener';
+import { GoBookmarkSlashFill } from "react-icons/go";
 
 export default function Bookmarks({ openedAt }) {
   const dropdownRef = useRef(null);
@@ -133,11 +134,14 @@ export default function Bookmarks({ openedAt }) {
         onBookmarkCreated={handleNewBookmark} 
         onBookmarkDeleted={handleDeletedBookmarkFromSignalR} 
       />
-      <div style={{ position: "relative", display: "inline-block" }} ref={dropdownRef}>
-        <button onClick={() => setSortMenuOpen((prev) => !prev)} className={styles.sortButton}>
-          <span className={styles.sortIconWithText}><BsSortUp size={18} /> Sort : </span>  
-          <span className={styles.sortTypeText}>{getSortTypeName(sortType)}</span>
-        </button>
+      <div style={{ position: "relative", display: "flex" }} ref={dropdownRef}>
+        <div className={styles.bookmarkPanelDetailBar}>
+          <button onClick={() => setSortMenuOpen((prev) => !prev)} className={styles.sortButton}>
+            <span className={styles.sortIconWithText}><BsSortUp size={18} /> Sort : </span>  
+            <span className={styles.sortTypeText}>{getSortTypeName(sortType)}</span>
+          </button>
+          <span className={styles.totalBookmarkText}>Total Bookmarks: 10</span>
+        </div>
         {sortMenuOpen && (
           <ul className={styles.sortDropdown}>
             <li onClick={() => handleSortChange("newest")} className={sortType === 'newest' ? styles.active : ''}>Newest First</li>
