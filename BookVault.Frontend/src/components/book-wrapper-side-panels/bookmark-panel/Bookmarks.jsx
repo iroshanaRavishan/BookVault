@@ -192,7 +192,10 @@ export default function Bookmarks({ openedAt }) {
           </div>
         </div>
       ) : (
-        <p>No bookmarks found.</p>
+        <div className={styles.noBookmarksText}>
+          <GoBookmarkSlashFill size={30}/>
+          <p>No bookmarks found.</p>
+        </div>
       )}
     </div>
   );
