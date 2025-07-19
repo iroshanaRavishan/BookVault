@@ -282,6 +282,41 @@ export default function FlipBook({ isRightPanelOpen }) {
     }
   };
 
+  const leftBookmarks = [...bookmarks]
+    .filter(b => b.page < leftPage + 2 || (b.page === leftPage && currentPage !== leftPage))
+    .sort((a, b) => a.page - b.page);
+
+  const rightBookmarks = [...bookmarks]
+    .filter(b => b.page > rightPage || (b.page === rightPage && currentPage !== rightPage))
+    .sort((a, b) => a.page - b.page);
+
+  const firstPage = rightBookmarks.slice(0, BOOKMARKS_PER_PAGE);
+  const remaining = rightBookmarks.slice(BOOKMARKS_PER_PAGE);
+
+  // Split into pages
+  const leftBookmarkPages = Array.from({ length: Math.ceil(leftBookmarks.length / BOOKMARKS_PER_PAGE) }, (_, i) =>
+    leftBookmarks.slice(i * BOOKMARKS_PER_PAGE, (i + 1) * BOOKMARKS_PER_PAGE)
+  );
+
+  let rightBookmarkPages = [firstPage];
+  for (let i = 0; i < remaining.length; i += BOOKMARKS_PER_PAGE) {
+    rightBookmarkPages.push(remaining.slice(i, i + BOOKMARKS_PER_PAGE));
+  }
+
+  useEffect(() => {
+    const leftPageCount = Math.ceil(leftBookmarks.length / BOOKMARKS_PER_PAGE);
+    const rightPageCount = rightBookmarkPages.length;
+
+    if (leftPageIndex >= leftPageCount) {
+      setLeftPageIndex(leftPageCount > 0 ? leftPageCount - 1 : 0);
+    }
+
+    if (rightPageIndex >= rightPageCount) {
+      setRightPageIndex(rightPageCount > 0 ? rightPageCount - 1 : 0);
+    }
+  }, [bookmarks, leftBookmarks, rightBookmarkPages, leftPageIndex, rightPageIndex]);
+
+
   const navButtonWidth = isFirstPage || isLastPage ? '480px' : '920px';
 
   return (
