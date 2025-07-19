@@ -1,7 +1,8 @@
 ﻿using BookVault.Application.DTOs.BookDTOs;
 using BookVault.Application.Interfaces;
-using Microsoft.AspNetCore.SignalR;
+using BookVault.Domain.Entities;
 using BookVault.RealTimeNotification;
+using Microsoft.AspNetCore.SignalR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,11 @@ namespace BookVault.Infrastructure.Services
             public async Task NotifyBookmarkCreatedAsync(BookmarkResponseDto bookmark)
             {
                 await _hubContext.Clients.All.SendAsync("BookmarkCreated", bookmark);
+            }
+
+            public async Task NotifyBookmarkDeletedAsync(Guid bookmarkId)
+            {
+                await _hubContext.Clients.All.SendAsync("BookmarkDeleted", bookmarkId);
             }
         }
     }
