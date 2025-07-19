@@ -1,15 +1,16 @@
 .bookmarkPanel {
-    padding: 0 0 0 10px;
+    padding: 0 0 0 0px;
+    width: 100%;
 }
 
 .bookmarkList {
     list-style: none;
-    padding: 0;
+    padding-left: 10px;
     margin: 10px 0px;
     overflow-y: auto;
     min-height: 240px;
     max-height: 250px; 
-    padding-right: 25px;
+    padding-right: 20px;
     position: relative;
     overflow-x: hidden;
     transition: all 500ms;
@@ -125,6 +126,17 @@
     justify-content: space-between;
     height: 580px;
 }
+
+.noBookmarksText{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 580px;
+    color: #ccc;
+    font-style: italic;
+}
+
 .pagePreviewContaienr {
     display: flex;
     flex-direction: column;
@@ -145,12 +157,13 @@
 }
 
 .jumpToPageButton {
-    height: 35px;
+    height: 40px;
     padding: 6px 12px;
-    font-size: 16px;
+    font-size: 14px;
     border-radius: 6px;
     background-color: #ffffff;
     border: none;
+    cursor: pointer;
 }
 
 .jumpToPageButton:disabled {
@@ -234,4 +247,17 @@
 
 .active {
     background-color: #f0f0f0;
+}
+
+.bookmarkPanelDetailBar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.totalBookmarkText{
+    font-size: 12px;
+    font-weight: 600;
 }
