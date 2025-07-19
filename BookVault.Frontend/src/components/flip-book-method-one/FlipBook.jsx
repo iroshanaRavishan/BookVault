@@ -3,7 +3,7 @@ import HTMLFlipBook from 'react-pageflip';
 import styles from './flipbook.module.css';
 import BookBindingHoles from '../book-binding-holes/BookBindingHoles';
 import { IoAddCircleSharp, IoCloseCircleSharp } from "react-icons/io5";
-import { LuChevronFirst, LuChevronLast } from 'react-icons/lu';
+import { LuChevronFirst, LuChevronLast, LuChevronLeft, LuChevronRight } from 'react-icons/lu';
 import { useUser } from '../../context/UserContext';
 import { useParams } from 'react-router-dom';
 
@@ -342,7 +342,7 @@ export default function FlipBook({ isRightPanelOpen }) {
                   backgroundColor: currentPage === b.page
                     ? b.color.replace(/hsl\(([^)]+),\s*([^)]+),\s*([^)]+),\s*[^)]+\)/, 'hsl($1, $2, $3, 1)')
                     : b.color,
-                  width: currentPage === b.page ? '32px' : '20px',
+                  width: currentPage === b.page ? '32px' : '21px',
                   cursor: 'pointer'
                 }}
               >
@@ -369,7 +369,7 @@ export default function FlipBook({ isRightPanelOpen }) {
                   className={styles.arrowLeft}
                   onClick={() => setLeftPageIndex(p => p - 1)}
                 >
-                  ◀
+                  <LuChevronLeft size={30}/>
                 </div>
               )}
               {leftPageIndex < leftBookmarkPages.length - 1 && (
@@ -377,7 +377,7 @@ export default function FlipBook({ isRightPanelOpen }) {
                   className={styles.arrowRight}
                   onClick={() => setLeftPageIndex(p => p + 1)}
                 >
-                  ▶
+                  <LuChevronRight size={30}/>
                 </div>
               )}
 
@@ -410,7 +410,7 @@ export default function FlipBook({ isRightPanelOpen }) {
                   backgroundColor: currentPage === b.page - 1
                     ? b.color.replace(/hsl\(([^)]+),\s*([^)]+),\s*([^)]+),\s*[^)]+\)/, 'hsl($1, $2, $3, 1)')
                     : b.color,
-                  width: currentPage === b.page - 1 ? '32px' : '20px',
+                  width: currentPage === b.page - 1 ? '32px' : '21px',
                   cursor: 'pointer'
                 }}
               >
@@ -437,7 +437,7 @@ export default function FlipBook({ isRightPanelOpen }) {
                   className={styles.arrowLeft}
                   onClick={() => setRightPageIndex((p) => p - 1)}
                 >
-                  ◀
+                  <LuChevronLeft size={30}/>
                 </div>
               )}
               {rightPageIndex < rightBookmarkPages.length - 1 && (
@@ -445,7 +445,7 @@ export default function FlipBook({ isRightPanelOpen }) {
                   className={styles.arrowRight}
                   onClick={() => setRightPageIndex((p) => p + 1)}
                 >
-                  ▶
+                  <LuChevronRight size={30}/>
                 </div>
               )}
 
