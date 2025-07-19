@@ -84,6 +84,9 @@ export default function FlipBook({ isRightPanelOpen }) {
   const totalPages = 2 + contentPages + (contentPages % 2 === 1 ? 1 : 0) + 2;
   const flipBookRef = useRef();
   const pages = [];
+  const BOOKMARKS_PER_PAGE = 14;
+  const [leftPageIndex, setLeftPageIndex] = useState(0);
+  const [rightPageIndex, setRightPageIndex] = useState(0);
 
   pages.push({ type: 'cover', content: <section>Cover Page</section> });
   pages.push({ type: 'blank', content: null });
