@@ -140,7 +140,7 @@ export default function Bookmarks({ openedAt }) {
             <span className={styles.sortIconWithText}><BsSortUp size={18} /> Sort : </span>  
             <span className={styles.sortTypeText}>{getSortTypeName(sortType)}</span>
           </button>
-          <span className={styles.totalBookmarkText}>Total Bookmarks: 10</span>
+          <span className={styles.totalBookmarkText}>Total Bookmarks: {bookmarks?.length}</span>
         </div>
         {sortMenuOpen && (
           <ul className={styles.sortDropdown}>
