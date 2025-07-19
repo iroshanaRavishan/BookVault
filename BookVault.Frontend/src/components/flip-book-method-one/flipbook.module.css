@@ -229,10 +229,6 @@
   user-select: none;
 }
 
-.rightBookmarkContainer {
-  flex-direction: row-reverse; /* for left-right visual order */
-}
-
 .bookmarkContainerLabel {
   color: white;
   font-size: 12px;
