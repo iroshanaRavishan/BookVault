@@ -133,6 +133,37 @@ export default function FlipBook({ isRightPanelOpen }) {
     }
   }
 
+  useEffect(() => {
+    const sortType = "page-asc";
+    const fetchAllBookmarks = async () => {
+      const url = `https://localhost:7157/api/Bookmark?userId=${user.id}&bookId=${id}&sortBy=${sortType}`;
+      try {
+        const response = await fetch(url, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json"
+          }
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch bookmarks");
+        }
+
+        const result = await response.json();
+        setBookmarks(result.map(b => ({
+        ...b,
+        page: b.pageNumber + 1
+      })));
+      } catch (err) {
+        console.error("Error fetching bookmarks:", err);
+      }
+    };
+
+    // if (user?.id && id) {
+      fetchAllBookmarks();
+    // }
+  }, []); 
+
   const handleAddBookmark = async (pageNumber) => {
     const currentBookmark = bookmarks.find(b => b.page === pageNumber);
     if (currentBookmark) {
