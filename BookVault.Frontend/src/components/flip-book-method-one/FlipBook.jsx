@@ -250,6 +250,15 @@ export default function FlipBook({ isRightPanelOpen }) {
     }
   };
 
+  function findBookmarkSliderIndex(bookmarkPage, bookmarkPages) {
+    for (let i = 0; i < bookmarkPages.length; i++) {
+      if (bookmarkPages[i].some(b => b.page === bookmarkPage)) {
+        return i;
+      }
+    }
+    return 0;
+  }
+
   const goToPage = async (targetPage) => {
     if (!flipBookRef.current) return;
 
@@ -313,6 +322,32 @@ export default function FlipBook({ isRightPanelOpen }) {
     // === Normal Flip ===
     else {
       await instance.flip(targetPage);
+    }
+
+    // After flipping, update the bookmark slider indices
+    // Find the new left/right bookmarks and their pages
+    const newLeftPage = targetPage % 2 === 0 ? targetPage : targetPage - 1;
+    const newRightPage = newLeftPage + 2;
+
+    // Recalculate left/right bookmarks
+    const newLeftBookmarks = [...bookmarks]
+      .filter(b => b.page < newLeftPage + 2 || (b.page === newLeftPage && targetPage !== newLeftPage))
+      .sort((a, b) => a.page - b.page);
+
+    const newRightBookmarks = [...bookmarks]
+      .filter(b => b.page > newRightPage || (b.page === newRightPage && targetPage !== newRightPage))
+      .sort((a, b) => a.page - b.page);
+
+    const newLeftBookmarkPages = Array.from({ length: Math.ceil(newLeftBookmarks.length / BOOKMARKS_PER_PAGE) }, (_, i) =>
+      newLeftBookmarks.slice(i * BOOKMARKS_PER_PAGE, (i + 1) * BOOKMARKS_PER_PAGE)
+    );
+
+    const firstPage = newRightBookmarks.slice(0, BOOKMARKS_PER_PAGE);
+    const remaining = newRightBookmarks.slice(BOOKMARKS_PER_PAGE);
+
+    let newRightBookmarkPages = [firstPage];
+    for (let i = 0; i < remaining.length; i += BOOKMARKS_PER_PAGE) {
+      newRightBookmarkPages.push(remaining.slice(i, i + BOOKMARKS_PER_PAGE));
     }
   };
 
@@ -510,7 +545,40 @@ export default function FlipBook({ isRightPanelOpen }) {
         mobileScrollSupport={true}
         drawShadow={true}
         useMouseEvents={true}
-        onFlip={({ data }) => setCurrentPage(data)}
+        onFlip={({ data }) => {
+          setCurrentPage(data);
+
+          // Calculate left/right bookmarks for the new page
+          const newLeftPage = data % 2 === 0 ? data : data - 1;
+          const newRightPage = newLeftPage + 1;
+
+          const newLeftBookmarks = [...bookmarks]
+            .filter(b => b.page < newLeftPage + 2 || (b.page === newLeftPage && data !== newLeftPage))
+            .sort((a, b) => a.page - b.page);
+
+          const newRightBookmarks = [...bookmarks]
+            .filter(b => b.page > newRightPage || (b.page === newRightPage && data !== newRightPage))
+            .sort((a, b) => a.page - b.page);
+
+          const newLeftBookmarkPages = Array.from({ length: Math.ceil(newLeftBookmarks.length / BOOKMARKS_PER_PAGE) }, (_, i) =>
+            newLeftBookmarks.slice(i * BOOKMARKS_PER_PAGE, (i + 1) * BOOKMARKS_PER_PAGE)
+          );
+
+          const firstPage = newRightBookmarks.slice(0, BOOKMARKS_PER_PAGE);
+          const remaining = newRightBookmarks.slice(BOOKMARKS_PER_PAGE);
+
+          let newRightBookmarkPages = [firstPage];
+          for (let i = 0; i < remaining.length; i += BOOKMARKS_PER_PAGE) {
+            newRightBookmarkPages.push(remaining.slice(i, i + BOOKMARKS_PER_PAGE));
+          }
+
+          // Find the slider index for the new page in both containers
+          const leftIndex = findBookmarkSliderIndex(data, newLeftBookmarkPages);
+          const rightIndex = findBookmarkSliderIndex(data, newRightBookmarkPages);
+
+          setLeftPageIndex(leftIndex);
+          setRightPageIndex(rightIndex);
+        }}
         className={`${styles.flipbook} ${
           currentPage === 0 ? styles.centeredCoverpage : ''
         } ${
