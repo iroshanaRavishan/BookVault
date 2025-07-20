@@ -8,7 +8,7 @@ import { HiMiniArrowLongUp, HiMiniArrowLongDown } from "react-icons/hi2";
 import BookmarkListener from '../../bookmark-listener/BookmarkListener';
 import { GoBookmarkSlashFill } from "react-icons/go";
 
-export default function Bookmarks({ openedAt }) {
+export default function Bookmarks({ openedAt, onBookmarkItemDoubleClick }) {
   const dropdownRef = useRef(null);
   const { id } = useParams(); 
   const { user } = useUser();
@@ -172,6 +172,7 @@ export default function Bookmarks({ openedAt }) {
                   '--border-color': bookmarks[i].color,
                   '--border-color-hover': bookmarks[i].color.replace(/,?\s*[\d.]+\)$/, ', 1)'),
                 }}
+                onDoubleClick={() => onBookmarkItemDoubleClick && onBookmarkItemDoubleClick(bookmark.pageNumber)}
               >
                 <div className={styles.bookmarkRow}>
                   <span className={styles.pageText}>page</span> 
