@@ -1,13 +1,22 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './footer.module.css';
 import { MdEmail } from "react-icons/md";
 import { FaSquareXTwitter } from "react-icons/fa6";
 import { PiInstagramLogoFill } from "react-icons/pi";
 import { IoLogoYoutube } from "react-icons/io";
 import { Link } from 'react-router-dom';
-
+import { useUser } from '../../context/UserContext';
 
 export default function Footer() {
+
+  const { user } = useUser();
+  const [loggedUser, setLoggedUser] = useState(null);
+
+  useEffect(()=>{
+    const userEmail = localStorage.getItem('userEmail');
+    setLoggedUser(userEmail);
+  },[user]);
+
   return (
     <footer className={styles.bookVaultFooter}>
       <div className={styles.footerMain}>
@@ -44,7 +53,21 @@ export default function Footer() {
               <li><Link to="/search">Search Books</Link></li>
             </ul>
           </div>
-          
+
+          {loggedUser && (
+            <div className={styles.footerColumn}>
+              <h4>Menu</h4>
+              <ul>
+                <li><Link to="/">Settings</Link></li>
+                <li><Link to="/">Profile</Link></li>
+                <li><Link to="/">Appearance</Link></li>
+                <li><Link to="/">Downloads</Link></li>
+                <li><Link to="/">Contact</Link></li>
+                <li><Link to="/">FAQs</Link></li>
+              </ul>
+            </div>
+          )}
+
           <div className={styles.footerColumn}>
             <h4>BookVault News</h4>
             <ul>
@@ -53,20 +76,6 @@ export default function Footer() {
               <li><Link to="#">Book Festivals</Link></li>
               <li><Link to="#">Awards</Link></li>
             </ul>
-          </div>
-          
-          <div className={styles.footerColumn}>
-            <div className={styles.regionSelector}>
-              <select>
-                <option>Choose region</option>
-                <option>United States</option>
-                <option>United Kingdom</option>
-                <option>Canada</option>
-                <option>Australia</option>
-                <option>Europe</option>
-                <option>Asia</option>
-              </select>
-            </div>
           </div>
         </div>
       </div>

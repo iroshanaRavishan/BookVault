@@ -1,6 +1,5 @@
-﻿using BookVault.Application.DTOs;
-using BookVault.Application.Services;
-using BookVault.DTOs;
+﻿using BookVault.Application.DTOs.BookDTOs;
+using BookVault.Application.Interfaces;
 using BookVault.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -237,6 +236,7 @@ namespace BookVault.controllers
                     ReadUrl = book.ReadUrl,
                     ReleaseDate = book.ReleaseDate,
                     CoverImagePath = request.FileType.ToLower() == "image" ?  "" : book.CoverImagePath,
+                    ThumbnailPath = request.FileType.ToLower() == "thumbnail" ?  "" : book.ThumbnailPath,
                     PdfFilePath = request.FileType.ToLower() == "pdf" ? "": book.PdfFilePath
                 };
 
@@ -270,7 +270,7 @@ namespace BookVault.controllers
         {
             public Guid BookId { get; set; }
             public string FilePath { get; set; }
-            public string FileType { get; set; } // "image" or "pdf"
+            public string FileType { get; set; } // "image" or "thumbnail" or "pdf"
         }
     }
 }
