@@ -6,6 +6,7 @@ import { IoAddCircleSharp, IoCloseCircleSharp } from "react-icons/io5";
 import { LuChevronFirst, LuChevronLast, LuChevronLeft, LuChevronRight } from 'react-icons/lu';
 import { useUser } from '../../context/UserContext';
 import { useParams } from 'react-router-dom';
+import BookmarkListener from '../bookmark-listener/BookmarkListener';
 
 const Page = forwardRef(({ children, number, totalPages, currentPage, pageType, onBookmarkAdd, activeBookmarks }, ref) => {
   const [showRotatedCopy, setShowRotatedCopy] = useState(false);
@@ -72,7 +73,7 @@ const Page = forwardRef(({ children, number, totalPages, currentPage, pageType, 
   );
 });
 
-export default function FlipBook({ isRightPanelOpen }) {
+export default function FlipBook({ isRightPanelOpen, selectedBookmarkedPageNumber }) {
   const [currentPage, setCurrentPage] = useState(0);
   const [bookmarks, setBookmarks] = useState([]);
   const [animatingPages, setAnimatingPages] = useState([]);
@@ -80,7 +81,7 @@ export default function FlipBook({ isRightPanelOpen }) {
   const {user} = useUser();
   const { id } = useParams();
 
-  const contentPages = 20;
+  const contentPages = 40;
   const totalPages = 2 + contentPages + (contentPages % 2 === 1 ? 1 : 0) + 2;
   const flipBookRef = useRef();
   const pages = [];
@@ -132,6 +133,52 @@ export default function FlipBook({ isRightPanelOpen }) {
       containerTransform = 'translateX(28%)';
     }
   }
+
+  useEffect(() => {
+    const sortType = "page-asc";
+    const fetchAllBookmarks = async () => {
+      const url = `https://localhost:7157/api/Bookmark?userId=${user.id}&bookId=${id}&sortBy=${sortType}`;
+      try {
+        const response = await fetch(url, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json"
+          }
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch bookmarks");
+        }
+
+        const result = await response.json();
+        setBookmarks(result.map(b => ({
+        ...b,
+        page: b.pageNumber + 1
+      })));
+      } catch (err) {
+        console.error("Error fetching bookmarks:", err);
+      }
+    };
+
+    // if (user?.id && id) {
+      fetchAllBookmarks();
+    // }
+  }, []); 
+
+  // Handle deletion from SignalR (real-time)
+  const handleDeletedBookmarkFromSignalR = (bookmarkId) => {
+    setBookmarks((prev) => prev.filter((b) => b.id !== bookmarkId));
+  };
+
+  // When navigating to a bookmark:
+  useEffect(() => {
+    if (selectedBookmarkedPageNumber !== null) {
+      const bookmark = bookmarks.find(b => b.pageNumber === selectedBookmarkedPageNumber);
+      if (bookmark) {
+        goToPage(bookmark.page);
+      }
+    }
+  }, [selectedBookmarkedPageNumber, bookmarks]);
 
   const handleAddBookmark = async (pageNumber) => {
     const currentBookmark = bookmarks.find(b => b.page === pageNumber);
@@ -219,6 +266,15 @@ export default function FlipBook({ isRightPanelOpen }) {
     }
   };
 
+  function findBookmarkSliderIndex(bookmarkPage, bookmarkPages) {
+    for (let i = 0; i < bookmarkPages.length; i++) {
+      if (bookmarkPages[i].some(b => b.page === bookmarkPage)) {
+        return i;
+      }
+    }
+    return 0;
+  }
+
   const goToPage = async (targetPage) => {
     if (!flipBookRef.current) return;
 
@@ -281,7 +337,34 @@ export default function FlipBook({ isRightPanelOpen }) {
 
     // === Normal Flip ===
     else {
+      await delay(100);
       await instance.flip(targetPage);
+    }
+
+    // After flipping, update the bookmark slider indices
+    // Find the new left/right bookmarks and their pages
+    const newLeftPage = targetPage % 2 === 0 ? targetPage : targetPage - 1;
+    const newRightPage = newLeftPage + 2;
+
+    // Recalculate left/right bookmarks
+    const newLeftBookmarks = [...bookmarks]
+      .filter(b => b.page < newLeftPage + 2 || (b.page === newLeftPage && targetPage !== newLeftPage))
+      .sort((a, b) => a.page - b.page);
+
+    const newRightBookmarks = [...bookmarks]
+      .filter(b => b.page > newRightPage || (b.page === newRightPage && targetPage !== newRightPage))
+      .sort((a, b) => a.page - b.page);
+
+    const newLeftBookmarkPages = Array.from({ length: Math.ceil(newLeftBookmarks.length / BOOKMARKS_PER_PAGE) }, (_, i) =>
+      newLeftBookmarks.slice(i * BOOKMARKS_PER_PAGE, (i + 1) * BOOKMARKS_PER_PAGE)
+    );
+
+    const firstPage = newRightBookmarks.slice(0, BOOKMARKS_PER_PAGE);
+    const remaining = newRightBookmarks.slice(BOOKMARKS_PER_PAGE);
+
+    let newRightBookmarkPages = [firstPage];
+    for (let i = 0; i < remaining.length; i += BOOKMARKS_PER_PAGE) {
+      newRightBookmarkPages.push(remaining.slice(i, i + BOOKMARKS_PER_PAGE));
     }
   };
 
@@ -324,6 +407,7 @@ export default function FlipBook({ isRightPanelOpen }) {
 
   return (
     <div className={styles.wrapper} style={{ width: isRightPanelOpen ? 'calc(100% - 350px)' : '100%' }}>
+      <BookmarkListener onBookmarkDeleted={handleDeletedBookmarkFromSignalR} />
       <div 
         className={styles.bookmarkContainers}
         style={{ transform: containerTransform }}
@@ -479,7 +563,40 @@ export default function FlipBook({ isRightPanelOpen }) {
         mobileScrollSupport={true}
         drawShadow={true}
         useMouseEvents={true}
-        onFlip={({ data }) => setCurrentPage(data)}
+        onFlip={({ data }) => {
+          setCurrentPage(data);
+
+          // Calculate left/right bookmarks for the new page
+          const newLeftPage = data % 2 === 0 ? data : data - 1;
+          const newRightPage = newLeftPage + 1;
+
+          const newLeftBookmarks = [...bookmarks]
+            .filter(b => b.page < newLeftPage + 2 || (b.page === newLeftPage && data !== newLeftPage))
+            .sort((a, b) => a.page - b.page);
+
+          const newRightBookmarks = [...bookmarks]
+            .filter(b => b.page > newRightPage || (b.page === newRightPage && data !== newRightPage))
+            .sort((a, b) => a.page - b.page);
+
+          const newLeftBookmarkPages = Array.from({ length: Math.ceil(newLeftBookmarks.length / BOOKMARKS_PER_PAGE) }, (_, i) =>
+            newLeftBookmarks.slice(i * BOOKMARKS_PER_PAGE, (i + 1) * BOOKMARKS_PER_PAGE)
+          );
+
+          const firstPage = newRightBookmarks.slice(0, BOOKMARKS_PER_PAGE);
+          const remaining = newRightBookmarks.slice(BOOKMARKS_PER_PAGE);
+
+          let newRightBookmarkPages = [firstPage];
+          for (let i = 0; i < remaining.length; i += BOOKMARKS_PER_PAGE) {
+            newRightBookmarkPages.push(remaining.slice(i, i + BOOKMARKS_PER_PAGE));
+          }
+
+          // Find the slider index for the new page in both containers
+          const leftIndex = findBookmarkSliderIndex(data, newLeftBookmarkPages);
+          const rightIndex = findBookmarkSliderIndex(data, newRightBookmarkPages);
+
+          setLeftPageIndex(leftIndex);
+          setRightPageIndex(rightIndex);
+        }}
         className={`${styles.flipbook} ${
           currentPage === 0 ? styles.centeredCoverpage : ''
         } ${
