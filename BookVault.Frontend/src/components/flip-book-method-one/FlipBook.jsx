@@ -6,6 +6,7 @@ import { IoAddCircleSharp, IoCloseCircleSharp } from "react-icons/io5";
 import { LuChevronFirst, LuChevronLast, LuChevronLeft, LuChevronRight } from 'react-icons/lu';
 import { useUser } from '../../context/UserContext';
 import { useParams } from 'react-router-dom';
+import BookmarkListener from '../bookmark-listener/BookmarkListener';
 
 const Page = forwardRef(({ children, number, totalPages, currentPage, pageType, onBookmarkAdd, activeBookmarks }, ref) => {
   const [showRotatedCopy, setShowRotatedCopy] = useState(false);
@@ -80,7 +81,7 @@ export default function FlipBook({ isRightPanelOpen }) {
   const {user} = useUser();
   const { id } = useParams();
 
-  const contentPages = 20;
+  const contentPages = 40;
   const totalPages = 2 + contentPages + (contentPages % 2 === 1 ? 1 : 0) + 2;
   const flipBookRef = useRef();
   const pages = [];
@@ -163,6 +164,11 @@ export default function FlipBook({ isRightPanelOpen }) {
       fetchAllBookmarks();
     // }
   }, []); 
+
+  // Handle deletion from SignalR (real-time)
+  const handleDeletedBookmarkFromSignalR = (bookmarkId) => {
+    setBookmarks((prev) => prev.filter((b) => b.id !== bookmarkId));
+  };
 
   const handleAddBookmark = async (pageNumber) => {
     const currentBookmark = bookmarks.find(b => b.page === pageNumber);
@@ -390,6 +396,7 @@ export default function FlipBook({ isRightPanelOpen }) {
 
   return (
     <div className={styles.wrapper} style={{ width: isRightPanelOpen ? 'calc(100% - 350px)' : '100%' }}>
+      <BookmarkListener onBookmarkDeleted={handleDeletedBookmarkFromSignalR} />
       <div 
         className={styles.bookmarkContainers}
         style={{ transform: containerTransform }}
