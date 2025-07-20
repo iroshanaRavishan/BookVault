@@ -20,18 +20,18 @@ namespace BookVault.Application.Services
             _logger = logger;
         }
 
-        public async Task<(bool IsSuccess, byte[]? ImageBytes, string Message)> GenerateThumbnailAsync(string filename)
+        public async Task<(bool IsSuccess, string? ThumbnailPath, string Message)> GenerateThumbnailAsync(string filename)
         {
             try
             {
-                var thumbnail = await _repository.GenerateThumbnailAsync(filename);
+                var thumbnailPath = await _repository.GenerateThumbnailAsync(filename);
 
-                if (thumbnail == null || thumbnail.Length == 0)
+                if (string.IsNullOrEmpty(thumbnailPath))
                 {
                     return (false, null, "Failed to generate thumbnail. File may not exist or is unreadable.");
                 }
 
-                return (true, thumbnail, "Thumbnail generated successfully.");
+                return (true, thumbnailPath, "Thumbnail generated successfully.");
             }
             catch (Exception ex)
             {
