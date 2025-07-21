@@ -17,11 +17,12 @@ namespace BookVault.API.Controllers
             _bookmarkService = bookmarkService;
         }
 
-        // GET: api/bookmarks?userId={userId}&bookId={bookId}
+        // GET: api/bookmarks?userId={userId}&bookId={bookId}&sortBy={sortBy}
+        // Available sortBy values: "newest", "oldest", "page-asc", "page-desc"
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<BookmarkResponseDto>>> GetAll([FromQuery] Guid userId, [FromQuery] Guid bookId)
+        public async Task<ActionResult<IEnumerable<BookmarkResponseDto>>> GetAll([FromQuery] Guid userId, [FromQuery] Guid bookId, [FromQuery] string sortBy = "page-asc")
         {
-            var bookmarks = await _bookmarkService.GetAllAsync(userId, bookId);
+            var bookmarks = await _bookmarkService.GetAllAsync(userId, bookId, sortBy);
 
             var result = bookmarks.Select(b => new BookmarkResponseDto
             {
@@ -29,6 +30,7 @@ namespace BookVault.API.Controllers
                 UserId = b.UserId,
                 BookId = b.BookId,
                 PageNumber = b.PageNumber,
+                Color = b.Color,
                 CreatedAt = b.CreatedAt,
                 BookmarkThumbnailPath = b.BookmarkThumbnailPath
             });
@@ -48,6 +50,7 @@ namespace BookVault.API.Controllers
                 UserId = bookmark.UserId,
                 BookId = bookmark.BookId,
                 PageNumber = bookmark.PageNumber,
+                Color = bookmark.Color,
                 CreatedAt = bookmark.CreatedAt,
                 BookmarkThumbnailPath = bookmark.BookmarkThumbnailPath
             };
@@ -59,7 +62,7 @@ namespace BookVault.API.Controllers
         [HttpDelete]
         public async Task<IActionResult> Delete([FromBody] BookmarkDeleteDto dto)
         {
-            var success = await _bookmarkService.DeleteAsync(dto.Id);
+            var success = await _bookmarkService.DeleteAsync(dto.Id, dto.IsLastBookmark);
             if (!success)
                 return NotFound();
 

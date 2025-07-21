@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookVault.Infrastructure", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookVault.Application", "BookVault.Application\BookVault.Application.csproj", "{A3EED40A-3B25-453F-9E6F-520EAD6137F7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookVault.Shared", "BookVault.Shared\BookVault.Shared.csproj", "{90E35766-E317-40D8-8D94-1BDBB26BAFE4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{A3EED40A-3B25-453F-9E6F-520EAD6137F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A3EED40A-3B25-453F-9E6F-520EAD6137F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A3EED40A-3B25-453F-9E6F-520EAD6137F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90E35766-E317-40D8-8D94-1BDBB26BAFE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90E35766-E317-40D8-8D94-1BDBB26BAFE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90E35766-E317-40D8-8D94-1BDBB26BAFE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90E35766-E317-40D8-8D94-1BDBB26BAFE4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

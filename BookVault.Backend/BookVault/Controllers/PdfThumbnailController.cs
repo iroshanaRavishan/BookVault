@@ -18,16 +18,16 @@ namespace BookVault.API.Controllers
         }
 
         [HttpGet("{filename}")]
-        public async Task<IActionResult> GetThumbnail(string filename)
+        public async Task<IActionResult> GetThumbnail(string filename, string type, [FromQuery] int page = 0)
         {
             if (string.IsNullOrWhiteSpace(filename))
                 return BadRequest("Filename is required.");
 
-            var (isSuccess, thumbnailPath, message) = await _thumbnailService.GenerateThumbnailAsync(filename);
+            var (isSuccess, thumbnailPath, message) = await _thumbnailService.GenerateThumbnailAsync(filename, type, page);
 
             if (!isSuccess || thumbnailPath == null)
             {
-                _logger.LogWarning("Thumbnail generation failed for {filename}: {message}", filename, message);
+                _logger.LogWarning("Thumbnail generation failed for {filename} (page {page}): {message}", filename, page, message);
                 return NotFound(message);
             }
 
