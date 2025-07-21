@@ -15,6 +15,7 @@ import { IoIosColorPalette } from "react-icons/io";
 import { IoCall } from "react-icons/io5";
 import { RiInformationFill } from "react-icons/ri";
 import { MdDownloadForOffline } from "react-icons/md";
+import { convertUserImageToBase64 } from '../../utils/convertUserImageToBase64';
 
 export default function NavBar() {
     const { user } = useUser();
@@ -31,11 +32,9 @@ export default function NavBar() {
       setIsSideMenuOpen(!isSideMenuOpen);
     };
     
-    const profilePictureUrl = user?.profilePicture 
-    ? `data:${user.profilePictureContentType};base64,${user.profilePicture}` 
-    : null;
+    const profilePictureUrl = convertUserImageToBase64(user);
 
-    const username = user?.name ? user.name: null;
+    const username = user?.userName ? user.userName: null;
 
 
     async function logOutHandler() {
@@ -117,13 +116,13 @@ export default function NavBar() {
               </>
             )}
           </NavLink>
-          <NavLink
-            className={`${styles.navLink} ${styles.navFlex}`}
+          <div
+            className={`${styles.navLinkButton} ${styles.navLink} ${styles.navFlex}`}
             onClick={sideMenu}
           >
             <SlMenu size={20} />
             <span>Menu</span>
-          </NavLink>
+          </div>
 
           <div className={`${styles.sideMenu} ${isSideMenuOpen ? styles.open : ""}`}>
               <div className={styles.sideMenuFirstContent}>
@@ -140,7 +139,7 @@ export default function NavBar() {
                           <span className={styles.menuSubTitle}>App settings</span> 
                       </span>
                   </Link>
-                  <Link to="/" className={styles.menuIconWrapper} onClick={ ()=>setIsSideMenuOpen(!isSideMenuOpen) }>
+                  <Link to="/profile-settings" className={styles.menuIconWrapper} onClick={ ()=>setIsSideMenuOpen(!isSideMenuOpen) }>
                       <FaUserCircle className={styles.menuIcon} size={20}/>
                       <span className={styles.menuTitle}>Profile <br />
                           <span className={styles.menuSubTitle}>Profile related settings</span> 
@@ -162,7 +161,7 @@ export default function NavBar() {
                       <IoCall className={styles.menuIcon} size={20}/>
                       <span className={styles.menuTitle}>Contact</span>
                   </Link>
-                  <Link to="/" className={styles.menuIconWrapper} onClick={ ()=>setIsSideMenuOpen(!isSideMenuOpen) }>
+                  <Link to="/faq" className={styles.menuIconWrapper} onClick={ ()=>setIsSideMenuOpen(!isSideMenuOpen) }>
                       <RiInformationFill className={styles.menuIcon} size={21}/>
                       <span className={styles.menuTitle}>FAQs<br />
                           <span className={styles.menuSubTitle}>Any question, expore here</span>
