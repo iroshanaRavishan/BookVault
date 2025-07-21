@@ -14,11 +14,26 @@ namespace BookVault.Application.Services
     {
         private readonly IBookmarkRepository _bookmarkRepository;
         private readonly INotificationService _notificationService;
+        private readonly IPdfThumbnailService _thumbnailService;
+        private readonly ILogger<BookService> _logger;
+        private readonly IBookRepository _bookRepository;
+        private readonly string _uploadsFolder;
 
-        public BookmarkService(IBookmarkRepository bookmarkRepository, INotificationService notificationService)
+        public BookmarkService(
+            IBookmarkRepository bookmarkRepository, 
+            INotificationService notificationService, 
+            IPdfThumbnailService thumbnailService, 
+            ILogger<BookService> logger, 
+            IBookRepository bookRepository, 
+            Microsoft.AspNetCore.Hosting.IHostingEnvironment environment
+            )
         {
             _bookmarkRepository = bookmarkRepository;
             _notificationService = notificationService;
+            _thumbnailService = thumbnailService;
+            _logger = logger;
+            _bookRepository = bookRepository;
+            _uploadsFolder = Path.Combine(environment.ContentRootPath, "uploads");
         }
 
         public async Task<IEnumerable<BookmarkResponseDto>> GetAllAsync(Guid userId, Guid bookId, string sortBy)
@@ -39,7 +54,15 @@ namespace BookVault.Application.Services
 
         public async Task<BookmarkResponseDto> CreateAsync(BookmarkCreateDto dto)
         {
-            var bookmark = Bookmark.Create(dto.UserId, dto.BookId, dto.PageNumber, dto.Color, dto.BookmarkThumbnailPath);
+
+            var book = await _bookRepository.GetByIdAsync(dto.BookId);
+
+            //var (isSuccess, thumbnailPath, message) = await GenerateThumbnailAsync(book.PdfFilePath, "bookmark", dto.PageNumber);
+
+            var bookmark = Bookmark.Create(dto.UserId, dto.BookId, dto.PageNumber, dto.Color, book.PdfFilePath);
+
+            //bookmark = Bookmark.Create(dto.UserId, dto.BookId, dto.PageNumber, dto.Color, book.PdfFilePath);
+
             await _bookmarkRepository.AddAsync(bookmark);
 
             var response = new BookmarkResponseDto
@@ -59,17 +82,77 @@ namespace BookVault.Application.Services
             return response;
         }
 
-        public async Task<bool> DeleteAsync(Guid bookmarkId)
+        public async Task<bool> DeleteAsync(Guid bookmarkId, bool isLastBookmark)
         {
             var bookmark = await _bookmarkRepository.GetByIdAsync(bookmarkId);
-            if (bookmark is null) return false;
+            if (isLastBookmark)
+            {
+                //basePath = Path.Combine(_env.ContentRootPath, "uploads", "bookmarks");
+                var fullPath = Path.Combine(_uploadsFolder, "bookmarks");
+                if (Directory.Exists(fullPath))
+                {
+                    var files = Directory.GetFiles(fullPath);
+                    foreach (var file in files)
+                    {
+                        File.Delete(file);
+                    }
+                }
+            }
 
-            await _bookmarkRepository.DeleteAsync(bookmark);
+            //if (bookmark is null) return false;
 
+                //if (bookmark != null)
+                //{
+                //    // Delete associated files
+                //    if (!string.IsNullOrEmpty(bookmark.BookmarkThumbnailPath))
+                //    {
+                //        DeleteFileIfExists(bookmark.BookmarkThumbnailPath);
+                //    }
+
+                    await _bookmarkRepository.DeleteAsync(bookmark);
+                //}
+            
             // Notify via SignalR
             await _notificationService.NotifyBookmarkDeletedAsync(bookmarkId);
 
             return true;
         }
+
+        private void DeleteFileIfExists(string relativePath)
+        {
+            if (string.IsNullOrEmpty(relativePath))
+                return;
+
+            var fullPath = Path.Combine(_uploadsFolder, relativePath);
+            if (File.Exists(fullPath))
+            {
+                try
+                {
+                    File.Delete(fullPath);
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogWarning(ex, "Failed to bookmark thumbnail file: {Path}", fullPath);
+                }
+            }
+        }
+
+        //private async Task<(bool isSuccess, string? thumbnailPath, string message)> GenerateThumbnailAsync(string filename, string type, int page)
+        //{
+        //    string fileName = Path.GetFileName(filename);
+
+        //    if (string.IsNullOrWhiteSpace(filename))
+        //        return (false, null, "Filename is required.");
+
+        //    var (isSuccess, thumbnailPath, message) = await _thumbnailService.GenerateThumbnailAsync(fileName, type, page);
+
+        //    if (!isSuccess || thumbnailPath == null)
+        //    {
+        //        _logger.LogWarning("Thumbnail generation failed for {filename}: {message}", filename, message);
+        //        return (false, null, message);
+        //    }
+
+        //    return (true, thumbnailPath, string.Empty);
+        //}
     }
 }
