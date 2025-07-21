@@ -9,5 +9,6 @@ namespace BookVault.Application.DTOs.BookmarkDTOs
     public class BookmarkDeleteDto
     {
         public Guid Id { get; set; }
+        public bool IsLastBookmark { get; set; }
     }
 }
