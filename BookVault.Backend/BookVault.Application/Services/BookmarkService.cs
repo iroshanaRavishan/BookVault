@@ -117,5 +117,42 @@ namespace BookVault.Application.Services
 
             return true;
         }
+
+        private void DeleteFileIfExists(string relativePath)
+        {
+            if (string.IsNullOrEmpty(relativePath))
+                return;
+
+            var fullPath = Path.Combine(_uploadsFolder, relativePath);
+            if (File.Exists(fullPath))
+            {
+                try
+                {
+                    File.Delete(fullPath);
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogWarning(ex, "Failed to bookmark thumbnail file: {Path}", fullPath);
+                }
+            }
+        }
+
+        //private async Task<(bool isSuccess, string? thumbnailPath, string message)> GenerateThumbnailAsync(string filename, string type, int page)
+        //{
+        //    string fileName = Path.GetFileName(filename);
+
+        //    if (string.IsNullOrWhiteSpace(filename))
+        //        return (false, null, "Filename is required.");
+
+        //    var (isSuccess, thumbnailPath, message) = await _thumbnailService.GenerateThumbnailAsync(fileName, type, page);
+
+        //    if (!isSuccess || thumbnailPath == null)
+        //    {
+        //        _logger.LogWarning("Thumbnail generation failed for {filename}: {message}", filename, message);
+        //        return (false, null, message);
+        //    }
+
+        //    return (true, thumbnailPath, string.Empty);
+        //}
     }
 }
