@@ -1,0 +1,263 @@
+.bookmarkPanel {
+    padding: 0 0 0 0px;
+    width: 100%;
+}
+
+.bookmarkList {
+    list-style: none;
+    padding-left: 10px;
+    margin: 10px 0px;
+    overflow-y: auto;
+    min-height: 240px;
+    max-height: 250px; 
+    padding-right: 20px;
+    position: relative;
+    overflow-x: hidden;
+    transition: all 500ms;
+}
+
+.bookmarkList::-webkit-scrollbar {
+    width: 7px;
+}
+
+.bookmarkList::-webkit-scrollbar-track {
+    background: #92929262; 
+    border-radius: 4px;
+}
+
+.bookmarkList::-webkit-scrollbar-thumb {
+    background: #b9b9b9; 
+    border-radius: 4px;
+}
+
+.bookmarkList::-webkit-scrollbar-thumb:hover {
+    background: #999999;
+}
+
+.bookmarkItem {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0;
+    border-left: 6px solid var(--border-color);
+    transition: border-left-color 0.2s ease;
+    padding-left: 10px;
+    border-radius: 12px;
+    position: relative;
+    user-select: none;
+
+    /* Store original color with reduced opacity as fallback */
+    --border-hsl: var(--border-color, hsl(20, 70%, 60%, 0.8));
+}
+
+.bookmarkItem:first-child {
+    margin-top: 0px;
+}
+
+.bookmarkItem:hover {
+    cursor: pointer;
+    transform: scale(1.01);
+    /* Override opacity on hover */
+    border-left-color: var(--border-color-hover);
+}
+
+.bookmarkItem::after {
+    content: "";
+    position: absolute;
+    left: 15px;
+    bottom: -6px;
+    height: 1px;
+    width: 100%;
+    background-color: currentColor; 
+    opacity: 0.2; 
+}
+
+.pageNumber {
+    font-size: 40px;
+    font-weight: 700;
+    opacity: 0.6;
+    margin-left: 20px;
+    transform: translateY(-2px);
+}
+
+.bookmarkItem:hover .pageNumber { 
+    /* when the mouse is hovering over the bookmarkItem, below styles will be added to the pageNumber */
+    color: #ffffffd2; 
+    opacity: 1;      
+    transition: all 0.2s ease ;
+}
+
+.bookmarkRow {
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.pageText {
+    transform: rotate(-90deg) translateX(0px) !important;
+    position: absolute;
+    left: 0;
+    font-size: 14px;
+    opacity: 0.6;
+}
+
+.createdDate {
+    transform: translateY(-2px);
+    display: flex;
+    flex-direction: column;
+    margin: 0 10px;
+    color: rgb(221, 221, 221);
+}
+
+.bookmarkDeleteButton{
+    color:#ddddddda
+}
+
+.bookmarkDeleteButton:hover {
+    color:#ffffff
+}
+
+.bookmarkPanelContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 580px;
+}
+
+.noBookmarksText{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 580px;
+    color: #ccc;
+    font-style: italic;
+}
+
+.pagePreviewContaienr {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.pagePreview {
+    width: 50%;
+    height: 100%;
+    padding: 3px 6px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    border: 1px solid white;
+    border-radius: 8px;
+}
+
+.jumpToPageButton {
+    height: 40px;
+    padding: 6px 12px;
+    font-size: 14px;
+    border-radius: 6px;
+    background-color: #ffffff;
+    border: none;
+    cursor: pointer;
+}
+
+.jumpToPageButton:disabled {
+    cursor: not-allowed;
+    color: #ffffff;
+    background-color: #999999;
+}
+
+.pageThumbnail {
+    height: 220px;
+    width: 160px;
+    border-radius: 6px;
+}
+
+.pagePreviewText {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.pagePreviewText::before {
+    content: '';
+    display: flex;
+    border-top: 1px solid #646464;
+    margin: 5px 0 10px 0;
+}
+
+.sortButton {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 12px;
+    width: 185px;
+    align-items: center;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: white;
+    right: 0;
+}
+
+.sortIconWithText{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 65px;
+    align-items: center;
+    gap: 5px;
+}
+
+.sortTypeText{
+    width: 100px;
+     display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.sortDropdown {
+    width: 185px;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 100;
+    background-color: white;
+    border: none;
+    color: black;
+    border-radius: 6px;
+    padding: 8px 0;
+    list-style: none;
+}
+
+.sortDropdown li {
+    padding: 8px 16px;
+    cursor: pointer;
+}
+
+.sortDropdown li:hover {
+    background-color: #f0f0f0;
+}
+
+.active {
+    background-color: #f0f0f0;
+}
+
+.bookmarkPanelDetailBar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.totalBookmarkText{
+    font-size: 12px;
+    font-weight: 600;
+}
