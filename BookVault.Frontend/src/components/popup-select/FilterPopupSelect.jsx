@@ -26,7 +26,7 @@ export default function FilterPopupSelect({ options, selectedValue, onSelect, pl
     setIsOpen(false);
   };
 
-  const selectedLabel = options.find(opt => opt.value === selectedValue)?.label;
+  const selectedLabel = selectedValue || "";
 
   return (
     <div className={styles.wrapper}>
@@ -35,7 +35,7 @@ export default function FilterPopupSelect({ options, selectedValue, onSelect, pl
         <span className={styles.iconWrapper}>
           {selectedValue ? (
             <IoCloseCircle
-            size={20}
+              size={20}
               className={styles.closeIcon}
               onClick={handleClear}
               title="Clear selection"
@@ -49,13 +49,13 @@ export default function FilterPopupSelect({ options, selectedValue, onSelect, pl
       {isOpen && (
         <div className={styles.modal} ref={modalRef}>
           <div className={twoColumns ? styles.optionsGrid : styles.optionsList}>
-            {options.map(({ label, value }) => (
+            {options.map((value) => (
               <div
                 key={value}
                 className={`${styles.option} ${value === selectedValue ? styles.selected : ""}`}
                 onClick={() => handleSelect(value)}
               >
-                {label}
+                {value}
               </div>
             ))}
           </div>

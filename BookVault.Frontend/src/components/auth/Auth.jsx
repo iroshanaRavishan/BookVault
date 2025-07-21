@@ -4,6 +4,7 @@ import styles from './auth.module.css';
 import ProfilePicSelectorModal from '../profile-picture-select-modal/ProfilePicSelectorModal';
 import { IoCloseCircleSharp } from "react-icons/io5";
 import PasswordInput from '../password-input/PasswordInput';
+import { LoadingAnimation } from '../loading-animation/LoadingAnimation';
 
 export default function Auth() {
   const navigate = useNavigate(); // Hook to programmatically navigate
@@ -280,7 +281,7 @@ export default function Auth() {
               
               <button type="submit" disabled={isLoding}>
                 { isLoding?
-                  <div className={styles.loadingSpinner}></div> : 
+                  "logging in..." : 
                   "Login" 
                 }
               </button>
@@ -337,7 +338,7 @@ export default function Auth() {
                 </div>
                 <button type="submit" disabled={isLoding}>
                   { isLoding?
-                    <div className={styles.loadingSpinner}></div>
+                    "Registering..."
                     : "Register" }
                 </button>
                 <p ref={regMessageRef}  className={`message`}></p>
@@ -360,6 +361,7 @@ export default function Auth() {
                 </div>
             </div>
           </div>
+          { isLoding && <LoadingAnimation /> }
         </div>
       </div>
   )
