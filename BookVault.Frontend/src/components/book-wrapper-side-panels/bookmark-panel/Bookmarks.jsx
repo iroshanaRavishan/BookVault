@@ -6,8 +6,9 @@ import { RiDeleteBin6Fill } from 'react-icons/ri';
 import { BsSortUp } from "react-icons/bs";
 import { HiMiniArrowLongUp, HiMiniArrowLongDown } from "react-icons/hi2";
 import BookmarkListener from '../../bookmark-listener/BookmarkListener';
+import { GoBookmarkSlashFill } from "react-icons/go";
 
-export default function Bookmarks({ openedAt }) {
+export default function Bookmarks({ openedAt, onBookmarkItemDoubleClick }) {
   const dropdownRef = useRef(null);
   const { id } = useParams(); 
   const { user } = useUser();
@@ -121,15 +122,26 @@ export default function Bookmarks({ openedAt }) {
     setBookmarks((prev) => (prev ? [newBookmark, ...prev] : [newBookmark]));
   };
 
+  // Handle deletion from SignalR (real-time)
+  const handleDeletedBookmarkFromSignalR = (bookmarkId) => {
+    setBookmarks((prev) => prev.filter((b) => b.id !== bookmarkId));
+  };
+
   return (
     <div className={styles.bookmarkPanel}>
       {/* Listen for new bookmarks in real-time */}
-      <BookmarkListener onBookmarkCreated={handleNewBookmark} />
-      <div style={{ position: "relative", display: "inline-block" }} ref={dropdownRef}>
-        <button onClick={() => setSortMenuOpen((prev) => !prev)} className={styles.sortButton}>
-          <span className={styles.sortIconWithText}><BsSortUp size={18} /> Sort : </span>  
-          <span className={styles.sortTypeText}>{getSortTypeName(sortType)}</span>
-        </button>
+      <BookmarkListener 
+        onBookmarkCreated={handleNewBookmark} 
+        onBookmarkDeleted={handleDeletedBookmarkFromSignalR} 
+      />
+      <div style={{ position: "relative", display: "flex" }} ref={dropdownRef}>
+        <div className={styles.bookmarkPanelDetailBar}>
+          <button onClick={() => setSortMenuOpen((prev) => !prev)} className={styles.sortButton}>
+            <span className={styles.sortIconWithText}><BsSortUp size={18} /> Sort : </span>  
+            <span className={styles.sortTypeText}>{getSortTypeName(sortType)}</span>
+          </button>
+          <span className={styles.totalBookmarkText}>Total Bookmarks: {bookmarks?.length}</span>
+        </div>
         {sortMenuOpen && (
           <ul className={styles.sortDropdown}>
             <li onClick={() => handleSortChange("newest")} className={sortType === 'newest' ? styles.active : ''}>Newest First</li>
@@ -160,6 +172,7 @@ export default function Bookmarks({ openedAt }) {
                   '--border-color': bookmarks[i].color,
                   '--border-color-hover': bookmarks[i].color.replace(/,?\s*[\d.]+\)$/, ', 1)'),
                 }}
+                onDoubleClick={() => onBookmarkItemDoubleClick && onBookmarkItemDoubleClick(bookmark.pageNumber)}
               >
                 <div className={styles.bookmarkRow}>
                   <span className={styles.pageText}>page</span> 
@@ -184,7 +197,10 @@ export default function Bookmarks({ openedAt }) {
           </div>
         </div>
       ) : (
-        <p>No bookmarks found.</p>
+        <div className={styles.noBookmarksText}>
+          <GoBookmarkSlashFill size={30}/>
+          <p>No bookmarks found.</p>
+        </div>
       )}
     </div>
   );

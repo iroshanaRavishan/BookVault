@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { HubConnectionBuilder } from "@microsoft/signalr";
 
-export default function BookmarkListener({ onBookmarkCreated }) {
+export default function BookmarkListener({ onBookmarkCreated, onBookmarkDeleted }) {
   useEffect(() => {
     const connection = new HubConnectionBuilder()
       .withUrl("https://localhost:7157/hubs/notifications")
@@ -19,10 +19,17 @@ export default function BookmarkListener({ onBookmarkCreated }) {
       }
     });
 
+    connection.on("BookmarkDeleted", (bookmarkId) => {
+      console.log("Bookmark deleted:", bookmarkId);
+      if (onBookmarkDeleted){
+         onBookmarkDeleted(bookmarkId);
+      }
+    });
+
     return () => {
       connection.stop();
     };
-  }, [onBookmarkCreated]);
+  }, [onBookmarkCreated, onBookmarkDeleted]);
 
   return null; // This component doesn't render UI
 }

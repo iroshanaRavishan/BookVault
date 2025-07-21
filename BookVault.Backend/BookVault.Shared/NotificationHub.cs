@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookVault.RealTimeNotification
+namespace BookVault.Shared
 {
     public class NotificationHub : Hub
     {
