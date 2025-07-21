@@ -39,7 +39,15 @@ namespace BookVault.Application.Services
 
         public async Task<BookmarkResponseDto> CreateAsync(BookmarkCreateDto dto)
         {
-            var bookmark = Bookmark.Create(dto.UserId, dto.BookId, dto.PageNumber, dto.Color, dto.BookmarkThumbnailPath);
+
+            var book = await _bookRepository.GetByIdAsync(dto.BookId);
+
+            //var (isSuccess, thumbnailPath, message) = await GenerateThumbnailAsync(book.PdfFilePath, "bookmark", dto.PageNumber);
+
+            var bookmark = Bookmark.Create(dto.UserId, dto.BookId, dto.PageNumber, dto.Color, book.PdfFilePath);
+
+            //bookmark = Bookmark.Create(dto.UserId, dto.BookId, dto.PageNumber, dto.Color, book.PdfFilePath);
+
             await _bookmarkRepository.AddAsync(bookmark);
 
             var response = new BookmarkResponseDto
