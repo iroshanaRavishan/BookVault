@@ -62,7 +62,7 @@ namespace BookVault.API.Controllers
         [HttpDelete]
         public async Task<IActionResult> Delete([FromBody] BookmarkDeleteDto dto)
         {
-            var success = await _bookmarkService.DeleteAsync(dto.Id);
+            var success = await _bookmarkService.DeleteAsync(dto.Id, dto.IsLastBookmark);
             if (!success)
                 return NotFound();
 

@@ -12,6 +12,6 @@ namespace BookVault.Application.Interfaces
     {
         Task<IEnumerable<BookmarkResponseDto>> GetAllAsync(Guid userId, Guid bookId, string sortBy);
         Task<BookmarkResponseDto> CreateAsync(BookmarkCreateDto dto);
-        Task<bool> DeleteAsync(Guid bookmarkId);
+        Task<bool> DeleteAsync(Guid bookmarkId, bool isLastBookmark);
     }
 }

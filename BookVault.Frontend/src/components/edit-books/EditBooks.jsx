@@ -171,9 +171,11 @@ export default function EditBooks() {
 
       if (fileType == "pdf") {
         try {
-          const thumbnailResponse = await fetch(`https://localhost:7157/api/PdfThumbnail/${cleanedFilePath}`, {
+          const page = 0;
+          const type = "thumbnail";
+          const thumbnailResponse = await fetch(`https://localhost:7157/api/PdfThumbnail/${cleanedFilePath}?type=${type}&page=${page}`, {
             method: "GET"
-          })
+          });
 
           if (!thumbnailResponse.ok) {
             throw new Error("Failed to generate thumbnail");
