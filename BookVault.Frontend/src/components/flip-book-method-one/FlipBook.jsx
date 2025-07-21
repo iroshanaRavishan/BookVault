@@ -73,7 +73,7 @@ const Page = forwardRef(({ children, number, totalPages, currentPage, pageType, 
   );
 });
 
-export default function FlipBook({ isRightPanelOpen }) {
+export default function FlipBook({ isRightPanelOpen, selectedBookmarkedPageNumber }) {
   const [currentPage, setCurrentPage] = useState(0);
   const [bookmarks, setBookmarks] = useState([]);
   const [animatingPages, setAnimatingPages] = useState([]);
@@ -169,6 +169,16 @@ export default function FlipBook({ isRightPanelOpen }) {
   const handleDeletedBookmarkFromSignalR = (bookmarkId) => {
     setBookmarks((prev) => prev.filter((b) => b.id !== bookmarkId));
   };
+
+  // When navigating to a bookmark:
+  useEffect(() => {
+    if (selectedBookmarkedPageNumber !== null) {
+      const bookmark = bookmarks.find(b => b.pageNumber === selectedBookmarkedPageNumber);
+      if (bookmark) {
+        goToPage(bookmark.page);
+      }
+    }
+  }, [selectedBookmarkedPageNumber, bookmarks]);
 
   const handleAddBookmark = async (pageNumber) => {
     const currentBookmark = bookmarks.find(b => b.page === pageNumber);
@@ -327,6 +337,7 @@ export default function FlipBook({ isRightPanelOpen }) {
 
     // === Normal Flip ===
     else {
+      await delay(100);
       await instance.flip(targetPage);
     }
 
