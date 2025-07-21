@@ -213,25 +213,13 @@
 
 .closeButton {
   position: absolute;
-  top: 15px;
-  right: 15px;
-  background: rgba(0, 0, 0, 0.6);
-  color: white;
-  border: none;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
+  top: 10px;
+  right: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 20px;
   cursor: pointer;
   z-index: 10;
-  transition: background 0.2s ease;
-}
-
-.closeButton:hover {
-  background: rgba(0, 0, 0, 0.8);
 }
 
 .modalGrid {
@@ -291,6 +279,7 @@
 
 .modalTitleRow {
   display: flex;
+  flex-direction: column;
   color: #222;
   justify-content: flex-start;
   align-items: baseline;
@@ -298,7 +287,6 @@
 }
 
 .editBookRec{
-  margin-left: 20px;
   font-size: 14px;
 }
 
@@ -384,21 +372,35 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: #e50914;
+  background: #6276e0;
   color: white;
   text-decoration: none;
-  padding: 12px 20px;
+  padding: 12px 24px;
+  border: none;
   border-radius: 8px;
-  font-weight: 600;
+  font-size: 15px;
+  font-weight: 500;
   transition: background 0.2s ease;
   margin-top: 10px;
+  cursor: pointer;
 }
 
 .readButton:hover {
-  background: #f40612;
+  background: #5b68d5;
 }
 
-.playIcon {
+.readButton:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.sourceIcon {
   width: 20px;
   height: 20px;
+}
+
+.readPlatformActionBtns {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }

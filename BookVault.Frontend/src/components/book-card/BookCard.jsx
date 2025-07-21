@@ -1,38 +1,50 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styles from './bookcard.module.css';
-import { FaCalendarAlt } from "react-icons/fa";
-import { GoClockFill } from "react-icons/go";
+import { RiEdit2Fill } from "react-icons/ri";
+import { RiDeleteBin6Fill } from "react-icons/ri";
 import GenreScroll from '../genre-scroll-buttons/GenreScroll';
 import { TbClock } from "react-icons/tb";
-import { Link } from 'react-router-dom';
-// import StarRating from '../star-rating/StartRating';
+import { Link, useNavigate } from 'react-router-dom';
+import ConfirmDeleteModal from '../confirm-dialog/ConfirmDialogModal';
+import useBooks from "../../hooks/useBook";
+import { IoCloseCircleSharp } from "react-icons/io5";
+import { FiCheckCircle } from "react-icons/fi";
+import { FaRegWindowMaximize, FaRegWindowRestore } from "react-icons/fa6";
+import { LoadingAnimation } from '../loading-animation/LoadingAnimation';
 
-export default function BookCard({ book }) {
+export default function BookCard({ book, refreshBooks }) {
   const [showModal, setShowModal] = useState(false);
-
-  // Sample book object structure for reference
-  // const book = {
-  //   id: 1,
-  //   name: "Inception of the case in the moon",
-  //   image: "/path/to/image.jpg",
-  //   rating: 3.9,
-  //   year: 2010,
-  //   read: true,
-  //   genres: ["Sci-Fi", "Action", "Thriller"],
-  //   author: "Christopher Nolan",
-  //   cast: ["Leonardo DiCaprio", "Joseph Gordon-Levitt", "Ellen Page"],
-  //   plot: "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O.",
-  //   length: "2h 28m",
-  //   readUrl: "https://www.websitename.com/read/books"
-  // };
+  const [showDeleteConfirmModal, setShowDeleteConfirmModal] = useState(false);
+  const { books, loading, fetchBooks } = useBooks(); // custom hook
+  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
 
   function ImagePathReviser(path){
     return `https://localhost:7157/uploads/${path.replace(/\\/g, '/')}`;
   }
 
-  useEffect(() => {
-    console.log(('book', book));
-  },[]);
+  function handleDeleteClick() {
+    setShowDeleteConfirmModal(true);   // Show the confirmation modal
+    closeModal(); // Open the modal to confirm deletion           
+  };
+  
+  function handleCloseModal() {
+    setShowDeleteConfirmModal(false);
+  };
+
+  async function handleConfirmDelete() {
+    await fetchBooks(); // refresh after successful delete
+    setShowDeleteConfirmModal(false);
+    // TODO : Implement the logic of opening the book modal if the modal is closed or cancel. 
+    // now the book modal is closing when close or cancel. so to delete have to start fro the begininghere
+  };
+
+  function handleDelayedNavigation() {
+    setIsLoading(true);
+    setTimeout(() => {
+      navigate(`/read/${book.id}`);
+    }, 3000); // 1000ms = 1 second delay
+  };
 
   const openModal = () => setShowModal(true);
   const closeModal = () => setShowModal(false);
@@ -44,7 +56,13 @@ export default function BookCard({ book }) {
           {book.coverImagePath ? (
             <img src={ImagePathReviser(book.coverImagePath)} alt={book.name} className={styles.bookImage} />
           ) : (
-            <div className={styles.placeholderImage}>No Image</div>
+             book.thumbnailPath ? (
+              <img src={ImagePathReviser(book.thumbnailPath)} alt={book.name} className={styles.bookImage} />
+            ) : (
+              <div className={styles.placeholderImage}>
+                <span className={styles.placeholderText}>No Image</span>
+              </div>
+            )
           )}
           <div className={styles.overlay}>
             <button className={styles.detailsButton} onClick={openModal}>
@@ -53,10 +71,9 @@ export default function BookCard({ book }) {
           </div>
           {book.isRead && (
             <div className={styles.readBadge}>
-              <svg viewBox="0 0 24 24" fill="none" className={styles.readIcon}>
-                <path d="M9 12l2 2 4-4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" />
-              </svg>
+              <span className={styles.readIcon}>
+                <FiCheckCircle size={16}/>
+              </span>
               <span>Read</span>
             </div>
           )}
@@ -85,21 +102,26 @@ export default function BookCard({ book }) {
       {showModal && (
         <div className={styles.modalOverlay} onClick={closeModal}>
           <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
-            <button className={styles.closeButton} onClick={closeModal}>×</button>
+            <span className={styles.closeButton} onClick={closeModal}><IoCloseCircleSharp size={30}/></span>
             
             <div className={styles.modalGrid}>
               <div className={styles.modalImageContainer}>
                 {book.coverImagePath ? (
                   <img src={ImagePathReviser(book.coverImagePath)} alt={book.name} className={styles.bookImage} />
                 ) : (
-                  <div className={styles.placeholderImage}>No Image</div>
+                  book.thumbnailPath ? (
+                    <img src={ImagePathReviser(book.thumbnailPath)} alt={book.name} className={styles.bookImage} />
+                  ) : (
+                    <div className={styles.placeholderImage}>
+                      <span className={styles.placeholderText}>No Image</span>
+                    </div>
+                  )
                 )}
                 {book.isRead && (
                   <div className={styles.modalReadBadge}>
-                    <svg viewBox="0 0 24 24" fill="none" className={styles.readIcon}>
-                      <path d="M9 12l2 2 4-4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                      <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" />
-                    </svg>
+                    <span className={styles.readIcon}>
+                      <FiCheckCircle size={16}/>
+                    </span>
                     <span>Read</span>
                   </div>
                 )}
@@ -108,9 +130,14 @@ export default function BookCard({ book }) {
               <div className={styles.modalDetails}>
                 <div className={styles.modalTitleRow}>
                   <h2 className={styles.modalTitle}>{book.name}</h2>
-                  <Link to={`/edit/${book.id}`}>
-                    <span className={styles.editBookRec}>Edit this book?</span>
-                  </Link>
+                  <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'flex-start', width: '100%' , marginTop: '10px'}}>
+                    <Link to={`/edit/${book.id}`}>
+                      <span className={styles.editBookRec}><RiEdit2Fill size={16} color='black'/></span>
+                    </Link>
+                    <button onClick={handleDeleteClick} className={styles.editBookRec} style={{ marginLeft: '10px', background: 'white', border: 'none' }}>
+                      <RiDeleteBin6Fill size={16} color='black' />
+                    </button>
+                  </div>
                 </div>
                 
                 <div className={styles.modalInfo}>
@@ -140,19 +167,33 @@ export default function BookCard({ book }) {
                 
                 <div className={styles.modalReadSection}>
                   <h4 className={styles.modalSectionTitle}>Read Now</h4>
-                  <a href={book.readUrl} target="_blank" rel="noopener noreferrer" className={styles.readButton}>
-                    <svg viewBox="0 0 24 24" fill="none" className={styles.playIcon}>
-                      <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" />
-                      <path d="M10 8l6 4-6 4V8z" fill="currentColor" />
-                    </svg>
-                    Read on Platform
-                  </a>
+                  <div className={styles.readPlatformActionBtns}>
+                    <button className={styles.readButton} onClick={handleDelayedNavigation}>
+                      <FaRegWindowMaximize className={styles.sourceIcon} />
+                      Read on Platform
+                    </button>
+                    <button disabled={!book.readUrl} className={styles.readButton}>
+                      <FaRegWindowRestore className={styles.sourceIcon}/>
+                      Read on source
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
       )}
+      {/* Confirm Delete Modal */}
+      <ConfirmDeleteModal
+        bookId={book.id}
+        isOpen={showDeleteConfirmModal}
+        onClose={handleCloseModal}
+        onConfirm={()=> {
+          handleConfirmDelete();
+          refreshBooks();
+        }}
+      />
+      { isLoading && <LoadingAnimation /> }
     </>
   );
 };
