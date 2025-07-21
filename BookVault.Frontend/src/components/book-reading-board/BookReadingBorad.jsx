@@ -15,6 +15,7 @@ export default function BookReadingBorad() {
   const [mainPanel, setMainPanel] = useState(null);
   const [leftPanelOpen, setLeftPanelOpen] = useState(false);
   const [isLeftPanelPinned, setIsLeftPanelPinned] = useState(false);
+  const [selectedBookmarkedPageNumber, setSelectedBookmarkedPageNumber] = useState(null);
 
   // This replaces useState for isRightPanelOpen
   const isRightPanelOpen = useMemo(() => {
@@ -84,10 +85,14 @@ export default function BookReadingBorad() {
           setLeftPanelOpen={setLeftPanelOpen}
           isLeftPanelPinned={isLeftPanelPinned}
           setIsLeftPanelPinned={setIsLeftPanelPinned}
+          onBookmarkSelect={setSelectedBookmarkedPageNumber}
         />
       </div>
       <div className={styles.book} style={{ width: `${bookWidth}%` }}>
-        <FlipBook isRightPanelOpen={isRightPanelOpen}/>
+        <FlipBook
+          isRightPanelOpen={isRightPanelOpen}
+          selectedBookmarkedPageNumber={selectedBookmarkedPageNumber}
+        />
       </div>
     </div>
   );

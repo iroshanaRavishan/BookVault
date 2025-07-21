@@ -13,15 +13,17 @@ namespace BookVault.Application.Services
     public class BookmarkService : IBookmarkService
     {
         private readonly IBookmarkRepository _bookmarkRepository;
+        private readonly INotificationService _notificationService;
 
-        public BookmarkService(IBookmarkRepository bookmarkRepository)
+        public BookmarkService(IBookmarkRepository bookmarkRepository, INotificationService notificationService)
         {
             _bookmarkRepository = bookmarkRepository;
+            _notificationService = notificationService;
         }
 
-        public async Task<IEnumerable<BookmarkResponseDto>> GetAllAsync(Guid userId, Guid bookId)
+        public async Task<IEnumerable<BookmarkResponseDto>> GetAllAsync(Guid userId, Guid bookId, string sortBy)
         {
-            var bookmarks = await _bookmarkRepository.GetAllAsync(userId, bookId);
+            var bookmarks = await _bookmarkRepository.GetAllAsync(userId, bookId, sortBy);
 
             return bookmarks.Select(b => new BookmarkResponseDto
             {
@@ -40,7 +42,7 @@ namespace BookVault.Application.Services
             var bookmark = Bookmark.Create(dto.UserId, dto.BookId, dto.PageNumber, dto.Color, dto.BookmarkThumbnailPath);
             await _bookmarkRepository.AddAsync(bookmark);
 
-            return new BookmarkResponseDto
+            var response = new BookmarkResponseDto
             {
                 Id = bookmark.Id,
                 UserId = bookmark.UserId,
@@ -50,6 +52,11 @@ namespace BookVault.Application.Services
                 CreatedAt = bookmark.CreatedAt,
                 BookmarkThumbnailPath = bookmark.BookmarkThumbnailPath
             };
+
+            // Notify via SignalR
+            await _notificationService.NotifyBookmarkCreatedAsync(response);
+
+            return response;
         }
 
         public async Task<bool> DeleteAsync(Guid bookmarkId)
@@ -58,6 +65,10 @@ namespace BookVault.Application.Services
             if (bookmark is null) return false;
 
             await _bookmarkRepository.DeleteAsync(bookmark);
+
+            // Notify via SignalR
+            await _notificationService.NotifyBookmarkDeletedAsync(bookmarkId);
+
             return true;
         }
     }
