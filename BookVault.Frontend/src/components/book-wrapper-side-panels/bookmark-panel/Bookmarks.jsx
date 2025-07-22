@@ -68,6 +68,12 @@ export default function Bookmarks({ openedAt, onBookmarkItemDoubleClick }) {
   }, [sortMenuOpen]);
 
   async function handleDeleteBookmark(id) {
+    // Check if this is the last bookmark
+    const isLastBookmark = false;
+    if (bookmarks && bookmarks[0].id === id) {
+      isLastBookmark = true;
+    }
+
     try {
       const response = await fetch("https://localhost:7157/api/Bookmark", {
         method: "DELETE",
