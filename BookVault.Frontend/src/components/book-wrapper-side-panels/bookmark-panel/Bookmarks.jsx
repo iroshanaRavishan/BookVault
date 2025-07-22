@@ -179,7 +179,16 @@ export default function Bookmarks({ openedAt, onBookmarkItemDoubleClick }) {
                   <span className={styles.pageNumber}> {bookmark.pageNumber} </span>
                   <span className={styles.createdDate}>
                     <small>Created at: </small>
-                    <small>{new Date(bookmark.createdAt).toLocaleString()}</small>
+                    <small>
+                      {new Date(bookmark.createdAt).toLocaleString([], {
+                        year: 'numeric',
+                        month: '2-digit',
+                        day: '2-digit',
+                        hour: '2-digit',
+                        minute: '2-digit',
+                        hour12: true
+                      })}
+                    </small>
                   </span>
                 </div>
                 <div>
