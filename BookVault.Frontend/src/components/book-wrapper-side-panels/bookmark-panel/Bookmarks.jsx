@@ -69,7 +69,7 @@ export default function Bookmarks({ openedAt, onBookmarkItemDoubleClick }) {
 
   async function handleDeleteBookmark(id) {
     // Check if this is the last bookmark
-    const isLastBookmark = false;
+    let isLastBookmark = false;
     if (bookmarks && bookmarks.length === 1 && bookmarks[0].id === id) {
       isLastBookmark = true;
     }
