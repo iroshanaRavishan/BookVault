@@ -10,7 +10,7 @@
     overflow-y: auto;
     min-height: 240px;
     max-height: 250px; 
-    padding-right: 20px;
+    padding-right: 10px;
     position: relative;
     overflow-x: hidden;
     transition: all 500ms;
@@ -110,6 +110,7 @@
     flex-direction: column;
     margin: 0 10px;
     color: rgb(221, 221, 221);
+    font-size: 14px;
 }
 
 .bookmarkDeleteButton{

@@ -68,13 +68,19 @@ export default function Bookmarks({ openedAt, onBookmarkItemDoubleClick }) {
   }, [sortMenuOpen]);
 
   async function handleDeleteBookmark(id) {
+    // Check if this is the last bookmark
+    let isLastBookmark = false;
+    if (bookmarks && bookmarks.length === 1 && bookmarks[0].id === id) {
+      isLastBookmark = true;
+    }
+
     try {
       const response = await fetch("https://localhost:7157/api/Bookmark", {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify({ id: id })
+        body: JSON.stringify({ id: id, isLastBookmark: isLastBookmark })
       });
 
       if (response.status === 204) {
@@ -179,7 +185,16 @@ export default function Bookmarks({ openedAt, onBookmarkItemDoubleClick }) {
                   <span className={styles.pageNumber}> {bookmark.pageNumber} </span>
                   <span className={styles.createdDate}>
                     <small>Created at: </small>
-                    <small>{new Date(bookmark.createdAt).toLocaleString()}</small>
+                    <small>
+                      {new Date(bookmark.createdAt).toLocaleString([], {
+                        year: 'numeric',
+                        month: '2-digit',
+                        day: '2-digit',
+                        hour: '2-digit',
+                        minute: '2-digit',
+                        hour12: true
+                      })}
+                    </small>
                   </span>
                 </div>
                 <div>
@@ -189,7 +204,7 @@ export default function Bookmarks({ openedAt, onBookmarkItemDoubleClick }) {
             ))}
           </ul>
           <div className={styles.pagePreviewContaienr}>
-            <span className={styles.pagePreviewText}>Page preview</span>
+            <span className={styles.pagePreviewText}>Page preview of page {thumbnailGeneratedFor}</span>
             <div className={styles.pagePreview}>
               <img src="../../../src/assets/profile-image.jpg" className={styles.pageThumbnail} alt="page-thumbnail" />
             </div>

@@ -8,6 +8,6 @@ namespace BookVault.Domain.Interfaces
 {
     public interface IPdfThumbnailRepository
     {
-        Task<string> GenerateThumbnailAsync(string filename);
+        Task<string> GenerateThumbnailAsync(string filename, string type, int page);
     }
 }
