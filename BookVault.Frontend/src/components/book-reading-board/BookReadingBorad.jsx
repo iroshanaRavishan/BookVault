@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import styles from './bookreadingborad.module.css';
 import { useParams } from 'react-router-dom';
-import FlipBook from '../flip-bool-method-one/FlipBook';
+import FlipBook from '../flip-book-method-one/FlipBook';
+import SideButtonsWrapper from '../side-button-wrapper/SideButtonWrapper';
 
 export default function BookReadingBorad() {
   const { id } = useParams();
@@ -9,6 +10,20 @@ export default function BookReadingBorad() {
   const [bookName, setBookName] = useState('');
   const [bookPdfUrl, setBookPdfUrl] = useState('');
   const [loading, setLoading] = useState(true);
+  const containerRef = useRef(null);
+  const [bookWidth, setBookWidth] = useState(100); // in percent
+  const [mainPanel, setMainPanel] = useState(null);
+  const [leftPanelOpen, setLeftPanelOpen] = useState(false);
+  const [isLeftPanelPinned, setIsLeftPanelPinned] = useState(false);
+  const [selectedBookmarkedPageNumber, setSelectedBookmarkedPageNumber] = useState(null);
+
+  // This replaces useState for isRightPanelOpen
+  const isRightPanelOpen = useMemo(() => {
+    const rightPanelNames = ["Bookmarks", "Appearance", "Reading Style", "Statistics"];
+    const isRight = mainPanel?.position === "right" && rightPanelNames.includes(mainPanel.name);
+    const isBottom = mainPanel?.position === "bottom";
+    return (isRight || isBottom) && leftPanelOpen && isLeftPanelPinned;
+  }, [mainPanel, leftPanelOpen, isLeftPanelPinned]);
 
   // Load existing book data
   useEffect(() => {
@@ -58,20 +73,27 @@ export default function BookReadingBorad() {
   }, []);
 
   return (
-    <div className={styles.container}>
-      {/* {loading && <p>Loading PDF...</p>}
-      {!loading && bookPdfUrl ? (
-        <iframe
-          src={bookPdfUrl}
-          title="PDF Viewer"
-          width="100%"
-          height="100%"
-          className={styles.pdfViewer}
+    <div className={styles.container} ref={containerRef}>
+      <div className={styles.wrapper} style={{ width: `${100 - bookWidth}%` }}>
+        <SideButtonsWrapper
+          bookWidth={bookWidth}
+          setBookWidth={setBookWidth}
+          containerRef={containerRef}
+          mainPanel={mainPanel}
+          setMainPanel={setMainPanel}
+          leftPanelOpen={leftPanelOpen}
+          setLeftPanelOpen={setLeftPanelOpen}
+          isLeftPanelPinned={isLeftPanelPinned}
+          setIsLeftPanelPinned={setIsLeftPanelPinned}
+          onBookmarkSelect={setSelectedBookmarkedPageNumber}
         />
-      ) : !loading && (
-        <p>PDF not available for this book.</p>
-      )} */}
-      <FlipBook />
+      </div>
+      <div className={styles.book} style={{ width: `${bookWidth}%` }}>
+        <FlipBook
+          isRightPanelOpen={isRightPanelOpen}
+          selectedBookmarkedPageNumber={selectedBookmarkedPageNumber}
+        />
+      </div>
     </div>
-  )
+  );
 }

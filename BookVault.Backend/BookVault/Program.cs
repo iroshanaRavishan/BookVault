@@ -1,9 +1,12 @@
 using BookVault.Application;
+using BookVault.Application.Interfaces;
 using BookVault.Data;
 using BookVault.Infrastructure;
 using BookVault.Infrastructure.Data;
+using BookVault.Infrastructure.Services.BookVault.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 using Scalar.AspNetCore;
+using BookVault.Shared;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +17,12 @@ builder.Services.AddEndpointsApiExplorer(); // Add this for better API documenta
 
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
+
+// Add SignalR
+builder.Services.AddSignalR();
+
+// Add INotificationService
+builder.Services.AddScoped<INotificationService, SignalRNotificationService>();
 
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
@@ -41,6 +50,7 @@ await using (var serviceScope = app.Services.CreateAsyncScope())
     var defaultPicContext = serviceScope.ServiceProvider.GetRequiredService<DefaultUserProfilePictureDbContext>();
     var bookContext = serviceScope.ServiceProvider.GetRequiredService<BookDbContext>();
     var authContext = serviceScope.ServiceProvider.GetRequiredService<AuthDbContext>();
+    var bookmarkContext = serviceScope.ServiceProvider.GetRequiredService<BookmarkDbContext>();
     var logger = serviceScope.ServiceProvider.GetRequiredService<ILogger<Program>>();
 
     try
@@ -56,6 +66,10 @@ await using (var serviceScope = app.Services.CreateAsyncScope())
         logger.LogInformation("Applying Auth migrations...");
         await authContext.Database.MigrateAsync();
         logger.LogInformation("AuthDbContext migrations applied successfully");
+
+        logger.LogInformation("Applying Bookmark migrations...");
+        await bookmarkContext.Database.MigrateAsync();
+        logger.LogInformation("BookmarkDbContext migrations applied successfully");
     }
     catch (Exception ex)
     {
@@ -88,5 +102,8 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+// Map SignalR hubs
+app.MapHub<NotificationHub>("/hubs/notifications");
 
 app.Run();
