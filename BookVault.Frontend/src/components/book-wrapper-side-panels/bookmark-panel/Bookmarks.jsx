@@ -80,7 +80,7 @@ export default function Bookmarks({ openedAt, onBookmarkItemDoubleClick }) {
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify({ id: id })
+        body: JSON.stringify({ id: id, isLastBookmark: isLastBookmark })
       });
 
       if (response.status === 204) {
