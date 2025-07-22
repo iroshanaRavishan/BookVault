@@ -73,7 +73,7 @@ const Page = forwardRef(({ children, number, totalPages, currentPage, pageType, 
   );
 });
 
-export default function FlipBook({ isRightPanelOpen }) {
+export default function FlipBook({ isRightPanelOpen, selectedBookmarkedPageNumber }) {
   const [currentPage, setCurrentPage] = useState(0);
   const [bookmarks, setBookmarks] = useState([]);
   const [animatingPages, setAnimatingPages] = useState([]);
@@ -170,11 +170,27 @@ export default function FlipBook({ isRightPanelOpen }) {
     setBookmarks((prev) => prev.filter((b) => b.id !== bookmarkId));
   };
 
+  // When navigating to a bookmark:
+  useEffect(() => {
+    if (selectedBookmarkedPageNumber !== null) {
+      const bookmark = bookmarks.find(b => b.pageNumber === selectedBookmarkedPageNumber);
+      if (bookmark) {
+        goToPage(bookmark.page);
+      }
+    }
+  }, [selectedBookmarkedPageNumber, bookmarks]);
+
   const handleAddBookmark = async (pageNumber) => {
     const currentBookmark = bookmarks.find(b => b.page === pageNumber);
     if (currentBookmark) {
       // Trigger removal animation
 
+      // Check if this is the last bookmark
+      const isLastBookmark = false;
+      if (bookmarks && bookmarks[0].id === currentBookmark.id) {
+        isLastBookmark = true;
+      }
+    
       try {
         const response = await fetch("https://localhost:7157/api/Bookmark", {
           method: "DELETE",
@@ -327,6 +343,7 @@ export default function FlipBook({ isRightPanelOpen }) {
 
     // === Normal Flip ===
     else {
+      await delay(100);
       await instance.flip(targetPage);
     }
 

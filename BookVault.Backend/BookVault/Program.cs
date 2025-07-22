@@ -6,7 +6,7 @@ using BookVault.Infrastructure.Data;
 using BookVault.Infrastructure.Services.BookVault.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 using Scalar.AspNetCore;
-using BookVault.RealTimeNotification;
+using BookVault.Shared;
 
 var builder = WebApplication.CreateBuilder(args);
 
