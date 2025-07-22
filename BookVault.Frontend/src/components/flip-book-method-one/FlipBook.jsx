@@ -185,6 +185,12 @@ export default function FlipBook({ isRightPanelOpen, selectedBookmarkedPageNumbe
     if (currentBookmark) {
       // Trigger removal animation
 
+      // Check if this is the last bookmark
+      const isLastBookmark = false;
+      if (bookmarks && bookmarks[0].id === currentBookmark.id) {
+        isLastBookmark = true;
+      }
+    
       try {
         const response = await fetch("https://localhost:7157/api/Bookmark", {
           method: "DELETE",
