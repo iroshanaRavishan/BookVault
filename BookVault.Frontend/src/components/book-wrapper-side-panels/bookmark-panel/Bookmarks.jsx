@@ -7,6 +7,7 @@ import { BsSortUp } from "react-icons/bs";
 import { HiMiniArrowLongUp, HiMiniArrowLongDown } from "react-icons/hi2";
 import BookmarkListener from '../../bookmark-listener/BookmarkListener';
 import { GoBookmarkSlashFill } from "react-icons/go";
+import { BiSolidDuplicate } from "react-icons/bi";
 
 export default function Bookmarks({ openedAt, onBookmarkItemDoubleClick }) {
   const dropdownRef = useRef(null);
@@ -15,6 +16,7 @@ export default function Bookmarks({ openedAt, onBookmarkItemDoubleClick }) {
   const [bookmarks, setBookmarks] = useState(null);
   const [sortMenuOpen, setSortMenuOpen] = useState(false);
   const [sortType, setSortType] = useState(localStorage.getItem('bookmarkSort') || 'page-asc');
+  const [thumbnailGeneratedFor, setThumbnailGeneratedFor] = useState(null);
 
   function handleSortChange(type) {
     setSortType(type);
@@ -133,6 +135,39 @@ export default function Bookmarks({ openedAt, onBookmarkItemDoubleClick }) {
     setBookmarks((prev) => prev.filter((b) => b.id !== bookmarkId));
   };
 
+  async function handleGenerateBookmarkThumbnail(path, page) {
+    setThumbnailGeneratedFor(page)
+    const filePathToBeCleaned = path;
+    // Split by backslash and get last part
+    const cleanedFilePath = filePathToBeCleaned.split('\\').pop();
+
+    let generatedThumbnailPath = null;
+
+    if (thumbnailGeneratedFor !== page) {
+      try {
+        const type = "bookmark";
+        const thumbnailResponse = await fetch(`https://localhost:7157/api/PdfThumbnail/${cleanedFilePath}?type=${type}&page=${page}`, {
+          method: "GET"
+        });
+
+        if (!thumbnailResponse.ok) {
+          throw new Error("Failed to generate thumbnail");
+        }
+
+      const thumbnailResult = await thumbnailResponse.json();
+      console.log("Thumbnail generated:", thumbnailResult);
+
+      generatedThumbnailPath = thumbnailResult.thumbnailPath;
+      console.log("generatedThumbnailPath", generatedThumbnailPath);
+      // setExistingThumbnailPath(generatedThumbnailPath); 
+      } catch (thumbnailError) {
+        console.error("Error generating thumbnail:", thumbnailError);
+        throw new Error("Failed to generate thumbnail for bookmark");
+      }
+    }
+    return { filePath: result.filePath, thumbnailPath: generatedThumbnailPath };
+  }
+
   return (
     <div className={styles.bookmarkPanel}>
       {/* Listen for new bookmarks in real-time */}
@@ -197,8 +232,31 @@ export default function Bookmarks({ openedAt, onBookmarkItemDoubleClick }) {
                     </small>
                   </span>
                 </div>
-                <div>
-                  <RiDeleteBin6Fill size={18} className={styles.bookmarkDeleteButton} onClick={() => handleDeleteBookmark(bookmarks[i].id)} />
+                <div className={styles.bookmarkListActionButtons}>
+                  <div 
+                    onDoubleClick={(e) => e.stopPropagation()} // Disable double-click
+                  >
+                    <BiSolidDuplicate 
+                      size={18} 
+                      className={styles.bookmarkActionButton}
+                      onClick={(e) =>{
+                        e.stopPropagation(),  // <-- Prevents triggering the <li> onClick
+                        handleGenerateBookmarkThumbnail(bookmark.bookmarkThumbnailPath, bookmark.pageNumber)
+                      }}
+                    />
+                  </div>
+                  <div
+                    onDoubleClick={(e) => e.stopPropagation()} // Disable double-click
+                  >
+                    <RiDeleteBin6Fill 
+                      size={18} 
+                      className={styles.bookmarkActionButton} 
+                      onClick={(e) => {
+                        e.stopPropagation(),  // <-- Prevents triggering the <li> onClick
+                        handleDeleteBookmark(bookmarks[i].id)
+                      }} 
+                    />
+                  </div>
                 </div>
               </li>
             ))}
