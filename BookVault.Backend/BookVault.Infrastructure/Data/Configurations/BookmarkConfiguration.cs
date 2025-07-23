@@ -26,10 +26,17 @@ namespace BookVault.Infrastructure.Data.Configurations
             builder.Property(b => b.PageNumber)
                    .IsRequired();
 
+            builder.Property(b => b.Color)
+                    .IsRequired();
+
             builder.Property(b => b.CreatedAt)
                    .IsRequired();
 
-            builder.Property(b => b.BookmarkThumbnailPath)
+            builder.Property(b => b.BookmarkThumbnailSourcePath)
+                   .HasMaxLength(500)
+                   .IsRequired(false);
+                   
+            builder.Property(b => b.BookmarkThumbnailImagePath)
                    .HasMaxLength(500)
                    .IsRequired(false);
 
