@@ -105,6 +105,15 @@ namespace BookVault.Application.Services
             return true;
         }
 
+        public async Task<bool> UpdateAsync (BookmarkUpdateDto dto)
+        {
+            if (dto.UserId != Guid.Empty && dto.BookId != Guid.Empty && string.IsNullOrEmpty(dto.BookmarkThumbnailImagePath))
+                return false;
+
+            await _bookmarkRepository.UpdateAllBookmarkThumbnailPathAsync(dto.UserId, dto.BookId, dto.BookmarkThumbnailImagePath);
+            return true;
+        }
+
         private void DeleteFileIfExists(string relativePath)
         {
             if (string.IsNullOrEmpty(relativePath))
