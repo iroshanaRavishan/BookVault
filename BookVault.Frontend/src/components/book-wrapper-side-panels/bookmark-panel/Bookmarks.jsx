@@ -197,8 +197,31 @@ export default function Bookmarks({ openedAt, onBookmarkItemDoubleClick }) {
                     </small>
                   </span>
                 </div>
-                <div>
-                  <RiDeleteBin6Fill size={18} className={styles.bookmarkDeleteButton} onClick={() => handleDeleteBookmark(bookmarks[i].id)} />
+                <div className={styles.bookmarkListActionButtons}>
+                  <div 
+                    onDoubleClick={(e) => e.stopPropagation()} // Disable double-click
+                  >
+                    <BiSolidDuplicate 
+                      size={18} 
+                      className={styles.bookmarkActionButton}
+                      onClick={(e) =>{
+                        e.stopPropagation(),  // <-- Prevents triggering the <li> onClick
+                        handleGenerateBookmarkThumbnail(bookmark.bookmarkThumbnailPath, bookmark.pageNumber)
+                      }}
+                    />
+                  </div>
+                  <div
+                    onDoubleClick={(e) => e.stopPropagation()} // Disable double-click
+                  >
+                    <RiDeleteBin6Fill 
+                      size={18} 
+                      className={styles.bookmarkActionButton} 
+                      onClick={(e) => {
+                        e.stopPropagation(),  // <-- Prevents triggering the <li> onClick
+                        handleDeleteBookmark(bookmarks[i].id)
+                      }} 
+                    />
+                  </div>
                 </div>
               </li>
             ))}
