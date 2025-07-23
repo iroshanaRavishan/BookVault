@@ -22,7 +22,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BookVault.Application\BookVault.Application.csproj" />
     <ProjectReference Include="..\BookVault.Domain\BookVault.Domain.csproj" />
+    <ProjectReference Include="..\BookVault.Shared\BookVault.Shared.csproj" />
   </ItemGroup>
 
 </Project>
