@@ -27,12 +27,14 @@ namespace BookVault.Domain.Entities
         [Required]
         public DateTimeOffset CreatedAt { get; private set; }
 
-        public string? BookmarkThumbnailPath { get; private set; }
+        public string? BookmarkThumbnailSourcePath { get; private set; }
+
+        public string? BookmarkThumbnailImagePath { get; private set; }
 
         // EF Core parameterless constructor
         private Bookmark() { }
 
-        private Bookmark(Guid id, Guid userId, Guid bookId, int pageNumber, string color, DateTimeOffset createdAt, string? thumbnailPath)
+        private Bookmark(Guid id, Guid userId, Guid bookId, int pageNumber, string color, DateTimeOffset createdAt, string? thumbnailSourcePath, string? thumbnailImagePath)
         {
             Id = id;
             UserId = userId;
@@ -40,10 +42,11 @@ namespace BookVault.Domain.Entities
             PageNumber = pageNumber;
             Color = color;
             CreatedAt = createdAt;
-            BookmarkThumbnailPath = thumbnailPath;
+            BookmarkThumbnailSourcePath = thumbnailSourcePath;
+            BookmarkThumbnailImagePath = thumbnailImagePath;
         }
 
-        public static Bookmark Create(Guid userId, Guid bookId, int pageNumber, string color, string? thumbnailPath)
+        public static Bookmark Create(Guid userId, Guid bookId, int pageNumber, string color, string? thumbnailSourcePath, string? thumbnailImagePath)
         {
             ValidateInputs(userId, bookId, pageNumber, color);
 
@@ -54,8 +57,15 @@ namespace BookVault.Domain.Entities
                 pageNumber,
                 color,
                 DateTimeOffset.UtcNow,
-                thumbnailPath
+                thumbnailSourcePath,
+                thumbnailImagePath
             );
+        }
+        public void UpdateThumbnailPath(Guid userId, Guid bookId, string? newThumbnailImagePath)
+        {
+            UserId = userId;
+            BookId = bookId;
+            BookmarkThumbnailImagePath = newThumbnailImagePath;
         }
 
         private static void ValidateInputs(Guid userId, Guid bookId, int pageNumber, string color)
