@@ -1,4 +1,5 @@
 ﻿using BookVault.Application.DTOs.BookDTOs;
+using BookVault.Application.DTOs.BookmarkDTOs;
 using BookVault.Application.Interfaces;
 using BookVault.Domain.Entities;
 using BookVault.Domain.Interfaces;
@@ -50,14 +51,15 @@ namespace BookVault.Application.Services
                 PageNumber = b.PageNumber,
                 Color = b.Color,
                 CreatedAt = b.CreatedAt,
-                BookmarkThumbnailPath = b.BookmarkThumbnailPath
+                BookmarkThumbnailSourcePath = b.BookmarkThumbnailSourcePath,
+                BookmarkThumbnailImagePath = b.BookmarkThumbnailImagePath
             });
         }
 
         public async Task<BookmarkResponseDto> CreateAsync(BookmarkCreateDto dto)
         {
             var book = await _bookRepository.GetByIdAsync(dto.BookId);
-            var bookmark = Bookmark.Create(dto.UserId, dto.BookId, dto.PageNumber, dto.Color, book.PdfFilePath);
+            var bookmark = Bookmark.Create(dto.UserId, dto.BookId, dto.PageNumber, dto.Color, book.PdfFilePath, null);
 
             await _bookmarkRepository.AddAsync(bookmark);
 
@@ -69,7 +71,8 @@ namespace BookVault.Application.Services
                 PageNumber = bookmark.PageNumber,
                 Color = bookmark.Color,
                 CreatedAt = bookmark.CreatedAt,
-                BookmarkThumbnailPath = bookmark.BookmarkThumbnailPath
+                BookmarkThumbnailSourcePath = bookmark.BookmarkThumbnailSourcePath,
+                BookmarkThumbnailImagePath = bookmark.BookmarkThumbnailImagePath
             };
 
             // Notify via SignalR
@@ -99,6 +102,15 @@ namespace BookVault.Application.Services
             // Notify via SignalR
             await _notificationService.NotifyBookmarkDeletedAsync(bookmarkId);
 
+            return true;
+        }
+
+        public async Task<bool> UpdateAsync (BookmarkUpdateDto dto)
+        {
+            if (dto.UserId != Guid.Empty && dto.BookId != Guid.Empty && string.IsNullOrEmpty(dto.BookmarkThumbnailImagePath))
+                return false;
+
+            await _bookmarkRepository.UpdateAllBookmarkThumbnailPathAsync(dto.UserId, dto.BookId, dto.BookmarkThumbnailImagePath);
             return true;
         }
 
