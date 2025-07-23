@@ -113,12 +113,25 @@
     font-size: 14px;
 }
 
-.bookmarkDeleteButton{
+.bookmarkListActionButtons {
+    display: flex;
+    flex-direction: row;
+    gap: 6px;
+}
+
+.bookmarkActionButton{
+    padding: 10px;
+    border: 1px solid #ddddddda;
+    background-color: #dddddd25;
+    border-radius: 50%;
     color:#ddddddda
 }
 
-.bookmarkDeleteButton:hover {
-    color:#ffffff
+.bookmarkActionButton:hover {
+    color:#ffffff;
+    border: 1px solid #ffffff;
+    background-color: #dddddd46;
+
 }
 
 .bookmarkPanelContainer {

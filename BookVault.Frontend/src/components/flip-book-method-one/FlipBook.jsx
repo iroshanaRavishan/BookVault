@@ -186,8 +186,8 @@ export default function FlipBook({ isRightPanelOpen, selectedBookmarkedPageNumbe
       // Trigger removal animation
 
       // Check if this is the last bookmark
-      const isLastBookmark = false;
-      if (bookmarks && bookmarks[0].id === currentBookmark.id) {
+      let isLastBookmark = false;
+      if (bookmarks && bookmarks.length === 1 && bookmarks[0].id === currentBookmark.id) {
         isLastBookmark = true;
       }
     
@@ -197,7 +197,7 @@ export default function FlipBook({ isRightPanelOpen, selectedBookmarkedPageNumbe
           headers: {
             "Content-Type": "application/json"
           },
-          body: JSON.stringify({ id: currentBookmark.id })
+          body: JSON.stringify({ id: currentBookmark.id, isLastBookmark: isLastBookmark })
         });
 
         if (response.status === 204) {
@@ -257,7 +257,7 @@ export default function FlipBook({ isRightPanelOpen, selectedBookmarkedPageNumbe
 
         const result = await response.json(); // Get the response body
 
-        setBookmarks(prev => [...prev, { id: result.id, page: result.pageNumber + 1, color: result.color, }]);
+        setBookmarks(prev => [...prev, { id: result.id, page: result.pageNumber + 1, color: result.color, pageNumber: result.pageNumber}]);
 
         // Trigger entry animation
         setAnimatingPages(prev => [...prev, pageNumber]);
