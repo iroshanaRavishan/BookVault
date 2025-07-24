@@ -137,7 +137,7 @@ export default function Bookmarks({ openedAt, onBookmarkItemDoubleClick }) {
 
   async function handleGenerateBookmarkThumbnail(bookmark) {
     setThumbnailGeneratedFor(page)
-    const filePathToBeCleaned = path;
+    const filePathToBeCleaned = bookmark.bookmarkThumbnailSourcePath;
     // Split by backslash and get last part
     const cleanedFilePath = filePathToBeCleaned.split('\\').pop();
 
