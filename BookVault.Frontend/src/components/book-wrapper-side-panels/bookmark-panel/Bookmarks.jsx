@@ -165,6 +165,14 @@ export default function Bookmarks({ openedAt, onBookmarkItemDoubleClick }) {
           },
           body: JSON.stringify({ userId: bookmark.userId, bookId: bookmark.bookId, bookmarkThumbnailImagePath: thumbnailResult.thumbnailPath })
          })
+
+        // Update local bookmarks state
+        setBookmarks(prev => prev.map(b =>
+          b.id === bookmark.id
+            ? { ...b, bookmarkThumbnailImagePath: thumbnailResult.thumbnailPath }
+            : b
+        ));
+
         } else {
           throw new Error("Failed to generate thumbnail");
         }
