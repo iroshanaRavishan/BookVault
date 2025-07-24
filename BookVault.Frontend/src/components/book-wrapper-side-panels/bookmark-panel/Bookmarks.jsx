@@ -16,7 +16,10 @@ export default function Bookmarks({ openedAt, onBookmarkItemDoubleClick }) {
   const [bookmarks, setBookmarks] = useState(null);
   const [sortMenuOpen, setSortMenuOpen] = useState(false);
   const [sortType, setSortType] = useState(localStorage.getItem('bookmarkSort') || 'page-asc');
-  const [thumbnailGeneratedFor, setThumbnailGeneratedFor] = useState({ path: null, page: null });
+  const [thumbnailGeneratedFor, setThumbnailGeneratedFor] = useState(() => {
+    const saved = localStorage.getItem('thumbnailGeneratedFor');
+    return saved ? JSON.parse(saved) : { path: null, page: null };
+  });
 
   function handleSortChange(type) {
     setSortType(type);
