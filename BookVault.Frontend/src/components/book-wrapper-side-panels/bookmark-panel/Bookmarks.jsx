@@ -188,7 +188,6 @@ export default function Bookmarks({ openedAt, onBookmarkItemDoubleClick }) {
         throw new Error("Failed to generate thumbnail for bookmark");
       }
     }
-    return { filePath: result.filePath, thumbnailPath: generatedThumbnailPath };
   }
 
   return (
