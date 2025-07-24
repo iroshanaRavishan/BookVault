@@ -135,7 +135,7 @@ export default function Bookmarks({ openedAt, onBookmarkItemDoubleClick }) {
     setBookmarks((prev) => prev.filter((b) => b.id !== bookmarkId));
   };
 
-  async function handleGenerateBookmarkThumbnail(path, page) {
+  async function handleGenerateBookmarkThumbnail(bookmark) {
     setThumbnailGeneratedFor(page)
     const filePathToBeCleaned = path;
     // Split by backslash and get last part
