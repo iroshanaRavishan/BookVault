@@ -23,7 +23,11 @@ export default function Bookmarks({ openedAt, onBookmarkItemDoubleClick }) {
     localStorage.setItem('bookmarkSort', type);
     setSortMenuOpen(false);
   }
-    
+  
+  function ImagePathReviser(path){
+    return `https://localhost:7157/uploads/${path.replace(/\\/g, '/')}`;
+  }
+  
   useEffect(() => {
     const fetchAllBookmarks = async () => {
       const url = `https://localhost:7157/api/Bookmark?userId=${user.id}&bookId=${id}&sortBy=${sortType}`;
@@ -135,20 +139,24 @@ export default function Bookmarks({ openedAt, onBookmarkItemDoubleClick }) {
     setBookmarks((prev) => prev.filter((b) => b.id !== bookmarkId));
   };
 
-  async function handleGenerateBookmarkThumbnail(path, page) {
+  async function handleGenerateBookmarkThumbnail(bookmark) {
     setThumbnailGeneratedFor(page)
-    const filePathToBeCleaned = path;
+    const filePathToBeCleaned = bookmark.bookmarkThumbnailSourcePath;
     // Split by backslash and get last part
     const cleanedFilePath = filePathToBeCleaned.split('\\').pop();
 
     let generatedThumbnailPath = null;
 
-    if (thumbnailGeneratedFor !== page) {
+    if (thumbnailGeneratedFor.page !== bookmark.pageNumber) {
       try {
         const type = "bookmark";
-        const thumbnailResponse = await fetch(`https://localhost:7157/api/PdfThumbnail/${cleanedFilePath}?type=${type}&page=${page}`, {
+        const thumbnailResponse = await fetch(`https://localhost:7157/api/PdfThumbnail/${cleanedFilePath}?type=${type}&page=${bookmark.pageNumber}`, {
           method: "GET"
         });
+
+        const thumbnailResult = await thumbnailResponse.json();
+
+        const path = ImagePathReviser(thumbnailResult.thumbnailPath);
 
         if (!thumbnailResponse.ok) {
           throw new Error("Failed to generate thumbnail");
@@ -241,7 +249,7 @@ export default function Bookmarks({ openedAt, onBookmarkItemDoubleClick }) {
                       className={styles.bookmarkActionButton}
                       onClick={(e) =>{
                         e.stopPropagation(),  // <-- Prevents triggering the <li> onClick
-                        handleGenerateBookmarkThumbnail(bookmark.bookmarkThumbnailPath, bookmark.pageNumber)
+                        handleGenerateBookmarkThumbnail(bookmark)
                       }}
                     />
                   </div>
