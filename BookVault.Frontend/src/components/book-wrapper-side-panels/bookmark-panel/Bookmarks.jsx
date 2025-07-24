@@ -146,7 +146,7 @@ export default function Bookmarks({ openedAt, onBookmarkItemDoubleClick }) {
     if (thumbnailGeneratedFor.page !== bookmark.pageNumber) {
       try {
         const type = "bookmark";
-        const thumbnailResponse = await fetch(`https://localhost:7157/api/PdfThumbnail/${cleanedFilePath}?type=${type}&page=${page}`, {
+        const thumbnailResponse = await fetch(`https://localhost:7157/api/PdfThumbnail/${cleanedFilePath}?type=${type}&page=${bookmark.pageNumber}`, {
           method: "GET"
         });
 
