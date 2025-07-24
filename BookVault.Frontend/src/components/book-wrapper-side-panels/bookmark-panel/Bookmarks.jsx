@@ -155,10 +155,17 @@ export default function Bookmarks({ openedAt, onBookmarkItemDoubleClick }) {
         });
 
         const thumbnailResult = await thumbnailResponse.json();
-
         const path = ImagePathReviser(thumbnailResult.thumbnailPath);
 
-        if (!thumbnailResponse.ok) {
+        if (thumbnailResponse.ok) {
+         const res = await fetch(`https://localhost:7157/api/Bookmark/${bookmark.id}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ userId: bookmark.userId, bookId: bookmark.bookId, bookmarkThumbnailImagePath: thumbnailResult.thumbnailPath })
+         })
+        } else {
           throw new Error("Failed to generate thumbnail");
         }
 
