@@ -58,10 +58,11 @@ namespace BookVault.Infrastructure.Repositories
             return true;
         }
 
-        public async Task DeleteAsync(Bookmark bookmark)
+        public async Task<bool> DeleteAsync(Bookmark bookmark)
         {
             _context.Bookmarks.Remove(bookmark);
             await _context.SaveChangesAsync();
+            return true;
         }
     }
 }
