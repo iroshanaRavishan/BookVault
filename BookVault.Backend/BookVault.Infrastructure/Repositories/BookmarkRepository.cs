@@ -58,10 +58,25 @@ namespace BookVault.Infrastructure.Repositories
             return true;
         }
 
-        public async Task DeleteAsync(Bookmark bookmark)
+        public async Task<bool> DeleteAsync(Bookmark bookmark)
         {
             _context.Bookmarks.Remove(bookmark);
             await _context.SaveChangesAsync();
+            return true;
+        }
+
+        public async Task<bool> UpdateAllBookmarkThumbnailPathAsync(Guid userId, Guid bookId, string newThumbnailImagePath)
+        {
+            var bookmarks = await _context.Bookmarks
+                .Where(b => b.UserId == userId && b.BookId == bookId)
+                .ToListAsync();
+            foreach (var bookmark in bookmarks)
+            {
+                bookmark.UpdateThumbnailPath(userId, bookId, newThumbnailImagePath);
+            }
+
+            await _context.SaveChangesAsync();
+            return true;
         }
     }
 }
