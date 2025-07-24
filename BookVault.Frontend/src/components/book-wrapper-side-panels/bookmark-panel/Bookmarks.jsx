@@ -154,6 +154,10 @@ export default function Bookmarks({ openedAt, onBookmarkItemDoubleClick }) {
           method: "GET"
         });
 
+        const thumbnailResult = await thumbnailResponse.json();
+
+        const path = ImagePathReviser(thumbnailResult.thumbnailPath);
+
         if (!thumbnailResponse.ok) {
           throw new Error("Failed to generate thumbnail");
         }
