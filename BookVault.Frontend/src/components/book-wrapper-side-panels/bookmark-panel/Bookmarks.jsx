@@ -23,7 +23,11 @@ export default function Bookmarks({ openedAt, onBookmarkItemDoubleClick }) {
     localStorage.setItem('bookmarkSort', type);
     setSortMenuOpen(false);
   }
-    
+  
+  function ImagePathReviser(path){
+    return `https://localhost:7157/uploads/${path.replace(/\\/g, '/')}`;
+  }
+  
   useEffect(() => {
     const fetchAllBookmarks = async () => {
       const url = `https://localhost:7157/api/Bookmark?userId=${user.id}&bookId=${id}&sortBy=${sortType}`;
