@@ -16,7 +16,10 @@ export default function Bookmarks({ openedAt, onBookmarkItemDoubleClick }) {
   const [bookmarks, setBookmarks] = useState(null);
   const [sortMenuOpen, setSortMenuOpen] = useState(false);
   const [sortType, setSortType] = useState(localStorage.getItem('bookmarkSort') || 'page-asc');
-  const [thumbnailGeneratedFor, setThumbnailGeneratedFor] = useState(null);
+  const [thumbnailGeneratedFor, setThumbnailGeneratedFor] = useState(() => {
+    const saved = localStorage.getItem('thumbnailGeneratedFor');
+    return saved ? JSON.parse(saved) : { path: null, page: null };
+  });
 
   function handleSortChange(type) {
     setSortType(type);
@@ -27,6 +30,12 @@ export default function Bookmarks({ openedAt, onBookmarkItemDoubleClick }) {
   function ImagePathReviser(path){
     return `https://localhost:7157/uploads/${path.replace(/\\/g, '/')}`;
   }
+
+  useEffect(() => {
+    if (thumbnailGeneratedFor.path || thumbnailGeneratedFor.page) {
+      localStorage.setItem('thumbnailGeneratedFor', JSON.stringify(thumbnailGeneratedFor));
+    }
+  }, [thumbnailGeneratedFor]);
   
   useEffect(() => {
     const fetchAllBookmarks = async () => {
@@ -155,10 +164,25 @@ export default function Bookmarks({ openedAt, onBookmarkItemDoubleClick }) {
         });
 
         const thumbnailResult = await thumbnailResponse.json();
-
         const path = ImagePathReviser(thumbnailResult.thumbnailPath);
 
-        if (!thumbnailResponse.ok) {
+        if (thumbnailResponse.ok) {
+         const res = await fetch(`https://localhost:7157/api/Bookmark/${bookmark.id}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ userId: bookmark.userId, bookId: bookmark.bookId, bookmarkThumbnailImagePath: thumbnailResult.thumbnailPath })
+         })
+
+        // Update local bookmarks state
+        setBookmarks(prev => prev.map(b =>
+          b.id === bookmark.id
+            ? { ...b, bookmarkThumbnailImagePath: thumbnailResult.thumbnailPath }
+            : b
+        ));
+
+        } else {
           throw new Error("Failed to generate thumbnail");
         }
 
@@ -173,7 +197,6 @@ export default function Bookmarks({ openedAt, onBookmarkItemDoubleClick }) {
         throw new Error("Failed to generate thumbnail for bookmark");
       }
     }
-    return { filePath: result.filePath, thumbnailPath: generatedThumbnailPath };
   }
 
   return (
