@@ -241,7 +241,7 @@ export default function Bookmarks({ openedAt, onBookmarkItemDoubleClick }) {
                       className={styles.bookmarkActionButton}
                       onClick={(e) =>{
                         e.stopPropagation(),  // <-- Prevents triggering the <li> onClick
-                        handleGenerateBookmarkThumbnail(bookmark.bookmarkThumbnailPath, bookmark.pageNumber)
+                        handleGenerateBookmarkThumbnail(bookmark)
                       }}
                     />
                   </div>
