@@ -20,11 +20,11 @@ namespace BookVault.Application.Services
             _logger = logger;
         }
 
-        public async Task<(bool IsSuccess, string? ThumbnailPath, string Message)> GenerateThumbnailAsync(string filename)
+        public async Task<(bool IsSuccess, string? ThumbnailPath, string Message)> GenerateThumbnailAsync(string filename, string type, int page)
         {
             try
             {
-                var thumbnailPath = await _repository.GenerateThumbnailAsync(filename);
+                var thumbnailPath = await _repository.GenerateThumbnailAsync(filename, type, page);
 
                 if (string.IsNullOrEmpty(thumbnailPath))
                 {

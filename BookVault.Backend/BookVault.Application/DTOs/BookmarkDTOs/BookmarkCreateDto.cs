@@ -12,6 +12,7 @@ namespace BookVault.Application.DTOs.BookDTOs
         public Guid BookId { get; set; }
         public int PageNumber { get; set; }
         public required string Color { get; set; }
-        public string? BookmarkThumbnailPath { get; set; }
+        public string? BookmarkThumbnailSourcePath { get; set; }
+        public string? BookmarkThumbnailImagePath { get; set; }
     }
 }
