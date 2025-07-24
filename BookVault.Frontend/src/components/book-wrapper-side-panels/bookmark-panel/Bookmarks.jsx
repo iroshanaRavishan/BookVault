@@ -30,6 +30,12 @@ export default function Bookmarks({ openedAt, onBookmarkItemDoubleClick }) {
   function ImagePathReviser(path){
     return `https://localhost:7157/uploads/${path.replace(/\\/g, '/')}`;
   }
+
+  useEffect(() => {
+    if (thumbnailGeneratedFor.path || thumbnailGeneratedFor.page) {
+      localStorage.setItem('thumbnailGeneratedFor', JSON.stringify(thumbnailGeneratedFor));
+    }
+  }, [thumbnailGeneratedFor]);
   
   useEffect(() => {
     const fetchAllBookmarks = async () => {
