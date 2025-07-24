@@ -239,7 +239,7 @@ export default function FlipBook({ isRightPanelOpen, selectedBookmarkedPageNumbe
         bookId: id, 
         pageNumber: pageNumber - 1,
         color: randomColor,
-        bookmarkThumbnailPath: null
+        bookmarkThumbnailSourcePath: null
       };
 
       try {
