@@ -8,6 +8,8 @@ import { HiMiniArrowLongUp, HiMiniArrowLongDown } from "react-icons/hi2";
 import BookmarkListener from '../../bookmark-listener/BookmarkListener';
 import { GoBookmarkSlashFill } from "react-icons/go";
 import { BiSolidDuplicate } from "react-icons/bi";
+import { FaChevronUp } from "react-icons/fa6";
+import { MdImageNotSupported } from "react-icons/md";
 
 export default function Bookmarks({ openedAt, onBookmarkItemDoubleClick }) {
   const dropdownRef = useRef(null);
@@ -82,12 +84,16 @@ export default function Bookmarks({ openedAt, onBookmarkItemDoubleClick }) {
     };
   }, [sortMenuOpen]);
 
-  async function handleDeleteBookmark(id) {
+  async function handleDeleteBookmark(bookmark) {
     // Check if this is the last bookmark
     let isLastBookmark = false;
-    if (bookmarks && bookmarks.length === 1 && bookmarks[0].id === id) {
+    if (bookmarks && bookmarks.length === 1 && bookmarks[0].id === bookmark.id) {
       isLastBookmark = true;
       localStorage.removeItem('thumbnailGeneratedFor');
+      setThumbnailGeneratedFor({ path: null, page: null });
+    }
+
+    if (bookmark.pageNumber === thumbnailGeneratedFor.page) {
       setThumbnailGeneratedFor({ path: null, page: null });
     }
 
@@ -97,12 +103,12 @@ export default function Bookmarks({ openedAt, onBookmarkItemDoubleClick }) {
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify({ id: id, isLastBookmark: isLastBookmark })
+        body: JSON.stringify({ id: bookmark.id, isLastBookmark: isLastBookmark })
       });
 
       if (response.status === 204) {
         console.log("Bookmark successfully deleted.");
-        setBookmarks((prev) => prev.filter((b) => b.id !== id));
+        setBookmarks((prev) => prev.filter((b) => b.id !== bookmark.id));
       } else if (response.status === 404) {
         console.log("Bookmark not found. It may have already been deleted.");
       } else {
@@ -292,7 +298,7 @@ useEffect(() => {
                       className={styles.bookmarkActionButton} 
                       onClick={(e) => {
                         e.stopPropagation(),  // <-- Prevents triggering the <li> onClick
-                        handleDeleteBookmark(bookmarks[i].id)
+                        handleDeleteBookmark(bookmarks[i])
                       }} 
                     />
                   </div>
