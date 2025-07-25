@@ -22,6 +22,7 @@ export default function Bookmarks({ openedAt, onBookmarkItemDoubleClick }) {
     const saved = localStorage.getItem('thumbnailGeneratedFor');
     return saved ? JSON.parse(saved) : { path: null, page: null };
   });
+  const [toggleDown, setToggleDown] = useState(true);
 
   function handleSortChange(type) {
     setSortType(type);
@@ -249,7 +250,7 @@ useEffect(() => {
       </div>
       {bookmarks && bookmarks.length > 0 ? (
         <div className={styles.bookmarkPanelContainer}>
-          <ul className={styles.bookmarkList}>
+          <ul className={`${styles.bookmarkList} ${toggleDown ? '' : styles.expanded}`}>
             {bookmarks.map((bookmark, i) => (
               <li
                 key={bookmark.id}
@@ -306,12 +307,30 @@ useEffect(() => {
               </li>
             ))}
           </ul>
-          <div className={styles.pagePreviewContaienr}>
-            <span className={styles.pagePreviewText}>Page preview of page {thumbnailGeneratedFor.page}</span>
-            <div className={styles.pagePreview}>
-              <img src={thumbnailGeneratedFor.path} className={styles.pageThumbnail} alt="page-thumbnail" />
+          <div className={`${styles.pagePreviewContaienr} ${toggleDown ? styles.open : styles.closed}`}>
+            <div className={styles.pagePreviewContaienrHeader}>
+              <span className={styles.pagePreviewText}>Page preview of selected bookmark <i> {thumbnailGeneratedFor.page}</i></span>
+              <span 
+                className={styles.pagePreviewToggler} 
+                onClick={() => setToggleDown(prev => !prev)}
+              >
+                <FaChevronUp style={{marginTop: '4px'}} size={18}/></span>
             </div>
-            <button className={styles.jumpToPageButton}>Jump to page</button>
+            <div className={styles.pagePreview}>
+              { thumbnailGeneratedFor.path ?
+                 <img src={thumbnailGeneratedFor.path} className={styles.pageThumbnail} alt="page-thumbnail" /> 
+                 : <span className={styles.pageThumbnailWithNoImage}>
+                    <MdImageNotSupported size={30} />
+                    <p>No Bookmark is seleted!</p>
+                  </span>
+              }
+            </div>
+            <button 
+              className={styles.jumpToPageButton}
+               onClick={() => onBookmarkItemDoubleClick && onBookmarkItemDoubleClick(thumbnailGeneratedFor.page)}
+            >
+              Jump to page
+            </button>
           </div>
         </div>
       ) : (
