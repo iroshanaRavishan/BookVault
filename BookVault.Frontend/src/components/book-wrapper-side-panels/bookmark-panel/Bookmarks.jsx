@@ -22,6 +22,7 @@ export default function Bookmarks({ openedAt, onBookmarkItemDoubleClick }) {
     const saved = localStorage.getItem('thumbnailGeneratedFor');
     return saved ? JSON.parse(saved) : { path: null, page: null };
   });
+  const [toggleDown, setToggleDown] = useState(true);
 
   function handleSortChange(type) {
     setSortType(type);
