@@ -134,7 +134,6 @@
     color:#ffffff;
     border: 1px solid #ffffff;
     background-color: #dddddd46;
-
 }
 
 .bookmarkPanelContainer {
@@ -233,18 +232,34 @@
     border-radius: 6px;
 }
 
+.pageThumbnailWithNoImage {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 220px;
+    width: 160px;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
 .pagePreviewText {
     font-size: 14px;
     font-weight: 600;
-    margin-bottom: 10px;
     position: relative;
 }
 
-.pagePreviewText::before {
-    content: '';
-    display: flex;
-    border-top: 1px solid #646464;
-    margin: 5px 0 10px 0;
+.pagePreviewToggler {
+    border-radius: 50%;
+    padding: 0px 5px;
+    border: 1px solid #ddddddda;
+    background-color: #dddddd25;
+    cursor: pointer;
+}
+
+.pagePreviewToggler:hover {
+    border: 1px solid #ffffff;
+    background-color: #dddddd46;
 }
 
 .sortButton {
