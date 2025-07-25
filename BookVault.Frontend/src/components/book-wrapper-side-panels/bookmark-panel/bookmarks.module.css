@@ -158,6 +158,40 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    position: fixed;         
+    bottom: 40px;
+    left: 0;
+    right: 0;
+    transition: transform 0.4s ease-in-out;
+    transform: translateY(100%); 
+    z-index: 1000;           
+}
+
+.pagePreviewContaienr.open {
+    transform: translateY(0); 
+}
+
+.pagePreviewContaienr.closed {
+    transform: translateY(100%);
+}
+
+.pagePreviewContaienrHeader {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    position: relative;
+    background-color: #646464;
+    padding: 5px 10px;
+}
+
+.pagePreviewToggler {
+    transition: transform 0.3s ease;
+}
+
+.pagePreviewContaienr.open .pagePreviewToggler {
+    transform: rotate(180deg);
 }
 
 .pagePreview {
