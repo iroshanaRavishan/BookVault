@@ -250,7 +250,7 @@ useEffect(() => {
       </div>
       {bookmarks && bookmarks.length > 0 ? (
         <div className={styles.bookmarkPanelContainer}>
-          <ul className={styles.bookmarkList}>
+          <ul className={`${styles.bookmarkList} ${toggleDown ? '' : styles.expanded}`}>
             {bookmarks.map((bookmark, i) => (
               <li
                 key={bookmark.id}
