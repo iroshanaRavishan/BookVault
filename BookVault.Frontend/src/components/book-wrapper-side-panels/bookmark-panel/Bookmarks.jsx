@@ -87,6 +87,8 @@ export default function Bookmarks({ openedAt, onBookmarkItemDoubleClick }) {
     let isLastBookmark = false;
     if (bookmarks && bookmarks.length === 1 && bookmarks[0].id === id) {
       isLastBookmark = true;
+      localStorage.removeItem('thumbnailGeneratedFor');
+      setThumbnailGeneratedFor({ path: null, page: null });
     }
 
     try {
