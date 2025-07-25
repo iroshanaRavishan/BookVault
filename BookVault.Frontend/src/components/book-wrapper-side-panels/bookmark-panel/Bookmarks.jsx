@@ -307,10 +307,23 @@ useEffect(() => {
               </li>
             ))}
           </ul>
-          <div className={styles.pagePreviewContaienr}>
-            <span className={styles.pagePreviewText}>Page preview of page {thumbnailGeneratedFor.page}</span>
+          <div className={`${styles.pagePreviewContaienr} ${toggleDown ? styles.open : styles.closed}`}>
+            <div className={styles.pagePreviewContaienrHeader}>
+              <span className={styles.pagePreviewText}>Page preview of selected bookmark <i> {thumbnailGeneratedFor.page}</i></span>
+              <span 
+                className={styles.pagePreviewToggler} 
+                onClick={() => setToggleDown(prev => !prev)}
+              >
+                <FaChevronUp style={{marginTop: '4px'}} size={18}/></span>
+            </div>
             <div className={styles.pagePreview}>
-              <img src={thumbnailGeneratedFor.path} className={styles.pageThumbnail} alt="page-thumbnail" />
+              { thumbnailGeneratedFor.path ?
+                 <img src={thumbnailGeneratedFor.path} className={styles.pageThumbnail} alt="page-thumbnail" /> 
+                 : <span className={styles.pageThumbnailWithNoImage}>
+                    <MdImageNotSupported size={30} />
+                    <p>No Bookmark is seleted!</p>
+                  </span>
+              }
             </div>
             <button 
               className={styles.jumpToPageButton}
