@@ -7,6 +7,7 @@ import { BsSortUp } from "react-icons/bs";
 import { HiMiniArrowLongUp, HiMiniArrowLongDown } from "react-icons/hi2";
 import BookmarkListener from '../../bookmark-listener/BookmarkListener';
 import { GoBookmarkSlashFill } from "react-icons/go";
+import { BiSolidDuplicate } from "react-icons/bi";
 
 export default function Bookmarks({ openedAt, onBookmarkItemDoubleClick }) {
   const dropdownRef = useRef(null);
@@ -15,13 +16,27 @@ export default function Bookmarks({ openedAt, onBookmarkItemDoubleClick }) {
   const [bookmarks, setBookmarks] = useState(null);
   const [sortMenuOpen, setSortMenuOpen] = useState(false);
   const [sortType, setSortType] = useState(localStorage.getItem('bookmarkSort') || 'page-asc');
+  const [thumbnailGeneratedFor, setThumbnailGeneratedFor] = useState(() => {
+    const saved = localStorage.getItem('thumbnailGeneratedFor');
+    return saved ? JSON.parse(saved) : { path: null, page: null };
+  });
 
   function handleSortChange(type) {
     setSortType(type);
     localStorage.setItem('bookmarkSort', type);
     setSortMenuOpen(false);
   }
-    
+  
+  function ImagePathReviser(path){
+    return `https://localhost:7157/uploads/${path.replace(/\\/g, '/')}`;
+  }
+
+  useEffect(() => {
+    if (thumbnailGeneratedFor.path || thumbnailGeneratedFor.page) {
+      localStorage.setItem('thumbnailGeneratedFor', JSON.stringify(thumbnailGeneratedFor));
+    }
+  }, [thumbnailGeneratedFor]);
+  
   useEffect(() => {
     const fetchAllBookmarks = async () => {
       const url = `https://localhost:7157/api/Bookmark?userId=${user.id}&bookId=${id}&sortBy=${sortType}`;
@@ -72,6 +87,8 @@ export default function Bookmarks({ openedAt, onBookmarkItemDoubleClick }) {
     let isLastBookmark = false;
     if (bookmarks && bookmarks.length === 1 && bookmarks[0].id === id) {
       isLastBookmark = true;
+      localStorage.removeItem('thumbnailGeneratedFor');
+      setThumbnailGeneratedFor({ path: null, page: null });
     }
 
     try {
@@ -123,6 +140,12 @@ export default function Bookmarks({ openedAt, onBookmarkItemDoubleClick }) {
     return 'Sort'; // default fallback
   }
 
+useEffect(() => {
+  if (thumbnailGeneratedFor.path || thumbnailGeneratedFor.page) {
+    localStorage.setItem('thumbnailGeneratedFor', JSON.stringify(thumbnailGeneratedFor));
+  }
+}, [thumbnailGeneratedFor]);
+
   // Handle new bookmark from SignalR
   const handleNewBookmark = (newBookmark) => {
     setBookmarks((prev) => (prev ? [newBookmark, ...prev] : [newBookmark]));
@@ -132,6 +155,57 @@ export default function Bookmarks({ openedAt, onBookmarkItemDoubleClick }) {
   const handleDeletedBookmarkFromSignalR = (bookmarkId) => {
     setBookmarks((prev) => prev.filter((b) => b.id !== bookmarkId));
   };
+
+  async function handleGenerateBookmarkThumbnail(bookmark) {
+    const filePathToBeCleaned = bookmark.bookmarkThumbnailSourcePath;
+    // Split by backslash and get last part
+    const cleanedFilePath = filePathToBeCleaned.split('\\').pop();
+
+    let generatedThumbnailPath = null;
+
+    if (thumbnailGeneratedFor.page !== bookmark.pageNumber) {
+      try {
+        const type = "bookmark";
+        const thumbnailResponse = await fetch(`https://localhost:7157/api/PdfThumbnail/${cleanedFilePath}?type=${type}&page=${bookmark.pageNumber}`, {
+          method: "GET"
+        });
+
+        const thumbnailResult = await thumbnailResponse.json();
+        const path = ImagePathReviser(thumbnailResult.thumbnailPath);
+
+        if (thumbnailResponse.ok) {
+         const res = await fetch(`https://localhost:7157/api/Bookmark/${bookmark.id}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ userId: bookmark.userId, bookId: bookmark.bookId, bookmarkThumbnailImagePath: thumbnailResult.thumbnailPath })
+         })
+
+        // Update local bookmarks state
+        setBookmarks(prev => prev.map(b =>
+          b.id === bookmark.id
+            ? { ...b, bookmarkThumbnailImagePath: thumbnailResult.thumbnailPath }
+            : b
+        ));
+
+        } else {
+          throw new Error("Failed to generate thumbnail");
+        }
+
+      console.log("Thumbnail generated:", thumbnailResult);
+      const updatedPath = `${path}?t=${new Date().getTime()}`;
+      setThumbnailGeneratedFor({ path: updatedPath, page: bookmark.pageNumber });
+
+      generatedThumbnailPath = thumbnailResult.thumbnailPath;
+      console.log("generatedThumbnailPath", generatedThumbnailPath);
+      // setExistingThumbnailPath(generatedThumbnailPath); 
+      } catch (thumbnailError) {
+        console.error("Error generating thumbnail:", thumbnailError);
+        throw new Error("Failed to generate thumbnail for bookmark");
+      }
+    }
+  }
 
   return (
     <div className={styles.bookmarkPanel}>
@@ -197,16 +271,39 @@ export default function Bookmarks({ openedAt, onBookmarkItemDoubleClick }) {
                     </small>
                   </span>
                 </div>
-                <div>
-                  <RiDeleteBin6Fill size={18} className={styles.bookmarkDeleteButton} onClick={() => handleDeleteBookmark(bookmarks[i].id)} />
+                <div className={styles.bookmarkListActionButtons}>
+                  <div 
+                    onDoubleClick={(e) => e.stopPropagation()} // Disable double-click
+                  >
+                    <BiSolidDuplicate 
+                      size={18} 
+                      className={styles.bookmarkActionButton}
+                      onClick={(e) =>{
+                        e.stopPropagation(),  // <-- Prevents triggering the <li> onClick
+                        handleGenerateBookmarkThumbnail(bookmark)
+                      }}
+                    />
+                  </div>
+                  <div
+                    onDoubleClick={(e) => e.stopPropagation()} // Disable double-click
+                  >
+                    <RiDeleteBin6Fill 
+                      size={18} 
+                      className={styles.bookmarkActionButton} 
+                      onClick={(e) => {
+                        e.stopPropagation(),  // <-- Prevents triggering the <li> onClick
+                        handleDeleteBookmark(bookmarks[i].id)
+                      }} 
+                    />
+                  </div>
                 </div>
               </li>
             ))}
           </ul>
           <div className={styles.pagePreviewContaienr}>
-            <span className={styles.pagePreviewText}>Page preview of page {thumbnailGeneratedFor}</span>
+            <span className={styles.pagePreviewText}>Page preview of page {thumbnailGeneratedFor.page}</span>
             <div className={styles.pagePreview}>
-              <img src="../../../src/assets/profile-image.jpg" className={styles.pageThumbnail} alt="page-thumbnail" />
+              <img src={thumbnailGeneratedFor.path} className={styles.pageThumbnail} alt="page-thumbnail" />
             </div>
             <button className={styles.jumpToPageButton}>Jump to page</button>
           </div>
