@@ -8,6 +8,8 @@ import { HiMiniArrowLongUp, HiMiniArrowLongDown } from "react-icons/hi2";
 import BookmarkListener from '../../bookmark-listener/BookmarkListener';
 import { GoBookmarkSlashFill } from "react-icons/go";
 import { BiSolidDuplicate } from "react-icons/bi";
+import { FaChevronUp } from "react-icons/fa6";
+import { MdImageNotSupported } from "react-icons/md";
 
 export default function Bookmarks({ openedAt, onBookmarkItemDoubleClick }) {
   const dropdownRef = useRef(null);
