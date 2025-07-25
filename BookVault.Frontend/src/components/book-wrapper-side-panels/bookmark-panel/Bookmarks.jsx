@@ -295,7 +295,7 @@ export default function Bookmarks({ openedAt, onBookmarkItemDoubleClick }) {
             ))}
           </ul>
           <div className={styles.pagePreviewContaienr}>
-            <span className={styles.pagePreviewText}>Page preview of page {thumbnailGeneratedFor}</span>
+            <span className={styles.pagePreviewText}>Page preview of page {thumbnailGeneratedFor.page}</span>
             <div className={styles.pagePreview}>
               <img src="../../../src/assets/profile-image.jpg" className={styles.pageThumbnail} alt="page-thumbnail" />
             </div>
