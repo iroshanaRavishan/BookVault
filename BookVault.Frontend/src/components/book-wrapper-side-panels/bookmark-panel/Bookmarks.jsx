@@ -151,7 +151,6 @@ export default function Bookmarks({ openedAt, onBookmarkItemDoubleClick }) {
   };
 
   async function handleGenerateBookmarkThumbnail(bookmark) {
-    setThumbnailGeneratedFor(page)
     const filePathToBeCleaned = bookmark.bookmarkThumbnailSourcePath;
     // Split by backslash and get last part
     const cleanedFilePath = filePathToBeCleaned.split('\\').pop();
@@ -188,8 +187,9 @@ export default function Bookmarks({ openedAt, onBookmarkItemDoubleClick }) {
           throw new Error("Failed to generate thumbnail");
         }
 
-      const thumbnailResult = await thumbnailResponse.json();
       console.log("Thumbnail generated:", thumbnailResult);
+      const updatedPath = `${path}?t=${new Date().getTime()}`;
+      setThumbnailGeneratedFor({ path: updatedPath, page: bookmark.pageNumber });
 
       generatedThumbnailPath = thumbnailResult.thumbnailPath;
       console.log("generatedThumbnailPath", generatedThumbnailPath);
