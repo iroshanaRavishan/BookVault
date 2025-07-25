@@ -312,7 +312,12 @@ useEffect(() => {
             <div className={styles.pagePreview}>
               <img src={thumbnailGeneratedFor.path} className={styles.pageThumbnail} alt="page-thumbnail" />
             </div>
-            <button className={styles.jumpToPageButton}>Jump to page</button>
+            <button 
+              className={styles.jumpToPageButton}
+               onClick={() => onBookmarkItemDoubleClick && onBookmarkItemDoubleClick(thumbnailGeneratedFor.page)}
+            >
+              Jump to page
+            </button>
           </div>
         </div>
       ) : (
