@@ -8,6 +8,8 @@ import { HiMiniArrowLongUp, HiMiniArrowLongDown } from "react-icons/hi2";
 import BookmarkListener from '../../bookmark-listener/BookmarkListener';
 import { GoBookmarkSlashFill } from "react-icons/go";
 import { BiSolidDuplicate } from "react-icons/bi";
+import { FaChevronUp } from "react-icons/fa6";
+import { MdImageNotSupported } from "react-icons/md";
 
 export default function Bookmarks({ openedAt, onBookmarkItemDoubleClick }) {
   const dropdownRef = useRef(null);
@@ -20,6 +22,7 @@ export default function Bookmarks({ openedAt, onBookmarkItemDoubleClick }) {
     const saved = localStorage.getItem('thumbnailGeneratedFor');
     return saved ? JSON.parse(saved) : { path: null, page: null };
   });
+  const [toggleDown, setToggleDown] = useState(true);
 
   function handleSortChange(type) {
     setSortType(type);
@@ -82,12 +85,16 @@ export default function Bookmarks({ openedAt, onBookmarkItemDoubleClick }) {
     };
   }, [sortMenuOpen]);
 
-  async function handleDeleteBookmark(id) {
+  async function handleDeleteBookmark(bookmark) {
     // Check if this is the last bookmark
     let isLastBookmark = false;
-    if (bookmarks && bookmarks.length === 1 && bookmarks[0].id === id) {
+    if (bookmarks && bookmarks.length === 1 && bookmarks[0].id === bookmark.id) {
       isLastBookmark = true;
       localStorage.removeItem('thumbnailGeneratedFor');
+      setThumbnailGeneratedFor({ path: null, page: null });
+    }
+
+    if (bookmark.pageNumber === thumbnailGeneratedFor.page) {
       setThumbnailGeneratedFor({ path: null, page: null });
     }
 
@@ -97,12 +104,12 @@ export default function Bookmarks({ openedAt, onBookmarkItemDoubleClick }) {
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify({ id: id, isLastBookmark: isLastBookmark })
+        body: JSON.stringify({ id: bookmark.id, isLastBookmark: isLastBookmark })
       });
 
       if (response.status === 204) {
         console.log("Bookmark successfully deleted.");
-        setBookmarks((prev) => prev.filter((b) => b.id !== id));
+        setBookmarks((prev) => prev.filter((b) => b.id !== bookmark.id));
       } else if (response.status === 404) {
         console.log("Bookmark not found. It may have already been deleted.");
       } else {
@@ -243,7 +250,7 @@ useEffect(() => {
       </div>
       {bookmarks && bookmarks.length > 0 ? (
         <div className={styles.bookmarkPanelContainer}>
-          <ul className={styles.bookmarkList}>
+          <ul className={`${styles.bookmarkList} ${toggleDown ? '' : styles.expanded}`}>
             {bookmarks.map((bookmark, i) => (
               <li
                 key={bookmark.id}
@@ -292,7 +299,7 @@ useEffect(() => {
                       className={styles.bookmarkActionButton} 
                       onClick={(e) => {
                         e.stopPropagation(),  // <-- Prevents triggering the <li> onClick
-                        handleDeleteBookmark(bookmarks[i].id)
+                        handleDeleteBookmark(bookmarks[i])
                       }} 
                     />
                   </div>
@@ -300,12 +307,30 @@ useEffect(() => {
               </li>
             ))}
           </ul>
-          <div className={styles.pagePreviewContaienr}>
-            <span className={styles.pagePreviewText}>Page preview of page {thumbnailGeneratedFor.page}</span>
-            <div className={styles.pagePreview}>
-              <img src={thumbnailGeneratedFor.path} className={styles.pageThumbnail} alt="page-thumbnail" />
+          <div className={`${styles.pagePreviewContaienr} ${toggleDown ? styles.open : styles.closed}`}>
+            <div className={styles.pagePreviewContaienrHeader}>
+              <span className={styles.pagePreviewText}>Page preview of selected bookmark <i> {thumbnailGeneratedFor.page}</i></span>
+              <span 
+                className={styles.pagePreviewToggler} 
+                onClick={() => setToggleDown(prev => !prev)}
+              >
+                <FaChevronUp style={{marginTop: '4px'}} size={18}/></span>
             </div>
-            <button className={styles.jumpToPageButton}>Jump to page</button>
+            <div className={styles.pagePreview}>
+              { thumbnailGeneratedFor.path ?
+                 <img src={thumbnailGeneratedFor.path} className={styles.pageThumbnail} alt="page-thumbnail" /> 
+                 : <span className={styles.pageThumbnailWithNoImage}>
+                    <MdImageNotSupported size={30} />
+                    <p>No Bookmark is seleted!</p>
+                  </span>
+              }
+            </div>
+            <button 
+              className={styles.jumpToPageButton}
+               onClick={() => onBookmarkItemDoubleClick && onBookmarkItemDoubleClick(thumbnailGeneratedFor.page)}
+            >
+              Jump to page
+            </button>
           </div>
         </div>
       ) : (
