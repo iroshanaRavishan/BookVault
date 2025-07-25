@@ -195,10 +195,11 @@
 }
 
 .pagePreview {
-    width: 50%;
+    width: 48%;
     height: 100%;
     padding: 3px 6px;
     margin: auto;
+    margin-bottom: -10px !important;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -208,8 +209,11 @@
 }
 
 .jumpToPageButton {
-    height: 40px;
+    position: relative;
+    bottom: -30px;
+    height: 35px;
     padding: 6px 12px;
+    margin: 0 10px;
     font-size: 14px;
     border-radius: 6px;
     background-color: #ffffff;
