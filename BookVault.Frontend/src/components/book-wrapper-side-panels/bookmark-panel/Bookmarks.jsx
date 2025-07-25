@@ -93,6 +93,10 @@ export default function Bookmarks({ openedAt, onBookmarkItemDoubleClick }) {
       setThumbnailGeneratedFor({ path: null, page: null });
     }
 
+    if (bookmark.pageNumber === thumbnailGeneratedFor.page) {
+      setThumbnailGeneratedFor({ path: null, page: null });
+    }
+
     try {
       const response = await fetch("https://localhost:7157/api/Bookmark", {
         method: "DELETE",
