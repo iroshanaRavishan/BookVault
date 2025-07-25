@@ -140,6 +140,12 @@ export default function Bookmarks({ openedAt, onBookmarkItemDoubleClick }) {
     return 'Sort'; // default fallback
   }
 
+useEffect(() => {
+  if (thumbnailGeneratedFor.path || thumbnailGeneratedFor.page) {
+    localStorage.setItem('thumbnailGeneratedFor', JSON.stringify(thumbnailGeneratedFor));
+  }
+}, [thumbnailGeneratedFor]);
+
   // Handle new bookmark from SignalR
   const handleNewBookmark = (newBookmark) => {
     setBookmarks((prev) => (prev ? [newBookmark, ...prev] : [newBookmark]));
