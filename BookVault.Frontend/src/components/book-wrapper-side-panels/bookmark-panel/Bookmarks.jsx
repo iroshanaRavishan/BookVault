@@ -87,6 +87,8 @@ export default function Bookmarks({ openedAt, onBookmarkItemDoubleClick }) {
     let isLastBookmark = false;
     if (bookmarks && bookmarks.length === 1 && bookmarks[0].id === id) {
       isLastBookmark = true;
+      localStorage.removeItem('thumbnailGeneratedFor');
+      setThumbnailGeneratedFor({ path: null, page: null });
     }
 
     try {
@@ -138,6 +140,12 @@ export default function Bookmarks({ openedAt, onBookmarkItemDoubleClick }) {
     return 'Sort'; // default fallback
   }
 
+useEffect(() => {
+  if (thumbnailGeneratedFor.path || thumbnailGeneratedFor.page) {
+    localStorage.setItem('thumbnailGeneratedFor', JSON.stringify(thumbnailGeneratedFor));
+  }
+}, [thumbnailGeneratedFor]);
+
   // Handle new bookmark from SignalR
   const handleNewBookmark = (newBookmark) => {
     setBookmarks((prev) => (prev ? [newBookmark, ...prev] : [newBookmark]));
@@ -149,7 +157,6 @@ export default function Bookmarks({ openedAt, onBookmarkItemDoubleClick }) {
   };
 
   async function handleGenerateBookmarkThumbnail(bookmark) {
-    setThumbnailGeneratedFor(page)
     const filePathToBeCleaned = bookmark.bookmarkThumbnailSourcePath;
     // Split by backslash and get last part
     const cleanedFilePath = filePathToBeCleaned.split('\\').pop();
@@ -186,8 +193,9 @@ export default function Bookmarks({ openedAt, onBookmarkItemDoubleClick }) {
           throw new Error("Failed to generate thumbnail");
         }
 
-      const thumbnailResult = await thumbnailResponse.json();
       console.log("Thumbnail generated:", thumbnailResult);
+      const updatedPath = `${path}?t=${new Date().getTime()}`;
+      setThumbnailGeneratedFor({ path: updatedPath, page: bookmark.pageNumber });
 
       generatedThumbnailPath = thumbnailResult.thumbnailPath;
       console.log("generatedThumbnailPath", generatedThumbnailPath);
@@ -293,9 +301,9 @@ export default function Bookmarks({ openedAt, onBookmarkItemDoubleClick }) {
             ))}
           </ul>
           <div className={styles.pagePreviewContaienr}>
-            <span className={styles.pagePreviewText}>Page preview of page {thumbnailGeneratedFor}</span>
+            <span className={styles.pagePreviewText}>Page preview of page {thumbnailGeneratedFor.page}</span>
             <div className={styles.pagePreview}>
-              <img src="../../../src/assets/profile-image.jpg" className={styles.pageThumbnail} alt="page-thumbnail" />
+              <img src={thumbnailGeneratedFor.path} className={styles.pageThumbnail} alt="page-thumbnail" />
             </div>
             <button className={styles.jumpToPageButton}>Jump to page</button>
           </div>
