@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import ReactQuill from 'react-quill-new';
 import 'react-quill-new/dist/quill.snow.css';
 import styles from './note.module.css';
@@ -6,9 +6,10 @@ import { LuUndo2, LuRedo2, LuChevronLeft, LuChevronRight } from "react-icons/lu"
 import { HiMiniCog6Tooth } from 'react-icons/hi2';
 import { IoCaretDown } from 'react-icons/io5';
 
-export default function Note() {
+export default function Note({ isPanelPinned }) {
     const [content, setContent] = useState('');
     const quillRef = useRef(null); // Ref to access Quill instance
+    const [lineHeight, setLineHeight] = useState(24); // px height for both
 
     const modules = {
         toolbar: {
@@ -29,6 +30,15 @@ export default function Note() {
         'link',
         'align',
     ];
+
+    const backgroundOffset = `${(24 - lineHeight) * 1.5}px`;
+
+    useEffect(() => {
+    if (quillRef.current) {
+        const editor = quillRef.current.getEditor();
+        editor.root.style.lineHeight = `${lineHeight}px`;  // match px to background
+    }
+    }, [lineHeight]);
 
   return (
     <div className={styles.noteWrapper}>
@@ -51,7 +61,6 @@ export default function Note() {
                 <option value="small">Small</option>
                 <option value="">Normal</option>
                 <option value="large">Large</option>
-                <option value="huge">Huge</option>
             </select>
         </div>
 
@@ -70,6 +79,14 @@ export default function Note() {
                 <HiMiniCog6Tooth className={styles.menuIcon} size={18}/> <IoCaretDown size={10}/>
             </div>
         </div>
+
+        <input
+            type="range"
+            min="24"
+            max="30"
+            value={lineHeight}
+            onChange={(e) => setLineHeight(Number(e.target.value))}
+        />
         
         {/* Editor */}
         <ReactQuill
@@ -80,6 +97,15 @@ export default function Note() {
             formats={formats}
             placeholder="Type your note here..."
             className={styles.editor}
+            style={{
+                background: `repeating-linear-gradient(
+                    #fff,
+                    #fff ${lineHeight - 1}px,
+                    #bdbdbdff ${lineHeight}px
+                )`,
+                backgroundPositionY: backgroundOffset,
+                maxHeight:  isPanelPinned ? '590px': '430px' 
+            }}
         />
         <div className={styles.noteContentActions}>
             <button>cancel</button>
