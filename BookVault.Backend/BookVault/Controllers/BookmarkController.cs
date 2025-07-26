@@ -32,7 +32,8 @@ namespace BookVault.API.Controllers
                 PageNumber = b.PageNumber,
                 Color = b.Color,
                 CreatedAt = b.CreatedAt,
-                BookmarkThumbnailPath = b.BookmarkThumbnailPath
+                BookmarkThumbnailSourcePath = b.BookmarkThumbnailSourcePath,
+                BookmarkThumbnailImagePath = b.BookmarkThumbnailImagePath
             });
 
             return Ok(result);
@@ -52,17 +53,28 @@ namespace BookVault.API.Controllers
                 PageNumber = bookmark.PageNumber,
                 Color = bookmark.Color,
                 CreatedAt = bookmark.CreatedAt,
-                BookmarkThumbnailPath = bookmark.BookmarkThumbnailPath
+                BookmarkThumbnailSourcePath = bookmark.BookmarkThumbnailSourcePath,
+                BookmarkThumbnailImagePath = bookmark.BookmarkThumbnailImagePath
             };
 
             return CreatedAtAction(nameof(GetAll), new { userId = response.UserId, bookId = response.BookId }, response);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(Guid id, [FromBody] BookmarkUpdateDto dto)
+        {
+            var updated = await _bookmarkService.UpdateAsync(dto);
+            if (!updated)
+                return NotFound();
+
+            return NoContent();
         }
 
         // DELETE: api/bookmarks
         [HttpDelete]
         public async Task<IActionResult> Delete([FromBody] BookmarkDeleteDto dto)
         {
-            var success = await _bookmarkService.DeleteAsync(dto.Id);
+            var success = await _bookmarkService.DeleteAsync(dto.Id, dto.IsLastBookmark);
             if (!success)
                 return NotFound();
 

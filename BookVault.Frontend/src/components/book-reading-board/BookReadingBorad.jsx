@@ -25,6 +25,12 @@ export default function BookReadingBorad() {
     return (isRight || isBottom) && leftPanelOpen && isLeftPanelPinned;
   }, [mainPanel, leftPanelOpen, isLeftPanelPinned]);
 
+  // function to force re-trigger bookmark navigation
+  const handleBookmarkSelect = (pageNum) => {
+    setSelectedBookmarkedPageNumber(null); // Reset to trigger change
+    setTimeout(() => setSelectedBookmarkedPageNumber(pageNum), 0); // Set new page
+  };
+
   // Load existing book data
   useEffect(() => {
     const loadBookData = async () => {
@@ -85,7 +91,7 @@ export default function BookReadingBorad() {
           setLeftPanelOpen={setLeftPanelOpen}
           isLeftPanelPinned={isLeftPanelPinned}
           setIsLeftPanelPinned={setIsLeftPanelPinned}
-          onBookmarkSelect={setSelectedBookmarkedPageNumber}
+          onBookmarkSelect={handleBookmarkSelect}
         />
       </div>
       <div className={styles.book} style={{ width: `${bookWidth}%` }}>

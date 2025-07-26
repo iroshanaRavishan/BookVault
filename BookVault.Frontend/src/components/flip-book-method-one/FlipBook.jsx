@@ -73,7 +73,7 @@ const Page = forwardRef(({ children, number, totalPages, currentPage, pageType, 
   );
 });
 
-export default function FlipBook({ isRightPanelOpen }) {
+export default function FlipBook({ isRightPanelOpen, selectedBookmarkedPageNumber }) {
   const [currentPage, setCurrentPage] = useState(0);
   const [bookmarks, setBookmarks] = useState([]);
   const [animatingPages, setAnimatingPages] = useState([]);
@@ -170,18 +170,34 @@ export default function FlipBook({ isRightPanelOpen }) {
     setBookmarks((prev) => prev.filter((b) => b.id !== bookmarkId));
   };
 
+  // When navigating to a bookmark:
+  useEffect(() => {
+    if (selectedBookmarkedPageNumber !== null) {
+      const bookmark = bookmarks.find(b => b.pageNumber === selectedBookmarkedPageNumber);
+      if (bookmark) {
+        goToPage(bookmark.page);
+      }
+    }
+  }, [selectedBookmarkedPageNumber]);
+
   const handleAddBookmark = async (pageNumber) => {
     const currentBookmark = bookmarks.find(b => b.page === pageNumber);
     if (currentBookmark) {
       // Trigger removal animation
 
+      // Check if this is the last bookmark
+      let isLastBookmark = false;
+      if (bookmarks && bookmarks.length === 1 && bookmarks[0].id === currentBookmark.id) {
+        isLastBookmark = true;
+      }
+    
       try {
         const response = await fetch("https://localhost:7157/api/Bookmark", {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json"
           },
-          body: JSON.stringify({ id: currentBookmark.id })
+          body: JSON.stringify({ id: currentBookmark.id, isLastBookmark: isLastBookmark })
         });
 
         if (response.status === 204) {
@@ -223,7 +239,7 @@ export default function FlipBook({ isRightPanelOpen }) {
         bookId: id, 
         pageNumber: pageNumber - 1,
         color: randomColor,
-        bookmarkThumbnailPath: null
+        bookmarkThumbnailSourcePath: null
       };
 
       try {
@@ -241,7 +257,7 @@ export default function FlipBook({ isRightPanelOpen }) {
 
         const result = await response.json(); // Get the response body
 
-        setBookmarks(prev => [...prev, { id: result.id, page: result.pageNumber + 1, color: result.color, }]);
+        setBookmarks(prev => [...prev, { id: result.id, page: result.pageNumber + 1, color: result.color, pageNumber: result.pageNumber}]);
 
         // Trigger entry animation
         setAnimatingPages(prev => [...prev, pageNumber]);
@@ -327,6 +343,7 @@ export default function FlipBook({ isRightPanelOpen }) {
 
     // === Normal Flip ===
     else {
+      await delay(100);
       await instance.flip(targetPage);
     }
 

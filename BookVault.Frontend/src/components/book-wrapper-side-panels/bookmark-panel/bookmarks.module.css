@@ -8,12 +8,15 @@
     padding-left: 10px;
     margin: 10px 0px;
     overflow-y: auto;
-    min-height: 240px;
-    max-height: 250px; 
-    padding-right: 20px;
+    max-height: 222px; 
+    padding-right: 10px;
     position: relative;
     overflow-x: hidden;
-    transition: all 500ms;
+    transition: all 500ms ease;
+}
+
+.bookmarkList.expanded {
+    max-height: 536px;
 }
 
 .bookmarkList::-webkit-scrollbar {
@@ -110,14 +113,27 @@
     flex-direction: column;
     margin: 0 10px;
     color: rgb(221, 221, 221);
+    font-size: 14px;
 }
 
-.bookmarkDeleteButton{
+.bookmarkListActionButtons {
+    display: flex;
+    flex-direction: row;
+    gap: 6px;
+}
+
+.bookmarkActionButton{
+    padding: 10px;
+    border: 1px solid #ddddddda;
+    background-color: #dddddd25;
+    border-radius: 50%;
     color:#ddddddda
 }
 
-.bookmarkDeleteButton:hover {
-    color:#ffffff
+.bookmarkActionButton:hover {
+    color:#ffffff;
+    border: 1px solid #ffffff;
+    background-color: #dddddd46;
 }
 
 .bookmarkPanelContainer {
@@ -141,13 +157,48 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    position: fixed;         
+    bottom: 40px;
+    left: 0;
+    right: 0;
+    transition: transform 0.4s ease-in-out;
+    transform: translateY(100%); 
+    z-index: 1000;           
+}
+
+.pagePreviewContaienr.open {
+    transform: translateY(0); 
+}
+
+.pagePreviewContaienr.closed {
+    transform: translateY(100%);
+}
+
+.pagePreviewContaienrHeader {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    position: relative;
+    background-color: #646464;
+    padding: 5px 10px;
+}
+
+.pagePreviewToggler {
+    transition: transform 0.3s ease;
+}
+
+.pagePreviewContaienr.open .pagePreviewToggler {
+    transform: rotate(180deg);
 }
 
 .pagePreview {
-    width: 50%;
+    width: 48%;
     height: 100%;
     padding: 3px 6px;
     margin: auto;
+    margin-bottom: -10px !important;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -157,8 +208,11 @@
 }
 
 .jumpToPageButton {
-    height: 40px;
+    position: relative;
+    bottom: -30px;
+    height: 35px;
     padding: 6px 12px;
+    margin: 0 10px;
     font-size: 14px;
     border-radius: 6px;
     background-color: #ffffff;
@@ -178,18 +232,34 @@
     border-radius: 6px;
 }
 
+.pageThumbnailWithNoImage {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 220px;
+    width: 160px;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
 .pagePreviewText {
     font-size: 14px;
     font-weight: 600;
-    margin-bottom: 10px;
     position: relative;
 }
 
-.pagePreviewText::before {
-    content: '';
-    display: flex;
-    border-top: 1px solid #646464;
-    margin: 5px 0 10px 0;
+.pagePreviewToggler {
+    border-radius: 50%;
+    padding: 0px 5px;
+    border: 1px solid #ddddddda;
+    background-color: #dddddd25;
+    cursor: pointer;
+}
+
+.pagePreviewToggler:hover {
+    border: 1px solid #ffffff;
+    background-color: #dddddd46;
 }
 
 .sortButton {
