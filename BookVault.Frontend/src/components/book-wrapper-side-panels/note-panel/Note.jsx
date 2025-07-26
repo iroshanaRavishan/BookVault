@@ -12,6 +12,7 @@ export default function Note() {
             ['bold', 'italic', 'underline', 'strike'],
             [{ 'color': [] }, { 'background': [] }],
             [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+            ['link'],
         ]
     };
 
@@ -20,6 +21,7 @@ export default function Note() {
         'bold', 'italic', 'underline', 'strike',
         'color', 'background',
         'list', 'bullet',
+        'link',
     ];
 
   return (
