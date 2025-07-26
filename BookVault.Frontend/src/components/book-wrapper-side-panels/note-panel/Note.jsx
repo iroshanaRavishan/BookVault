@@ -10,12 +10,14 @@ export default function Note() {
         toolbar: [
             [{ 'size': ['small', false, 'large', 'huge'] }],  // Inline font sizes
             ['bold', 'italic', 'underline', 'strike'],
+            [{ 'color': [] }, { 'background': [] }],
         ]
     };
 
     const formats = [
         'size',
         'bold', 'italic', 'underline', 'strike',
+        'color', 'background',
     ];
 
   return (
