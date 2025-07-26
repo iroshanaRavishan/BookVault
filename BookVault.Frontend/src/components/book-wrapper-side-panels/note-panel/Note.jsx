@@ -11,6 +11,7 @@ export default function Note() {
             [{ 'size': ['small', false, 'large', 'huge'] }],  // Inline font sizes
             ['bold', 'italic', 'underline', 'strike'],
             [{ 'color': [] }, { 'background': [] }],
+            [{ 'list': 'ordered' }, { 'list': 'bullet' }],
         ]
     };
 
@@ -18,6 +19,7 @@ export default function Note() {
         'size',
         'bold', 'italic', 'underline', 'strike',
         'color', 'background',
+        'list', 'bullet',
     ];
 
   return (
