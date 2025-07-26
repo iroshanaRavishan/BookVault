@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 import ReactQuill from 'react-quill-new';
 import 'react-quill-new/dist/quill.snow.css';
 import styles from './note.module.css';
+import { LuUndo2, LuRedo2 } from "react-icons/lu";
 
 export default function Note() {
     const [content, setContent] = useState('');
@@ -36,9 +37,10 @@ export default function Note() {
   return (
     <div className={styles.noteWrapper}>
         <div style={{ marginBottom: '5px' }}>
-            <button onClick={() => quillRef.current?.getEditor().history.undo()}>undo</button>
-            <button onClick={() => quillRef.current?.getEditor().history.redo()}>redo</button>
+            <button onClick={() => quillRef.current?.getEditor().history.undo()}><LuUndo2 /></button>
+            <button onClick={() => quillRef.current?.getEditor().history.redo()}><LuRedo2 /></button>
         </div>
+        
         {/* Editor */}
         <ReactQuill
             ref={quillRef}
