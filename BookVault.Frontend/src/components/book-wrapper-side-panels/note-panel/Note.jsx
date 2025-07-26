@@ -6,7 +6,7 @@ import { LuUndo2, LuRedo2, LuChevronLeft, LuChevronRight } from "react-icons/lu"
 import { HiMiniCog6Tooth } from 'react-icons/hi2';
 import { IoCaretDown } from 'react-icons/io5';
 
-export default function Note() {
+export default function Note({ isPanelPinned }) {
     const [content, setContent] = useState('');
     const quillRef = useRef(null); // Ref to access Quill instance
     const [lineHeight, setLineHeight] = useState(24); // px height for both
