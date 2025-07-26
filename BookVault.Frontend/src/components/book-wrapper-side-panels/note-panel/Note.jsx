@@ -2,8 +2,9 @@ import React, { useState, useRef } from 'react';
 import ReactQuill from 'react-quill-new';
 import 'react-quill-new/dist/quill.snow.css';
 import styles from './note.module.css';
-import { LuUndo2, LuRedo2 } from "react-icons/lu";
+import { LuUndo2, LuRedo2, LuChevronLeft, LuChevronRight } from "react-icons/lu";
 import { HiMiniCog6Tooth } from 'react-icons/hi2';
+import { IoCaretDown } from 'react-icons/io5';
 
 export default function Note() {
     const [content, setContent] = useState('');
@@ -54,19 +55,19 @@ export default function Note() {
             </select>
         </div>
 
-        <div className={styles.noteActions} style={{margin: '5px 0'}}>  
-            <div >
-                <button onClick={() => quillRef.current?.getEditor().history.undo()}><LuUndo2 /></button>
-                <button onClick={() => quillRef.current?.getEditor().history.redo()}><LuRedo2 /></button>
-            </div>
+        <div className={styles.noteActions} style={{margin: '10px 0'}}>  
             <div>
-                <button>prev</button>
-                <span> 5 </span>
-                <span>page</span>
-                <button>next</button>
+                <span className={styles.undoRedoBtns} onClick={() => quillRef.current?.getEditor().history.undo()}><LuUndo2 /></span>
+                <span className={styles.undoRedoBtns} onClick={() => quillRef.current?.getEditor().history.redo()}><LuRedo2 /></span>
             </div>
-            <div>
-                <HiMiniCog6Tooth className={styles.menuIcon} size={21}/> Settings
+            <div className={styles.noteNavigation}>
+                <LuChevronLeft className={styles.navigationIcons} size={22}/>
+                {/* <span> 5 </span> */}
+                <span className={styles.pageText}>Page 5 </span>
+                <LuChevronRight className={styles.navigationIcons} size={22}/>
+            </div>
+            <div className={styles.settings}>
+                <HiMiniCog6Tooth className={styles.menuIcon} size={18}/> <IoCaretDown size={10}/>
             </div>
         </div>
         
@@ -80,6 +81,10 @@ export default function Note() {
             placeholder="Type your note here..."
             className={styles.editor}
         />
+        <div className={styles.noteContentActions}>
+            <button>cancel</button>
+            <button>save</button>
+        </div>
     </div>
   );
 }
