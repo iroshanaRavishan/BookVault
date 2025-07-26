@@ -36,4 +36,54 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15); 
+}
+
+.undoRedoBtns {
+  border-radius: 4px;
+  padding: 5px 8px;
+  cursor: pointer;
+  border: 1px solid #e7e7e7;
+  margin-right: 5px;
+}
+
+.undoRedoBtns:hover {
+  background-color: #f1f1f1;
+}
+
+.noteNavigation{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.navigationIcons {
+  margin: 0 5px;
+  border-radius: 5px;
+  height: 20px;
+  padding: 5px 3px;
+  border: 1px solid #e7e7e7;
+}
+
+.navigationIcons:hover {
+  background-color: #f1f1f1;
+  color: #2c2c2c;
+}
+
+.settings {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: #494949;
+  gap: 5px;
+  cursor: pointer;
+  border: 1px solid #e7e7e7;
+  padding: 5px;
+  border-radius: 5px;
+  height: 20px;
+}
+
+.settings:hover {
+  background-color: #f1f1f1;
+  color: #2c2c2c;
 }
