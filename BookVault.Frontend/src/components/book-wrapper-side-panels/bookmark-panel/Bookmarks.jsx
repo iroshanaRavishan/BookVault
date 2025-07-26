@@ -23,6 +23,7 @@ export default function Bookmarks({ openedAt, onBookmarkItemDoubleClick }) {
     return saved ? JSON.parse(saved) : { path: null, page: null };
   });
   const [toggleDown, setToggleDown] = useState(true);
+  const [lastClickTime, setLastClickTime] = useState(0);
 
   function handleSortChange(type) {
     setSortType(type);
@@ -214,6 +215,16 @@ useEffect(() => {
     }
   }
 
+  const handleClick = () => {
+    const now = Date.now();
+    if (now - lastClickTime < 1100) return; // Ignore clicks within 1000ms
+    setLastClickTime(now);
+
+    if (onBookmarkItemDoubleClick) {
+      onBookmarkItemDoubleClick(thumbnailGeneratedFor.page);
+    }
+  };
+
   return (
     <div className={styles.bookmarkPanel}>
       {/* Listen for new bookmarks in real-time */}
@@ -327,7 +338,8 @@ useEffect(() => {
             </div>
             <button 
               className={styles.jumpToPageButton}
-               onClick={() => onBookmarkItemDoubleClick && onBookmarkItemDoubleClick(thumbnailGeneratedFor.page)}
+              onClick={handleClick}
+              onDoubleClick={(e) => e.stopPropagation()}
             >
               Jump to page
             </button>
