@@ -1,6 +1,6 @@
 .noteWrapper {
   background: #fff;
-  height: 88%;
+  height: -webkit-fill-available !important;
   display: flex;
   flex-direction: column;
   color: black;
@@ -15,17 +15,7 @@
 
 .editor {
   flex: 1;
-  min-height: 300px;
-  color: black;
-  background: repeating-linear-gradient(
-    #fff,
-    #fff 24px,
-    #e8e8e8 25px
-  );
-  padding-top: 10px;
-  font-size: 15px;
-  line-height: 25px;
-  border: none;
+  padding-top: 16px;
 }
 
 .customToolbar {
@@ -35,7 +25,9 @@
   padding: 6px;
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start;
+  justify-content: space-between;
+  height: 64px !important;
+  align-items: center;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15); 
 }
 
@@ -46,7 +38,6 @@
   border: 1px solid #e7e7e7;
   margin-right: 5px;
   background-color: #f3f3f3;
-
 }
 
 .undoRedoBtns:hover {
