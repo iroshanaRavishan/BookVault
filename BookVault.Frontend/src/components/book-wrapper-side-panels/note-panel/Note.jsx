@@ -13,6 +13,7 @@ export default function Note() {
             [{ 'color': [] }, { 'background': [] }],
             [{ 'list': 'ordered' }, { 'list': 'bullet' }],
             ['link'],
+            [{ 'align': [] }],
         ]
     };
 
@@ -22,6 +23,7 @@ export default function Note() {
         'color', 'background',
         'list', 'bullet',
         'link',
+        'align',
     ];
 
   return (
