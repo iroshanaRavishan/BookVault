@@ -290,7 +290,7 @@ export default function SideButtonsWrapper({
             style={{
               backgroundColor: 'white',
             }}>
-            <Note />
+            <Note isPanelPinned={isLeftPanelPinned} />
           </div>
           {isLeftPanelPinned && (
             <div className={styles.resizer} onMouseDown={handleMouseDown} />
