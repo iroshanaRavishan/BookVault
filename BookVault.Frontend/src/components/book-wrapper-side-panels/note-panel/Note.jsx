@@ -8,13 +8,13 @@ export default function Note() {
 
     const modules = {
         toolbar: [
-            [{ 'header': [1, 2, 3, false] }],
+            [{ 'size': ['small', false, 'large', 'huge'] }],  // Inline font sizes
             ['bold', 'italic', 'underline', 'strike'],
         ]
     };
 
     const formats = [
-        'header',
+        'size',
         'bold', 'italic', 'underline', 'strike',
     ];
 
