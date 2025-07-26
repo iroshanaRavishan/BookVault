@@ -14,6 +14,7 @@ export default function Note() {
             [{ 'list': 'ordered' }, { 'list': 'bullet' }],
             ['link'],
             [{ 'align': [] }],
+            ['clean'],
         ]
     };
 
