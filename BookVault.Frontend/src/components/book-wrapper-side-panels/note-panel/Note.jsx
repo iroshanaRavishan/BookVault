@@ -103,7 +103,8 @@ export default function Note({ isPanelPinned }) {
                     #fff ${lineHeight - 1}px,
                     #bdbdbdff ${lineHeight}px
                 )`,
-                backgroundPositionY: backgroundOffset
+                backgroundPositionY: backgroundOffset,
+                maxHeight:  isPanelPinned ? '590px': '430px' 
             }}
         />
         <div className={styles.noteContentActions}>
