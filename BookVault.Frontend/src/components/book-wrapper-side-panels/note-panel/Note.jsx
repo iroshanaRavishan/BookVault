@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import ReactQuill from 'react-quill-new';
 import 'react-quill-new/dist/quill.snow.css';
 import styles from './note.module.css';
 
 export default function Note() {
     const [content, setContent] = useState('');
+    const quillRef = useRef(null); // Ref to access Quill instance
 
     const modules = {
         toolbar: [
@@ -15,7 +16,12 @@ export default function Note() {
             ['link'],
             [{ 'align': [] }],
             ['clean'],
-        ]
+        ],
+        history: {
+            delay: 500,
+            maxStack: 100,
+            userOnly: true,
+        }
     };
 
     const formats = [
@@ -29,8 +35,13 @@ export default function Note() {
 
   return (
     <div className={styles.noteWrapper}>
+        <div style={{ marginBottom: '5px' }}>
+            <button onClick={() => quillRef.current?.getEditor().history.undo()}>undo</button>
+            <button onClick={() => quillRef.current?.getEditor().history.redo()}>redo</button>
+        </div>
         {/* Editor */}
         <ReactQuill
+            ref={quillRef}
             value={content}
             onChange={setContent}
             modules={modules}
