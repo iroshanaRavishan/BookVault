@@ -55,7 +55,7 @@ export default function Note() {
             </select>
         </div>
 
-        <div className={styles.noteActions} style={{margin: '8px 0'}}>  
+        <div className={styles.noteActions} style={{margin: '10px 0'}}>  
             <div>
                 <span className={styles.undoRedoBtns} onClick={() => quillRef.current?.getEditor().history.undo()}><LuUndo2 /></span>
                 <span className={styles.undoRedoBtns} onClick={() => quillRef.current?.getEditor().history.redo()}><LuRedo2 /></span>
@@ -63,7 +63,7 @@ export default function Note() {
             <div className={styles.noteNavigation}>
                 <LuChevronLeft className={styles.navigationIcons} size={22}/>
                 {/* <span> 5 </span> */}
-                <span>Page 5 </span>
+                <span className={styles.pageText}>Page 5 </span>
                 <LuChevronRight className={styles.navigationIcons} size={22}/>
             </div>
             <div className={styles.settings}>
@@ -81,6 +81,10 @@ export default function Note() {
             placeholder="Type your note here..."
             className={styles.editor}
         />
+        <div className={styles.noteContentActions}>
+            <button>cancel</button>
+            <button>save</button>
+        </div>
     </div>
   );
 }
