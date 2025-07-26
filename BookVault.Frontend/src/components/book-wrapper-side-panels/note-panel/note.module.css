@@ -29,8 +29,8 @@
 }
 
 .customToolbar {
-  border-top: 1px solid #ccc;
-  background: #ffefef;
+  border: none !important;
+  background: #fff;
   border-radius: 6px;
   padding: 6px;
   display: flex;
