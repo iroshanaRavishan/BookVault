@@ -2,8 +2,9 @@ import React, { useState, useRef } from 'react';
 import ReactQuill from 'react-quill-new';
 import 'react-quill-new/dist/quill.snow.css';
 import styles from './note.module.css';
-import { LuUndo2, LuRedo2 } from "react-icons/lu";
+import { LuUndo2, LuRedo2, LuChevronLeft, LuChevronRight } from "react-icons/lu";
 import { HiMiniCog6Tooth } from 'react-icons/hi2';
+import { IoCaretDown } from 'react-icons/io5';
 
 export default function Note() {
     const [content, setContent] = useState('');
