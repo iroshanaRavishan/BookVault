@@ -138,6 +138,10 @@
   position: relative;
   padding: 20px 10px 10px;
   user-select: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
 /* Style the slider track */
@@ -194,17 +198,4 @@
 
 .slider:hover::-moz-range-thumb {
   background: #0056b3;
-}
-
-/* Tooltip */
-.sliderTooltip {
-  position: absolute;
-  top: 10px; /* above thumb */
-  color: #202020;
-  font-size: 12px;
-  font-weight: bold;
-  pointer-events: none;
-  user-select: none;
-  white-space: nowrap;
-  transition: left 0.05s ease;
 }
