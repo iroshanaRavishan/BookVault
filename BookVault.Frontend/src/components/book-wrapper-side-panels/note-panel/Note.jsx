@@ -35,6 +35,11 @@ export default function Note({ isPanelPinned }) {
     ];
 
 
+    useLayoutEffect(() => {
+        updateTooltipPosition();
+    }, [lineHeight]);
+
+
     useEffect(() => {
         if (!quillRef.current) return;
 
