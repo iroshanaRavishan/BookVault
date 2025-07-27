@@ -108,8 +108,12 @@ export default function Note({ isPanelPinned }) {
                 <span className={styles.pageText}>Page 5 </span>
                 <LuChevronRight className={styles.navigationIcons} size={22}/>
             </div>
-            <div className={styles.settings}>
-                <HiMiniCog6Tooth className={styles.menuIcon} size={18}/> <IoCaretDown size={10}/>
+            <div
+                className={styles.settings}
+                onClick={() => setSettingsOpen(prev => !prev)}
+                style={{ cursor: 'pointer' }}
+            >
+                <HiMiniCog6Tooth className={styles.menuIcon} size={18} /> <IoCaretDown size={10} />
             </div>
         </div>
 
