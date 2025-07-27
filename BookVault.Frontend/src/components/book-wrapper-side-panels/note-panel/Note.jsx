@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useLayoutEffect } from 'react';
 import ReactQuill from 'react-quill-new';
 import 'react-quill-new/dist/quill.snow.css';
 import styles from './note.module.css';
@@ -11,8 +11,9 @@ export default function Note({ isPanelPinned }) {
     const quillRef = useRef(null); // Ref to access Quill instance
     const [lineHeight, setLineHeight] = useState(24); // px height for both
     const [settingsOpen, setSettingsOpen] = useState(false);
+    const sliderRef = useRef(null);
+    const [tooltipLeft, setTooltipLeft] = useState('10px');
 
-    const mappedValue = lineHeight - 23;
     const modules = {
         toolbar: {
             container: '#toolbar',
@@ -33,6 +34,31 @@ export default function Note({ isPanelPinned }) {
         'align',
     ];
 
+    const updateTooltipPosition = () => {
+        if (!sliderRef.current) return;
+
+        const slider = sliderRef.current;
+        const min = Number(slider.min);
+        const max = Number(slider.max);
+        const percent = (lineHeight - min) / (max - min);
+
+        const sliderWidth = slider.offsetWidth;
+        const thumbWidth = 28; // must match your thumb size
+        const left = percent * (sliderWidth - thumbWidth) + thumbWidth / 2;
+
+        setTooltipLeft(`${left}px`);
+    };
+
+    useLayoutEffect(() => {
+        updateTooltipPosition();
+    }, [lineHeight]);
+
+    useEffect(() => {
+        // Initial calculation after mount
+        updateTooltipPosition();
+        window.addEventListener('resize', updateTooltipPosition);
+        return () => window.removeEventListener('resize', updateTooltipPosition);
+    }, []);
 
     useEffect(() => {
         if (!quillRef.current) return;
@@ -138,18 +164,22 @@ export default function Note({ isPanelPinned }) {
             <div className={styles.popup}>
                 <label htmlFor="lineHeightSlider">Line Height:</label>
 
-                <input
-                    id="lineHeightSlider"
-                    type="range"
-                    min="24"
-                    max="30"
-                    value={lineHeight}
-                    onChange={(e) => setLineHeight(Number(e.target.value))}
-                    className={styles.slider}
-                />
-
-                <div className={styles.sliderTooltip} style={{ left: `${((lineHeight - 24) / 6) * 100}%` }}>
-                    {mappedValue}
+                <div className={styles.sliderWrapper}>
+                    <input
+                        ref={sliderRef}
+                        type="range"
+                        min="24"
+                        max="30"
+                        value={lineHeight}
+                        onChange={(e) => setLineHeight(Number(e.target.value))}
+                        className={styles.slider}
+                    />
+                    <div
+                        className={styles.sliderTooltip}
+                        style={{ left: tooltipLeft }}
+                    >
+                        {lineHeight - 23}
+                    </div>
                 </div>
             </div>
         )}
