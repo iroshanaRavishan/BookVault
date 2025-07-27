@@ -74,7 +74,7 @@ export default function Note({ isPanelPinned }) {
     }, [lineHeight]);
 
   return (
-    <div className={styles.noteWrapper}>
+    <div className={styles.noteWrapper} style={{ position: 'relative' }}>
         <div id="toolbar" className={styles.customToolbar}>
             <button className="ql-bold" />
             <button className="ql-italic" />
