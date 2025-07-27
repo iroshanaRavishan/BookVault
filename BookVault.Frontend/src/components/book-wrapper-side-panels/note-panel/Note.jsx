@@ -12,7 +12,6 @@ export default function Note({ isPanelPinned }) {
     const [lineHeight, setLineHeight] = useState(24); // px height for both
     const [settingsOpen, setSettingsOpen] = useState(false);
 
-    const mappedValue = lineHeight - 23;
     const modules = {
         toolbar: {
             container: '#toolbar',
