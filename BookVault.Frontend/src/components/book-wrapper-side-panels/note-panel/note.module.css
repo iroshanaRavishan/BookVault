@@ -119,6 +119,19 @@
   z-index: 1000;
   width: 160px;
   border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.popupHeader {
+  display: flex;
+}
+
+.popupBody {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
 .sliderWrapper {
