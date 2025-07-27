@@ -117,13 +117,7 @@ export default function Note({ isPanelPinned }) {
             placeholder="Type your note here..."
             className={styles.editor}
             style={{
-                background: `repeating-linear-gradient(
-                    #fff,
-                    #fff ${lineHeight - 1}px,
-                    #bdbdbdff ${lineHeight}px
-                )`,
-                backgroundPositionY: backgroundOffset,
-                maxHeight:  isPanelPinned ? '590px': '430px' 
+                maxHeight: isPanelPinned ? '590px' : '430px',
             }}
         />
         <div className={styles.noteContentActions}>
