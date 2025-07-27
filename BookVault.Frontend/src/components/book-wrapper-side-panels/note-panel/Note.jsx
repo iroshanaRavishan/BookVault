@@ -117,14 +117,6 @@ export default function Note({ isPanelPinned }) {
             </div>
         </div>
 
-        <input
-            type="range"
-            min="24"
-            max="30"
-            value={lineHeight}
-            onChange={(e) => setLineHeight(Number(e.target.value))}
-        />
-        
         {/* Editor */}
         <ReactQuill
             ref={quillRef}
