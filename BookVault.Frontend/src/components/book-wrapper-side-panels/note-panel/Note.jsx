@@ -164,18 +164,22 @@ export default function Note({ isPanelPinned }) {
             <div className={styles.popup}>
                 <label htmlFor="lineHeightSlider">Line Height:</label>
 
-                <input
-                    id="lineHeightSlider"
-                    type="range"
-                    min="24"
-                    max="30"
-                    value={lineHeight}
-                    onChange={(e) => setLineHeight(Number(e.target.value))}
-                    className={styles.slider}
-                />
-
-                <div className={styles.sliderTooltip} style={{ left: `${((lineHeight - 24) / 6) * 100}%` }}>
-                    {mappedValue}
+                <div className={styles.sliderWrapper}>
+                    <input
+                        ref={sliderRef}
+                        type="range"
+                        min="24"
+                        max="30"
+                        value={lineHeight}
+                        onChange={(e) => setLineHeight(Number(e.target.value))}
+                        className={styles.slider}
+                    />
+                    <div
+                        className={styles.sliderTooltip}
+                        style={{ left: tooltipLeft }}
+                    >
+                        {lineHeight - 23}
+                    </div>
                 </div>
             </div>
         )}
