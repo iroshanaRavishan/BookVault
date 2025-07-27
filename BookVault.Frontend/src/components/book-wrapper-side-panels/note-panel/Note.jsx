@@ -40,6 +40,25 @@ export default function Note({ isPanelPinned }) {
     }
     }, [lineHeight]);
 
+    useEffect(() => {
+        if (quillRef.current) {
+            const editor = quillRef.current.getEditor();
+            const editorRoot = editor.root; // .ql-editor element
+            editorRoot.style.lineHeight = `${lineHeight}px`;
+
+            // Apply lined background directly to the scrollable content area
+            editorRoot.style.background = `repeating-linear-gradient(
+                #fff,
+                #fff ${lineHeight - 1}px,
+                #bdbdbdff ${lineHeight}px
+            )`;
+
+            // Ensure background scrolls with content
+            editorRoot.style.backgroundAttachment = 'local';
+            editorRoot.style.backgroundPositionY = backgroundOffset;
+        }
+    }, [lineHeight, backgroundOffset]);
+
   return (
     <div className={styles.noteWrapper}>
         <div id="toolbar" className={styles.customToolbar}>
@@ -98,13 +117,7 @@ export default function Note({ isPanelPinned }) {
             placeholder="Type your note here..."
             className={styles.editor}
             style={{
-                background: `repeating-linear-gradient(
-                    #fff,
-                    #fff ${lineHeight - 1}px,
-                    #bdbdbdff ${lineHeight}px
-                )`,
-                backgroundPositionY: backgroundOffset,
-                maxHeight:  isPanelPinned ? '590px': '430px' 
+                maxHeight: isPanelPinned ? '590px' : '430px',
             }}
         />
         <div className={styles.noteContentActions}>
