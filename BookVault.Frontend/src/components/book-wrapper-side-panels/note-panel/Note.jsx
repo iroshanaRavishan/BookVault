@@ -10,7 +10,9 @@ export default function Note({ isPanelPinned }) {
     const [content, setContent] = useState('');
     const quillRef = useRef(null); // Ref to access Quill instance
     const [lineHeight, setLineHeight] = useState(24); // px height for both
+    const [settingsOpen, setSettingsOpen] = useState(false);
 
+    const mappedValue = lineHeight - 23;
     const modules = {
         toolbar: {
             container: '#toolbar',
@@ -72,7 +74,7 @@ export default function Note({ isPanelPinned }) {
     }, [lineHeight]);
 
   return (
-    <div className={styles.noteWrapper}>
+    <div className={styles.noteWrapper} style={{ position: 'relative' }}>
         <div id="toolbar" className={styles.customToolbar}>
             <button className="ql-bold" />
             <button className="ql-italic" />
@@ -106,19 +108,15 @@ export default function Note({ isPanelPinned }) {
                 <span className={styles.pageText}>Page 5 </span>
                 <LuChevronRight className={styles.navigationIcons} size={22}/>
             </div>
-            <div className={styles.settings}>
-                <HiMiniCog6Tooth className={styles.menuIcon} size={18}/> <IoCaretDown size={10}/>
+            <div
+                className={styles.settings}
+                onClick={() => setSettingsOpen(prev => !prev)}
+                style={{ cursor: 'pointer' }}
+            >
+                <HiMiniCog6Tooth className={styles.menuIcon} size={18} /> <IoCaretDown size={10} />
             </div>
         </div>
 
-        <input
-            type="range"
-            min="24"
-            max="30"
-            value={lineHeight}
-            onChange={(e) => setLineHeight(Number(e.target.value))}
-        />
-        
         {/* Editor */}
         <ReactQuill
             ref={quillRef}
@@ -136,6 +134,25 @@ export default function Note({ isPanelPinned }) {
             <button>cancel</button>
             <button>save</button>
         </div>
+        {settingsOpen && (
+            <div className={styles.popup}>
+                <label htmlFor="lineHeightSlider">Line Height:</label>
+
+                <input
+                    id="lineHeightSlider"
+                    type="range"
+                    min="24"
+                    max="30"
+                    value={lineHeight}
+                    onChange={(e) => setLineHeight(Number(e.target.value))}
+                    className={styles.slider}
+                />
+
+                <div className={styles.sliderTooltip} style={{ left: `${((lineHeight - 24) / 6) * 100}%` }}>
+                    {mappedValue}
+                </div>
+            </div>
+        )}
     </div>
   );
 }
