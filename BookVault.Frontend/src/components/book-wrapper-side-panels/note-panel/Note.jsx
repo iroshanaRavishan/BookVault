@@ -31,33 +31,45 @@ export default function Note({ isPanelPinned }) {
         'align',
     ];
 
-    const backgroundOffset = `${(24 - lineHeight) * 1.5}px`;
 
     useEffect(() => {
-    if (quillRef.current) {
+        if (!quillRef.current) return;
+
         const editor = quillRef.current.getEditor();
-        editor.root.style.lineHeight = `${lineHeight}px`;  // match px to background
-    }
+        const editorRoot = editor.root;
+
+        // Slider range values
+        const minLineHeight = 24;
+        const maxLineHeight = 30;
+
+        // Apply the requested line height
+        editorRoot.style.lineHeight = `${lineHeight}px`;
+
+        // Dynamic offset (6px -> 0px)
+        const offset = (((maxLineHeight - lineHeight) / (maxLineHeight - minLineHeight)) * 2.9) + 4;
+
+        // Measure actual line spacing
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = `<div>M</div><div>M</div>`;
+        tempDiv.style.visibility = 'hidden';
+        tempDiv.style.position = 'absolute';
+        tempDiv.style.top = '-9999px';
+        tempDiv.style.lineHeight = `${lineHeight}px`;
+
+        editorRoot.appendChild(tempDiv);
+        const children = tempDiv.querySelectorAll('div');
+        const lineSpacing = children[1].offsetTop - children[0].offsetTop;
+        tempDiv.remove();
+
+        // Apply gradient with dynamic offset
+        editorRoot.style.background = `repeating-linear-gradient(
+            #fff,
+            #fff ${lineSpacing - 1}px,
+            #bdbdbdff ${lineSpacing}px
+        )`;
+        editorRoot.style.backgroundAttachment = 'local';
+        editorRoot.style.backgroundPosition = `0 ${offset}px`;
     }, [lineHeight]);
-
-    useEffect(() => {
-        if (quillRef.current) {
-            const editor = quillRef.current.getEditor();
-            const editorRoot = editor.root; // .ql-editor element
-            editorRoot.style.lineHeight = `${lineHeight}px`;
-
-            // Apply lined background directly to the scrollable content area
-            editorRoot.style.background = `repeating-linear-gradient(
-                #fff,
-                #fff ${lineHeight - 1}px,
-                #bdbdbdff ${lineHeight}px
-            )`;
-
-            // Ensure background scrolls with content
-            editorRoot.style.backgroundAttachment = 'local';
-            editorRoot.style.backgroundPositionY = backgroundOffset;
-        }
-    }, [lineHeight, backgroundOffset]);
 
   return (
     <div className={styles.noteWrapper}>
