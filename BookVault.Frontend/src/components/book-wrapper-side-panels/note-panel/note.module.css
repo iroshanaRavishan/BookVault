@@ -186,15 +186,12 @@
 /* Tooltip */
 .sliderTooltip {
   position: absolute;
-  top: 25px;
-  transform: translateX(-50%);
-  color: rgb(63, 63, 63);
-  margin: 0 auto;
-  font-size: 14px;
+  top: 10px; /* above thumb */
+  color: #202020;
+  font-size: 12px;
   font-weight: bold;
   pointer-events: none;
   user-select: none;
   white-space: nowrap;
-  transition: left 0.1s ease;
+  transition: left 0.05s ease;
 }
-
