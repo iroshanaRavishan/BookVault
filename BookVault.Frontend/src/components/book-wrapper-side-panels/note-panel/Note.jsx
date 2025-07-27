@@ -34,6 +34,20 @@ export default function Note({ isPanelPinned }) {
         'align',
     ];
 
+    const updateTooltipPosition = () => {
+        if (!sliderRef.current) return;
+
+        const slider = sliderRef.current;
+        const min = Number(slider.min);
+        const max = Number(slider.max);
+        const percent = (lineHeight - min) / (max - min);
+
+        const sliderWidth = slider.offsetWidth;
+        const thumbWidth = 28; // must match your thumb size
+        const left = percent * (sliderWidth - thumbWidth) + thumbWidth / 2;
+
+        setTooltipLeft(`${left}px`);
+    };
 
     useLayoutEffect(() => {
         updateTooltipPosition();
