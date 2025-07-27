@@ -107,3 +107,94 @@
   color: white;
   width: 100%;
 }
+
+.popup {
+  position: absolute;
+  top: 130px; /* adjust based on your layout */
+  right: 0px;
+  background: white;
+  border: 1px solid #ccc;
+  padding: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  z-index: 1000;
+  width: 160px;
+  border-radius: 4px;
+}
+
+.sliderWrapper {
+  position: relative;
+  padding: 20px 10px 10px;
+  user-select: none;
+}
+
+/* Style the slider track */
+.slider {
+  width: 100%;
+  -webkit-appearance: none;
+  height: 6px;
+  border-radius: 3px;
+  background: #ddd;
+  outline: none;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+/* Track for Firefox */
+.slider::-moz-range-track {
+  background: #ddd;
+  height: 6px;
+  border-radius: 3px;
+}
+
+/* Thumb */
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 15px;
+  height: 15px;
+  background: #007bff;
+  cursor: pointer;
+  border-radius: 50%;
+  border: none;
+  position: relative;
+  z-index: 2;
+  margin-top: -1px; /* center the thumb */
+  box-shadow: 0 0 6px rgba(0, 123, 255, 0.5);
+  transition: background 0.3s;
+}
+
+.slider::-moz-range-thumb {
+  width: 10px;
+  height: 10px;
+  background: #007bff;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 0 6px rgba(0, 123, 255, 0.5);
+  transition: background 0.3s;
+}
+
+/* Thumb hover effect */
+.slider:hover::-webkit-slider-thumb {
+  background: #0056b3;
+}
+
+.slider:hover::-moz-range-thumb {
+  background: #0056b3;
+}
+
+/* Tooltip */
+.sliderTooltip {
+  position: absolute;
+  top: 25px;
+  transform: translateX(-50%);
+  color: rgb(63, 63, 63);
+  margin: 0 auto;
+  font-size: 14px;
+  font-weight: bold;
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+  transition: left 0.1s ease;
+}
+
