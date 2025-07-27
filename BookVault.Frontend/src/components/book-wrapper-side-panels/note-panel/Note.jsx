@@ -10,7 +10,9 @@ export default function Note({ isPanelPinned }) {
     const [content, setContent] = useState('');
     const quillRef = useRef(null); // Ref to access Quill instance
     const [lineHeight, setLineHeight] = useState(24); // px height for both
+    const [settingsOpen, setSettingsOpen] = useState(false);
 
+    const mappedValue = lineHeight - 23;
     const modules = {
         toolbar: {
             container: '#toolbar',
