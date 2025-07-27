@@ -11,6 +11,8 @@ export default function Note({ isPanelPinned }) {
     const quillRef = useRef(null); // Ref to access Quill instance
     const [lineHeight, setLineHeight] = useState(24); // px height for both
     const [settingsOpen, setSettingsOpen] = useState(false);
+    const sliderRef = useRef(null);
+    const [tooltipLeft, setTooltipLeft] = useState('10px');
 
     const modules = {
         toolbar: {
