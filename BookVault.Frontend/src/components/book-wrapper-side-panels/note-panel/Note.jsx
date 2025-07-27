@@ -39,6 +39,12 @@ export default function Note({ isPanelPinned }) {
         updateTooltipPosition();
     }, [lineHeight]);
 
+    useEffect(() => {
+        // Initial calculation after mount
+        updateTooltipPosition();
+        window.addEventListener('resize', updateTooltipPosition);
+        return () => window.removeEventListener('resize', updateTooltipPosition);
+    }, []);
 
     useEffect(() => {
         if (!quillRef.current) return;
