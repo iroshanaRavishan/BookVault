@@ -167,10 +167,10 @@ export default function Note({ isPanelPinned }) {
                     <IoCloseCircleSharp size={20} className="closeBtn" style={{top: '10px', right: '8px'}} onClick={() => setSettingsOpen(prev => !prev)}/>
                 </div>
                 <div className={styles.popupBody}>
-                    <label htmlFor="lineHeightSlider">Line Height: {lineHeight - 23}</label>
+                    <label htmlFor="lineHeightSlider" className={styles.lineLabel}>Line Height : {lineHeight - 23}</label>
 
                     <div className={styles.sliderWrapper}>
-                        <span>1</span>
+                        <span className={styles.sliderLimitNumbers} style={{paddingRight: '10px'}}>1</span>
                         <input
                             ref={sliderRef}
                             type="range"
@@ -180,7 +180,7 @@ export default function Note({ isPanelPinned }) {
                             onChange={(e) => setLineHeight(Number(e.target.value))}
                             className={styles.slider}
                         />
-                        <span>6</span>
+                        <span className={styles.sliderLimitNumbers} style={{paddingLeft: '10px'}}>6</span>
                     </div>
                 </div>
             </div>
