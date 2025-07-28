@@ -167,20 +167,21 @@ export default function Note({ isPanelPinned }) {
                     <IoCloseCircleSharp size={20} className="closeBtn" style={{top: '10px', right: '8px'}} onClick={() => setSettingsOpen(prev => !prev)}/>
                 </div>
                 <div className={styles.popupBody}>
-                    <label htmlFor="lineHeightSlider" className={styles.lineLabel}>Line Height : {lineHeight - 23}</label>
-
-                    <div className={styles.sliderWrapper}>
-                        <span className={styles.sliderLimitNumbers} style={{paddingRight: '10px'}}>1</span>
-                        <input
-                            ref={sliderRef}
-                            type="range"
-                            min="24"
-                            max="30"
-                            value={lineHeight}
-                            onChange={(e) => setLineHeight(Number(e.target.value))}
-                            className={styles.slider}
-                        />
-                        <span className={styles.sliderLimitNumbers} style={{paddingLeft: '10px'}}>6</span>
+                    <div className={styles.lineHeightSlider}>
+                        <label htmlFor="lineHeightSlider" className={styles.lineLabel}>Line Height : {lineHeight - 23}</label>
+                        <div className={styles.sliderWrapper}>
+                            <span className={styles.sliderLimitNumbers} style={{paddingRight: '10px'}}>1</span>
+                            <input
+                                ref={sliderRef}
+                                type="range"
+                                min="24"
+                                max="30"
+                                value={lineHeight}
+                                onChange={(e) => setLineHeight(Number(e.target.value))}
+                                className={styles.slider}
+                            />
+                            <span className={styles.sliderLimitNumbers} style={{paddingLeft: '10px'}}>6</span>
+                        </div>
                     </div>
                 </div>
             </div>
