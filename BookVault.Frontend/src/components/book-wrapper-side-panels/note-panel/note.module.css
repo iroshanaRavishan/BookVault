@@ -166,6 +166,23 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  padding-top: 5px;
+}
+
+.lineHeightSlider {
+  font-size: 12px;
+  font-weight: 600;
+  margin-top: 10px;
+  position: relative;
+  display: flex;       
+  flex-direction: column;   
+}
+
+.lineHeightSlider::before {
+  content: "";
+  flex-grow: 1;           
+  height: 1px;
+  background-color: #ccc;
 }
 
 /* Style the slider track */
