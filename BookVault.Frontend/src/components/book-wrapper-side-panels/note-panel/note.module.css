@@ -183,7 +183,7 @@
 .slider {
   width: 100%;
   -webkit-appearance: none;
-  height: 6px;
+  height: 3px;
   border-radius: 3px;
   background: #ddd;
   outline: none;
