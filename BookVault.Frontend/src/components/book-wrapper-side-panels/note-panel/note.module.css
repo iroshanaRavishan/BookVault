@@ -126,6 +126,13 @@
 
 .popupHeader {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.headerText {
+  line-height: 1.4;
+  font-size: 14px;
 }
 
 .popupBody {
