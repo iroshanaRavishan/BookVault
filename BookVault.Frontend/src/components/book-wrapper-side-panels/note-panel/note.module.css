@@ -132,6 +132,7 @@
 .headerText {
   line-height: 1.4;
   font-size: 14px;
+  font-weight: 600;
 }
 
 .popupBody {
@@ -194,8 +195,8 @@
 .slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 15px;
-  height: 15px;
+  width: 12px;
+  height: 12px;
   background: #007bff;
   cursor: pointer;
   border-radius: 50%;
