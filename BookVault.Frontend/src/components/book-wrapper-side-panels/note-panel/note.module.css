@@ -142,20 +142,10 @@
 
 .lineLabel {
   font-size: 12px;
-  font-weight: 600;
-  margin-top: 10px;
-  position: relative;
+  font-weight: 400;
+  margin-top: 5px;
   display: flex;          
   align-items: center;    
-}
-
-.lineLabel::after {
-  content: "";
-  flex-grow: 1;           
-  height: 1px;
-  margin-top: 1px;
-  background-color: #ccc;
-  margin-left: 10px;      
 }
 
 .sliderWrapper {
