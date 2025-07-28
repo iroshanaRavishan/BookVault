@@ -188,14 +188,6 @@
   background: #ddd;
   outline: none;
   cursor: pointer;
-  margin-top: 20px;
-}
-
-/* Track for Firefox */
-.slider::-moz-range-track {
-  background: #ddd;
-  height: 6px;
-  border-radius: 3px;
 }
 
 /* Thumb */
@@ -211,26 +203,10 @@
   position: relative;
   z-index: 2;
   margin-top: -1px; /* center the thumb */
-  box-shadow: 0 0 6px rgba(0, 123, 255, 0.5);
-  transition: background 0.3s;
-}
-
-.slider::-moz-range-thumb {
-  width: 10px;
-  height: 10px;
-  background: #007bff;
-  border-radius: 50%;
-  border: none;
-  cursor: pointer;
-  box-shadow: 0 0 6px rgba(0, 123, 255, 0.5);
   transition: background 0.3s;
 }
 
 /* Thumb hover effect */
 .slider:hover::-webkit-slider-thumb {
-  background: #0056b3;
-}
-
-.slider:hover::-moz-range-thumb {
   background: #0056b3;
 }
