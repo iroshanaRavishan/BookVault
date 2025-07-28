@@ -140,6 +140,12 @@
   justify-content: flex-start;
 }
 
+.popupBody label {
+  font-size: 12px;
+  font-weight: 600;
+  margin-top: 10px;
+}
+
 .sliderWrapper {
   position: relative;
   padding: 20px 10px 10px;
