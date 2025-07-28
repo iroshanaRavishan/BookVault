@@ -164,6 +164,7 @@ export default function Note({ isPanelPinned }) {
             <div className={styles.popup}>
                 <div className={styles.popupHeader}>
                     <span className={styles.headerText}>Advance Settigns</span>
+                    <IoCloseCircleSharp size={20} className="closeBtn" />
                 </div>
                 <div className={styles.popupBody}>
                     <label htmlFor="lineHeightSlider">Line Height: {lineHeight - 23}</label>
