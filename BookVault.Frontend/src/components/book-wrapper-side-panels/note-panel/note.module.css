@@ -140,10 +140,22 @@
   justify-content: flex-start;
 }
 
-.popupBody label {
+.lineLabel {
   font-size: 12px;
   font-weight: 600;
   margin-top: 10px;
+  position: relative;
+  display: flex;          
+  align-items: center;    
+}
+
+.lineLabel::after {
+  content: "";
+  flex-grow: 1;           
+  height: 1px;
+  margin-top: 1px;
+  background-color: #ccc;
+  margin-left: 10px;      
 }
 
 .sliderWrapper {
