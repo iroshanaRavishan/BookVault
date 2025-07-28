@@ -160,7 +160,7 @@
 
 .sliderWrapper {
   position: relative;
-  padding: 20px 10px 10px;
+  padding-bottom: 10px;
   user-select: none;
   display: flex;
   flex-direction: row;
