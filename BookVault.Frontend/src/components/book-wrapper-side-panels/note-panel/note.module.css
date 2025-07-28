@@ -185,6 +185,10 @@
   background-color: #ccc;
 }
 
+.sliderLimitNumbers {
+  font-size: 12px;
+}
+
 /* Style the slider track */
 .slider {
   width: 100%;
