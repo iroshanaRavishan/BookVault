@@ -4,7 +4,7 @@ import 'react-quill-new/dist/quill.snow.css';
 import styles from './note.module.css';
 import { LuUndo2, LuRedo2, LuChevronLeft, LuChevronRight } from "react-icons/lu";
 import { HiMiniCog6Tooth } from 'react-icons/hi2';
-import { IoCaretDown } from 'react-icons/io5';
+import { IoCaretDown, IoCloseCircleSharp } from 'react-icons/io5';
 
 export default function Note({ isPanelPinned }) {
     const [content, setContent] = useState('');
@@ -163,7 +163,7 @@ export default function Note({ isPanelPinned }) {
         {settingsOpen && (
             <div className={styles.popup}>
                 <div className={styles.popupHeader}>
-                    <span>Advance Settigns</span>
+                    <span className={styles.headerText}>Advance Settigns</span>
                 </div>
                 <div className={styles.popupBody}>
                     <label htmlFor="lineHeightSlider">Line Height: {lineHeight - 23}</label>
