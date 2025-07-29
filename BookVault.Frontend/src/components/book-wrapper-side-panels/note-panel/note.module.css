@@ -197,14 +197,14 @@
   appearance: none;
   width: 12px;
   height: 12px;
-  background: #007bff;
+  background: white;      
+  border: 3px solid black;
   cursor: pointer;
   border-radius: 50%;
-  border: none;
   position: relative;
   z-index: 2;
   margin-top: -1px; /* center the thumb */
-  transition: background 0.3s;
+  transition: background 0.3s, border-color 0.3s;
 }
 
 /* Thumb hover effect */
