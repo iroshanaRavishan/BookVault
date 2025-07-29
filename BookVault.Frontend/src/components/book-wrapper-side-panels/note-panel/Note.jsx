@@ -184,7 +184,7 @@ export default function Note({ isPanelPinned }) {
                         </div>
                     </div>
 
-                    <div className={styles.noteNavigation}>
+                    <div className={styles.noteNavigationSelectionSection}>
                         <label htmlFor="lineHeightSlider" className={styles.sectionLabel}>Navigation</label>
                         <div className={styles.navigrationWrapper}>
                             <input type="radio" name="manual" id="1" /> Manual
