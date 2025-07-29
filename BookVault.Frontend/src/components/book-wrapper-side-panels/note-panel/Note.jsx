@@ -170,7 +170,7 @@ export default function Note({ isPanelPinned }) {
                     <div className={styles.lineHeightSlider}>
                         <label htmlFor="lineHeightSlider" className={styles.sectionLabel}>Line Height : {lineHeight - 23}</label>
                         <div className={styles.sliderWrapper}>
-                            <span className={styles.sliderLimitNumbers} style={{paddingRight: '10px'}}>1</span>
+                            <span className={styles.sliderLimitNumbers} style={{padding: '0 8px'}}>1</span>
                             <input
                                 ref={sliderRef}
                                 type="range"
@@ -180,7 +180,23 @@ export default function Note({ isPanelPinned }) {
                                 onChange={(e) => setLineHeight(Number(e.target.value))}
                                 className={styles.slider}
                             />
-                            <span className={styles.sliderLimitNumbers} style={{paddingLeft: '10px'}}>7</span>
+                            <span className={styles.sliderLimitNumbers} style={{padding: '0 8px'}}>7</span>
+                        </div>
+                    </div>
+
+                    <div className={styles.noteNavigationSelectionSection}>
+                        <label htmlFor="lineHeightSlider" className={styles.sectionLabel} style={{marginTop: '0px'}}>
+                            Page rules visibility
+                        </label>
+                        <div className={styles.pageRuleVisibility}>
+                            <label className={styles.radioButtonWrapper}>
+                                <input type="radio" name="ruleVisibility" id="show" />
+                                <span className={styles.radioLabel}>Show</span>
+                            </label>
+                            <label className={styles.radioButtonWrapper}>
+                                <input type="radio" name="ruleVisibility" id="hide" />
+                                <span className={styles.radioLabel}>hide</span>
+                            </label>
                         </div>
                     </div>
 
@@ -188,7 +204,6 @@ export default function Note({ isPanelPinned }) {
                         <label htmlFor="lineHeightSlider" className={styles.sectionLabel} style={{marginTop: '0px'}}>
                             Navigation
                         </label>
-                        
                         <div className={styles.navigationWrapper}>
                             <label className={styles.radioButtonWrapper}>
                                 <input type="radio" name="navigationMode" id="manual" /><span className={styles.radioLabel}>Manual - <span className={styles.radioDesc}>The notes are not tunred when the book's pages turn</span></span>
