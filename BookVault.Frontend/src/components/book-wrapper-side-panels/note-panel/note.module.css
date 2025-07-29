@@ -141,7 +141,7 @@
   justify-content: flex-start;
 }
 
-.lineLabel {
+.sectionLabel {
   font-size: 12px;
   font-weight: 400;
   margin-top: 5px;
@@ -197,17 +197,20 @@
   appearance: none;
   width: 12px;
   height: 12px;
-  background: #007bff;
+  background: white;      
+  border: 3px solid black;
   cursor: pointer;
   border-radius: 50%;
-  border: none;
   position: relative;
   z-index: 2;
   margin-top: -1px; /* center the thumb */
-  transition: background 0.3s;
+  transition: background 0.3s, border-color 0.3s;
 }
 
 /* Thumb hover effect */
 .slider:hover::-webkit-slider-thumb {
-  background: #0056b3;
+  background: white;      
+  border-color: #333;     
+    width: 13px;            
+  height: 13px;
 }

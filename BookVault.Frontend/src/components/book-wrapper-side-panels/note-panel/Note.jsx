@@ -168,7 +168,7 @@ export default function Note({ isPanelPinned }) {
                 </div>
                 <div className={styles.popupBody}>
                     <div className={styles.lineHeightSlider}>
-                        <label htmlFor="lineHeightSlider" className={styles.lineLabel}>Line Height : {lineHeight - 23}</label>
+                        <label htmlFor="lineHeightSlider" className={styles.sectionLabel}>Line Height : {lineHeight - 23}</label>
                         <div className={styles.sliderWrapper}>
                             <span className={styles.sliderLimitNumbers} style={{paddingRight: '10px'}}>1</span>
                             <input
