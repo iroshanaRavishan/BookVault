@@ -225,6 +225,7 @@
   justify-content: flex-start;
   gap: 10px;
   width: 100%;
+  padding-bottom: 10px;
 }
 
 .noteNavigationSelectionSection::before {
@@ -241,7 +242,7 @@
   position: relative;
 }
 
-.navigationWrapper {
+.navigationWrapper, .pageRuleVisibility {
   display: flex;
   flex-direction: column;
   gap: 10px;
