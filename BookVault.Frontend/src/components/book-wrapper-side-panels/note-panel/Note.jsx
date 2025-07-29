@@ -185,7 +185,7 @@ export default function Note({ isPanelPinned }) {
                     </div>
 
                     <div className={styles.noteNavigationSelectionSection}>
-                        <label htmlFor="lineHeightSlider" className={styles.sectionLabel}>
+                        <label htmlFor="lineHeightSlider" className={styles.sectionLabel} style={{marginTop: '0px'}}>
                             Navigation
                         </label>
                         
