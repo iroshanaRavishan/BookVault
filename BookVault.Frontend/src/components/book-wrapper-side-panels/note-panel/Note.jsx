@@ -186,9 +186,24 @@ export default function Note({ isPanelPinned }) {
 
                     <div className={styles.noteNavigationSelectionSection}>
                         <label htmlFor="lineHeightSlider" className={styles.sectionLabel} style={{marginTop: '0px'}}>
+                            Page rules visibility
+                        </label>
+                        <div className={styles.pageRuleVisibility}>
+                            <label className={styles.radioButtonWrapper}>
+                                <input type="radio" name="ruleVisibility" id="show" />
+                                <span className={styles.radioLabel}>Show</span>
+                            </label>
+                            <label className={styles.radioButtonWrapper}>
+                                <input type="radio" name="ruleVisibility" id="hide" />
+                                <span className={styles.radioLabel}>hide</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div className={styles.noteNavigationSelectionSection}>
+                        <label htmlFor="lineHeightSlider" className={styles.sectionLabel} style={{marginTop: '0px'}}>
                             Navigation
                         </label>
-                        
                         <div className={styles.navigationWrapper}>
                             <label className={styles.radioButtonWrapper}>
                                 <input type="radio" name="navigationMode" id="manual" /><span className={styles.radioLabel}>Manual - <span className={styles.radioDesc}>The notes are not tunred when the book's pages turn</span></span>
