@@ -218,11 +218,9 @@
 .noteNavigationSelectionSection {
   font-size: 12px;
   font-weight: 600;
-  margin-top: 10px;
   position: relative;
   display: flex;       
   flex-direction: column;   
-  align-items: flex-start;
   justify-content: flex-start;
   gap: 10px;
   width: 100%;
