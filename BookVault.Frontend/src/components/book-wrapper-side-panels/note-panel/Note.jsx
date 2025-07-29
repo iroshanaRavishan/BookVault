@@ -184,11 +184,18 @@ export default function Note({ isPanelPinned }) {
                         </div>
                     </div>
 
-                    <div className={styles.noteNavigation}>
-                        <label htmlFor="lineHeightSlider" className={styles.sectionLabel}>Navigation</label>
-                        <div className={styles.navigrationWrapper}>
-                            <input type="radio" name="manual" id="1" /> Manual
-                            <input type="radio" name="auto" id="2" /> Auto
+                    <div className={styles.noteNavigationSelectionSection}>
+                        <label htmlFor="lineHeightSlider" className={styles.sectionLabel}>
+                            Navigation
+                        </label>
+                        
+                        <div className={styles.navigationWrapper}>
+                            <label className={styles.radioLabel}>
+                                <input type="radio" name="navigationMode" id="manual" /> Manual
+                            </label>
+                            <label className={styles.radioLabel}>
+                                <input type="radio" name="navigationMode" id="auto" /> Auto
+                            </label>
                         </div>
                     </div>
                 </div>
