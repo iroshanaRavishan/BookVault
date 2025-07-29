@@ -214,3 +214,19 @@
     width: 13px;            
   height: 13px;
 }
+
+.noteNavigation {
+  font-size: 12px;
+  font-weight: 600;
+  margin-top: 10px;
+  position: relative;
+  display: flex;       
+  flex-direction: column;   
+}
+
+.noteNavigation::before {
+  content: "";
+  flex-grow: 1;           
+  height: 1px;
+  background-color: #ccc;
+}

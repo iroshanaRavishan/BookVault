@@ -180,7 +180,15 @@ export default function Note({ isPanelPinned }) {
                                 onChange={(e) => setLineHeight(Number(e.target.value))}
                                 className={styles.slider}
                             />
-                            <span className={styles.sliderLimitNumbers} style={{paddingLeft: '10px'}}>6</span>
+                            <span className={styles.sliderLimitNumbers} style={{paddingLeft: '10px'}}>7</span>
+                        </div>
+                    </div>
+
+                    <div className={styles.noteNavigation}>
+                        <label htmlFor="lineHeightSlider" className={styles.sectionLabel}>Navigation</label>
+                        <div className={styles.navigrationWrapper}>
+                            <input type="radio" name="manual" id="1" /> Manual
+                            <input type="radio" name="auto" id="2" /> Auto
                         </div>
                     </div>
                 </div>
