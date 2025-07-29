@@ -269,13 +269,14 @@
   background: radial-gradient(circle, #252525 50%, transparent 50%);
 }
 
-.radioLabel {
-  font-size: 13px;
+.radioButtonWrapper {
+  font-size: 12px;
   font-weight: 500;
   color: #444;
   cursor: pointer;
   display: flex;
-  align-items: center;
+  gap: 10px;
+  align-items: flex-start;
   transition: color 0.2s ease;
 }
 
