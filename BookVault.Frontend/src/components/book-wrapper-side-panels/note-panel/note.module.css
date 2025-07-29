@@ -209,5 +209,8 @@
 
 /* Thumb hover effect */
 .slider:hover::-webkit-slider-thumb {
-  background: #0056b3;
+  background: white;      
+  border-color: #333;     
+    width: 13px;            
+  height: 13px;
 }
