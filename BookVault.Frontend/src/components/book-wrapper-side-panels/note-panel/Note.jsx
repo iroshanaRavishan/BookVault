@@ -170,7 +170,7 @@ export default function Note({ isPanelPinned }) {
                     <div className={styles.lineHeightSlider}>
                         <label htmlFor="lineHeightSlider" className={styles.sectionLabel}>Line Height : {lineHeight - 23}</label>
                         <div className={styles.sliderWrapper}>
-                            <span className={styles.sliderLimitNumbers} style={{paddingRight: '10px'}}>1</span>
+                            <span className={styles.sliderLimitNumbers} style={{padding: '0 8px'}}>1</span>
                             <input
                                 ref={sliderRef}
                                 type="range"
@@ -180,7 +180,7 @@ export default function Note({ isPanelPinned }) {
                                 onChange={(e) => setLineHeight(Number(e.target.value))}
                                 className={styles.slider}
                             />
-                            <span className={styles.sliderLimitNumbers} style={{paddingLeft: '10px'}}>7</span>
+                            <span className={styles.sliderLimitNumbers} style={{padding: '0 8px'}}>7</span>
                         </div>
                     </div>
 
