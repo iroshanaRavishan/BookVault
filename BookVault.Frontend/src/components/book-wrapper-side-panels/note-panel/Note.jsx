@@ -347,11 +347,13 @@ export default function Note({ isPanelPinned }) {
         {showDiscardModal && (
             <div className={styles.modalBackdrop}>
                 <div className={styles.modal}>
-                <p>Do you want to discard the changes?</p>
-                <div className={styles.modalButtons}>
-                    <button onClick={confirmDiscard}>Yes</button>
-                    <button onClick={closeModal}>No</button>
-                </div>
+                    <div className={styles.popupHeader}>
+                        <span className={styles.headerText}>Do you want to discard the changes?</span>
+                    </div>
+                    <div className={styles.modalActionButtons}>
+                        <button className={styles.modalButtons} onClick={confirmDiscard}>Yes</button>
+                        <button className={styles.modalButtons} onClick={closeModal}>No</button>
+                    </div>
                 </div>
             </div>
         )}
