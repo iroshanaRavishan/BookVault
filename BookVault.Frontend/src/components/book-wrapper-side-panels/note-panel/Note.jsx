@@ -5,6 +5,7 @@ import styles from './note.module.css';
 import { LuUndo2, LuRedo2, LuChevronLeft, LuChevronRight } from "react-icons/lu";
 import { HiMiniCog6Tooth } from 'react-icons/hi2';
 import { IoCaretDown, IoCloseCircleSharp } from 'react-icons/io5';
+import { decrypt, encrypt } from '../../../utils/encryptUtils';
 
 export default function Note({ isPanelPinned }) {
     const [content, setContent] = useState('');
@@ -16,6 +17,7 @@ export default function Note({ isPanelPinned }) {
     const [tooltipLeft, setTooltipLeft] = useState('10px');
     const [ruleVisibility, setRuleVisibility] = useState('show');
     const [navigationMode, setNavigationMode] = useState('auto');
+    const [showDiscardModal, setShowDiscardModal] = useState(false);
 
     const modules = {
         toolbar: {
@@ -51,6 +53,19 @@ export default function Note({ isPanelPinned }) {
 
         setTooltipLeft(`${left}px`);
     };
+
+    useEffect(() => {
+        const savedEncryptedNote = localStorage.getItem('note_content');
+        if (savedEncryptedNote) {
+            const decrypted = decrypt(savedEncryptedNote);
+            setContent(decrypted);
+        }
+    }, []);
+
+    useEffect(() => {
+        const encrypted = encrypt(content);
+        localStorage.setItem('note_content', encrypted);
+    }, [content]);
 
     useEffect(() => {
         const storedLineHeight = localStorage.getItem('note_lineHeight');
@@ -148,6 +163,30 @@ export default function Note({ isPanelPinned }) {
         editorRoot.style.backgroundPosition = `0 ${offset}px`;
     }, [lineHeight, ruleVisibility]);
 
+    const handleSave = async () => {
+        try {
+            // send content to your API
+            // implement API call
+            localStorage.removeItem('note_content');
+        } catch (error) {
+            console.error('Save failed:', error);
+        }
+    };
+
+    const handleCancel = () => {
+        setShowDiscardModal(true);
+    };
+
+    const confirmDiscard = () => {
+        setContent('');
+        localStorage.removeItem('note_content');
+        setShowDiscardModal(false);
+    };
+
+    const closeModal = () => {
+        setShowDiscardModal(false);
+    };
+
   return (
     <div className={styles.noteWrapper} style={{ position: 'relative' }}>
         <div id="toolbar" className={styles.customToolbar}>
@@ -210,8 +249,8 @@ export default function Note({ isPanelPinned }) {
             }}
         />
         <div className={styles.noteContentActions}>
-            <button>cancel</button>
-            <button>save</button>
+            <button onClick={handleCancel}>cancel</button>
+            <button onClick={handleSave}>save</button>
         </div>
         {settingsOpen && (
             <div className={styles.popup} ref={settingsRef}>
@@ -302,6 +341,17 @@ export default function Note({ isPanelPinned }) {
                             </label>
                         </div>
                     </div>
+                </div>
+            </div>
+        )}
+        {showDiscardModal && (
+            <div className={styles.modalBackdrop}>
+                <div className={styles.modal}>
+                <p>Do you want to discard the changes?</p>
+                <div className={styles.modalButtons}>
+                    <button onClick={confirmDiscard}>Yes</button>
+                    <button onClick={closeModal}>No</button>
+                </div>
                 </div>
             </div>
         )}
