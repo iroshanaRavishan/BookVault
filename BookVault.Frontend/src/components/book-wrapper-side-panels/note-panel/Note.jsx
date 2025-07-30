@@ -192,11 +192,23 @@ export default function Note({ isPanelPinned }) {
                         </label>
                         <div className={styles.pageRuleVisibility}>
                             <label className={styles.radioButtonWrapper}>
-                                <input type="radio" name="ruleVisibility" id="show" />
+                                <input
+                                    type="radio"
+                                    name="ruleVisibility"
+                                    id="show"
+                                    checked={ruleVisibility === 'show'}
+                                    onChange={() => setRuleVisibility('show')}
+                                />
                                 <span className={styles.radioLabel}>Show</span>
                             </label>
                             <label className={styles.radioButtonWrapper}>
-                                <input type="radio" name="ruleVisibility" id="hide" />
+                                <input
+                                    type="radio"
+                                    name="ruleVisibility"
+                                    id="hide"
+                                    checked={ruleVisibility === 'hide'}
+                                    onChange={() => setRuleVisibility('hide')}
+                                />
                                 <span className={styles.radioLabel}>hide</span>
                             </label>
                         </div>
