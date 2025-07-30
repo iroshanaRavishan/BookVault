@@ -12,6 +12,7 @@ export default function Note({ isPanelPinned }) {
     const [lineHeight, setLineHeight] = useState(24); // px height for both
     const [settingsOpen, setSettingsOpen] = useState(false);
     const sliderRef = useRef(null);
+    const settingsRef = useRef(null);
     const [tooltipLeft, setTooltipLeft] = useState('10px');
     const [ruleVisibility, setRuleVisibility] = useState('show');
     const [navigationMode, setNavigationMode] = useState('auto');
@@ -78,6 +79,21 @@ export default function Note({ isPanelPinned }) {
         localStorage.setItem('note_navigationMode', navigationMode);
     }, [navigationMode]);
 
+    useEffect(() => {
+        function handleClickOutside(event) {
+            if (settingsRef.current && !settingsRef.current.contains(event.target)) {
+                setSettingsOpen(false);
+            }
+        }
+
+        if (settingsOpen) {
+            document.addEventListener('mousedown', handleClickOutside);
+        }
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [settingsOpen]);
 
     useLayoutEffect(() => {
         updateTooltipPosition();
@@ -169,10 +185,14 @@ export default function Note({ isPanelPinned }) {
             </div>
             <div
                 className={styles.settings}
+                onMouseDown={(e) => {
+                    e.stopPropagation(); // Prevent click from reaching document listener
+                }}
                 onClick={() => setSettingsOpen(prev => !prev)}
                 style={{ cursor: 'pointer' }}
             >
-                <HiMiniCog6Tooth className={styles.menuIcon} size={18} /> <IoCaretDown size={10} />
+                <HiMiniCog6Tooth className={styles.menuIcon} size={18} />
+                <IoCaretDown size={10} />
             </div>
         </div>
 
@@ -194,7 +214,7 @@ export default function Note({ isPanelPinned }) {
             <button>save</button>
         </div>
         {settingsOpen && (
-            <div className={styles.popup}>
+            <div className={styles.popup} ref={settingsRef}>
                 <div className={styles.popupHeader}>
                     <span className={styles.headerText}>Advance Settigns</span>
                     <IoCloseCircleSharp size={20} className="closeBtn" style={{top: '10px', right: '8px'}} onClick={() => setSettingsOpen(prev => !prev)}/>
