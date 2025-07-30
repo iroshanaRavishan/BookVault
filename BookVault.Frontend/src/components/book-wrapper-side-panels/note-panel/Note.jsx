@@ -13,6 +13,8 @@ export default function Note({ isPanelPinned }) {
     const [settingsOpen, setSettingsOpen] = useState(false);
     const sliderRef = useRef(null);
     const [tooltipLeft, setTooltipLeft] = useState('10px');
+    const [ruleVisibility, setRuleVisibility] = useState('show');
+    const [navigationMode, setNavigationMode] = useState('auto');
 
     const modules = {
         toolbar: {
