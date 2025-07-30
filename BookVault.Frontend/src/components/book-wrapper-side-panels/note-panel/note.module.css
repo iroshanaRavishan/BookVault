@@ -106,6 +106,11 @@
   background-color: #494949;
   color: white;
   width: 100%;
+  cursor: pointer;
+}
+
+.noteContentActions button:hover {
+  background-color: #666;
 }
 
 .popup {
@@ -296,24 +301,42 @@
   font-weight: 500;
 }
 
+/* discard changes modal */
 .modalBackdrop {
   position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  top: 0; 
+  left: 0;
+  width: 100%; 
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
   display: flex; align-items: center; justify-content: center;
-  z-index: 1000;
 }
 
 .modal {
   background: white;
   padding: 20px 30px;
+  width: 70%;
   border-radius: 8px;
   text-align: center;
 }
 
-.modalButtons {
+.modalActionButtons {
   margin-top: 20px;
   display: flex;
   justify-content: space-around;
+}
+
+.modalButtons {
+  padding: 8px 20px;
+  border: none;
+  font-size: 14px;
+  border-radius: 6px;
+  background-color: #494949;
+  color: white;
+  width: 30%;
+  cursor: pointer;
+}
+
+.modalButtons:hover {
+    background-color: #666;
 }
