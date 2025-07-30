@@ -1,6 +1,10 @@
 import CryptoJS from 'crypto-js';
 
-const SECRET_KEY = 'the-secret-key';
+const SECRET_KEY = import.meta.env.VITE_CRYPTO_SECRET_KEY;
+
+if (!SECRET_KEY) {
+  throw new Error('VITE_CRYPTO_SECRET_KEY is not defined in environment variables');
+}
 
 export function encrypt(text) {
     return CryptoJS.AES.encrypt(text, SECRET_KEY).toString();
