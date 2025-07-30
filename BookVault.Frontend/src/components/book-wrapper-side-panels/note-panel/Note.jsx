@@ -17,6 +17,7 @@ export default function Note({ isPanelPinned }) {
     const [tooltipLeft, setTooltipLeft] = useState('10px');
     const [ruleVisibility, setRuleVisibility] = useState('show');
     const [navigationMode, setNavigationMode] = useState('auto');
+    const [showDiscardModal, setShowDiscardModal] = useState(false);
 
     const modules = {
         toolbar: {
@@ -316,6 +317,17 @@ export default function Note({ isPanelPinned }) {
                             </label>
                         </div>
                     </div>
+                </div>
+            </div>
+        )}
+        {showDiscardModal && (
+            <div className={styles.modalBackdrop}>
+                <div className={styles.modal}>
+                <p>Do you want to discard the changes?</p>
+                <div className={styles.modalButtons}>
+                    <button onClick={confirmDiscard}>Yes</button>
+                    <button onClick={closeModal}>No</button>
+                </div>
                 </div>
             </div>
         )}
