@@ -223,10 +223,34 @@ export default function Note({ isPanelPinned }) {
                         </label>
                         <div className={styles.navigationWrapper}>
                             <label className={styles.radioButtonWrapper}>
-                                <input type="radio" name="navigationMode" id="manual" /><span className={styles.radioLabel}>Manual - <span className={styles.radioDesc}>The notes are not tunred when the book's pages turn</span></span>
+                                <input
+                                    type="radio"
+                                    name="navigationMode"
+                                    id="manual"
+                                    checked={navigationMode === 'manual'}
+                                    onChange={() => setNavigationMode('manual')}
+                                />
+                                <span className={styles.radioLabel}>
+                                    Manual - 
+                                    <span className={styles.radioDesc}>
+                                        The notes are not tunred when the book's pages turn
+                                    </span>
+                                </span>
                             </label>
                             <label className={styles.radioButtonWrapper}>
-                                <input type="radio" name="navigationMode" id="auto" /> <span className={styles.radioLabel}>Auto - <span className={styles.radioDesc}>automatically turn the notes with the book's page is turned</span></span>
+                                <input
+                                    type="radio"
+                                    name="navigationMode"
+                                    id="auto"
+                                    checked={navigationMode === 'auto'}
+                                    onChange={() => setNavigationMode('auto')}
+                                />
+                                <span className={styles.radioLabel}>
+                                    Auto - 
+                                    <span className={styles.radioDesc}>
+                                        automatically turn the notes with the book's page is turned
+                                    </span>
+                                </span>
                             </label>
                         </div>
                     </div>
