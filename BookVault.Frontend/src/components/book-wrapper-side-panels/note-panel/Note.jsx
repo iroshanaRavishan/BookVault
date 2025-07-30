@@ -68,14 +68,17 @@ export default function Note({ isPanelPinned }) {
         const editor = quillRef.current.getEditor();
         const editorRoot = editor.root;
 
-        // Slider range values
-        const minLineHeight = 24;
-        const maxLineHeight = 30;
-
-        // Apply the requested line height
+        // Always apply line height
         editorRoot.style.lineHeight = `${lineHeight}px`;
 
-        // Dynamic offset (6px -> 0px)
+        // Remove any background if ruleVisibility is 'hide'
+        if (ruleVisibility === 'hide') {
+            editorRoot.style.background = 'none';
+            return;
+        }
+
+        const minLineHeight = 24;
+        const maxLineHeight = 30;
         const offset = (((maxLineHeight - lineHeight) / (maxLineHeight - minLineHeight)) * 2.9) + 4;
 
         // Measure actual line spacing
