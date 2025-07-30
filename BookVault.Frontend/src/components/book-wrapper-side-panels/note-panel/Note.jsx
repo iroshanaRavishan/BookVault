@@ -185,10 +185,14 @@ export default function Note({ isPanelPinned }) {
             </div>
             <div
                 className={styles.settings}
+                onMouseDown={(e) => {
+                    e.stopPropagation(); // Prevent click from reaching document listener
+                }}
                 onClick={() => setSettingsOpen(prev => !prev)}
                 style={{ cursor: 'pointer' }}
             >
-                <HiMiniCog6Tooth className={styles.menuIcon} size={18} /> <IoCaretDown size={10} />
+                <HiMiniCog6Tooth className={styles.menuIcon} size={18} />
+                <IoCaretDown size={10} />
             </div>
         </div>
 
