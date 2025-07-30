@@ -127,7 +127,7 @@ namespace BookVault.Application.Services
                     pdfFilePath = await SaveFileAsync(command.PdfFile, "pdfs");
                 }
 
-                var (isSuccess, thumbnailPath, message) = await GenerateThumbnailAsync(pdfFilePath);
+                var (isSuccess, thumbnailPath, message) = await GenerateThumbnailAsync(pdfFilePath, "thumbnail", 0);
 
                 // Create book with genres list
                 var book = Book.Create(
@@ -297,14 +297,14 @@ namespace BookVault.Application.Services
             }
         }
 
-        private async Task<(bool isSuccess, string? thumbnailPath, string message)> GenerateThumbnailAsync(string filename)
+        private async Task<(bool isSuccess, string? thumbnailPath, string message)> GenerateThumbnailAsync(string filename, string type, int page)
         {
             string fileName = Path.GetFileName(filename);
 
             if (string.IsNullOrWhiteSpace(filename))
                 return (false, null, "Filename is required.");
 
-            var (isSuccess, thumbnailPath, message) = await _thumbnailService.GenerateThumbnailAsync(fileName);
+            var (isSuccess, thumbnailPath, message) = await _thumbnailService.GenerateThumbnailAsync(fileName, type, page);
 
             if (!isSuccess || thumbnailPath == null)
             {

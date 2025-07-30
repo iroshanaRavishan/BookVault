@@ -85,8 +85,8 @@ namespace BookVault.API.Controllers
         {
             try
             {
-                var result = await _authService.UpdateUserProfileAsync(User, userUpdateDto);
-                if (!result.IsSuccess)
+                var (isSuccess, message, result) = await _authService.UpdateUserProfileAsync(User, userUpdateDto);
+                if (!isSuccess)
                     return BadRequest(result);
 
                 return Ok(new { message = "Profile updated successfully!", isSuccess = true });

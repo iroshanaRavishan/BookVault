@@ -38,11 +38,10 @@
 .form {
   display: flex;
   flex-direction: column;
-  gap: 20px;
 }
 
 .input {
-  padding: 12px 14px;
+  padding: 10px 15px;
   border: 1px solid #ddd;
   border-radius: 8px;
   font-size: 15px;
@@ -66,6 +65,8 @@
   font-size: 16px;
   font-weight: 600;
   color: #333;
+  margin-top: 20px;
+  margin-bottom: 5px;
 }
 
 .uploadLabel {
@@ -95,6 +96,22 @@
 
 .submitButton:hover {
   background-color: #3a5a8c;
+}
+
+.selectingProfilePic {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.selectingProfilePic img {
+  margin: 0 10px;
+}
+
+.submitButton:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
 }
 
 @media (max-width: 768px) {

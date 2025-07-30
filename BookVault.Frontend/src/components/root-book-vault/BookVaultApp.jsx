@@ -19,6 +19,7 @@ import Layout from '../layout/layout';
 import ContactForm from '../contact/ContactForm';
 import FAQPage from '../faqs/FAQPage';
 import ProfileSettings from '../profile-settings/ProfileSettings';
+import BookReadingBorad from '../book-reading-board/BookReadingBorad';
 
 export default function BookVaultApp() {
 
@@ -35,6 +36,7 @@ export default function BookVaultApp() {
           <Route path="/contact" element={<ContactForm />} />
           <Route path="/faq" element={<FAQPage />} />
           <Route path="/profile-settings" element={<ProfileSettings />} />
+          <Route path="/read/:id" element={<BookReadingBorad />} />
         </Route>
 
         {/* Public routes */}
