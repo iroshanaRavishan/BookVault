@@ -372,21 +372,35 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: #e50914;
+  background: #6276e0;
   color: white;
   text-decoration: none;
-  padding: 12px 20px;
+  padding: 12px 24px;
+  border: none;
   border-radius: 8px;
-  font-weight: 600;
+  font-size: 15px;
+  font-weight: 500;
   transition: background 0.2s ease;
   margin-top: 10px;
+  cursor: pointer;
 }
 
 .readButton:hover {
-  background: #f40612;
+  background: #5b68d5;
 }
 
-.playIcon {
+.readButton:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.sourceIcon {
   width: 20px;
   height: 20px;
+}
+
+.readPlatformActionBtns {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }
