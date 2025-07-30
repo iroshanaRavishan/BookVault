@@ -5,6 +5,7 @@ import styles from './note.module.css';
 import { LuUndo2, LuRedo2, LuChevronLeft, LuChevronRight } from "react-icons/lu";
 import { HiMiniCog6Tooth } from 'react-icons/hi2';
 import { IoCaretDown, IoCloseCircleSharp } from 'react-icons/io5';
+import { decrypt, encrypt } from '../../../utils/encryptUtils';
 
 export default function Note({ isPanelPinned }) {
     const [content, setContent] = useState('');
@@ -51,6 +52,19 @@ export default function Note({ isPanelPinned }) {
 
         setTooltipLeft(`${left}px`);
     };
+
+    useEffect(() => {
+        const savedEncryptedNote = localStorage.getItem('note_content');
+        if (savedEncryptedNote) {
+            const decrypted = decrypt(savedEncryptedNote);
+            setContent(decrypted);
+        }
+    }, []);
+
+    useEffect(() => {
+        const encrypted = encrypt(content);
+        localStorage.setItem('note_content', encrypted);
+    }, [content]);
 
     useEffect(() => {
         const storedLineHeight = localStorage.getItem('note_lineHeight');
