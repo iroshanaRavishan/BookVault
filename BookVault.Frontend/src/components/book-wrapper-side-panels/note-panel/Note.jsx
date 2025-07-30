@@ -163,6 +163,30 @@ export default function Note({ isPanelPinned }) {
         editorRoot.style.backgroundPosition = `0 ${offset}px`;
     }, [lineHeight, ruleVisibility]);
 
+    const handleSave = async () => {
+        try {
+            // send content to your API
+            // implement API call
+            localStorage.removeItem('note_content');
+        } catch (error) {
+            console.error('Save failed:', error);
+        }
+    };
+
+    const handleCancel = () => {
+        setShowDiscardModal(true);
+    };
+
+    const confirmDiscard = () => {
+        setContent('');
+        localStorage.removeItem('note_content');
+        setShowDiscardModal(false);
+    };
+
+    const closeModal = () => {
+        setShowDiscardModal(false);
+    };
+
   return (
     <div className={styles.noteWrapper} style={{ position: 'relative' }}>
         <div id="toolbar" className={styles.customToolbar}>
@@ -225,8 +249,8 @@ export default function Note({ isPanelPinned }) {
             }}
         />
         <div className={styles.noteContentActions}>
-            <button>cancel</button>
-            <button>save</button>
+            <button onClick={handleCancel}>cancel</button>
+            <button onClick={handleSave}>save</button>
         </div>
         {settingsOpen && (
             <div className={styles.popup} ref={settingsRef}>
