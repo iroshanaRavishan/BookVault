@@ -51,6 +51,19 @@ export default function Note({ isPanelPinned }) {
         setTooltipLeft(`${left}px`);
     };
 
+    useEffect(() => {
+        localStorage.setItem('note_lineHeight', lineHeight);
+    }, [lineHeight]);
+
+    useEffect(() => {
+        localStorage.setItem('note_ruleVisibility', ruleVisibility);
+    }, [ruleVisibility]);
+
+    useEffect(() => {
+        localStorage.setItem('note_navigationMode', navigationMode);
+    }, [navigationMode]);
+
+
     useLayoutEffect(() => {
         updateTooltipPosition();
     }, [lineHeight]);
