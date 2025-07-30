@@ -79,6 +79,21 @@ export default function Note({ isPanelPinned }) {
         localStorage.setItem('note_navigationMode', navigationMode);
     }, [navigationMode]);
 
+    useEffect(() => {
+        function handleClickOutside(event) {
+            if (settingsRef.current && !settingsRef.current.contains(event.target)) {
+                setSettingsOpen(false);
+            }
+        }
+
+        if (settingsOpen) {
+            document.addEventListener('mousedown', handleClickOutside);
+        }
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [settingsOpen]);
 
     useLayoutEffect(() => {
         updateTooltipPosition();
