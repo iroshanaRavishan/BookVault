@@ -33,9 +33,7 @@ export default function NavBar() {
     };
     
     const profilePictureUrl = convertUserImageToBase64(user);
-
     const username = user?.userName ? user.userName: null;
-
 
     async function logOutHandler() {
       sideMenu();
@@ -49,6 +47,7 @@ export default function NavBar() {
               const data = await response.json();
               if (response.ok) {
                   localStorage.removeItem("userEmail");
+                  localStorage.clear();
                   document.location = "/";
               } else {
                   console.log("Could not log out: ", response);
