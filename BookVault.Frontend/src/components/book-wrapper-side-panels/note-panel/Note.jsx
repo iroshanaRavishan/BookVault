@@ -52,6 +52,21 @@ export default function Note({ isPanelPinned }) {
     };
 
     useEffect(() => {
+        const storedLineHeight = localStorage.getItem('note_lineHeight');
+        const storedRuleVisibility = localStorage.getItem('note_ruleVisibility');
+        const storedNavigationMode = localStorage.getItem('note_navigationMode');
+
+        if (storedLineHeight) setLineHeight(Number(storedLineHeight));
+        else setLineHeight(24); // 1 → 24 px
+
+        if (storedRuleVisibility) setRuleVisibility(storedRuleVisibility);
+        else setRuleVisibility('show');
+
+        if (storedNavigationMode) setNavigationMode(storedNavigationMode);
+        else setNavigationMode('auto');
+    }, []);
+
+    useEffect(() => {
         localStorage.setItem('note_lineHeight', lineHeight);
     }, [lineHeight]);
 
