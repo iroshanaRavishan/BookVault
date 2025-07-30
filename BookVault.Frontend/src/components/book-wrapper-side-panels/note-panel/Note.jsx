@@ -102,7 +102,7 @@ export default function Note({ isPanelPinned }) {
         )`;
         editorRoot.style.backgroundAttachment = 'local';
         editorRoot.style.backgroundPosition = `0 ${offset}px`;
-    }, [lineHeight]);
+    }, [lineHeight, ruleVisibility]);
 
   return (
     <div className={styles.noteWrapper} style={{ position: 'relative' }}>
