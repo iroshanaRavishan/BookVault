@@ -5,6 +5,7 @@ import styles from './note.module.css';
 import { LuUndo2, LuRedo2, LuChevronLeft, LuChevronRight } from "react-icons/lu";
 import { HiMiniCog6Tooth } from 'react-icons/hi2';
 import { IoCaretDown, IoCloseCircleSharp } from 'react-icons/io5';
+import { decrypt, encrypt } from '../../../utils/encryptUtils';
 
 export default function Note({ isPanelPinned }) {
     const [content, setContent] = useState('');
@@ -12,7 +13,11 @@ export default function Note({ isPanelPinned }) {
     const [lineHeight, setLineHeight] = useState(24); // px height for both
     const [settingsOpen, setSettingsOpen] = useState(false);
     const sliderRef = useRef(null);
+    const settingsRef = useRef(null);
     const [tooltipLeft, setTooltipLeft] = useState('10px');
+    const [ruleVisibility, setRuleVisibility] = useState('show');
+    const [navigationMode, setNavigationMode] = useState('auto');
+    const [showDiscardModal, setShowDiscardModal] = useState(false);
 
     const modules = {
         toolbar: {
@@ -49,6 +54,62 @@ export default function Note({ isPanelPinned }) {
         setTooltipLeft(`${left}px`);
     };
 
+    useEffect(() => {
+        const savedEncryptedNote = localStorage.getItem('note_content');
+        if (savedEncryptedNote) {
+            const decrypted = decrypt(savedEncryptedNote);
+            setContent(decrypted);
+        }
+    }, []);
+
+    useEffect(() => {
+        const encrypted = encrypt(content);
+        localStorage.setItem('note_content', encrypted);
+    }, [content]);
+
+    useEffect(() => {
+        const storedLineHeight = localStorage.getItem('note_lineHeight');
+        const storedRuleVisibility = localStorage.getItem('note_ruleVisibility');
+        const storedNavigationMode = localStorage.getItem('note_navigationMode');
+
+        if (storedLineHeight) setLineHeight(Number(storedLineHeight));
+        else setLineHeight(24); // 1 → 24 px
+
+        if (storedRuleVisibility) setRuleVisibility(storedRuleVisibility);
+        else setRuleVisibility('show');
+
+        if (storedNavigationMode) setNavigationMode(storedNavigationMode);
+        else setNavigationMode('auto');
+    }, []);
+
+    useEffect(() => {
+        localStorage.setItem('note_lineHeight', lineHeight);
+    }, [lineHeight]);
+
+    useEffect(() => {
+        localStorage.setItem('note_ruleVisibility', ruleVisibility);
+    }, [ruleVisibility]);
+
+    useEffect(() => {
+        localStorage.setItem('note_navigationMode', navigationMode);
+    }, [navigationMode]);
+
+    useEffect(() => {
+        function handleClickOutside(event) {
+            if (settingsRef.current && !settingsRef.current.contains(event.target)) {
+                setSettingsOpen(false);
+            }
+        }
+
+        if (settingsOpen) {
+            document.addEventListener('mousedown', handleClickOutside);
+        }
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [settingsOpen]);
+
     useLayoutEffect(() => {
         updateTooltipPosition();
     }, [lineHeight]);
@@ -66,14 +127,17 @@ export default function Note({ isPanelPinned }) {
         const editor = quillRef.current.getEditor();
         const editorRoot = editor.root;
 
-        // Slider range values
-        const minLineHeight = 24;
-        const maxLineHeight = 30;
-
-        // Apply the requested line height
+        // Always apply line height
         editorRoot.style.lineHeight = `${lineHeight}px`;
 
-        // Dynamic offset (6px -> 0px)
+        // Remove any background if ruleVisibility is 'hide'
+        if (ruleVisibility === 'hide') {
+            editorRoot.style.background = 'none';
+            return;
+        }
+
+        const minLineHeight = 24;
+        const maxLineHeight = 30;
         const offset = (((maxLineHeight - lineHeight) / (maxLineHeight - minLineHeight)) * 2.9) + 4;
 
         // Measure actual line spacing
@@ -97,7 +161,31 @@ export default function Note({ isPanelPinned }) {
         )`;
         editorRoot.style.backgroundAttachment = 'local';
         editorRoot.style.backgroundPosition = `0 ${offset}px`;
-    }, [lineHeight]);
+    }, [lineHeight, ruleVisibility]);
+
+    const handleSave = async () => {
+        try {
+            // send content to your API
+            // implement API call
+            localStorage.removeItem('note_content');
+        } catch (error) {
+            console.error('Save failed:', error);
+        }
+    };
+
+    const handleCancel = () => {
+        setShowDiscardModal(true);
+    };
+
+    const confirmDiscard = () => {
+        setContent('');
+        localStorage.removeItem('note_content');
+        setShowDiscardModal(false);
+    };
+
+    const closeModal = () => {
+        setShowDiscardModal(false);
+    };
 
   return (
     <div className={styles.noteWrapper} style={{ position: 'relative' }}>
@@ -136,10 +224,14 @@ export default function Note({ isPanelPinned }) {
             </div>
             <div
                 className={styles.settings}
+                onMouseDown={(e) => {
+                    e.stopPropagation(); // Prevent click from reaching document listener
+                }}
                 onClick={() => setSettingsOpen(prev => !prev)}
                 style={{ cursor: 'pointer' }}
             >
-                <HiMiniCog6Tooth className={styles.menuIcon} size={18} /> <IoCaretDown size={10} />
+                <HiMiniCog6Tooth className={styles.menuIcon} size={18} />
+                <IoCaretDown size={10} />
             </div>
         </div>
 
@@ -157,11 +249,11 @@ export default function Note({ isPanelPinned }) {
             }}
         />
         <div className={styles.noteContentActions}>
-            <button>cancel</button>
-            <button>save</button>
+            <button onClick={handleCancel}>cancel</button>
+            <button onClick={handleSave}>save</button>
         </div>
         {settingsOpen && (
-            <div className={styles.popup}>
+            <div className={styles.popup} ref={settingsRef}>
                 <div className={styles.popupHeader}>
                     <span className={styles.headerText}>Advance Settigns</span>
                     <IoCloseCircleSharp size={20} className="closeBtn" style={{top: '10px', right: '8px'}} onClick={() => setSettingsOpen(prev => !prev)}/>
@@ -190,11 +282,23 @@ export default function Note({ isPanelPinned }) {
                         </label>
                         <div className={styles.pageRuleVisibility}>
                             <label className={styles.radioButtonWrapper}>
-                                <input type="radio" name="ruleVisibility" id="show" />
+                                <input
+                                    type="radio"
+                                    name="ruleVisibility"
+                                    id="show"
+                                    checked={ruleVisibility === 'show'}
+                                    onChange={() => setRuleVisibility('show')}
+                                />
                                 <span className={styles.radioLabel}>Show</span>
                             </label>
                             <label className={styles.radioButtonWrapper}>
-                                <input type="radio" name="ruleVisibility" id="hide" />
+                                <input
+                                    type="radio"
+                                    name="ruleVisibility"
+                                    id="hide"
+                                    checked={ruleVisibility === 'hide'}
+                                    onChange={() => setRuleVisibility('hide')}
+                                />
                                 <span className={styles.radioLabel}>hide</span>
                             </label>
                         </div>
@@ -206,13 +310,48 @@ export default function Note({ isPanelPinned }) {
                         </label>
                         <div className={styles.navigationWrapper}>
                             <label className={styles.radioButtonWrapper}>
-                                <input type="radio" name="navigationMode" id="manual" /><span className={styles.radioLabel}>Manual - <span className={styles.radioDesc}>The notes are not tunred when the book's pages turn</span></span>
+                                <input
+                                    type="radio"
+                                    name="navigationMode"
+                                    id="manual"
+                                    checked={navigationMode === 'manual'}
+                                    onChange={() => setNavigationMode('manual')}
+                                />
+                                <span className={styles.radioLabel}>
+                                    Manual - 
+                                    <span className={styles.radioDesc}>
+                                        The notes are not tunred when the book's pages turn
+                                    </span>
+                                </span>
                             </label>
                             <label className={styles.radioButtonWrapper}>
-                                <input type="radio" name="navigationMode" id="auto" /> <span className={styles.radioLabel}>Auto - <span className={styles.radioDesc}>automatically turn the notes with the book's page is turned</span></span>
+                                <input
+                                    type="radio"
+                                    name="navigationMode"
+                                    id="auto"
+                                    checked={navigationMode === 'auto'}
+                                    onChange={() => setNavigationMode('auto')}
+                                />
+                                <span className={styles.radioLabel}>
+                                    Auto - 
+                                    <span className={styles.radioDesc}>
+                                        automatically turn the notes with the book's page is turned
+                                    </span>
+                                </span>
                             </label>
                         </div>
                     </div>
+                </div>
+            </div>
+        )}
+        {showDiscardModal && (
+            <div className={styles.modalBackdrop}>
+                <div className={styles.modal}>
+                <p>Do you want to discard the changes?</p>
+                <div className={styles.modalButtons}>
+                    <button onClick={confirmDiscard}>Yes</button>
+                    <button onClick={closeModal}>No</button>
+                </div>
                 </div>
             </div>
         )}
