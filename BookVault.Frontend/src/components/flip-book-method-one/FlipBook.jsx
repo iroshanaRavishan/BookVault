@@ -184,7 +184,6 @@ export default function FlipBook({ isRightPanelOpen, selectedBookmarkedPageNumbe
     const currentBookmark = bookmarks.find(b => b.page === pageNumber);
     if (currentBookmark) {
       // Trigger removal animation
-
       // Check if this is the last bookmark
       let isLastBookmark = false;
       if (bookmarks && bookmarks.length === 1 && bookmarks[0].id === currentBookmark.id) {
@@ -231,8 +230,6 @@ export default function FlipBook({ isRightPanelOpen, selectedBookmarkedPageNumbe
 
       const hue = getCustomRandomInt() * 10;
       const randomColor = `hsl(${hue}, 70%, 60%, 0.8)`;
-      console.log("user id is : " + user.id );
-      console.log("book id : " + id );
 
       const newBookmark = {
         userId: user.id,
