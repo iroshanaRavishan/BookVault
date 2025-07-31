@@ -180,6 +180,8 @@ export default function Note({ isPanelPinned }) {
             // send content to your API
             // implement API call
             localStorage.removeItem('note_content');
+            setInitialContent(noteContent);
+            setHasChanges(false);
         } catch (error) {
             console.error('Save failed:', error);
         }
@@ -191,6 +193,9 @@ export default function Note({ isPanelPinned }) {
 
     const confirmDiscard = () => {
         setContent('');
+        setNoteContent(initialContent);
+        setHasChanges(false); // TODO: have to be aware here, bcz, even the cancel button is clicked and clicked yes on the popup,
+        //  the save and cancel buttons are enabled. Get disabled only when again do for the second file
         localStorage.removeItem('note_content');
         setShowDiscardModal(false);
     };
@@ -251,7 +256,7 @@ export default function Note({ isPanelPinned }) {
         <ReactQuill
             ref={quillRef}
             value={content}
-            onChange={setContent}
+            onChange={handleQuillChange}
             modules={modules}
             formats={formats}
             placeholder="Type your note here..."
@@ -261,8 +266,8 @@ export default function Note({ isPanelPinned }) {
             }}
         />
         <div className={styles.noteContentActions}>
-            <button onClick={handleCancel}>cancel</button>
-            <button onClick={handleSave}>save</button>
+            <button onClick={handleCancel} disabled={!hasChanges}>Cancel</button>
+            <button onClick={handleSave} disabled={!hasChanges}>Save</button>
         </div>
         {settingsOpen && (
             <div className={styles.popup} ref={settingsRef}>
