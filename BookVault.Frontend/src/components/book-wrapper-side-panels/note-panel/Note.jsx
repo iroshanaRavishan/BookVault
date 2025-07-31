@@ -166,6 +166,15 @@ export default function Note({ isPanelPinned }) {
         editorRoot.style.backgroundPosition = `0 ${offset}px`;
     }, [lineHeight, ruleVisibility]);
 
+    useEffect(() => {
+        setHasChanges(noteContent !== initialContent);
+    }, [noteContent, initialContent]);
+
+    const handleQuillChange = (value) => {
+        setContent(value);
+        setNoteContent(value); // if using noteContent to track save/cancel
+    };
+
     const handleSave = async () => {
         try {
             // send content to your API
