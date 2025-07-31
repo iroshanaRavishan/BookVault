@@ -73,7 +73,7 @@ const Page = forwardRef(({ children, number, totalPages, currentPage, pageType, 
   );
 });
 
-export default function FlipBook({ isRightPanelOpen, selectedBookmarkedPageNumber }) {
+export default function FlipBook({ isRightPanelOpen, selectedBookmarkedPageNumber, setThumbnailGeneratedBookmarkDelFromBook }) {
   const [currentPage, setCurrentPage] = useState(0);
   const [bookmarks, setBookmarks] = useState([]);
   const [animatingPages, setAnimatingPages] = useState([]);
@@ -184,12 +184,17 @@ export default function FlipBook({ isRightPanelOpen, selectedBookmarkedPageNumbe
     const currentBookmark = bookmarks.find(b => b.page === pageNumber);
     if (currentBookmark) {
       // Trigger removal animation
-
       // Check if this is the last bookmark
       let isLastBookmark = false;
       if (bookmarks && bookmarks.length === 1 && bookmarks[0].id === currentBookmark.id) {
         isLastBookmark = true;
       }
+      
+      // set the page number to delete the generated thumbnail
+      setThumbnailGeneratedBookmarkDelFromBook({
+        page: pageNumber - 1,
+        ts: Date.now() // ensures uniqueness
+      });
     
       try {
         const response = await fetch("https://localhost:7157/api/Bookmark", {
@@ -231,8 +236,6 @@ export default function FlipBook({ isRightPanelOpen, selectedBookmarkedPageNumbe
 
       const hue = getCustomRandomInt() * 10;
       const randomColor = `hsl(${hue}, 70%, 60%, 0.8)`;
-      console.log("user id is : " + user.id );
-      console.log("book id : " + id );
 
       const newBookmark = {
         userId: user.id,

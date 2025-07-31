@@ -16,6 +16,7 @@ export default function BookReadingBorad() {
   const [leftPanelOpen, setLeftPanelOpen] = useState(false);
   const [isLeftPanelPinned, setIsLeftPanelPinned] = useState(false);
   const [selectedBookmarkedPageNumber, setSelectedBookmarkedPageNumber] = useState(null);
+  const [thumbnailGeneratedBookmarkDelFromBook, setThumbnailGeneratedBookmarkDelFromBook] = useState(null);
 
   // This replaces useState for isRightPanelOpen
   const isRightPanelOpen = useMemo(() => {
@@ -74,6 +75,7 @@ export default function BookReadingBorad() {
 
     // Disable scroll
     document.body.style.overflow = 'hidden';
+    window.scrollTo(0, 0);  // Reset scroll position to top
 
     // Cleanup function to enable scroll when the component is unmounted
     return () => {
@@ -95,12 +97,14 @@ export default function BookReadingBorad() {
           isLeftPanelPinned={isLeftPanelPinned}
           setIsLeftPanelPinned={setIsLeftPanelPinned}
           onBookmarkSelect={handleBookmarkSelect}
+          onThumbnailGeneratedBookmarkDelFromBook={thumbnailGeneratedBookmarkDelFromBook}
         />
       </div>
       <div className={styles.book} style={{ width: `${bookWidth}%` }}>
         <FlipBook
           isRightPanelOpen={isRightPanelOpen}
           selectedBookmarkedPageNumber={selectedBookmarkedPageNumber}
+          setThumbnailGeneratedBookmarkDelFromBook={setThumbnailGeneratedBookmarkDelFromBook}
         />
       </div>
     </div>
