@@ -189,6 +189,12 @@ export default function FlipBook({ isRightPanelOpen, selectedBookmarkedPageNumbe
       if (bookmarks && bookmarks.length === 1 && bookmarks[0].id === currentBookmark.id) {
         isLastBookmark = true;
       }
+      
+      // set the page number to delete the generated thumbnail
+      setThumbnailGeneratedBookmarkDelFromBook({
+        page: pageNumber - 1,
+        ts: Date.now() // ensures uniqueness
+      });
     
       try {
         const response = await fetch("https://localhost:7157/api/Bookmark", {
