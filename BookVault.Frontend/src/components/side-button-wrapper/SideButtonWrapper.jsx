@@ -6,6 +6,7 @@ import { BsChatLeftDotsFill, BsGrid1X2Fill, BsPinAngleFill, BsPinFill } from "re
 import { LuNotebookText } from "react-icons/lu";
 import { FaChartBar } from "react-icons/fa";
 import Bookmarks from "../book-wrapper-side-panels/bookmark-panel/Bookmarks";
+import Note from "../book-wrapper-side-panels/note-panel/Note";
 
 const rightButtonData = ["Bookmarks", "Appearance", "Reading Style", "Statistics"];
 const leftButtonData = ["Notes"];
@@ -285,8 +286,12 @@ export default function SideButtonsWrapper({
               </span>
             </div>
           </div>
-          <div className={styles.panelBody}>
-            <span>this is the note section</span>
+          <div className={styles.panelBody} 
+            style={{
+              backgroundColor: 'white',
+              paddingRight: isLeftPanelPinned ? '14px':''
+            }}>
+            <Note isPanelPinned={isLeftPanelPinned} />
           </div>
           {isLeftPanelPinned && (
             <div className={styles.resizer} onMouseDown={handleMouseDown} />
