@@ -11,7 +11,7 @@ import { BiSolidDuplicate } from "react-icons/bi";
 import { FaChevronUp } from "react-icons/fa6";
 import { MdImageNotSupported } from "react-icons/md";
 
-export default function Bookmarks({ openedAt, onBookmarkItemDoubleClick }) {
+export default function Bookmarks({ openedAt, onBookmarkItemDoubleClick, thumbnailGeneratedBookmarkDelFromBook }) {
   const dropdownRef = useRef(null);
   const { id } = useParams(); 
   const { user } = useUser();
@@ -34,6 +34,12 @@ export default function Bookmarks({ openedAt, onBookmarkItemDoubleClick }) {
   function ImagePathReviser(path){
     return `https://localhost:7157/uploads/${path.replace(/\\/g, '/')}`;
   }
+
+  useEffect(() => {
+    if (thumbnailGeneratedBookmarkDelFromBook.page === thumbnailGeneratedFor.page) {
+      setThumbnailGeneratedFor({ path: null, page: null });
+    }
+  }, [thumbnailGeneratedBookmarkDelFromBook]);
 
   useEffect(() => {
     if (thumbnailGeneratedFor.path || thumbnailGeneratedFor.page) {
