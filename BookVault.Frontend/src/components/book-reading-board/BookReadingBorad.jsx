@@ -68,8 +68,11 @@ export default function BookReadingBorad() {
     loadBookData()
   }, [id]);
 
-  useEffect(()=>{
-    // Disable scroll when the component is mounted
+  useEffect(() => {
+    // Scroll to top
+    window.scrollTo(0, 0);
+
+    // Disable scroll
     document.body.style.overflow = 'hidden';
 
     // Cleanup function to enable scroll when the component is unmounted
