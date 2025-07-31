@@ -11,7 +11,7 @@ import { BiSolidDuplicate } from "react-icons/bi";
 import { FaChevronUp } from "react-icons/fa6";
 import { MdImageNotSupported } from "react-icons/md";
 
-export default function Bookmarks({ openedAt, onBookmarkItemDoubleClick }) {
+export default function Bookmarks({ openedAt, onBookmarkItemDoubleClick, thumbnailGeneratedBookmarkDelFromBook }) {
   const dropdownRef = useRef(null);
   const { id } = useParams(); 
   const { user } = useUser();
@@ -23,6 +23,7 @@ export default function Bookmarks({ openedAt, onBookmarkItemDoubleClick }) {
     return saved ? JSON.parse(saved) : { path: null, page: null };
   });
   const [toggleDown, setToggleDown] = useState(true);
+  const [lastClickTime, setLastClickTime] = useState(0);
 
   function handleSortChange(type) {
     setSortType(type);
@@ -33,6 +34,12 @@ export default function Bookmarks({ openedAt, onBookmarkItemDoubleClick }) {
   function ImagePathReviser(path){
     return `https://localhost:7157/uploads/${path.replace(/\\/g, '/')}`;
   }
+
+  useEffect(() => {
+    if (thumbnailGeneratedBookmarkDelFromBook.page === thumbnailGeneratedFor.page) {
+      setThumbnailGeneratedFor({ path: null, page: null });
+    }
+  }, [thumbnailGeneratedBookmarkDelFromBook]);
 
   useEffect(() => {
     if (thumbnailGeneratedFor.path || thumbnailGeneratedFor.page) {
@@ -214,6 +221,16 @@ useEffect(() => {
     }
   }
 
+  const handleClick = () => {
+    const now = Date.now();
+    if (now - lastClickTime < 1100) return; // Ignore clicks within 1000ms
+    setLastClickTime(now);
+
+    if (onBookmarkItemDoubleClick) {
+      onBookmarkItemDoubleClick(thumbnailGeneratedFor.page);
+    }
+  };
+
   return (
     <div className={styles.bookmarkPanel}>
       {/* Listen for new bookmarks in real-time */}
@@ -327,7 +344,8 @@ useEffect(() => {
             </div>
             <button 
               className={styles.jumpToPageButton}
-               onClick={() => onBookmarkItemDoubleClick && onBookmarkItemDoubleClick(thumbnailGeneratedFor.page)}
+              onClick={handleClick}
+              onDoubleClick={(e) => e.stopPropagation()}
             >
               Jump to page
             </button>
