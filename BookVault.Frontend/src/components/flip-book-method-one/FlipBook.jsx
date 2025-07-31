@@ -178,7 +178,7 @@ export default function FlipBook({ isRightPanelOpen, selectedBookmarkedPageNumbe
         goToPage(bookmark.page);
       }
     }
-  }, [selectedBookmarkedPageNumber, bookmarks]);
+  }, [selectedBookmarkedPageNumber]);
 
   const handleAddBookmark = async (pageNumber) => {
     const currentBookmark = bookmarks.find(b => b.page === pageNumber);
@@ -239,7 +239,7 @@ export default function FlipBook({ isRightPanelOpen, selectedBookmarkedPageNumbe
         bookId: id, 
         pageNumber: pageNumber - 1,
         color: randomColor,
-        bookmarkThumbnailPath: null
+        bookmarkThumbnailSourcePath: null
       };
 
       try {
