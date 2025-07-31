@@ -73,7 +73,7 @@ const Page = forwardRef(({ children, number, totalPages, currentPage, pageType, 
   );
 });
 
-export default function FlipBook({ isRightPanelOpen, selectedBookmarkedPageNumber }) {
+export default function FlipBook({ isRightPanelOpen, selectedBookmarkedPageNumber, setThumbnailGeneratedBookmarkDelFromBook }) {
   const [currentPage, setCurrentPage] = useState(0);
   const [bookmarks, setBookmarks] = useState([]);
   const [animatingPages, setAnimatingPages] = useState([]);
