@@ -18,6 +18,9 @@ export default function Note({ isPanelPinned }) {
     const [ruleVisibility, setRuleVisibility] = useState('show');
     const [navigationMode, setNavigationMode] = useState('auto');
     const [showDiscardModal, setShowDiscardModal] = useState(false);
+    const [noteContent, setNoteContent] = useState('');
+    const [initialContent, setInitialContent] = useState('');
+    const [hasChanges, setHasChanges] = useState(false);
 
     const modules = {
         toolbar: {
