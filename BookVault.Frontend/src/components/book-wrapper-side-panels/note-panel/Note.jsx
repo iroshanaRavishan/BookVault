@@ -32,6 +32,53 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
         return stored ? parseInt(stored) : null;
     });
 
+    useEffect(() => {
+        const { left: prevLeft, right: prevRight } = prevPageInfo;
+        const { left: newLeft, right: newRight, total } = currentPageInfo;
+
+        let newHighlight = null;
+
+        // Forward navigation
+        if (newRight > prevRight) {
+            if (newRight <= total) {
+                newHighlight = newRight;
+            } else if (newLeft > 0 && newLeft <= total) {
+                newHighlight = newLeft;
+            }
+        }
+
+        // Backward navigation
+        if (newLeft < prevLeft) {
+            if (newLeft > 0 && newLeft <= total) {
+                newHighlight = newLeft;
+            } else if (newRight > 0 && newRight <= total) {
+                newHighlight = newRight;
+            }
+        }
+
+        // Special handling for jumping directly over the last odd content page
+        const isOdd = total % 2 !== 0;
+        const skippedLastPage =
+            isOdd &&
+            newLeft > total &&
+            newRight > total &&
+            prevRight <= total;
+
+        if (skippedLastPage) {
+            newHighlight = total;
+        }
+
+        if (newHighlight !== null && newHighlight <= total) {
+            setHighlightPage(newHighlight);
+            localStorage.setItem('highlightPage', newHighlight);
+        }
+
+        setPrevPageInfo(currentPageInfo);
+    }, [currentPageInfo]);
+
+    const getPageClass = (pageNumber) =>
+    highlightPage === pageNumber ? styles.highlightedPage : '';
+
     const modules = {
         toolbar: {
             container: '#toolbar',
