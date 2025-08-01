@@ -15,7 +15,7 @@
 
 .editor {
   flex: 1;
-  padding-top: 16px;
+  padding-top: 6px;
 }
 
 .customToolbar {
@@ -89,7 +89,13 @@
 
 .pageText {
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.noteNagigationPageNumber:hover {
+    background-color: #38320f1e;
+    border-radius: 5px;
 }
 
 .settings {
