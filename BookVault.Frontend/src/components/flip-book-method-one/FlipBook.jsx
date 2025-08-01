@@ -584,6 +584,13 @@ export default function FlipBook({
           const newLeftPage = data % 2 === 0 ? data : data - 1;
           const newRightPage = newLeftPage + 1;
 
+          console.log("left page ", newLeftPage , "- | -", " right page", newRightPage, "TOTAL", contentPages)
+          setCurrentPageInfo({
+            left:newLeftPage,
+            right: newRightPage,
+            total: contentPages
+          })
+
           const newLeftBookmarks = [...bookmarks]
             .filter(b => b.page < newLeftPage + 2 || (b.page === newLeftPage && data !== newLeftPage))
             .sort((a, b) => a.page - b.page);
