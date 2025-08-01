@@ -6,8 +6,9 @@ import { LuUndo2, LuRedo2, LuChevronLeft, LuChevronRight } from "react-icons/lu"
 import { HiMiniCog6Tooth } from 'react-icons/hi2';
 import { IoCaretDown, IoCloseCircleSharp } from 'react-icons/io5';
 import { decrypt, encrypt } from '../../../utils/encryptUtils';
+import { FiPaperclip } from "react-icons/fi";
 
-export default function Note({ isPanelPinned }) {
+export default function Note({ isPanelPinned, currentPageInfo }) {
     const [content, setContent] = useState('');
     const quillRef = useRef(null); // Ref to access Quill instance
     const [lineHeight, setLineHeight] = useState(24); // px height for both
@@ -21,6 +22,63 @@ export default function Note({ isPanelPinned }) {
     const [noteContent, setNoteContent] = useState('');
     const [initialContent, setInitialContent] = useState('');
     const [hasChanges, setHasChanges] = useState(false);
+    const [prevPageInfo, setPrevPageInfo] = useState({
+        left: 0,
+        right: 1,
+        total: null,
+    });
+
+    const [highlightPage, setHighlightPage] = useState(() => {
+        const stored = localStorage.getItem('highlightPage');
+        return stored ? parseInt(stored) : null;
+    });
+
+    useEffect(() => {
+        const { left: prevLeft, right: prevRight } = prevPageInfo;
+        const { left: newLeft, right: newRight, total } = currentPageInfo;
+
+        let newHighlight = null;
+
+        // Forward navigation
+        if (newRight > prevRight) {
+            if (newRight <= total) {
+                newHighlight = newRight;
+            } else if (newLeft > 0 && newLeft <= total) {
+                newHighlight = newLeft;
+            }
+        }
+
+        // Backward navigation
+        if (newLeft < prevLeft) {
+            if (newLeft > 0 && newLeft <= total) {
+                newHighlight = newLeft;
+            } else if (newRight > 0 && newRight <= total) {
+                newHighlight = newRight;
+            }
+        }
+
+        // Special handling for jumping directly over the last odd content page
+        const isOdd = total % 2 !== 0;
+        const skippedLastPage =
+            isOdd &&
+            newLeft > total &&
+            newRight > total &&
+            prevRight <= total;
+
+        if (skippedLastPage) {
+            newHighlight = total;
+        }
+
+        if (newHighlight !== null && newHighlight <= total) {
+            setHighlightPage(newHighlight);
+            localStorage.setItem('highlightPage', newHighlight);
+        }
+
+        setPrevPageInfo(currentPageInfo);
+    }, [currentPageInfo]);
+
+    const getPageClass = (pageNumber) =>
+    highlightPage === pageNumber ? styles.highlightedPage : '';
 
     const modules = {
         toolbar: {
@@ -235,8 +293,37 @@ export default function Note({ isPanelPinned }) {
             </div>
             <div className={styles.noteNavigation}>
                 <LuChevronLeft className={styles.navigationIcons} size={22}/>
-                {/* <span> 5 </span> */}
-                <span className={styles.pageText}>Page 5 </span>
+                <span className={styles.pageText}>
+                    {/* Left Page */}
+                    {currentPageInfo.left > 0 && currentPageInfo.left <= currentPageInfo.total ? (
+                        <span className={`${styles.noteNagigationPageNumber} ${getPageClass(currentPageInfo.left)}`} style={{padding: '5px 8px 8.2px 8px'}}>
+                            {currentPageInfo.left}
+                        </span>
+                    ) : (
+                        ''
+                    )}
+
+                    {/* Separator */}
+                    {currentPageInfo.left > 0 && currentPageInfo.left <= currentPageInfo.total &&
+                    currentPageInfo.right > 0 && currentPageInfo.right <= currentPageInfo.total
+                    ? <span className={styles.notePageSeparator}></span>
+                    : ''}
+
+                    {/* Right Page */}
+                    {currentPageInfo.right > 0 && currentPageInfo.right <= currentPageInfo.total ? (
+                        <span className={`${styles.noteNagigationPageNumber} ${getPageClass(currentPageInfo.right)}`} style={{padding: '5px 8px 8.2px 8px'}}>
+                            {currentPageInfo.right}
+                        </span>
+                    ) : currentPageInfo.left <= 0 && currentPageInfo.right === 1 ? (
+                        <span className={`${styles.noteNagigationPageNumber} ${getPageClass(1)}`} style={{padding: '5px 8px 8.2px 8px'}}>1</span>
+                    ) : currentPageInfo.left > currentPageInfo.total ? (
+                        <span className={`${styles.noteNagigationPageNumber} ${getPageClass(currentPageInfo.total)}`} style={{padding: '5px 8px 8.2px 8px'}}>
+                            {currentPageInfo.total}
+                        </span>
+                    ) : (
+                        ''
+                    )}
+                </span>
                 <LuChevronRight className={styles.navigationIcons} size={22}/>
             </div>
             <div
@@ -251,7 +338,7 @@ export default function Note({ isPanelPinned }) {
                 <IoCaretDown size={10} />
             </div>
         </div>
-
+        <span className={styles.pageAttachementText}> <FiPaperclip size={15} />The note is attached to <span style={{fontWeight: '700'}}> <u>page - {highlightPage}</u></span></span>
         {/* Editor */}
         <ReactQuill
             ref={quillRef}
