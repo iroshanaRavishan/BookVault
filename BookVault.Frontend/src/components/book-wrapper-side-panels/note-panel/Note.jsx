@@ -142,7 +142,7 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
         const percent = (lineHeight - min) / (max - min);
 
         const sliderWidth = slider.offsetWidth;
-        const thumbWidth = 28; // must match your thumb size
+        const thumbWidth = 28; // must match the thumb size
         const left = percent * (sliderWidth - thumbWidth) + thumbWidth / 2;
 
         setTooltipLeft(`${left}px`);

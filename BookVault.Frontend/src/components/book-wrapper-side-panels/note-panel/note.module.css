@@ -18,6 +18,28 @@
   padding-top: 6px;
 }
 
+:global(.ql-size-small) {
+  font-size: 0.8em !important;
+  display: inline !important;
+  line-height: 1 !important;
+  transform-origin: bottom left;
+  position: relative;
+  top: 0px;
+  margin-right: 0 !important;
+  white-space: normal; /* Prevent splitting of the word */
+}
+
+:global(.ql-size-large) {
+  font-size: 1.4em !important;
+  display: inline !important;
+  line-height: 1 !important;
+  transform-origin: bottom left;
+  position: relative;
+  top: 0px;
+  margin-right: 0 !important;
+  white-space: normal;
+}
+
 .customToolbar {
   border: none !important;
   background: #fff;
