@@ -21,7 +21,8 @@ export default function SideButtonsWrapper({
   setLeftPanelOpen,
   isLeftPanelPinned,
   setIsLeftPanelPinned,
-  onBookmarkSelect
+  onBookmarkSelect,
+  onThumbnailGeneratedBookmarkDelFromBook
 }) {
   const [rightOffsets, setRightOffsets] = useState([]);
   const [leftOffsets, setLeftOffsets] = useState([]);
@@ -199,7 +200,11 @@ export default function SideButtonsWrapper({
   };
 
   const panelContentMap = {
-    'Bookmarks': <Bookmarks openedAt={Date.now()} onBookmarkItemDoubleClick={onBookmarkSelect} />,
+    'Bookmarks': <Bookmarks 
+      openedAt={Date.now()}
+      onBookmarkItemDoubleClick={onBookmarkSelect}
+      thumbnailGeneratedBookmarkDelFromBook={onThumbnailGeneratedBookmarkDelFromBook}
+    />,
     'Appearance': <span>this is the content of the Appearance</span>,
     'Reading Style': <span>this is the content of the Reading Styles</span>,
     'Statistics': <span>this is the content of the Statistics</span>,
