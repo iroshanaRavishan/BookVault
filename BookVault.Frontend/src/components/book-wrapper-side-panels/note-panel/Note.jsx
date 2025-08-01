@@ -7,7 +7,7 @@ import { HiMiniCog6Tooth } from 'react-icons/hi2';
 import { IoCaretDown, IoCloseCircleSharp } from 'react-icons/io5';
 import { decrypt, encrypt } from '../../../utils/encryptUtils';
 
-export default function Note({ isPanelPinned }) {
+export default function Note({ isPanelPinned, currentPageInfo }) {
     const [content, setContent] = useState('');
     const quillRef = useRef(null); // Ref to access Quill instance
     const [lineHeight, setLineHeight] = useState(24); // px height for both
