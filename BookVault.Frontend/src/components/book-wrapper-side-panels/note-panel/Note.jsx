@@ -33,6 +33,31 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
         return stored ? parseInt(stored) : null;
     });
 
+    // Set localStorage to 1 on **page refresh only**
+    useEffect(() => {
+        const handleBeforeUnload = () => {
+            // This will run on page refresh or browser/tab close
+            // So set a flag to detect it
+            localStorage.setItem('wasPageRefreshed', 'true');
+        };
+
+        window.addEventListener('beforeunload', handleBeforeUnload);
+
+        return () => {
+            window.removeEventListener('beforeunload', handleBeforeUnload);
+        };
+    }, []);
+
+    useEffect(() => {
+        const wasPageRefreshed = localStorage.getItem('wasPageRefreshed');
+
+        if (wasPageRefreshed === 'true') {
+            localStorage.setItem('highlightPage', '1');
+            setHighlightPage(1);
+            localStorage.removeItem('wasPageRefreshed'); // Clean up the flag
+        }
+    }, []);
+
     useEffect(() => {
         const { left: prevLeft, right: prevRight } = prevPageInfo;
         const { left: newLeft, right: newRight, total } = currentPageInfo;
