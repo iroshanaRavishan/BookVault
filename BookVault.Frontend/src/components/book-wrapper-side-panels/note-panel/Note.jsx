@@ -27,6 +27,11 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
         total: null,
     });
 
+    const [highlightPage, setHighlightPage] = useState(() => {
+        const stored = localStorage.getItem('highlightPage');
+        return stored ? parseInt(stored) : null;
+    });
+
     const modules = {
         toolbar: {
             container: '#toolbar',
