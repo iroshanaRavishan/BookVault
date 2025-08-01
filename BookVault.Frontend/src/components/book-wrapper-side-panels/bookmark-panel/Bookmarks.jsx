@@ -36,7 +36,7 @@ export default function Bookmarks({ openedAt, onBookmarkItemDoubleClick, thumbna
   }
 
   useEffect(() => {
-    if (thumbnailGeneratedBookmarkDelFromBook.page === thumbnailGeneratedFor.page) {
+    if (thumbnailGeneratedBookmarkDelFromBook?.page === thumbnailGeneratedFor.page) {
       setThumbnailGeneratedFor({ path: null, page: null });
     }
   }, [thumbnailGeneratedBookmarkDelFromBook]);
