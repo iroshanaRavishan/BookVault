@@ -293,8 +293,37 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
             </div>
             <div className={styles.noteNavigation}>
                 <LuChevronLeft className={styles.navigationIcons} size={22}/>
-                {/* <span> 5 </span> */}
-                <span className={styles.pageText}>Page 5 </span>
+                <span className={styles.pageText}>
+                    {/* Left Page */}
+                    {currentPageInfo.left > 0 && currentPageInfo.left <= currentPageInfo.total ? (
+                        <span className={`${styles.noteNagigationPageNumber} ${getPageClass(currentPageInfo.left)}`} style={{padding: '5px 8px 8.2px 8px'}}>
+                            {currentPageInfo.left}
+                        </span>
+                    ) : (
+                        ''
+                    )}
+
+                    {/* Separator */}
+                    {currentPageInfo.left > 0 && currentPageInfo.left <= currentPageInfo.total &&
+                    currentPageInfo.right > 0 && currentPageInfo.right <= currentPageInfo.total
+                    ? <span className={styles.notePageSeparator}></span>
+                    : ''}
+
+                    {/* Right Page */}
+                    {currentPageInfo.right > 0 && currentPageInfo.right <= currentPageInfo.total ? (
+                        <span className={`${styles.noteNagigationPageNumber} ${getPageClass(currentPageInfo.right)}`} style={{padding: '5px 8px 8.2px 8px'}}>
+                            {currentPageInfo.right}
+                        </span>
+                    ) : currentPageInfo.left <= 0 && currentPageInfo.right === 1 ? (
+                        <span className={`${styles.noteNagigationPageNumber} ${getPageClass(1)}`} style={{padding: '5px 8px 8.2px 8px'}}>1</span>
+                    ) : currentPageInfo.left > currentPageInfo.total ? (
+                        <span className={`${styles.noteNagigationPageNumber} ${getPageClass(currentPageInfo.total)}`} style={{padding: '5px 8px 8.2px 8px'}}>
+                            {currentPageInfo.total}
+                        </span>
+                    ) : (
+                        ''
+                    )}
+                </span>
                 <LuChevronRight className={styles.navigationIcons} size={22}/>
             </div>
             <div
