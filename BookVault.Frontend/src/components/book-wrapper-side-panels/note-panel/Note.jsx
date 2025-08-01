@@ -21,6 +21,11 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
     const [noteContent, setNoteContent] = useState('');
     const [initialContent, setInitialContent] = useState('');
     const [hasChanges, setHasChanges] = useState(false);
+    const [prevPageInfo, setPrevPageInfo] = useState({
+        left: 0,
+        right: 1,
+        total: null,
+    });
 
     const modules = {
         toolbar: {
