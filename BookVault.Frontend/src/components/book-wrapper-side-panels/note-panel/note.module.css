@@ -15,7 +15,7 @@
 
 .editor {
   flex: 1;
-  padding-top: 16px;
+  padding-top: 6px;
 }
 
 .customToolbar {
@@ -58,6 +58,15 @@
   color: #666;
 }
 
+.notePageSeparator {
+  display: inline-block;
+  width: 1px;
+  height: 24px;
+  background-color: #ccc;
+  margin: 0 5px; 
+  vertical-align: middle;
+}
+
 .noteNavigation{
   display: flex;
   flex-direction: row;
@@ -80,7 +89,13 @@
 
 .pageText {
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.noteNagigationPageNumber:hover {
+    background-color: #38320f1e;
+    border-radius: 5px;
 }
 
 .settings {
@@ -361,5 +376,13 @@
 
 .modalButtons:hover {
     background-color: #666;
+}
+
+.highlightedPage {
+  background-color: #38320f4d;
+  border-radius: 5px;
+  transition: background-color 0.1s ease;
+  height: 35px;
+  font-weight: 700;
 }
 
