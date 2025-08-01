@@ -49,6 +49,16 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
     }, []);
 
     useEffect(() => {
+        const wasPageRefreshed = localStorage.getItem('wasPageRefreshed');
+
+        if (wasPageRefreshed === 'true') {
+            localStorage.setItem('highlightPage', '1');
+            setHighlightPage(1);
+            localStorage.removeItem('wasPageRefreshed'); // Clean up the flag
+        }
+    }, []);
+
+    useEffect(() => {
         const { left: prevLeft, right: prevRight } = prevPageInfo;
         const { left: newLeft, right: newRight, total } = currentPageInfo;
 
