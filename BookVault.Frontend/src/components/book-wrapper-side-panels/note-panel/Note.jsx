@@ -15,6 +15,7 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
     const [settingsOpen, setSettingsOpen] = useState(false);
     const sliderRef = useRef(null);
     const settingsRef = useRef(null);
+    const hasMountedRef = useRef(false);
     const [tooltipLeft, setTooltipLeft] = useState('10px');
     const [ruleVisibility, setRuleVisibility] = useState('show');
     const [navigationMode, setNavigationMode] = useState('auto');
@@ -59,6 +60,13 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
     }, []);
 
     useEffect(() => {
+        if (!hasMountedRef.current) {
+            // First mount — likely a reopen
+            hasMountedRef.current = true;
+            setPrevPageInfo(currentPageInfo); // Initialize prev info
+            return;
+        }
+
         const { left: prevLeft, right: prevRight } = prevPageInfo;
         const { left: newLeft, right: newRight, total } = currentPageInfo;
 
