@@ -22,7 +22,8 @@ export default function SideButtonsWrapper({
   isLeftPanelPinned,
   setIsLeftPanelPinned,
   onBookmarkSelect,
-  onThumbnailGeneratedBookmarkDelFromBook
+  onThumbnailGeneratedBookmarkDelFromBook,
+  currentPageInfo
 }) {
   const [rightOffsets, setRightOffsets] = useState([]);
   const [leftOffsets, setLeftOffsets] = useState([]);
