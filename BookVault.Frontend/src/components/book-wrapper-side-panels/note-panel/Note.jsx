@@ -6,6 +6,7 @@ import { LuUndo2, LuRedo2, LuChevronLeft, LuChevronRight } from "react-icons/lu"
 import { HiMiniCog6Tooth } from 'react-icons/hi2';
 import { IoCaretDown, IoCloseCircleSharp } from 'react-icons/io5';
 import { decrypt, encrypt } from '../../../utils/encryptUtils';
+import { FiPaperclip } from "react-icons/fi";
 
 export default function Note({ isPanelPinned, currentPageInfo }) {
     const [content, setContent] = useState('');
@@ -308,7 +309,7 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
                 <IoCaretDown size={10} />
             </div>
         </div>
-
+        <span className={styles.pageAttachementText}> <FiPaperclip size={15} />The note is attached to <span style={{fontWeight: '700'}}> <u>page - {highlightPage}</u></span></span>
         {/* Editor */}
         <ReactQuill
             ref={quillRef}
