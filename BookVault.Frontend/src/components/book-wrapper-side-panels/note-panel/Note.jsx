@@ -15,6 +15,7 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
     const [settingsOpen, setSettingsOpen] = useState(false);
     const sliderRef = useRef(null);
     const settingsRef = useRef(null);
+    const hasMountedRef = useRef(false);
     const [tooltipLeft, setTooltipLeft] = useState('10px');
     const [ruleVisibility, setRuleVisibility] = useState('show');
     const [navigationMode, setNavigationMode] = useState('auto');
@@ -33,7 +34,39 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
         return stored ? parseInt(stored) : null;
     });
 
+    // Set localStorage to 1 on **page refresh only**
     useEffect(() => {
+        const handleBeforeUnload = () => {
+            // This will run on page refresh or browser/tab close
+            // So set a flag to detect it
+            localStorage.setItem('wasPageRefreshed', 'true');
+        };
+
+        window.addEventListener('beforeunload', handleBeforeUnload);
+
+        return () => {
+            window.removeEventListener('beforeunload', handleBeforeUnload);
+        };
+    }, []);
+
+    useEffect(() => {
+        const wasPageRefreshed = localStorage.getItem('wasPageRefreshed');
+
+        if (wasPageRefreshed === 'true') {
+            localStorage.setItem('highlightPage', '1');
+            setHighlightPage(1);
+            localStorage.removeItem('wasPageRefreshed'); // Clean up the flag
+        }
+    }, []);
+
+    useEffect(() => {
+        if (!hasMountedRef.current) {
+            // First mount — likely a reopen
+            hasMountedRef.current = true;
+            setPrevPageInfo(currentPageInfo); // Initialize prev info
+            return;
+        }
+
         const { left: prevLeft, right: prevRight } = prevPageInfo;
         const { left: newLeft, right: newRight, total } = currentPageInfo;
 
@@ -109,7 +142,7 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
         const percent = (lineHeight - min) / (max - min);
 
         const sliderWidth = slider.offsetWidth;
-        const thumbWidth = 28; // must match your thumb size
+        const thumbWidth = 28; // must match the thumb size
         const left = percent * (sliderWidth - thumbWidth) + thumbWidth / 2;
 
         setTooltipLeft(`${left}px`);
