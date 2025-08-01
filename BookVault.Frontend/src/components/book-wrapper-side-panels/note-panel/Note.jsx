@@ -76,6 +76,9 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
         setPrevPageInfo(currentPageInfo);
     }, [currentPageInfo]);
 
+    const getPageClass = (pageNumber) =>
+    highlightPage === pageNumber ? styles.highlightedPage : '';
+
     const modules = {
         toolbar: {
             container: '#toolbar',
