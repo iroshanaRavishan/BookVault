@@ -73,7 +73,12 @@ const Page = forwardRef(({ children, number, totalPages, currentPage, pageType, 
   );
 });
 
-export default function FlipBook({ isRightPanelOpen, selectedBookmarkedPageNumber, setThumbnailGeneratedBookmarkDelFromBook }) {
+export default function FlipBook({ 
+  isRightPanelOpen, 
+  selectedBookmarkedPageNumber, 
+  setThumbnailGeneratedBookmarkDelFromBook,
+  setCurrentPageInfo 
+}) {
   const [currentPage, setCurrentPage] = useState(0);
   const [bookmarks, setBookmarks] = useState([]);
   const [animatingPages, setAnimatingPages] = useState([]);
@@ -81,7 +86,7 @@ export default function FlipBook({ isRightPanelOpen, selectedBookmarkedPageNumbe
   const {user} = useUser();
   const { id } = useParams();
 
-  const contentPages = 40;
+  const contentPages = 10;
   const totalPages = 2 + contentPages + (contentPages % 2 === 1 ? 1 : 0) + 2;
   const flipBookRef = useRef();
   const pages = [];
@@ -578,6 +583,13 @@ export default function FlipBook({ isRightPanelOpen, selectedBookmarkedPageNumbe
           // Calculate left/right bookmarks for the new page
           const newLeftPage = data % 2 === 0 ? data : data - 1;
           const newRightPage = newLeftPage + 1;
+
+          console.log("left page ", newLeftPage , "- | -", " right page", newRightPage, "TOTAL", contentPages)
+          setCurrentPageInfo({
+            left:newLeftPage,
+            right: newRightPage,
+            total: contentPages
+          })
 
           const newLeftBookmarks = [...bookmarks]
             .filter(b => b.page < newLeftPage + 2 || (b.page === newLeftPage && data !== newLeftPage))

@@ -15,7 +15,29 @@
 
 .editor {
   flex: 1;
-  padding-top: 16px;
+  padding-top: 6px;
+}
+
+:global(.ql-size-small) {
+  font-size: 0.8em !important;
+  display: inline !important;
+  line-height: 1 !important;
+  transform-origin: bottom left;
+  position: relative;
+  top: 0px;
+  margin-right: 0 !important;
+  white-space: normal; /* Prevent splitting of the word */
+}
+
+:global(.ql-size-large) {
+  font-size: 1.4em !important;
+  display: inline !important;
+  line-height: 1 !important;
+  transform-origin: bottom left;
+  position: relative;
+  top: 0px;
+  margin-right: 0 !important;
+  white-space: normal;
 }
 
 .customToolbar {
@@ -49,6 +71,24 @@
   background-color: #eeeeee;
 }
 
+.pageAttachementText {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: #666;
+}
+
+.notePageSeparator {
+  display: inline-block;
+  width: 1px;
+  height: 24px;
+  background-color: #ccc;
+  margin: 0 5px; 
+  vertical-align: middle;
+}
+
 .noteNavigation{
   display: flex;
   flex-direction: row;
@@ -71,7 +111,14 @@
 
 .pageText {
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 400;
+  cursor: pointer;
+  height: 25.5px;
+}
+
+.noteNagigationPageNumber:hover {
+    background-color: #38320f1e;
+    border-radius: 5px;
 }
 
 .settings {
@@ -352,5 +399,13 @@
 
 .modalButtons:hover {
     background-color: #666;
+}
+
+.highlightedPage {
+  background-color: #38320f4d;
+  border-radius: 5px;
+  transition: background-color 0.1s ease;
+  height: 35px;
+  font-weight: 700;
 }
 
