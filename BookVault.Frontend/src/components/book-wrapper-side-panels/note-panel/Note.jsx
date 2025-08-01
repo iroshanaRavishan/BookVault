@@ -21,6 +21,16 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
     const [noteContent, setNoteContent] = useState('');
     const [initialContent, setInitialContent] = useState('');
     const [hasChanges, setHasChanges] = useState(false);
+    const [prevPageInfo, setPrevPageInfo] = useState({
+        left: 0,
+        right: 1,
+        total: null,
+    });
+
+    const [highlightPage, setHighlightPage] = useState(() => {
+        const stored = localStorage.getItem('highlightPage');
+        return stored ? parseInt(stored) : null;
+    });
 
     const modules = {
         toolbar: {
