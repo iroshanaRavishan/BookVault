@@ -31,16 +31,21 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15); 
 }
 
-.undoRedoBtns {
+.undoRedoActionsButtons{
+  display: flex;
+  flex-direction: row;
+  gap: 6px;
+}
+
+.undoRedoButton {
   border-radius: 4px;
-  padding: 5px 8px;
+  padding: 3px 8px;
   cursor: pointer;
   border: 1px solid #e7e7e7;
-  margin-right: 5px;
   background-color: #f3f3f3;
 }
 
-.undoRedoBtns:hover {
+.undoRedoButton:hover {
   background-color: #eeeeee;
 }
 

@@ -229,9 +229,9 @@ export default function Note({ isPanelPinned }) {
         </div>
 
         <div className={styles.noteActions} style={{margin: '10px 0'}}>  
-            <div>
-                <span className={styles.undoRedoBtns} onClick={() => quillRef.current?.getEditor().history.undo()}><LuUndo2 /></span>
-                <span className={styles.undoRedoBtns} onClick={() => quillRef.current?.getEditor().history.redo()}><LuRedo2 /></span>
+            <div className={styles.undoRedoActionsButtons}>
+                <span className={styles.undoRedoButton} onClick={() => quillRef.current?.getEditor().history.undo()}><LuUndo2 /></span>
+                <span className={styles.undoRedoButton} onClick={() => quillRef.current?.getEditor().history.redo()}><LuRedo2 /></span>
             </div>
             <div className={styles.noteNavigation}>
                 <LuChevronLeft className={styles.navigationIcons} size={22}/>

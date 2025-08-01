@@ -75,6 +75,7 @@ export default function BookReadingBorad() {
 
     // Disable scroll
     document.body.style.overflow = 'hidden';
+    window.scrollTo(0, 0);  // Reset scroll position to top
 
     // Cleanup function to enable scroll when the component is unmounted
     return () => {
