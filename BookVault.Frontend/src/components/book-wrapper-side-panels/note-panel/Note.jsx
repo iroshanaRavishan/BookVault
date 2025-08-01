@@ -128,7 +128,7 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
         'size',
         'bold', 'italic', 'underline', 'strike',
         'color', 'background',
-        'list', 'bullet',
+        'list',
         'link',
         'align',
     ];
