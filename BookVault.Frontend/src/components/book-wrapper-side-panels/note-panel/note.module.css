@@ -58,6 +58,15 @@
   color: #666;
 }
 
+.notePageSeparator {
+  display: inline-block;
+  width: 1px;
+  height: 24px;
+  background-color: #ccc;
+  margin: 0 5px; 
+  vertical-align: middle;
+}
+
 .noteNavigation{
   display: flex;
   flex-direction: row;
