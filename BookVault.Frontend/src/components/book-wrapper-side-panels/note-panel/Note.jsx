@@ -285,22 +285,10 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
             }
         };
 
-        // enforce after-change backup too
-        const handleTextChange = (delta, oldDelta, source) => {
-            if (source !== 'user') return;
-
-            const plainText = quill.getText().trimEnd();
-            if (plainText.length > USER_NOTES.MAX_CHARS) {
-                quill.deleteText(USER_NOTES.MAX_CHARS, plainText.length);
-            }
-        };
-
         quill.root.addEventListener('beforeinput', handleBeforeInput);
-        quill.on('text-change', handleTextChange);
 
         return () => {
             quill.root.removeEventListener('beforeinput', handleBeforeInput);
-            quill.off('text-change', handleTextChange);
         };
     }, []);
 
