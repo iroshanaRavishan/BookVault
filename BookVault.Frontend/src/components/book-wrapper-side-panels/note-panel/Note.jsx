@@ -7,6 +7,7 @@ import { HiMiniCog6Tooth } from 'react-icons/hi2';
 import { IoCaretDown, IoCloseCircleSharp } from 'react-icons/io5';
 import { decrypt, encrypt } from '../../../utils/encryptUtils';
 import { FiPaperclip } from "react-icons/fi";
+import { USER_NOTES } from '../../../constants/constants';
 
 export default function Note({ isPanelPinned, currentPageInfo }) {
     const [content, setContent] = useState('');
@@ -128,7 +129,7 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
         'size',
         'bold', 'italic', 'underline', 'strike',
         'color', 'background',
-        'list', 'bullet',
+        'list',
         'link',
         'align',
     ];
@@ -265,6 +266,31 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
         setContent(value);
         setNoteContent(value); // if using noteContent to track save/cancel
     };
+
+    useEffect(() => {
+        const quill = quillRef.current?.getEditor();
+        if (!quill) return;
+
+        // Block insertions if max reached
+        const handleBeforeInput = (e) => {
+            const currentLength = quill.getText().trimEnd().length;
+
+            // If at or over limit and trying to insert, block it
+            if (
+                currentLength >= USER_NOTES.MAX_CHARS &&
+                e.inputType &&
+                e.inputType.startsWith('insert')
+            ) {
+                e.preventDefault();
+            }
+        };
+
+        quill.root.addEventListener('beforeinput', handleBeforeInput);
+
+        return () => {
+            quill.root.removeEventListener('beforeinput', handleBeforeInput);
+        };
+    }, []);
 
     const handleSave = async () => {
         try {
