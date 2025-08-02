@@ -13,3 +13,6 @@ export const NoteProvider = ({ children }) => {
     </NoteContext.Provider>
   );
 };
+
+// Custom hook for easier access
+export const useNoteContext = () => useContext(NoteContext);
