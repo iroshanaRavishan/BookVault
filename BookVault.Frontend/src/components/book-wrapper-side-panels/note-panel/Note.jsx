@@ -267,6 +267,43 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
         setNoteContent(value); // if using noteContent to track save/cancel
     };
 
+    useEffect(() => {
+        const quill = quillRef.current?.getEditor();
+        if (!quill) return;
+
+        // Block insertions if max reached
+        const handleBeforeInput = (e) => {
+            const currentLength = quill.getText().trimEnd().length;
+
+            // If at or over limit and trying to insert, block it
+            if (
+                currentLength >= USER_NOTES.MAX_CHARS &&
+                e.inputType &&
+                e.inputType.startsWith('insert')
+            ) {
+                e.preventDefault();
+            }
+        };
+
+        // enforce after-change backup too
+        const handleTextChange = (delta, oldDelta, source) => {
+            if (source !== 'user') return;
+
+            const plainText = quill.getText().trimEnd();
+            if (plainText.length > USER_NOTES.MAX_CHARS) {
+                quill.deleteText(USER_NOTES.MAX_CHARS, plainText.length);
+            }
+        };
+
+        quill.root.addEventListener('beforeinput', handleBeforeInput);
+        quill.on('text-change', handleTextChange);
+
+        return () => {
+            quill.root.removeEventListener('beforeinput', handleBeforeInput);
+            quill.off('text-change', handleTextChange);
+        };
+    }, []);
+
     const handleSave = async () => {
         try {
             // send content to your API
