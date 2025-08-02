@@ -406,6 +406,11 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
                     <u>page - {highlightPage}</u>
                 </span>
             </div>
+            <div className={styles.characterLimitTextWrapper}>
+                <span style={{color: (quillRef.current?.getEditor().getText().trimEnd().length) >= USER_NOTES.MAX_CHARS ? 'red' : 'gray' }}>
+                    {(quillRef.current?.getEditor().getText().trimEnd().length || 0)} / {USER_NOTES.MAX_CHARS} characters
+                </span> 
+            </div>
         </div>
 
         {/* Editor */}
