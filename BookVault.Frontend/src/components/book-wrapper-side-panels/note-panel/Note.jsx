@@ -271,24 +271,36 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
         const quill = quillRef.current?.getEditor();
         if (!quill) return;
 
-        // Block insertions if max reached
-        const handleBeforeInput = (e) => {
-            const currentLength = quill.getText().trimEnd().length;
+        const MAX = USER_NOTES.MAX_CHARS;
 
-            // If at or over limit and trying to insert, block it
+        const handleBeforeInput = (e) => {
+            const currentLength = quill.getLength() - 1; // Exclude final newline
             if (
-                currentLength >= USER_NOTES.MAX_CHARS &&
+                currentLength >= MAX &&
                 e.inputType &&
                 e.inputType.startsWith('insert')
             ) {
-                e.preventDefault();
+                e.preventDefault(); // BLOCK input, including space
+            }
+        };
+
+        const handleTextChange = (delta, oldDelta, source) => {
+            if (source !== 'user') return;
+
+            const currentLength = quill.getLength() - 1;
+            if (currentLength > MAX) {
+                // Remove extra characters if somehow inserted
+                const excess = currentLength - MAX;
+                quill.deleteText(MAX, excess);
             }
         };
 
         quill.root.addEventListener('beforeinput', handleBeforeInput);
+        quill.on('text-change', handleTextChange);
 
         return () => {
             quill.root.removeEventListener('beforeinput', handleBeforeInput);
+            quill.off('text-change', handleTextChange);
         };
     }, []);
 
@@ -407,8 +419,8 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
                 </span>
             </div>
             <div className={styles.characterLimitTextWrapper}>
-                <span style={{color: (quillRef.current?.getEditor().getText().trimEnd().length) >= USER_NOTES.MAX_CHARS ? 'red' : 'gray' }}>
-                    {(quillRef.current?.getEditor().getText().trimEnd().length || 0)} / {USER_NOTES.MAX_CHARS} characters
+                <span style={{ color: (quillRef.current?.getEditor().getLength() - 1) >= USER_NOTES.MAX_CHARS ? 'red' : 'gray' }}>
+                    {(quillRef.current?.getEditor().getLength() - 1) || 0} / {USER_NOTES.MAX_CHARS} characters
                 </span> 
             </div>
         </div>
