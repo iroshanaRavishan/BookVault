@@ -397,7 +397,17 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
                 <IoCaretDown size={10} />
             </div>
         </div>
-        <span className={styles.pageAttachementText}> <FiPaperclip size={15} />The note is attached to <span style={{fontWeight: '700'}}> <u>page - {highlightPage}</u></span></span>
+
+        <div className={styles.noteDetailBar}>
+            <div className={styles.pageAttachementText}> 
+                <FiPaperclip size={15} />
+                The note is attached to 
+                <span style={{fontWeight: '700'}}>
+                    <u>page - {highlightPage}</u>
+                </span>
+            </div>
+        </div>
+
         {/* Editor */}
         <ReactQuill
             ref={quillRef}
