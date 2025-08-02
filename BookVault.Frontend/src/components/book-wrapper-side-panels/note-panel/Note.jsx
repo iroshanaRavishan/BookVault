@@ -7,6 +7,7 @@ import { HiMiniCog6Tooth } from 'react-icons/hi2';
 import { IoCaretDown, IoCloseCircleSharp } from 'react-icons/io5';
 import { decrypt, encrypt } from '../../../utils/encryptUtils';
 import { FiPaperclip } from "react-icons/fi";
+import { USER_NOTES } from '../../../constants/constants';
 
 export default function Note({ isPanelPinned, currentPageInfo }) {
     const [content, setContent] = useState('');
