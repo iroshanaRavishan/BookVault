@@ -419,8 +419,8 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
                 </span>
             </div>
             <div className={styles.characterLimitTextWrapper}>
-                <span style={{color: (quillRef.current?.getEditor().getText().trimEnd().length) >= USER_NOTES.MAX_CHARS ? 'red' : 'gray' }}>
-                    {(quillRef.current?.getEditor().getText().trimEnd().length || 0)} / {USER_NOTES.MAX_CHARS} characters
+                <span style={{ color: (quillRef.current?.getEditor().getLength() - 1) >= USER_NOTES.MAX_CHARS ? 'red' : 'gray' }}>
+                    {(quillRef.current?.getEditor().getLength() - 1) || 0} / {USER_NOTES.MAX_CHARS} characters
                 </span> 
             </div>
         </div>
