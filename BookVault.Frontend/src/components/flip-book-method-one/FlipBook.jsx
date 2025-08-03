@@ -7,6 +7,8 @@ import { LuChevronFirst, LuChevronLast, LuChevronLeft, LuChevronRight } from 're
 import { useUser } from '../../context/UserContext';
 import { useParams } from 'react-router-dom';
 import BookmarkListener from '../bookmark-listener/BookmarkListener';
+import { useNoteContext } from '../../context/NoteContext';
+import { confirmUnsavedChanges } from '../../utils/noteUtils';
 
 const Page = forwardRef(({ children, number, totalPages, currentPage, pageType, onBookmarkAdd, activeBookmarks }, ref) => {
   const [showRotatedCopy, setShowRotatedCopy] = useState(false);
