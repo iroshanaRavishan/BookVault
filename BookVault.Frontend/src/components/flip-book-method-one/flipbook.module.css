@@ -369,7 +369,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.45);
+  background-color: rgba(0, 0, 0, 0.4);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -379,6 +379,10 @@
 
 .unsavedWarning {
   background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   color: #333;
   padding: 20px 24px;
   border-radius: 12px;
@@ -386,12 +390,12 @@
   font-size: 16px;
   max-width: 320px;
   text-align: center;
-  line-height: 1.4;
   animation: fadeInScale 0.3s ease-out;
 }
 
 .unsavedWarning button {
-  margin-top: 12px;
+  margin-top: 20px;
+  width: 50%;
   padding: 8px 16px;
   background-color: #ff5c5c;
   color: #fff;
