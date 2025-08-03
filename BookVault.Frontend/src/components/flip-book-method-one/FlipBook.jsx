@@ -85,8 +85,9 @@ export default function FlipBook({
   const [bookmarks, setBookmarks] = useState([]);
   const [animatingPages, setAnimatingPages] = useState([]);
   const [removingPages, setRemovingPages] = useState([]);
-  const {user} = useUser();
+  const { user } = useUser();
   const { id } = useParams();
+  const { hasUnsavedChanges } = useNoteContext();
 
   const contentPages = 10;
   const totalPages = 2 + contentPages + (contentPages % 2 === 1 ? 1 : 0) + 2;
@@ -294,6 +295,9 @@ export default function FlipBook({
   const goToPage = async (targetPage) => {
     if (!flipBookRef.current) return;
 
+    if (!confirmUnsavedChanges(hasUnsavedChanges)) return;
+
+    // Proceed with your full page flip logic here
     const instance = flipBookRef.current.pageFlip();
     const current = instance.getCurrentPageIndex();
     const total = instance.getPageCount();
