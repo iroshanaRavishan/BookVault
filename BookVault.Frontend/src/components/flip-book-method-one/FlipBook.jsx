@@ -10,8 +10,27 @@ import BookmarkListener from '../bookmark-listener/BookmarkListener';
 import { useNoteContext } from '../../context/NoteContext';
 import { confirmUnsavedChanges } from '../../utils/noteUtils';
 
-const Page = forwardRef(({ children, number, totalPages, currentPage, pageType, onBookmarkAdd, activeBookmarks }, ref) => {
+const Page = forwardRef(({ 
+  children,
+  number,
+  totalPages,
+  currentPage,
+  pageType,
+  onBookmarkAdd,
+  activeBookmarks,
+  hasUnsavedChanges,
+  setTriedFlipWhileUnsaved 
+}, ref) => {
   const [showRotatedCopy, setShowRotatedCopy] = useState(false);
+
+  const handlePagePointerDown = (e) => {
+    if (hasUnsavedChanges) {
+      e.stopPropagation();
+      e.preventDefault();
+      setTriedFlipWhileUnsaved(true);
+    }
+  };
+
   let radiusClass = "";
   if (number === 0) radiusClass = styles.rightRounded;
   else if (number === totalPages - 1) radiusClass = styles.leftRounded;
