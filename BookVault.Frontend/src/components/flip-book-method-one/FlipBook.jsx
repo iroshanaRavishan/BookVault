@@ -388,6 +388,16 @@ export default function FlipBook({
     }
   };
 
+  const handleFlipPrev = () => {
+    if (!confirmUnsavedChanges(hasUnsavedChanges)) return;
+    flipBookRef.current.pageFlip().flipPrev();
+  };
+
+  const handleFlipNext = () => {
+    if (!confirmUnsavedChanges(hasUnsavedChanges)) return;
+    flipBookRef.current.pageFlip().flipNext();
+  };
+
   const leftBookmarks = [...bookmarks]
     .filter(b => b.page < leftPage + 2 || (b.page === leftPage && currentPage !== leftPage))
     .sort((a, b) => a.page - b.page);
@@ -654,14 +664,14 @@ export default function FlipBook({
           <LuChevronFirst className={styles.toTheFirst} style={{ left: "0px", cursor: "pointer" }} />
         </span>
         <span
-          onClick={() => flipBookRef.current.pageFlip().flipPrev()}
+          onClick={handleFlipPrev}
           className={styles.navButton}
           style={currentPage === 0 ? { display: 'none' } : {}}
         >
           Prev
         </span>
         <span
-          onClick={() => flipBookRef.current.pageFlip().flipNext()}
+          onClick={handleFlipNext}
           className={styles.navButton}
           style={currentPage === totalPages - 1 ? { display: 'none' } : {}}
         >
