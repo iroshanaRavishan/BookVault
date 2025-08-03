@@ -684,7 +684,7 @@ export default function FlipBook({
       {triedFlipWhileUnsaved && (
         <div className={styles.unsavedOverlay}>
           <div className={styles.unsavedWarning}>
-            You have unsaved notes. Please save or discard them before turning pages.
+            <span>You have unsaved notes. Please save or discard them before turning pages.</span>
             <button onClick={() => setTriedFlipWhileUnsaved(false)}>OK</button>
           </div>
         </div>
