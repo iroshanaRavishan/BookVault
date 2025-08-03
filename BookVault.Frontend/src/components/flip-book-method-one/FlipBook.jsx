@@ -53,7 +53,11 @@ const Page = forwardRef(({
   }, [activeBookmarks, number]);
 
   return (
-    <div className={`${styles.page} ${radiusClass} ${coverClass}`} ref={ref}>
+    <div 
+      className={`${styles.page} ${radiusClass} ${coverClass}`}
+      ref={ref}
+      onPointerDown={handlePagePointerDown}
+    >
       {/* Book holes */}
       {showLeftCoverHoles && <BookBindingHoles side="left" />}
       {showLeftHoles && <BookBindingHoles side="right" />}
