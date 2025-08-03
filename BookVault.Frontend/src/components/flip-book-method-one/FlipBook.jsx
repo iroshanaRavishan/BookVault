@@ -7,6 +7,8 @@ import { LuChevronFirst, LuChevronLast, LuChevronLeft, LuChevronRight } from 're
 import { useUser } from '../../context/UserContext';
 import { useParams } from 'react-router-dom';
 import BookmarkListener from '../bookmark-listener/BookmarkListener';
+import { useNoteContext } from '../../context/NoteContext';
+import { confirmUnsavedChanges } from '../../utils/noteUtils';
 
 const Page = forwardRef(({ children, number, totalPages, currentPage, pageType, onBookmarkAdd, activeBookmarks }, ref) => {
   const [showRotatedCopy, setShowRotatedCopy] = useState(false);
@@ -83,8 +85,9 @@ export default function FlipBook({
   const [bookmarks, setBookmarks] = useState([]);
   const [animatingPages, setAnimatingPages] = useState([]);
   const [removingPages, setRemovingPages] = useState([]);
-  const {user} = useUser();
+  const { user } = useUser();
   const { id } = useParams();
+  const { hasUnsavedChanges } = useNoteContext();
 
   const contentPages = 10;
   const totalPages = 2 + contentPages + (contentPages % 2 === 1 ? 1 : 0) + 2;
@@ -292,6 +295,9 @@ export default function FlipBook({
   const goToPage = async (targetPage) => {
     if (!flipBookRef.current) return;
 
+    if (!confirmUnsavedChanges(hasUnsavedChanges)) return;
+
+    // Proceed with your full page flip logic here
     const instance = flipBookRef.current.pageFlip();
     const current = instance.getCurrentPageIndex();
     const total = instance.getPageCount();
@@ -380,6 +386,16 @@ export default function FlipBook({
     for (let i = 0; i < remaining.length; i += BOOKMARKS_PER_PAGE) {
       newRightBookmarkPages.push(remaining.slice(i, i + BOOKMARKS_PER_PAGE));
     }
+  };
+
+  const handleFlipPrev = () => {
+    if (!confirmUnsavedChanges(hasUnsavedChanges)) return;
+    flipBookRef.current.pageFlip().flipPrev();
+  };
+
+  const handleFlipNext = () => {
+    if (!confirmUnsavedChanges(hasUnsavedChanges)) return;
+    flipBookRef.current.pageFlip().flipNext();
   };
 
   const leftBookmarks = [...bookmarks]
@@ -648,14 +664,14 @@ export default function FlipBook({
           <LuChevronFirst className={styles.toTheFirst} style={{ left: "0px", cursor: "pointer" }} />
         </span>
         <span
-          onClick={() => flipBookRef.current.pageFlip().flipPrev()}
+          onClick={handleFlipPrev}
           className={styles.navButton}
           style={currentPage === 0 ? { display: 'none' } : {}}
         >
           Prev
         </span>
         <span
-          onClick={() => flipBookRef.current.pageFlip().flipNext()}
+          onClick={handleFlipNext}
           className={styles.navButton}
           style={currentPage === totalPages - 1 ? { display: 'none' } : {}}
         >

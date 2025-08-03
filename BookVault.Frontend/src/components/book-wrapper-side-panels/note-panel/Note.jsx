@@ -8,8 +8,10 @@ import { IoCaretDown, IoCloseCircleSharp } from 'react-icons/io5';
 import { decrypt, encrypt } from '../../../utils/encryptUtils';
 import { FiPaperclip } from "react-icons/fi";
 import { USER_NOTES } from '../../../constants/constants';
+import { useNoteContext } from '../../../context/NoteContext.jsx';
 
 export default function Note({ isPanelPinned, currentPageInfo }) {
+    const { setHasUnsavedChanges } = useNoteContext();
     const [content, setContent] = useState('');
     const quillRef = useRef(null); // Ref to access Quill instance
     const [lineHeight, setLineHeight] = useState(24); // px height for both
@@ -263,6 +265,7 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
     }, [noteContent, initialContent]);
 
     const handleQuillChange = (value) => {
+        setHasUnsavedChanges(true); // Mark note as dirty when user types
         setContent(value);
         setNoteContent(value); // if using noteContent to track save/cancel
     };
@@ -311,6 +314,7 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
             localStorage.removeItem('note_content');
             setInitialContent(noteContent);
             setHasChanges(false);
+            setHasUnsavedChanges(false); // Reset status after save
         } catch (error) {
             console.error('Save failed:', error);
         }
