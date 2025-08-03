@@ -85,6 +85,7 @@ export default function FlipBook({
   const [bookmarks, setBookmarks] = useState([]);
   const [animatingPages, setAnimatingPages] = useState([]);
   const [removingPages, setRemovingPages] = useState([]);
+  const [triedFlipWhileUnsaved, setTriedFlipWhileUnsaved] = useState(false);
   const { user } = useUser();
   const { id } = useParams();
   const { hasUnsavedChanges } = useNoteContext();
@@ -654,6 +655,15 @@ export default function FlipBook({
           </Page>
         ))}
       </HTMLFlipBook>
+
+      {triedFlipWhileUnsaved && (
+        <div className={styles.unsavedOverlay}>
+          <div className={styles.unsavedWarning}>
+            You have unsaved notes. Please save or discard them before turning pages.
+            <button onClick={() => setTriedFlipWhileUnsaved(false)}>OK</button>
+          </div>
+        </div>
+      )}
 
       {/* Navigation Buttons */}
       <div className={styles.navButtons} style={{ width: navButtonWidth }}>
