@@ -656,6 +656,15 @@ export default function FlipBook({
         ))}
       </HTMLFlipBook>
 
+      {triedFlipWhileUnsaved && (
+        <div className={styles.unsavedOverlay}>
+          <div className={styles.unsavedWarning}>
+            You have unsaved notes. Please save or discard them before turning pages.
+            <button onClick={() => setTriedFlipWhileUnsaved(false)}>OK</button>
+          </div>
+        </div>
+      )}
+
       {/* Navigation Buttons */}
       <div className={styles.navButtons} style={{ width: navButtonWidth }}>
         <span
