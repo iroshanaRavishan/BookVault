@@ -85,6 +85,7 @@ export default function FlipBook({
   const [bookmarks, setBookmarks] = useState([]);
   const [animatingPages, setAnimatingPages] = useState([]);
   const [removingPages, setRemovingPages] = useState([]);
+  const [triedFlipWhileUnsaved, setTriedFlipWhileUnsaved] = useState(false);
   const { user } = useUser();
   const { id } = useParams();
   const { hasUnsavedChanges } = useNoteContext();
