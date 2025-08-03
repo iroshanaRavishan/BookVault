@@ -10,7 +10,17 @@ import BookmarkListener from '../bookmark-listener/BookmarkListener';
 import { useNoteContext } from '../../context/NoteContext';
 import { confirmUnsavedChanges } from '../../utils/noteUtils';
 
-const Page = forwardRef(({ children, number, totalPages, currentPage, pageType, onBookmarkAdd, activeBookmarks }, ref) => {
+const Page = forwardRef(({ 
+  children,
+  number,
+  totalPages,
+  currentPage,
+  pageType,
+  onBookmarkAdd,
+  activeBookmarks,
+  hasUnsavedChanges,
+  setTriedFlipWhileUnsaved 
+}, ref) => {
   const [showRotatedCopy, setShowRotatedCopy] = useState(false);
   let radiusClass = "";
   if (number === 0) radiusClass = styles.rightRounded;
