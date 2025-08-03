@@ -650,6 +650,8 @@ export default function FlipBook({
             pageType={page.type}
             onBookmarkAdd={handleAddBookmark}
             activeBookmarks={bookmarks}
+            hasUnsavedChanges={hasUnsavedChanges}
+            setTriedFlipWhileUnsaved={setTriedFlipWhileUnsaved}
           >
             <div className={styles.pageContent}>{page.content}</div>
           </Page>
