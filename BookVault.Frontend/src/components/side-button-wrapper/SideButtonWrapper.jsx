@@ -58,6 +58,12 @@ export default function SideButtonsWrapper({
     setLeftOffsets(calcOffsets(leftRefs.current));
   }, []);
 
+  useEffect(() => {
+    if((leftPanelOpen == false) && showUnsavedWarningPopup) {
+      handleButtonClick("Notes", "left")
+    }
+  }, [showUnsavedWarningPopup]);
+
   const { dynamicPanelRight, dynamicButtonRight } = useMemo(() => {
     // If the left panel isn’t pinned, neither offset should apply
     if (!isLeftPanelPinned) {
