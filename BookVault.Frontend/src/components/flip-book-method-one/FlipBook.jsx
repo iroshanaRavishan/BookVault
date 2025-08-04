@@ -8,7 +8,6 @@ import { useUser } from '../../context/UserContext';
 import { useParams } from 'react-router-dom';
 import BookmarkListener from '../bookmark-listener/BookmarkListener';
 import { useNoteContext } from '../../context/NoteContext';
-import { confirmUnsavedChanges } from '../../utils/noteUtils';
 
 const Page = forwardRef(({ 
   children,
@@ -318,7 +317,10 @@ export default function FlipBook({
   const goToPage = async (targetPage) => {
     if (!flipBookRef.current) return;
 
-    if (!confirmUnsavedChanges(hasUnsavedChanges)) return;
+    if (hasUnsavedChanges) {
+      setShowUnsavedWarningPopup(true);
+      return;
+    }
 
     // Proceed with your full page flip logic here
     const instance = flipBookRef.current.pageFlip();
@@ -412,12 +414,18 @@ export default function FlipBook({
   };
 
   const handleFlipPrev = () => {
-    if (!confirmUnsavedChanges(hasUnsavedChanges)) return;
+    if (hasUnsavedChanges) {
+      setShowUnsavedWarningPopup(true);
+      return;
+    }
     flipBookRef.current.pageFlip().flipPrev();
   };
 
   const handleFlipNext = () => {
-    if (!confirmUnsavedChanges(hasUnsavedChanges)) return;
+    if (hasUnsavedChanges) {
+      setShowUnsavedWarningPopup(true);
+      return;
+    }
     flipBookRef.current.pageFlip().flipNext();
   };
 
