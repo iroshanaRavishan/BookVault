@@ -371,11 +371,18 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
                 <span className={styles.pageText}>
                     {/* Left Page */}
                     {currentPageInfo.left > 0 && currentPageInfo.left <= currentPageInfo.total ? (
-                        <span className={`${styles.noteNagigationPageNumber} ${getPageClass(currentPageInfo.left)}`} style={{padding: '5px 8px 8.2px 8px'}}>
-                            {currentPageInfo.left}
-                        </span>
+                    <span
+                        className={`${styles.noteNagigationPageNumber} ${getPageClass(currentPageInfo.left)}`}
+                        style={{padding: '5px 8px 8.2px 8px'}}
+                        onClick={() => {
+                        setHighlightPage(currentPageInfo.left);
+                        localStorage.setItem('highlightPage', currentPageInfo.left);
+                        }}
+                    >
+                        {currentPageInfo.left}
+                    </span>
                     ) : (
-                        ''
+                    ''
                     )}
 
                     {/* Separator */}
@@ -386,17 +393,40 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
 
                     {/* Right Page */}
                     {currentPageInfo.right > 0 && currentPageInfo.right <= currentPageInfo.total ? (
-                        <span className={`${styles.noteNagigationPageNumber} ${getPageClass(currentPageInfo.right)}`} style={{padding: '5px 8px 8.2px 8px'}}>
-                            {currentPageInfo.right}
-                        </span>
+                    <span
+                        className={`${styles.noteNagigationPageNumber} ${getPageClass(currentPageInfo.right)}`}
+                        style={{padding: '5px 8px 8.2px 8px'}}
+                        onClick={() => {
+                        setHighlightPage(currentPageInfo.right);
+                        localStorage.setItem('highlightPage', currentPageInfo.right);
+                        }}
+                    >
+                        {currentPageInfo.right}
+                    </span>
                     ) : currentPageInfo.left <= 0 && currentPageInfo.right === 1 ? (
-                        <span className={`${styles.noteNagigationPageNumber} ${getPageClass(1)}`} style={{padding: '5px 8px 8.2px 8px'}}>1</span>
+                    <span
+                        className={`${styles.noteNagigationPageNumber} ${getPageClass(1)}`}
+                        style={{padding: '5px 8px 8.2px 8px'}}
+                        onClick={() => {
+                        setHighlightPage(1);
+                        localStorage.setItem('highlightPage', 1);
+                        }}
+                    >
+                        1
+                    </span>
                     ) : currentPageInfo.left > currentPageInfo.total ? (
-                        <span className={`${styles.noteNagigationPageNumber} ${getPageClass(currentPageInfo.total)}`} style={{padding: '5px 8px 8.2px 8px'}}>
-                            {currentPageInfo.total}
-                        </span>
+                    <span
+                        className={`${styles.noteNagigationPageNumber} ${getPageClass(currentPageInfo.total)}`}
+                        style={{padding: '5px 8px 8.2px 8px'}}
+                        onClick={() => {
+                        setHighlightPage(currentPageInfo.total);
+                        localStorage.setItem('highlightPage', currentPageInfo.total);
+                        }}
+                    >
+                        {currentPageInfo.total}
+                    </span>
                     ) : (
-                        ''
+                    ''
                     )}
                 </span>
                 <LuChevronRight className={styles.navigationIcons} size={22}/>
