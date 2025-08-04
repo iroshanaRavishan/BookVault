@@ -148,6 +148,7 @@ export default function SideButtonsWrapper({
     setIsLeftOpening(false);
 
     setTimeout(() => {
+      setShowUnsavedWarningPopup(false)
       setLeftPanelOpen(false);
       setIsLeftClosing(false);
       setIsLeftPanelPinned(false);
