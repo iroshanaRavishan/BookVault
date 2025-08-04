@@ -7,6 +7,7 @@ import { LuNotebookText } from "react-icons/lu";
 import { FaChartBar } from "react-icons/fa";
 import Bookmarks from "../book-wrapper-side-panels/bookmark-panel/Bookmarks";
 import Note from "../book-wrapper-side-panels/note-panel/Note";
+import { useNoteContext } from "../../context/NoteContext";
 
 const rightButtonData = ["Bookmarks", "Appearance", "Reading Style", "Statistics"];
 const leftButtonData = ["Notes"];
@@ -33,6 +34,7 @@ export default function SideButtonsWrapper({
   const [isLeftClosing, setIsLeftClosing] = useState(false);
   const [pendingPanel, setPendingPanel] = useState(null);   // Panel to open next after closing
 
+  const { showUnsavedWarningPopup, setShowUnsavedWarningPopup } = useNoteContext();
   const rightRefs = useRef([]);
   const leftRefs = useRef([]);
 
