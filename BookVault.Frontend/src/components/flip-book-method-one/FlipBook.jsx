@@ -19,7 +19,7 @@ const Page = forwardRef(({
   onBookmarkAdd,
   activeBookmarks,
   hasUnsavedChanges,
-  setTriedFlipWhileUnsaved 
+  setShowUnsavedWarningPopup
 }, ref) => {
   const [showRotatedCopy, setShowRotatedCopy] = useState(false);
 
@@ -27,7 +27,7 @@ const Page = forwardRef(({
     if (hasUnsavedChanges) {
       e.stopPropagation();
       e.preventDefault();
-      setTriedFlipWhileUnsaved(true);
+      setShowUnsavedWarningPopup(true);
     }
   };
 
@@ -108,10 +108,9 @@ export default function FlipBook({
   const [bookmarks, setBookmarks] = useState([]);
   const [animatingPages, setAnimatingPages] = useState([]);
   const [removingPages, setRemovingPages] = useState([]);
-  const [triedFlipWhileUnsaved, setTriedFlipWhileUnsaved] = useState(false);
   const { user } = useUser();
   const { id } = useParams();
-  const { hasUnsavedChanges } = useNoteContext();
+  const { hasUnsavedChanges, setShowUnsavedWarningPopup } = useNoteContext();
 
   const contentPages = 10;
   const totalPages = 2 + contentPages + (contentPages % 2 === 1 ? 1 : 0) + 2;
@@ -674,21 +673,12 @@ export default function FlipBook({
             onBookmarkAdd={handleAddBookmark}
             activeBookmarks={bookmarks}
             hasUnsavedChanges={hasUnsavedChanges}
-            setTriedFlipWhileUnsaved={setTriedFlipWhileUnsaved}
+            setShowUnsavedWarningPopup={setShowUnsavedWarningPopup}
           >
             <div className={styles.pageContent}>{page.content}</div>
           </Page>
         ))}
       </HTMLFlipBook>
-
-      {triedFlipWhileUnsaved && (
-        <div className={styles.unsavedOverlay}>
-          <div className={styles.unsavedWarning}>
-            <span>You have unsaved notes. Please save or discard them before turning pages.</span>
-            <button onClick={() => setTriedFlipWhileUnsaved(false)}>OK</button>
-          </div>
-        </div>
-      )}
 
       {/* Navigation Buttons */}
       <div className={styles.navButtons} style={{ width: navButtonWidth }}>
