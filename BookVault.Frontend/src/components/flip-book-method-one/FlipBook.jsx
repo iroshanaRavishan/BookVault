@@ -19,7 +19,7 @@ const Page = forwardRef(({
   onBookmarkAdd,
   activeBookmarks,
   hasUnsavedChanges,
-  setTriedFlipWhileUnsaved 
+  setShowUnsavedWarningPopup
 }, ref) => {
   const [showRotatedCopy, setShowRotatedCopy] = useState(false);
 
@@ -27,7 +27,7 @@ const Page = forwardRef(({
     if (hasUnsavedChanges) {
       e.stopPropagation();
       e.preventDefault();
-      setTriedFlipWhileUnsaved(true);
+      setShowUnsavedWarningPopup(true);
     }
   };
 
@@ -108,7 +108,6 @@ export default function FlipBook({
   const [bookmarks, setBookmarks] = useState([]);
   const [animatingPages, setAnimatingPages] = useState([]);
   const [removingPages, setRemovingPages] = useState([]);
-  const [triedFlipWhileUnsaved, setTriedFlipWhileUnsaved] = useState(false);
   const { user } = useUser();
   const { id } = useParams();
   const { hasUnsavedChanges, setShowUnsavedWarningPopup } = useNoteContext();
@@ -674,7 +673,7 @@ export default function FlipBook({
             onBookmarkAdd={handleAddBookmark}
             activeBookmarks={bookmarks}
             hasUnsavedChanges={hasUnsavedChanges}
-            setTriedFlipWhileUnsaved={setTriedFlipWhileUnsaved}
+            setShowUnsavedWarningPopup={setShowUnsavedWarningPopup}
           >
             <div className={styles.pageContent}>{page.content}</div>
           </Page>
