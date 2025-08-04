@@ -11,7 +11,7 @@ import { USER_NOTES } from '../../../constants/constants';
 import { useNoteContext } from '../../../context/NoteContext.jsx';
 
 export default function Note({ isPanelPinned, currentPageInfo }) {
-    const { setHasUnsavedChanges } = useNoteContext();
+    const { setHasUnsavedChanges, showUnsavedWarningPopup, setShowUnsavedWarningPopup } = useNoteContext();
     const [content, setContent] = useState('');
     const quillRef = useRef(null); // Ref to access Quill instance
     const [lineHeight, setLineHeight] = useState(24); // px height for both
