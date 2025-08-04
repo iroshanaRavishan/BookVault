@@ -585,7 +585,7 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
                             }}
                             style={{backgroundColor: '#f78080ff'}}
                         >
-                            Ok, Back to editor
+                            Ok, back to editor
                         </button>
                     </div>
                 </div>
