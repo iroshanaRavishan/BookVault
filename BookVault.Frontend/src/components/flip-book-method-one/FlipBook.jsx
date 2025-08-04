@@ -630,6 +630,17 @@ export default function FlipBook({
         drawShadow={true}
         useMouseEvents={true}
         onFlip={({ data }) => {
+          if (hasUnsavedChanges) {
+            setShowUnsavedWarningPopup(true);
+            // Snap back to previous page after a short delay
+            setTimeout(() => {
+              if (flipBookRef.current) {
+                flipBookRef.current.pageFlip().flip(previousPage);
+              }
+            }, 400);
+            return;
+          }
+  
           setCurrentPage(data);
 
           // Calculate left/right bookmarks for the new page
