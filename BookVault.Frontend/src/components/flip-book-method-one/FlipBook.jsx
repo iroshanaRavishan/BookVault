@@ -111,7 +111,7 @@ export default function FlipBook({
   const [triedFlipWhileUnsaved, setTriedFlipWhileUnsaved] = useState(false);
   const { user } = useUser();
   const { id } = useParams();
-  const { hasUnsavedChanges } = useNoteContext();
+  const { hasUnsavedChanges, setShowUnsavedWarningPopup } = useNoteContext();
 
   const contentPages = 10;
   const totalPages = 2 + contentPages + (contentPages % 2 === 1 ? 1 : 0) + 2;
