@@ -166,6 +166,10 @@ export default function FlipBook({
   }
 
   useEffect(() => {
+    setPreviousPage(currentPage);
+  }, [currentPage]);
+
+  useEffect(() => {
     const sortType = "page-asc";
     const fetchAllBookmarks = async () => {
       const url = `https://localhost:7157/api/Bookmark?userId=${user.id}&bookId=${id}&sortBy=${sortType}`;
