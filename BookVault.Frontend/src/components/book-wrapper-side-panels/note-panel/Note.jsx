@@ -309,7 +309,7 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
 
     const handleSave = async () => {
         try {
-            // send content to your API
+            // send content to the API
             // implement API call
             localStorage.removeItem('note_content');
             setInitialContent(noteContent);
@@ -545,8 +545,48 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
                         <span className={styles.headerText}>Do you want to discard the changes?</span>
                     </div>
                     <div className={styles.modalActionButtons}>
-                        <button className={styles.modalButtons} onClick={confirmDiscard}>Yes</button>
-                        <button className={styles.modalButtons} onClick={closeModal}>No</button>
+                        <button 
+                            className={styles.modalButtons} 
+                            onClick={confirmDiscard}
+                        >
+                            Yes
+                        </button>
+                        <button 
+                            className={styles.modalButtons} 
+                            onClick={closeModal}
+                            style={{backgroundColor: '#f78080ff'}}
+                        >
+                            No
+                        </button>
+                    </div>
+                </div>
+            </div>
+        )}
+        {showUnsavedWarningPopup && (
+            <div className={styles.modalBackdrop}>
+                <div className={styles.modal}>
+                    <div className={styles.popupHeader}>
+                        <span className={styles.headerText}>You have unsaved notes. Please save or discard them before turning pages</span>
+                    </div>
+                    <div className={styles.modalActionButtons}>
+                        <button 
+                            className={styles.modalButtons}
+                            onClick={() => {
+                                setShowUnsavedWarningPopup(false);
+                                handleSave();
+                            }}
+                        >
+                            Save
+                        </button>
+                        <button 
+                            className={styles.modalButtons}
+                            onClick={() => {
+                                setShowUnsavedWarningPopup(false);
+                            }}
+                            style={{backgroundColor: '#f78080ff'}}
+                        >
+                            Ok, Back to editor
+                        </button>
                     </div>
                 </div>
             </div>
