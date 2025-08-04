@@ -6,9 +6,17 @@ const NoteContext = createContext();
 // Provider component
 export const NoteProvider = ({ children }) => {
   const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
+  const [showUnsavedWarningPopup, setShowUnsavedWarningPopup] = useState(false);
 
   return (
-    <NoteContext.Provider value={{ hasUnsavedChanges, setHasUnsavedChanges }}>
+    <NoteContext.Provider
+      value={{
+        hasUnsavedChanges,
+        setHasUnsavedChanges,
+        showUnsavedWarningPopup,
+        setShowUnsavedWarningPopup,
+      }}
+    >
       {children}
     </NoteContext.Provider>
   );
