@@ -110,6 +110,7 @@ export default function FlipBook({
   const { user } = useUser();
   const { id } = useParams();
   const { hasUnsavedChanges, setShowUnsavedWarningPopup } = useNoteContext();
+  const [previousPage, setPreviousPage] = useState(0);
 
   const contentPages = 10;
   const totalPages = 2 + contentPages + (contentPages % 2 === 1 ? 1 : 0) + 2;
@@ -163,6 +164,10 @@ export default function FlipBook({
       containerTransform = 'translateX(28%)';
     }
   }
+
+  useEffect(() => {
+    setPreviousPage(currentPage);
+  }, [currentPage]);
 
   useEffect(() => {
     const sortType = "page-asc";
@@ -625,6 +630,17 @@ export default function FlipBook({
         drawShadow={true}
         useMouseEvents={true}
         onFlip={({ data }) => {
+          if (hasUnsavedChanges) {
+            setShowUnsavedWarningPopup(true);
+            // Snap back to previous page after a short delay
+            setTimeout(() => {
+              if (flipBookRef.current) {
+                flipBookRef.current.pageFlip().flip(previousPage);
+              }
+            }, 400);
+            return;
+          }
+  
           setCurrentPage(data);
 
           // Calculate left/right bookmarks for the new page
