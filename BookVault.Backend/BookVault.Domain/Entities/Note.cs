@@ -32,5 +32,15 @@ namespace BookVault.Domain.Entities
 
         // EF Core parameterless constructor
         private Note() { }
+        private Note(Guid id, Guid userId, Guid bookId, int pageNumber, string? content, DateTimeOffset createdAt, DateTimeOffset updatedAt)
+        {
+            Id = id;
+            UserId = userId;
+            BookId = bookId;
+            PageNumber = pageNumber;
+            Content = content;
+            CreatedAt = createdAt;
+            UpdatedAt = updatedAt;
+        }
     }
 }
