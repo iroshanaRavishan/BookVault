@@ -42,5 +42,15 @@ namespace BookVault.Domain.Entities
             CreatedAt = createdAt;
             UpdatedAt = updatedAt;
         }
+
+        private static void ValidateInputs(Guid userId, Guid bookId, int pageNumber)
+        {
+            if (userId == Guid.Empty)
+                throw new ArgumentException("UserId cannot be empty.", nameof(userId));
+            if (bookId == Guid.Empty)
+                throw new ArgumentException("BookId cannot be empty.", nameof(bookId));
+            if (pageNumber < 1)
+                throw new ArgumentOutOfRangeException(nameof(pageNumber), "Page number must be greater than zero.");
+        }
     }
 }
