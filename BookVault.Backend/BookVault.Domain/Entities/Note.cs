@@ -43,6 +43,21 @@ namespace BookVault.Domain.Entities
             UpdatedAt = updatedAt;
         }
 
+        public static Note Create(Guid userId, Guid bookId, int pageNumber, string? content)
+        {
+            ValidateInputs(userId, bookId, pageNumber);
+
+            return new Note(
+                Guid.NewGuid(),
+                userId,
+                bookId,
+                pageNumber,
+                content,
+                DateTimeOffset.UtcNow,
+                DateTimeOffset.UtcNow
+             );
+        }
+
         private static void ValidateInputs(Guid userId, Guid bookId, int pageNumber)
         {
             if (userId == Guid.Empty)
