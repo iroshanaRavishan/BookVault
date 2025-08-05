@@ -58,6 +58,14 @@ namespace BookVault.Domain.Entities
              );
         }
 
+        public void Update(Guid userId, Guid bookId, string? content)
+        {
+            UserId = userId;
+            BookId = bookId;
+            Content = content;
+            UpdatedAt = DateTimeOffset.UtcNow;
+        }
+
         private static void ValidateInputs(Guid userId, Guid bookId, int pageNumber)
         {
             if (userId == Guid.Empty)
