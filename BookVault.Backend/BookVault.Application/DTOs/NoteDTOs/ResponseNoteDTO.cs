@@ -9,12 +9,12 @@ namespace BookVault.Application.DTOs.NoteDTOs
 {
     public class ResponseNoteDTO
     {
-        public Guid Id { get; private set; }
-        public Guid UserId { get; private set; }
-        public Guid BookId { get; private set; }
-        public int PageNumber { get; private set; }
-        public string? Content { get; private set; }
-        public DateTimeOffset CreatedAt { get; private set; }
-        public DateTimeOffset UpdatedAt { get; private set; }
+        public Guid Id { get; set; }
+        public Guid UserId { get; set; }
+        public Guid BookId { get; set; }
+        public int PageNumber { get; set; }
+        public string? Content { get; set; }
+        public DateTimeOffset CreatedAt { get; set; }
+        public DateTimeOffset UpdatedAt { get; set; }
     }
 }
