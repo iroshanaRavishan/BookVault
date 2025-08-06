@@ -9,9 +9,14 @@ import { decrypt, encrypt } from '../../../utils/encryptUtils';
 import { FiPaperclip } from "react-icons/fi";
 import { USER_NOTES } from '../../../constants/constants';
 import { useNoteContext } from '../../../context/NoteContext.jsx';
+import { useParams } from 'react-router-dom';
+import { useUser } from '../../../context/UserContext.jsx';
 
 export default function Note({ isPanelPinned, currentPageInfo }) {
     const { setHasUnsavedChanges, showUnsavedWarningPopup, setShowUnsavedWarningPopup } = useNoteContext();
+    const { id } = useParams(); 
+    const { user } = useUser();
+
     const [content, setContent] = useState('');
     const quillRef = useRef(null); // Ref to access Quill instance
     const [lineHeight, setLineHeight] = useState(24); // px height for both
