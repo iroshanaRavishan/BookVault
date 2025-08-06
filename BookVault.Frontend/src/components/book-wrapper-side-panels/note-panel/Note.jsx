@@ -309,9 +309,33 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
 
     const handleSave = async () => {
         try {
-            // send content to the API
-            // implement API call
+            const payload = {
+                userId: user.id,
+                bookId: id,
+                pageNumber: highlightPage,
+                content: encrypt(content)
+            };
+
+            const response = await fetch("https://localhost:7157/api/Note", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(payload)
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+
+            const data = await response.json();
+
+            console.log("Note saved successfully:", data);
+
+            // Remove draft content from local storage
             localStorage.removeItem('note_content');
+
+            // Update state to reflect saved note
             setInitialContent(noteContent);
             setHasChanges(false);
             setHasUnsavedChanges(false); // Reset status after save
