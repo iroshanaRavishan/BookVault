@@ -25,5 +25,11 @@ namespace BookVault.Infrastructure.Repositories
             await _noteDbContext.SaveChangesAsync();
             return note;
         }
+
+        public async Task UpdateAsync(Note note)
+        {
+            _noteDbContext.Notes.Update(note);
+            await _noteDbContext.SaveChangesAsync();
+        }
     }
 }
