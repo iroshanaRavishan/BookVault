@@ -34,6 +34,8 @@ namespace BookVault.Application.Services
             if (existingNote == null) return null;
 
             existingNote.Update(dto.Id, dto.Content);
+            await _noteRepository.UpdateAsync(existingNote);
+            return MapToResponseDto(existingNote);
         }
 
         private static ResponseNoteDTO MapToResponseDto(Note note) =>
