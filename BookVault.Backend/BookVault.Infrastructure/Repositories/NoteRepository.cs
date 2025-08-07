@@ -3,6 +3,7 @@ using BookVault.Application.Interfaces;
 using BookVault.Domain.Entities;
 using BookVault.Domain.Interfaces;
 using BookVault.Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,8 @@ namespace BookVault.Infrastructure.Repositories
         {
             _noteDbContext = noteDbContext;
         }
+        public async Task<Note?> GetByBookAndUserAsync(Guid Id) =>
+          await _noteDbContext.Notes.FirstOrDefaultAsync(n => n.Id == Id);
 
         public async Task<Note> AddAsync(Note note)
         {
