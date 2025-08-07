@@ -58,10 +58,9 @@ namespace BookVault.Domain.Entities
              );
         }
 
-        public void Update(Guid userId, Guid bookId, string? content)
+        public void Update(Guid id, string? content)
         {
-            UserId = userId;
-            BookId = bookId;
+            Id = id;
             Content = content;
             UpdatedAt = DateTimeOffset.UtcNow;
         }
