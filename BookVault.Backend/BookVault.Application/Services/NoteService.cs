@@ -28,6 +28,16 @@ namespace BookVault.Application.Services
             return MapToResponseDto(createdNote);
         }
 
+        public async Task<ResponseNoteDTO> UpdateNoteAsync(Guid Id, UpdateNoteDTO dto)
+        {
+            var existingNote = await _noteRepository.GetByBookAndUserAsync(Id);
+            if (existingNote == null) return null;
+
+            existingNote.Update(dto.Id, dto.Content);
+            await _noteRepository.UpdateAsync(existingNote);
+            return MapToResponseDto(existingNote);
+        }
+
         private static ResponseNoteDTO MapToResponseDto(Note note) =>
             new ResponseNoteDTO
             {
