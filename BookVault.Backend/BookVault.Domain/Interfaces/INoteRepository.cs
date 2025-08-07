@@ -10,5 +10,6 @@ namespace BookVault.Domain.Interfaces
     public interface INoteRepository
     {
         Task<Note?> AddAsync(Note note);
+        Task UpdateAsync(Note note);
     }
 }
