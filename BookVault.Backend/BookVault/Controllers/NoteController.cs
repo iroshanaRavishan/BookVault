@@ -1,7 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using BookVault.Application.DTOs.NoteDTOs;
+﻿using BookVault.Application.DTOs.NoteDTOs;
 using BookVault.Application.Interfaces;
+using BookVault.Domain.Entities;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
 namespace BookVault.API.Controllers
 {
@@ -20,6 +21,16 @@ namespace BookVault.API.Controllers
         {
             var createdNote = await _noteService.AddAsync(dto);
             return Ok(new { Message = "Note created successfully", Note = createdNote });
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateNote(Guid id, [FromBody] UpdateNoteDTO dto)
+        {
+            var updatedNote = await _noteService.UpdateNoteAsync(id, dto);
+            if (updatedNote == null)
+                return NotFound();
+
+            return Ok(updatedNote);
         }
     }
 }
