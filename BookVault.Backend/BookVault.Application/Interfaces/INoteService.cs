@@ -9,6 +9,7 @@ namespace BookVault.Application.Interfaces
 {
     public interface INoteService
     {
-        Task <ResponseNoteDTO> AddAsync(CreateNoteDTO dto);
+        Task<ResponseNoteDTO> AddAsync(CreateNoteDTO dto);
+        Task<ResponseNoteDTO> UpdateNoteAsync(Guid Id, UpdateNoteDTO dto);
     }
 }
