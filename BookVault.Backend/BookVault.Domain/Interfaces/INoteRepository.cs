@@ -13,5 +13,6 @@ namespace BookVault.Domain.Interfaces
         Task<Note?> AddAsync(Note note);
         Task<Note?> GetByBookAndUserAsync(Guid Id);
         Task UpdateAsync(Note note);
+        Task DeleteAsync(Note note);
     }
 }
