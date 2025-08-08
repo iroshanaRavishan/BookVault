@@ -43,7 +43,7 @@ namespace BookVault.Application.Services
             var note = await _noteRepository.GetByIdAsync(noteId);
             if (note == null) return false;
             
-            // add delete asynchronous operation
+            await _noteRepository.DeleteAsync(note);
             return true;
         }
 
