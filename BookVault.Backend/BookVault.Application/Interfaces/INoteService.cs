@@ -11,5 +11,6 @@ namespace BookVault.Application.Interfaces
     {
         Task<ResponseNoteDTO> AddAsync(CreateNoteDTO dto);
         Task<ResponseNoteDTO> UpdateNoteAsync(Guid Id, UpdateNoteDTO dto);
+        Task<bool> DeleteNoteAsync(Guid noteId);
     }
 }
