@@ -38,5 +38,11 @@ namespace BookVault.Infrastructure.Repositories
             _noteDbContext.Notes.Update(note);
             await _noteDbContext.SaveChangesAsync();
         }
+
+        public async Task DeleteAsync(Note note)
+        {
+            _noteDbContext.Notes.Remove(note);
+            await _noteDbContext.SaveChangesAsync();
+        }
     }
 }

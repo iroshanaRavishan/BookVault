@@ -38,6 +38,15 @@ namespace BookVault.Application.Services
             return MapToResponseDto(existingNote);
         }
 
+        public async Task<bool> DeleteNoteAsync(Guid noteId)
+        {
+            var note = await _noteRepository.GetByIdAsync(noteId);
+            if (note == null) return false;
+            
+            await _noteRepository.DeleteAsync(note);
+            return true;
+        }
+
         private static ResponseNoteDTO MapToResponseDto(Note note) =>
             new ResponseNoteDTO
             {
