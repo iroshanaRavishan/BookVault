@@ -86,6 +86,7 @@
   gap: 4px;
   font-size: 12px;
   color: #666;
+  user-select: none;
 }
 
 .characterLimitTextWrapper {
@@ -128,6 +129,7 @@
   font-weight: 400;
   cursor: pointer;
   height: 25.5px;
+  user-select: none;
 }
 
 .noteNagigationPageNumber:hover {
