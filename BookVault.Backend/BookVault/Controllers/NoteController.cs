@@ -16,6 +16,13 @@ namespace BookVault.API.Controllers
             _noteService = noteService;
         }
 
+        [HttpGet("{userId}/{bookId}")]
+        public async Task<IActionResult> GetNotesByUserAndBook(Guid userId, Guid bookId)
+        {
+            var notes = await _noteService.GetNotesByUserAndBookAsync(userId, bookId);
+            return Ok(notes);
+        }
+
         [HttpPost]
         public async Task<IActionResult> CreateNote([FromBody] CreateNoteDTO dto)
         {
