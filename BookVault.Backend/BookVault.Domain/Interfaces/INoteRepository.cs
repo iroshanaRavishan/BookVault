@@ -9,6 +9,10 @@ namespace BookVault.Domain.Interfaces
 {
     public interface INoteRepository
     {
+        Task<IEnumerable<Note>> GetNotesByUserAndBookAsync(Guid userId, Guid bookId);
+        Task<Note?> GetByIdAsync(Guid noteId);
         Task<Note?> AddAsync(Note note);
+        Task UpdateAsync(Note note);
+        Task DeleteAsync(Note note);
     }
 }
