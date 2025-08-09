@@ -6,14 +6,24 @@ import { LuUndo2, LuRedo2, LuChevronLeft, LuChevronRight } from "react-icons/lu"
 import { HiMiniCog6Tooth } from 'react-icons/hi2';
 import { IoCaretDown, IoCloseCircleSharp } from 'react-icons/io5';
 import { decrypt, encrypt } from '../../../utils/encryptUtils';
+import { FiPaperclip } from "react-icons/fi";
+import { USER_NOTES } from '../../../constants/constants';
+import { useNoteContext } from '../../../context/NoteContext.jsx';
+import { useParams } from 'react-router-dom';
+import { useUser } from '../../../context/UserContext.jsx';
 
-export default function Note({ isPanelPinned }) {
+export default function Note({ isPanelPinned, currentPageInfo }) {
+    const { setHasUnsavedChanges, showUnsavedWarningPopup, setShowUnsavedWarningPopup } = useNoteContext();
+    const { id } = useParams(); 
+    const { user } = useUser();
+
     const [content, setContent] = useState('');
     const quillRef = useRef(null); // Ref to access Quill instance
     const [lineHeight, setLineHeight] = useState(24); // px height for both
     const [settingsOpen, setSettingsOpen] = useState(false);
     const sliderRef = useRef(null);
     const settingsRef = useRef(null);
+    const hasMountedRef = useRef(false);
     const [tooltipLeft, setTooltipLeft] = useState('10px');
     const [ruleVisibility, setRuleVisibility] = useState('show');
     const [navigationMode, setNavigationMode] = useState('auto');
@@ -21,6 +31,95 @@ export default function Note({ isPanelPinned }) {
     const [noteContent, setNoteContent] = useState('');
     const [initialContent, setInitialContent] = useState('');
     const [hasChanges, setHasChanges] = useState(false);
+    const [prevPageInfo, setPrevPageInfo] = useState({
+        left: 0,
+        right: 1,
+        total: null,
+    });
+
+    const [highlightPage, setHighlightPage] = useState(() => {
+        const stored = localStorage.getItem('highlightPage');
+        return stored ? parseInt(stored) : null;
+    });
+
+    // Set localStorage to 1 on **page refresh only**
+    useEffect(() => {
+        const handleBeforeUnload = () => {
+            // This will run on page refresh or browser/tab close
+            // So set a flag to detect it
+            localStorage.setItem('wasPageRefreshed', 'true');
+        };
+
+        window.addEventListener('beforeunload', handleBeforeUnload);
+
+        return () => {
+            window.removeEventListener('beforeunload', handleBeforeUnload);
+        };
+    }, []);
+
+    useEffect(() => {
+        const wasPageRefreshed = localStorage.getItem('wasPageRefreshed');
+
+        if (wasPageRefreshed === 'true') {
+            localStorage.setItem('highlightPage', '1');
+            setHighlightPage(1);
+            localStorage.removeItem('wasPageRefreshed'); // Clean up the flag
+        }
+    }, []);
+
+    useEffect(() => {
+        if (!hasMountedRef.current) {
+            // First mount — likely a reopen
+            hasMountedRef.current = true;
+            setPrevPageInfo(currentPageInfo); // Initialize prev info
+            return;
+        }
+
+        const { left: prevLeft, right: prevRight } = prevPageInfo;
+        const { left: newLeft, right: newRight, total } = currentPageInfo;
+
+        let newHighlight = null;
+
+        // Forward navigation
+        if (newRight > prevRight) {
+            if (newRight <= total) {
+                newHighlight = newRight;
+            } else if (newLeft > 0 && newLeft <= total) {
+                newHighlight = newLeft;
+            }
+        }
+
+        // Backward navigation
+        if (newLeft < prevLeft) {
+            if (newLeft > 0 && newLeft <= total) {
+                newHighlight = newLeft;
+            } else if (newRight > 0 && newRight <= total) {
+                newHighlight = newRight;
+            }
+        }
+
+        // Special handling for jumping directly over the last odd content page
+        const isOdd = total % 2 !== 0;
+        const skippedLastPage =
+            isOdd &&
+            newLeft > total &&
+            newRight > total &&
+            prevRight <= total;
+
+        if (skippedLastPage) {
+            newHighlight = total;
+        }
+
+        if (newHighlight !== null && newHighlight <= total) {
+            setHighlightPage(newHighlight);
+            localStorage.setItem('highlightPage', newHighlight);
+        }
+
+        setPrevPageInfo(currentPageInfo);
+    }, [currentPageInfo]);
+
+    const getPageClass = (pageNumber) =>
+    highlightPage === pageNumber ? styles.highlightedPage : '';
 
     const modules = {
         toolbar: {
@@ -37,7 +136,7 @@ export default function Note({ isPanelPinned }) {
         'size',
         'bold', 'italic', 'underline', 'strike',
         'color', 'background',
-        'list', 'bullet',
+        'list',
         'link',
         'align',
     ];
@@ -51,7 +150,7 @@ export default function Note({ isPanelPinned }) {
         const percent = (lineHeight - min) / (max - min);
 
         const sliderWidth = slider.offsetWidth;
-        const thumbWidth = 28; // must match your thumb size
+        const thumbWidth = 28; // must match the thumb size
         const left = percent * (sliderWidth - thumbWidth) + thumbWidth / 2;
 
         setTooltipLeft(`${left}px`);
@@ -171,17 +270,80 @@ export default function Note({ isPanelPinned }) {
     }, [noteContent, initialContent]);
 
     const handleQuillChange = (value) => {
+        setHasUnsavedChanges(true); // Mark note as dirty when user types
         setContent(value);
         setNoteContent(value); // if using noteContent to track save/cancel
     };
 
+    useEffect(() => {
+        const quill = quillRef.current?.getEditor();
+        if (!quill) return;
+
+        const MAX = USER_NOTES.MAX_CHARS;
+
+        const handleBeforeInput = (e) => {
+            const currentLength = quill.getLength() - 1; // Exclude final newline
+            if (
+                currentLength >= MAX &&
+                e.inputType &&
+                e.inputType.startsWith('insert')
+            ) {
+                e.preventDefault(); // BLOCK input, including space
+            }
+        };
+
+        const handleTextChange = (delta, oldDelta, source) => {
+            if (source !== 'user') return;
+
+            const currentLength = quill.getLength() - 1;
+            if (currentLength > MAX) {
+                // Remove extra characters if somehow inserted
+                const excess = currentLength - MAX;
+                quill.deleteText(MAX, excess);
+            }
+        };
+
+        quill.root.addEventListener('beforeinput', handleBeforeInput);
+        quill.on('text-change', handleTextChange);
+
+        return () => {
+            quill.root.removeEventListener('beforeinput', handleBeforeInput);
+            quill.off('text-change', handleTextChange);
+        };
+    }, []);
+
     const handleSave = async () => {
         try {
-            // send content to your API
-            // implement API call
+            const payload = {
+                userId: user.id,
+                bookId: id,
+                pageNumber: highlightPage,
+                content: encrypt(content)
+            };
+
+            const response = await fetch("https://localhost:7157/api/Note", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(payload)
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+
+            const data = await response.json();
+
+            console.log("Note saved successfully:", data);
+
+            // Remove draft content from local storage
             localStorage.removeItem('note_content');
+
+            // Update state to reflect saved note
             setInitialContent(noteContent);
             setHasChanges(false);
+            setHasUnsavedChanges(false); // Reset status after save
         } catch (error) {
             console.error('Save failed:', error);
         }
@@ -235,8 +397,67 @@ export default function Note({ isPanelPinned }) {
             </div>
             <div className={styles.noteNavigation}>
                 <LuChevronLeft className={styles.navigationIcons} size={22}/>
-                {/* <span> 5 </span> */}
-                <span className={styles.pageText}>Page 5 </span>
+                <span className={styles.pageText}>
+                    {/* Left Page */}
+                    {currentPageInfo.left > 0 && currentPageInfo.left <= currentPageInfo.total ? (
+                    <span
+                        className={`${styles.noteNagigationPageNumber} ${getPageClass(currentPageInfo.left)}`}
+                        style={{padding: '5px 8px 8.2px 8px'}}
+                        onClick={() => {
+                        setHighlightPage(currentPageInfo.left);
+                        localStorage.setItem('highlightPage', currentPageInfo.left);
+                        }}
+                    >
+                        {currentPageInfo.left}
+                    </span>
+                    ) : (
+                    ''
+                    )}
+
+                    {/* Separator */}
+                    {currentPageInfo.left > 0 && currentPageInfo.left <= currentPageInfo.total &&
+                    currentPageInfo.right > 0 && currentPageInfo.right <= currentPageInfo.total
+                    ? <span className={styles.notePageSeparator}></span>
+                    : ''}
+
+                    {/* Right Page */}
+                    {currentPageInfo.right > 0 && currentPageInfo.right <= currentPageInfo.total ? (
+                    <span
+                        className={`${styles.noteNagigationPageNumber} ${getPageClass(currentPageInfo.right)}`}
+                        style={{padding: '5px 8px 8.2px 8px'}}
+                        onClick={() => {
+                        setHighlightPage(currentPageInfo.right);
+                        localStorage.setItem('highlightPage', currentPageInfo.right);
+                        }}
+                    >
+                        {currentPageInfo.right}
+                    </span>
+                    ) : currentPageInfo.left <= 0 && currentPageInfo.right === 1 ? (
+                    <span
+                        className={`${styles.noteNagigationPageNumber} ${getPageClass(1)}`}
+                        style={{padding: '5px 8px 8.2px 8px'}}
+                        onClick={() => {
+                        setHighlightPage(1);
+                        localStorage.setItem('highlightPage', 1);
+                        }}
+                    >
+                        1
+                    </span>
+                    ) : currentPageInfo.left > currentPageInfo.total ? (
+                    <span
+                        className={`${styles.noteNagigationPageNumber} ${getPageClass(currentPageInfo.total)}`}
+                        style={{padding: '5px 8px 8.2px 8px'}}
+                        onClick={() => {
+                        setHighlightPage(currentPageInfo.total);
+                        localStorage.setItem('highlightPage', currentPageInfo.total);
+                        }}
+                    >
+                        {currentPageInfo.total}
+                    </span>
+                    ) : (
+                    ''
+                    )}
+                </span>
                 <LuChevronRight className={styles.navigationIcons} size={22}/>
             </div>
             <div
@@ -249,6 +470,21 @@ export default function Note({ isPanelPinned }) {
             >
                 <HiMiniCog6Tooth className={styles.menuIcon} size={18} />
                 <IoCaretDown size={10} />
+            </div>
+        </div>
+
+        <div className={styles.noteDetailBar}>
+            <div className={styles.pageAttachementText}> 
+                <FiPaperclip size={15} />
+                The note is attached to 
+                <span style={{fontWeight: '700'}}>
+                    <u>page - {highlightPage}</u>
+                </span>
+            </div>
+            <div className={styles.characterLimitTextWrapper}>
+                <span style={{ color: (quillRef.current?.getEditor().getLength() - 1) >= USER_NOTES.MAX_CHARS ? 'red' : 'gray' }}>
+                    {(quillRef.current?.getEditor().getLength() - 1) || 0} / {USER_NOTES.MAX_CHARS} characters
+                </span> 
             </div>
         </div>
 
@@ -368,8 +604,48 @@ export default function Note({ isPanelPinned }) {
                         <span className={styles.headerText}>Do you want to discard the changes?</span>
                     </div>
                     <div className={styles.modalActionButtons}>
-                        <button className={styles.modalButtons} onClick={confirmDiscard}>Yes</button>
-                        <button className={styles.modalButtons} onClick={closeModal}>No</button>
+                        <button 
+                            className={styles.modalButtons} 
+                            onClick={confirmDiscard}
+                        >
+                            Yes
+                        </button>
+                        <button 
+                            className={styles.modalButtons} 
+                            onClick={closeModal}
+                            style={{backgroundColor: '#f78080ff'}}
+                        >
+                            No
+                        </button>
+                    </div>
+                </div>
+            </div>
+        )}
+        {showUnsavedWarningPopup && (
+            <div className={styles.modalBackdrop}>
+                <div className={styles.modal}>
+                    <div className={styles.popupHeader}>
+                        <span className={styles.headerText}>You have unsaved notes. Please save or discard them before turning pages</span>
+                    </div>
+                    <div className={styles.modalActionButtons}>
+                        <button 
+                            className={styles.modalButtons}
+                            onClick={() => {
+                                setShowUnsavedWarningPopup(false);
+                                handleSave();
+                            }}
+                        >
+                            Save
+                        </button>
+                        <button 
+                            className={styles.modalButtons}
+                            onClick={() => {
+                                setShowUnsavedWarningPopup(false);
+                            }}
+                            style={{backgroundColor: '#f78080ff'}}
+                        >
+                            Ok, back to editor
+                        </button>
                     </div>
                 </div>
             </div>

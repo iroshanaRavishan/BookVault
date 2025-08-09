@@ -15,7 +15,29 @@
 
 .editor {
   flex: 1;
-  padding-top: 16px;
+  padding-top: 6px;
+}
+
+:global(.ql-size-small) {
+  font-size: 0.8em !important;
+  display: inline !important;
+  line-height: 1 !important;
+  transform-origin: bottom left;
+  position: relative;
+  top: 0px;
+  margin-right: 0 !important;
+  white-space: normal; /* Prevent splitting of the word */
+}
+
+:global(.ql-size-large) {
+  font-size: 1.4em !important;
+  display: inline !important;
+  line-height: 1 !important;
+  transform-origin: bottom left;
+  position: relative;
+  top: 0px;
+  margin-right: 0 !important;
+  white-space: normal;
 }
 
 .customToolbar {
@@ -49,6 +71,38 @@
   background-color: #eeeeee;
 }
 
+.pageAttachementText {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
+}
+
+.noteDetailBar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+  font-size: 12px;
+  color: #666;
+  user-select: none;
+}
+
+.characterLimitTextWrapper {
+  text-align: right;
+  font-size: 11px;
+}
+
+.notePageSeparator {
+  display: inline-block;
+  width: 1px;
+  height: 24px;
+  background-color: #ccc;
+  margin: 0 5px; 
+  vertical-align: middle;
+}
+
 .noteNavigation{
   display: flex;
   flex-direction: row;
@@ -62,6 +116,7 @@
   padding: 5px 3px;
   border: 1px solid #e7e7e7;
   background-color: #f3f3f3;
+  cursor: pointer;
 }
 
 .navigationIcons:hover {
@@ -71,7 +126,15 @@
 
 .pageText {
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 400;
+  cursor: pointer;
+  height: 25.5px;
+  user-select: none;
+}
+
+.noteNagigationPageNumber:hover {
+    background-color: #38320f1e;
+    border-radius: 5px;
 }
 
 .settings {
@@ -150,7 +213,6 @@
 .headerText {
   line-height: 1.4;
   font-size: 14px;
-  font-weight: 600;
 }
 
 .popupBody {
@@ -327,26 +389,27 @@
 
 .modal {
   background: white;
-  padding: 20px 30px;
+  padding: 20px;
   width: 70%;
   border-radius: 8px;
   text-align: center;
+  animation: fadeInScale 0.3s ease-out;
 }
 
 .modalActionButtons {
   margin-top: 20px;
   display: flex;
   justify-content: space-around;
+  gap: 10px;
 }
 
 .modalButtons {
-  padding: 8px 20px;
+  padding: 8px 15px;
   border: none;
-  font-size: 14px;
+  font-size: 13px;
   border-radius: 6px;
   background-color: #494949;
   color: white;
-  width: 30%;
   cursor: pointer;
 }
 
@@ -354,3 +417,21 @@
     background-color: #666;
 }
 
+.highlightedPage {
+  background-color: #38320f4d;
+  border-radius: 5px;
+  transition: background-color 0.1s ease;
+  height: 35px;
+  font-weight: 700;
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
