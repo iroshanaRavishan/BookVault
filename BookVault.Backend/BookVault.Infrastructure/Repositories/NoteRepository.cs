@@ -19,6 +19,12 @@ namespace BookVault.Infrastructure.Repositories
         {
             _noteDbContext = noteDbContext;
         }
+        public async Task<IEnumerable<Note>> GetNotesByUserAndBookAsync(Guid userId, Guid bookId)
+        {
+            return await _noteDbContext.Notes
+                .Where(n => n.UserId == userId && n.BookId == bookId)
+                .ToListAsync();
+        }
 
         public async Task<Note?> GetByIdAsync(Guid noteId) =>
             await _noteDbContext.Notes.FirstOrDefaultAsync(n => n.Id == noteId);
