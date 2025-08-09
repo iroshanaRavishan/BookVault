@@ -165,6 +165,21 @@ export default function FlipBook({
     }
   }
 
+  // send current page info to parent component at the initial render
+  useEffect(() => {
+    let initialLeftPage = currentPage % 2 === 0 ? currentPage : currentPage - 1;
+    let initialRightPage = initialLeftPage + 1;
+
+    if (initialLeftPage == null) initialLeftPage = 0;
+    if (initialRightPage == null) initialRightPage = 0;
+
+    setCurrentPageInfo({
+      left: initialLeftPage,
+      right: initialRightPage,
+      total: contentPages
+    });
+  }, []);
+
   useEffect(() => {
     setPreviousPage(currentPage);
   }, [currentPage]);
@@ -647,9 +662,8 @@ export default function FlipBook({
           const newLeftPage = data % 2 === 0 ? data : data - 1;
           const newRightPage = newLeftPage + 1;
 
-          console.log("left page ", newLeftPage , "- | -", " right page", newRightPage, "TOTAL", contentPages)
           setCurrentPageInfo({
-            left:newLeftPage,
+            left: newLeftPage,
             right: newRightPage,
             total: contentPages
           })
