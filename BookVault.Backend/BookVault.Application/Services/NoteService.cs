@@ -19,6 +19,11 @@ namespace BookVault.Application.Services
             _noteRepository = noteRepository;
         }
 
+        public async Task<IEnumerable<Note>> GetNotesByUserAndBookAsync(Guid userId, Guid bookId)
+        {
+            return await _noteRepository.GetNotesByUserAndBookAsync(userId, bookId);
+        }
+
         public async Task<ResponseNoteDTO> AddAsync(CreateNoteDTO dto)
         {
             var note = Note.Create(dto.UserId, dto.BookId, dto.PageNumber, dto.Content);
