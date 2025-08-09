@@ -32,5 +32,15 @@ namespace BookVault.API.Controllers
 
             return Ok(updatedNote);
         }
+
+        [HttpDelete("{noteId}")]
+        public async Task<IActionResult> DeleteNote(Guid noteId)
+        {
+            var deleted = await _noteService.DeleteNoteAsync(noteId);
+            if (!deleted)
+                return NotFound();
+
+            return NoContent();
+        }
     }
 }

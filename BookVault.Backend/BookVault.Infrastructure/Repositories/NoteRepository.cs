@@ -20,11 +20,8 @@ namespace BookVault.Infrastructure.Repositories
             _noteDbContext = noteDbContext;
         }
 
-        public async Task<Note?> GetByIdAsync(Guid id) =>
-            await _noteDbContext.Notes.FirstOrDefaultAsync(n => n.Id == id);
-
-        public async Task<Note?> GetByBookAndUserAsync(Guid Id) =>
-            await _noteDbContext.Notes.FirstOrDefaultAsync(n => n.Id == Id);
+        public async Task<Note?> GetByIdAsync(Guid noteId) =>
+            await _noteDbContext.Notes.FirstOrDefaultAsync(n => n.Id == noteId);
 
         public async Task<Note> AddAsync(Note note)
         {
