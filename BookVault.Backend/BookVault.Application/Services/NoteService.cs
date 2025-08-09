@@ -30,7 +30,7 @@ namespace BookVault.Application.Services
 
         public async Task<ResponseNoteDTO> UpdateNoteAsync(Guid Id, UpdateNoteDTO dto)
         {
-            var existingNote = await _noteRepository.GetByBookAndUserAsync(Id);
+            var existingNote = await _noteRepository.GetByIdAsync(noteId);
             if (existingNote == null) return null;
 
             existingNote.Update(dto.Id, dto.Content);
