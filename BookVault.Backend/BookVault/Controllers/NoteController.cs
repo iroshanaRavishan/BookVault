@@ -23,10 +23,10 @@ namespace BookVault.API.Controllers
             return Ok(new { Message = "Note created successfully", Note = createdNote });
         }
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateNote(Guid id, [FromBody] UpdateNoteDTO dto)
+        [HttpPut("{noteId}")]
+        public async Task<IActionResult> UpdateNote(Guid noteId, [FromBody] UpdateNoteDTO dto)
         {
-            var updatedNote = await _noteService.UpdateNoteAsync(id, dto);
+            var updatedNote = await _noteService.UpdateNoteAsync(noteId, dto);
             if (updatedNote == null)
                 return NotFound();
 
