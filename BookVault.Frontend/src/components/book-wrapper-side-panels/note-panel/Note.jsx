@@ -287,7 +287,8 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
     }, [noteContent, initialContent]);
 
     const handleQuillChange = (value) => {
-        setHasUnsavedChanges(true); // Mark note as dirty when user types
+        if (value === "<p><br></p>") value = ""; // Mark note as dirty when user types
+        if (value) setHasUnsavedChanges(true);
         setContent(value);
         setNoteContent(value); // if using noteContent to track save/cancel
     };
