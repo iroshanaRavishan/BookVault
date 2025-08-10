@@ -112,14 +112,14 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
 
         if (newHighlight !== null && newHighlight <= total) {
             setHighlightPage(newHighlight);
-            goToPage(newHighlight)
+            goToNote(newHighlight)
             localStorage.setItem('highlightPage', newHighlight);
         }
 
         setPrevPageInfo(currentPageInfo);
     }, [currentPageInfo]);
 
-    const goToPage = (pageNum) => {
+    const goToNote = (pageNum) => {
         setHighlightPage(pageNum);
 
         if (notesByPage[pageNum]) {
