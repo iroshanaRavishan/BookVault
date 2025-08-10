@@ -112,14 +112,14 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
 
         if (newHighlight !== null && newHighlight <= total) {
             setHighlightPage(newHighlight);
-            goToPage(newHighlight)
+            goToNote(newHighlight)
             localStorage.setItem('highlightPage', newHighlight);
         }
 
         setPrevPageInfo(currentPageInfo);
     }, [currentPageInfo]);
 
-    const goToPage = (pageNum) => {
+    const goToNote = (pageNum) => {
         setHighlightPage(pageNum);
 
         if (notesByPage[pageNum]) {
@@ -590,7 +590,7 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
                                 <span className={styles.radioLabel}>
                                     Manual - 
                                     <span className={styles.radioDesc}>
-                                        The notes are not tunred when the book's pages turn
+                                        The notes are not turned when the book's pages turn
                                     </span>
                                 </span>
                             </label>
