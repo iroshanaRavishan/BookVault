@@ -590,7 +590,7 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
                                 <span className={styles.radioLabel}>
                                     Manual - 
                                     <span className={styles.radioDesc}>
-                                        The notes are not tunred when the book's pages turn
+                                        The notes are not turned when the book's pages turn
                                     </span>
                                 </span>
                             </label>
