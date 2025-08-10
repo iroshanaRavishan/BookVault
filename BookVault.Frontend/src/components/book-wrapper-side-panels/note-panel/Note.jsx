@@ -435,7 +435,7 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
                 <span className={styles.undoRedoButton} onClick={() => quillRef.current?.getEditor().history.redo()}><LuRedo2 /></span>
             </div>
             <div className={styles.noteNavigation}>
-                <LuChevronLeft className={styles.navigationIcons} size={22}/>
+                <LuChevronLeft className={styles.navigationIcons} size={22} onClick={handlePrevPage}/>
                 <span className={styles.pageText}>
                     {/* Left Page */}
                     {currentPageInfo.left > 0 && currentPageInfo.left <= currentPageInfo.total ? (
@@ -497,7 +497,7 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
                     ''
                     )}
                 </span>
-                <LuChevronRight className={styles.navigationIcons} size={22}/>
+                <LuChevronRight className={styles.navigationIcons}size={22} onClick={handleNextPage}/>
             </div>
             <div
                 className={styles.settings}
