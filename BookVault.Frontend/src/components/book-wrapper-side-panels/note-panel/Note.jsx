@@ -112,6 +112,7 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
 
         if (newHighlight !== null && newHighlight <= total) {
             setHighlightPage(newHighlight);
+            goToPage(newHighlight)
             localStorage.setItem('highlightPage', newHighlight);
         }
 
