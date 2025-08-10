@@ -137,6 +137,24 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
         setHasChanges(false);
     };
 
+    const handlePrevPage = () => {
+        if (navigationMode !== "manual") return;
+        if (manualPage > 1) {
+            const newPage = manualPage - 1;
+            setManualPage(newPage);
+            goToNote(newPage);
+        }
+    };
+
+    const handleNextPage = () => {
+        if (navigationMode !== "manual") return;
+        if (manualPage < currentPageInfo.total) {
+            const newPage = manualPage + 1;
+            setManualPage(newPage);
+            goToNote(newPage);
+        }
+    };
+
     const getPageClass = (pageNumber) =>
     highlightPage === pageNumber ? styles.highlightedPage : '';
 
