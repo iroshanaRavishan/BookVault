@@ -118,6 +118,22 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
         setPrevPageInfo(currentPageInfo);
     }, [currentPageInfo]);
 
+    const goToPage = (pageNum) => {
+        setHighlightPage(pageNum);
+
+        if (notesByPage[pageNum]) {
+            const noteContent = notesByPage[pageNum];
+            setContent(noteContent);
+            setNoteContent(noteContent);
+            setInitialContent(noteContent);
+        } else {
+            setContent("");
+            setNoteContent("");
+            setInitialContent("");
+        }
+        setHasChanges(false);
+    };
+
     const getPageClass = (pageNumber) =>
     highlightPage === pageNumber ? styles.highlightedPage : '';
 
