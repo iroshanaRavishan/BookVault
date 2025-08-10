@@ -112,11 +112,28 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
 
         if (newHighlight !== null && newHighlight <= total) {
             setHighlightPage(newHighlight);
+            goToNote(newHighlight)
             localStorage.setItem('highlightPage', newHighlight);
         }
 
         setPrevPageInfo(currentPageInfo);
     }, [currentPageInfo]);
+
+    const goToNote = (pageNum) => {
+        setHighlightPage(pageNum);
+
+        if (notesByPage[pageNum]) {
+            const noteContent = notesByPage[pageNum];
+            setContent(noteContent);
+            setNoteContent(noteContent);
+            setInitialContent(noteContent);
+        } else {
+            setContent("");
+            setNoteContent("");
+            setInitialContent("");
+        }
+        setHasChanges(false);
+    };
 
     const getPageClass = (pageNumber) =>
     highlightPage === pageNumber ? styles.highlightedPage : '';
