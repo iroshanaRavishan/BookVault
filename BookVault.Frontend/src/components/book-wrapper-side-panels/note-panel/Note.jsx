@@ -537,7 +537,16 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
                     ''
                     )}
                 </span>
-                <LuChevronRight className={styles.navigationIcons}size={22} onClick={handleNextPage}/>
+
+                <LuChevronRight
+                    className={styles.navigationIcons}
+                    size={22}
+                    onClick={handleNextPage}
+                    style={{
+                        cursor: navigationMode === "manual" ? "pointer" : "not-allowed",
+                        opacity: navigationMode === "manual" ? 1 : 0.4
+                    }}
+                />
             </div>
             <div
                 className={styles.settings}
