@@ -16,14 +16,16 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
     const { setHasUnsavedChanges, showUnsavedWarningPopup, setShowUnsavedWarningPopup } = useNoteContext();
     const { id } = useParams(); 
     const { user } = useUser();
-
-    const [content, setContent] = useState('');
-    const quillRef = useRef(null); // Ref to access Quill instance
-    const [lineHeight, setLineHeight] = useState(24); // px height for both
-    const [settingsOpen, setSettingsOpen] = useState(false);
     const sliderRef = useRef(null);
     const settingsRef = useRef(null);
     const hasMountedRef = useRef(false);
+    const quillRef = useRef(null); // Ref to access Quill instance
+
+    const [content, setContent] = useState('');
+    const [notesByPage, setNotesByPage] = useState({});
+    const [manualPage, setManualPage] = useState(1);
+    const [lineHeight, setLineHeight] = useState(24); // px height for both
+    const [settingsOpen, setSettingsOpen] = useState(false);
     const [tooltipLeft, setTooltipLeft] = useState('10px');
     const [ruleVisibility, setRuleVisibility] = useState('show');
     const [navigationMode, setNavigationMode] = useState('auto');
@@ -372,7 +374,6 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
     };
 
     const confirmDiscard = () => {
-        setContent('');
         setNoteContent(initialContent);
         setHasChanges(false); // TODO: have to be aware here, bcz, even the cancel button is clicked and clicked yes on the popup,
         //  the save and cancel buttons are enabled. Get disabled only when again do for the second file
