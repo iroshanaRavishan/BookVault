@@ -413,6 +413,12 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
             setInitialContent(noteContent);
             setHasChanges(false);
             setHasUnsavedChanges(false); // Reset status after save
+
+            // update notesByPage for the current page
+            setNotesByPage(prev => ({
+                ...prev,
+                [highlightPage]: content
+            }));
         } catch (error) {
             console.error('Save failed:', error);
         }
