@@ -44,6 +44,37 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
         return stored ? parseInt(stored) : null;
     });
 
+    useEffect(() => {
+        const fetchNotes = async () => {
+            try {
+                const res = await fetch(`https://localhost:7157/api/Note/${user.id}/${id}`);
+                if (!res.ok) throw new Error("Failed to fetch notes");
+                const data = await res.json();
+
+                // Convert to map
+                const map = {};
+                data.forEach(note => {
+                    map[note.pageNumber] = decrypt(note.content);
+                });
+                setNotesByPage(map);
+
+                if (map[1]) {
+                    setContent(map[1]);
+                    setNoteContent(map[1]);
+                    setInitialContent(map[1]);
+                } else {
+                    setContent("");
+                    setNoteContent("");
+                    setInitialContent("");
+                }
+            } catch (err) {
+                console.error(err);
+            }
+        };
+
+        fetchNotes();
+    }, []);
+
     // Set localStorage to 1 on **page refresh only**
     useEffect(() => {
         const handleBeforeUnload = () => {
