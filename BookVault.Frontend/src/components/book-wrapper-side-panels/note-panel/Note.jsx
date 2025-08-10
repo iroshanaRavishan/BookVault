@@ -16,14 +16,16 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
     const { setHasUnsavedChanges, showUnsavedWarningPopup, setShowUnsavedWarningPopup } = useNoteContext();
     const { id } = useParams(); 
     const { user } = useUser();
-
-    const [content, setContent] = useState('');
-    const quillRef = useRef(null); // Ref to access Quill instance
-    const [lineHeight, setLineHeight] = useState(24); // px height for both
-    const [settingsOpen, setSettingsOpen] = useState(false);
     const sliderRef = useRef(null);
     const settingsRef = useRef(null);
     const hasMountedRef = useRef(false);
+    const quillRef = useRef(null); // Ref to access Quill instance
+
+    const [content, setContent] = useState('');
+    const [notesByPage, setNotesByPage] = useState({});
+    const [manualPage, setManualPage] = useState(1);
+    const [lineHeight, setLineHeight] = useState(24); // px height for both
+    const [settingsOpen, setSettingsOpen] = useState(false);
     const [tooltipLeft, setTooltipLeft] = useState('10px');
     const [ruleVisibility, setRuleVisibility] = useState('show');
     const [navigationMode, setNavigationMode] = useState('auto');
@@ -41,6 +43,37 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
         const stored = localStorage.getItem('highlightPage');
         return stored ? parseInt(stored) : null;
     });
+
+    useEffect(() => {
+        const fetchNotes = async () => {
+            try {
+                const res = await fetch(`https://localhost:7157/api/Note/${user.id}/${id}`);
+                if (!res.ok) throw new Error("Failed to fetch notes");
+                const data = await res.json();
+
+                // Convert to map
+                const map = {};
+                data.forEach(note => {
+                    map[note.pageNumber] = decrypt(note.content);
+                });
+                setNotesByPage(map);
+
+                if (map[1]) {
+                    setContent(map[1]);
+                    setNoteContent(map[1]);
+                    setInitialContent(map[1]);
+                } else {
+                    setContent("");
+                    setNoteContent("");
+                    setInitialContent("");
+                }
+            } catch (err) {
+                console.error(err);
+            }
+        };
+
+        fetchNotes();
+    }, []);
 
     // Set localStorage to 1 on **page refresh only**
     useEffect(() => {
@@ -133,6 +166,24 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
             setInitialContent("");
         }
         setHasChanges(false);
+    };
+
+    const handlePrevPage = () => {
+        if (navigationMode !== "manual") return;
+        if (manualPage > 1) {
+            const newPage = manualPage - 1;
+            setManualPage(newPage);
+            goToNote(newPage);
+        }
+    };
+
+    const handleNextPage = () => {
+        if (navigationMode !== "manual") return;
+        if (manualPage < currentPageInfo.total) {
+            const newPage = manualPage + 1;
+            setManualPage(newPage);
+            goToNote(newPage);
+        }
     };
 
     const getPageClass = (pageNumber) =>
@@ -287,7 +338,8 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
     }, [noteContent, initialContent]);
 
     const handleQuillChange = (value) => {
-        setHasUnsavedChanges(true); // Mark note as dirty when user types
+        if (value === "<p><br></p>") value = ""; // Mark note as dirty when user types
+        if (value) setHasUnsavedChanges(true);
         setContent(value);
         setNoteContent(value); // if using noteContent to track save/cancel
     };
@@ -371,10 +423,11 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
     };
 
     const confirmDiscard = () => {
-        setContent('');
+        setContent(initialContent)
         setNoteContent(initialContent);
         setHasChanges(false); // TODO: have to be aware here, bcz, even the cancel button is clicked and clicked yes on the popup,
         //  the save and cancel buttons are enabled. Get disabled only when again do for the second file
+        setHasUnsavedChanges(false); // Reset status after save
         localStorage.removeItem('note_content');
         setShowDiscardModal(false);
     };
@@ -413,7 +466,7 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
                 <span className={styles.undoRedoButton} onClick={() => quillRef.current?.getEditor().history.redo()}><LuRedo2 /></span>
             </div>
             <div className={styles.noteNavigation}>
-                <LuChevronLeft className={styles.navigationIcons} size={22}/>
+                <LuChevronLeft className={styles.navigationIcons} size={22} onClick={handlePrevPage}/>
                 <span className={styles.pageText}>
                     {/* Left Page */}
                     {currentPageInfo.left > 0 && currentPageInfo.left <= currentPageInfo.total ? (
@@ -475,7 +528,7 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
                     ''
                     )}
                 </span>
-                <LuChevronRight className={styles.navigationIcons} size={22}/>
+                <LuChevronRight className={styles.navigationIcons}size={22} onClick={handleNextPage}/>
             </div>
             <div
                 className={styles.settings}
