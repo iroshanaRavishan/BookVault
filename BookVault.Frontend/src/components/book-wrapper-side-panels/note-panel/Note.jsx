@@ -155,6 +155,24 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
     }, [currentPageInfo]);
 
     const goToNote = (pageNum) => {
+        if (navigationMode === "auto") {
+            setHighlightPage(pageNum);
+       
+            if (notesByPage[pageNum]) {
+                const noteContent = notesByPage[pageNum];
+                setContent(noteContent);
+                setNoteContent(noteContent);
+                setInitialContent(noteContent);
+            } else {
+                setContent("");
+                setNoteContent("");
+                setInitialContent("");
+            }
+         }
+        setHasChanges(false);
+    };
+
+    const goToNoteManual = (pageNum) => {
         setHighlightPage(pageNum);
 
         if (notesByPage[pageNum]) {
@@ -175,7 +193,7 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
         if (manualPage > 1) {
             const newPage = manualPage - 1;
             setManualPage(newPage);
-            goToNote(newPage);
+            goToNoteManual(newPage);
         }
     };
 
@@ -184,7 +202,7 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
         if (manualPage < currentPageInfo.total) {
             const newPage = manualPage + 1;
             setManualPage(newPage);
-            goToNote(newPage);
+            goToNoteManual(newPage);
         }
     };
 
