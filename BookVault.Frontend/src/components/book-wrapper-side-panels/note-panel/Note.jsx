@@ -23,7 +23,7 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
 
     const [content, setContent] = useState('');
     const [notesByPage, setNotesByPage] = useState({});
-    const [manualPage, setManualPage] = useState(1);
+    const [manualPage, setManualPage] = useState(null);
     const [lineHeight, setLineHeight] = useState(24); // px height for both
     const [settingsOpen, setSettingsOpen] = useState(false);
     const [tooltipLeft, setTooltipLeft] = useState('10px');
@@ -144,7 +144,9 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
         }
 
         if (newHighlight !== null && newHighlight <= total) {
-            setHighlightPage(newHighlight);
+            if (navigationMode === "auto") {
+                setHighlightPage(newHighlight);
+            }
             goToNote(newHighlight)
             localStorage.setItem('highlightPage', newHighlight);
         }
@@ -413,6 +415,12 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
             setInitialContent(noteContent);
             setHasChanges(false);
             setHasUnsavedChanges(false); // Reset status after save
+
+            // update notesByPage for the current page
+            setNotesByPage(prev => ({
+                ...prev,
+                [highlightPage]: content
+            }));
         } catch (error) {
             console.error('Save failed:', error);
         }
