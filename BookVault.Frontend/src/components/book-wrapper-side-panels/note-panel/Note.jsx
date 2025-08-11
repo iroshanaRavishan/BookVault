@@ -107,24 +107,29 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
             const left = currentPageInfo.left;
             const right = currentPageInfo.right;
 
-            // Only consider valid page numbers
+            // Handle first/last/single page edge cases
             if (left > 0 && right > 0) {
-                if (manualPage < left && manualPage < right) {
-                    // Navigated backward, set to smaller
+                if (manualPage > left && manualPage > right) {
                     setHighlightPage(Math.min(left, right));
                     goToNote(Math.min(left, right));
                     localStorage.setItem('highlightPage', Math.min(left, right));
-                } else if (manualPage > left && manualPage > right) {
-                    // Navigated forward, set to bigger
+                } else if (manualPage < left && manualPage < right) {
                     setHighlightPage(Math.max(left, right));
                     goToNote(Math.max(left, right));
                     localStorage.setItem('highlightPage', Math.max(left, right));
                 } else {
-                    // If manualPage is between left and right, pick the closest or default to left
                     setHighlightPage(left);
                     goToNote(left);
                     localStorage.setItem('highlightPage', left);
                 }
+            } else if (left > 0) {
+                setHighlightPage(left);
+                goToNote(left);
+                localStorage.setItem('highlightPage', left);
+            } else if (right > 0) {
+                setHighlightPage(right);
+                goToNote(right);
+                localStorage.setItem('highlightPage', right);
             }
         }
     }, [navigationMode]);
