@@ -101,6 +101,35 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
     }, []);
 
     useEffect(() => {
+        if (navigationMode === "manual" && highlightPage) {
+            setManualPage(highlightPage);
+        } else if (navigationMode === "auto" && manualPage != null) {
+            const left = currentPageInfo.left;
+            const right = currentPageInfo.right;
+
+            // Only consider valid page numbers
+            if (left > 0 && right > 0) {
+                if (manualPage < left && manualPage < right) {
+                    // Navigated backward, set to smaller
+                    setHighlightPage(Math.min(left, right));
+                    goToNote(Math.min(left, right));
+                    localStorage.setItem('highlightPage', Math.min(left, right));
+                } else if (manualPage > left && manualPage > right) {
+                    // Navigated forward, set to bigger
+                    setHighlightPage(Math.max(left, right));
+                    goToNote(Math.max(left, right));
+                    localStorage.setItem('highlightPage', Math.max(left, right));
+                } else {
+                    // If manualPage is between left and right, pick the closest or default to left
+                    setHighlightPage(left);
+                    goToNote(left);
+                    localStorage.setItem('highlightPage', left);
+                }
+            }
+        }
+    }, [navigationMode]);
+
+    useEffect(() => {
         if (!hasMountedRef.current) {
             // First mount — likely a reopen
             hasMountedRef.current = true;
