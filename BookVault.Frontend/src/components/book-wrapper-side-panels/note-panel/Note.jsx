@@ -106,15 +106,19 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
         } else if (navigationMode === "auto" && manualPage != null) {
             const left = currentPageInfo.left;
             const right = currentPageInfo.right;
-            const maxContentPage = currentPageInfo.total; // This should be contentPages
+            const maxContentPage = currentPageInfo.total;
 
-            // Only consider valid page numbers
-            if (left > 0 && right > 0) {
+            // If manualPage matches one of the visible pages, keep it highlighted
+            if (manualPage === left || manualPage === right) {
+                setHighlightPage(manualPage);
+                goToNote(manualPage);
+                localStorage.setItem('highlightPage', manualPage);
+            } else if (left > 0 && right > 0) {
                 let newHighlight;
                 if (manualPage < left && manualPage < right) {
-                    newHighlight = Math.min(left, right);
-                } else if (manualPage > left && manualPage > right) {
                     newHighlight = Math.max(left, right);
+                } else if (manualPage > left && manualPage > right) {
+                    newHighlight = Math.min(left, right);
                 } else {
                     newHighlight = left;
                 }
@@ -135,6 +139,7 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
                 localStorage.setItem('highlightPage', newHighlight);
             }
         }
+        
     }, [navigationMode]);
 
     useEffect(() => {
