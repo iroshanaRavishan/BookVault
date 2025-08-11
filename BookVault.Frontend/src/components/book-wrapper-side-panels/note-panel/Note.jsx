@@ -106,30 +106,33 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
         } else if (navigationMode === "auto" && manualPage != null) {
             const left = currentPageInfo.left;
             const right = currentPageInfo.right;
+            const maxContentPage = currentPageInfo.total; // This should be contentPages
 
-            // Handle first/last/single page edge cases
+            // Only consider valid page numbers
             if (left > 0 && right > 0) {
-                if (manualPage > left && manualPage > right) {
-                    setHighlightPage(Math.min(left, right));
-                    goToNote(Math.min(left, right));
-                    localStorage.setItem('highlightPage', Math.min(left, right));
-                } else if (manualPage < left && manualPage < right) {
-                    setHighlightPage(Math.max(left, right));
-                    goToNote(Math.max(left, right));
-                    localStorage.setItem('highlightPage', Math.max(left, right));
+                let newHighlight;
+                if (manualPage < left && manualPage < right) {
+                    newHighlight = Math.min(left, right);
+                } else if (manualPage > left && manualPage > right) {
+                    newHighlight = Math.max(left, right);
                 } else {
-                    setHighlightPage(left);
-                    goToNote(left);
-                    localStorage.setItem('highlightPage', left);
+                    newHighlight = left;
                 }
+                // Clamp to max content page
+                if (newHighlight > maxContentPage) newHighlight = maxContentPage;
+                setHighlightPage(newHighlight);
+                goToNote(newHighlight);
+                localStorage.setItem('highlightPage', newHighlight);
             } else if (left > 0) {
-                setHighlightPage(left);
-                goToNote(left);
-                localStorage.setItem('highlightPage', left);
+                let newHighlight = left > maxContentPage ? maxContentPage : left;
+                setHighlightPage(newHighlight);
+                goToNote(newHighlight);
+                localStorage.setItem('highlightPage', newHighlight);
             } else if (right > 0) {
-                setHighlightPage(right);
-                goToNote(right);
-                localStorage.setItem('highlightPage', right);
+                let newHighlight = right > maxContentPage ? maxContentPage : right;
+                setHighlightPage(newHighlight);
+                goToNote(newHighlight);
+                localStorage.setItem('highlightPage', newHighlight);
             }
         }
     }, [navigationMode]);
