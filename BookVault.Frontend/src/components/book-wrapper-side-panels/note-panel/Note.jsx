@@ -103,11 +103,7 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
     useEffect(() => {
         if (navigationMode === "manual" && highlightPage) {
             setManualPage(highlightPage);
-        }
-    }, [navigationMode]);
-
-    useEffect(() => {
-        if (navigationMode === "auto" && manualPage != null) {
+        } else if (navigationMode === "auto" && manualPage != null) {
             const left = currentPageInfo.left;
             const right = currentPageInfo.right;
 
