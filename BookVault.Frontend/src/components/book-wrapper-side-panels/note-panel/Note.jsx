@@ -155,6 +155,24 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
     }, [currentPageInfo]);
 
     const goToNote = (pageNum) => {
+        if (navigationMode === "auto") {
+            setHighlightPage(pageNum);
+       
+            if (notesByPage[pageNum]) {
+                const noteContent = notesByPage[pageNum];
+                setContent(noteContent);
+                setNoteContent(noteContent);
+                setInitialContent(noteContent);
+            } else {
+                setContent("");
+                setNoteContent("");
+                setInitialContent("");
+            }
+         }
+        setHasChanges(false);
+    };
+
+    const goToNoteManual = (pageNum) => {
         setHighlightPage(pageNum);
 
         if (notesByPage[pageNum]) {
