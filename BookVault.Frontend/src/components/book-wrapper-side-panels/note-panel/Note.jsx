@@ -193,7 +193,7 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
         if (manualPage > 1) {
             const newPage = manualPage - 1;
             setManualPage(newPage);
-            goToNote(newPage);
+            goToNoteManual(newPage);
         }
     };
 
@@ -202,7 +202,7 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
         if (manualPage < currentPageInfo.total) {
             const newPage = manualPage + 1;
             setManualPage(newPage);
-            goToNote(newPage);
+            goToNoteManual(newPage);
         }
     };
 
