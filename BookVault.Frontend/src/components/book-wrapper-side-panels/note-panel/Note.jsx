@@ -493,8 +493,7 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
     const confirmDiscard = () => {
         setContent(initialContent)
         setNoteContent(initialContent);
-        setHasChanges(false); // TODO: have to be aware here, bcz, even the cancel button is clicked and clicked yes on the popup,
-        //  the save and cancel buttons are enabled. Get disabled only when again do for the second file
+        setHasChanges(false); 
         setHasUnsavedChanges(false); // Reset status after save
         localStorage.removeItem('note_content');
         setShowDiscardModal(false);
@@ -528,7 +527,7 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
             </select>
         </div>
 
-        <div className={styles.noteActions} style={{margin: '10px 0'}}>  
+        <div className={styles.noteActions} style={{margin: '8px 0 4px 0'}}>  
             <div className={styles.undoRedoActionsButtons}>
                 <span className={styles.undoRedoButton} onClick={() => quillRef.current?.getEditor().history.undo()}><LuUndo2 /></span>
                 <span className={styles.undoRedoButton} onClick={() => quillRef.current?.getEditor().history.redo()}><LuRedo2 /></span>
