@@ -115,6 +115,27 @@
   cursor: not-allowed;
 }
 
+.deleteButton {
+  background-color: #f78080;
+  color: #494949;
+  border: 1px solid #e7e7e7;
+  border-radius: 5px;
+  padding: 2px 12px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.deleteButton:hover:enabled {
+  background-color: #e74c3c;
+}
+
+.deleteButton:disabled {
+  background-color: #f7808099;
+  color: #fff;
+  cursor: not-allowed;
+}
+
 .notePageSeparator {
   display: inline-block;
   width: 1px;
