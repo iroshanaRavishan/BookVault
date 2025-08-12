@@ -559,24 +559,6 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
                             >
                                 {manualPage}
                             </span>
-
-                            {/* Only show separator and next page if not on the first page */}
-                            {manualPage > 1 && manualPage + 1 <= currentPageInfo.total && (
-                                <>
-                                    <span className={styles.notePageSeparator}></span>
-                                    <span
-                                        className={`${styles.noteNagigationPageNumber} ${getPageClass(manualPage + 1)}`}
-                                        style={{ padding: '5px 8px 8.2px 8px' }}
-                                        onClick={() => {
-                                            setHighlightPage(manualPage + 1);
-                                            goToNote(manualPage + 1);
-                                            localStorage.setItem('highlightPage', manualPage + 1);
-                                        }}
-                                    >
-                                        {manualPage + 1}
-                                    </span>
-                                </>
-                            )} 
                         </>
                     ) : (
                         <>
