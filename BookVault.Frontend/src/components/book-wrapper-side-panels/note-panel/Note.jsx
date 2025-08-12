@@ -547,7 +547,9 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
                 <span className={styles.pageText}>
                     {navigationMode === "manual" ? (
                         <>
-
+                            <span>
+                                {manualPage}
+                            </span>
                         </>
                     ) : (
                         <>
