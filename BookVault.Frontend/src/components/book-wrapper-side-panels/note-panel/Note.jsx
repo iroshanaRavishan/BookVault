@@ -545,7 +545,12 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
                 />
 
                 <span className={styles.pageText}>
-                    {/* Left Page */}
+                    {navigationMode === "manual" ? (
+                        <>
+
+                        </>
+                    ) : (
+                        <>
                     {currentPageInfo.left > 0 && currentPageInfo.left <= currentPageInfo.total ? (
                     <span
                         className={`${styles.noteNagigationPageNumber} ${getPageClass(currentPageInfo.left)}`}
