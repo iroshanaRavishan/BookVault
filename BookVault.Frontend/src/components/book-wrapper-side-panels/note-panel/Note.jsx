@@ -3,6 +3,8 @@ import ReactQuill from 'react-quill-new';
 import 'react-quill-new/dist/quill.snow.css';
 import styles from './note.module.css';
 import { LuUndo2, LuRedo2, LuChevronLeft, LuChevronRight } from "react-icons/lu";
+import { BiSolidEraser } from "react-icons/bi";
+import { AiOutlineDelete } from "react-icons/ai";
 import { HiMiniCog6Tooth } from 'react-icons/hi2';
 import { IoCaretDown, IoCloseCircleSharp } from 'react-icons/io5';
 import { decrypt, encrypt } from '../../../utils/encryptUtils';
@@ -655,6 +657,10 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
                 <span style={{ color: (quillRef.current?.getEditor().getLength() - 1) >= USER_NOTES.MAX_CHARS ? 'red' : 'gray' }}>
                     {(quillRef.current?.getEditor().getLength() - 1) || 0} / {USER_NOTES.MAX_CHARS} characters
                 </span> 
+                <div >
+                    <button ><BiSolidEraser style={{marginTop: '1px'}} /></button>
+                    <button ><AiOutlineDelete style={{marginTop: '1px'}} /></button>
+                </div>
             </div>
         </div>
 
