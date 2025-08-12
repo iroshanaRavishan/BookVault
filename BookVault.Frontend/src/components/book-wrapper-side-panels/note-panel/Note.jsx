@@ -659,7 +659,7 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
                 </span> 
                 <div >
                     <button className={styles.clearButton} disabled={!content}><BiSolidEraser style={{marginTop: '1px'}} /></button>
-                    <button disabled={!notesByPage[highlightPage]}><AiOutlineDelete style={{marginTop: '1px'}} /></button>
+                    <button className={styles.deleteButton} disabled={!notesByPage[highlightPage]}><AiOutlineDelete style={{marginTop: '1px'}} /></button>
                 </div>
             </div>
         </div>
