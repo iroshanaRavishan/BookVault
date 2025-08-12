@@ -564,7 +564,9 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
                             {manualPage > 1 && manualPage + 1 <= currentPageInfo.total && (
                                 <>
                                     <span className={styles.notePageSeparator}></span>
-                                    <span>
+                                    <span
+                                        className={`${styles.noteNagigationPageNumber} ${getPageClass(manualPage + 1)}`}
+                                    >
                                         {manualPage + 1}
                                     </span>
                                 </>
