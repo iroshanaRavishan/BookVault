@@ -546,20 +546,17 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
 
                 <span className={styles.pageText}>
                     {navigationMode === "manual" ? (
-                        <>
-                            {/* Show current manual page */}
-                            <span
-                                className={`${styles.noteNagigationPageNumber} ${getPageClass(manualPage)}`}
-                                style={{ padding: '5px 8px 8.2px 8px' }}
-                                onClick={() => {
-                                    setHighlightPage(manualPage);
-                                    goToNote(manualPage);
-                                    localStorage.setItem('highlightPage', manualPage);
-                                }}
-                            >
-                                {manualPage}
-                            </span>
-                        </>
+                        <span
+                            className={`${styles.noteNagigationPageNumber} ${getPageClass(manualPage)}`}
+                            style={{ padding: '5px 8px 8.2px 8px' }}
+                            onClick={() => {
+                                setHighlightPage(manualPage);
+                                goToNote(manualPage);
+                                localStorage.setItem('highlightPage', manualPage);
+                            }}
+                        >
+                            {manualPage}
+                        </span>
                     ) : (
                         <>
                     {currentPageInfo.left > 0 && currentPageInfo.left <= currentPageInfo.total ? (
