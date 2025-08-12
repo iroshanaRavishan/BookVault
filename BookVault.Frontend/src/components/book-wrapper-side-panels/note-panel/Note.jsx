@@ -551,6 +551,7 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
                                 className={`${styles.noteNagigationPageNumber} ${getPageClass(manualPage)}`}
                                 style={{ padding: '5px 8px 8.2px 8px' }}
                                 onClick={() => {
+                                    goToNote(manualPage);
                                     localStorage.setItem('highlightPage', manualPage);
                                 }}
                             >
