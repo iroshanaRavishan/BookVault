@@ -608,6 +608,8 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
                     </span>
                     ) : (
                     ''
+                            )}
+                        </>
                     )}
                 </span>
 
