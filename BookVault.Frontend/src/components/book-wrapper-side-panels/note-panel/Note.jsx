@@ -566,6 +566,7 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
                                     <span className={styles.notePageSeparator}></span>
                                     <span
                                         className={`${styles.noteNagigationPageNumber} ${getPageClass(manualPage + 1)}`}
+                                        style={{ padding: '5px 8px 8.2px 8px' }}
                                     >
                                         {manualPage + 1}
                                     </span>
