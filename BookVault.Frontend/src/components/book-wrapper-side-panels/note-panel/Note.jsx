@@ -657,6 +657,10 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
                 <span style={{ color: (quillRef.current?.getEditor().getLength() - 1) >= USER_NOTES.MAX_CHARS ? 'red' : 'gray' }}>
                     {(quillRef.current?.getEditor().getLength() - 1) || 0} / {USER_NOTES.MAX_CHARS} characters
                 </span> 
+                <div >
+                    <button ><BiSolidEraser /></button>
+                    <button ><AiOutlineDelete /></button>
+                </div>
             </div>
         </div>
 
