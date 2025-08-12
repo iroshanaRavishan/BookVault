@@ -547,6 +547,7 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
                 <span className={styles.pageText}>
                     {navigationMode === "manual" ? (
                         <>
+                            {/* Show current manual page */}
                             <span
                                 className={`${styles.noteNagigationPageNumber} ${getPageClass(manualPage)}`}
                                 style={{ padding: '5px 8px 8.2px 8px' }}
@@ -558,6 +559,18 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
                             >
                                 {manualPage}
                             </span>
+
+                            {/* Only show separator and next page if not on the first page */}
+                            {manualPage > 1 && manualPage + 1 <= currentPageInfo.total && (
+                                <>
+                                    <span className={styles.notePageSeparator}></span>
+                                    <span
+                                        className={`${styles.noteNagigationPageNumber} ${getPageClass(manualPage + 1)}`}
+                                    >
+                                        {manualPage + 1}
+                                    </span>
+                                </>
+                            )} 
                         </>
                     ) : (
                         <>
