@@ -198,39 +198,40 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
         setPrevPageInfo(currentPageInfo);
     }, [currentPageInfo]);
 
-    const goToNote = (pageNum) => {
-        if (navigationMode === "auto") {
-            setHighlightPage(pageNum);
+    // const goToNote = (pageNum) => {
+    //     if (navigationMode === "auto") {
+    //         setHighlightPage(pageNum);
        
-            if (notesByPage[pageNum]) {
-                const noteContent = notesByPage[pageNum];
-                setContent(noteContent);
-                setNoteContent(noteContent);
-                setInitialContent(noteContent);
-            } else {
-                setContent("");
-                setNoteContent("");
-                setInitialContent("");
-            }
-         }
-        setHasChanges(false);
-    };
+    //         if (notesByPage[pageNum]) {
+    //             const noteContent = notesByPage[pageNum];
+    //             setContent(noteContent);
+    //             setNoteContent(noteContent);
+    //             setInitialContent(noteContent);
+    //         } else {
+    //             setContent("");
+    //             setNoteContent("");
+    //             setInitialContent("");
+    //         }
+    //      }
+    //     setHasChanges(false);
+    // };
 
-    const goToNoteManual = (pageNum) => {
-        setHighlightPage(pageNum);
+    // const goToNoteManual = (pageNum) => {
+    //     setHighlightPage(pageNum);
 
-        if (notesByPage[pageNum]) {
-            const noteContent = notesByPage[pageNum];
-            setContent(noteContent);
-            setNoteContent(noteContent);
-            setInitialContent(noteContent);
-        } else {
-            setContent("");
-            setNoteContent("");
-            setInitialContent("");
-        }
-        setHasChanges(false);
-    };
+    //     if (notesByPage[pageNum]) {
+    //         const noteContent = notesByPage[pageNum];
+    //         setContent(noteContent);
+    //         setNoteContent(noteContent);
+    //         setInitialContent(noteContent);
+    //     } else {
+    //         setContent("");
+    //         setNoteContent("");
+    //         setInitialContent("");
+    //     }
+    //     setHasChanges(false);
+    // };
+
 
     const handlePrevPage = () => {
         if (navigationMode !== "manual") return;
