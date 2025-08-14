@@ -524,6 +524,11 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
                 setInitialContent('');
                 setHasChanges(false);
                 setHasUnsavedChanges(false);
+                setNotesByPage(prev => {
+                    const updated = { ...prev };
+                    delete updated[highlightPage];
+                    return updated;
+                });
         } catch (err) {
             console.error(err);
             alert("Failed to delete note.");
