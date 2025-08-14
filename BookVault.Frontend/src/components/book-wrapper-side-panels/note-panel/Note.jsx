@@ -529,6 +529,7 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
                     delete updated[highlightPage];
                     return updated;
                 });
+            localStorage.removeItem('note_content');
         } catch (err) {
             console.error(err);
             alert("Failed to delete note.");
