@@ -198,38 +198,59 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
         setPrevPageInfo(currentPageInfo);
     }, [currentPageInfo]);
 
-    const goToNote = (pageNum) => {
-        if (navigationMode === "auto") {
-            setHighlightPage(pageNum);
+    // const goToNote = (pageNum) => {
+    //     if (navigationMode === "auto") {
+    //         setHighlightPage(pageNum);
        
-            if (notesByPage[pageNum]) {
-                const noteContent = notesByPage[pageNum];
-                setContent(noteContent);
-                setNoteContent(noteContent);
-                setInitialContent(noteContent);
-            } else {
-                setContent("");
-                setNoteContent("");
-                setInitialContent("");
-            }
-         }
+    //         if (notesByPage[pageNum]) {
+    //             const noteContent = notesByPage[pageNum];
+    //             setContent(noteContent);
+    //             setNoteContent(noteContent);
+    //             setInitialContent(noteContent);
+    //         } else {
+    //             setContent("");
+    //             setNoteContent("");
+    //             setInitialContent("");
+    //         }
+    //      }
+    //     setHasChanges(false);
+    // };
+
+    // const goToNoteManual = (pageNum) => {
+    //     setHighlightPage(pageNum);
+
+    //     if (notesByPage[pageNum]) {
+    //         const noteContent = notesByPage[pageNum];
+    //         setContent(noteContent);
+    //         setNoteContent(noteContent);
+    //         setInitialContent(noteContent);
+    //     } else {
+    //         setContent("");
+    //         setNoteContent("");
+    //         setInitialContent("");
+    //     }
+    //     setHasChanges(false);
+    // };
+
+    const loadNote = (pageNum) => {
+        setHighlightPage(pageNum);
+
+        const noteContent = notesByPage[pageNum] || "";
+        setContent(noteContent);
+        setNoteContent(noteContent);
+        setInitialContent(noteContent);
+
         setHasChanges(false);
     };
 
-    const goToNoteManual = (pageNum) => {
-        setHighlightPage(pageNum);
-
-        if (notesByPage[pageNum]) {
-            const noteContent = notesByPage[pageNum];
-            setContent(noteContent);
-            setNoteContent(noteContent);
-            setInitialContent(noteContent);
-        } else {
-            setContent("");
-            setNoteContent("");
-            setInitialContent("");
+    const goToNote = (pageNum) => {
+        if (navigationMode === "auto") {
+            loadNote(pageNum);
         }
-        setHasChanges(false);
+    };
+
+    const goToNoteManual = (pageNum) => {
+        loadNote(pageNum);
     };
 
     const handlePrevPage = () => {
