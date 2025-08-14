@@ -520,6 +520,7 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
             });
             if (!response.ok) throw new Error("Failed to delete note");
                 setContent('');
+                setNoteContent('');
         } catch (err) {
             console.error(err);
             alert("Failed to delete note.");
