@@ -523,6 +523,7 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
                 setNoteContent('');
                 setInitialContent('');
                 setHasChanges(false);
+                setHasUnsavedChanges(false);
         } catch (err) {
             console.error(err);
             alert("Failed to delete note.");
