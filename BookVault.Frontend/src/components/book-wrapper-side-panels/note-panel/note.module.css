@@ -81,7 +81,7 @@
 .noteDetailBar {
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: end;
   justify-content: space-between;
   gap: 4px;
   font-size: 12px;
@@ -90,6 +90,9 @@
 }
 
 .characterLimitTextWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
   text-align: right;
   font-size: 11px;
 }
