@@ -507,6 +507,7 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
 
     const handleClear = () => {
         setContent('');
+        setNoteContent('');
     };
 
   return (
