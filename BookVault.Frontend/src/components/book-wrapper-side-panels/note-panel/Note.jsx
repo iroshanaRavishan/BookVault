@@ -512,6 +512,19 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
         setHasUnsavedChanges(true);
     };
 
+    const handleDelete = async () => {
+        if (!window.confirm('Are you sure you want to delete this note?')) return;
+        try {
+            const response = await fetch(`https://localhost:7157/api/Note/${user.id}/${id}/${highlightPage}`, {
+                method: "DELETE"
+            });
+            if (!response.ok) throw new Error("Failed to delete note");
+                setContent('');
+        } catch (err) {
+            console.error(err);
+        }
+    };
+
   return (
     <div className={styles.noteWrapper} style={{ position: 'relative' }}>
         <div id="toolbar" className={styles.customToolbar}>
@@ -666,7 +679,7 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
                 </span> 
                 <div className={styles.clearDeleteButtons}>
                     <button onClick={handleClear} className={styles.clearButton} disabled={!content}><BiSolidEraser style={{marginTop: '1px'}} /></button>
-                    <button className={styles.deleteButton} disabled={!notesByPage[highlightPage]}><AiOutlineDelete style={{marginTop: '1px'}} /></button>
+                    <button onClick={handleDelete} className={styles.deleteButton} disabled={!notesByPage[highlightPage]}><AiOutlineDelete style={{marginTop: '1px'}} /></button>
                 </div>
             </div>
         </div>
