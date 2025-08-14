@@ -232,6 +232,26 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
     //     setHasChanges(false);
     // };
 
+    const loadNote = (pageNum) => {
+        setHighlightPage(pageNum);
+
+        const noteContent = notesByPage[pageNum] || "";
+        setContent(noteContent);
+        setNoteContent(noteContent);
+        setInitialContent(noteContent);
+
+        setHasChanges(false);
+    };
+
+    const goToNote = (pageNum) => {
+        if (navigationMode === "auto") {
+            loadNote(pageNum);
+        }
+    };
+
+    const goToNoteManual = (pageNum) => {
+        loadNote(pageNum);
+    };
 
     const handlePrevPage = () => {
         if (navigationMode !== "manual") return;
