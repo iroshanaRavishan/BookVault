@@ -520,14 +520,14 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
             });
             if (!response.ok) throw new Error("Failed to delete note");
                 setContent('');
-                setNoteContent('');
-                setInitialContent('');
-                setHasChanges(false);
-                setHasUnsavedChanges(false);
-                setNotesByPage(prev => {
-                    const updated = { ...prev };
-                    delete updated[highlightPage];
-                    return updated;
+            setNoteContent('');
+            setInitialContent('');
+            setHasChanges(false);
+            setHasUnsavedChanges(false);
+            setNotesByPage(prev => {
+                const updated = { ...prev };
+                delete updated[highlightPage];
+                return updated;
                 });
             localStorage.removeItem('note_content');
         } catch (err) {
