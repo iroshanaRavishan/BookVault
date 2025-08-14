@@ -505,6 +505,13 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
         setShowDiscardModal(false);
     };
 
+    const handleClear = () => {
+        setContent('');
+        setNoteContent('');
+        setHasChanges(true);
+        setHasUnsavedChanges(true);
+    };
+
   return (
     <div className={styles.noteWrapper} style={{ position: 'relative' }}>
         <div id="toolbar" className={styles.customToolbar}>
@@ -657,8 +664,8 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
                 <span style={{ color: (quillRef.current?.getEditor().getLength() - 1) >= USER_NOTES.MAX_CHARS ? 'red' : 'gray' }}>
                     {(quillRef.current?.getEditor().getLength() - 1) || 0} / {USER_NOTES.MAX_CHARS} characters
                 </span> 
-                <div >
-                    <button className={styles.clearButton} disabled={!content}><BiSolidEraser style={{marginTop: '1px'}} /></button>
+                <div className={styles.clearDeleteButtons}>
+                    <button onClick={handleClear} className={styles.clearButton} disabled={!content}><BiSolidEraser style={{marginTop: '1px'}} /></button>
                     <button className={styles.deleteButton} disabled={!notesByPage[highlightPage]}><AiOutlineDelete style={{marginTop: '1px'}} /></button>
                 </div>
             </div>
