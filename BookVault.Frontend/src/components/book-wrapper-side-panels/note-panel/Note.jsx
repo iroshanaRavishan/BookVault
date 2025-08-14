@@ -509,6 +509,7 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
         setContent('');
         setNoteContent('');
         setHasChanges(true);
+        setHasUnsavedChanges(true);
     };
 
   return (
