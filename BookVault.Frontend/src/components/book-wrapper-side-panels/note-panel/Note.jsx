@@ -519,9 +519,20 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
                 method: "DELETE"
             });
             if (!response.ok) throw new Error("Failed to delete note");
-                setContent('');
+            setContent('');
+            setNoteContent('');
+            setInitialContent('');
+            setHasChanges(false);
+            setHasUnsavedChanges(false);
+            setNotesByPage(prev => {
+                const updated = { ...prev };
+                delete updated[highlightPage];
+                return updated;
+            });
+            localStorage.removeItem('note_content');
         } catch (err) {
             console.error(err);
+            alert("Failed to delete note.");
         }
     };
 
