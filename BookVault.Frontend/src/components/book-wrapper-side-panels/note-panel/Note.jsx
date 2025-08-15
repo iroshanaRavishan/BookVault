@@ -615,7 +615,7 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
                     {currentPageInfo.left > 0 && currentPageInfo.left <= currentPageInfo.total ? (
                     <span
                         className={`${styles.noteNagigationPageNumber} ${getPageClass(currentPageInfo.left)}`}
-                        style={{padding: '5px 8px 8.2px 8px'}}
+                        style={{ padding: '5px 8px 8.2px 8px' }}
                         onClick={() => {
                             setHighlightPage(currentPageInfo.left);
                             goToNote(currentPageInfo.left);
@@ -638,7 +638,7 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
                     {currentPageInfo.right > 0 && currentPageInfo.right <= currentPageInfo.total ? (
                     <span
                         className={`${styles.noteNagigationPageNumber} ${getPageClass(currentPageInfo.right)}`}
-                        style={{padding: '5px 8px 8.2px 8px'}}
+                        style={{ padding: '5px 8px 8.2px 8px' }}
                         onClick={() => {
                             setHighlightPage(currentPageInfo.right);
                             goToNote(currentPageInfo.right);
@@ -650,7 +650,7 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
                     ) : currentPageInfo.left <= 0 && currentPageInfo.right === 1 ? (
                     <span
                         className={`${styles.noteNagigationPageNumber} ${getPageClass(1)}`}
-                        style={{padding: '5px 8px 8.2px 8px'}}
+                        style={{ padding: '5px 8px 8.2px 8px' }}
                         onClick={() => {
                             setHighlightPage(1);
                             goToNote(1);
@@ -662,7 +662,7 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
                     ) : currentPageInfo.left > currentPageInfo.total ? (
                     <span
                         className={`${styles.noteNagigationPageNumber} ${getPageClass(currentPageInfo.total)}`}
-                        style={{padding: '5px 8px 8.2px 8px'}}
+                        style={{ padding: '5px 8px 8.2px 8px' }}
                         onClick={() => {
                             setHighlightPage(currentPageInfo.total);
                             goToNote(currentPageInfo.total);
