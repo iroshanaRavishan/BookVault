@@ -617,8 +617,9 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
                         className={`${styles.noteNagigationPageNumber} ${getPageClass(currentPageInfo.left)}`}
                         style={{padding: '5px 8px 8.2px 8px'}}
                         onClick={() => {
-                        setHighlightPage(currentPageInfo.left);
-                        localStorage.setItem('highlightPage', currentPageInfo.left);
+                            setHighlightPage(currentPageInfo.left);
+                            goToNote(currentPageInfo.left);
+                            localStorage.setItem('highlightPage', currentPageInfo.left);
                         }}
                     >
                         {currentPageInfo.left}
