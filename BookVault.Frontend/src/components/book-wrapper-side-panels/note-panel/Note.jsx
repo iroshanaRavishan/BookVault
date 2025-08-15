@@ -613,7 +613,7 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
                     ) : (
                         <>
                             {/* auto mode logic */}
-                    {currentPageInfo.left > 0 && currentPageInfo.left <= currentPageInfo.total ? (
+                            {currentPageInfo.left > 0 && currentPageInfo.left <= currentPageInfo.total ? (
                                 <span
                                     className={`${styles.noteNagigationPageNumber} ${getPageClass(currentPageInfo.left)}`}
                                     style={{ padding: '5px 8px 8.2px 8px' }}
