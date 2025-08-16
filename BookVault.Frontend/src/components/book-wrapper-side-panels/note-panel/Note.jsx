@@ -506,7 +506,12 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
             // update notesByPage for the current page
             setNotesByPage(prev => ({
                 ...prev,
-                [highlightPage]: content
+                [highlightPage]: {
+                    ...(prev[highlightPage] || {}),
+                    id: data.id,
+                    pageNumber: highlightPage,
+                    content: content,
+                }
             }));
         } catch (error) {
             console.error('Save failed:', error);
