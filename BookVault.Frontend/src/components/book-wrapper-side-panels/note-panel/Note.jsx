@@ -727,7 +727,7 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
                 </span> 
                 <div className={styles.clearDeleteButtons}>
                     <button onClick={handleClear} className={styles.clearButton} disabled={!content}><BiSolidEraser style={{marginTop: '1px'}} /></button>
-                    <button onClick={handleDelete} className={styles.deleteButton} disabled={!notesByPage[highlightPage]}><AiOutlineDelete style={{marginTop: '1px'}} /></button>
+                    <button onClick={() => handleDelete(notesByPage[highlightPage]?.id)} className={styles.deleteButton} disabled={!notesByPage[highlightPage]} ><AiOutlineDelete style={{marginTop: '1px'}} /></button>
                 </div>
             </div>
         </div>
