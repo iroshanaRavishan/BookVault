@@ -238,7 +238,8 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
     const loadNote = (pageNum) => {
         setHighlightPage(pageNum);
 
-        const noteContent = notesByPage[pageNum] || "";
+        const noteObj = notesByPage[pageNum];
+        const noteContent = noteObj ? noteObj.content : "";
         setContent(noteContent);
         setNoteContent(noteContent);
         setInitialContent(noteContent);
