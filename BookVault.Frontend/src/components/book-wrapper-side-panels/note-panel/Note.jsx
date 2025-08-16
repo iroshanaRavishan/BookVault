@@ -509,6 +509,8 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
                 [highlightPage]: {
                     ...(prev[highlightPage] || {}),
                     id: data.id,
+                    bookId: id,
+                    userId: user.id,
                     pageNumber: highlightPage,
                     content: content,
                 }
