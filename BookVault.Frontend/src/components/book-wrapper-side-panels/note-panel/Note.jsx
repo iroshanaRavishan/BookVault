@@ -513,6 +513,8 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
                     userId: user.id,
                     pageNumber: highlightPage,
                     content: content,
+                    createdAt: data.createdAt || new Date().toISOString(),
+                    updatedAt: data.updatedAt || new Date().toISOString()
                 }
             }));
         } catch (error) {
@@ -544,13 +546,16 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
         setHasUnsavedChanges(true);
     };
 
-    const handleDelete = async () => {
+    const handleDelete = async (noteID) => {
         if (!window.confirm('Are you sure you want to delete this note?')) return;
+
         try {
-            const response = await fetch(`https://localhost:7157/api/Note/${user.id}/${id}/${highlightPage}`, {
+            const response = await fetch(`https://localhost:7157/api/Note/${noteID}`, {
                 method: "DELETE"
             });
+
             if (!response.ok) throw new Error("Failed to delete note");
+
             setContent('');
             setNoteContent('');
             setInitialContent('');
@@ -562,6 +567,7 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
                 return updated;
             });
             localStorage.removeItem('note_content');
+
         } catch (err) {
             console.error(err);
             alert("Failed to delete note.");
@@ -724,8 +730,16 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
                     {(quillRef.current?.getEditor().getLength() - 1) || 0} / {USER_NOTES.MAX_CHARS} characters
                 </span> 
                 <div className={styles.clearDeleteButtons}>
-                    <button onClick={handleClear} className={styles.clearButton} disabled={!content}><BiSolidEraser style={{marginTop: '1px'}} /></button>
-                    <button onClick={handleDelete} className={styles.deleteButton} disabled={!notesByPage[highlightPage]}><AiOutlineDelete style={{marginTop: '1px'}} /></button>
+                    <button onClick={handleClear} className={styles.clearButton} disabled={!content}>
+                        <BiSolidEraser style={{marginTop: '1px'}} />
+                    </button>
+                    <button
+                        onClick={() => handleDelete(notesByPage[highlightPage]?.id)}
+                        className={styles.deleteButton}
+                        disabled={!notesByPage[highlightPage]}
+                    >
+                        <AiOutlineDelete style={{marginTop: '1px'}} />
+                    </button>
                 </div>
             </div>
         </div>
