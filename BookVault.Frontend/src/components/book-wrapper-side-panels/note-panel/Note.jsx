@@ -64,9 +64,9 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
                 setNotesByPage(map);
 
                 if (map[1]) {
-                    setContent(map[1]);
-                    setNoteContent(map[1]);
-                    setInitialContent(map[1]);
+                    setContent(map[1].content);
+                    setNoteContent(map[1].content);
+                    setInitialContent(map[1].content);
                 } else {
                     setContent("");
                     setNoteContent("");
