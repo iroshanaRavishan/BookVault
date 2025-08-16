@@ -53,17 +53,20 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
                 if (!res.ok) throw new Error("Failed to fetch notes");
                 const data = await res.json();
 
-                // Convert to map
+                // Map pageNumber to the full note object, with decrypted content
                 const map = {};
                 data.forEach(note => {
-                    map[note.pageNumber] = decrypt(note.content);
+                    map[note.pageNumber] = {
+                        ...note,
+                        content: decrypt(note.content)
+                    };
                 });
                 setNotesByPage(map);
 
                 if (map[1]) {
-                    setContent(map[1]);
-                    setNoteContent(map[1]);
-                    setInitialContent(map[1]);
+                    setContent(map[1].content);
+                    setNoteContent(map[1].content);
+                    setInitialContent(map[1].content);
                 } else {
                     setContent("");
                     setNoteContent("");
@@ -235,7 +238,8 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
     const loadNote = (pageNum) => {
         setHighlightPage(pageNum);
 
-        const noteContent = notesByPage[pageNum] || "";
+        const noteObj = notesByPage[pageNum];
+        const noteContent = noteObj ? noteObj.content : "";
         setContent(noteContent);
         setNoteContent(noteContent);
         setInitialContent(noteContent);
@@ -502,7 +506,14 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
             // update notesByPage for the current page
             setNotesByPage(prev => ({
                 ...prev,
-                [highlightPage]: content
+                [highlightPage]: {
+                    ...(prev[highlightPage] || {}),
+                    id: data.id,
+                    bookId: id,
+                    userId: user.id,
+                    pageNumber: highlightPage,
+                    content: content,
+                }
             }));
         } catch (error) {
             console.error('Save failed:', error);
