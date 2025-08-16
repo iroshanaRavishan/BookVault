@@ -238,7 +238,8 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
     const loadNote = (pageNum) => {
         setHighlightPage(pageNum);
 
-        const noteContent = notesByPage[pageNum] || "";
+        const noteObj = notesByPage[pageNum];
+        const noteContent = noteObj ? noteObj.content : "";
         setContent(noteContent);
         setNoteContent(noteContent);
         setInitialContent(noteContent);
@@ -505,7 +506,14 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
             // update notesByPage for the current page
             setNotesByPage(prev => ({
                 ...prev,
-                [highlightPage]: content
+                [highlightPage]: {
+                    ...(prev[highlightPage] || {}),
+                    id: data.id,
+                    bookId: id,
+                    userId: user.id,
+                    pageNumber: highlightPage,
+                    content: content,
+                }
             }));
         } catch (error) {
             console.error('Save failed:', error);
