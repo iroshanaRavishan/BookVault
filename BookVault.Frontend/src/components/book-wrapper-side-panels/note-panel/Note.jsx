@@ -546,13 +546,16 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
         setHasUnsavedChanges(true);
     };
 
-    const handleDelete = async () => {
+    const handleDelete = async (noteID) => {
         if (!window.confirm('Are you sure you want to delete this note?')) return;
+
         try {
-            const response = await fetch(`https://localhost:7157/api/Note/${user.id}/${id}/${highlightPage}`, {
+            const response = await fetch(`https://localhost:7157/api/Note/${noteID}`, {
                 method: "DELETE"
             });
+
             if (!response.ok) throw new Error("Failed to delete note");
+
             setContent('');
             setNoteContent('');
             setInitialContent('');
@@ -564,6 +567,7 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
                 return updated;
             });
             localStorage.removeItem('note_content');
+
         } catch (err) {
             console.error(err);
             alert("Failed to delete note.");
