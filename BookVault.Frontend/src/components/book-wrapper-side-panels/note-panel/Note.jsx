@@ -53,10 +53,13 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
                 if (!res.ok) throw new Error("Failed to fetch notes");
                 const data = await res.json();
 
-                // Convert to map
+                // Map pageNumber to the full note object, with decrypted content
                 const map = {};
                 data.forEach(note => {
-                    map[note.pageNumber] = decrypt(note.content);
+                    map[note.pageNumber] = {
+                        ...note,
+                        content: decrypt(note.content)
+                    };
                 });
                 setNotesByPage(map);
 
