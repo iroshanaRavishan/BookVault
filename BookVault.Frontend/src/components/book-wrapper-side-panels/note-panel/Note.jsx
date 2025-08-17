@@ -510,13 +510,13 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
                 ...prev,
                 [highlightPage]: {
                     ...(prev[highlightPage] || {}),
-                    id: data.id,
+                    id: data.note?.id,
                     bookId: id,
                     userId: user.id,
                     pageNumber: highlightPage,
                     content: content,
-                    createdAt: data.createdAt || new Date().toISOString(),
-                    updatedAt: data.updatedAt || new Date().toISOString()
+                    createdAt: data.note?.createdAt || new Date().toISOString(),
+                    updatedAt: data.note?.updatedAt || new Date().toISOString()
                 }
             }));
         } catch (error) {
