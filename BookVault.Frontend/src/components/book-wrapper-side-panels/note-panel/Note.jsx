@@ -49,37 +49,7 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
     });
 
     useEffect(() => {
-        const fetchNotes = async () => {
-            try {
-                const res = await fetch(`https://localhost:7157/api/Note/${user.id}/${id}`);
-                if (!res.ok) throw new Error("Failed to fetch notes");
-                const data = await res.json();
-
-                // Map pageNumber to the full note object, with decrypted content
-                const map = {};
-                data.forEach(note => {
-                    map[note.pageNumber] = {
-                        ...note,
-                        content: decrypt(note.content)
-                    };
-                });
-                setNotesByPage(map);
-
-                if (map[1]) {
-                    setContent(map[1].content);
-                    setNoteContent(map[1].content);
-                    setInitialContent(map[1].content);
-                } else {
-                    setContent("");
-                    setNoteContent("");
-                    setInitialContent("");
-                }
-            } catch (err) {
-                console.error(err);
-            }
-        };
-
-        fetchNotes();
+        fetchAllNotes();
     }, []);
 
     // Set localStorage to 1 on **page refresh only**
@@ -471,6 +441,36 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
             quill.off('text-change', handleTextChange);
         };
     }, []);
+
+    const fetchAllNotes = async () => {
+        try {
+            const res = await fetch(`https://localhost:7157/api/Note/${user.id}/${id}`);
+            if (!res.ok) throw new Error("Failed to fetch notes");
+            const data = await res.json();
+
+            const map = {};
+            data.forEach(note => {
+                map[note.pageNumber] = {
+                    ...note,
+                    content: decrypt(note.content)
+                };
+            });
+            setNotesByPage(map);
+
+            // Optionally set editor state for page 1 on initial load
+            if (map[1]) {
+                setContent(map[1].content);
+                setNoteContent(map[1].content);
+                setInitialContent(map[1].content);
+            } else {
+                setContent("");
+                setNoteContent("");
+                setInitialContent("");
+            }
+        } catch (err) {
+            console.error(err);
+        }
+    };
 
     const handleSave = async () => {
         try {
