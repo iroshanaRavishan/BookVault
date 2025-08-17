@@ -52,6 +52,13 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
         fetchAllNotes();
     }, []);
 
+    // disable the delete poup when highlightPage, currentPageInfo changes (means a page is fliped) 
+    useEffect(() => {
+        if (showDeleteModal) {
+            setShowDeleteModal(false);
+        }
+    }, [highlightPage, currentPageInfo]);
+
     // Set localStorage to 1 on **page refresh only**
     useEffect(() => {
         const handleBeforeUnload = () => {
@@ -548,11 +555,14 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
         setHasUnsavedChanges(true);
     };
 
-    const handleDelete = async (noteID) => {
-        if (!window.confirm('Are you sure you want to delete this note?')) return;
+    const handleDelete = (noteID) => {
+        setNoteToDelete(noteID);
+        setShowDeleteModal(true);
+    };
 
+    const confirmDelete = async () => {
         try {
-            const response = await fetch(`https://localhost:7157/api/Note/${noteID}`, {
+            const response = await fetch(`https://localhost:7157/api/Note/${noteToDelete}`, {
                 method: "DELETE"
             });
 
@@ -573,7 +583,15 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
         } catch (err) {
             console.error(err);
             alert("Failed to delete note.");
+        } finally {
+            setShowDeleteModal(false);
+            setNoteToDelete(null);
         }
+    };
+
+    const closeDeleteModal = () => {
+        setShowDeleteModal(false);
+        setNoteToDelete(null);
     };
 
   return (
@@ -738,7 +756,7 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
                     <button
                         onClick={() => handleDelete(notesByPage[highlightPage]?.id)}
                         className={styles.deleteButton}
-                        disabled={!notesByPage[highlightPage]}
+                        disabled={!notesByPage[highlightPage]?.id}
                     >
                         <AiOutlineDelete style={{marginTop: '1px'}} />
                     </button>
@@ -903,6 +921,30 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
                             style={{backgroundColor: '#f78080ff'}}
                         >
                             Ok, back to editor
+                        </button>
+                    </div>
+                </div>
+            </div>
+        )}
+        {showDeleteModal && (
+            <div className={styles.modalBackdrop}>
+                <div className={styles.modal}>
+                    <div className={styles.popupHeader}>
+                        <span className={styles.headerText}>Are you sure you want to delete this note?</span>
+                    </div>
+                    <div className={styles.modalActionButtons}>
+                        <button 
+                            className={styles.modalButtons} 
+                            onClick={confirmDelete}
+                        >
+                            Yes
+                        </button>
+                        <button 
+                            className={styles.modalButtons} 
+                            onClick={closeDeleteModal}
+                            style={{backgroundColor: '#f78080ff'}}
+                        >
+                            No
                         </button>
                     </div>
                 </div>
