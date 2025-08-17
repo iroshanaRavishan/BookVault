@@ -81,16 +81,69 @@
 .noteDetailBar {
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: end;
   justify-content: space-between;
   gap: 4px;
   font-size: 12px;
   color: #666;
+  user-select: none;
 }
 
 .characterLimitTextWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
   text-align: right;
   font-size: 11px;
+}
+
+.clearDeleteButtons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
+.clearButton {
+  background-color: #f7e380;
+  color: #494949;
+  border: 1px solid #e7e7e7;
+  border-radius: 5px;
+  padding: 2px 12px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.clearButton:hover:enabled {
+  background-color: #ffe066;
+}
+
+.clearButton:disabled {
+  background-color: #f7e38099;
+  color: #aaa;
+  cursor: not-allowed;
+}
+
+.deleteButton {
+  background-color: #f78080;
+  color: #494949;
+  border: 1px solid #e7e7e7;
+  border-radius: 5px;
+  padding: 2px 12px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.deleteButton:hover:enabled {
+  background-color: #e74c3c;
+}
+
+.deleteButton:disabled {
+  background-color: #f7808099;
+  color: #fff;
+  cursor: not-allowed;
 }
 
 .notePageSeparator {
@@ -128,6 +181,7 @@
   font-weight: 400;
   cursor: pointer;
   height: 25.5px;
+  user-select: none;
 }
 
 .noteNagigationPageNumber:hover {
