@@ -548,33 +548,11 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
         setHasUnsavedChanges(true);
     };
 
-    const handleDelete = async (noteID) => {
-        if (!window.confirm('Are you sure you want to delete this note?')) return;
-
-        try {
-            const response = await fetch(`https://localhost:7157/api/Note/${noteID}`, {
-                method: "DELETE"
-            });
-
-            if (!response.ok) throw new Error("Failed to delete note");
-
-            setContent('');
-            setNoteContent('');
-            setInitialContent('');
-            setHasChanges(false);
-            setHasUnsavedChanges(false);
-            setNotesByPage(prev => {
-                const updated = { ...prev };
-                delete updated[highlightPage];
-                return updated;
-            });
-            localStorage.removeItem('note_content');
-
-        } catch (err) {
-            console.error(err);
-            alert("Failed to delete note.");
-        }
+    const handleDelete = (noteID) => {
+        setNoteToDelete(noteID);
+        setShowDeleteModal(true);
     };
+
 
   return (
     <div className={styles.noteWrapper} style={{ position: 'relative' }}>
