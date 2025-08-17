@@ -35,6 +35,8 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
     const [noteContent, setNoteContent] = useState('');
     const [initialContent, setInitialContent] = useState('');
     const [hasChanges, setHasChanges] = useState(false);
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [noteToDelete, setNoteToDelete] = useState(null);
     const [prevPageInfo, setPrevPageInfo] = useState({
         left: 0,
         right: 1,
