@@ -749,7 +749,7 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
                     <button
                         onClick={() => handleDelete(notesByPage[highlightPage]?.id)}
                         className={styles.deleteButton}
-                        disabled={!notesByPage[highlightPage]}
+                        disabled={!notesByPage[highlightPage]?.id}
                     >
                         <AiOutlineDelete style={{marginTop: '1px'}} />
                     </button>
