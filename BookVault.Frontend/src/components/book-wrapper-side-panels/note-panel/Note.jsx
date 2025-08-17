@@ -886,6 +886,28 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
                 </div>
             </div>
         )}
+        {showDeleteModal && (
+            <div className={styles.modalBackdrop}>
+                <div className={styles.modal}>
+                    <div className={styles.popupHeader}>
+                        <span className={styles.headerText}>Are you sure you want to delete this note?</span>
+                    </div>
+                    <div className={styles.modalActionButtons}>
+                        <button 
+                            className={styles.modalButtons} 
+                        >
+                            Yes
+                        </button>
+                        <button 
+                            className={styles.modalButtons} 
+                            style={{backgroundColor: '#f78080ff'}}
+                        >
+                            No
+                        </button>
+                    </div>
+                </div>
+            </div>
+        )}
     </div>
   );
 }
