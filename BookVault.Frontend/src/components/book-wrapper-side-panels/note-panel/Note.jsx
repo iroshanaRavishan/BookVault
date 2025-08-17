@@ -52,6 +52,13 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
         fetchAllNotes();
     }, []);
 
+    // disable the delete poup when highlightPage, currentPageInfo changes (means a page is fliped) 
+    useEffect(() => {
+        if (showDeleteModal) {
+            setShowDeleteModal(false);
+        }
+    }, [highlightPage, currentPageInfo]);
+
     // Set localStorage to 1 on **page refresh only**
     useEffect(() => {
         const handleBeforeUnload = () => {
