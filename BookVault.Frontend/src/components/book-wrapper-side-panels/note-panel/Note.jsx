@@ -553,6 +553,10 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
         setShowDeleteModal(true);
     };
 
+    const closeDeleteModal = () => {
+        setShowDeleteModal(false);
+        setNoteToDelete(null);
+    };
 
   return (
     <div className={styles.noteWrapper} style={{ position: 'relative' }}>
