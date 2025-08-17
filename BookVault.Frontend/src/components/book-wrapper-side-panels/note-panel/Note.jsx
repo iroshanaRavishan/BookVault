@@ -35,6 +35,8 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
     const [noteContent, setNoteContent] = useState('');
     const [initialContent, setInitialContent] = useState('');
     const [hasChanges, setHasChanges] = useState(false);
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [noteToDelete, setNoteToDelete] = useState(null);
     const [prevPageInfo, setPrevPageInfo] = useState({
         left: 0,
         right: 1,
@@ -47,38 +49,15 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
     });
 
     useEffect(() => {
-        const fetchNotes = async () => {
-            try {
-                const res = await fetch(`https://localhost:7157/api/Note/${user.id}/${id}`);
-                if (!res.ok) throw new Error("Failed to fetch notes");
-                const data = await res.json();
-
-                // Map pageNumber to the full note object, with decrypted content
-                const map = {};
-                data.forEach(note => {
-                    map[note.pageNumber] = {
-                        ...note,
-                        content: decrypt(note.content)
-                    };
-                });
-                setNotesByPage(map);
-
-                if (map[1]) {
-                    setContent(map[1].content);
-                    setNoteContent(map[1].content);
-                    setInitialContent(map[1].content);
-                } else {
-                    setContent("");
-                    setNoteContent("");
-                    setInitialContent("");
-                }
-            } catch (err) {
-                console.error(err);
-            }
-        };
-
-        fetchNotes();
+        fetchAllNotes();
     }, []);
+
+    // disable the delete poup when highlightPage, currentPageInfo changes (means a page is fliped) 
+    useEffect(() => {
+        if (showDeleteModal) {
+            setShowDeleteModal(false);
+        }
+    }, [highlightPage, currentPageInfo]);
 
     // Set localStorage to 1 on **page refresh only**
     useEffect(() => {
@@ -470,6 +449,36 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
         };
     }, []);
 
+    const fetchAllNotes = async () => {
+        try {
+            const res = await fetch(`https://localhost:7157/api/Note/${user.id}/${id}`);
+            if (!res.ok) throw new Error("Failed to fetch notes");
+            const data = await res.json();
+
+            const map = {};
+            data.forEach(note => {
+                map[note.pageNumber] = {
+                    ...note,
+                    content: decrypt(note.content)
+                };
+            });
+            setNotesByPage(map);
+
+            // Optionally set editor state for page 1 on initial load
+            if (map[1]) {
+                setContent(map[1].content);
+                setNoteContent(map[1].content);
+                setInitialContent(map[1].content);
+            } else {
+                setContent("");
+                setNoteContent("");
+                setInitialContent("");
+            }
+        } catch (err) {
+            console.error(err);
+        }
+    };
+
     const handleSave = async () => {
         try {
             const payload = {
@@ -508,13 +517,13 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
                 ...prev,
                 [highlightPage]: {
                     ...(prev[highlightPage] || {}),
-                    id: data.id,
+                    id: data.note?.id,
                     bookId: id,
                     userId: user.id,
                     pageNumber: highlightPage,
                     content: content,
-                    createdAt: data.createdAt || new Date().toISOString(),
-                    updatedAt: data.updatedAt || new Date().toISOString()
+                    createdAt: data.note?.createdAt || new Date().toISOString(),
+                    updatedAt: data.note?.updatedAt || new Date().toISOString()
                 }
             }));
         } catch (error) {
@@ -546,11 +555,14 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
         setHasUnsavedChanges(true);
     };
 
-    const handleDelete = async (noteID) => {
-        if (!window.confirm('Are you sure you want to delete this note?')) return;
+    const handleDelete = (noteID) => {
+        setNoteToDelete(noteID);
+        setShowDeleteModal(true);
+    };
 
+    const confirmDelete = async () => {
         try {
-            const response = await fetch(`https://localhost:7157/api/Note/${noteID}`, {
+            const response = await fetch(`https://localhost:7157/api/Note/${noteToDelete}`, {
                 method: "DELETE"
             });
 
@@ -571,7 +583,15 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
         } catch (err) {
             console.error(err);
             alert("Failed to delete note.");
+        } finally {
+            setShowDeleteModal(false);
+            setNoteToDelete(null);
         }
+    };
+
+    const closeDeleteModal = () => {
+        setShowDeleteModal(false);
+        setNoteToDelete(null);
     };
 
   return (
@@ -736,7 +756,7 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
                     <button
                         onClick={() => handleDelete(notesByPage[highlightPage]?.id)}
                         className={styles.deleteButton}
-                        disabled={!notesByPage[highlightPage]}
+                        disabled={!notesByPage[highlightPage]?.id}
                     >
                         <AiOutlineDelete style={{marginTop: '1px'}} />
                     </button>
@@ -901,6 +921,30 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
                             style={{backgroundColor: '#f78080ff'}}
                         >
                             Ok, back to editor
+                        </button>
+                    </div>
+                </div>
+            </div>
+        )}
+        {showDeleteModal && (
+            <div className={styles.modalBackdrop}>
+                <div className={styles.modal}>
+                    <div className={styles.popupHeader}>
+                        <span className={styles.headerText}>Are you sure you want to delete this note?</span>
+                    </div>
+                    <div className={styles.modalActionButtons}>
+                        <button 
+                            className={styles.modalButtons} 
+                            onClick={confirmDelete}
+                        >
+                            Yes
+                        </button>
+                        <button 
+                            className={styles.modalButtons} 
+                            onClick={closeDeleteModal}
+                            style={{backgroundColor: '#f78080ff'}}
+                        >
+                            No
                         </button>
                     </div>
                 </div>
