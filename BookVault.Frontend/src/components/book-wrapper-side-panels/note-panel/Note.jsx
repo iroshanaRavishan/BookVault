@@ -928,11 +928,13 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
                     <div className={styles.modalActionButtons}>
                         <button 
                             className={styles.modalButtons} 
+                            onClick={confirmDelete}
                         >
                             Yes
                         </button>
                         <button 
                             className={styles.modalButtons} 
+                            onClick={closeDeleteModal}
                             style={{backgroundColor: '#f78080ff'}}
                         >
                             No
