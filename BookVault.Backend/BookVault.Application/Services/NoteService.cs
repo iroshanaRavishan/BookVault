@@ -24,8 +24,19 @@ namespace BookVault.Application.Services
             return await _noteRepository.GetNotesByUserAndBookAsync(userId, bookId);
         }
 
-        public async Task<ResponseNoteDTO> AddAsync(CreateNoteDTO dto)
+        public async Task<ResponseNoteDTO> AddOrUpdateAsync(CreateNoteDTO dto)
         {
+            var existingNote = await _noteRepository.GetByUserBookAndPageAsync(dto.UserId, dto.BookId, dto.PageNumber);
+
+            if (existingNote != null)
+            {
+                // Update existing note
+                existingNote.Update(existingNote.Id, dto.Content);
+                await _noteRepository.UpdateAsync(existingNote);
+                return MapToResponseDto(existingNote);
+            }
+
+            // Otherwise create new
             var note = Note.Create(dto.UserId, dto.BookId, dto.PageNumber, dto.Content);
 
             var createdNote = await _noteRepository.AddAsync(note);
