@@ -1,4 +1,4 @@
-import React from 'react'
+import { useState } from "react";
 import styles from './appearance.module.css';
 
 export default function Appearance() {
