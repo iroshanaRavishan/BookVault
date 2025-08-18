@@ -216,7 +216,14 @@ export default function SideButtonsWrapper({
       onBookmarkItemDoubleClick={onBookmarkSelect}
       thumbnailGeneratedBookmarkDelFromBook={onThumbnailGeneratedBookmarkDelFromBook}
     />,
-    'Appearance': <Appearance />,
+    'Appearance': <div 
+                    style={{
+                      display: 'flex',
+                      height: '627px'
+                    }}
+                  >
+                    <Appearance />
+                  </div>,
     'Reading Style': <span>this is the content of the Reading Styles</span>,
     'Statistics': <span>this is the content of the Statistics</span>,
     'Ask AI': <span>this is the content of the Ask AI</span>
