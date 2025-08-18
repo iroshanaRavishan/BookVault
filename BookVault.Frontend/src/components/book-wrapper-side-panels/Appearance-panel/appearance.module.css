@@ -5,3 +5,36 @@
     flex-direction: column;
     justify-content: space-between;
 }
+
+.appearanceActions {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+  width: 100%;
+}
+
+.appearanceActions button {
+  padding: 8px 20px;
+  border: none;
+  font-size: 14px;
+  border-radius: 6px;
+  background-color: #494949;
+  color: white;
+  width: 100%;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.appearanceActions button:hover {
+  background-color: #666;
+}
+
+.appearanceActions button:disabled {
+  background-color: #929292;
+  color: #000000;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
