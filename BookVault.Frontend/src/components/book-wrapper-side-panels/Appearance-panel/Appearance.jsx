@@ -1,7 +1,8 @@
 import React from 'react'
+import styles from './appearance.module.css';
 
 export default function Appearance() {
   return (
-    <div>Appearance</div>
+    <div className={styles.AppearancePanel}></div>
   )
 }
