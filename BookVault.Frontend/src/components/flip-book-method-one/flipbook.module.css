@@ -1,7 +1,7 @@
 .wrapper {
   width: -webkit-fill-available;
   height: 100vh;
-  background: #f1c40f;
+  background: var(--flipbook-bg);
   display: flex;
   justify-content: center;
   align-items: center;
