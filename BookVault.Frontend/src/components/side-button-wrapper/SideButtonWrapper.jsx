@@ -8,6 +8,7 @@ import { FaChartBar } from "react-icons/fa";
 import Bookmarks from "../book-wrapper-side-panels/bookmark-panel/Bookmarks";
 import Note from "../book-wrapper-side-panels/note-panel/Note";
 import { useNoteContext } from "../../context/NoteContext";
+import Appearance from "../book-wrapper-side-panels/Appearance-panel/Appearance";
 
 const rightButtonData = ["Bookmarks", "Appearance", "Reading Style", "Statistics"];
 const leftButtonData = ["Notes"];
@@ -215,7 +216,7 @@ export default function SideButtonsWrapper({
       onBookmarkItemDoubleClick={onBookmarkSelect}
       thumbnailGeneratedBookmarkDelFromBook={onThumbnailGeneratedBookmarkDelFromBook}
     />,
-    'Appearance': <span>this is the content of the Appearance</span>,
+    'Appearance': <Appearance />,
     'Reading Style': <span>this is the content of the Reading Styles</span>,
     'Statistics': <span>this is the content of the Statistics</span>,
     'Ask AI': <span>this is the content of the Ask AI</span>
