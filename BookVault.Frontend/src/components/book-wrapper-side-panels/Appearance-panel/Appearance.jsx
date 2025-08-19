@@ -17,13 +17,14 @@ export default function Appearance() {
     <div className={styles.AppearancePanel}>
       <div>
         <div className={styles.appearanceOptions}>
-            <label>Choose FlipBook Background: </label>
-            <input type="color" value={color} onChange={handleColorChange} />
+          <label>Choose FlipBook Background: </label>
+          <input type="color" value={color} onChange={handleColorChange} />
         </div>
       </div>
+
       <div className={styles.appearanceActions}>
-          <button>Cancel</button>
-          <button>Save</button>
+        <button>Cancel</button>
+        <button>Save</button>
       </div>
     </div>
   );
