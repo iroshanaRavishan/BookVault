@@ -487,7 +487,13 @@ export default function FlipBook({
   const navButtonWidth = isFirstPage || isLastPage ? '480px' : '920px';
 
   return (
-    <div className={styles.wrapper} style={{ width: isRightPanelOpen ? 'calc(100% - 350px)' : '100%' }}>
+    <div 
+      className={styles.wrapper}
+      style={{ 
+        width: isRightPanelOpen ? 'calc(100% - 350px)' : '100%',
+        transition: 'filter 0.2s'
+     }}
+    >
       <BookmarkListener onBookmarkDeleted={handleDeletedBookmarkFromSignalR} />
       <div 
         className={styles.bookmarkContainers}
