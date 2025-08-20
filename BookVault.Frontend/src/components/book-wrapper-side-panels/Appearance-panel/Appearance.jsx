@@ -16,6 +16,9 @@ export default function Appearance() {
   const handleMarginToggle = (e) => {
     const isChecked = e.target.checked;
     setMarginEnabled(isChecked);
+
+    // update CSS variable globally
+    document.documentElement.style.setProperty("--flipbook-margin", isChecked ? "45px" : "0px");
   };
 
   return (
