@@ -40,6 +40,18 @@ export default function Appearance() {
             Enable Page Margin
           </label>
         </div>
+
+        <div className={styles.appearanceOptions}>
+          <label htmlFor="brightness-slider">Brightness: </label>
+          <input
+            id="brightness-slider"
+            type="range"
+            min="0.7"
+            max="1.2"
+            step="0.01"
+            value={brightness}
+          />
+        </div>
       </div>
 
       <div className={styles.appearanceActions}>
