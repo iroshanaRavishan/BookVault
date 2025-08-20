@@ -713,7 +713,9 @@ export default function FlipBook({
             hasUnsavedChanges={hasUnsavedChanges}
             setShowUnsavedWarningPopup={setShowUnsavedWarningPopup}
           >
-            <div className={styles.pageContent}>{page.content}</div>
+             <div class={styles.pageContentWrapper}>
+              <div className={styles.pageContent}>{page.content}</div>
+            </div>
           </Page>
         ))}
       </HTMLFlipBook>
