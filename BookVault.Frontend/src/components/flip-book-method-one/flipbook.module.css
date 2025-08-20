@@ -57,7 +57,8 @@
 .pageContent {
   margin: var(--flipbook-margin);
   height: -webkit-fill-available;
-  background-color: #f3f3f375;
+  width: -webkit-fill-available;
+  background-color: #d1232375;
   overflow: hidden !important;
 }
 
