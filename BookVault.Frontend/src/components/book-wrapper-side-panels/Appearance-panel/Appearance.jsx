@@ -28,6 +28,17 @@ export default function Appearance() {
           <label>Choose FlipBook Background: </label>
           <input type="color" value={color} onChange={handleColorChange} />
         </div>
+
+        <div>
+          <label>
+            <input
+              type="checkbox"
+              checked={marginEnabled}
+              onChange={handleMarginToggle}
+            />
+            Enable Page Margin
+          </label>
+        </div>
       </div>
 
       <div className={styles.appearanceActions}>
