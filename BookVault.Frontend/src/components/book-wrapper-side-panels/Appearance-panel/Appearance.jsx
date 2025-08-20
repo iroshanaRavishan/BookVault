@@ -13,6 +13,11 @@ export default function Appearance() {
     document.documentElement.style.setProperty("--flipbook-bg", newColor);
   };
 
+  const handleMarginToggle = (e) => {
+    const isChecked = e.target.checked;
+    setMarginEnabled(isChecked);
+  };
+
   return (
     <div className={styles.AppearancePanel}>
       <div>
