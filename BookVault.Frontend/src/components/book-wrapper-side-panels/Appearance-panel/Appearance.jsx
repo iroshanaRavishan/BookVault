@@ -43,6 +43,11 @@ export default function Appearance() {
 
         <div className={styles.appearanceOptions}>
           <label htmlFor="brightness-slider">Brightness: </label>
+          <input
+            id="brightness-slider"
+            type="range"
+            value={brightness}
+          />
         </div>
       </div>
 
