@@ -40,6 +40,10 @@ export default function Appearance() {
             Enable Page Margin
           </label>
         </div>
+
+        <div>
+          <label htmlFor="brightness-slider">Brightness: </label>
+        </div>
       </div>
 
       <div className={styles.appearanceActions}>
