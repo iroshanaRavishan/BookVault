@@ -639,6 +639,7 @@ export default function FlipBook({
       <HTMLFlipBook
         ref={flipBookRef}
         width={230}
+        style={{ filter: `brightness(var(--flipbook-brightness))` }}
         height={345}
         minWidth={180}
         maxWidth={460}
