@@ -713,7 +713,10 @@ export default function FlipBook({
             hasUnsavedChanges={hasUnsavedChanges}
             setShowUnsavedWarningPopup={setShowUnsavedWarningPopup}
           >
-             <div class={styles.pageContentWrapper}>
+            <div
+              className={styles.pageContentWrapper}
+              style={i % 2 === 0 ? { borderRadius: "0px 10px 10px 0px" } : { borderRadius: "10px 0px 0px 10px" }}
+            >
               <div className={styles.pageContent}>{page.content}</div>
             </div>
           </Page>
