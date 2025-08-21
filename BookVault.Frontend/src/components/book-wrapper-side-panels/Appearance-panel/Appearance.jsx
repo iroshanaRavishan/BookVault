@@ -41,6 +41,10 @@ export default function Appearance() {
         document.documentElement.style.setProperty("--note-panel-toolbar", "#333");
         document.documentElement.style.setProperty("--note-quill-item-color", "#ffffffff");
         document.documentElement.style.setProperty("--note-quill-item-background-hover-color", "#acacacff");
+        document.documentElement.style.setProperty("--undo-redo-action-button-border-color", "#8f8f8fff");
+        document.documentElement.style.setProperty("--undo-redo-action-button-bg-color", "#d6d6d6ff");
+        document.documentElement.style.setProperty("--undo-redo-action-button-hover-bg-color", "#c4c4c4ff");
+        document.documentElement.style.setProperty("--undo-redo-action-button-hover-bg-color", "#c4c4c4ff");
       } else {
         // Light theme
         document.documentElement.style.setProperty("--panel-header", "#fff");
