@@ -56,6 +56,7 @@ export default function Appearance() {
             max="1.2"
             step="0.01"
             value={brightness}
+            onChange={handleBrightnessChange}
           />
         </div>
       </div>
