@@ -38,11 +38,13 @@ export default function Appearance() {
         document.documentElement.style.setProperty("--panel-header", "#333");
         document.documentElement.style.setProperty("--panel-header-name-color", "#fff");  
         document.documentElement.style.setProperty("--panel-body-bg", "#333");
+        document.documentElement.style.setProperty("--note-panel-toolbar", "#333");
       } else {
         // Light theme
         document.documentElement.style.setProperty("--panel-header", "#fff");
         document.documentElement.style.setProperty("--panel-header-name-color", "#111");
         document.documentElement.style.setProperty("--panel-body-bg", "#ffffffff");
+        document.documentElement.style.setProperty("--note-panel-toolbar", "#fff");
       }
       return newTheme;
     });
