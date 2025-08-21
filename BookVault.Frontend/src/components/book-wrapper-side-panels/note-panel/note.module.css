@@ -63,12 +63,13 @@
   border-radius: 4px;
   padding: 3px 8px;
   cursor: pointer;
-  border: 1px solid #e7e7e7;
-  background-color: #f3f3f3;
+  border: 1px solid var(--undo-redo-action-button-border-color);
+  background-color: var(--undo-redo-action-button-bg-color);
+  color: var(--undo-redo-action-button-item-color);
 }
 
 .undoRedoButton:hover {
-  background-color: #eeeeee;
+  background-color: var(--undo-redo-action-button-hover-bg-color);
 }
 
 .pageAttachementText {
