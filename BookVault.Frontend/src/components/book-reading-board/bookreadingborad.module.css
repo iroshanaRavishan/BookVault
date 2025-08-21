@@ -8,8 +8,10 @@
 
 .book {
     overflow: auto;
+    background-color: var(--flipbook-bg);
 }
 
 .wrapper {
     overflow: auto;
+    background-color: var(--flipbook-bg);
 }
