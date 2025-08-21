@@ -51,6 +51,7 @@ await using (var serviceScope = app.Services.CreateAsyncScope())
     var bookContext = serviceScope.ServiceProvider.GetRequiredService<BookDbContext>();
     var authContext = serviceScope.ServiceProvider.GetRequiredService<AuthDbContext>();
     var bookmarkContext = serviceScope.ServiceProvider.GetRequiredService<BookmarkDbContext>();
+    var noteContext = serviceScope.ServiceProvider.GetRequiredService<NoteDbContext>();
     var logger = serviceScope.ServiceProvider.GetRequiredService<ILogger<Program>>();
 
     try
@@ -70,6 +71,10 @@ await using (var serviceScope = app.Services.CreateAsyncScope())
         logger.LogInformation("Applying Bookmark migrations...");
         await bookmarkContext.Database.MigrateAsync();
         logger.LogInformation("BookmarkDbContext migrations applied successfully");
+
+        logger.LogInformation("Applying Note migrations...");
+        await noteContext.Database.MigrateAsync();
+        logger.LogInformation("noteDbContext migrations applied successfully");
     }
     catch (Exception ex)
     {

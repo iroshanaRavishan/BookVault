@@ -7,9 +7,29 @@ import { LuChevronFirst, LuChevronLast, LuChevronLeft, LuChevronRight } from 're
 import { useUser } from '../../context/UserContext';
 import { useParams } from 'react-router-dom';
 import BookmarkListener from '../bookmark-listener/BookmarkListener';
+import { useNoteContext } from '../../context/NoteContext';
 
-const Page = forwardRef(({ children, number, totalPages, currentPage, pageType, onBookmarkAdd, activeBookmarks }, ref) => {
+const Page = forwardRef(({ 
+  children,
+  number,
+  totalPages,
+  currentPage,
+  pageType,
+  onBookmarkAdd,
+  activeBookmarks,
+  hasUnsavedChanges,
+  setShowUnsavedWarningPopup
+}, ref) => {
   const [showRotatedCopy, setShowRotatedCopy] = useState(false);
+
+  const handlePagePointerDown = (e) => {
+    if (hasUnsavedChanges) {
+      e.stopPropagation();
+      e.preventDefault();
+      setShowUnsavedWarningPopup(true);
+    }
+  };
+
   let radiusClass = "";
   if (number === 0) radiusClass = styles.rightRounded;
   else if (number === totalPages - 1) radiusClass = styles.leftRounded;
@@ -32,7 +52,11 @@ const Page = forwardRef(({ children, number, totalPages, currentPage, pageType, 
   }, [activeBookmarks, number]);
 
   return (
-    <div className={`${styles.page} ${radiusClass} ${coverClass}`} ref={ref}>
+    <div 
+      className={`${styles.page} ${radiusClass} ${coverClass}`}
+      ref={ref}
+      onPointerDown={handlePagePointerDown}
+    >
       {/* Book holes */}
       {showLeftCoverHoles && <BookBindingHoles side="left" />}
       {showLeftHoles && <BookBindingHoles side="right" />}
@@ -83,8 +107,10 @@ export default function FlipBook({
   const [bookmarks, setBookmarks] = useState([]);
   const [animatingPages, setAnimatingPages] = useState([]);
   const [removingPages, setRemovingPages] = useState([]);
-  const {user} = useUser();
+  const { user } = useUser();
   const { id } = useParams();
+  const { hasUnsavedChanges, setShowUnsavedWarningPopup } = useNoteContext();
+  const [previousPage, setPreviousPage] = useState(0);
 
   const contentPages = 10;
   const totalPages = 2 + contentPages + (contentPages % 2 === 1 ? 1 : 0) + 2;
@@ -138,6 +164,25 @@ export default function FlipBook({
       containerTransform = 'translateX(28%)';
     }
   }
+
+  // send current page info to parent component at the initial render
+  useEffect(() => {
+    let initialLeftPage = currentPage % 2 === 0 ? currentPage : currentPage - 1;
+    let initialRightPage = initialLeftPage + 1;
+
+    if (initialLeftPage == null) initialLeftPage = 0;
+    if (initialRightPage == null) initialRightPage = 0;
+
+    setCurrentPageInfo({
+      left: initialLeftPage,
+      right: initialRightPage,
+      total: contentPages
+    });
+  }, []);
+
+  useEffect(() => {
+    setPreviousPage(currentPage);
+  }, [currentPage]);
 
   useEffect(() => {
     const sortType = "page-asc";
@@ -292,6 +337,12 @@ export default function FlipBook({
   const goToPage = async (targetPage) => {
     if (!flipBookRef.current) return;
 
+    if (hasUnsavedChanges) {
+      setShowUnsavedWarningPopup(true);
+      return;
+    }
+
+    // Proceed with your full page flip logic here
     const instance = flipBookRef.current.pageFlip();
     const current = instance.getCurrentPageIndex();
     const total = instance.getPageCount();
@@ -382,6 +433,22 @@ export default function FlipBook({
     }
   };
 
+  const handleFlipPrev = () => {
+    if (hasUnsavedChanges) {
+      setShowUnsavedWarningPopup(true);
+      return;
+    }
+    flipBookRef.current.pageFlip().flipPrev();
+  };
+
+  const handleFlipNext = () => {
+    if (hasUnsavedChanges) {
+      setShowUnsavedWarningPopup(true);
+      return;
+    }
+    flipBookRef.current.pageFlip().flipNext();
+  };
+
   const leftBookmarks = [...bookmarks]
     .filter(b => b.page < leftPage + 2 || (b.page === leftPage && currentPage !== leftPage))
     .sort((a, b) => a.page - b.page);
@@ -420,7 +487,13 @@ export default function FlipBook({
   const navButtonWidth = isFirstPage || isLastPage ? '480px' : '920px';
 
   return (
-    <div className={styles.wrapper} style={{ width: isRightPanelOpen ? 'calc(100% - 350px)' : '100%' }}>
+    <div 
+      className={styles.wrapper}
+      style={{ 
+        width: isRightPanelOpen ? 'calc(100% - 350px)' : '100%',
+        transition: 'filter 0.2s'
+     }}
+    >
       <BookmarkListener onBookmarkDeleted={handleDeletedBookmarkFromSignalR} />
       <div 
         className={styles.bookmarkContainers}
@@ -566,6 +639,7 @@ export default function FlipBook({
       <HTMLFlipBook
         ref={flipBookRef}
         width={230}
+        style={{ filter: `brightness(var(--flipbook-brightness))` }}
         height={345}
         minWidth={180}
         maxWidth={460}
@@ -578,15 +652,25 @@ export default function FlipBook({
         drawShadow={true}
         useMouseEvents={true}
         onFlip={({ data }) => {
+          if (hasUnsavedChanges) {
+            setShowUnsavedWarningPopup(true);
+            // Snap back to previous page after a short delay
+            setTimeout(() => {
+              if (flipBookRef.current) {
+                flipBookRef.current.pageFlip().flip(previousPage);
+              }
+            }, 400);
+            return;
+          }
+  
           setCurrentPage(data);
 
           // Calculate left/right bookmarks for the new page
           const newLeftPage = data % 2 === 0 ? data : data - 1;
           const newRightPage = newLeftPage + 1;
 
-          console.log("left page ", newLeftPage , "- | -", " right page", newRightPage, "TOTAL", contentPages)
           setCurrentPageInfo({
-            left:newLeftPage,
+            left: newLeftPage,
             right: newRightPage,
             total: contentPages
           })
@@ -633,8 +717,15 @@ export default function FlipBook({
             pageType={page.type}
             onBookmarkAdd={handleAddBookmark}
             activeBookmarks={bookmarks}
+            hasUnsavedChanges={hasUnsavedChanges}
+            setShowUnsavedWarningPopup={setShowUnsavedWarningPopup}
           >
-            <div className={styles.pageContent}>{page.content}</div>
+            <div
+              className={styles.pageContentWrapper}
+              style={i % 2 === 0 ? { borderRadius: "0px 10px 10px 0px" } : { borderRadius: "10px 0px 0px 10px" }}
+            >
+              <div className={styles.pageContent}>{page.content}</div>
+            </div>
           </Page>
         ))}
       </HTMLFlipBook>
@@ -648,14 +739,14 @@ export default function FlipBook({
           <LuChevronFirst className={styles.toTheFirst} style={{ left: "0px", cursor: "pointer" }} />
         </span>
         <span
-          onClick={() => flipBookRef.current.pageFlip().flipPrev()}
+          onClick={handleFlipPrev}
           className={styles.navButton}
           style={currentPage === 0 ? { display: 'none' } : {}}
         >
           Prev
         </span>
         <span
-          onClick={() => flipBookRef.current.pageFlip().flipNext()}
+          onClick={handleFlipNext}
           className={styles.navButton}
           style={currentPage === totalPages - 1 ? { display: 'none' } : {}}
         >

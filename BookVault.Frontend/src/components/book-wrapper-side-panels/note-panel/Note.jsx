@@ -3,19 +3,31 @@ import ReactQuill from 'react-quill-new';
 import 'react-quill-new/dist/quill.snow.css';
 import styles from './note.module.css';
 import { LuUndo2, LuRedo2, LuChevronLeft, LuChevronRight } from "react-icons/lu";
+import { BiSolidEraser } from "react-icons/bi";
+import { AiOutlineDelete } from "react-icons/ai";
 import { HiMiniCog6Tooth } from 'react-icons/hi2';
 import { IoCaretDown, IoCloseCircleSharp } from 'react-icons/io5';
 import { decrypt, encrypt } from '../../../utils/encryptUtils';
 import { FiPaperclip } from "react-icons/fi";
+import { USER_NOTES } from '../../../constants/constants';
+import { useNoteContext } from '../../../context/NoteContext.jsx';
+import { useParams } from 'react-router-dom';
+import { useUser } from '../../../context/UserContext.jsx';
 
 export default function Note({ isPanelPinned, currentPageInfo }) {
-    const [content, setContent] = useState('');
-    const quillRef = useRef(null); // Ref to access Quill instance
-    const [lineHeight, setLineHeight] = useState(24); // px height for both
-    const [settingsOpen, setSettingsOpen] = useState(false);
+    const { setHasUnsavedChanges, showUnsavedWarningPopup, setShowUnsavedWarningPopup } = useNoteContext();
+    const { id } = useParams(); 
+    const { user } = useUser();
     const sliderRef = useRef(null);
     const settingsRef = useRef(null);
     const hasMountedRef = useRef(false);
+    const quillRef = useRef(null); // Ref to access Quill instance
+
+    const [content, setContent] = useState('');
+    const [notesByPage, setNotesByPage] = useState({});
+    const [manualPage, setManualPage] = useState(null);
+    const [lineHeight, setLineHeight] = useState(24); // px height for both
+    const [settingsOpen, setSettingsOpen] = useState(false);
     const [tooltipLeft, setTooltipLeft] = useState('10px');
     const [ruleVisibility, setRuleVisibility] = useState('show');
     const [navigationMode, setNavigationMode] = useState('auto');
@@ -23,6 +35,8 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
     const [noteContent, setNoteContent] = useState('');
     const [initialContent, setInitialContent] = useState('');
     const [hasChanges, setHasChanges] = useState(false);
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [noteToDelete, setNoteToDelete] = useState(null);
     const [prevPageInfo, setPrevPageInfo] = useState({
         left: 0,
         right: 1,
@@ -33,6 +47,17 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
         const stored = localStorage.getItem('highlightPage');
         return stored ? parseInt(stored) : null;
     });
+
+    useEffect(() => {
+        fetchAllNotes();
+    }, []);
+
+    // disable the delete poup when highlightPage, currentPageInfo changes (means a page is fliped) 
+    useEffect(() => {
+        if (showDeleteModal) {
+            setShowDeleteModal(false);
+        }
+    }, [highlightPage, currentPageInfo]);
 
     // Set localStorage to 1 on **page refresh only**
     useEffect(() => {
@@ -58,6 +83,48 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
             localStorage.removeItem('wasPageRefreshed'); // Clean up the flag
         }
     }, []);
+
+    useEffect(() => {
+        if (navigationMode === "manual" && highlightPage) {
+            setManualPage(highlightPage);
+        } else if (navigationMode === "auto" && manualPage != null) {
+            const left = currentPageInfo.left;
+            const right = currentPageInfo.right;
+            const maxContentPage = currentPageInfo.total;
+
+            // If manualPage matches one of the visible pages, keep it highlighted
+            if (manualPage === left || manualPage === right) {
+                setHighlightPage(manualPage);
+                goToNote(manualPage);
+                localStorage.setItem('highlightPage', manualPage);
+            } else if (left > 0 && right > 0) {
+                let newHighlight;
+                if (manualPage < left && manualPage < right) {
+                    newHighlight = Math.max(left, right);
+                } else if (manualPage > left && manualPage > right) {
+                    newHighlight = Math.min(left, right);
+                } else {
+                    newHighlight = left;
+                }
+                // Clamp to max content page
+                if (newHighlight > maxContentPage) newHighlight = maxContentPage;
+                setHighlightPage(newHighlight);
+                goToNote(newHighlight);
+                localStorage.setItem('highlightPage', newHighlight);
+            } else if (left > 0) {
+                let newHighlight = left > maxContentPage ? maxContentPage : left;
+                setHighlightPage(newHighlight);
+                goToNote(newHighlight);
+                localStorage.setItem('highlightPage', newHighlight);
+            } else if (right > 0) {
+                let newHighlight = right > maxContentPage ? maxContentPage : right;
+                setHighlightPage(newHighlight);
+                goToNote(newHighlight);
+                localStorage.setItem('highlightPage', newHighlight);
+            }
+        }
+        
+    }, [navigationMode]);
 
     useEffect(() => {
         if (!hasMountedRef.current) {
@@ -103,12 +170,89 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
         }
 
         if (newHighlight !== null && newHighlight <= total) {
-            setHighlightPage(newHighlight);
+            if (navigationMode === "auto") {
+                setHighlightPage(newHighlight);
+            }
+            goToNote(newHighlight)
             localStorage.setItem('highlightPage', newHighlight);
         }
 
         setPrevPageInfo(currentPageInfo);
     }, [currentPageInfo]);
+
+    // const goToNote = (pageNum) => {
+    //     if (navigationMode === "auto") {
+    //         setHighlightPage(pageNum);
+       
+    //         if (notesByPage[pageNum]) {
+    //             const noteContent = notesByPage[pageNum];
+    //             setContent(noteContent);
+    //             setNoteContent(noteContent);
+    //             setInitialContent(noteContent);
+    //         } else {
+    //             setContent("");
+    //             setNoteContent("");
+    //             setInitialContent("");
+    //         }
+    //      }
+    //     setHasChanges(false);
+    // };
+
+    // const goToNoteManual = (pageNum) => {
+    //     setHighlightPage(pageNum);
+
+    //     if (notesByPage[pageNum]) {
+    //         const noteContent = notesByPage[pageNum];
+    //         setContent(noteContent);
+    //         setNoteContent(noteContent);
+    //         setInitialContent(noteContent);
+    //     } else {
+    //         setContent("");
+    //         setNoteContent("");
+    //         setInitialContent("");
+    //     }
+    //     setHasChanges(false);
+    // };
+
+    const loadNote = (pageNum) => {
+        setHighlightPage(pageNum);
+
+        const noteObj = notesByPage[pageNum];
+        const noteContent = noteObj ? noteObj.content : "";
+        setContent(noteContent);
+        setNoteContent(noteContent);
+        setInitialContent(noteContent);
+
+        setHasChanges(false);
+    };
+
+    const goToNote = (pageNum) => {
+        if (navigationMode === "auto") {
+            loadNote(pageNum);
+        }
+    };
+
+    const goToNoteManual = (pageNum) => {
+        loadNote(pageNum);
+    };
+
+    const handlePrevPage = () => {
+        if (navigationMode !== "manual") return;
+        if (manualPage > 1) {
+            const newPage = manualPage - 1;
+            setManualPage(newPage);
+            goToNoteManual(newPage);
+        }
+    };
+
+    const handleNextPage = () => {
+        if (navigationMode !== "manual") return;
+        if (manualPage < currentPageInfo.total) {
+            const newPage = manualPage + 1;
+            setManualPage(newPage);
+            goToNoteManual(newPage);
+        }
+    };
 
     const getPageClass = (pageNumber) =>
     highlightPage === pageNumber ? styles.highlightedPage : '';
@@ -128,7 +272,7 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
         'size',
         'bold', 'italic', 'underline', 'strike',
         'color', 'background',
-        'list', 'bullet',
+        'list',
         'link',
         'align',
     ];
@@ -262,17 +406,126 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
     }, [noteContent, initialContent]);
 
     const handleQuillChange = (value) => {
+        if (value === "<p><br></p>") value = ""; // Mark note as dirty when user types
+        if (value) setHasUnsavedChanges(true);
         setContent(value);
         setNoteContent(value); // if using noteContent to track save/cancel
     };
 
+    useEffect(() => {
+        const quill = quillRef.current?.getEditor();
+        if (!quill) return;
+
+        const MAX = USER_NOTES.MAX_CHARS;
+
+        const handleBeforeInput = (e) => {
+            const currentLength = quill.getLength() - 1; // Exclude final newline
+            if (
+                currentLength >= MAX &&
+                e.inputType &&
+                e.inputType.startsWith('insert')
+            ) {
+                e.preventDefault(); // BLOCK input, including space
+            }
+        };
+
+        const handleTextChange = (delta, oldDelta, source) => {
+            if (source !== 'user') return;
+
+            const currentLength = quill.getLength() - 1;
+            if (currentLength > MAX) {
+                // Remove extra characters if somehow inserted
+                const excess = currentLength - MAX;
+                quill.deleteText(MAX, excess);
+            }
+        };
+
+        quill.root.addEventListener('beforeinput', handleBeforeInput);
+        quill.on('text-change', handleTextChange);
+
+        return () => {
+            quill.root.removeEventListener('beforeinput', handleBeforeInput);
+            quill.off('text-change', handleTextChange);
+        };
+    }, []);
+
+    const fetchAllNotes = async () => {
+        try {
+            const res = await fetch(`https://localhost:7157/api/Note/${user.id}/${id}`);
+            if (!res.ok) throw new Error("Failed to fetch notes");
+            const data = await res.json();
+
+            const map = {};
+            data.forEach(note => {
+                map[note.pageNumber] = {
+                    ...note,
+                    content: decrypt(note.content)
+                };
+            });
+            setNotesByPage(map);
+
+            // Optionally set editor state for page 1 on initial load
+            if (map[1]) {
+                setContent(map[1].content);
+                setNoteContent(map[1].content);
+                setInitialContent(map[1].content);
+            } else {
+                setContent("");
+                setNoteContent("");
+                setInitialContent("");
+            }
+        } catch (err) {
+            console.error(err);
+        }
+    };
+
     const handleSave = async () => {
         try {
-            // send content to your API
-            // implement API call
+            const payload = {
+                userId: user.id,
+                bookId: id,
+                pageNumber: highlightPage,
+                content: encrypt(content)
+            };
+
+            const response = await fetch("https://localhost:7157/api/Note", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(payload)
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+
+            const data = await response.json();
+
+            console.log("Note saved successfully:", data);
+
+            // Remove draft content from local storage
             localStorage.removeItem('note_content');
+
+            // Update state to reflect saved note
             setInitialContent(noteContent);
             setHasChanges(false);
+            setHasUnsavedChanges(false); // Reset status after save
+
+            // update notesByPage for the current page
+            setNotesByPage(prev => ({
+                ...prev,
+                [highlightPage]: {
+                    ...(prev[highlightPage] || {}),
+                    id: data.note?.id,
+                    bookId: id,
+                    userId: user.id,
+                    pageNumber: highlightPage,
+                    content: content,
+                    createdAt: data.note?.createdAt || new Date().toISOString(),
+                    updatedAt: data.note?.updatedAt || new Date().toISOString()
+                }
+            }));
         } catch (error) {
             console.error('Save failed:', error);
         }
@@ -283,16 +536,62 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
     };
 
     const confirmDiscard = () => {
-        setContent('');
+        setContent(initialContent)
         setNoteContent(initialContent);
-        setHasChanges(false); // TODO: have to be aware here, bcz, even the cancel button is clicked and clicked yes on the popup,
-        //  the save and cancel buttons are enabled. Get disabled only when again do for the second file
+        setHasChanges(false); 
+        setHasUnsavedChanges(false); // Reset status after save
         localStorage.removeItem('note_content');
         setShowDiscardModal(false);
     };
 
     const closeModal = () => {
         setShowDiscardModal(false);
+    };
+
+    const handleClear = () => {
+        setContent('');
+        setNoteContent('');
+        setHasChanges(true);
+        setHasUnsavedChanges(true);
+    };
+
+    const handleDelete = (noteID) => {
+        setNoteToDelete(noteID);
+        setShowDeleteModal(true);
+    };
+
+    const confirmDelete = async () => {
+        try {
+            const response = await fetch(`https://localhost:7157/api/Note/${noteToDelete}`, {
+                method: "DELETE"
+            });
+
+            if (!response.ok) throw new Error("Failed to delete note");
+
+            setContent('');
+            setNoteContent('');
+            setInitialContent('');
+            setHasChanges(false);
+            setHasUnsavedChanges(false);
+            setNotesByPage(prev => {
+                const updated = { ...prev };
+                delete updated[highlightPage];
+                return updated;
+            });
+            localStorage.removeItem('note_content');
+
+        } catch (err) {
+            console.error(err);
+            alert("Failed to delete note.");
+        } finally {
+            setShowDeleteModal(false);
+            setNoteToDelete(null);
+        }
+    };
+
+    const closeDeleteModal = () => {
+        setShowDeleteModal(false);
+        setNoteToDelete(null);
     };
 
   return (
@@ -319,45 +618,111 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
             </select>
         </div>
 
-        <div className={styles.noteActions} style={{margin: '10px 0'}}>  
+        <div className={styles.noteActions} style={{margin: '8px 0 4px 0'}}>  
             <div className={styles.undoRedoActionsButtons}>
                 <span className={styles.undoRedoButton} onClick={() => quillRef.current?.getEditor().history.undo()}><LuUndo2 /></span>
                 <span className={styles.undoRedoButton} onClick={() => quillRef.current?.getEditor().history.redo()}><LuRedo2 /></span>
             </div>
             <div className={styles.noteNavigation}>
-                <LuChevronLeft className={styles.navigationIcons} size={22}/>
+                <LuChevronLeft
+                    className={styles.navigationIcons}
+                    size={22}
+                    onClick={handlePrevPage}
+                    style={{
+                        cursor: navigationMode === "manual" ? "pointer" : "not-allowed",
+                        opacity: navigationMode === "manual" ? 1 : 0.4
+                    }}
+                />
+
                 <span className={styles.pageText}>
-                    {/* Left Page */}
-                    {currentPageInfo.left > 0 && currentPageInfo.left <= currentPageInfo.total ? (
-                        <span className={`${styles.noteNagigationPageNumber} ${getPageClass(currentPageInfo.left)}`} style={{padding: '5px 8px 8.2px 8px'}}>
-                            {currentPageInfo.left}
+                    {navigationMode === "manual" ? (
+                        <span
+                            className={`${styles.noteNagigationPageNumber} ${getPageClass(manualPage)}`}
+                            style={{ padding: '5px 8px 8.2px 8px' }}
+                            onClick={() => {
+                                setHighlightPage(manualPage);
+                                goToNote(manualPage);
+                                localStorage.setItem('highlightPage', manualPage);
+                            }}
+                        >
+                            {manualPage}
                         </span>
                     ) : (
-                        ''
-                    )}
-
-                    {/* Separator */}
-                    {currentPageInfo.left > 0 && currentPageInfo.left <= currentPageInfo.total &&
-                    currentPageInfo.right > 0 && currentPageInfo.right <= currentPageInfo.total
-                    ? <span className={styles.notePageSeparator}></span>
-                    : ''}
-
-                    {/* Right Page */}
-                    {currentPageInfo.right > 0 && currentPageInfo.right <= currentPageInfo.total ? (
-                        <span className={`${styles.noteNagigationPageNumber} ${getPageClass(currentPageInfo.right)}`} style={{padding: '5px 8px 8.2px 8px'}}>
-                            {currentPageInfo.right}
-                        </span>
-                    ) : currentPageInfo.left <= 0 && currentPageInfo.right === 1 ? (
-                        <span className={`${styles.noteNagigationPageNumber} ${getPageClass(1)}`} style={{padding: '5px 8px 8.2px 8px'}}>1</span>
-                    ) : currentPageInfo.left > currentPageInfo.total ? (
-                        <span className={`${styles.noteNagigationPageNumber} ${getPageClass(currentPageInfo.total)}`} style={{padding: '5px 8px 8.2px 8px'}}>
-                            {currentPageInfo.total}
-                        </span>
-                    ) : (
-                        ''
+                        <>
+                            {/* auto mode logic */}
+                            {currentPageInfo.left > 0 && currentPageInfo.left <= currentPageInfo.total ? (
+                                <span
+                                    className={`${styles.noteNagigationPageNumber} ${getPageClass(currentPageInfo.left)}`}
+                                    style={{ padding: '5px 8px 8.2px 8px' }}
+                                    onClick={() => {
+                                        setHighlightPage(currentPageInfo.left);
+                                        goToNote(currentPageInfo.left);
+                                        localStorage.setItem('highlightPage', currentPageInfo.left);
+                                    }}
+                                >
+                                    {currentPageInfo.left}
+                                </span>
+                            ) : (
+                                ''
+                            )}
+                            {currentPageInfo.left > 0 && currentPageInfo.left <= currentPageInfo.total &&
+                            currentPageInfo.right > 0 && currentPageInfo.right <= currentPageInfo.total ? (
+                                <span className={styles.notePageSeparator}></span>
+                            ) : (
+                                ''
+                            )}
+                            {currentPageInfo.right > 0 && currentPageInfo.right <= currentPageInfo.total ? (
+                                <span
+                                    className={`${styles.noteNagigationPageNumber} ${getPageClass(currentPageInfo.right)}`}
+                                    style={{ padding: '5px 8px 8.2px 8px' }}
+                                    onClick={() => {
+                                        setHighlightPage(currentPageInfo.right);
+                                        goToNote(currentPageInfo.right);
+                                        localStorage.setItem('highlightPage', currentPageInfo.right);
+                                    }}
+                                >
+                                    {currentPageInfo.right}
+                                </span>
+                            ) : currentPageInfo.left <= 0 && currentPageInfo.right === 1 ? (
+                                <span
+                                    className={`${styles.noteNagigationPageNumber} ${getPageClass(1)}`}
+                                    style={{ padding: '5px 8px 8.2px 8px' }}
+                                    onClick={() => {
+                                        setHighlightPage(1);
+                                        goToNote(1);
+                                        localStorage.setItem('highlightPage', 1);
+                                    }}
+                                >
+                                    1
+                                </span>
+                            ) : currentPageInfo.left > currentPageInfo.total ? (
+                                <span
+                                    className={`${styles.noteNagigationPageNumber} ${getPageClass(currentPageInfo.total)}`}
+                                    style={{ padding: '5px 8px 8.2px 8px' }}
+                                    onClick={() => {
+                                        setHighlightPage(currentPageInfo.total);
+                                        goToNote(currentPageInfo.total);
+                                        localStorage.setItem('highlightPage', currentPageInfo.total);
+                                    }}
+                                >
+                                    {currentPageInfo.total}
+                                </span>
+                            ) : (
+                                ''
+                            )}
+                        </>
                     )}
                 </span>
-                <LuChevronRight className={styles.navigationIcons} size={22}/>
+
+                <LuChevronRight
+                    className={styles.navigationIcons}
+                    size={22}
+                    onClick={handleNextPage}
+                    style={{
+                        cursor: navigationMode === "manual" ? "pointer" : "not-allowed",
+                        opacity: navigationMode === "manual" ? 1 : 0.4
+                    }}
+                />
             </div>
             <div
                 className={styles.settings}
@@ -371,7 +736,34 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
                 <IoCaretDown size={10} />
             </div>
         </div>
-        <span className={styles.pageAttachementText}> <FiPaperclip size={15} />The note is attached to <span style={{fontWeight: '700'}}> <u>page - {highlightPage}</u></span></span>
+
+        <div className={styles.noteDetailBar}>
+            <div className={styles.pageAttachementText}> 
+                <FiPaperclip size={15} />
+                The note is attached to 
+                <span style={{fontWeight: '700'}}>
+                    <u>page - {highlightPage}</u>
+                </span>
+            </div>
+            <div className={styles.characterLimitTextWrapper}>
+                <span style={{ color: (quillRef.current?.getEditor().getLength() - 1) >= USER_NOTES.MAX_CHARS ? 'red' : 'gray' }}>
+                    {(quillRef.current?.getEditor().getLength() - 1) || 0} / {USER_NOTES.MAX_CHARS} characters
+                </span> 
+                <div className={styles.clearDeleteButtons}>
+                    <button onClick={handleClear} className={styles.clearButton} disabled={!content}>
+                        <BiSolidEraser style={{marginTop: '1px'}} />
+                    </button>
+                    <button
+                        onClick={() => handleDelete(notesByPage[highlightPage]?.id)}
+                        className={styles.deleteButton}
+                        disabled={!notesByPage[highlightPage]?.id}
+                    >
+                        <AiOutlineDelete style={{marginTop: '1px'}} />
+                    </button>
+                </div>
+            </div>
+        </div>
+
         {/* Editor */}
         <ReactQuill
             ref={quillRef}
@@ -457,7 +849,7 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
                                 <span className={styles.radioLabel}>
                                     Manual - 
                                     <span className={styles.radioDesc}>
-                                        The notes are not tunred when the book's pages turn
+                                        The notes are not turned when the book's pages turn
                                     </span>
                                 </span>
                             </label>
@@ -488,8 +880,72 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
                         <span className={styles.headerText}>Do you want to discard the changes?</span>
                     </div>
                     <div className={styles.modalActionButtons}>
-                        <button className={styles.modalButtons} onClick={confirmDiscard}>Yes</button>
-                        <button className={styles.modalButtons} onClick={closeModal}>No</button>
+                        <button 
+                            className={styles.modalButtons} 
+                            onClick={confirmDiscard}
+                        >
+                            Yes
+                        </button>
+                        <button 
+                            className={styles.modalButtons} 
+                            onClick={closeModal}
+                            style={{backgroundColor: '#f78080ff'}}
+                        >
+                            No
+                        </button>
+                    </div>
+                </div>
+            </div>
+        )}
+        {showUnsavedWarningPopup && (
+            <div className={styles.modalBackdrop}>
+                <div className={styles.modal}>
+                    <div className={styles.popupHeader}>
+                        <span className={styles.headerText}>You have unsaved notes. Please save or discard them before turning pages</span>
+                    </div>
+                    <div className={styles.modalActionButtons}>
+                        <button 
+                            className={styles.modalButtons}
+                            onClick={() => {
+                                setShowUnsavedWarningPopup(false);
+                                handleSave();
+                            }}
+                        >
+                            Save
+                        </button>
+                        <button 
+                            className={styles.modalButtons}
+                            onClick={() => {
+                                setShowUnsavedWarningPopup(false);
+                            }}
+                            style={{backgroundColor: '#f78080ff'}}
+                        >
+                            Ok, back to editor
+                        </button>
+                    </div>
+                </div>
+            </div>
+        )}
+        {showDeleteModal && (
+            <div className={styles.modalBackdrop}>
+                <div className={styles.modal}>
+                    <div className={styles.popupHeader}>
+                        <span className={styles.headerText}>Are you sure you want to delete this note?</span>
+                    </div>
+                    <div className={styles.modalActionButtons}>
+                        <button 
+                            className={styles.modalButtons} 
+                            onClick={confirmDelete}
+                        >
+                            Yes
+                        </button>
+                        <button 
+                            className={styles.modalButtons} 
+                            onClick={closeDeleteModal}
+                            style={{backgroundColor: '#f78080ff'}}
+                        >
+                            No
+                        </button>
                     </div>
                 </div>
             </div>

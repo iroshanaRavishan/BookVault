@@ -33,3 +33,7 @@ export const SORT_OPTIONS = [
   "Added date (Newest)",
   "Added date (Oldest)",
 ];
+
+export const USER_NOTES = {
+  MAX_CHARS: 20,
+};
