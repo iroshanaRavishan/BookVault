@@ -22,6 +22,12 @@ export default function Appearance() {
     document.documentElement.style.setProperty("--flipbook-margin", isChecked ? "45px" : "0px");
   };
 
+  const handleBrightnessChange = (e) => {
+    const newValue = Number(e.target.value);
+    setBrightness(newValue);
+    document.documentElement.style.setProperty("--flipbook-brightness", newValue);
+  };
+
   return (
     <div className={styles.AppearancePanel}>
       <div>
@@ -50,6 +56,7 @@ export default function Appearance() {
             max="1.2"
             step="0.01"
             value={brightness}
+            onChange={handleBrightnessChange}
           />
         </div>
       </div>
