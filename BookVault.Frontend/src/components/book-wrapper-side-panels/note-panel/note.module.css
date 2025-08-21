@@ -42,7 +42,7 @@
 
 .customToolbar {
   border: none !important;
-  background: #fff;
+  background: var(--note-panel-toolbar);
   border-radius: 6px;
   padding: 6px;
   display: flex;
