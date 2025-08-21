@@ -8,4 +8,8 @@
   --note-panel-toolbar: #fff;
   --note-quill-item-color: #000000;
   --note-quill-item-background-hover-color: #0000001e;
+  --undo-redo-action-button-border-color: #e7e7e7;
+  --undo-redo-action-button-bg-color: #f3f3f3;
+  --undo-redo-action-button-hover-bg-color: #eeeeee;
+  --undo-redo-action-button-item-color: #2b2b2b;
 }
