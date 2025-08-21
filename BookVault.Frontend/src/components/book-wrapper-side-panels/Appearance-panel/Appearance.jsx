@@ -79,6 +79,13 @@ export default function Appearance() {
             onChange={handleBrightnessChange}
           />
         </div>
+
+        <div className={styles.appearanceOptions}>
+          <label>Theme: </label>
+          <button onClick={handleThemeToggle}>
+            {isDarkTheme ? "Switch to Light" : "Switch to Dark"}
+          </button>
+        </div>
       </div>
 
       <div className={styles.appearanceActions}>
