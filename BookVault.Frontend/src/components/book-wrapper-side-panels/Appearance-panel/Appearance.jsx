@@ -5,6 +5,7 @@ export default function Appearance() {
   const [color, setColor] = useState("#f1c40f"); // default yellow
   const [marginEnabled, setMarginEnabled] = useState(true); // default ON (45px)
   const [brightness, setBrightness] = useState(1); // default brightness
+  const [isDarkTheme, setIsDarkTheme] = useState(false); // default light
 
   const handleColorChange = (e) => {
     const newColor = e.target.value;
