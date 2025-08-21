@@ -311,7 +311,6 @@ export default function SideButtonsWrapper({
           </div>
           <div className={styles.panelBody} 
             style={{
-              backgroundColor: 'white',
               paddingRight: isLeftPanelPinned ? '14px':'',
               height: isLeftPanelPinned? '790px': '627px'
             }}>
