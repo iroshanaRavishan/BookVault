@@ -52,7 +52,7 @@ export default function Appearance() {
           <input
             id="brightness-slider"
             type="range"
-            min="0.7"
+            min="0.8"
             max="1.2"
             step="0.01"
             value={brightness}
