@@ -53,6 +53,31 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15); 
 }
 
+/* Make Quill icons use currentColor */
+.customToolbar :global(.ql-stroke) {
+  stroke: currentColor !important;
+}
+.customToolbar :global(.ql-fill) {
+  fill: currentColor !important;
+}
+
+/* Set the actual color (drives currentColor above) */
+.customToolbar :global(button),
+.customToolbar :global(.ql-picker),
+.customToolbar :global(.ql-picker-label),
+.customToolbar :global(.ql-picker-options),
+.customToolbar :global(.ql-picker-item) {
+  color: var(--note-quill-item-color) !important;
+  border-radius: 5px;
+}
+
+/* Hover states */
+.customToolbar :global(button:hover),
+.customToolbar :global(.ql-picker-label:hover),
+.customToolbar :global(.ql-picker-item:hover) {
+  background: var(--note-quill-item-background-hover-color) !important;
+}
+
 .undoRedoActionsButtons{
   display: flex;
   flex-direction: row;
