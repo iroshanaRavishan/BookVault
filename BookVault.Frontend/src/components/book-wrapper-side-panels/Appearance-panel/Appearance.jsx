@@ -48,6 +48,7 @@ export default function Appearance() {
         document.documentElement.style.setProperty("--note-detail-bar-bg", "#2b2b2b");
         document.documentElement.style.setProperty("--note-detail-bar-text-color", "#bebebeff");
         document.documentElement.style.setProperty("--note-character-limit-text", "#bebebeff");
+        document.documentElement.style.setProperty("--note-action-bg", "#2b2b2b");
       } else {
         // Light theme
         document.documentElement.style.setProperty("--panel-header", "#fff");
@@ -63,6 +64,7 @@ export default function Appearance() {
         document.documentElement.style.setProperty("--note-detail-bar-bg", "#fff");
         document.documentElement.style.setProperty("--note-detail-bar-text-color", "#666");
         document.documentElement.style.setProperty("--note-character-limit-text", "gray");
+        document.documentElement.style.setProperty("--note-action-bg", "#fff");
       }
       return newTheme;
     });
