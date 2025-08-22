@@ -194,7 +194,7 @@
   border-radius: 5px;
   height: 20px;
   padding: 5px 3px;
-  border: 1px solid #e7e7e7;
+  border: 1px solid var(--note-navigation-button-border-color);
   background-color: var(--note-navigation-button-bg);
   cursor: pointer;
 }
