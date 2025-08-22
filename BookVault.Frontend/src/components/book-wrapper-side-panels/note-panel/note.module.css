@@ -200,7 +200,7 @@
 }
 
 .navigationIcons:hover {
-  background-color: #eeeeee;
+  background-color: var(--note-navigation-button-hover-bg-color);
   color: #2c2c2c;
 }
 
