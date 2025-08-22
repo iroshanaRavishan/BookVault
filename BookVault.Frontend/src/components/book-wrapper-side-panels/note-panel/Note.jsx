@@ -618,7 +618,7 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
             </select>
         </div>
 
-        <div className={styles.noteActions} style={{margin: '8px 0 4px 0'}}>  
+        <div className={styles.noteActions}>  
             <div className={styles.undoRedoActionsButtons}>
                 <span className={styles.undoRedoButton} onClick={() => quillRef.current?.getEditor().history.undo()}><LuUndo2 /></span>
                 <span className={styles.undoRedoButton} onClick={() => quillRef.current?.getEditor().history.redo()}><LuRedo2 /></span>
