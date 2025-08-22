@@ -1,5 +1,4 @@
 .noteWrapper {
-  background: #fff;
   height: -webkit-fill-available !important;
   display: flex;
   flex-direction: column;
@@ -12,6 +11,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 8px 0 4px 0;
+  background-color: var(--note-action-bg);
 }
 
 .editor {
@@ -195,7 +195,7 @@
   height: 20px;
   padding: 5px 3px;
   border: 1px solid #e7e7e7;
-  background-color: #f3f3f3;
+  background-color: var(--note-navigation-button-bg);
   cursor: pointer;
 }
 
