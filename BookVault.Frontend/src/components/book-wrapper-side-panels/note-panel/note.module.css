@@ -228,7 +228,7 @@
   padding: 5px;
   border-radius: 5px;
   height: 20px;
-  background-color: #f3f3f3;
+  background-color: var(--note-settings-button-background-color);
 }
 
 .settings:hover {
