@@ -45,6 +45,7 @@ export default function Appearance() {
         document.documentElement.style.setProperty("--undo-redo-action-button-bg-color", "#d6d6d6ff");
         document.documentElement.style.setProperty("--undo-redo-action-button-hover-bg-color", "#c4c4c4ff");
         document.documentElement.style.setProperty("--undo-redo-action-button-hover-bg-color", "#c4c4c4ff");
+        document.documentElement.style.setProperty("--note-detail-bar-bg", "#2b2b2b");
       } else {
         // Light theme
         document.documentElement.style.setProperty("--panel-header", "#fff");
