@@ -618,7 +618,7 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
             </select>
         </div>
 
-        <div className={styles.noteActions} style={{margin: '8px 0 4px 0'}}>  
+        <div className={styles.noteActions}>  
             <div className={styles.undoRedoActionsButtons}>
                 <span className={styles.undoRedoButton} onClick={() => quillRef.current?.getEditor().history.undo()}><LuUndo2 /></span>
                 <span className={styles.undoRedoButton} onClick={() => quillRef.current?.getEditor().history.redo()}><LuRedo2 /></span>
@@ -746,7 +746,7 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
                 </span>
             </div>
             <div className={styles.characterLimitTextWrapper}>
-                <span style={{ color: (quillRef.current?.getEditor().getLength() - 1) >= USER_NOTES.MAX_CHARS ? 'red' : 'gray' }}>
+                <span style={{ color: (quillRef.current?.getEditor().getLength() - 1) >= USER_NOTES.MAX_CHARS ? 'red' : `var(--note-character-limit-text)`  }}>
                     {(quillRef.current?.getEditor().getLength() - 1) || 0} / {USER_NOTES.MAX_CHARS} characters
                 </span> 
                 <div className={styles.clearDeleteButtons}>
