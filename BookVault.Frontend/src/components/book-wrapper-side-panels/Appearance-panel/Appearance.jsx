@@ -50,6 +50,8 @@ export default function Appearance() {
         document.documentElement.style.setProperty("--note-character-limit-text", "#bebebeff");
         document.documentElement.style.setProperty("--note-action-bg", "#2b2b2b");
         document.documentElement.style.setProperty("--note-navigation-button-bg", "#f3f3f3");
+        document.documentElement.style.setProperty("--note-navigation-button-border-color", "#8f8f8fff");
+        document.documentElement.style.setProperty("--note-navigation-button-hover-bg-color", "#c4c4c4ff");
       } else {
         // Light theme
         document.documentElement.style.setProperty("--panel-header", "#fff");
@@ -67,6 +69,8 @@ export default function Appearance() {
         document.documentElement.style.setProperty("--note-character-limit-text", "gray");
         document.documentElement.style.setProperty("--note-action-bg", "#fff");
         document.documentElement.style.setProperty("--note-navigation-button-bg", "#d3d3d3ff");
+        document.documentElement.style.setProperty("--note-navigation-button-border-color", "#bbbbbbff");
+        document.documentElement.style.setProperty("--note-navigation-button-hover-bg-color", "#acacacff");
       }
       return newTheme;
     });
