@@ -156,7 +156,7 @@
 .deleteButton {
   background-color: #f78080;
   color: #494949;
-  border: 1px solid #e7e7e7;
+  border: 1px solid var(--note-delete-button-border-color);
   border-radius: 5px;
   padding: 2px 12px;
   font-size: 16px;
