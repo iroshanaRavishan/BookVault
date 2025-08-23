@@ -51,7 +51,7 @@ export default function Appearance() {
         document.documentElement.style.setProperty("--note-action-bg", "#2b2b2b");
         document.documentElement.style.setProperty("--note-navigation-button-bg", "#f3f3f3");
         document.documentElement.style.setProperty("--note-navigation-button-border-color", "#8f8f8fff");
-        document.documentElement.style.setProperty("--note-navigation-button-hover-bg-color", "#c4c4c4ff");
+        document.documentElement.style.setProperty("--note-navigation-button-hover-bg-color", "#e9e9e9ff");
         document.documentElement.style.setProperty("--note-settings-button-background-color", "#e9e9e9ff");
         document.documentElement.style.setProperty("--note-settings-button-border-color", "#8f8f8fff");
       } else {
@@ -72,7 +72,7 @@ export default function Appearance() {
         document.documentElement.style.setProperty("--note-action-bg", "#fff");
         document.documentElement.style.setProperty("--note-navigation-button-bg", "#d3d3d3ff");
         document.documentElement.style.setProperty("--note-navigation-button-border-color", "#bbbbbbff");
-        document.documentElement.style.setProperty("--note-navigation-button-hover-bg-color", "#acacacff");
+        document.documentElement.style.setProperty("--note-navigation-button-hover-bg-color", "#d3d3d3ff");
         document.documentElement.style.setProperty("--note-settings-button-background-color", "#d3d3d3ff");
         document.documentElement.style.setProperty("--note-settings-button-border-color", "#bbbbbbff");
       }
