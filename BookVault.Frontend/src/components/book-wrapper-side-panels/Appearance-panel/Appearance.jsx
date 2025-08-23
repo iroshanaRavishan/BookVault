@@ -55,6 +55,7 @@ export default function Appearance() {
         document.documentElement.style.setProperty("--note-settings-button-background-color", "#e9e9e9ff");
         document.documentElement.style.setProperty("--note-settings-button-border-color", "#8f8f8fff");
         document.documentElement.style.setProperty("--note-clear-button-border-color", "#8f8f8fff");
+        document.documentElement.style.setProperty("--note-delete-button-border-color", "#8f8f8fff");
       } else {
         // Light theme
         document.documentElement.style.setProperty("--panel-header", "#fff");
@@ -77,6 +78,7 @@ export default function Appearance() {
         document.documentElement.style.setProperty("--note-settings-button-background-color", "#d3d3d3ff");
         document.documentElement.style.setProperty("--note-settings-button-border-color", "#bbbbbbff");
         document.documentElement.style.setProperty("--note-clear-button-border-color", "#bbbbbbff");
+        document.documentElement.style.setProperty("--note-delete-button-border-color", "#bbbbbbff");
       }
       return newTheme;
     });
