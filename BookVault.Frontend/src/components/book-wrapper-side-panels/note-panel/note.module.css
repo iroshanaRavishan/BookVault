@@ -224,7 +224,7 @@
   color: #494949;
   gap: 5px;
   cursor: pointer;
-  border: 1px solid #e7e7e7;
+  border: 1px solid var(--note-settings-button-border-color);
   padding: 5px;
   border-radius: 5px;
   height: 20px;
