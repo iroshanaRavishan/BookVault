@@ -58,7 +58,7 @@ export default function Appearance() {
         document.documentElement.style.setProperty("--note-delete-button-border-color", "#8f8f8fff");
         document.documentElement.style.setProperty("--note-navigation-highlighted-note-bg", "#c4c4c4ff");
         document.documentElement.style.setProperty("--note-navigation-non-heighlighted-button-text-color", "#ffffffff");
-        document.documentElement.style.setProperty("--note-navigation-highlighted-note-number-hover-bg-color", "#c4c4c48a");
+        document.documentElement.style.setProperty("--note-navigation-highlighted-note-number-hover-bg-color", "#c4c4c4b6");
       } else {
         // Light theme
         document.documentElement.style.setProperty("--panel-header", "#fff");
