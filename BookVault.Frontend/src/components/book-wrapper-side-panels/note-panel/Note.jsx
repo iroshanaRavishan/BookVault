@@ -393,9 +393,9 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
 
         // Apply gradient with dynamic offset
         editorRoot.style.background = `repeating-linear-gradient(
-            #fff,
-            #fff ${lineSpacing - 1}px,
-            #bdbdbdff ${lineSpacing}px
+            var(--editor-bg-color),
+            var(--editor-bg-color) ${lineSpacing - 1}px,
+            var(--editor-line-color) ${lineSpacing}px
         )`;
         editorRoot.style.backgroundAttachment = 'local';
         editorRoot.style.backgroundPosition = `0 ${offset}px`;
