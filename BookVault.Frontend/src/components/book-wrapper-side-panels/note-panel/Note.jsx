@@ -746,7 +746,7 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
                 </span>
             </div>
             <div className={styles.characterLimitTextWrapper}>
-                <span style={{ color: (quillRef.current?.getEditor().getLength() - 1) >= USER_NOTES.MAX_CHARS ? 'red' : `var(--note-character-limit-text)`  }}>
+                <span style={{ color: (quillRef.current?.getEditor().getLength() - 1) >= USER_NOTES.MAX_CHARS ? 'red' : `var(--note-section-text-color)`  }}>
                     {(quillRef.current?.getEditor().getLength() - 1) || 0} / {USER_NOTES.MAX_CHARS} characters
                 </span> 
                 <div className={styles.clearDeleteButtons}>
