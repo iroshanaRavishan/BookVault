@@ -494,11 +494,11 @@
 }
 
 .modalButtons:hover {
-    background-color: #666;
+  background-color: #666;
 }
 
 .highlightedPage {
-  background-color: #38320f4d;
+  background-color: var(--note-navigation-highlighted-page-bg);
   border-radius: 5px;
   transition: background-color 0.1s ease;
   height: 35px;
