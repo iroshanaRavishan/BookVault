@@ -505,6 +505,10 @@
   font-weight: 700;
 }
 
+.nonHeighlightedPageNumber {
+  color: var(--note-navigation-non-heighlighted-button-text-color);
+}
+
 @keyframes fadeInScale {
   from {
     opacity: 0;
