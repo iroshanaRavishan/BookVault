@@ -271,7 +271,7 @@
     cursor: pointer;
     border: 1px solid #ccc;
     border-radius: 6px;
-    background-color: white;
+    background-color: var(--bookmark-action-button-bg-color);
     right: 0;
 }
 
