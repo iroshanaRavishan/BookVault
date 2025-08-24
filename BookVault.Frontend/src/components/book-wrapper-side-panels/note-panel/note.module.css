@@ -251,7 +251,7 @@
   border: none;
   font-size: 14px;
   border-radius: 6px;
-  background-color: #494949;
+  background-color: var(--note-action-button-bg-color);
   color: white;
   width: 100%;
   cursor: pointer;
