@@ -30,4 +30,6 @@
   --note-action-button-bg-color: #494949;
   --note-action-button-text-color: #666;
   --note-action-button-hover-bg-color: #eeeeee;
+  --note-action-button-disabled-bg-color: #929292;
+  --note-action-button-disabled-text-color: #000000;
 }
