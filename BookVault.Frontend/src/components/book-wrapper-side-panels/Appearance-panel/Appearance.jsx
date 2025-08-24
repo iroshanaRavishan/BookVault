@@ -58,7 +58,8 @@ export default function Appearance() {
         document.documentElement.style.setProperty("--note-delete-button-border-color", "#8f8f8fff");
         document.documentElement.style.setProperty("--note-navigation-highlighted-note-bg", "#c4c4c4ff");
         document.documentElement.style.setProperty("--note-navigation-non-heighlighted-button-text-color", "#ffffffff");
-        document.documentElement.style.setProperty("--note-navigation-highlighted-note-number-hover-bg-color", "#c4c4c48a");
+        document.documentElement.style.setProperty("--note-navigation-highlighted-note-number-hover-bg-color", "#c4c4c4b6");
+        document.documentElement.style.setProperty("--note-settings-button-hover-bg-color", "#c4c4c4ff");
       } else {
         // Light theme
         document.documentElement.style.setProperty("--panel-header", "#fff");
@@ -85,6 +86,7 @@ export default function Appearance() {
         document.documentElement.style.setProperty("--note-navigation-highlighted-note-bg", "#bbbbbbff");
         document.documentElement.style.setProperty("--note-navigation-non-heighlighted-button-text-color", "#000000");
         document.documentElement.style.setProperty("--note-navigation-highlighted-note-number-hover-bg-color", "#acacac8f");
+        document.documentElement.style.setProperty("--note-settings-button-hover-bg-color", "#acacacff");
       }
       return newTheme;
     });
