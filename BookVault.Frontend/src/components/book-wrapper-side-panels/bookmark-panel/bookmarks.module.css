@@ -266,13 +266,13 @@
     display: flex;
     justify-content: space-between;
     padding: 6px 12px;
-    width: 185px;
+    width: 190px;
     align-items: center;
     cursor: pointer;
-    border: 1px solid #ccc;
     border-radius: 6px;
-    background-color: white;
+    background-color: var(--bookmark-action-button-bg-color);
     right: 0;
+    color: var(--bookmark-action-button-text-color);
 }
 
 .sortIconWithText{
@@ -330,4 +330,5 @@
 .totalBookmarkText{
     font-size: 12px;
     font-weight: 600;
+    color: var(--bookmark-section-text-color);
 }

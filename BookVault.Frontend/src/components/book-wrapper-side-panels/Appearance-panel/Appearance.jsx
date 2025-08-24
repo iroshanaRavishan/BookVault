@@ -66,6 +66,10 @@ export default function Appearance() {
         document.documentElement.style.setProperty("--note-action-button-disabled-text-color", "#858585ff");
         document.documentElement.style.setProperty("--editor-bg-color", "#dbdbdbff");
         document.documentElement.style.setProperty("--editor-line-color", "#808080ff");
+
+        document.documentElement.style.setProperty("--bookmark-action-button-bg-color", "#ffffffff");
+        document.documentElement.style.setProperty("--bookmark-action-button-text-color", "#000000ff");
+        document.documentElement.style.setProperty("--bookmark-section-text-color", "#a09e9eff");
       } else {
         // Light theme
         document.documentElement.style.setProperty("--panel-header", "#fff");
@@ -99,6 +103,10 @@ export default function Appearance() {
         document.documentElement.style.setProperty("--note-action-button-disabled-text-color", "#ffffffff");
         document.documentElement.style.setProperty("--editor-bg-color", "#fafafaff");
         document.documentElement.style.setProperty("--editor-line-color", "#bdbdbdff");
+
+        document.documentElement.style.setProperty("--bookmark-action-button-bg-color", "#313131ff");
+        document.documentElement.style.setProperty("--bookmark-action-button-text-color", "#ffffffff");
+        document.documentElement.style.setProperty("--bookmark-section-text-color", "#666");
       }
       return newTheme;
     });
