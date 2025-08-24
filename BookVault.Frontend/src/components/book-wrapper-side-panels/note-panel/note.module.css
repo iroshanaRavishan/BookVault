@@ -252,7 +252,7 @@
   font-size: 14px;
   border-radius: 6px;
   background-color: var(--note-action-button-bg-color);
-  color: white;
+  color: var(--note-action-button-text-color);
   width: 100%;
   cursor: pointer;
   transition: opacity 0.3s ease;
