@@ -44,6 +44,10 @@
   border: 2px solid #ffffff;
 }
 
+:global(.ql-editor::-webkit-scrollbar-thumb:hover) {
+  background: #555; 
+}
+
 :global(.ql-size-small) {
   font-size: 0.8em !important;
   display: inline !important;
