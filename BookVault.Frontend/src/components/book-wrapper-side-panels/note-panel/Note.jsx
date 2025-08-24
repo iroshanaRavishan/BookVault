@@ -255,7 +255,7 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
     };
 
     const getPageClass = (pageNumber) =>
-    highlightPage === pageNumber ? styles.highlightedPage : '';
+        highlightPage === pageNumber ? styles.highlightedPage : styles.nonHeighlightedPageNumber;
 
     const modules = {
         toolbar: {

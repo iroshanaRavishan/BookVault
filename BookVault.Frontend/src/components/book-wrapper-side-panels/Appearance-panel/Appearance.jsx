@@ -56,6 +56,7 @@ export default function Appearance() {
         document.documentElement.style.setProperty("--note-settings-button-border-color", "#8f8f8fff");
         document.documentElement.style.setProperty("--note-clear-button-border-color", "#8f8f8fff");
         document.documentElement.style.setProperty("--note-delete-button-border-color", "#8f8f8fff");
+        document.documentElement.style.setProperty("--note-navigation-highlighted-page-bg", "#c4c4c4ff");
       } else {
         // Light theme
         document.documentElement.style.setProperty("--panel-header", "#fff");
@@ -79,6 +80,7 @@ export default function Appearance() {
         document.documentElement.style.setProperty("--note-settings-button-border-color", "#bbbbbbff");
         document.documentElement.style.setProperty("--note-clear-button-border-color", "#bbbbbbff");
         document.documentElement.style.setProperty("--note-delete-button-border-color", "#bbbbbbff");
+        document.documentElement.style.setProperty("--note-navigation-highlighted-page-bg", "#bbbbbbff");
       }
       return newTheme;
     });
