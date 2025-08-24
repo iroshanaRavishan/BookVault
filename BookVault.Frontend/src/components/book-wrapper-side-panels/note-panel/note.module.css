@@ -213,7 +213,7 @@
 }
 
 .noteNagigationPageNumber:hover {
-    background-color: #38320f1e;
+    background-color: var(--note-navigation-highlighted-note-number-hover-bg-color);
     border-radius: 5px;
 }
 
@@ -498,7 +498,7 @@
 }
 
 .highlightedPage {
-  background-color: var(--note-navigation-highlighted-page-bg);
+  background-color: var(--note-navigation-highlighted-note-bg);
   border-radius: 5px;
   transition: background-color 0.1s ease;
   height: 35px;
