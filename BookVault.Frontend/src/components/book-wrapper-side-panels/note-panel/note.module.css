@@ -498,7 +498,7 @@
 }
 
 .highlightedPage {
-  background-color: var(--note-navigation-highlighted-page-bg);
+  background-color: var(--note-navigation-highlighted-note-bg);
   border-radius: 5px;
   transition: background-color 0.1s ease;
   height: 35px;
