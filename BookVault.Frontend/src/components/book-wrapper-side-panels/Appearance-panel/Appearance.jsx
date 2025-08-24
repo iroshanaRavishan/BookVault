@@ -62,6 +62,9 @@ export default function Appearance() {
         document.documentElement.style.setProperty("--note-settings-button-hover-bg-color", "#c4c4c4ff");
         document.documentElement.style.setProperty("--note-action-button-bg-color", "#ffffffff");
         document.documentElement.style.setProperty("--note-action-button-text-color", "#000000ff");
+        document.documentElement.style.setProperty("--note-action-button-hover-bg-color", "#c4c4c4ff");
+        document.documentElement.style.setProperty("--note-action-button-disabled-bg-color", "#ffffffff");
+        document.documentElement.style.setProperty("--note-action-button-disabled-text-color", "#858585ff");
       } else {
         // Light theme
         document.documentElement.style.setProperty("--panel-header", "#fff");
@@ -91,6 +94,9 @@ export default function Appearance() {
         document.documentElement.style.setProperty("--note-settings-button-hover-bg-color", "#acacacff");
         document.documentElement.style.setProperty("--note-action-button-bg-color", "#313131ff");
         document.documentElement.style.setProperty("--note-action-button-text-color", "#ffffffff");
+        document.documentElement.style.setProperty("--note-action-button-hover-bg-color", "#8b8b8bff");
+        document.documentElement.style.setProperty("--note-action-button-disabled-bg-color", "#727272ff");
+        document.documentElement.style.setProperty("--note-action-button-disabled-text-color", "#ffffffff");
       }
       return newTheme;
     });
