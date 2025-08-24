@@ -259,7 +259,7 @@
 }
 
 .noteContentActions button:hover {
-  background-color: #666;
+  background-color: var(--note-action-button-hover-bg-color);
 }
 
 .noteContentActions button:disabled {
