@@ -37,8 +37,8 @@ export default function Appearance() {
         // Dark theme
         document.documentElement.style.setProperty("--panel-header", "#333");
         document.documentElement.style.setProperty("--panel-header-name-color", "#fff");  
-        document.documentElement.style.setProperty("--panel-body-bg", "#333");
-        document.documentElement.style.setProperty("--note-panel-toolbar", "#333");
+        document.documentElement.style.setProperty("--panel-body-bg", "#3f3f3fff");
+        document.documentElement.style.setProperty("--note-panel-toolbar", "#3f3f3fff");
         document.documentElement.style.setProperty("--note-quill-item-color", "#ffffffff");
         document.documentElement.style.setProperty("--note-quill-item-background-hover-color", "#acacacff");
         document.documentElement.style.setProperty("--undo-redo-action-button-border-color", "#8f8f8fff");
@@ -71,8 +71,8 @@ export default function Appearance() {
         // Light theme
         document.documentElement.style.setProperty("--panel-header", "#fff");
         document.documentElement.style.setProperty("--panel-header-name-color", "#111");
-        document.documentElement.style.setProperty("--panel-body-bg", "#ffffffff");
-        document.documentElement.style.setProperty("--note-panel-toolbar", "#fff");
+        document.documentElement.style.setProperty("--panel-body-bg", "#f1f1f1ff");
+        document.documentElement.style.setProperty("--note-panel-toolbar", "#f1f1f1ff");
         document.documentElement.style.setProperty("--note-quill-item-color", "#000000");
         document.documentElement.style.setProperty("--note-quill-item-background-hover-color", "#0000001e");
         document.documentElement.style.setProperty("--undo-redo-action-button-border-color", "#bbbbbbff");
