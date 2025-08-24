@@ -272,6 +272,7 @@
     border-radius: 6px;
     background-color: var(--bookmark-action-button-bg-color);
     right: 0;
+    color: var(--bookmark-action-button-text-color);
 }
 
 .sortIconWithText{
