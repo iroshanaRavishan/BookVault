@@ -19,6 +19,11 @@
   padding-top: 6px;
 }
 
+:global(.ql-editor) {
+  border-radius: 4px;
+  overflow-y: auto; 
+}
+
 :global(.ql-size-small) {
   font-size: 0.8em !important;
   display: inline !important;
