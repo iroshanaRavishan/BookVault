@@ -301,7 +301,7 @@ useEffect(() => {
                   >
                     <BiSolidDuplicate 
                       size={18} 
-                      className={styles.bookmarkActionButton}
+                      className={styles.bookmarkListActionButton}
                       onClick={(e) =>{
                         e.stopPropagation(),  // <-- Prevents triggering the <li> onClick
                         handleGenerateBookmarkThumbnail(bookmark)
@@ -313,7 +313,7 @@ useEffect(() => {
                   >
                     <RiDeleteBin6Fill 
                       size={18} 
-                      className={styles.bookmarkActionButton} 
+                      className={styles.bookmarkListActionButton} 
                       onClick={(e) => {
                         e.stopPropagation(),  // <-- Prevents triggering the <li> onClick
                         handleDeleteBookmark(bookmarks[i])
