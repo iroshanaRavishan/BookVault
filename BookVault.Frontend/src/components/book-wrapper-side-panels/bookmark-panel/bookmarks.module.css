@@ -49,6 +49,7 @@
     border-radius: 12px;
     position: relative;
     user-select: none;
+    background-color: var(--bookmark-list-item-bg-color);
 
     /* Store original color with reduced opacity as fallback */
     --border-hsl: var(--border-color, hsl(20, 70%, 60%, 0.8));
