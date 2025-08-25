@@ -346,6 +346,7 @@ useEffect(() => {
               className={styles.jumpToPageButton}
               onClick={handleClick}
               onDoubleClick={(e) => e.stopPropagation()}
+              disabled={!thumbnailGeneratedFor.path}
             >
               Jump to page
             </button>
