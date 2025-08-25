@@ -49,6 +49,7 @@
     border-radius: 12px;
     position: relative;
     user-select: none;
+    background-color: var(--bookmark-list-item-bg-color);
 
     /* Store original color with reduced opacity as fallback */
     --border-hsl: var(--border-color, hsl(20, 70%, 60%, 0.8));
@@ -81,12 +82,13 @@
     font-weight: 700;
     opacity: 0.6;
     margin-left: 20px;
+    color: var(--bookmark-section-text-color);
     transform: translateY(-2px);
 }
 
 .bookmarkItem:hover .pageNumber { 
     /* when the mouse is hovering over the bookmarkItem, below styles will be added to the pageNumber */
-    color: #ffffffd2; 
+    color: var(--bookmark-list-item-hover-number-color);
     opacity: 1;      
     transition: all 0.2s ease ;
 }
@@ -105,6 +107,7 @@
     left: 0;
     font-size: 14px;
     opacity: 0.6;
+    color: var(--bookmark-section-text-color);
 }
 
 .createdDate {
@@ -112,7 +115,7 @@
     display: flex;
     flex-direction: column;
     margin: 0 10px;
-    color: rgb(221, 221, 221);
+    color: var(--bookmark-section-text-color);
     font-size: 14px;
 }
 
@@ -124,10 +127,10 @@
 
 .bookmarkListActionButton{
     padding: 10px;
-    border: 1px solid #ddddddda;
-    background-color: #dddddd25;
+    border: 1px solid  var(--bookmark-section-text-color);
+    background-color: var(--bookmark-list-action-button-bg-color);
     border-radius: 50%;
-    color:#ddddddda
+    color: var(--bookmark-section-text-color);
 }
 
 .bookmarkListActionButton:hover {
@@ -215,7 +218,8 @@
     margin: 0 10px;
     font-size: 14px;
     border-radius: 6px;
-    background-color: #ffffff;
+    background-color: var(--bookmark-action-button-bg-color);
+    color: var(--bookmark-action-button-text-color);
     border: none;
     cursor: pointer;
 }
