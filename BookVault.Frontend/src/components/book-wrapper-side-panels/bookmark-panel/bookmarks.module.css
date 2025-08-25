@@ -226,7 +226,6 @@
 }
 
 .jumpToPageButton:disabled {
-    cursor: not-allowed;
     color: var(--bookmark-action-button-disabled-text-color);
     background-color: var(--bookmark-action-button-disabled-bg-color);
     cursor: not-allowed;
