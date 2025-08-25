@@ -123,6 +123,7 @@
     display: flex;
     flex-direction: row;
     gap: 6px;
+    transform: translateY(3px);
 }
 
 .bookmarkListActionButton{
@@ -184,7 +185,7 @@
     align-items: center;
     margin-bottom: 15px;
     position: relative;
-    background-color: #646464;
+    background-color: var(--bookmark-thumbnail-section-header-bg-color);
     padding: 5px 10px;
 }
 
@@ -206,7 +207,7 @@
     align-items: center;
     justify-content: center;
     margin-bottom: 20px;
-    border: 1px solid white;
+    border: 1px solid var(--bookmark-page-preview-border-color);
     border-radius: 8px;
 }
 
