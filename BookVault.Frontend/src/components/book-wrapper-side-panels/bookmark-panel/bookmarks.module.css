@@ -207,7 +207,7 @@
     align-items: center;
     justify-content: center;
     margin-bottom: 20px;
-    border: 1px solid white;
+    border: 1px solid var(--bookmark-page-preview-border-color);
     border-radius: 8px;
 }
 
