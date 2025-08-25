@@ -73,6 +73,8 @@ export default function Appearance() {
         document.documentElement.style.setProperty("--bookmark-list-item-bg-color", "#1f1f1fb7");
         document.documentElement.style.setProperty("--bookmark-list-item-hover-number-color", "#ffffffd2");
         document.documentElement.style.setProperty("--bookmark-list-action-button-bg-color", "#dddddd25");
+        document.documentElement.style.setProperty("--bookmark-thumbnail-section-header-bg-color", "#616161ff");
+        document.documentElement.style.setProperty("--bookmark-page-preview-border-color", "#e0e0e0ff");
       } else {
         // Light theme
         document.documentElement.style.setProperty("--panel-header", "#fff");
@@ -113,6 +115,9 @@ export default function Appearance() {
         document.documentElement.style.setProperty("--bookmark-list-item-bg-color", "#ecececff");
         document.documentElement.style.setProperty("--bookmark-list-item-hover-number-color", "#474747ff");
         document.documentElement.style.setProperty("--bookmark-list-action-button-bg-color", "#e0e0e0ff");
+        document.documentElement.style.setProperty("--bookmark-thumbnail-section-header-bg-color", "#838383ff");
+        document.documentElement.style.setProperty("--bookmark-page-preview-border-color", "#5e5e5eff");
+      }
       return newTheme;
     });
   };
