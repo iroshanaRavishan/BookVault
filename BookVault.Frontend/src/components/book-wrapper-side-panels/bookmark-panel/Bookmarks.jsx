@@ -326,7 +326,7 @@ useEffect(() => {
           </ul>
           <div className={`${styles.pagePreviewContaienr} ${toggleDown ? styles.open : styles.closed}`}>
             <div className={styles.pagePreviewContaienrHeader}>
-              <span className={styles.pagePreviewText}>Page preview of selected bookmark <i> {thumbnailGeneratedFor.page}</i></span>
+              <span className={styles.pagePreviewText}>Preview of selected bookmark <i style={{fontWeight: '100'}}> page - {thumbnailGeneratedFor.page}</i></span>
               <span 
                 className={styles.pagePreviewToggler} 
                 onClick={() => setToggleDown(prev => !prev)}
