@@ -185,7 +185,7 @@
     align-items: center;
     margin-bottom: 15px;
     position: relative;
-    background-color: #646464;
+    background-color: var(--bookmark-thumbnail-section-header-bg-color);
     padding: 5px 10px;
 }
 
