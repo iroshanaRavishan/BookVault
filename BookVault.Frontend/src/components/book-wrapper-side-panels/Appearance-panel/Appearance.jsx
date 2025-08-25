@@ -69,7 +69,10 @@ export default function Appearance() {
 
         document.documentElement.style.setProperty("--bookmark-action-button-bg-color", "#ffffffff");
         document.documentElement.style.setProperty("--bookmark-action-button-text-color", "#000000ff");
-        document.documentElement.style.setProperty("--bookmark-section-text-color", "#a09e9eff");
+        document.documentElement.style.setProperty("--bookmark-section-text-color", "#bebebeff");
+        document.documentElement.style.setProperty("--bookmark-list-item-bg-color", "#1f1f1fb7");
+        document.documentElement.style.setProperty("--bookmark-list-item-hover-number-color", "#ffffffd2");
+        document.documentElement.style.setProperty("--bookmark-list-action-button-bg-color", "#dddddd25");
       } else {
         // Light theme
         document.documentElement.style.setProperty("--panel-header", "#fff");
@@ -107,7 +110,9 @@ export default function Appearance() {
         document.documentElement.style.setProperty("--bookmark-action-button-bg-color", "#313131ff");
         document.documentElement.style.setProperty("--bookmark-action-button-text-color", "#ffffffff");
         document.documentElement.style.setProperty("--bookmark-section-text-color", "#666");
-      }
+        document.documentElement.style.setProperty("--bookmark-list-item-bg-color", "#ecececff");
+        document.documentElement.style.setProperty("--bookmark-list-item-hover-number-color", "#474747ff");
+        document.documentElement.style.setProperty("--bookmark-list-action-button-bg-color", "#e0e0e0ff");
       return newTheme;
     });
   };
