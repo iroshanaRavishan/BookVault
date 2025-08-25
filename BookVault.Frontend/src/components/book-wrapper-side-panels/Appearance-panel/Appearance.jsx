@@ -74,6 +74,8 @@ export default function Appearance() {
         document.documentElement.style.setProperty("--bookmark-list-item-hover-number-color", "#ffffffd2");
         document.documentElement.style.setProperty("--bookmark-list-action-button-bg-color", "#dddddd25");
         document.documentElement.style.setProperty("--bookmark-thumbnail-section-header-bg-color", "#616161ff");
+        document.documentElement.style.setProperty("--bookmark-list-action-button-color", "#1a1a1aff");
+        document.documentElement.style.setProperty("--bookmark-list-action-button-hover-bg-color", "#acacacff");
         document.documentElement.style.setProperty("--bookmark-page-preview-border-color", "#e0e0e0ff");
         document.documentElement.style.setProperty("--bookmark-action-button-disabled-bg-color", "#ffffffff");
         document.documentElement.style.setProperty("--bookmark-action-button-disabled-text-color", "#858585ff");
@@ -118,6 +120,8 @@ export default function Appearance() {
         document.documentElement.style.setProperty("--bookmark-list-item-hover-number-color", "#474747ff");
         document.documentElement.style.setProperty("--bookmark-list-action-button-bg-color", "#e0e0e0ff");
         document.documentElement.style.setProperty("--bookmark-thumbnail-section-header-bg-color", "#838383ff");
+        document.documentElement.style.setProperty("--bookmark-list-action-button-color", "#3b3b3b");
+        document.documentElement.style.setProperty("--bookmark-list-action-button-hover-bg-color", "#c5c5c5");
         document.documentElement.style.setProperty("--bookmark-page-preview-border-color", "#5e5e5eff");
         document.documentElement.style.setProperty("--bookmark-action-button-disabled-bg-color", "#727272ff");
         document.documentElement.style.setProperty("--bookmark-action-button-disabled-text-color", "#ffffffff");
