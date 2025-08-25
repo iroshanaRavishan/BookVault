@@ -88,7 +88,7 @@
 
 .bookmarkItem:hover .pageNumber { 
     /* when the mouse is hovering over the bookmarkItem, below styles will be added to the pageNumber */
-    color: #ffffffd2; 
+    color: var(--bookmark-list-item-hover-number-color);
     opacity: 1;      
     transition: all 0.2s ease ;
 }
@@ -107,6 +107,7 @@
     left: 0;
     font-size: 14px;
     opacity: 0.6;
+    color: var(--bookmark-section-text-color);
 }
 
 .createdDate {
