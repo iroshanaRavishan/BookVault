@@ -183,7 +183,7 @@ export default function Appearance() {
         <div>
           <label>View Mode: </label>
           <button >
-           mode
+            {isFullScreen ? "Exit Full Mode" : "Enter Full Mode"}
           </button>
         </div>
       </div>
