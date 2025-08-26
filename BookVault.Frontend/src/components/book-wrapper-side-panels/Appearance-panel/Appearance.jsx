@@ -133,16 +133,6 @@ export default function Appearance() {
     });
   };
 
-  const handleFullScreenToggle = () => {
-    if (!isFullScreen) {
-      document.documentElement.requestFullscreen?.();
-      setIsFullScreen(true);
-    } else {
-      document.exitFullscreen?.();
-      setIsFullScreen(false);
-    }
-  };
-
   return (
     <div className={styles.AppearancePanel}>
       <div>
