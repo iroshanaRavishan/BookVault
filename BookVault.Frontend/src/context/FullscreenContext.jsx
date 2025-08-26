@@ -38,3 +38,6 @@ export const FullscreenProvider = ({ children }) => {
     </FullscreenContext.Provider>
   );
 };
+
+// Custom hook for easier access
+export const useFullscreenContext = () => useContext(FullscreenContext);
