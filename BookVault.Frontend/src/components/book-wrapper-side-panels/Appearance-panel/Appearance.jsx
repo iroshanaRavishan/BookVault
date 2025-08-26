@@ -180,7 +180,7 @@ export default function Appearance() {
           </button>
         </div>
 
-        <div>
+        <div className={styles.appearanceOptions}>
           <label>View Mode: </label>
           <button onClick={handleFullScreenToggle}>
             {isFullScreen ? "Exit Full Mode" : "Enter Full Mode"}
