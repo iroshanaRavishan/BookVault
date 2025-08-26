@@ -1,12 +1,14 @@
 import { useState } from "react";
 import styles from './appearance.module.css';
+import { useFullscreenContext } from "../../../context/FullscreenContext";
 
 export default function Appearance() {
   const [color, setColor] = useState("#f1c40f"); // default yellow
   const [marginEnabled, setMarginEnabled] = useState(true); // default ON (45px)
   const [brightness, setBrightness] = useState(1); // default brightness
   const [isDarkTheme, setIsDarkTheme] = useState(false); // default light
-  const [isFullScreen, setIsFullScreen] = useState(false); // fullscreen state
+
+  const { isFullScreen, handleFullScreenToggle } = useFullscreenContext();
 
   const handleColorChange = (e) => {
     const newColor = e.target.value;
@@ -129,16 +131,6 @@ export default function Appearance() {
       }
       return newTheme;
     });
-  };
-
-  const handleFullScreenToggle = () => {
-    if (!isFullScreen) {
-      document.documentElement.requestFullscreen?.();
-      setIsFullScreen(true);
-    } else {
-      document.exitFullscreen?.();
-      setIsFullScreen(false);
-    }
   };
 
   return (
