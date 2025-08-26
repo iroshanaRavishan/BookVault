@@ -182,7 +182,7 @@ export default function Appearance() {
 
         <div>
           <label>View Mode: </label>
-          <button >
+          <button onClick={handleFullScreenToggle}>
             {isFullScreen ? "Exit Full Mode" : "Enter Full Mode"}
           </button>
         </div>
