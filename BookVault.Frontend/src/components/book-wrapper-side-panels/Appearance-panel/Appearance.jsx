@@ -135,6 +135,9 @@ export default function Appearance() {
     if (!isFullScreen) {
       document.documentElement.requestFullscreen?.();
       setIsFullScreen(true);
+    } else {
+      document.exitFullscreen?.();
+      setIsFullScreen(false);
     }
   };
 
