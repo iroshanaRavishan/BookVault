@@ -131,6 +131,12 @@ export default function Appearance() {
     });
   };
 
+  const handleFullScreenToggle = () => {
+    if (!isFullScreen) {
+      document.documentElement.requestFullscreen?.();
+    }
+  };
+
   return (
     <div className={styles.AppearancePanel}>
       <div>
