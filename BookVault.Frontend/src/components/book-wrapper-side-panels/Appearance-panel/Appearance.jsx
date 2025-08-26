@@ -179,6 +179,13 @@ export default function Appearance() {
             {isDarkTheme ? "Switch to Light" : "Switch to Dark"}
           </button>
         </div>
+
+        <div>
+          <label>View Mode: </label>
+          <button >
+           mode
+          </button>
+        </div>
       </div>
 
       <div className={styles.appearanceActions}>
