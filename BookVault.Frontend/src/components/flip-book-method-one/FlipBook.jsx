@@ -643,7 +643,7 @@ export default function FlipBook({
         style={{ filter: `brightness(var(--flipbook-brightness))` }}
         height={345}
         minWidth={180}
-        maxWidth={460}
+        maxWidth={isFullScreen ? 568 : 460}
         minHeight={270}
         maxHeight={isFullScreen ? 852 : 690}
         size="stretch"
