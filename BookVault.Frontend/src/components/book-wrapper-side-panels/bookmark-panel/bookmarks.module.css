@@ -135,9 +135,9 @@
 }
 
 .bookmarkListActionButton:hover {
-    color:#ffffff;
-    border: 1px solid #ffffff;
-    background-color: #dddddd46;
+    color: var(--bookmark-list-action-button-color);
+    border: 1px solid var(--bookmark-list-action-button-color);
+    background-color: var(--bookmark-list-action-button-hover-bg-color);
 }
 
 .bookmarkPanelContainer {
