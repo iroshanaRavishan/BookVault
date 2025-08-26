@@ -134,6 +134,7 @@ export default function Appearance() {
   const handleFullScreenToggle = () => {
     if (!isFullScreen) {
       document.documentElement.requestFullscreen?.();
+      setIsFullScreen(true);
     }
   };
 
