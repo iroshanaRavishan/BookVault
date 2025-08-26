@@ -487,7 +487,13 @@ export default function FlipBook({
   const navButtonWidth = isFirstPage || isLastPage ? '480px' : '920px';
 
   return (
-    <div className={styles.wrapper} style={{ width: isRightPanelOpen ? 'calc(100% - 350px)' : '100%' }}>
+    <div 
+      className={styles.wrapper}
+      style={{ 
+        width: isRightPanelOpen ? 'calc(100% - 350px)' : '100%',
+        transition: 'filter 0.2s'
+     }}
+    >
       <BookmarkListener onBookmarkDeleted={handleDeletedBookmarkFromSignalR} />
       <div 
         className={styles.bookmarkContainers}
@@ -633,6 +639,7 @@ export default function FlipBook({
       <HTMLFlipBook
         ref={flipBookRef}
         width={230}
+        style={{ filter: `brightness(var(--flipbook-brightness))` }}
         height={345}
         minWidth={180}
         maxWidth={460}
@@ -713,7 +720,12 @@ export default function FlipBook({
             hasUnsavedChanges={hasUnsavedChanges}
             setShowUnsavedWarningPopup={setShowUnsavedWarningPopup}
           >
-            <div className={styles.pageContent}>{page.content}</div>
+            <div
+              className={styles.pageContentWrapper}
+              style={i % 2 === 0 ? { borderRadius: "0px 10px 10px 0px" } : { borderRadius: "10px 0px 0px 10px" }}
+            >
+              <div className={styles.pageContent}>{page.content}</div>
+            </div>
           </Page>
         ))}
       </HTMLFlipBook>

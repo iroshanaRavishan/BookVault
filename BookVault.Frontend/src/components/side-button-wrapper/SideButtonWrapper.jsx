@@ -311,7 +311,6 @@ export default function SideButtonsWrapper({
           </div>
           <div className={styles.panelBody} 
             style={{
-              backgroundColor: 'white',
               paddingRight: isLeftPanelPinned ? '14px':'',
               height: isLeftPanelPinned? '790px': '627px'
             }}>
@@ -349,7 +348,12 @@ export default function SideButtonsWrapper({
               <span className={styles.headerTopic}> {getIconForPanel(mainPanel.name)} {mainPanel.name}</span>
             </div>
           </div>
-          <div className={styles.panelBody}>
+          <div 
+            className={styles.panelBody}
+            style={{
+              height:'627px'
+            }}
+          >
             {panelContentMap[mainPanel.name] || ''}
           </div>
         </div>
