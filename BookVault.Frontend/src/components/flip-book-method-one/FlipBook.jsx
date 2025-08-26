@@ -119,6 +119,7 @@ export default function FlipBook({
   const BOOKMARKS_PER_PAGE = 14;
   const [leftPageIndex, setLeftPageIndex] = useState(0);
   const [rightPageIndex, setRightPageIndex] = useState(0);
+  const [isFullScreen, setIsFullScreen] = useState(true);
 
   pages.push({ type: 'cover', content: <section>Cover Page</section> });
   pages.push({ type: 'blank', content: null });
@@ -642,9 +643,9 @@ export default function FlipBook({
         style={{ filter: `brightness(var(--flipbook-brightness))` }}
         height={345}
         minWidth={180}
-        maxWidth={460}
+        maxWidth={isFullScreen ? 568 : 460}
         minHeight={270}
-        maxHeight={690}
+        maxHeight={isFullScreen ? 852 : 690}
         size="stretch"
         maxShadowOpacity={0.5}
         showCover={true}
