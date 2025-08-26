@@ -179,6 +179,13 @@ export default function Appearance() {
             {isDarkTheme ? "Switch to Light" : "Switch to Dark"}
           </button>
         </div>
+
+        <div className={styles.appearanceOptions}>
+          <label>View Mode: </label>
+          <button onClick={handleFullScreenToggle}>
+            {isFullScreen ? "Exit Full Mode" : "Enter Full Mode"}
+          </button>
+        </div>
       </div>
 
       <div className={styles.appearanceActions}>
