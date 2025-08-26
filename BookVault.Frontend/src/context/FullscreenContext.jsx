@@ -26,4 +26,15 @@ export const FullscreenProvider = ({ children }) => {
     return () => document.removeEventListener("fullscreenchange", onChange);
   }, []);
 
+  return (
+    <FullscreenContext.Provider
+      value={{
+        isFullScreen,
+        setIsFullScreen,
+        handleFullScreenToggle,
+      }}
+    >
+      {children}
+    </FullscreenContext.Provider>
+  );
 };
