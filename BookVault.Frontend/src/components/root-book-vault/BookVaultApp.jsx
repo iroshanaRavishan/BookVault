@@ -21,6 +21,7 @@ import FAQPage from '../faqs/FAQPage';
 import ProfileSettings from '../profile-settings/ProfileSettings';
 import BookReadingBorad from '../book-reading-board/BookReadingBorad';
 import { NoteProvider } from '../../context/NoteContext';
+import { FullscreenProvider } from '../../context/FullscreenContext';
 
 export default function BookVaultApp() {
 
@@ -39,7 +40,7 @@ export default function BookVaultApp() {
           <Route path="/profile-settings" element={<ProfileSettings />} />
           <Route path="/read/:id" element={
               <NoteProvider>
-                <BookReadingBorad />
+                <FullscreenProvider> <BookReadingBorad /></FullscreenProvider>
               </NoteProvider>
           } />
         </Route>

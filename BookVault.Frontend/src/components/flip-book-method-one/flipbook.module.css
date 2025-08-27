@@ -101,7 +101,6 @@
 
 .navButtons {
   position: absolute;
-  bottom: 0px;
   display: flex;
   flex-direction: row;
   gap: 5px;
@@ -206,7 +205,6 @@
 .bookmarkContainers {
   position: absolute;
   top: 110px;
-  width: 800px;
   display: flex;
   justify-content: center;
   pointer-events: none;
