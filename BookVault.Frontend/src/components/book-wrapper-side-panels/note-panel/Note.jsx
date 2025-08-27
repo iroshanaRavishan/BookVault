@@ -22,6 +22,7 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
     const settingsRef = useRef(null);
     const hasMountedRef = useRef(false);
     const quillRef = useRef(null); // Ref to access Quill instance
+    const { isFullScreen } = useFullscreenContext();
 
     const [content, setContent] = useState('');
     const [notesByPage, setNotesByPage] = useState({});
