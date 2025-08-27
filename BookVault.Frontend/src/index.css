@@ -49,4 +49,7 @@
   --bookmark-list-action-button-color:#3b3b3b;
   --bookmark-list-action-button-hover-bg-color:#c5c5c5;
   --bookmark-page-preview-border-color: #5e5e5eff;
+
+  --book-reading-board-side-button-bg-color: #fff;
+  --book-reading-board-side-button-text-color: #333;
 }
