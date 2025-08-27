@@ -13,6 +13,7 @@ import { USER_NOTES } from '../../../constants/constants';
 import { useNoteContext } from '../../../context/NoteContext.jsx';
 import { useParams } from 'react-router-dom';
 import { useUser } from '../../../context/UserContext.jsx';
+import { useFullscreenContext } from '../../../context/FullscreenContext.jsx';
 
 export default function Note({ isPanelPinned, currentPageInfo }) {
     const { setHasUnsavedChanges, showUnsavedWarningPopup, setShowUnsavedWarningPopup } = useNoteContext();
@@ -22,6 +23,7 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
     const settingsRef = useRef(null);
     const hasMountedRef = useRef(false);
     const quillRef = useRef(null); // Ref to access Quill instance
+    const { isFullScreen } = useFullscreenContext();
 
     const [content, setContent] = useState('');
     const [notesByPage, setNotesByPage] = useState({});
@@ -774,7 +776,9 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
             placeholder="Type your note here..."
             className={styles.editor}
             style={{
-                maxHeight: isPanelPinned ? '590px' : '430px',
+                maxHeight: isFullScreen
+                    ? (isPanelPinned ? "748px" : "430px")
+                    : (isPanelPinned ? "590px" : "430px")
             }}
         />
         <div className={styles.noteContentActions}>
