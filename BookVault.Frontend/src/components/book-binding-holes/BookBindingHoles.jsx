@@ -5,7 +5,7 @@ import { useFullscreenContext } from '../../context/FullscreenContext';
 export default function BookBindingHoles({ side }) {
   const { isFullScreen } = useFullscreenContext();
   
-  const holes = new Array(24).fill(0);
+  const holes = new Array(isFullScreen ? 29: 24).fill(0);
   const sideClass = side === 'left' || side === 'right' ? styles[side] : '';
 
   return (
