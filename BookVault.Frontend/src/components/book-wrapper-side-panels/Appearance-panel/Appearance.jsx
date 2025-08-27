@@ -38,6 +38,7 @@ export default function Appearance() {
 
       if (newTheme) {
         // Dark theme
+        document.documentElement.style.setProperty("--header-pin-icon-color", "#fff");
         document.documentElement.style.setProperty("--panel-header", "#333");
         document.documentElement.style.setProperty("--panel-header-name-color", "#fff");  
         document.documentElement.style.setProperty("--panel-body-bg", "#3f3f3fff");
@@ -84,6 +85,7 @@ export default function Appearance() {
         document.documentElement.style.setProperty("--bookmark-action-button-disabled-text-color", "#858585ff");
       } else {
         // Light theme
+        document.documentElement.style.setProperty("--header-pin-icon-color", "black");
         document.documentElement.style.setProperty("--panel-header", "#fff");
         document.documentElement.style.setProperty("--panel-header-name-color", "#111");
         document.documentElement.style.setProperty("--panel-body-bg", "#f1f1f1ff");
