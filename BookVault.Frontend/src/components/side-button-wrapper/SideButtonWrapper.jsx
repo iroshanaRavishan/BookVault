@@ -8,6 +8,7 @@ import { FaChartBar } from "react-icons/fa";
 import Bookmarks from "../book-wrapper-side-panels/bookmark-panel/Bookmarks";
 import Note from "../book-wrapper-side-panels/note-panel/Note";
 import { useNoteContext } from "../../context/NoteContext";
+import Appearance from "../book-wrapper-side-panels/Appearance-panel/Appearance";
 
 const rightButtonData = ["Bookmarks", "Appearance", "Reading Style", "Statistics"];
 const leftButtonData = ["Notes"];
@@ -215,7 +216,14 @@ export default function SideButtonsWrapper({
       onBookmarkItemDoubleClick={onBookmarkSelect}
       thumbnailGeneratedBookmarkDelFromBook={onThumbnailGeneratedBookmarkDelFromBook}
     />,
-    'Appearance': <span>this is the content of the Appearance</span>,
+    'Appearance': <div 
+                    style={{
+                      display: 'flex',
+                      height: '627px'
+                    }}
+                  >
+                    <Appearance />
+                  </div>,
     'Reading Style': <span>this is the content of the Reading Styles</span>,
     'Statistics': <span>this is the content of the Statistics</span>,
     'Ask AI': <span>this is the content of the Ask AI</span>
@@ -303,7 +311,6 @@ export default function SideButtonsWrapper({
           </div>
           <div className={styles.panelBody} 
             style={{
-              backgroundColor: 'white',
               paddingRight: isLeftPanelPinned ? '14px':'',
               height: isLeftPanelPinned? '790px': '627px'
             }}>
@@ -341,7 +348,12 @@ export default function SideButtonsWrapper({
               <span className={styles.headerTopic}> {getIconForPanel(mainPanel.name)} {mainPanel.name}</span>
             </div>
           </div>
-          <div className={styles.panelBody}>
+          <div 
+            className={styles.panelBody}
+            style={{
+              height:'627px'
+            }}
+          >
             {panelContentMap[mainPanel.name] || ''}
           </div>
         </div>
