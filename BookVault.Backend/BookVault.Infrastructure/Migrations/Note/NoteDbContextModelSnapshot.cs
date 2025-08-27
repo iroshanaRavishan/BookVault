@@ -8,10 +8,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace BookVault.Infrastructure.Migrations.Bookmark
+namespace BookVault.Infrastructure.Migrations.Note
 {
-    [DbContext(typeof(BookmarkDbContext))]
-    partial class BookmarkDbContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(NoteDbContext))]
+    partial class NoteDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -23,7 +23,7 @@ namespace BookVault.Infrastructure.Migrations.Bookmark
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("BookVault.Domain.Entities.Bookmark", b =>
+            modelBuilder.Entity("BookVault.Domain.Entities.Note", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -32,23 +32,18 @@ namespace BookVault.Infrastructure.Migrations.Bookmark
                     b.Property<Guid>("BookId")
                         .HasColumnType("uuid");
 
-                    b.Property<string>("BookmarkThumbnailImagePath")
-                        .HasMaxLength(500)
-                        .HasColumnType("character varying(500)");
-
-                    b.Property<string>("BookmarkThumbnailSourcePath")
-                        .HasMaxLength(500)
-                        .HasColumnType("character varying(500)");
-
-                    b.Property<string>("Color")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<string>("Content")
+                        .HasMaxLength(5000)
+                        .HasColumnType("character varying(5000)");
 
                     b.Property<DateTimeOffset>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<int>("PageNumber")
                         .HasColumnType("integer");
+
+                    b.Property<DateTimeOffset>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uuid");
@@ -58,7 +53,7 @@ namespace BookVault.Infrastructure.Migrations.Bookmark
                     b.HasIndex("UserId", "BookId", "PageNumber")
                         .IsUnique();
 
-                    b.ToTable("Bookmarks", "app");
+                    b.ToTable("Notes", "app");
                 });
 #pragma warning restore 612, 618
         }

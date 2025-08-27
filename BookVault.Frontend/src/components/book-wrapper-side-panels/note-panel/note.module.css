@@ -1,0 +1,550 @@
+.noteWrapper {
+  height: -webkit-fill-available !important;
+  display: flex;
+  flex-direction: column;
+  color: black;
+}
+
+.noteActions {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0 4px 0;
+  background-color: var(--note-action-bg);
+}
+
+.editor {
+  flex: 1;
+  padding-top: 6px;
+}
+
+:global(.ql-editor) {
+  border-radius: 4px;
+  overflow-y: auto; 
+}
+
+:global(.ql-container) {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+:global(.ql-editor::-webkit-scrollbar) {
+  width: 10px; 
+}
+
+:global(.ql-editor::-webkit-scrollbar-track) {
+  background: #ffffff; 
+  border-radius: 0 4px 4px 0;
+}
+
+:global(.ql-editor::-webkit-scrollbar-thumb) {
+  background-color: #888; 
+  border-radius: 7px;
+  border: 2px solid #ffffff;
+}
+
+:global(.ql-editor::-webkit-scrollbar-thumb:hover) {
+  background: #555; 
+}
+
+:global(.ql-size-small) {
+  font-size: 0.8em !important;
+  display: inline !important;
+  line-height: 1 !important;
+  transform-origin: bottom left;
+  position: relative;
+  top: 0px;
+  margin-right: 0 !important;
+  white-space: normal; /* Prevent splitting of the word */
+}
+
+:global(.ql-size-large) {
+  font-size: 1.4em !important;
+  display: inline !important;
+  line-height: 1 !important;
+  transform-origin: bottom left;
+  position: relative;
+  top: 0px;
+  margin-right: 0 !important;
+  white-space: normal;
+}
+
+.customToolbar {
+  border: none !important;
+  background: var(--note-panel-toolbar);
+  border-radius: 6px;
+  padding: 6px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  height: 64px !important;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15); 
+}
+
+/* Make Quill icons use currentColor */
+.customToolbar :global(.ql-stroke) {
+  stroke: currentColor !important;
+}
+.customToolbar :global(.ql-fill) {
+  fill: currentColor !important;
+}
+
+/* Set the actual color (drives currentColor above) */
+.customToolbar :global(button),
+.customToolbar :global(.ql-picker),
+.customToolbar :global(.ql-picker-label),
+.customToolbar :global(.ql-picker-options),
+.customToolbar :global(.ql-picker-item) {
+  color: var(--note-quill-item-color) !important;
+  border-radius: 5px;
+}
+
+/* Hover states */
+.customToolbar :global(button:hover),
+.customToolbar :global(.ql-picker-label:hover),
+.customToolbar :global(.ql-picker-item:hover) {
+  background: var(--note-quill-item-background-hover-color) !important;
+}
+
+.undoRedoActionsButtons{
+  display: flex;
+  flex-direction: row;
+  gap: 6px;
+}
+
+.undoRedoButton {
+  border-radius: 4px;
+  padding: 3px 8px;
+  cursor: pointer;
+  border: 1px solid var(--undo-redo-action-button-border-color);
+  background-color: var(--undo-redo-action-button-bg-color);
+  color: var(--undo-redo-action-button-item-color);
+}
+
+.undoRedoButton:hover {
+  background-color: var(--undo-redo-action-button-hover-bg-color);
+}
+
+.pageAttachementText {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
+}
+
+.noteDetailBar {
+  display: flex;
+  flex-direction: row;
+  align-items: end;
+  justify-content: space-between;
+  gap: 4px;
+  font-size: 12px;
+  color: var(--note-section-text-color);
+  user-select: none;
+  background: var(--note-detail-bar-bg);
+}
+
+.characterLimitTextWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+  font-size: 11px;
+}
+
+.clearDeleteButtons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
+.clearButton {
+  background-color: #f7e380;
+  color: #494949;
+  border: 1px solid var(--note-clear-button-border-color);
+  border-radius: 5px;
+  padding: 2px 12px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.clearButton:hover:enabled {
+  background-color: #ffe066;
+}
+
+.clearButton:disabled {
+  background-color: #f7e38099;
+  color: #aaa;
+  cursor: not-allowed;
+}
+
+.deleteButton {
+  background-color: #f78080;
+  color: #494949;
+  border: 1px solid var(--note-delete-button-border-color);
+  border-radius: 5px;
+  padding: 2px 12px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.deleteButton:hover:enabled {
+  background-color: #e74c3c;
+}
+
+.deleteButton:disabled {
+  background-color: #f7808099;
+  color: #fff;
+  cursor: not-allowed;
+}
+
+.notePageSeparator {
+  display: inline-block;
+  width: 1px;
+  height: 24px;
+  background-color: #ccc;
+  margin: 0 5px; 
+  vertical-align: middle;
+}
+
+.noteNavigation{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.navigationIcons {
+  margin: 0 5px;
+  border-radius: 5px;
+  height: 20px;
+  padding: 5px 3px;
+  border: 1px solid var(--note-navigation-button-border-color);
+  background-color: var(--note-navigation-button-bg);
+  cursor: pointer;
+}
+
+.navigationIcons:hover {
+  background-color: var(--note-navigation-button-hover-bg-color);
+  color: #2c2c2c;
+}
+
+.pageText {
+  font-size: 14px;
+  font-weight: 400;
+  cursor: pointer;
+  height: 25.5px;
+  user-select: none;
+}
+
+.noteNagigationPageNumber:hover {
+    background-color: var(--note-navigation-highlighted-note-number-hover-bg-color);
+    border-radius: 5px;
+}
+
+.settings {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: #494949;
+  gap: 5px;
+  cursor: pointer;
+  border: 1px solid var(--note-settings-button-border-color);
+  padding: 5px;
+  border-radius: 5px;
+  height: 20px;
+  background-color: var(--note-settings-button-background-color);
+}
+
+.settings:hover {
+  background-color: var(--note-settings-button-hover-bg-color);
+  color: #2c2c2c;
+}
+
+.noteContentActions {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+  width: 100%;
+}
+
+.noteContentActions button {
+  padding: 8px 20px;
+  border: none;
+  font-size: 14px;
+  border-radius: 6px;
+  background-color: var(--note-action-button-bg-color);
+  color: var(--note-action-button-text-color);
+  width: 100%;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.noteContentActions button:hover {
+  background-color: var(--note-action-button-hover-bg-color);
+}
+
+.noteContentActions button:disabled {
+  background-color: var(--note-action-button-disabled-bg-color); 
+  color: var(--note-action-button-disabled-text-color);
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.popup {
+  position: absolute;
+  top: 130px; /* adjust based on your layout */
+  right: 0px;
+  background: white;
+  padding: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  z-index: 1000;
+  width: 160px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.popupHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.headerText {
+  line-height: 1.4;
+  font-size: 14px;
+}
+
+.popupBody {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.sectionLabel {
+  font-size: 12px;
+  font-weight: 400;
+  margin-top: 5px;
+  display: flex;          
+  align-items: center;    
+}
+
+.sliderWrapper {
+  position: relative;
+  padding-bottom: 10px;
+  user-select: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding-top: 5px;
+}
+
+.lineHeightSlider {
+  font-size: 12px;
+  font-weight: 600;
+  margin-top: 10px;
+  position: relative;
+  display: flex;       
+  flex-direction: column;   
+}
+
+.lineHeightSlider::before {
+  content: "";
+  flex-grow: 1;           
+  height: 1px;
+  background-color: #ccc;
+}
+
+.sliderLimitNumbers {
+  font-size: 12px;
+  color: #666;
+}
+
+/* Style the slider track */
+.slider {
+  width: 100%;
+  -webkit-appearance: none;
+  height: 3px;
+  border-radius: 3px;
+  background: #ddd;
+  outline: none;
+  cursor: pointer;
+}
+
+/* Thumb */
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  background: white;      
+  border: 3px solid black;
+  cursor: pointer;
+  border-radius: 50%;
+  position: relative;
+  z-index: 2;
+  margin-top: -1px; /* center the thumb */
+  transition: background 0.3s, border-color 0.3s;
+}
+
+/* Thumb hover effect */
+.slider:hover::-webkit-slider-thumb {
+  background: white;      
+  border-color: #333;     
+    width: 13px;            
+  height: 13px;
+}
+
+.noteNavigationSelectionSection {
+  font-size: 12px;
+  font-weight: 600;
+  position: relative;
+  display: flex;       
+  flex-direction: column;   
+  justify-content: flex-start;
+  gap: 10px;
+  width: 100%;
+  padding-bottom: 10px;
+}
+
+.noteNavigationSelectionSection::before {
+  content: "";
+  flex-grow: 1;           
+  height: 1px;
+  background-color: #ccc;
+}
+
+.sectionLabel {
+  font-size: 12px;
+  font-weight: 600;
+  color: #666;
+  position: relative;
+}
+
+.navigationWrapper, .pageRuleVisibility {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+/* Hide the native radio */
+.radioLabel input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  color: #666;
+  width: 13px !important;
+  height: 13px !important;
+  border: 2px solid #666;
+  border-radius: 50%;
+  margin-right: 8px;
+  cursor: pointer;
+  position: relative;
+  outline: none;
+  background: #fff;
+  transition: border-color 0.2s ease;
+}
+
+.radioLabel input[type="radio"]:checked {
+  border-color: #202020;
+  background: radial-gradient(circle, #252525 50%, transparent 50%);
+}
+
+.radioButtonWrapper {
+  font-size: 12px;
+  font-weight: 500;
+  color: #444;
+  cursor: pointer;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  transition: color 0.2s ease;
+}
+
+.radioLabel {
+  font-size: 12px;
+  font-weight: 500;
+  color: #444;
+  cursor: pointer;
+}
+
+.radioDesc {
+  color: #8f8f8f;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+/* discard changes modal */
+.modalBackdrop {
+  position: fixed;
+  top: 0; 
+  left: 0;
+  width: 100%; 
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex; align-items: center; justify-content: center;
+}
+
+.modal {
+  background: white;
+  padding: 20px;
+  width: 70%;
+  border-radius: 8px;
+  text-align: center;
+  animation: fadeInScale 0.3s ease-out;
+}
+
+.modalActionButtons {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-around;
+  gap: 10px;
+}
+
+.modalButtons {
+  padding: 8px 15px;
+  border: none;
+  font-size: 13px;
+  border-radius: 6px;
+  background-color: #494949;
+  color: white;
+  cursor: pointer;
+}
+
+.modalButtons:hover {
+  background-color: #666;
+}
+
+.highlightedPage {
+  background-color: var(--note-navigation-highlighted-note-bg);
+  border-radius: 5px;
+  transition: background-color 0.1s ease;
+  height: 35px;
+  font-weight: 700;
+}
+
+.nonHeighlightedPageNumber {
+  color: var(--note-navigation-non-heighlighted-button-text-color);
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

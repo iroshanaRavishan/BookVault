@@ -4,15 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookVault.Application.DTOs.BookDTOs
+namespace BookVault.Application.DTOs.NoteDTOs
 {
-    public class BookmarkCreateDto
+    public class CreateNoteDTO
     {
         public Guid UserId { get; set; }
         public Guid BookId { get; set; }
         public int PageNumber { get; set; }
-        public required string Color { get; set; }
-        public string? BookmarkThumbnailSourcePath { get; set; }
-        public string? BookmarkThumbnailImagePath { get; set; }
+        public required string? Content { get; set; }
     }
 }

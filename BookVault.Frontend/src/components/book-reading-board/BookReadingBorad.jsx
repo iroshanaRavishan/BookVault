@@ -16,6 +16,12 @@ export default function BookReadingBorad() {
   const [leftPanelOpen, setLeftPanelOpen] = useState(false);
   const [isLeftPanelPinned, setIsLeftPanelPinned] = useState(false);
   const [selectedBookmarkedPageNumber, setSelectedBookmarkedPageNumber] = useState(null);
+  const [thumbnailGeneratedBookmarkDelFromBook, setThumbnailGeneratedBookmarkDelFromBook] = useState(null);
+  const [currentPageInfo, setCurrentPageInfo] = useState({
+    left: 0,
+    right: 1,
+    total: null
+  });
 
   // This replaces useState for isRightPanelOpen
   const isRightPanelOpen = useMemo(() => {
@@ -24,6 +30,12 @@ export default function BookReadingBorad() {
     const isBottom = mainPanel?.position === "bottom";
     return (isRight || isBottom) && leftPanelOpen && isLeftPanelPinned;
   }, [mainPanel, leftPanelOpen, isLeftPanelPinned]);
+
+  // function to force re-trigger bookmark navigation
+  const handleBookmarkSelect = (pageNum) => {
+    setSelectedBookmarkedPageNumber(null); // Reset to trigger change
+    setTimeout(() => setSelectedBookmarkedPageNumber(pageNum), 0); // Set new page
+  };
 
   // Load existing book data
   useEffect(() => {
@@ -62,9 +74,13 @@ export default function BookReadingBorad() {
     loadBookData()
   }, [id]);
 
-  useEffect(()=>{
-    // Disable scroll when the component is mounted
+  useEffect(() => {
+    // Scroll to top
+    window.scrollTo(0, 0);
+
+    // Disable scroll
     document.body.style.overflow = 'hidden';
+    window.scrollTo(0, 0);  // Reset scroll position to top
 
     // Cleanup function to enable scroll when the component is unmounted
     return () => {
@@ -85,13 +101,17 @@ export default function BookReadingBorad() {
           setLeftPanelOpen={setLeftPanelOpen}
           isLeftPanelPinned={isLeftPanelPinned}
           setIsLeftPanelPinned={setIsLeftPanelPinned}
-          onBookmarkSelect={setSelectedBookmarkedPageNumber}
+          onBookmarkSelect={handleBookmarkSelect}
+          onThumbnailGeneratedBookmarkDelFromBook={thumbnailGeneratedBookmarkDelFromBook}
+          currentPageInfo={currentPageInfo}
         />
       </div>
       <div className={styles.book} style={{ width: `${bookWidth}%` }}>
         <FlipBook
           isRightPanelOpen={isRightPanelOpen}
           selectedBookmarkedPageNumber={selectedBookmarkedPageNumber}
+          setThumbnailGeneratedBookmarkDelFromBook={setThumbnailGeneratedBookmarkDelFromBook}
+          setCurrentPageInfo={setCurrentPageInfo}
         />
       </div>
     </div>

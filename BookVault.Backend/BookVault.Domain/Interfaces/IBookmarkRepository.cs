@@ -13,6 +13,7 @@ namespace BookVault.Domain.Interfaces
         Task<Bookmark?> GetByIdAsync(Guid bookmarkId);
         Task AddAsync(Bookmark bookmark);
         Task<bool> DeleteByIdAsync(Guid id);
-        Task DeleteAsync(Bookmark bookmark);
+        Task<bool> DeleteAsync(Bookmark bookmark);
+        Task <bool>UpdateAllBookmarkThumbnailPathAsync(Guid userId, Guid bookId, string newThumbnailImagePath);
     }
 }
