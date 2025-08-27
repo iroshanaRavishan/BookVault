@@ -11,7 +11,7 @@ namespace BookVault.Application.Interfaces
     public interface INoteService
     {
         Task<IEnumerable<Note>> GetNotesByUserAndBookAsync(Guid userId, Guid bookId);
-        Task<ResponseNoteDTO> AddAsync(CreateNoteDTO dto);
+        Task<ResponseNoteDTO> AddOrUpdateAsync(CreateNoteDTO dto);
         Task<ResponseNoteDTO> UpdateNoteAsync(Guid noteId, UpdateNoteDTO dto);
         Task<bool> DeleteNoteAsync(Guid noteId);
     }

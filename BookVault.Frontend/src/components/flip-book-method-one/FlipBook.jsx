@@ -8,6 +8,7 @@ import { useUser } from '../../context/UserContext';
 import { useParams } from 'react-router-dom';
 import BookmarkListener from '../bookmark-listener/BookmarkListener';
 import { useNoteContext } from '../../context/NoteContext';
+import { useFullscreenContext } from '../../context/FullscreenContext';
 
 const Page = forwardRef(({ 
   children,
@@ -119,6 +120,8 @@ export default function FlipBook({
   const BOOKMARKS_PER_PAGE = 14;
   const [leftPageIndex, setLeftPageIndex] = useState(0);
   const [rightPageIndex, setRightPageIndex] = useState(0);
+
+  const { isFullScreen } = useFullscreenContext();
 
   pages.push({ type: 'cover', content: <section>Cover Page</section> });
   pages.push({ type: 'blank', content: null });
@@ -487,11 +490,20 @@ export default function FlipBook({
   const navButtonWidth = isFirstPage || isLastPage ? '480px' : '920px';
 
   return (
-    <div className={styles.wrapper} style={{ width: isRightPanelOpen ? 'calc(100% - 350px)' : '100%' }}>
+    <div 
+      className={styles.wrapper}
+      style={{ 
+        width: isRightPanelOpen ? 'calc(100% - 350px)' : '100%',
+        transition: 'filter 0.2s'
+     }}
+    >
       <BookmarkListener onBookmarkDeleted={handleDeletedBookmarkFromSignalR} />
       <div 
         className={styles.bookmarkContainers}
-        style={{ transform: containerTransform }}
+        style={{ 
+          transform: containerTransform,
+          width: isFullScreen ? '980px' : '800px'  
+        }}
       >
         <div className={styles.leftBookmarkContainer}>
           {leftBookmarkPages[leftPageIndex] &&  leftBookmarkPages[leftPageIndex].map((b) => (
@@ -633,11 +645,12 @@ export default function FlipBook({
       <HTMLFlipBook
         ref={flipBookRef}
         width={230}
+        style={{ filter: `brightness(var(--flipbook-brightness))` }}
         height={345}
         minWidth={180}
-        maxWidth={460}
+        maxWidth={isFullScreen ? 568 : 460}
         minHeight={270}
-        maxHeight={690}
+        maxHeight={isFullScreen ? 852 : 690}
         size="stretch"
         maxShadowOpacity={0.5}
         showCover={true}
@@ -713,7 +726,12 @@ export default function FlipBook({
             hasUnsavedChanges={hasUnsavedChanges}
             setShowUnsavedWarningPopup={setShowUnsavedWarningPopup}
           >
-            <div className={styles.pageContent}>{page.content}</div>
+            <div
+              className={styles.pageContentWrapper}
+              style={i % 2 === 0 ? { borderRadius: "0px 10px 10px 0px" } : { borderRadius: "10px 0px 0px 10px" }}
+            >
+              <div className={styles.pageContent}>{page.content}</div>
+            </div>
           </Page>
         ))}
       </HTMLFlipBook>

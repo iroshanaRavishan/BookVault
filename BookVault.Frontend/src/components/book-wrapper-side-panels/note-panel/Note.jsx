@@ -13,6 +13,7 @@ import { USER_NOTES } from '../../../constants/constants';
 import { useNoteContext } from '../../../context/NoteContext.jsx';
 import { useParams } from 'react-router-dom';
 import { useUser } from '../../../context/UserContext.jsx';
+import { useFullscreenContext } from '../../../context/FullscreenContext.jsx';
 
 export default function Note({ isPanelPinned, currentPageInfo }) {
     const { setHasUnsavedChanges, showUnsavedWarningPopup, setShowUnsavedWarningPopup } = useNoteContext();
@@ -22,6 +23,7 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
     const settingsRef = useRef(null);
     const hasMountedRef = useRef(false);
     const quillRef = useRef(null); // Ref to access Quill instance
+    const { isFullScreen } = useFullscreenContext();
 
     const [content, setContent] = useState('');
     const [notesByPage, setNotesByPage] = useState({});
@@ -255,7 +257,7 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
     };
 
     const getPageClass = (pageNumber) =>
-    highlightPage === pageNumber ? styles.highlightedPage : '';
+        highlightPage === pageNumber ? styles.highlightedPage : styles.nonHeighlightedPageNumber;
 
     const modules = {
         toolbar: {
@@ -393,9 +395,9 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
 
         // Apply gradient with dynamic offset
         editorRoot.style.background = `repeating-linear-gradient(
-            #fff,
-            #fff ${lineSpacing - 1}px,
-            #bdbdbdff ${lineSpacing}px
+            var(--editor-bg-color),
+            var(--editor-bg-color) ${lineSpacing - 1}px,
+            var(--editor-line-color) ${lineSpacing}px
         )`;
         editorRoot.style.backgroundAttachment = 'local';
         editorRoot.style.backgroundPosition = `0 ${offset}px`;
@@ -618,7 +620,7 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
             </select>
         </div>
 
-        <div className={styles.noteActions} style={{margin: '8px 0 4px 0'}}>  
+        <div className={styles.noteActions}>  
             <div className={styles.undoRedoActionsButtons}>
                 <span className={styles.undoRedoButton} onClick={() => quillRef.current?.getEditor().history.undo()}><LuUndo2 /></span>
                 <span className={styles.undoRedoButton} onClick={() => quillRef.current?.getEditor().history.redo()}><LuRedo2 /></span>
@@ -746,7 +748,7 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
                 </span>
             </div>
             <div className={styles.characterLimitTextWrapper}>
-                <span style={{ color: (quillRef.current?.getEditor().getLength() - 1) >= USER_NOTES.MAX_CHARS ? 'red' : 'gray' }}>
+                <span style={{ color: (quillRef.current?.getEditor().getLength() - 1) >= USER_NOTES.MAX_CHARS ? 'red' : `var(--note-section-text-color)`  }}>
                     {(quillRef.current?.getEditor().getLength() - 1) || 0} / {USER_NOTES.MAX_CHARS} characters
                 </span> 
                 <div className={styles.clearDeleteButtons}>
@@ -774,7 +776,9 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
             placeholder="Type your note here..."
             className={styles.editor}
             style={{
-                maxHeight: isPanelPinned ? '590px' : '430px',
+                maxHeight: isFullScreen
+                    ? (isPanelPinned ? "748px" : "430px")
+                    : (isPanelPinned ? "590px" : "430px")
             }}
         />
         <div className={styles.noteContentActions}>
