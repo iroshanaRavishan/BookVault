@@ -500,7 +500,10 @@ export default function FlipBook({
       <BookmarkListener onBookmarkDeleted={handleDeletedBookmarkFromSignalR} />
       <div 
         className={styles.bookmarkContainers}
-        style={{ transform: containerTransform }}
+        style={{ 
+          transform: containerTransform,
+          width: isFullScreen ? '980px' : '800px'  
+        }}
       >
         <div className={styles.leftBookmarkContainer}>
           {leftBookmarkPages[leftPageIndex] &&  leftBookmarkPages[leftPageIndex].map((b) => (
