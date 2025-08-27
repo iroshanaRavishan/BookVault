@@ -13,6 +13,7 @@ import { USER_NOTES } from '../../../constants/constants';
 import { useNoteContext } from '../../../context/NoteContext.jsx';
 import { useParams } from 'react-router-dom';
 import { useUser } from '../../../context/UserContext.jsx';
+import { useFullscreenContext } from '../../../context/FullscreenContext.jsx';
 
 export default function Note({ isPanelPinned, currentPageInfo }) {
     const { setHasUnsavedChanges, showUnsavedWarningPopup, setShowUnsavedWarningPopup } = useNoteContext();
