@@ -1,4 +1,6 @@
 :root {
+  --header-pin-icon-color: black;
+
   --flipbook-bg: #f1c40f;
   --flipbook-margin: 45px; 
   --flipbook-brightness: 1;
