@@ -9,6 +9,7 @@ import Bookmarks from "../book-wrapper-side-panels/bookmark-panel/Bookmarks";
 import Note from "../book-wrapper-side-panels/note-panel/Note";
 import { useNoteContext } from "../../context/NoteContext";
 import Appearance from "../book-wrapper-side-panels/Appearance-panel/Appearance";
+import { useFullscreenContext } from "../../context/FullscreenContext";
 
 const rightButtonData = ["Bookmarks", "Appearance", "Reading Style", "Statistics"];
 const leftButtonData = ["Notes"];
@@ -38,6 +39,7 @@ export default function SideButtonsWrapper({
   const { showUnsavedWarningPopup, setShowUnsavedWarningPopup } = useNoteContext();
   const rightRefs = useRef([]);
   const leftRefs = useRef([]);
+  const { isFullScreen } = useFullscreenContext();
 
   useEffect(() => {
     const calcOffsets = (refs) => {
@@ -195,8 +197,8 @@ export default function SideButtonsWrapper({
       const newBookWidthPx = initialBookWidthPx - deltaX;
       const newBookWidthPercent = (newBookWidthPx / containerWidth) * 100;
 
-      // Clamp the width between 75% and 85%
-      const clampedWidth = Math.min(Math.max(newBookWidthPercent, 75), 85);
+      // Clamp the width between 77% and 85%
+      const clampedWidth = Math.min(Math.max(newBookWidthPercent, 77), 85);
 
       setBookWidth(clampedWidth);
     };
