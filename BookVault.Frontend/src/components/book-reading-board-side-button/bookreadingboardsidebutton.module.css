@@ -14,8 +14,8 @@
 
 .sideButton {
   width: fit-content;
-  background-color: #333;
-  color: white;
+  background-color: var(--book-reading-board-side-button-bg-color);
+  color: var(--book-reading-board-side-button-text-color);
   font-size: 15px;
   cursor: pointer;
   border-top-left-radius: 10px;
