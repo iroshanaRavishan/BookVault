@@ -7,11 +7,11 @@
 }
 
 .book {
-    background: #f1c40f;
     overflow: auto;
+    background-color: var(--flipbook-bg);
 }
 
 .wrapper {
     overflow: auto;
-    background: #f1c40f;
+    background-color: var(--flipbook-bg);
 }

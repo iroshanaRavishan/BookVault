@@ -7,6 +7,9 @@ import { LuNotebookText } from "react-icons/lu";
 import { FaChartBar } from "react-icons/fa";
 import Bookmarks from "../book-wrapper-side-panels/bookmark-panel/Bookmarks";
 import Note from "../book-wrapper-side-panels/note-panel/Note";
+import { useNoteContext } from "../../context/NoteContext";
+import Appearance from "../book-wrapper-side-panels/Appearance-panel/Appearance";
+import { useFullscreenContext } from "../../context/FullscreenContext";
 
 const rightButtonData = ["Bookmarks", "Appearance", "Reading Style", "Statistics"];
 const leftButtonData = ["Notes"];
@@ -22,7 +25,8 @@ export default function SideButtonsWrapper({
   isLeftPanelPinned,
   setIsLeftPanelPinned,
   onBookmarkSelect,
-  onThumbnailGeneratedBookmarkDelFromBook
+  onThumbnailGeneratedBookmarkDelFromBook,
+  currentPageInfo
 }) {
   const [rightOffsets, setRightOffsets] = useState([]);
   const [leftOffsets, setLeftOffsets] = useState([]);
@@ -32,8 +36,10 @@ export default function SideButtonsWrapper({
   const [isLeftClosing, setIsLeftClosing] = useState(false);
   const [pendingPanel, setPendingPanel] = useState(null);   // Panel to open next after closing
 
+  const { showUnsavedWarningPopup, setShowUnsavedWarningPopup } = useNoteContext();
   const rightRefs = useRef([]);
   const leftRefs = useRef([]);
+  const { isFullScreen } = useFullscreenContext();
 
   useEffect(() => {
     const calcOffsets = (refs) => {
@@ -54,6 +60,12 @@ export default function SideButtonsWrapper({
     setRightOffsets(calcOffsets(rightRefs.current));
     setLeftOffsets(calcOffsets(leftRefs.current));
   }, []);
+
+  useEffect(() => {
+    if((leftPanelOpen == false) && showUnsavedWarningPopup) {
+      handleButtonClick("Notes", "left")
+    }
+  }, [showUnsavedWarningPopup]);
 
   const { dynamicPanelRight, dynamicButtonRight } = useMemo(() => {
     // If the left panel isn’t pinned, neither offset should apply
@@ -139,6 +151,7 @@ export default function SideButtonsWrapper({
     setIsLeftOpening(false);
 
     setTimeout(() => {
+      setShowUnsavedWarningPopup(false)
       setLeftPanelOpen(false);
       setIsLeftClosing(false);
       setIsLeftPanelPinned(false);
@@ -184,8 +197,8 @@ export default function SideButtonsWrapper({
       const newBookWidthPx = initialBookWidthPx - deltaX;
       const newBookWidthPercent = (newBookWidthPx / containerWidth) * 100;
 
-      // Clamp the width between 75% and 85%
-      const clampedWidth = Math.min(Math.max(newBookWidthPercent, 75), 85);
+      // Clamp the width between 77% and 85%
+      const clampedWidth = Math.min(Math.max(newBookWidthPercent, 77), 85);
 
       setBookWidth(clampedWidth);
     };
@@ -205,7 +218,14 @@ export default function SideButtonsWrapper({
       onBookmarkItemDoubleClick={onBookmarkSelect}
       thumbnailGeneratedBookmarkDelFromBook={onThumbnailGeneratedBookmarkDelFromBook}
     />,
-    'Appearance': <span>this is the content of the Appearance</span>,
+    'Appearance': <div 
+                    style={{
+                      display: 'flex',
+                      height: '627px'
+                    }}
+                  >
+                    <Appearance />
+                  </div>,
     'Reading Style': <span>this is the content of the Reading Styles</span>,
     'Statistics': <span>this is the content of the Statistics</span>,
     'Ask AI': <span>this is the content of the Ask AI</span>
@@ -293,10 +313,12 @@ export default function SideButtonsWrapper({
           </div>
           <div className={styles.panelBody} 
             style={{
-              backgroundColor: 'white',
-              paddingRight: isLeftPanelPinned ? '14px':''
+              paddingRight: isLeftPanelPinned ? '14px':'',
+              height: isFullScreen 
+              ? (isLeftPanelPinned ? "948px" : "790px") 
+              : (isLeftPanelPinned ? "790px" : "627px")
             }}>
-            <Note isPanelPinned={isLeftPanelPinned} />
+            <Note isPanelPinned={isLeftPanelPinned} currentPageInfo={currentPageInfo} />
           </div>
           {isLeftPanelPinned && (
             <div className={styles.resizer} onMouseDown={handleMouseDown} />
@@ -330,7 +352,12 @@ export default function SideButtonsWrapper({
               <span className={styles.headerTopic}> {getIconForPanel(mainPanel.name)} {mainPanel.name}</span>
             </div>
           </div>
-          <div className={styles.panelBody}>
+          <div 
+            className={styles.panelBody}
+            style={{
+              height:'627px'
+            }}
+          >
             {panelContentMap[mainPanel.name] || ''}
           </div>
         </div>
