@@ -776,7 +776,9 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
             placeholder="Type your note here..."
             className={styles.editor}
             style={{
-                maxHeight: isPanelPinned ? '590px' : '430px',
+                maxHeight: isFullScreen
+                    ? (isPanelPinned ? "748px" : "430px")
+                    : (isPanelPinned ? "590px" : "430px")
             }}
         />
         <div className={styles.noteContentActions}>
