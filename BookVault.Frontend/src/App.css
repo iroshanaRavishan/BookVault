@@ -64,6 +64,7 @@ body {
   font-size: 16px;
   cursor: pointer;
   z-index: 1000;
+  color: var(--header-pin-icon-color);
 }
 
 .panelPinBtn:hover {
