@@ -1,11 +1,14 @@
 import { useState } from "react";
 import styles from './appearance.module.css';
+import { useFullscreenContext } from "../../../context/FullscreenContext";
 
 export default function Appearance() {
   const [color, setColor] = useState("#f1c40f"); // default yellow
   const [marginEnabled, setMarginEnabled] = useState(true); // default ON (45px)
   const [brightness, setBrightness] = useState(1); // default brightness
   const [isDarkTheme, setIsDarkTheme] = useState(false); // default light
+
+  const { isFullScreen, handleFullScreenToggle } = useFullscreenContext();
 
   const handleColorChange = (e) => {
     const newColor = e.target.value;
@@ -35,6 +38,7 @@ export default function Appearance() {
 
       if (newTheme) {
         // Dark theme
+        document.documentElement.style.setProperty("--header-pin-icon-color", "#fff");
         document.documentElement.style.setProperty("--panel-header", "#333");
         document.documentElement.style.setProperty("--panel-header-name-color", "#fff");  
         document.documentElement.style.setProperty("--panel-body-bg", "#3f3f3fff");
@@ -69,9 +73,19 @@ export default function Appearance() {
 
         document.documentElement.style.setProperty("--bookmark-action-button-bg-color", "#ffffffff");
         document.documentElement.style.setProperty("--bookmark-action-button-text-color", "#000000ff");
-        document.documentElement.style.setProperty("--bookmark-section-text-color", "#a09e9eff");
+        document.documentElement.style.setProperty("--bookmark-section-text-color", "#bebebeff");
+        document.documentElement.style.setProperty("--bookmark-list-item-bg-color", "#1f1f1fb7");
+        document.documentElement.style.setProperty("--bookmark-list-item-hover-number-color", "#ffffffd2");
+        document.documentElement.style.setProperty("--bookmark-list-action-button-bg-color", "#dddddd25");
+        document.documentElement.style.setProperty("--bookmark-thumbnail-section-header-bg-color", "#616161ff");
+        document.documentElement.style.setProperty("--bookmark-list-action-button-color", "#1a1a1aff");
+        document.documentElement.style.setProperty("--bookmark-list-action-button-hover-bg-color", "#acacacff");
+        document.documentElement.style.setProperty("--bookmark-page-preview-border-color", "#e0e0e0ff");
+        document.documentElement.style.setProperty("--bookmark-action-button-disabled-bg-color", "#ffffffff");
+        document.documentElement.style.setProperty("--bookmark-action-button-disabled-text-color", "#858585ff");
       } else {
         // Light theme
+        document.documentElement.style.setProperty("--header-pin-icon-color", "black");
         document.documentElement.style.setProperty("--panel-header", "#fff");
         document.documentElement.style.setProperty("--panel-header-name-color", "#111");
         document.documentElement.style.setProperty("--panel-body-bg", "#f1f1f1ff");
@@ -107,6 +121,15 @@ export default function Appearance() {
         document.documentElement.style.setProperty("--bookmark-action-button-bg-color", "#313131ff");
         document.documentElement.style.setProperty("--bookmark-action-button-text-color", "#ffffffff");
         document.documentElement.style.setProperty("--bookmark-section-text-color", "#666");
+        document.documentElement.style.setProperty("--bookmark-list-item-bg-color", "#ecececff");
+        document.documentElement.style.setProperty("--bookmark-list-item-hover-number-color", "#474747ff");
+        document.documentElement.style.setProperty("--bookmark-list-action-button-bg-color", "#e0e0e0ff");
+        document.documentElement.style.setProperty("--bookmark-thumbnail-section-header-bg-color", "#838383ff");
+        document.documentElement.style.setProperty("--bookmark-list-action-button-color", "#3b3b3b");
+        document.documentElement.style.setProperty("--bookmark-list-action-button-hover-bg-color", "#c5c5c5");
+        document.documentElement.style.setProperty("--bookmark-page-preview-border-color", "#5e5e5eff");
+        document.documentElement.style.setProperty("--bookmark-action-button-disabled-bg-color", "#727272ff");
+        document.documentElement.style.setProperty("--bookmark-action-button-disabled-text-color", "#ffffffff");
       }
       return newTheme;
     });
@@ -148,6 +171,13 @@ export default function Appearance() {
           <label>Theme: </label>
           <button onClick={handleThemeToggle}>
             {isDarkTheme ? "Switch to Light" : "Switch to Dark"}
+          </button>
+        </div>
+
+        <div className={styles.appearanceOptions}>
+          <label>View Mode: </label>
+          <button onClick={handleFullScreenToggle}>
+            {isFullScreen ? "Exit Full Mode" : "Enter Full Mode"}
           </button>
         </div>
       </div>
