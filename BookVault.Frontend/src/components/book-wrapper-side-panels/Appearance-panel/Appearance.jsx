@@ -152,6 +152,12 @@ export default function Appearance() {
           <input type="color" value={color} onChange={handleColorChange} />
         </div>
 
+        <div >
+          <label>
+            dim bookmarks
+          </label>
+        </div>
+
         <div className={styles.appearanceOptions}>
           <label>
             <input
