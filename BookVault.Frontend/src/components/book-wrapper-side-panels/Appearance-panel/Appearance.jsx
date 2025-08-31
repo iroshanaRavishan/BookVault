@@ -7,6 +7,7 @@ export default function Appearance() {
   const [marginEnabled, setMarginEnabled] = useState(true); // default ON (45px)
   const [brightness, setBrightness] = useState(1); // default brightness
   const [isDarkTheme, setIsDarkTheme] = useState(false); // default light
+  const [isDimmed, setIsDimmed] = useState(false); // toggler state
 
   const { isFullScreen, handleFullScreenToggle } = useFullscreenContext();
 
@@ -149,6 +150,16 @@ export default function Appearance() {
         <div className={styles.appearanceOptions}>
           <label>Choose FlipBook Background: </label>
           <input type="color" value={color} onChange={handleColorChange} />
+        </div>
+
+        <div >
+          <label>
+            <input
+              type="checkbox"
+              checked={isDimmed}
+            />
+            dim bookmarks
+          </label>
         </div>
 
         <div className={styles.appearanceOptions}>
