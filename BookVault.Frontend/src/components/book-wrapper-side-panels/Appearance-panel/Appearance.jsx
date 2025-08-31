@@ -145,7 +145,13 @@ export default function Appearance() {
   };
 
   const handleBookmarkBrightnessChange = () => {
-   
+    const newActiveValue = isDimmed ? 1 : 0.5; 
+    const newInactiveValue = isDimmed ? 0.5 : 0.2; 
+    setIsDimmed(!isDimmed);
+
+    // Adjust bookmark dimming (inverse relationship)
+    const activebookmarkOpacity = Math.min(1, Math.max(0.3, newActiveValue));
+    const inactivebookmarkOpacity = Math.min(1, Math.max(0.3, newInactiveValue));
   };
 
   return (
