@@ -643,6 +643,7 @@ export default function FlipBook({
       </div>
 
       <HTMLFlipBook
+        key={isFullScreen? 'fullscreen': 'normal'}
         ref={flipBookRef}
         width={230}
         style={{ filter: `brightness(var(--flipbook-brightness))` }}
