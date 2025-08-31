@@ -152,6 +152,9 @@ export default function Appearance() {
     // Adjust bookmark dimming (inverse relationship)
     const activebookmarkOpacity = Math.min(1, Math.max(0.3, newActiveValue));
     const inactivebookmarkOpacity = Math.min(1, Math.max(0.3, newInactiveValue));
+
+    document.documentElement.style.setProperty("--active-bookmark-opacity", activebookmarkOpacity);
+    document.documentElement.style.setProperty("--inactive-bookmark-opacity", inactivebookmarkOpacity);
   };
 
   return (
