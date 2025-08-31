@@ -154,6 +154,10 @@ export default function Appearance() {
 
         <div >
           <label>
+            <input
+              type="checkbox"
+              checked={isDimmed}
+            />
             dim bookmarks
           </label>
         </div>
