@@ -7,6 +7,7 @@ export default function Appearance() {
   const [marginEnabled, setMarginEnabled] = useState(true); // default ON (45px)
   const [brightness, setBrightness] = useState(1); // default brightness
   const [isDarkTheme, setIsDarkTheme] = useState(false); // default light
+  const [isDimmed, setIsDimmed] = useState(false); // toggler state
 
   const { isFullScreen, handleFullScreenToggle } = useFullscreenContext();
 
