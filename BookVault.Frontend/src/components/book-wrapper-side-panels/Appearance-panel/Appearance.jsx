@@ -7,6 +7,7 @@ export default function Appearance() {
   const [marginEnabled, setMarginEnabled] = useState(true); // default ON (45px)
   const [brightness, setBrightness] = useState(1); // default brightness
   const [isDarkTheme, setIsDarkTheme] = useState(false); // default light
+  const [isDimmed, setIsDimmed] = useState(false); // toggler state
 
   const { isFullScreen, handleFullScreenToggle } = useFullscreenContext();
 
@@ -143,12 +144,36 @@ export default function Appearance() {
     });
   };
 
+  const handleBookmarkBrightnessChange = () => {
+    const newActiveValue = isDimmed ? 1 : 0.5; 
+    const newInactiveValue = isDimmed ? 0.5 : 0.2; 
+    setIsDimmed(!isDimmed);
+
+    // Adjust bookmark dimming (inverse relationship)
+    const activebookmarkOpacity = Math.min(1, Math.max(0.3, newActiveValue));
+    const inactivebookmarkOpacity = Math.min(1, Math.max(0.3, newInactiveValue));
+
+    document.documentElement.style.setProperty("--active-bookmark-opacity", activebookmarkOpacity);
+    document.documentElement.style.setProperty("--inactive-bookmark-opacity", inactivebookmarkOpacity);
+  };
+
   return (
     <div className={styles.AppearancePanel}>
       <div>
         <div className={styles.appearanceOptions}>
           <label>Choose FlipBook Background: </label>
           <input type="color" value={color} onChange={handleColorChange} />
+        </div>
+
+        <div className={styles.appearanceOptions}>
+          <label>
+            <input
+              type="checkbox"
+              checked={isDimmed}
+              onChange={handleBookmarkBrightnessChange}
+            />
+            dim bookmarks
+          </label>
         </div>
 
         <div className={styles.appearanceOptions}>
