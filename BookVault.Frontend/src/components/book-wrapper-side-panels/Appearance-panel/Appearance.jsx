@@ -145,7 +145,8 @@ export default function Appearance() {
   };
 
   const handleBookmarkBrightnessChange = () => {
-   
+    const newActiveValue = isDimmed ? 1 : 0.5; 
+    const newInactiveValue = isDimmed ? 0.5 : 0.2; 
   };
 
   return (
