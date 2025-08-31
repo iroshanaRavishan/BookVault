@@ -651,7 +651,7 @@ export default function FlipBook({
         minWidth={180}
         maxWidth={isFullScreen ? 568 : 460}
         minHeight={270}
-        maxHeight={isFullScreen ? 852 : 690}
+        maxHeight={isFullScreen ? 834 : 690}
         size="stretch"
         maxShadowOpacity={0.5}
         showCover={true}
