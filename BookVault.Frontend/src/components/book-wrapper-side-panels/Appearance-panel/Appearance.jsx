@@ -144,6 +144,10 @@ export default function Appearance() {
     });
   };
 
+  const handleBookmarkBrightnessChange = () => {
+   
+  };
+
   return (
     <div className={styles.AppearancePanel}>
       <div>
