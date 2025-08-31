@@ -161,6 +161,7 @@ export default function Appearance() {
             <input
               type="checkbox"
               checked={isDimmed}
+              onChange={handleBookmarkBrightnessChange}
             />
             dim bookmarks
           </label>
