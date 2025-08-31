@@ -7,6 +7,7 @@ export default function Appearance() {
   const [marginEnabled, setMarginEnabled] = useState(true); // default ON (45px)
   const [brightness, setBrightness] = useState(1); // default brightness
   const [isDarkTheme, setIsDarkTheme] = useState(false); // default light
+  const [isDimmed, setIsDimmed] = useState(false); // toggler state
 
   const { isFullScreen, handleFullScreenToggle } = useFullscreenContext();
 
@@ -143,12 +144,27 @@ export default function Appearance() {
     });
   };
 
+  const handleBookmarkBrightnessChange = () => {
+   
+  };
+
   return (
     <div className={styles.AppearancePanel}>
       <div>
         <div className={styles.appearanceOptions}>
           <label>Choose FlipBook Background: </label>
           <input type="color" value={color} onChange={handleColorChange} />
+        </div>
+
+        <div className={styles.appearanceOptions}>
+          <label>
+            <input
+              type="checkbox"
+              checked={isDimmed}
+              onChange={handleBookmarkBrightnessChange}
+            />
+            dim bookmarks
+          </label>
         </div>
 
         <div className={styles.appearanceOptions}>
