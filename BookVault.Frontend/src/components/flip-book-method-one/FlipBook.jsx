@@ -113,7 +113,7 @@ export default function FlipBook({
   const { hasUnsavedChanges, setShowUnsavedWarningPopup } = useNoteContext();
   const [previousPage, setPreviousPage] = useState(0);
 
-  const contentPages = 10;
+  const contentPages = 30;
   const totalPages = 2 + contentPages + (contentPages % 2 === 1 ? 1 : 0) + 2;
   const flipBookRef = useRef();
   const pages = [];

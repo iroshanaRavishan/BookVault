@@ -1,5 +1,7 @@
 :root {
   --header-pin-icon-color: black;
+  --active-bookmark-opacity: 1;
+  --inactive-bookmark-opacity: 0.5;
 
   --flipbook-bg: #f1c40f;
   --flipbook-margin: 45px; 
