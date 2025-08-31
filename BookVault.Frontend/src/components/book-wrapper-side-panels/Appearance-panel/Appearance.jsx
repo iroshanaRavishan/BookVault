@@ -152,7 +152,7 @@ export default function Appearance() {
           <input type="color" value={color} onChange={handleColorChange} />
         </div>
 
-        <div >
+        <div className={styles.appearanceOptions}>
           <label>
             <input
               type="checkbox"
