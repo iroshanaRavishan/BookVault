@@ -144,6 +144,10 @@ export default function Appearance() {
     });
   };
 
+  const handleBookmarkBrightnessChange = () => {
+   
+  };
+
   return (
     <div className={styles.AppearancePanel}>
       <div>
@@ -152,11 +156,12 @@ export default function Appearance() {
           <input type="color" value={color} onChange={handleColorChange} />
         </div>
 
-        <div >
+        <div className={styles.appearanceOptions}>
           <label>
             <input
               type="checkbox"
               checked={isDimmed}
+              onChange={handleBookmarkBrightnessChange}
             />
             dim bookmarks
           </label>
