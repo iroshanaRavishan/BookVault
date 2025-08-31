@@ -487,7 +487,9 @@ export default function FlipBook({
   }, [bookmarks, leftBookmarks, rightBookmarkPages, leftPageIndex, rightPageIndex]);
 
 
-  const navButtonWidth = isFirstPage || isLastPage ? '480px' : '920px';
+  const navButtonWidth = isFullScreen
+    ? (isFirstPage || isLastPage ? "500px" : "1135px")
+    : (isFirstPage || isLastPage ? "480px" : "940px");
 
   return (
     <div 
