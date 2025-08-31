@@ -737,7 +737,7 @@ export default function FlipBook({
       </HTMLFlipBook>
 
       {/* Navigation Buttons */}
-      <div className={styles.navButtons} style={{ width: navButtonWidth }}>
+      <div className={styles.navButtons} style={{ width: navButtonWidth, bottom: isFullScreen ? '15px' : '0px' }}>
         <span
           style={currentPage === 0 ? { display: 'none' } : {}}
           onClick={() => goToPage(0)}
