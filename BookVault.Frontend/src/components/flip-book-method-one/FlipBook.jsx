@@ -491,6 +491,21 @@ export default function FlipBook({
     ? (isFirstPage || isLastPage ? "500px" : "1135px")
     : (isFirstPage || isLastPage ? "480px" : "940px");
 
+  useEffect(() => {
+    if (!flipBookRef.current) return;
+
+    const storedPage = parseInt(localStorage.getItem("flipbook-current-page"), 10);
+
+    if (!isNaN(storedPage)) {
+      // give the flipbook time to initialize after remount
+      setTimeout(() => {
+        if (flipBookRef.current?.pageFlip) {
+          flipBookRef.current.pageFlip().flip(storedPage);
+        }
+      }, 450);
+    }
+  }, [isFullScreen]);
+
   return (
     <div 
       className={styles.wrapper}
@@ -519,9 +534,15 @@ export default function FlipBook({
                 onClick={() => goToPage(b.page)}
                 style={{
                   backgroundColor: currentPage === b.page
-                    ? b.color.replace(/hsl\(([^)]+),\s*([^)]+),\s*([^)]+),\s*[^)]+\)/, 'hsl($1, $2, $3, 1)')
-                    : b.color,
-                  width: currentPage === b.page ? '32px' : '21px',
+                    ? b.color.replace(
+                        /hsl\(([^)]+),\s*([^)]+),\s*([^)]+),\s*[^)]+\)/,
+                        `hsl($1, $2, $3, var(--active-bookmark-opacity))`
+                      )
+                    : b.color.replace(
+                        /hsl\(([^)]+),\s*([^)]+),\s*([^)]+),\s*[^)]+\)/,
+                        `hsl($1, $2, $3, var(--inactive-bookmark-opacity))`
+                      ),
+                  width: currentPage === b.page ? '32px' : isFullScreen ? '27px': '21px',
                   cursor: 'pointer'
                 }}
               >
@@ -586,10 +607,16 @@ export default function FlipBook({
                 `}
                 onClick={() => goToPage(b.page)}
                 style={{
-                  backgroundColor: currentPage === b.page - 1
-                    ? b.color.replace(/hsl\(([^)]+),\s*([^)]+),\s*([^)]+),\s*[^)]+\)/, 'hsl($1, $2, $3, 1)')
-                    : b.color,
-                  width: currentPage === b.page - 1 ? '32px' : '21px',
+                  backgroundColor: currentPage === b.page -1
+                    ? b.color.replace(
+                        /hsl\(([^)]+),\s*([^)]+),\s*([^)]+),\s*[^)]+\)/,
+                        `hsl($1, $2, $3, var(--active-bookmark-opacity))`
+                      )
+                    : b.color.replace(
+                        /hsl\(([^)]+),\s*([^)]+),\s*([^)]+),\s*[^)]+\)/,
+                        `hsl($1, $2, $3, var(--inactive-bookmark-opacity))`
+                      ),
+                  width: currentPage === b.page - 1 ? '32px' : isFullScreen ? '27px': '21px',
                   cursor: 'pointer'
                 }}
               >
@@ -673,6 +700,7 @@ export default function FlipBook({
           }
   
           setCurrentPage(data);
+          localStorage.setItem("flipbook-current-page", data); 
 
           // Calculate left/right bookmarks for the new page
           const newLeftPage = data % 2 === 0 ? data : data - 1;
