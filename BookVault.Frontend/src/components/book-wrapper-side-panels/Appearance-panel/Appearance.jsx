@@ -8,6 +8,7 @@ export default function Appearance() {
   const [brightness, setBrightness] = useState(1); // default brightness
   const [isDarkTheme, setIsDarkTheme] = useState(false); // default light
   const [isDimmed, setIsDimmed] = useState(false); // toggler state
+  const [isFocusMode, setIsFocusMode] = useState(false); // focus mode state
 
   const { isFullScreen, handleFullScreenToggle } = useFullscreenContext();
 
