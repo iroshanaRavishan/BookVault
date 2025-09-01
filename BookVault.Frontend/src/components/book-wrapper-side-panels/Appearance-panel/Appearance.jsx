@@ -163,6 +163,9 @@ export default function Appearance() {
       const newFocusMode = !prev;
 
       if (newFocusMode) {
+        // Close all opened side buttons
+        window.dispatchEvent(new Event("closeAllSideButtons"));
+
         // Reduce background opacity
         document.documentElement.style.setProperty("--flipbook-bg-opacity", "0.5");
       } else {
