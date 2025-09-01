@@ -496,6 +496,14 @@ export default function FlipBook({
 
     const storedPage = parseInt(localStorage.getItem("flipbook-current-page"), 10);
 
+    if (!isNaN(storedPage)) {
+      // give the flipbook time to initialize after remount
+      setTimeout(() => {
+        if (flipBookRef.current?.pageFlip) {
+          flipBookRef.current.pageFlip().flip(storedPage);
+        }
+      }, 450);
+    }
   }, [isFullScreen]);
 
   return (
