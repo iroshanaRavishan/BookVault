@@ -607,10 +607,16 @@ export default function FlipBook({
                 `}
                 onClick={() => goToPage(b.page)}
                 style={{
-                  backgroundColor: currentPage === b.page - 1
-                    ? b.color.replace(/hsl\(([^)]+),\s*([^)]+),\s*([^)]+),\s*[^)]+\)/, 'hsl($1, $2, $3, 1)')
-                    : b.color,
-                  width: currentPage === b.page - 1 ? '32px' : '21px',
+                  backgroundColor: currentPage === b.page -1
+                    ? b.color.replace(
+                        /hsl\(([^)]+),\s*([^)]+),\s*([^)]+),\s*[^)]+\)/,
+                        `hsl($1, $2, $3, var(--active-bookmark-opacity))`
+                      )
+                    : b.color.replace(
+                        /hsl\(([^)]+),\s*([^)]+),\s*([^)]+),\s*[^)]+\)/,
+                        `hsl($1, $2, $3, var(--inactive-bookmark-opacity))`
+                      ),
+                  width: currentPage === b.page - 1 ? '32px' : isFullScreen ? '27px': '21px',
                   cursor: 'pointer'
                 }}
               >
