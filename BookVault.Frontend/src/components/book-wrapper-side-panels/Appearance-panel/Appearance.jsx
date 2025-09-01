@@ -158,6 +158,19 @@ export default function Appearance() {
     document.documentElement.style.setProperty("--inactive-bookmark-opacity", inactivebookmarkOpacity);
   };
 
+  const handleFocusModeToggle = () => {
+    setIsFocusMode((prev) => {
+      const newFocusMode = !prev;
+
+      if (newFocusMode) {
+        // Reduce background opacity
+        document.documentElement.style.setProperty("--flipbook-bg-opacity", "0.5");
+      } 
+      
+      return newFocusMode;
+    });
+  };
+
   return (
     <div className={styles.AppearancePanel}>
       <div>
