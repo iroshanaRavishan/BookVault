@@ -8,6 +8,7 @@ export default function Appearance() {
   const [brightness, setBrightness] = useState(1); // default brightness
   const [isDarkTheme, setIsDarkTheme] = useState(false); // default light
   const [isDimmed, setIsDimmed] = useState(false); // toggler state
+  const [isFocusMode, setIsFocusMode] = useState(false); // focus mode state
 
   const { isFullScreen, handleFullScreenToggle } = useFullscreenContext();
 
@@ -157,6 +158,25 @@ export default function Appearance() {
     document.documentElement.style.setProperty("--inactive-bookmark-opacity", inactivebookmarkOpacity);
   };
 
+  const handleFocusModeToggle = () => {
+    setIsFocusMode((prev) => {
+      const newFocusMode = !prev;
+
+      if (newFocusMode) {
+        // Close all opened side buttons
+        window.dispatchEvent(new Event("closeAllSideButtons"));
+
+        // Reduce background opacity
+        document.documentElement.style.setProperty("--flipbook-bg-opacity", "0.5");
+      } else {
+        // restore full opacity
+        document.documentElement.style.setProperty("--flipbook-bg-opacity", "1");
+      }
+
+      return newFocusMode;
+    });
+  };
+
   return (
     <div className={styles.AppearancePanel}>
       <div>
@@ -211,6 +231,13 @@ export default function Appearance() {
           <label>View Mode: </label>
           <button onClick={handleFullScreenToggle}>
             {isFullScreen ? "Exit Full Mode" : "Enter Full Mode"}
+          </button>
+        </div>
+
+        <div className={styles.appearanceOptions}>
+          <label>Focus Mode: </label>
+          <button onClick={handleFocusModeToggle}>
+            {isFocusMode ? "Exit Focus Mode" : "Enter Focus Mode"}
           </button>
         </div>
       </div>
