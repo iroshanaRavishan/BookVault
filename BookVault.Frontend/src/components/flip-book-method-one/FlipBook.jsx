@@ -700,6 +700,7 @@ export default function FlipBook({
           }
   
           setCurrentPage(data);
+          localStorage.setItem("flipbook-current-page", data); 
 
           // Calculate left/right bookmarks for the new page
           const newLeftPage = data % 2 === 0 ? data : data - 1;
