@@ -214,6 +214,13 @@ export default function Appearance() {
             {isFullScreen ? "Exit Full Mode" : "Enter Full Mode"}
           </button>
         </div>
+
+        <div>
+          <label>Focus Mode: </label>
+          <button>
+            Focus Mode
+          </button>
+        </div>
       </div>
 
       <div className={styles.appearanceActions}>
