@@ -165,8 +165,11 @@ export default function Appearance() {
       if (newFocusMode) {
         // Reduce background opacity
         document.documentElement.style.setProperty("--flipbook-bg-opacity", "0.5");
-      } 
-      
+      } else {
+        // restore full opacity
+        document.documentElement.style.setProperty("--flipbook-bg-opacity", "1");
+      }
+
       return newFocusMode;
     });
   };
