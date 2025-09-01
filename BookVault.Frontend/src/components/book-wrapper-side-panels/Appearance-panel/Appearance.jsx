@@ -218,7 +218,7 @@ export default function Appearance() {
         <div>
           <label>Focus Mode: </label>
           <button>
-            Focus Mode
+            {isFocusMode ? "Exit Focus Mode" : "Enter Focus Mode"}
           </button>
         </div>
       </div>
