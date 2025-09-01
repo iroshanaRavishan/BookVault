@@ -491,6 +491,13 @@ export default function FlipBook({
     ? (isFirstPage || isLastPage ? "500px" : "1135px")
     : (isFirstPage || isLastPage ? "480px" : "940px");
 
+  useEffect(() => {
+    if (!flipBookRef.current) return;
+
+    const storedPage = parseInt(localStorage.getItem("flipbook-current-page"), 10);
+
+  }, [isFullScreen]);
+
   return (
     <div 
       className={styles.wrapper}
