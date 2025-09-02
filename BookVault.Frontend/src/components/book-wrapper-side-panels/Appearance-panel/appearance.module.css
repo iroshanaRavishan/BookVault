@@ -99,3 +99,12 @@
   transition: 0.4s;
   border-radius: 50%;
 }
+
+/* Checked state */
+.toggleSwitch input:checked + .slider {
+  background-color: #4caf50; /* green active */
+}
+
+.toggleSwitch input:checked + .slider::before {
+  transform: translateX(24px);
+}
