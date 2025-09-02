@@ -191,13 +191,14 @@ export default function Appearance() {
         <div className={styles.appearanceOptions}>
           <span className={styles.sectionHeader}>Bookmarks</span>
           <div className={styles.appearanceOption}>
-            <label>
-              <input
-                type="checkbox"
-                checked={isDimmed}
-                onChange={handleBookmarkBrightnessChange}
-              />
-              dim bookmarks
+            <label> Dim bookmarks  </label>
+            <label className={styles.toggleSwitch}>
+                <input
+                  type="checkbox"
+                  checked={isDimmed}
+                  onChange={handleBookmarkBrightnessChange}
+                />
+                <span className={styles.slider}></span>
             </label>
           </div>
         </div>
@@ -206,13 +207,14 @@ export default function Appearance() {
           <span className={styles.sectionHeader}>Book</span>
           <div>
             <div className={styles.appearanceOption}>
-              <label>
+              <label>Enable Page Margin</label>
+              <label className={styles.toggleSwitch}>
                 <input
                   type="checkbox"
                   checked={marginEnabled}
                   onChange={handleMarginToggle}
                 />
-                Enable Page Margin
+                <span className={styles.slider}></span>
               </label>
             </div>
             <div className={styles.appearanceOption}>
