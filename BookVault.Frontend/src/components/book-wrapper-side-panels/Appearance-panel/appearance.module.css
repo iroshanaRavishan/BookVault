@@ -101,7 +101,7 @@
 
 /* Checked state */
 .toggleSwitch input:checked + .slider {
-  background-color: #4caf50; /* green active */
+  background-color: #797979; 
 }
 
 .toggleSwitch input:checked + .slider::before {
