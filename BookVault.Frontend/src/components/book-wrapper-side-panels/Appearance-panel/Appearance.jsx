@@ -181,11 +181,13 @@ export default function Appearance() {
     <div className={styles.AppearancePanel}>
       <div>
         <div className={styles.appearanceOptions}>
+          <span className={styles.sectionHeader}>Background</span>
           <label>Choose FlipBook Background: </label>
           <input type="color" value={color} onChange={handleColorChange} />
         </div>
 
         <div className={styles.appearanceOptions}>
+        <span className={styles.sectionHeader}>Bookmarks</span>
           <label>
             <input
               type="checkbox"
