@@ -36,6 +36,14 @@
   color: #333;
 }
 
+.sectionHeader::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: rgba(0, 0, 0, 0.2);
+  margin-left: 12px;
+}
+
 .appearanceActions button {
   padding: 8px 20px;
   border: none;
