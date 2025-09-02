@@ -204,27 +204,30 @@ export default function Appearance() {
 
         <div className={styles.appearanceOptions}>
           <span className={styles.sectionHeader}>Book</span>
-          <label>
-            <input
-              type="checkbox"
-              checked={marginEnabled}
-              onChange={handleMarginToggle}
-            />
-            Enable Page Margin
-          </label>
-        </div>
-
-        <div className={styles.appearanceOptions}>
-          <label htmlFor="brightness-slider">Brightness: </label>
-          <input
-            id="brightness-slider"
-            type="range"
-            min="0.8"
-            max="1.2"
-            step="0.01"
-            value={brightness}
-            onChange={handleBrightnessChange}
-          />
+          <div>
+            <div className={styles.appearanceOption}>
+              <label>
+                <input
+                  type="checkbox"
+                  checked={marginEnabled}
+                  onChange={handleMarginToggle}
+                />
+                Enable Page Margin
+              </label>
+            </div>
+            <div className={styles.appearanceOption}>
+              <label htmlFor="brightness-slider">Brightness: </label>
+              <input
+                id="brightness-slider"
+                type="range"
+                min="0.8"
+                max="1.2"
+                step="0.01"
+                value={brightness}
+                onChange={handleBrightnessChange}
+              />
+            </div>
+          </div>
         </div>
 
     <div className={styles.appearanceOptions}>
