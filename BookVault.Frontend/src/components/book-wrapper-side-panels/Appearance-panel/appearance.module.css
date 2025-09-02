@@ -93,9 +93,10 @@
   left: 0px;
   bottom: 3px;
   background-color: rgb(255, 255, 255);
-  border: 3px solid rgb(0, 0, 0); /* red border */
+  border: 3px solid rgb(0, 0, 0); 
   transition: 0.4s;
   border-radius: 50%;
+  transform: translateY(28%);
 }
 
 /* Checked state */
@@ -104,5 +105,5 @@
 }
 
 .toggleSwitch input:checked + .slider::before {
-  transform: translateX(24px);
+  transform: translate(18px, 28%);
 }
