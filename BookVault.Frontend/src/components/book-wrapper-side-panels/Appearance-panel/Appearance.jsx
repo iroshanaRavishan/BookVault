@@ -181,11 +181,13 @@ export default function Appearance() {
     <div className={styles.AppearancePanel}>
       <div>
         <div className={styles.appearanceOptions}>
+          <span className={styles.sectionHeader}>Background</span>
           <label>Choose FlipBook Background: </label>
           <input type="color" value={color} onChange={handleColorChange} />
         </div>
 
         <div className={styles.appearanceOptions}>
+        <span className={styles.sectionHeader}>Bookmarks</span>
           <label>
             <input
               type="checkbox"
@@ -197,6 +199,7 @@ export default function Appearance() {
         </div>
 
         <div className={styles.appearanceOptions}>
+          <span className={styles.sectionHeader}>Book</span>
           <label>
             <input
               type="checkbox"
@@ -220,7 +223,8 @@ export default function Appearance() {
           />
         </div>
 
-        <div className={styles.appearanceOptions}>
+    <div className={styles.appearanceOptions}>
+      <span className={styles.sectionHeader}>Select your mode</span>
           <label>Theme: </label>
           <button onClick={handleThemeToggle}>
             {isDarkTheme ? "Switch to Light" : "Switch to Dark"}
