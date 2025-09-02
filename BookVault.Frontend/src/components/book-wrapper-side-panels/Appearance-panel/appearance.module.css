@@ -107,3 +107,14 @@
 .toggleSwitch input:checked + .slider::before {
   transform: translate(18px, 28%);
 }
+
+.birghnessSlider {
+  width:60%;
+  -webkit-appearance: none;
+  height: 3px;
+  border-radius: 3px;
+  margin-top: 8px;
+  background: #ddd;
+  outline: none;
+  cursor: pointer;
+}

@@ -227,6 +227,7 @@ export default function Appearance() {
                 step="0.01"
                 value={brightness}
                 onChange={handleBrightnessChange}
+                className={styles.birghnessSlider}
               />
             </div>
           </div>
