@@ -92,7 +92,8 @@
   width: 16px;
   left: 0px;
   bottom: 3px;
-  background-color: white;
+  background-color: rgb(255, 255, 255);
+  border: 3px solid rgb(0, 0, 0); /* red border */
   transition: 0.4s;
   border-radius: 50%;
 }
