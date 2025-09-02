@@ -27,6 +27,15 @@
   align-items: center;
 }
 
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  font-weight: 600;
+  font-size: 16px;
+  color: #333;
+}
+
 .appearanceActions button {
   padding: 8px 20px;
   border: none;
