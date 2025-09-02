@@ -230,8 +230,8 @@ export default function Appearance() {
           </div>
         </div>
 
-    <div className={styles.appearanceOptions}>
-      <span className={styles.sectionHeader}>Select your mode</span>
+        <div className={styles.appearanceOptions}>
+          <span className={styles.sectionHeader}>Select your mode</span>
           <div>
             <div className={styles.appearanceOption}>
               <label>Theme: </label>
