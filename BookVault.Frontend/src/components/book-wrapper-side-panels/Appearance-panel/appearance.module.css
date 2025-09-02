@@ -20,6 +20,30 @@
   margin-bottom: 20px;
 }
 
+.appearanceOption {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  font-weight: 600;
+  font-size: 16px;
+  color: #333;
+}
+
+.sectionHeader::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: rgba(0, 0, 0, 0.2);
+  margin-left: 12px;
+}
+
 .appearanceActions button {
   padding: 8px 20px;
   border: none;
