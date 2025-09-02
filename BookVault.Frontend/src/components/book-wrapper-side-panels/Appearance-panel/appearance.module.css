@@ -16,6 +16,10 @@
   width: 100%;
 }
 
+.appearanceOptions {
+  margin-bottom: 20px;
+}
+
 .appearanceActions button {
   padding: 8px 20px;
   border: none;
