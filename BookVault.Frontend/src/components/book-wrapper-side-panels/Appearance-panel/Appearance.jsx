@@ -189,15 +189,17 @@ export default function Appearance() {
         </div>
 
         <div className={styles.appearanceOptions}>
-        <span className={styles.sectionHeader}>Bookmarks</span>
-          <label>
-            <input
-              type="checkbox"
-              checked={isDimmed}
-              onChange={handleBookmarkBrightnessChange}
-            />
-            dim bookmarks
-          </label>
+          <span className={styles.sectionHeader}>Bookmarks</span>
+          <div className={styles.appearanceOption}>
+            <label>
+              <input
+                type="checkbox"
+                checked={isDimmed}
+                onChange={handleBookmarkBrightnessChange}
+              />
+              dim bookmarks
+            </label>
+          </div>
         </div>
 
         <div className={styles.appearanceOptions}>
