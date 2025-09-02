@@ -182,67 +182,76 @@ export default function Appearance() {
       <div>
         <div className={styles.appearanceOptions}>
           <span className={styles.sectionHeader}>Background</span>
-          <label>Choose FlipBook Background: </label>
-          <input type="color" value={color} onChange={handleColorChange} />
+          <div className={styles.appearanceOption}>
+            <label>Choose FlipBook Background: </label>
+            <input type="color" value={color} onChange={handleColorChange} />
+          </div>
         </div>
 
         <div className={styles.appearanceOptions}>
-        <span className={styles.sectionHeader}>Bookmarks</span>
-          <label>
-            <input
-              type="checkbox"
-              checked={isDimmed}
-              onChange={handleBookmarkBrightnessChange}
-            />
-            dim bookmarks
-          </label>
+          <span className={styles.sectionHeader}>Bookmarks</span>
+          <div className={styles.appearanceOption}>
+            <label>
+              <input
+                type="checkbox"
+                checked={isDimmed}
+                onChange={handleBookmarkBrightnessChange}
+              />
+              dim bookmarks
+            </label>
+          </div>
         </div>
 
         <div className={styles.appearanceOptions}>
           <span className={styles.sectionHeader}>Book</span>
-          <label>
-            <input
-              type="checkbox"
-              checked={marginEnabled}
-              onChange={handleMarginToggle}
-            />
-            Enable Page Margin
-          </label>
+          <div>
+            <div className={styles.appearanceOption}>
+              <label>
+                <input
+                  type="checkbox"
+                  checked={marginEnabled}
+                  onChange={handleMarginToggle}
+                />
+                Enable Page Margin
+              </label>
+            </div>
+            <div className={styles.appearanceOption}>
+              <label htmlFor="brightness-slider">Brightness: </label>
+              <input
+                id="brightness-slider"
+                type="range"
+                min="0.8"
+                max="1.2"
+                step="0.01"
+                value={brightness}
+                onChange={handleBrightnessChange}
+              />
+            </div>
+          </div>
         </div>
 
         <div className={styles.appearanceOptions}>
-          <label htmlFor="brightness-slider">Brightness: </label>
-          <input
-            id="brightness-slider"
-            type="range"
-            min="0.8"
-            max="1.2"
-            step="0.01"
-            value={brightness}
-            onChange={handleBrightnessChange}
-          />
-        </div>
-
-    <div className={styles.appearanceOptions}>
-      <span className={styles.sectionHeader}>Select your mode</span>
-          <label>Theme: </label>
-          <button onClick={handleThemeToggle}>
-            {isDarkTheme ? "Switch to Light" : "Switch to Dark"}
-          </button>
-        </div>
-
-        <div className={styles.appearanceOptions}>
-          <label>View Mode: </label>
-          <button onClick={handleFullScreenToggle}>
-            {isFullScreen ? "Exit Full Mode" : "Enter Full Mode"}
-          </button>
-        </div>
-
-        <div className={styles.appearanceOptions}>
-          <label>Focus Mode: </label>
-          <button onClick={handleFocusModeToggle}>
-            {isFocusMode ? "Exit Focus Mode" : "Enter Focus Mode"}
-          </button>
+          <span className={styles.sectionHeader}>Select your mode</span>
+          <div>
+            <div className={styles.appearanceOption}>
+              <label>Theme: </label>
+              <button onClick={handleThemeToggle}>
+                {isDarkTheme ? "Switch to Light" : "Switch to Dark"}
+              </button>
+            </div>
+            <div className={styles.appearanceOption}>
+              <label>View Mode: </label>
+              <button onClick={handleFullScreenToggle}>
+                {isFullScreen ? "Exit Full Mode" : "Enter Full Mode"}
+              </button>
+            </div>
+            <div className={styles.appearanceOption}>
+              <label>Focus Mode: </label>
+              <button onClick={handleFocusModeToggle}>
+                {isFocusMode ? "Exit Focus Mode" : "Enter Focus Mode"}
+              </button>
+            </div>
+          </div>
         </div>
       </div>
 
