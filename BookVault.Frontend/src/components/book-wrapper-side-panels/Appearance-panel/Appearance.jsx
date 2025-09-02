@@ -232,24 +232,26 @@ export default function Appearance() {
 
     <div className={styles.appearanceOptions}>
       <span className={styles.sectionHeader}>Select your mode</span>
-          <label>Theme: </label>
-          <button onClick={handleThemeToggle}>
-            {isDarkTheme ? "Switch to Light" : "Switch to Dark"}
-          </button>
-        </div>
-
-        <div className={styles.appearanceOptions}>
-          <label>View Mode: </label>
-          <button onClick={handleFullScreenToggle}>
-            {isFullScreen ? "Exit Full Mode" : "Enter Full Mode"}
-          </button>
-        </div>
-
-        <div className={styles.appearanceOptions}>
-          <label>Focus Mode: </label>
-          <button onClick={handleFocusModeToggle}>
-            {isFocusMode ? "Exit Focus Mode" : "Enter Focus Mode"}
-          </button>
+          <div>
+            <div className={styles.appearanceOption}>
+              <label>Theme: </label>
+              <button onClick={handleThemeToggle}>
+                {isDarkTheme ? "Switch to Light" : "Switch to Dark"}
+              </button>
+            </div>
+            <div className={styles.appearanceOption}>
+              <label>View Mode: </label>
+              <button onClick={handleFullScreenToggle}>
+                {isFullScreen ? "Exit Full Mode" : "Enter Full Mode"}
+              </button>
+            </div>
+            <div className={styles.appearanceOption}>
+              <label>Focus Mode: </label>
+              <button onClick={handleFocusModeToggle}>
+                {isFocusMode ? "Exit Focus Mode" : "Enter Focus Mode"}
+              </button>
+            </div>
+          </div>
         </div>
       </div>
 
