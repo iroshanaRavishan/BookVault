@@ -18,9 +18,12 @@
 
 .appearanceOptions {
   margin-bottom: 20px;
+  font-size: 14px;
 }
 
 .appearanceOption {
+  margin-left: 10px;
+  margin-top: 10px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -32,7 +35,7 @@
   align-items: center;
   width: 100%;
   font-weight: 600;
-  font-size: 16px;
+  font-size: 15px;
   color: #333;
 }
 
@@ -40,7 +43,7 @@
   content: "";
   flex: 1;
   height: 1px;
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.096);
   margin-left: 12px;
 }
 
@@ -59,11 +62,12 @@
 .toggleButton:hover {
   background-color:var(--appearance-action-button-hover-bg-color);
 }
+
 .toggleSwitch {
   position: relative;
   display: inline-block;
-  width: 40px;
-  height: 15px;
+  width: 35px;
+  height: 12px;
 }
 
 /* Hide default checkbox */
@@ -78,7 +82,7 @@
   cursor: pointer;
   top: 0;
   left: 0;
-  right: 0;
+  right: 2px;
   bottom: 0;
   background-color: #ccc;
   transition: 0.4s;
