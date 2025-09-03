@@ -62,11 +62,12 @@
 .toggleButton:hover {
   background-color:var(--appearance-action-button-hover-bg-color);
 }
+
 .toggleSwitch {
   position: relative;
   display: inline-block;
-  width: 40px;
-  height: 15px;
+  width: 35px;
+  height: 12px;
 }
 
 /* Hide default checkbox */
