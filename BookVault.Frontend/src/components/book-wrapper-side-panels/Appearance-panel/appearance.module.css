@@ -44,19 +44,20 @@
   margin-left: 12px;
 }
 
-.appearanceActions button {
+.toggleButton {
   padding: 8px 20px;
   border: none;
-  font-size: 14px;
+  font-size: 13px;
   border-radius: 6px;
-  background-color: #ffffff;
-  width: 100%;
+  background-color: var(--appearance-action-button-bg-color);
+  color: var(--appearance-action-button-text-color);
+  width: 150px;
   cursor: pointer;
   transition: opacity 0.3s ease;
 }
 
-.appearanceActions button:hover {
-  background-color: #cecece;
+.toggleButton:hover {
+  background-color:var(--appearance-action-button-hover-bg-color);
 }
 .toggleSwitch {
   position: relative;
