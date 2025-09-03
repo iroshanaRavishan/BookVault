@@ -192,7 +192,7 @@ export default function Appearance() {
           <span className={styles.sectionHeader}>Background</span>
           <div className={styles.appearanceOption}>
             <label>Choose FlipBook Background: </label>
-            <input type="color" value={color} onChange={handleColorChange} />
+            <input type="color" value={color} className={styles.colorPicker} onChange={handleColorChange} />
           </div>
         </div>
 
