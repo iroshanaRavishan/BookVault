@@ -125,7 +125,7 @@
 }
 
 .colorPicker {
-  border: 1px solid #a1a1a1;
+  border: 2px solid var(--appearance-color-picker-button-border-color);
   width: 40px;
   height: 25px;
   border-radius: 5px;   
