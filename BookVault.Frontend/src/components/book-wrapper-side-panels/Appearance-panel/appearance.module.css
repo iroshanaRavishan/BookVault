@@ -93,8 +93,8 @@
 .slider::before {
   position: absolute;
   content: "";
-  height: 16px; 
-  width: 16px;
+  height: 12px; 
+  width: 12px;
   left: 0px;
   bottom: 3px;
   background-color: rgb(255, 255, 255);
