@@ -246,19 +246,19 @@ export default function Appearance() {
           <div>
             <div className={styles.appearanceOption}>
               <label>Theme: </label>
-              <button onClick={handleThemeToggle}>
+              <button onClick={handleThemeToggle} className={styles.toggleButton}>
                 {isDarkTheme ? "Switch to Light" : "Switch to Dark"}
               </button>
             </div>
             <div className={styles.appearanceOption}>
               <label>View Mode: </label>
-              <button onClick={handleFullScreenToggle}>
+              <button onClick={handleFullScreenToggle} className={styles.toggleButton}>
                 {isFullScreen ? "Exit Full Mode" : "Enter Full Mode"}
               </button>
             </div>
             <div className={styles.appearanceOption}>
               <label>Focus Mode: </label>
-              <button onClick={handleFocusModeToggle}>
+              <button onClick={handleFocusModeToggle} className={styles.toggleButton}>
                 {isFocusMode ? "Exit Focus Mode" : "Enter Focus Mode"}
               </button>
             </div>
