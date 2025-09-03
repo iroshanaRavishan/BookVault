@@ -134,3 +134,8 @@
   background: none;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
+
+.colorPicker:hover {
+  transform: scale(1.02);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
