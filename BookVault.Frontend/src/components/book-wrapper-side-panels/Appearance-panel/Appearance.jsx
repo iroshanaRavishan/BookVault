@@ -7,6 +7,8 @@ export default function Appearance() {
   const [marginEnabled, setMarginEnabled] = useState(true); // default ON (45px)
   const [brightness, setBrightness] = useState(1); // default brightness
   const [isDarkTheme, setIsDarkTheme] = useState(false); // default light
+  const [isDimmed, setIsDimmed] = useState(false); // toggler state
+  const [isFocusMode, setIsFocusMode] = useState(false); // focus mode state
 
   const { isFullScreen, handleFullScreenToggle } = useFullscreenContext();
 
@@ -83,6 +85,14 @@ export default function Appearance() {
         document.documentElement.style.setProperty("--bookmark-page-preview-border-color", "#e0e0e0ff");
         document.documentElement.style.setProperty("--bookmark-action-button-disabled-bg-color", "#ffffffff");
         document.documentElement.style.setProperty("--bookmark-action-button-disabled-text-color", "#858585ff");
+        document.documentElement.style.setProperty("--bookmark-page-preview-header-text-color", "#e0e0e0ff");
+
+        document.documentElement.style.setProperty("--book-reading-board-side-button-bg-color", "#333");
+        document.documentElement.style.setProperty("--book-reading-board-side-button-text-color", "#fff");
+
+        document.documentElement.style.setProperty("--appearance-action-button-bg-color", "#ffffffff");
+        document.documentElement.style.setProperty("--appearance-action-button-text-color", "#000000ff");
+        document.documentElement.style.setProperty("--appearance-action-button-hover-bg-color", "#c4c4c4ff");
       } else {
         // Light theme
         document.documentElement.style.setProperty("--header-pin-icon-color", "black");
@@ -130,8 +140,48 @@ export default function Appearance() {
         document.documentElement.style.setProperty("--bookmark-page-preview-border-color", "#5e5e5eff");
         document.documentElement.style.setProperty("--bookmark-action-button-disabled-bg-color", "#727272ff");
         document.documentElement.style.setProperty("--bookmark-action-button-disabled-text-color", "#ffffffff");
+        document.documentElement.style.setProperty("--bookmark-page-preview-header-text-color", "#fff");
+
+        document.documentElement.style.setProperty("--book-reading-board-side-button-bg-color", "#fff");
+        document.documentElement.style.setProperty("--book-reading-board-side-button-text-color", "#333");
+
+        document.documentElement.style.setProperty("--appearance-action-button-bg-color", "#313131ff");
+        document.documentElement.style.setProperty("--appearance-action-button-text-color", "#ffffffff");
+        document.documentElement.style.setProperty("--appearance-action-button-hover-bg-color", "#8b8b8bff");
       }
       return newTheme;
+    });
+  };
+
+  const handleBookmarkBrightnessChange = () => {
+    const newActiveValue = isDimmed ? 1 : 0.5; 
+    const newInactiveValue = isDimmed ? 0.5 : 0.2; 
+    setIsDimmed(!isDimmed);
+
+    // Adjust bookmark dimming (inverse relationship)
+    const activebookmarkOpacity = Math.min(1, Math.max(0.3, newActiveValue));
+    const inactivebookmarkOpacity = Math.min(1, Math.max(0.3, newInactiveValue));
+
+    document.documentElement.style.setProperty("--active-bookmark-opacity", activebookmarkOpacity);
+    document.documentElement.style.setProperty("--inactive-bookmark-opacity", inactivebookmarkOpacity);
+  };
+
+  const handleFocusModeToggle = () => {
+    setIsFocusMode((prev) => {
+      const newFocusMode = !prev;
+
+      if (newFocusMode) {
+        // Close all opened side buttons
+        window.dispatchEvent(new Event("closeAllSideButtons"));
+
+        // Reduce background opacity
+        document.documentElement.style.setProperty("--flipbook-bg-opacity", "0.5");
+      } else {
+        // restore full opacity
+        document.documentElement.style.setProperty("--flipbook-bg-opacity", "1");
+      }
+
+      return newFocusMode;
     });
   };
 
@@ -139,52 +189,81 @@ export default function Appearance() {
     <div className={styles.AppearancePanel}>
       <div>
         <div className={styles.appearanceOptions}>
-          <label>Choose FlipBook Background: </label>
-          <input type="color" value={color} onChange={handleColorChange} />
+          <span className={styles.sectionHeader}>Background</span>
+          <div className={styles.appearanceOption}>
+            <label>Choose FlipBook Background: </label>
+            <input type="color" value={color} onChange={handleColorChange} />
+          </div>
         </div>
 
         <div className={styles.appearanceOptions}>
-          <label>
-            <input
-              type="checkbox"
-              checked={marginEnabled}
-              onChange={handleMarginToggle}
-            />
-            Enable Page Margin
-          </label>
+          <span className={styles.sectionHeader}>Bookmarks</span>
+          <div className={styles.appearanceOption}>
+            <label> Dim bookmarks  </label>
+            <label className={styles.toggleSwitch}>
+                <input
+                  type="checkbox"
+                  checked={isDimmed}
+                  onChange={handleBookmarkBrightnessChange}
+                />
+                <span className={styles.slider}></span>
+            </label>
+          </div>
         </div>
 
         <div className={styles.appearanceOptions}>
-          <label htmlFor="brightness-slider">Brightness: </label>
-          <input
-            id="brightness-slider"
-            type="range"
-            min="0.8"
-            max="1.2"
-            step="0.01"
-            value={brightness}
-            onChange={handleBrightnessChange}
-          />
+          <span className={styles.sectionHeader}>Book</span>
+          <div>
+            <div className={styles.appearanceOption}>
+              <label>Enable Page Margin</label>
+              <label className={styles.toggleSwitch}>
+                <input
+                  type="checkbox"
+                  checked={marginEnabled}
+                  onChange={handleMarginToggle}
+                />
+                <span className={styles.slider}></span>
+              </label>
+            </div>
+            <div className={styles.appearanceOption}>
+              <label htmlFor="brightness-slider">Brightness: </label>
+              <input
+                id="brightness-slider"
+                type="range"
+                min="0.8"
+                max="1.2"
+                step="0.01"
+                value={brightness}
+                onChange={handleBrightnessChange}
+                className={styles.birghnessSlider}
+              />
+            </div>
+          </div>
         </div>
 
         <div className={styles.appearanceOptions}>
-          <label>Theme: </label>
-          <button onClick={handleThemeToggle}>
-            {isDarkTheme ? "Switch to Light" : "Switch to Dark"}
-          </button>
+          <span className={styles.sectionHeader}>Select your mode</span>
+          <div>
+            <div className={styles.appearanceOption}>
+              <label>Theme: </label>
+              <button onClick={handleThemeToggle} className={styles.toggleButton}>
+                {isDarkTheme ? "Switch to Light" : "Switch to Dark"}
+              </button>
+            </div>
+            <div className={styles.appearanceOption}>
+              <label>View Mode: </label>
+              <button onClick={handleFullScreenToggle} className={styles.toggleButton}>
+                {isFullScreen ? "Exit Full Mode" : "Enter Full Mode"}
+              </button>
+            </div>
+            <div className={styles.appearanceOption}>
+              <label>Focus Mode: </label>
+              <button onClick={handleFocusModeToggle} className={styles.toggleButton}>
+                {isFocusMode ? "Exit Focus Mode" : "Enter Focus Mode"}
+              </button>
+            </div>
+          </div>
         </div>
-
-        <div className={styles.appearanceOptions}>
-          <label>View Mode: </label>
-          <button onClick={handleFullScreenToggle}>
-            {isFullScreen ? "Exit Full Mode" : "Enter Full Mode"}
-          </button>
-        </div>
-      </div>
-
-      <div className={styles.appearanceActions}>
-        <button>Cancel</button>
-        <button>Save</button>
       </div>
     </div>
   );

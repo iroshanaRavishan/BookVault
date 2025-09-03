@@ -16,17 +16,110 @@
   width: 100%;
 }
 
-.appearanceActions button {
+.appearanceOptions {
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+.appearanceOption {
+  margin-left: 10px;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  font-weight: 600;
+  font-size: 15px;
+  color: #333;
+}
+
+.sectionHeader::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: rgba(0, 0, 0, 0.096);
+  margin-left: 12px;
+}
+
+.toggleButton {
   padding: 8px 20px;
   border: none;
-  font-size: 14px;
+  font-size: 13px;
   border-radius: 6px;
-  background-color: #ffffff;
-  width: 100%;
+  background-color: var(--appearance-action-button-bg-color);
+  color: var(--appearance-action-button-text-color);
+  width: 150px;
   cursor: pointer;
   transition: opacity 0.3s ease;
 }
 
-.appearanceActions button:hover {
-  background-color: #cecece;
+.toggleButton:hover {
+  background-color:var(--appearance-action-button-hover-bg-color);
+}
+
+.toggleSwitch {
+  position: relative;
+  display: inline-block;
+  width: 35px;
+  height: 12px;
+}
+
+/* Hide default checkbox */
+.toggleSwitch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 2px;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 20px;
+}
+
+/* Circle knob */
+.slider::before {
+  position: absolute;
+  content: "";
+  height: 12px; 
+  width: 12px;
+  left: 0px;
+  bottom: 3px;
+  background-color: rgb(255, 255, 255);
+  border: 3px solid rgb(0, 0, 0); 
+  transition: 0.4s;
+  border-radius: 50%;
+  transform: translateY(34%);
+}
+
+/* Checked state */
+.toggleSwitch input:checked + .slider {
+  background-color: #797979; 
+}
+
+.toggleSwitch input:checked + .slider::before {
+  transform: translate(16px, 34%);
+}
+
+.birghnessSlider {
+  width:60%;
+  -webkit-appearance: none;
+  height: 3px;
+  border-radius: 3px;
+  margin-top: 8px;
+  background: #ddd;
+  outline: none;
+  cursor: pointer;
 }
