@@ -115,11 +115,22 @@
 
 .birghnessSlider {
   width:60%;
-  -webkit-appearance: none;
   height: 3px;
   border-radius: 3px;
   margin-top: 8px;
   background: #ddd;
   outline: none;
   cursor: pointer;
+}
+
+.colorPicker {
+  border: 1px solid #a1a1a1;
+  width: 40px;
+  height: 25px;
+  border-radius: 4px;   
+  cursor: pointer;
+  overflow: hidden;
+  padding: 0;
+  background: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
