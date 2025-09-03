@@ -19,6 +19,7 @@
 .appearanceOptions {
   margin-bottom: 20px;
   font-size: 14px;
+  color: var(--appearance-section-sub-text-color);
 }
 
 .appearanceOption {
@@ -36,7 +37,7 @@
   width: 100%;
   font-weight: 600;
   font-size: 15px;
-  color: #333;
+  color: var(--appearance-section-text-color);
 }
 
 .sectionHeader::after {
