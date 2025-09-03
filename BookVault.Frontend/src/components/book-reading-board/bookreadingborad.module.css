@@ -4,15 +4,14 @@
     justify-content: center;
     min-height: 45.9vh;
     width: 100%;
+    background-color: var(--flipbook-bg);
 }
 
 .book {
     overflow: auto;
-    background-color: var(--flipbook-bg);
 }
 
 .wrapper {
     overflow: auto;
-    background-color: var(--flipbook-bg);
     opacity: var(--flipbook-bg-opacity);
 }
