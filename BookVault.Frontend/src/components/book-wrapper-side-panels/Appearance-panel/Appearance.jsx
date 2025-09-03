@@ -265,11 +265,6 @@ export default function Appearance() {
           </div>
         </div>
       </div>
-
-      <div className={styles.appearanceActions}>
-        <button>Cancel</button>
-        <button>Save</button>
-      </div>
     </div>
   );
 }
