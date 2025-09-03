@@ -93,15 +93,15 @@
 .slider::before {
   position: absolute;
   content: "";
-  height: 16px; 
-  width: 16px;
+  height: 12px; 
+  width: 12px;
   left: 0px;
   bottom: 3px;
   background-color: rgb(255, 255, 255);
   border: 3px solid rgb(0, 0, 0); 
   transition: 0.4s;
   border-radius: 50%;
-  transform: translateY(28%);
+  transform: translateY(34%);
 }
 
 /* Checked state */
@@ -110,7 +110,7 @@
 }
 
 .toggleSwitch input:checked + .slider::before {
-  transform: translate(18px, 28%);
+  transform: translate(16px, 34%);
 }
 
 .birghnessSlider {
