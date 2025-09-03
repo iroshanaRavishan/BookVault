@@ -110,7 +110,7 @@
 }
 
 .toggleSwitch input:checked + .slider::before {
-  transform: translate(18px, 28%);
+  transform: translate(16px, 34%);
 }
 
 .birghnessSlider {
