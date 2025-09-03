@@ -56,4 +56,8 @@
 
   --book-reading-board-side-button-bg-color: #fff;
   --book-reading-board-side-button-text-color: #333;
+
+  --appearance-action-button-bg-color: #313131ff;
+  --appearance-action-button-text-color: #ffffffff;
+  --appearance-action-button-hover-bg-color: #8b8b8bff;
 }
