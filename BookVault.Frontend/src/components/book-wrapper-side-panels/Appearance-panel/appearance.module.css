@@ -35,7 +35,7 @@
   align-items: center;
   width: 100%;
   font-weight: 600;
-  font-size: 16px;
+  font-size: 15px;
   color: #333;
 }
 
@@ -43,7 +43,7 @@
   content: "";
   flex: 1;
   height: 1px;
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.096);
   margin-left: 12px;
 }
 
