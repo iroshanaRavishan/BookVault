@@ -93,6 +93,8 @@ export default function Appearance() {
         document.documentElement.style.setProperty("--appearance-action-button-bg-color", "#ffffffff");
         document.documentElement.style.setProperty("--appearance-action-button-text-color", "#000000ff");
         document.documentElement.style.setProperty("--appearance-action-button-hover-bg-color", "#c4c4c4ff");
+      document.documentElement.style.setProperty("--appearance-action-button-disabled-bg-color", "#ffffffff");
+      document.documentElement.style.setProperty("--appearance-action-button-disabled-text-color", "#858585ff");
         document.documentElement.style.setProperty("--appearance-section-text-color", "#ffffffff");
         document.documentElement.style.setProperty("--appearance-section-sub-text-color", "#dddddd");
         document.documentElement.style.setProperty("--appearance-color-picker-button-border-color", "#e9e9e9ff");
@@ -151,6 +153,8 @@ export default function Appearance() {
         document.documentElement.style.setProperty("--appearance-action-button-bg-color", "#313131ff");
         document.documentElement.style.setProperty("--appearance-action-button-text-color", "#ffffffff");
         document.documentElement.style.setProperty("--appearance-action-button-hover-bg-color", "#8b8b8bff");
+      document.documentElement.style.setProperty("--appearance-action-button-disabled-bg-color", "#727272ff");
+      document.documentElement.style.setProperty("--appearance-action-button-disabled-text-color", "#ffffffff");
         document.documentElement.style.setProperty("--appearance-section-text-color", "#000000ff");
         document.documentElement.style.setProperty("--appearance-section-sub-text-color", "#252525ff");
         document.documentElement.style.setProperty("--appearance-color-picker-button-border-color", "#888888");
