@@ -262,6 +262,12 @@ export default function Appearance() {
                 {isFocusMode ? "Exit Focus Mode" : "Enter Focus Mode"}
               </button>
             </div>
+            <div className={styles.appearanceOption}>
+              <label>Theme: </label>
+              <button onClick={handleThemeToggle} className={styles.toggleButton} disabled={isAutoThemeEnabled}>
+                {isDarkTheme ? "Switch to Light" : "Switch to Dark"}
+              </button>
+            </div>
           </div>
         </div>
       </div>
