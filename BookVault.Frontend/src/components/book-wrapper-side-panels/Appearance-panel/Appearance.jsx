@@ -287,6 +287,8 @@ export default function Appearance() {
                 <label style={{display: 'flex', alignItems: 'center', gap: '8px'}}>
                   <input
                     type="checkbox"
+                    checked={isAutoThemeEnabled}
+                    onChange={(e) => setIsAutoThemeEnabled(e.target.checked)}
                   />
                 </label>
               </div>
