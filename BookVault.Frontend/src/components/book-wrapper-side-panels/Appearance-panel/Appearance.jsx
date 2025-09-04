@@ -282,6 +282,12 @@ export default function Appearance() {
               </button>
             </div>
             <span className={styles.themeDivider}>or</span>
+            <div className={styles.appearanceOption} style={{width: '100%', marginTop: '0px'}}>
+              <div className={styles.autoThemeSection}>
+                <label style={{display: 'flex', alignItems: 'center', gap: '8px'}}>
+                </label>
+              </div>
+            </div>
           </div>
         </div>
       </div>
