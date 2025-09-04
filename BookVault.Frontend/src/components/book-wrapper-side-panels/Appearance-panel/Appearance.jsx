@@ -9,8 +9,15 @@ export default function Appearance() {
   const [isDarkTheme, setIsDarkTheme] = useState(false); // default light
   const [isDimmed, setIsDimmed] = useState(false); // toggler state
   const [isFocusMode, setIsFocusMode] = useState(false); // focus mode state
+  const [isAutoThemeEnabled, setIsAutoThemeEnabled] = useState(false);
+  const [scheduledTime, setScheduledTime] = useState(null); // default 12
 
   const { isFullScreen, handleFullScreenToggle } = useFullscreenContext();
+
+  // Handler from time picker
+  const handleSetTime = (timeString) => {
+    setScheduledTime(timeString);
+  };
 
   const handleColorChange = (e) => {
     const newColor = e.target.value;
