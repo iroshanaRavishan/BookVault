@@ -157,13 +157,13 @@ export default function Appearance() {
         document.documentElement.style.setProperty("--appearance-color-picker-button-border-color", "#888888");
       }
 
-    const handleThemeToggle = () => {
-      setIsDarkTheme((prev) => {
-        const newTheme = !prev;
-        applyTheme(newTheme);
-        return newTheme;
-      });
-    };
+  const handleThemeToggle = () => {
+    setIsDarkTheme((prev) => {
+      const newTheme = !prev;
+      applyTheme(newTheme);
+      return newTheme;
+    });
+  };
 
   const handleBookmarkBrightnessChange = () => {
     const newActiveValue = isDimmed ? 1 : 0.5; 
