@@ -196,3 +196,10 @@
   margin: 10px 0 0 0;
   width: 100%;
 }
+
+.themeDivider::before,
+.themeDivider::after {
+  content: "";
+  flex: 1;
+  border-bottom: 1px solid #00000027;
+}
