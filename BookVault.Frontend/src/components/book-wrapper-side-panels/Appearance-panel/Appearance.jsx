@@ -268,6 +268,7 @@ export default function Appearance() {
                 {isDarkTheme ? "Switch to Light" : "Switch to Dark"}
               </button>
             </div>
+            <span className={styles.themeDivider}>or</span>
           </div>
         </div>
       </div>
