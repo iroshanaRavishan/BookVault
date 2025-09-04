@@ -144,6 +144,15 @@
   transition: background 0.2s ease;
 }
 
+.birghnessSlider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #ffffff; 
+}
+
 .colorPicker {
   border: 2px solid var(--appearance-color-picker-button-border-color);
   width: 40px;
