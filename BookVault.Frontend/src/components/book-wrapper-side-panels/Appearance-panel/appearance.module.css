@@ -203,3 +203,11 @@
   flex: 1;
   border-bottom: 1px solid #00000027;
 }
+
+.themeDivider::before {
+  margin-right: 10px;
+}
+
+.themeDivider::after {
+  margin-left: 10px;
+}
