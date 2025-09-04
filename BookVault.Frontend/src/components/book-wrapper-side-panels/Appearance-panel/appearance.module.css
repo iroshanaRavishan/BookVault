@@ -151,6 +151,9 @@
   height: 18px;
   border-radius: 50%;
   background: #ffffff; 
+  border: 3px solid #000000;
+  cursor: pointer;
+  transition: transform 0.2s ease;
 }
 
 .colorPicker {
