@@ -34,9 +34,6 @@ export default function Appearance() {
     document.documentElement.style.setProperty("--flipbook-brightness", newValue);
   };
 
-  const handleThemeToggle = () => {
-    setIsDarkTheme((prev) => {
-      const newTheme = !prev;
 
       if (newTheme) {
         // Dark theme
