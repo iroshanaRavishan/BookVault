@@ -285,6 +285,9 @@ export default function Appearance() {
             <div className={styles.appearanceOption} style={{width: '100%', marginTop: '0px'}}>
               <div className={styles.autoThemeSection}>
                 <label style={{display: 'flex', alignItems: 'center', gap: '8px'}}>
+                  <input
+                    type="checkbox"
+                  />
                 </label>
               </div>
             </div>
