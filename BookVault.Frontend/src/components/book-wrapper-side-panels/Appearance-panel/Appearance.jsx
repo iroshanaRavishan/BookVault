@@ -251,12 +251,6 @@ export default function Appearance() {
           <span className={styles.sectionHeader}>Select your mode</span>
           <div>
             <div className={styles.appearanceOption}>
-              <label>Theme: </label>
-              <button onClick={handleThemeToggle} className={styles.toggleButton}>
-                {isDarkTheme ? "Switch to Light" : "Switch to Dark"}
-              </button>
-            </div>
-            <div className={styles.appearanceOption}>
               <label>View: </label>
               <button onClick={handleFullScreenToggle} className={styles.toggleButton}>
                 {isFullScreen ? "Exit Full Mode" : "Enter Full Mode"}
