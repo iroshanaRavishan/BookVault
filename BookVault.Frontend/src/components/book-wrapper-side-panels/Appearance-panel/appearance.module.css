@@ -140,6 +140,8 @@
   background: linear-gradient(to right, #797979 var(--value, 50%), #ccc var(--value, 50%), #ccc 100%);
   outline: none;
   cursor: pointer;
+  margin-top: 8px;
+  transition: background 0.2s ease;
 }
 
 .colorPicker {
