@@ -232,9 +232,8 @@ export default function Appearance() {
               </label>
             </div>
             <div className={styles.appearanceOption}>
-              <label htmlFor="brightness-slider">Brightness: </label>
+              <label>Brightness: </label>
               <input
-                id="brightness-slider"
                 type="range"
                 min="0.8"
                 max="1.2"
@@ -257,13 +256,13 @@ export default function Appearance() {
               </button>
             </div>
             <div className={styles.appearanceOption}>
-              <label>View Mode: </label>
+              <label>View: </label>
               <button onClick={handleFullScreenToggle} className={styles.toggleButton}>
                 {isFullScreen ? "Exit Full Mode" : "Enter Full Mode"}
               </button>
             </div>
             <div className={styles.appearanceOption}>
-              <label>Focus Mode: </label>
+              <label>Focus: </label>
               <button onClick={handleFocusModeToggle} className={styles.toggleButton}>
                 {isFocusMode ? "Exit Focus Mode" : "Enter Focus Mode"}
               </button>
