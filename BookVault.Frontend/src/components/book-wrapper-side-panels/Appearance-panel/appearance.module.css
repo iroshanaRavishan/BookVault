@@ -32,6 +32,15 @@
   align-items: center;
 }
 
+.autoThemeSection {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  padding-right: 10px;
+}
+
 .sectionHeader {
   display: flex;
   align-items: center;
@@ -116,11 +125,12 @@
 }
 
 .birghnessSlider {
-  width:60%;
-  height: 3px;
+  -webkit-appearance: none;
+  appearance: none;
+  width: 60%;
+  height: 6px;
   border-radius: 3px;
-  margin-top: 8px;
-  background: #ddd;
+  background: linear-gradient(to right, #797979 var(--value, 50%), #ccc var(--value, 50%), #ccc 100%);
   outline: none;
   cursor: pointer;
 }
