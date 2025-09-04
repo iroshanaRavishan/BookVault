@@ -186,3 +186,13 @@
 .colorPicker::-webkit-color-swatch-wrapper {
   padding: 0;
 }
+
+.themeDivider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #555; /* text color */
+  font-weight: 500;
+  margin: 10px 0 0 0;
+  width: 100%;
+}
