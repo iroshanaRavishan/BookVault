@@ -125,8 +125,10 @@
 }
 
 .birghnessSlider {
-  width:60%;
-  height: 3px;
+  -webkit-appearance: none;
+  appearance: none;
+  width: 60%;
+  height: 6px;
   border-radius: 3px;
   background: linear-gradient(to right, #797979 var(--value, 50%), #ccc var(--value, 50%), #ccc 100%);
   outline: none;
