@@ -241,6 +241,7 @@ export default function Appearance() {
                 value={brightness}
                 onChange={handleBrightnessChange}
                 className={styles.birghnessSlider}
+                style={{ "--value": `${((brightness - 0.8) / 0.4) * 100}%` }}
               />
             </div>
           </div>
