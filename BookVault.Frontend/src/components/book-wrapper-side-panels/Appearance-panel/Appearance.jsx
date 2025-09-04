@@ -246,7 +246,7 @@ export default function Appearance() {
           </div>
         </div>
 
-        <div className={styles.appearanceOptions}>
+        <div className={styles.appearanceOptions} style={{marginBottom: '10px'}}>
           <span className={styles.sectionHeader}>Select your mode</span>
           <div>
             <div className={styles.appearanceOption}>
