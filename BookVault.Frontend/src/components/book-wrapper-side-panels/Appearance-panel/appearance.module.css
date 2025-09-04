@@ -4,6 +4,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    user-select: none;
 }
 
 .appearanceActions {
@@ -44,7 +45,7 @@
   content: "";
   flex: 1;
   height: 1px;
-  background: rgba(0, 0, 0, 0.096);
+  background: #00000018;
   margin-left: 12px;
 }
 
@@ -98,8 +99,8 @@
   width: 12px;
   left: 0px;
   bottom: 3px;
-  background-color: rgb(255, 255, 255);
-  border: 3px solid rgb(0, 0, 0); 
+  background-color: #ffffff;
+  border: 3px solid #000000; 
   transition: 0.4s;
   border-radius: 50%;
   transform: translateY(34%);
