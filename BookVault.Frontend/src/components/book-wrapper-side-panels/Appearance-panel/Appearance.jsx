@@ -241,6 +241,7 @@ export default function Appearance() {
                 value={brightness}
                 onChange={handleBrightnessChange}
                 className={styles.birghnessSlider}
+                style={{ "--value": `${((brightness - 0.8) / 0.4) * 100}%` }}
               />
             </div>
           </div>
@@ -249,12 +250,6 @@ export default function Appearance() {
         <div className={styles.appearanceOptions} style={{marginBottom: '10px'}}>
           <span className={styles.sectionHeader}>Select your mode</span>
           <div>
-            <div className={styles.appearanceOption}>
-              <label>Theme: </label>
-              <button onClick={handleThemeToggle} className={styles.toggleButton}>
-                {isDarkTheme ? "Switch to Light" : "Switch to Dark"}
-              </button>
-            </div>
             <div className={styles.appearanceOption}>
               <label>View: </label>
               <button onClick={handleFullScreenToggle} className={styles.toggleButton}>
@@ -265,6 +260,12 @@ export default function Appearance() {
               <label>Focus: </label>
               <button onClick={handleFocusModeToggle} className={styles.toggleButton}>
                 {isFocusMode ? "Exit Focus Mode" : "Enter Focus Mode"}
+              </button>
+            </div>
+            <div className={styles.appearanceOption}>
+              <label>Theme: </label>
+              <button onClick={handleThemeToggle} className={styles.toggleButton} disabled={isAutoThemeEnabled}>
+                {isDarkTheme ? "Switch to Light" : "Switch to Dark"}
               </button>
             </div>
           </div>
