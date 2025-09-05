@@ -116,7 +116,7 @@
   left: 0px;
   bottom: 3px;
   background-color: var(--appearance-toggle-slider-bg-color);
-  border: 3px solid #000000; 
+  border: 3px solid var(--appearance-toggle-slider-border-color); 
   transition: 0.4s;
   border-radius: 50%;
   transform: translateY(34%);
