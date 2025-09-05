@@ -137,7 +137,7 @@
   width: 60%;
   height: 6px;
   border-radius: 3px;
-  background: linear-gradient(to right, #797979 var(--value, 50%), #ccc var(--value, 50%), #ccc 100%);
+  background: linear-gradient(to right, var(--appearance-toggle-bg-checked-color) var(--value, 50%), var(--appearance-toggle-bg-unchecked-color) var(--value, 50%), var(--appearance-toggle-bg-unchecked-color) 100%);
   outline: none;
   cursor: pointer;
   margin-top: 8px;
