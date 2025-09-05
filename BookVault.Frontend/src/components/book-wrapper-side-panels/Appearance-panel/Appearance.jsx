@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styles from './appearance.module.css';
 import { useFullscreenContext } from "../../../context/FullscreenContext";
+import TimePicker from "../../time-picker/TimePicker";
 
 export default function Appearance() {
   const [color, setColor] = useState("#f1c40f"); // default yellow
@@ -301,6 +302,7 @@ export default function Appearance() {
                   <span style={{fontSize: '13px'}}>Automate Theme</span>
                 </label>
                 <div className={!isAutoThemeEnabled ? styles.disabledSection : ""}>
+                  <TimePicker isAutoThemeEnabled={isAutoThemeEnabled} onSet={handleSetTime} />
                 </div>
               </div>
             </div>
