@@ -20,11 +20,12 @@
   --note-detail-bar-bg: #f1f1f1ff;
   --note-section-text-color: #666;
   --note-action-bg: #f1f1f1ff;
-  --note-navigation-button-bg: #f3f3f3;
-  --note-navigation-button-border-color: #e7e7e7;
-  --note-navigation-button-hover-bg-color: #eeeeee;
-  --note-settings-button-background-color: #f3f3f3;
-  --note-settings-button-border-color: #e7e7e7;
+  --note-navigation-button-bg: #d3d3d3ff;
+  --note-navigation-button-border-color: #bbbbbbff;
+  --note-navigation-button-hover-bg-color: #acacacff;
+  --note-settings-button-background-color: #d3d3d3ff;
+  --note-settings-button-border-color: #bbbbbbff;
+  --note-settings-button-hover-bg-color: #acacacff;
   --note-clear-button-border-color: #e7e7e7;
   --note-delete-button-border-color: #e7e7e7;
   --note-navigation-highlighted-note-bg: #38320f2c;
