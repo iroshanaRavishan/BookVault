@@ -67,4 +67,7 @@
   --appearance-color-picker-button-border-color: #888888;
   --appearance-toggle-slider-bg-color: #fff;
   --appearance-toggle-slider-border-color: #000000;
+
+  --appearance-toggle-bg-unchecked-color: #ccc;
+  --appearance-toggle-bg-checked-color:#797979;
 }
