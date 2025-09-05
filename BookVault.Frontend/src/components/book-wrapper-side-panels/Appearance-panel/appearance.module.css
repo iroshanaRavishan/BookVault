@@ -102,7 +102,7 @@
   left: 0;
   right: 2px;
   bottom: 0;
-  background-color: #ccc;
+  background-color: var(--appearance-toggle-bg-unchecked-color);
   transition: 0.4s;
   border-radius: 20px;
 }
