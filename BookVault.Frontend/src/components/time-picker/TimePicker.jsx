@@ -3,7 +3,7 @@ import styles from './timepicker.module.css';
 
 export default function TimePicker() {
   return (
-    <div>
+    <div className={styles.container}>
       Time Picker
     </div>
   );
