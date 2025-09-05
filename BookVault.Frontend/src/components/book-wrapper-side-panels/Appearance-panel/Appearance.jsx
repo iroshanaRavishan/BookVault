@@ -300,6 +300,8 @@ export default function Appearance() {
                   />
                   <span style={{fontSize: '13px'}}>Automate Theme</span>
                 </label>
+                <div className={!isAutoThemeEnabled ? styles.disabledSection : ""}>
+                </div>
               </div>
             </div>
           </div>
