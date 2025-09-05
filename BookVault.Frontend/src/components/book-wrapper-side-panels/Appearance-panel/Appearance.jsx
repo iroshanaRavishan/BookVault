@@ -104,6 +104,8 @@ export default function Appearance() {
         document.documentElement.style.setProperty("--appearance-color-picker-button-border-color", "#e9e9e9ff");
       document.documentElement.style.setProperty("--appearance-toggle-slider-bg-color", "#000");
       document.documentElement.style.setProperty("--appearance-toggle-slider-border-color", "#fff");
+      document.documentElement.style.setProperty("--appearance-toggle-bg-unchecked-color", "#8f8f8fff");
+      document.documentElement.style.setProperty("--appearance-toggle-bg-checked-color", "#ddddddff"); 
       } else {
         // Light theme
         document.documentElement.style.setProperty("--header-pin-icon-color", "black");
@@ -166,6 +168,8 @@ export default function Appearance() {
         document.documentElement.style.setProperty("--appearance-color-picker-button-border-color", "#888888");
       document.documentElement.style.setProperty("--appearance-toggle-slider-bg-color", "#fff");
       document.documentElement.style.setProperty("--appearance-toggle-slider-border-color", "#000");
+      document.documentElement.style.setProperty("--appearance-toggle-bg-unchecked-color", "#ccc");
+      document.documentElement.style.setProperty("--appearance-toggle-bg-checked-color", "#797979");
       }
 
   const handleThemeToggle = () => {
