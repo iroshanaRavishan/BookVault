@@ -13,10 +13,10 @@
   --note-panel-toolbar: #f1f1f1ff;
   --note-quill-item-color: #000000;
   --note-quill-item-background-hover-color: #0000001e;
-  --undo-redo-action-button-border-color: #e7e7e7;
-  --undo-redo-action-button-bg-color: #f3f3f3;
-  --undo-redo-action-button-hover-bg-color: #eeeeee;
-  --undo-redo-action-button-item-color: #2b2b2b;
+  --undo-redo-action-button-border-color: #bbbbbbff;
+  --undo-redo-action-button-bg-color: #d3d3d3ff;
+  --undo-redo-action-button-hover-bg-color: #acacacff;
+  --undo-redo-action-button-item-color: #3a3a3aff;
   --note-detail-bar-bg: #f1f1f1ff;
   --note-section-text-color: #666;
   --note-action-bg: #f1f1f1ff;
