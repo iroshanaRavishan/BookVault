@@ -151,7 +151,7 @@
   height: 18px;
   border-radius: 50%;
   background: var(--appearance-toggle-slider-bg-color); 
-  border: 3px solid #000000;
+  border: 3px solid var(--appearance-toggle-slider-border-color);
   cursor: pointer;
   transition: transform 0.2s ease;
 }
