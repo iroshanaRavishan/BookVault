@@ -15,13 +15,13 @@
 }
 
 .timeChangeButton {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
 .timeChangeButton:active {
-    background-color: #ccc;
+  background-color: #ccc;
 }
