@@ -19,7 +19,9 @@ export default function TimePicker({ isAutoThemeEnabled, onSet }) {
   const decrement = (type) => {
     if (type === "hour") {
       setHour((prev) => (prev === 1 ? 12 : prev - 1));
-    }
+    } else {
+      setMinute((prev) => (prev === 0 ? 59 : prev - 1));
+    } 
   };
 
 
