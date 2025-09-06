@@ -27,18 +27,6 @@ export default function TimePicker({ isAutoThemeEnabled, onSet }) {
     }
   };
 
-  const handleSet = () => {
-    const timeString = `${hour}:${minute.toString().padStart(2, "0")} ${ampm}`;
-    onSet(timeString); // send selected time back to parent
-  };
-
-  const handleReset = () => {
-    setHour(12);
-    setMinute(0);
-    setAmpm("AM");
-    onSet("12:00 AM"); // notify parent
-  };
-
   return (
     <div className={styles.container}>
       <div style={{ opacity: isAutoThemeEnabled ? 1 : 0.4, pointerEvents: isAutoThemeEnabled ? 'auto' : 'none' }}>
