@@ -26,6 +26,11 @@ export default function TimePicker({ isAutoThemeEnabled, onSet }) {
     }
   };
 
+  const handleSet = () => {
+    const timeString = `${hour}:${minute.toString().padStart(2, "0")} ${ampm}`;
+    onSet(timeString); // send selected time back to parent
+  };
+
 
   return (
     <div className={styles.container}>
