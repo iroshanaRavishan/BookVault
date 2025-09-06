@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styles from './timepicker.module.css';
+import { FaChevronDown, FaChevronUp } from "react-icons/fa6";
 
 export default function TimePicker({ isAutoThemeEnabled, onSet }) {
   const [hour, setHour] = useState(12);
