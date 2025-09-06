@@ -6,10 +6,38 @@
     gap: 25px;
 }
 
+.timePickerWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 3px;
+  margin-top: 10px;
+}
+
+.timeColumn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 18px;
+  font-weight: bold;
+}
+
 .timeChangeButtonIcon {
   width: 26px;
   font-size: 18px;
   border: none;
   cursor: pointer;
   user-select: none;
+}
+
+.timeChangeButton {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.timeChangeButton:active {
+  background-color: #ccc;
 }
