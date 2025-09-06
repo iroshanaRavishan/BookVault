@@ -44,6 +44,10 @@ export default function TimePicker({ isAutoThemeEnabled, onSet }) {
       <div className={styles.timePickerWrapper} style={{ opacity: isAutoThemeEnabled ? 1 : 0.4, pointerEvents: isAutoThemeEnabled ? 'auto' : 'none' }}>
         <div className={styles.timeColumn}>
             <button className={styles.timeChangeButton} onClick={() => increment("hour")}><FaChevronUp className={styles.timeChangeButtonIcon} /></button>
+            <input
+                type="number"
+                className={styles.timeInput}
+            />
             <button className={styles.timeChangeButton}  onClick={() => decrement("hour")}><FaChevronDown className={styles.timeChangeButtonIcon} /></button>
         </div>
       </div>
