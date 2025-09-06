@@ -21,7 +21,9 @@ export default function TimePicker({ isAutoThemeEnabled, onSet }) {
       setHour((prev) => (prev === 1 ? 12 : prev - 1));
     } else if (type === "minute") {
       setMinute((prev) => (prev === 0 ? 59 : prev - 1));
-    } 
+    } else {
+      setAmpm((prev) => (prev === "AM" ? "PM" : "AM"));
+    }
   };
 
 
