@@ -5,3 +5,11 @@
     justify-content: space-between;
     gap: 25px;
 }
+
+.timeChangeButtonIcon {
+  width: 26px;
+  font-size: 18px;
+  border: none;
+  cursor: pointer;
+  user-select: none;
+}
