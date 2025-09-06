@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styles from './timepicker.module.css';
+import { FaChevronDown, FaChevronUp } from "react-icons/fa6";
 
 export default function TimePicker({ isAutoThemeEnabled, onSet }) {
   const [hour, setHour] = useState(12);
@@ -40,7 +41,12 @@ export default function TimePicker({ isAutoThemeEnabled, onSet }) {
 
   return (
     <div className={styles.container}>
-      Time Picker
+      <div style={{ opacity: isAutoThemeEnabled ? 1 : 0.4, pointerEvents: isAutoThemeEnabled ? 'auto' : 'none' }}>
+        <div>
+            <button className={styles.timeChangeButton} onClick={() => increment("hour")}><FaChevronUp className={styles.timeChangeButtonIcon} /></button>
+            <button className={styles.timeChangeButton}  onClick={() => decrement("hour")}><FaChevronDown className={styles.timeChangeButtonIcon} /></button>
+        </div>
+      </div>
     </div>
   );
 }

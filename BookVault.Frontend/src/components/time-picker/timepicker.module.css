@@ -5,3 +5,23 @@
     justify-content: space-between;
     gap: 25px;
 }
+
+.timeChangeButtonIcon {
+  width: 26px;
+  font-size: 18px;
+  border: none;
+  cursor: pointer;
+  user-select: none;
+}
+
+.timeChangeButton {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.timeChangeButton:active {
+  background-color: #ccc;
+}
