@@ -40,7 +40,11 @@ export default function TimePicker({ isAutoThemeEnabled, onSet }) {
 
   return (
     <div className={styles.container}>
-      Time Picker
+      <div>
+        <div>
+            <button onClick={() => increment("hour")}>up</button>
+        </div>
+      </div>
     </div>
   );
 }
