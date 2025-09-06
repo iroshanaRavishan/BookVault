@@ -43,7 +43,8 @@ export default function TimePicker({ isAutoThemeEnabled, onSet }) {
     <div className={styles.container}>
       <div style={{ opacity: isAutoThemeEnabled ? 1 : 0.4, pointerEvents: isAutoThemeEnabled ? 'auto' : 'none' }}>
         <div>
-            <button onClick={() => increment("hour")}>up</button>
+            <button onClick={() => increment("hour")}><FaChevronUp /></button>
+            <button  onClick={() => decrement("hour")}><FaChevronDown /></button>
         </div>
       </div>
     </div>
