@@ -54,13 +54,22 @@ const TimePicker = forwardRef(({ isAutoThemeEnabled, onSet }, ref) => {
           pointerEvents: isAutoThemeEnabled ? "auto" : "none",
         }}
       >
+        {/* Hour */}
         <div className={styles.timeColumn}>
-            <button className={styles.timeChangeButton} onClick={() => increment("hour")}><FaChevronUp className={styles.timeChangeButtonIcon} /></button>
-            <input
-                type="number"
-                className={styles.timeInput}
-            />
-            <button className={styles.timeChangeButton}  onClick={() => decrement("hour")}><FaChevronDown className={styles.timeChangeButtonIcon} /></button>
+          <button className={styles.timeChangeButton} onClick={() => increment("hour")}><FaChevronUp className={styles.timeChangeButtonIcon} /></button>
+          <input
+            type="number"
+            value={hour.toString().padStart(2, "0")}
+            onChange={(e) => {
+              let val = parseInt(e.target.value, 10);
+              if (isNaN(val)) val = 1;
+              if (val < 1) val = 1;
+              if (val > 12) val = 12;
+              setHour(val);
+            }}
+            className={styles.timeInput}
+          />
+          <button className={styles.timeChangeButton} onClick={() => decrement("hour")}><FaChevronDown className={styles.timeChangeButtonIcon} /></button>
         </div>
       </div>
     </div>
