@@ -77,6 +77,7 @@ const TimePicker = forwardRef(({ isAutoThemeEnabled, onSet }, ref) => {
           <button className={styles.timeChangeButton} onClick={() => increment("minute")}><FaChevronUp className={styles.timeChangeButtonIcon} /></button>
           <input
             type="number"
+            value={minute.toString().padStart(2, "0")}
           />
           <button className={styles.timeChangeButton} onClick={() => decrement("minute")}><FaChevronDown className={styles.timeChangeButtonIcon} /></button>
         </div>
