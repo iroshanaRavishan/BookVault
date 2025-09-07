@@ -19,7 +19,7 @@ export default function Appearance() {
   const handleSetTime = (type, timeString) => {
     if (type === "from") {
       setFromTime(timeString);
-    } else {
+    } else if (type === "to") {
       setToTime(timeString);
     }
   };
