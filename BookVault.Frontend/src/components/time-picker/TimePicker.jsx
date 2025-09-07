@@ -92,8 +92,8 @@ const TimePicker = forwardRef(({ isAutoThemeEnabled, onSet }, ref) => {
         <span style={{ fontSize: "20px" }}>:</span>
         {/* AM/PM */}
         <div className={styles.timeColumn}>
-          <button className={styles.timeChangeButton}>+</button>
-          <button className={styles.timeChangeButton}>-</button>
+          <button className={styles.timeChangeButton} onClick={() => increment("ampm")}>+</button>
+          <button className={styles.timeChangeButton} onClick={() => decrement("ampm")}>-</button>
         </div>
       </div>
     </div>
