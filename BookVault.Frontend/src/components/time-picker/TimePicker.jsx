@@ -36,8 +36,14 @@ const TimePicker = forwardRef(({ isAutoThemeEnabled, onSet }, ref) => {
     setHour(12);
     setMinute(0);
     setAmpm("AM");
-    onSet("12:00 AM"); // notify parent
+    onSet("12:00 AM");
   };
+
+  // Expose functions to parent through ref
+  useImperativeHandle(ref, () => ({
+    handleSet,
+    handleReset
+  }));
 
   return (
     <div className={styles.container}>
