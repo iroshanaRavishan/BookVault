@@ -47,7 +47,13 @@ const TimePicker = forwardRef(({ isAutoThemeEnabled, onSet }, ref) => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.timePickerWrapper} style={{ opacity: isAutoThemeEnabled ? 1 : 0.4, pointerEvents: isAutoThemeEnabled ? 'auto' : 'none' }}>
+      <div
+        className={styles.timePickerWrapper}
+        style={{
+          opacity: isAutoThemeEnabled ? 1 : 0.4,
+          pointerEvents: isAutoThemeEnabled ? "auto" : "none",
+        }}
+      >
         <div className={styles.timeColumn}>
             <button className={styles.timeChangeButton} onClick={() => increment("hour")}><FaChevronUp className={styles.timeChangeButtonIcon} /></button>
             <input
