@@ -1,4 +1,4 @@
-import { useState, forwardRef } from "react";
+import { useState, useImperativeHandle, forwardRef } from "react";
 import styles from './timepicker.module.css';
 import { FaChevronDown, FaChevronUp } from "react-icons/fa6";
 
@@ -70,6 +70,12 @@ const TimePicker = forwardRef(({ isAutoThemeEnabled, onSet }, ref) => {
             className={styles.timeInput}
           />
           <button className={styles.timeChangeButton} onClick={() => decrement("hour")}><FaChevronDown className={styles.timeChangeButtonIcon} /></button>
+        </div>
+        <span style={{ fontSize: "20px" }}>:</span>
+        {/* Minute */}
+        <div className={styles.timeColumn}>
+          <button className={styles.timeChangeButton} onClick={() => increment("minute")}><FaChevronUp className={styles.timeChangeButtonIcon} /></button>
+          <button className={styles.timeChangeButton} onClick={() => decrement("minute")}><FaChevronDown className={styles.timeChangeButtonIcon} /></button>
         </div>
       </div>
     </div>
