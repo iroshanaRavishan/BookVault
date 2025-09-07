@@ -74,8 +74,8 @@ const TimePicker = forwardRef(({ isAutoThemeEnabled, onSet }, ref) => {
         <span style={{ fontSize: "20px" }}>:</span>
         {/* Minute */}
         <div className={styles.timeColumn}>
-          <button className={styles.timeChangeButton} >+</button>
-          <button className={styles.timeChangeButton} >-</button>
+          <button className={styles.timeChangeButton} ><FaChevronUp className={styles.timeChangeButtonIcon} /></button>
+          <button className={styles.timeChangeButton} ><FaChevronDown className={styles.timeChangeButtonIcon} /></button>
         </div>
       </div>
     </div>
