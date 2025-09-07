@@ -36,12 +36,24 @@ const TimePicker = forwardRef(({ isAutoThemeEnabled, onSet }, ref) => {
     setHour(12);
     setMinute(0);
     setAmpm("AM");
-    onSet("12:00 AM"); // notify parent
+    onSet("12:00 AM");
   };
+
+  // Expose functions to parent through ref
+  useImperativeHandle(ref, () => ({
+    handleSet,
+    handleReset
+  }));
 
   return (
     <div className={styles.container}>
-      <div className={styles.timePickerWrapper} style={{ opacity: isAutoThemeEnabled ? 1 : 0.4, pointerEvents: isAutoThemeEnabled ? 'auto' : 'none' }}>
+      <div
+        className={styles.timePickerWrapper}
+        style={{
+          opacity: isAutoThemeEnabled ? 1 : 0.4,
+          pointerEvents: isAutoThemeEnabled ? "auto" : "none",
+        }}
+      >
         <div className={styles.timeColumn}>
             <button className={styles.timeChangeButton} onClick={() => increment("hour")}><FaChevronUp className={styles.timeChangeButtonIcon} /></button>
             <input
