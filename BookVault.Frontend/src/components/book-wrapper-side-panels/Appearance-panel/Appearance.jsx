@@ -16,8 +16,12 @@ export default function Appearance() {
   const { isFullScreen, handleFullScreenToggle } = useFullscreenContext();
 
   // Handler from time picker
-  const handleSetTime = (timeString) => {
-    setScheduledTime(timeString);
+  const handleSetTime = (type, timeString) => {
+    if (type === "from") {
+      setFromTime(timeString);
+    } else {
+      setToTime(timeString);
+    }
   };
 
   const handleColorChange = (e) => {
