@@ -316,6 +316,7 @@ export default function Appearance() {
                       onChange={(t) => handleCurrentTimeChange("from", t)}
                     />
                   <div className={!isAutoThemeEnabled ? styles.disabledSection : ""}>
+                    <span style={{ fontSize: "12px" }}>To : </span>
                   </div>
                 </div>
                 </div>
