@@ -343,6 +343,7 @@ export default function Appearance() {
                     className={styles.setButton}
                     onClick={() => {
                       fromTimeRef.current?.handleSet();
+                      toTimeRef.current?.handleSet();
                     }}
                   >
                     Set time
