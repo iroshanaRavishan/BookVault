@@ -334,6 +334,7 @@ export default function Appearance() {
                     onClick={() => {
                       fromTimeRef.current?.handleReset();
                       toTimeRef.current?.handleReset();
+                      setButtonsDisabled(true);
                     }}
                   >
                     Reset time
