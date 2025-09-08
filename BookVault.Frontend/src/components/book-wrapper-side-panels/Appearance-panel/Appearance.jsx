@@ -316,6 +316,18 @@ export default function Appearance() {
                       onChange={(t) => handleCurrentTimeChange("from", t)}
                     />
                   </div>
+                  <span className={styles.timePickerSeparator}></span>
+                  <div className={!isAutoThemeEnabled ? styles.disabledSection : ""}>
+                    <span style={{ fontSize: "12px" }}>To : </span>
+                    <TimePicker 
+                      id="to" 
+                      ref={toTimeRef} 
+                      isAutoThemeEnabled={isAutoThemeEnabled} 
+                      onSet={(t) => handleSetTime("to", t)} 
+                      onChange={(t) => handleCurrentTimeChange("to", t)}
+                    />
+                  </div>
+                </div>
                 </div>
               </div>
             </div>
