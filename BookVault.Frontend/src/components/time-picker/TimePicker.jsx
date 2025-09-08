@@ -42,7 +42,8 @@ const TimePicker = forwardRef(({ isAutoThemeEnabled, onSet, onChange }, ref) => 
   // Expose functions to parent through ref
   useImperativeHandle(ref, () => ({
     handleSet,
-    handleReset
+    handleReset,
+    getCurrentTime: () => `${hour}:${minute.toString().padStart(2, "0")} ${ampm}` // NEW
   }));
 
   return (
