@@ -308,6 +308,12 @@ export default function Appearance() {
                 <div className={styles.timeRange}>
                   <div className={!isAutoThemeEnabled ? styles.disabledSection : ""}>
                     <span style={{ fontSize: "12px" }}>From : </span>
+                    <TimePicker 
+                      id="from" 
+                      ref={fromTimeRef} 
+                      isAutoThemeEnabled={isAutoThemeEnabled} 
+                      onSet={(t) => handleSetTime("from", t)}  
+                    />
                   </div>
                 </div>
               </div>
