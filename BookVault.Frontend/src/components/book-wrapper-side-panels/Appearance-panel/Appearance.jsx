@@ -313,6 +313,7 @@ export default function Appearance() {
                       ref={fromTimeRef} 
                       isAutoThemeEnabled={isAutoThemeEnabled} 
                       onSet={(t) => handleSetTime("from", t)}  
+                      onChange={(t) => handleCurrentTimeChange("from", t)}
                     />
                   </div>
                 </div>
