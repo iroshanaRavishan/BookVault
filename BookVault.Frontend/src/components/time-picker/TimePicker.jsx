@@ -87,6 +87,9 @@ const TimePicker = forwardRef(({ isAutoThemeEnabled, onSet, onChange }, ref) => 
               if (val < 0) val = 0;
               if (val > 59) val = 59;
               setMinute(val);
+
+              const timeString = `${hour}:${val.toString().padStart(2, "0")} ${ampm}`;
+              if (onChange) onChange(timeString);
             }}
             className={styles.timeInput}
           />
@@ -96,6 +99,19 @@ const TimePicker = forwardRef(({ isAutoThemeEnabled, onSet, onChange }, ref) => 
         {/* AM/PM */}
         <div className={styles.timeColumn}>
           <button className={styles.timeChangeButton} onClick={() => increment("ampm")}><FaChevronUp className={styles.timeChangeButtonIcon} /></button>
+          <input
+            type="text"
+            value={ampm}
+            onChange={(e) => {
+              let val = e.target.value.toUpperCase();
+              if (val !== "AM" && val !== "PM") return;
+              setAmpm(val);
+
+              const timeString = `${hour}:${minute.toString().padStart(2, "0")} ${val}`;
+              if (onChange) onChange(timeString);
+            }}
+            className={styles.timeInput}
+          />
           <button className={styles.timeChangeButton} onClick={() => decrement("ampm")}><FaChevronDown className={styles.timeChangeButtonIcon} /></button>
         </div>
       </div>
