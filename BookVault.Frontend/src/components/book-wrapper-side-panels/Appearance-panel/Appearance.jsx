@@ -315,7 +315,9 @@ export default function Appearance() {
                       onSet={(t) => handleSetTime("from", t)}  
                       onChange={(t) => handleCurrentTimeChange("from", t)}
                     />
+                  <div className={!isAutoThemeEnabled ? styles.disabledSection : ""}>
                   </div>
+                </div>
                 </div>
               </div>
             </div>
