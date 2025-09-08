@@ -328,6 +328,7 @@ export default function Appearance() {
                     />
                   </div>
                 </div>
+                <div className={styles.buttonGroup}>
                 </div>
               </div>
             </div>
