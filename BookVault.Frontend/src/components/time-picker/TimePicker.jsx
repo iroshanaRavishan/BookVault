@@ -2,7 +2,7 @@ import { useState, useImperativeHandle, forwardRef } from "react";
 import styles from './timepicker.module.css';
 import { FaChevronDown, FaChevronUp } from "react-icons/fa6";
 
-const TimePicker = forwardRef(({ isAutoThemeEnabled, onSet }, ref) => {
+const TimePicker = forwardRef(({ isAutoThemeEnabled, onSet, onChange }, ref) => {
   const [hour, setHour] = useState(12);
   const [minute, setMinute] = useState(0);
   const [ampm, setAmpm] = useState("AM");
