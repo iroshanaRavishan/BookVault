@@ -102,6 +102,11 @@ const TimePicker = forwardRef(({ isAutoThemeEnabled, onSet, onChange }, ref) => 
           <input
             type="text"
             value={ampm}
+            onChange={(e) => {
+              let val = e.target.value.toUpperCase();
+              if (val !== "AM" && val !== "PM") return;
+              setAmpm(val);
+            }}
             className={styles.timeInput}
           />
           <button className={styles.timeChangeButton} onClick={() => decrement("ampm")}><FaChevronDown className={styles.timeChangeButtonIcon} /></button>
