@@ -198,18 +198,6 @@ export default function Appearance() {
     document.documentElement.style.setProperty("--inactive-bookmark-opacity", inactivebookmarkOpacity);
   };
 
-  const parseTimeToMinutes = (timeString) => {
-    const [hourPart, minuteWithAmpm] = timeString.split(":");
-    const [minutePart, ampm] = minuteWithAmpm.split(" ");
-    let hour = parseInt(hourPart, 10);
-    const minute = parseInt(minutePart, 10);
-
-    if (ampm === "PM" && hour !== 12) hour += 12;
-    if (ampm === "AM" && hour === 12) hour = 0;
-
-    return hour * 60 + minute;
-  };
-
   const handleFocusModeToggle = () => {
     setIsFocusMode((prev) => {
       const newFocusMode = !prev;
@@ -317,8 +305,17 @@ export default function Appearance() {
                   />
                   <span style={{fontSize: '13px'}}>Automate Theme</span>
                 </label>
-                <div className={!isAutoThemeEnabled ? styles.disabledSection : ""}>
-                  <TimePicker isAutoThemeEnabled={isAutoThemeEnabled} onSet={handleSetTime} />
+                <div className={styles.timeRange}>
+                  <div className={!isAutoThemeEnabled ? styles.disabledSection : ""}>
+                    <span style={{ fontSize: "12px" }}>From : </span>
+                    <TimePicker 
+                      id="from" 
+                      ref={fromTimeRef} 
+                      isAutoThemeEnabled={isAutoThemeEnabled} 
+                      onSet={(t) => handleSetTime("from", t)}  
+                      onChange={(t) => handleCurrentTimeChange("from", t)}
+                    />
+                  </div>
                 </div>
               </div>
             </div>
