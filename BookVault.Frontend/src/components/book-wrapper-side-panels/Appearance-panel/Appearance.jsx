@@ -305,8 +305,17 @@ export default function Appearance() {
                   />
                   <span style={{fontSize: '13px'}}>Automate Theme</span>
                 </label>
-                <div className={!isAutoThemeEnabled ? styles.disabledSection : ""}>
-                  <TimePicker isAutoThemeEnabled={isAutoThemeEnabled} onSet={handleSetTime} />
+                <div className={styles.timeRange}>
+                  <div className={!isAutoThemeEnabled ? styles.disabledSection : ""}>
+                    <span style={{ fontSize: "12px" }}>From : </span>
+                    <TimePicker 
+                      id="from" 
+                      ref={fromTimeRef} 
+                      isAutoThemeEnabled={isAutoThemeEnabled} 
+                      onSet={(t) => handleSetTime("from", t)}  
+                      onChange={(t) => handleCurrentTimeChange("from", t)}
+                    />
+                  </div>
                 </div>
               </div>
             </div>
