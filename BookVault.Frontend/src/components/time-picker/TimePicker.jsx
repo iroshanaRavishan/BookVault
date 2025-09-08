@@ -87,6 +87,9 @@ const TimePicker = forwardRef(({ isAutoThemeEnabled, onSet, onChange }, ref) => 
               if (val < 0) val = 0;
               if (val > 59) val = 59;
               setMinute(val);
+
+              const timeString = `${hour}:${val.toString().padStart(2, "0")} ${ampm}`;
+              if (onChange) onChange(timeString);
             }}
             className={styles.timeInput}
           />
