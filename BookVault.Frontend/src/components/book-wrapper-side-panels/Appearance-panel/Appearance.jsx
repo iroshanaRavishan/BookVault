@@ -307,6 +307,7 @@ export default function Appearance() {
                 </label>
                 <div className={styles.timeRange}>
                   <div className={!isAutoThemeEnabled ? styles.disabledSection : ""}>
+                    <span style={{ fontSize: "12px" }}>From : </span>
                   </div>
                 </div>
               </div>
