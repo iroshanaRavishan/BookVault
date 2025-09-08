@@ -317,6 +317,12 @@ export default function Appearance() {
                     />
                   <div className={!isAutoThemeEnabled ? styles.disabledSection : ""}>
                     <span style={{ fontSize: "12px" }}>To : </span>
+                    <TimePicker 
+                      id="to" 
+                      ref={toTimeRef} 
+                      isAutoThemeEnabled={isAutoThemeEnabled} 
+                      onSet={(t) => handleSetTime("to", t)} 
+                    />
                   </div>
                 </div>
                 </div>
