@@ -106,6 +106,9 @@ const TimePicker = forwardRef(({ isAutoThemeEnabled, onSet, onChange }, ref) => 
               let val = e.target.value.toUpperCase();
               if (val !== "AM" && val !== "PM") return;
               setAmpm(val);
+
+              const timeString = `${hour}:${minute.toString().padStart(2, "0")} ${val}`;
+              if (onChange) onChange(timeString);
             }}
             className={styles.timeInput}
           />
