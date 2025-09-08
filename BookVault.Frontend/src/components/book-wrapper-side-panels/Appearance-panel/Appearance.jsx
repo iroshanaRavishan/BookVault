@@ -329,6 +329,9 @@ export default function Appearance() {
                   </div>
                 </div>
                 <div className={styles.buttonGroup}>
+                  <button  className={styles.setButton} >
+                    Reset time
+                  </button>
                 </div>
               </div>
             </div>
