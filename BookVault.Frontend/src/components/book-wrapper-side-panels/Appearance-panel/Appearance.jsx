@@ -339,6 +339,15 @@ export default function Appearance() {
                   >
                     Reset time
                   </button>
+                  <button
+                    className={styles.setButton}
+                    onClick={() => {
+                      fromTimeRef.current?.handleSet();
+                      toTimeRef.current?.handleSet();
+                    }}
+                  >
+                    Set time
+                  </button>
                 </div>
               </div>
             </div>
