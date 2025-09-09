@@ -17,8 +17,10 @@ const TimePicker = forwardRef(({ isAutoThemeEnabled, onSet, onChange }, ref) => 
       });
     } else if (type === "minute") {
       setMinute((prev) => {
-        return prev === 59 ? 0 : prev + 1;
-       });
+        const newVal = prev === 59 ? 0 : prev + 1;
+        const timeString = `${hour}:${newVal.toString().padStart(2, "0")} ${ampm}`;
+        return newVal;
+      });
     } else {
       setAmpm((prev) => (prev === "AM" ? "PM" : "AM"));
     }
