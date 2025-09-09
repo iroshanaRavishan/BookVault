@@ -34,7 +34,9 @@ const TimePicker = forwardRef(({ isAutoThemeEnabled, onSet, onChange }, ref) => 
 
   const decrement = (type) => {
     if (type === "hour") {
-      setHour((prev) => (prev === 1 ? 12 : prev - 1));
+      setHour((prev) => {
+        return prev === 1 ? 12 : prev - 1;
+      });
     } else if (type === "minute") {
       setMinute((prev) => (prev === 0 ? 59 : prev - 1));
     } else {
