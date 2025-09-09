@@ -336,6 +336,7 @@ export default function Appearance() {
                       toTimeRef.current?.handleReset();
                       setButtonsDisabled(true);
                     }}
+                    disabled={buttonsDisabled}
                   >
                     Reset time
                   </button>
