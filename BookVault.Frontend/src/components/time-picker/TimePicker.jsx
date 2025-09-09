@@ -49,7 +49,9 @@ const TimePicker = forwardRef(({ isAutoThemeEnabled, onSet, onChange }, ref) => 
       });
     } else {
       setAmpm((prev) => {
-        return prev === "AM" ? "PM" : "AM";
+        const newVal = prev === "AM" ? "PM" : "AM";
+        const timeString = `${hour}:${minute.toString().padStart(2, "0")} ${newVal}`;
+        return newVal;
       });
     }
   };
