@@ -44,6 +44,7 @@ const TimePicker = forwardRef(({ isAutoThemeEnabled, onSet, onChange }, ref) => 
       setMinute((prev) => {
         const newVal = prev === 0 ? 59 : prev - 1;
         const timeString = `${hour}:${newVal.toString().padStart(2, "0")} ${ampm}`;
+        if (onChange) onChange(timeString);
         return newVal;
       });
     } else {
