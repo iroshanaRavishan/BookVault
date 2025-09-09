@@ -22,8 +22,13 @@ const TimePicker = forwardRef(({ isAutoThemeEnabled, onSet, onChange }, ref) => 
         if (onChange) onChange(timeString);
         return newVal;
       });
-    } else {
-      setAmpm((prev) => (prev === "AM" ? "PM" : "AM"));
+    } else if (type === "ampm") {
+      setAmpm((prev) => {
+        const newVal = prev === "AM" ? "PM" : "AM";
+        const timeString = `${hour}:${minute.toString().padStart(2, "0")} ${newVal}`;
+        if (onChange) onChange(timeString);
+        return newVal;
+      });
     }
   };
 
