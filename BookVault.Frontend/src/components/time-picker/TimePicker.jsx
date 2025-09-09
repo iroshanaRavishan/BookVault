@@ -10,7 +10,9 @@ const TimePicker = forwardRef(({ isAutoThemeEnabled, onSet, onChange }, ref) => 
   const increment = (type) => {
     if (type === "hour") {
       setHour((prev) => {
-        return prev === 12 ? 1 : prev + 1 ;
+         const newVal = prev === 12 ? 1 : prev + 1;
+         const timeString = `${newVal}:${minute.toString().padStart(2, "0")} ${ampm}`;
+         return newVal;
       });
     } else if (type === "minute") {
       setMinute((prev) => (prev === 59 ? 0 : prev + 1));
