@@ -346,6 +346,7 @@ export default function Appearance() {
                       fromTimeRef.current?.handleSet();
                       toTimeRef.current?.handleSet();
                     }}
+                    disabled={buttonsDisabled}
                   >
                     Set time
                   </button>
