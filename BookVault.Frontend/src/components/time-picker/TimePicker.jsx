@@ -48,7 +48,9 @@ const TimePicker = forwardRef(({ isAutoThemeEnabled, onSet, onChange }, ref) => 
         return newVal;
       });
     } else {
-      setAmpm((prev) => (prev === "AM" ? "PM" : "AM"));
+      setAmpm((prev) => {
+        return prev === "AM" ? "PM" : "AM";
+      });
     }
   };
 
