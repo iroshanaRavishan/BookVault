@@ -10,10 +10,10 @@ const TimePicker = forwardRef(({ isAutoThemeEnabled, onSet, onChange }, ref) => 
   const increment = (type) => {
     if (type === "hour") {
       setHour((prev) => {
-         const newVal = prev === 12 ? 1 : prev + 1;
-         const timeString = `${newVal}:${minute.toString().padStart(2, "0")} ${ampm}`;
-         if (onChange) onChange(timeString);
-         return newVal;
+        const newVal = prev === 12 ? 1 : prev + 1;
+        const timeString = `${newVal}:${minute.toString().padStart(2, "0")} ${ampm}`;
+        if (onChange) onChange(timeString);
+        return newVal;
       });
     } else if (type === "minute") {
       setMinute((prev) => {
