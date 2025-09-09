@@ -16,7 +16,9 @@ const TimePicker = forwardRef(({ isAutoThemeEnabled, onSet, onChange }, ref) => 
          return newVal;
       });
     } else if (type === "minute") {
-      setMinute((prev) => (prev === 59 ? 0 : prev + 1));
+      setMinute((prev) => {
+        return prev === 59 ? 0 : prev + 1;
+       });
     } else {
       setAmpm((prev) => (prev === "AM" ? "PM" : "AM"));
     }
