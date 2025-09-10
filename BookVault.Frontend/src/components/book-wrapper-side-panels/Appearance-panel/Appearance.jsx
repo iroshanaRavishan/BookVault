@@ -222,6 +222,8 @@ export default function Appearance() {
     const [mPart, ampm] = rest.split(" ");
     let h = parseInt(hPart, 10);
     const m = parseInt(mPart, 10);
+    if (ampm === "PM" && h !== 12) h += 12;
+    if (ampm === "AM" && h === 12) h = 0;
   };
 
   return (
