@@ -11,7 +11,7 @@ export default function Appearance() {
   const [isDimmed, setIsDimmed] = useState(false); // toggler state
   const [isFocusMode, setIsFocusMode] = useState(false); // focus mode state
   const [isAutoThemeEnabled, setIsAutoThemeEnabled] = useState(false);
-  const [scheduledTime, setScheduledTime] = useState(null); // default 12
+  const [fromTime, setFromTime] = useState(null);
 
   const { isFullScreen, handleFullScreenToggle } = useFullscreenContext();
 
