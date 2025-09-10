@@ -234,6 +234,13 @@ export default function Appearance() {
     return d;
   };
 
+  const nextOccurrence = (t) => {
+    const now = new Date();
+    const d = dateForTodayTime(t);
+    if (d <= now) d.setDate(d.getDate() + 1);
+    return d;
+  };
+
   return (
     <div className={styles.AppearancePanel}>
       <div>
