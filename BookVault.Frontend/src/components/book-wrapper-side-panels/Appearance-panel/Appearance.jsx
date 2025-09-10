@@ -243,6 +243,8 @@ export default function Appearance() {
   
   const handleCurrentTimeChange = (type, timeString) => {
     const normalized = normalizeTimeString(timeString);
+    if (type === "from") setFromCurrent(normalized);
+    else setToCurrent(normalized);
   };
   
   return (
