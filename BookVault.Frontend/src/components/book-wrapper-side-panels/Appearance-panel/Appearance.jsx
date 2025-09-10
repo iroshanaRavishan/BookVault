@@ -227,6 +227,9 @@ export default function Appearance() {
     return { h24: h, m };
   };
 
+  const dateForTodayTime = (t) => {
+  };
+
   return (
     <div className={styles.AppearancePanel}>
       <div>
