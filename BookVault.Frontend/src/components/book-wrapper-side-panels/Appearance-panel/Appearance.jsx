@@ -227,6 +227,13 @@ export default function Appearance() {
     return { h24: h, m };
   };
 
+  const dateForTodayTime = (t) => {
+    const { h24, m } = parseTimeToHM(t);
+    const d = new Date();
+    d.setHours(h24, m, 0, 0);
+    return d;
+  };
+
   return (
     <div className={styles.AppearancePanel}>
       <div>
