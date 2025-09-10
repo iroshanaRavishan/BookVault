@@ -228,6 +228,8 @@ export default function Appearance() {
   };
 
   const dateForTodayTime = (t) => {
+    const { h24, m } = parseTimeToHM(t);
+    const d = new Date();
   };
 
   return (
