@@ -240,7 +240,11 @@ export default function Appearance() {
     if (d <= now) d.setDate(d.getDate() + 1);
     return d;
   };
-
+  
+  const handleCurrentTimeChange = (type, timeString) => {
+    
+  };
+  
   return (
     <div className={styles.AppearancePanel}>
       <div>
