@@ -218,8 +218,10 @@ export default function Appearance() {
   };
 
   const parseTimeToHM = (t) => {
-  const [hPart, rest] = t.split(":");
-  const [mPart, ampm] = rest.split(" ");
+    const [hPart, rest] = t.split(":");
+    const [mPart, ampm] = rest.split(" ");
+    let h = parseInt(hPart, 10);
+    const m = parseInt(mPart, 10);
   };
 
   return (
