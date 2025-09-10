@@ -218,7 +218,7 @@ export default function Appearance() {
   };
 
   const parseTimeToHM = (t) => {
-  
+  const [hPart, rest] = t.split(":");
   };
 
   return (
