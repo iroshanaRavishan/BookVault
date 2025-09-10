@@ -217,6 +217,10 @@ export default function Appearance() {
     });
   };
 
+  const parseTimeToHM = (t) => {
+  
+  };
+
   return (
     <div className={styles.AppearancePanel}>
       <div>
