@@ -242,7 +242,7 @@ export default function Appearance() {
   };
   
   const handleCurrentTimeChange = (type, timeString) => {
-    
+    const normalized = normalizeTimeString(timeString);
   };
   
   return (
