@@ -234,6 +234,9 @@ export default function Appearance() {
     return d;
   };
 
+  const nextOccurrence = (t) => {
+  };
+
   return (
     <div className={styles.AppearancePanel}>
       <div>
