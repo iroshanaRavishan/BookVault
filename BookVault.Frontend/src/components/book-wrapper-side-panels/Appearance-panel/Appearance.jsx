@@ -235,6 +235,8 @@ export default function Appearance() {
   };
 
   const nextOccurrence = (t) => {
+    const now = new Date();
+    const d = dateForTodayTime(t);
   };
 
   return (
