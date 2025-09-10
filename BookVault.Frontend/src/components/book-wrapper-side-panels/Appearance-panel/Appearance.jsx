@@ -224,6 +224,7 @@ export default function Appearance() {
     const m = parseInt(mPart, 10);
     if (ampm === "PM" && h !== 12) h += 12;
     if (ampm === "AM" && h === 12) h = 0;
+    return { h24: h, m };
   };
 
   return (
