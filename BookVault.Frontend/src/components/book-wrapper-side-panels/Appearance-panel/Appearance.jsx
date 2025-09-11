@@ -246,7 +246,16 @@ export default function Appearance() {
     if (type === "from") setFromCurrent(normalized);
     else setToCurrent(normalized);
   };
-  
+
+  const normalizeTimeString = (t) => {
+    // ensures HH:MM AM/PM format
+    const [hPart, rest] = t.split(":");
+    const [mPart, ampm] = rest.split(" ");
+    const h = parseInt(hPart, 10);
+    const m = parseInt(mPart, 10);
+    return `${h.toString().padStart(2, "0")}:${m.toString().padStart(2, "0")} ${ampm}`;
+  };
+
   return (
     <div className={styles.AppearancePanel}>
       <div>
