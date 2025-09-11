@@ -253,6 +253,7 @@ export default function Appearance() {
     const [mPart, ampm] = rest.split(" ");
     const h = parseInt(hPart, 10);
     const m = parseInt(mPart, 10);
+    return `${h.toString().padStart(2, "0")}:${m.toString().padStart(2, "0")} ${ampm}`;
   };
 
   return (
