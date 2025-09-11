@@ -253,6 +253,9 @@ export default function Appearance() {
     if (fromMin < toMin) {
       // same-day window
       return nowMin >= fromMin && nowMin < toMin;
+    } else {
+      // overnight window
+      return nowMin >= fromMin || nowMin < toMin;
     }
   };
 
