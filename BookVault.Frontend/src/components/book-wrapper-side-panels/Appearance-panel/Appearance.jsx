@@ -59,6 +59,11 @@ export default function Appearance() {
         scheduleDark();
       }, delay);
     };
+
+    const scheduleLight = () => {
+      const when = nextOccurrence(toTime);
+      const delay = Math.max(0, when.getTime() - Date.now());
+    };
   }, [isAutoThemeEnabled, fromTime, toTime]);
 
 
