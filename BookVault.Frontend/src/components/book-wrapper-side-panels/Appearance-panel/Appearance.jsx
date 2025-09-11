@@ -245,6 +245,7 @@ export default function Appearance() {
     const now = new Date();
     const nowMin = now.getHours() * 60 + now.getMinutes();
     const f = parseTimeToHM(fromT);
+    const t = parseTimeToHM(toT);
   };
 
   const handleCurrentTimeChange = (type, timeString) => {
