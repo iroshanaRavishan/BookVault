@@ -248,6 +248,8 @@ export default function Appearance() {
     const t = parseTimeToHM(toT);
     const fromMin = f.h24 * 60 + f.m;
     const toMin = t.h24 * 60 + t.m;
+
+    if (fromMin === toMin) return false; // same time -> treat as always light
   };
 
   const handleCurrentTimeChange = (type, timeString) => {
