@@ -36,6 +36,9 @@ export default function Appearance() {
     setButtonsDisabled(fromNorm === toNorm);
   }, [fromCurrent, toCurrent, isAutoThemeEnabled]);
 
+  useEffect(() => {
+  }, [isAutoThemeEnabled, fromTime, toTime]);
+
 
   // Handler from time picker
   const handleSetTime = (type, timeString) => {
