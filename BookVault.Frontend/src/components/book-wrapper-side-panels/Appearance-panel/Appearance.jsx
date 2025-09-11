@@ -246,7 +246,10 @@ export default function Appearance() {
     if (type === "from") setFromCurrent(normalized);
     else setToCurrent(normalized);
   };
-  
+
+  const normalizeTimeString = (t) => {
+  };
+
   return (
     <div className={styles.AppearancePanel}>
       <div>
