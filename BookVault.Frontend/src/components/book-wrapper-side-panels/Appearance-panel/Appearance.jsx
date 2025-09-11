@@ -250,6 +250,7 @@ export default function Appearance() {
   const normalizeTimeString = (t) => {
     // ensures HH:MM AM/PM format
     const [hPart, rest] = t.split(":");
+    const [mPart, ampm] = rest.split(" ");
   };
 
   return (
