@@ -13,6 +13,7 @@ export default function Appearance() {
   const [isAutoThemeEnabled, setIsAutoThemeEnabled] = useState(false);
   const [fromTime, setFromTime] = useState(null);
   const [toTime, setToTime] = useState(null);
+  const [buttonsDisabled, setButtonsDisabled] = useState(true);
 
   const { isFullScreen, handleFullScreenToggle } = useFullscreenContext();
 
