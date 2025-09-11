@@ -12,6 +12,7 @@ export default function Appearance() {
   const [isFocusMode, setIsFocusMode] = useState(false); // focus mode state
   const [isAutoThemeEnabled, setIsAutoThemeEnabled] = useState(false);
   const [fromTime, setFromTime] = useState(null);
+  const [toTime, setToTime] = useState(null);
 
   const { isFullScreen, handleFullScreenToggle } = useFullscreenContext();
 
