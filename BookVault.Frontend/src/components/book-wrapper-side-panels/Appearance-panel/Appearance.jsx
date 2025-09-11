@@ -19,6 +19,8 @@ export default function Appearance() {
   
   const fromTimeRef = useRef();
   const toTimeRef = useRef();
+  const darkTimerRef = useRef(null);
+  const lightTimerRef = useRef(null);
 
   const { isFullScreen, handleFullScreenToggle } = useFullscreenContext();
 
