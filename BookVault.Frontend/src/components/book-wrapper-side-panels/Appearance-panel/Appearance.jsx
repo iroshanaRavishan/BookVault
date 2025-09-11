@@ -63,6 +63,12 @@ export default function Appearance() {
     const scheduleLight = () => {
       const when = nextOccurrence(toTime);
       const delay = Math.max(0, when.getTime() - Date.now());
+      lightTimerRef.current = setTimeout(() => {
+        setIsDarkTheme(false);
+        applyTheme(false);
+        // reschedule for the next day
+        scheduleLight();
+      }, delay);
     };
   }, [isAutoThemeEnabled, fromTime, toTime]);
 
