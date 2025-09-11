@@ -23,6 +23,8 @@ useEffect(() => {
 
   const fromNorm = normalizeTimeString(fromCurrent);
   const toNorm = normalizeTimeString(toCurrent);
+
+  setButtonsDisabled(fromNorm === toNorm);
 }, [fromCurrent, toCurrent, isAutoThemeEnabled]);
 
 
