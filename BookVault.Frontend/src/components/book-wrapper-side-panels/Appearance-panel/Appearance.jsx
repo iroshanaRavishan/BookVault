@@ -70,6 +70,14 @@ export default function Appearance() {
         scheduleLight();
       }, delay);
     };
+
+    scheduleDark();
+    scheduleLight();
+
+    return () => {
+      if (darkTimerRef.current) clearTimeout(darkTimerRef.current);
+      if (lightTimerRef.current) clearTimeout(lightTimerRef.current);
+    };
   }, [isAutoThemeEnabled, fromTime, toTime]);
 
 
