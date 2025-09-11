@@ -52,6 +52,12 @@ export default function Appearance() {
     const scheduleDark = () => {
       const when = nextOccurrence(fromTime);
       const delay = Math.max(0, when.getTime() - Date.now());
+      darkTimerRef.current = setTimeout(() => {
+        setIsDarkTheme(true);
+        applyTheme(true);
+        // reschedule for the next day
+        scheduleDark();
+      }, delay);
     };
   }, [isAutoThemeEnabled, fromTime, toTime]);
 
