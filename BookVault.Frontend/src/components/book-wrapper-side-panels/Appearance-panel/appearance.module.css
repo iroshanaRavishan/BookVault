@@ -211,3 +211,10 @@
 .themeDivider::after {
   margin-left: 10px;
 }
+
+.timePickerSeparator {
+  width: 2px;
+  height: 80px;
+  background-color: #ccc;
+  transform: translateY(20%);
+}
