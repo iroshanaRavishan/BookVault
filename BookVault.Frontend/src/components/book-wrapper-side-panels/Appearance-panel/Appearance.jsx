@@ -15,8 +15,12 @@ export default function Appearance() {
 
   const { isFullScreen, handleFullScreenToggle } = useFullscreenContext();
 
-  useEffect(() => {
-  }, [fromCurrent, toCurrent, isAutoThemeEnabled]);
+useEffect(() => {
+  if (!isAutoThemeEnabled) {
+    setButtonsDisabled(true);
+    return;
+  }
+}, [fromCurrent, toCurrent, isAutoThemeEnabled]);
 
 
   // Handler from time picker
