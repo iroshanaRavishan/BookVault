@@ -244,6 +244,7 @@ export default function Appearance() {
   const isNowWithinRange = (fromT, toT) => {
     const now = new Date();
     const nowMin = now.getHours() * 60 + now.getMinutes();
+    const f = parseTimeToHM(fromT);
   };
 
   const handleCurrentTimeChange = (type, timeString) => {
