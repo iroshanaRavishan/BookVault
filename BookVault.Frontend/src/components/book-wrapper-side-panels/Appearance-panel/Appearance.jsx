@@ -43,6 +43,11 @@ export default function Appearance() {
 
     if (!isAutoThemeEnabled || !fromTime || !toTime) return;
 
+    // Set correct theme immediately (no drift)
+    const darkNow = isNowWithinRange(fromTime, toTime);
+    setIsDarkTheme(darkNow);
+    applyTheme(darkNow);
+
   }, [isAutoThemeEnabled, fromTime, toTime]);
 
 
