@@ -15,17 +15,17 @@ export default function Appearance() {
 
   const { isFullScreen, handleFullScreenToggle } = useFullscreenContext();
 
-useEffect(() => {
-  if (!isAutoThemeEnabled) {
-    setButtonsDisabled(true);
-    return;
-  }
+  useEffect(() => {
+    if (!isAutoThemeEnabled) {
+      setButtonsDisabled(true);
+      return;
+    }
 
-  const fromNorm = normalizeTimeString(fromCurrent);
-  const toNorm = normalizeTimeString(toCurrent);
+    const fromNorm = normalizeTimeString(fromCurrent);
+    const toNorm = normalizeTimeString(toCurrent);
 
-  setButtonsDisabled(fromNorm === toNorm);
-}, [fromCurrent, toCurrent, isAutoThemeEnabled]);
+    setButtonsDisabled(fromNorm === toNorm);
+  }, [fromCurrent, toCurrent, isAutoThemeEnabled]);
 
 
   // Handler from time picker
