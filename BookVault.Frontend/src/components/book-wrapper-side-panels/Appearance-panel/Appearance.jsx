@@ -40,6 +40,9 @@ export default function Appearance() {
     // clear any existing timers
     if (darkTimerRef.current) clearTimeout(darkTimerRef.current);
     if (lightTimerRef.current) clearTimeout(lightTimerRef.current);
+
+    if (!isAutoThemeEnabled || !fromTime || !toTime) return;
+
   }, [isAutoThemeEnabled, fromTime, toTime]);
 
 
