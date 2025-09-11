@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from './appearance.module.css';
 import { useFullscreenContext } from "../../../context/FullscreenContext";
 import TimePicker from "../../time-picker/TimePicker";
@@ -16,6 +16,8 @@ export default function Appearance() {
   const [buttonsDisabled, setButtonsDisabled] = useState(true);
   const [fromCurrent, setFromCurrent] = useState("12:00 AM");
   const [toCurrent, setToCurrent] = useState("12:00 AM");
+  
+  const fromTimeRef = useRef();
 
   const { isFullScreen, handleFullScreenToggle } = useFullscreenContext();
 
