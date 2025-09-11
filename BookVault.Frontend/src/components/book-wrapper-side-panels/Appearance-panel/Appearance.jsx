@@ -240,7 +240,10 @@ export default function Appearance() {
     if (d <= now) d.setDate(d.getDate() + 1);
     return d;
   };
-  
+
+  const isNowWithinRange = (fromT, toT) => {
+  };
+
   const handleCurrentTimeChange = (type, timeString) => {
     const normalized = normalizeTimeString(timeString);
     if (type === "from") setFromCurrent(normalized);
