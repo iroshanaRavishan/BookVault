@@ -226,3 +226,9 @@
   justify-content: space-between;
 }
 
+.buttonGroup {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  width: 100%;
+}
