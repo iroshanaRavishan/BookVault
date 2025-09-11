@@ -20,6 +20,9 @@ useEffect(() => {
     setButtonsDisabled(true);
     return;
   }
+
+  const fromNorm = normalizeTimeString(fromCurrent);
+  const toNorm = normalizeTimeString(toCurrent);
 }, [fromCurrent, toCurrent, isAutoThemeEnabled]);
 
 
