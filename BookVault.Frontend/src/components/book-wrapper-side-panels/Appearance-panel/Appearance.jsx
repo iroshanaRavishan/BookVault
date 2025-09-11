@@ -18,6 +18,7 @@ export default function Appearance() {
   const [toCurrent, setToCurrent] = useState("12:00 AM");
   
   const fromTimeRef = useRef();
+  const toTimeRef = useRef();
 
   const { isFullScreen, handleFullScreenToggle } = useFullscreenContext();
 
