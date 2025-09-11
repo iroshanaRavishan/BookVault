@@ -218,3 +218,11 @@
   background-color: #ccc;
   transform: translateY(20%);
 }
+
+.timeRange {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
