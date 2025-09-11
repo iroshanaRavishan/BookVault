@@ -70,6 +70,8 @@ export default function Appearance() {
         scheduleLight();
       }, delay);
     };
+
+    scheduleDark();
   }, [isAutoThemeEnabled, fromTime, toTime]);
 
 
