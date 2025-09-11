@@ -48,6 +48,28 @@ export default function Appearance() {
     setIsDarkTheme(darkNow);
     applyTheme(darkNow);
 
+    // Schedule next dark-on and light-on boundaries exactly
+    const scheduleDark = () => {
+      const when = nextOccurrence(fromTime);
+      const delay = Math.max(0, when.getTime() - Date.now());
+      darkTimerRef.current = setTimeout(() => {
+        setIsDarkTheme(true);
+        applyTheme(true);
+        // reschedule for the next day
+        scheduleDark();
+      }, delay);
+    };
+
+    const scheduleLight = () => {
+      const when = nextOccurrence(toTime);
+      const delay = Math.max(0, when.getTime() - Date.now());
+      lightTimerRef.current = setTimeout(() => {
+        setIsDarkTheme(false);
+        applyTheme(false);
+        // reschedule for the next day
+        scheduleLight();
+      }, delay);
+    };
   }, [isAutoThemeEnabled, fromTime, toTime]);
 
 
