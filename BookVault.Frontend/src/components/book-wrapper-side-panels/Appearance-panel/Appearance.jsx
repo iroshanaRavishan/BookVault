@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from './appearance.module.css';
 import { useFullscreenContext } from "../../../context/FullscreenContext";
 import TimePicker from "../../time-picker/TimePicker";
@@ -14,6 +14,19 @@ export default function Appearance() {
   const [fromTime, setFromTime] = useState(null);
 
   const { isFullScreen, handleFullScreenToggle } = useFullscreenContext();
+
+  useEffect(() => {
+    if (!isAutoThemeEnabled) {
+      setButtonsDisabled(true);
+      return;
+    }
+
+    const fromNorm = normalizeTimeString(fromCurrent);
+    const toNorm = normalizeTimeString(toCurrent);
+
+    setButtonsDisabled(fromNorm === toNorm);
+  }, [fromCurrent, toCurrent, isAutoThemeEnabled]);
+
 
   // Handler from time picker
   const handleSetTime = (type, timeString) => {
