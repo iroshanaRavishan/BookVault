@@ -251,6 +251,8 @@ export default function Appearance() {
     // ensures HH:MM AM/PM format
     const [hPart, rest] = t.split(":");
     const [mPart, ampm] = rest.split(" ");
+    const h = parseInt(hPart, 10);
+    const m = parseInt(mPart, 10);
   };
 
   return (
