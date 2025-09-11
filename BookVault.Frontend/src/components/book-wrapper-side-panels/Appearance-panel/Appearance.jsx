@@ -14,6 +14,8 @@ export default function Appearance() {
   const [fromTime, setFromTime] = useState(null);
   const [toTime, setToTime] = useState(null);
   const [buttonsDisabled, setButtonsDisabled] = useState(true);
+  const [fromCurrent, setFromCurrent] = useState("12:00 AM");
+  const [toCurrent, setToCurrent] = useState("12:00 AM");
 
   const { isFullScreen, handleFullScreenToggle } = useFullscreenContext();
 
