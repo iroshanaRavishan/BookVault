@@ -19,6 +19,8 @@ export default function Appearance() {
   
   const fromTimeRef = useRef();
   const toTimeRef = useRef();
+  const darkTimerRef = useRef(null);
+  const lightTimerRef = useRef(null);
 
   const { isFullScreen, handleFullScreenToggle } = useFullscreenContext();
 
@@ -33,6 +35,20 @@ export default function Appearance() {
 
     setButtonsDisabled(fromNorm === toNorm);
   }, [fromCurrent, toCurrent, isAutoThemeEnabled]);
+
+  useEffect(() => {
+    // clear any existing timers
+    if (darkTimerRef.current) clearTimeout(darkTimerRef.current);
+    if (lightTimerRef.current) clearTimeout(lightTimerRef.current);
+
+    if (!isAutoThemeEnabled || !fromTime || !toTime) return;
+
+    // Set correct theme immediately (no drift)
+    const darkNow = isNowWithinRange(fromTime, toTime);
+    setIsDarkTheme(darkNow);
+    applyTheme(darkNow);
+
+  }, [isAutoThemeEnabled, fromTime, toTime]);
 
 
   // Handler from time picker
