@@ -265,6 +265,7 @@ export default function Appearance() {
   const handleFocusModeToggle = () => {
     setIsFocusMode((prev) => {
       const newVal = !prev;
+      applyFocusMode(newVal);
       return newVal;
     });
   };
