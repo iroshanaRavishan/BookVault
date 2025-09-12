@@ -27,3 +27,9 @@ export function applyBookmarkDim(isDimmed) {
   document.documentElement.style.setProperty("--active-bookmark-opacity", activebookmarkOpacity);
   document.documentElement.style.setProperty("--inactive-bookmark-opacity", inactivebookmarkOpacity);
 }
+
+// Focus mode
+export function applyFocusMode(isFocus) {
+  window.dispatchEvent(new Event("closeAllSideButtons"));
+  document.documentElement.style.setProperty("--flipbook-bg-opacity", "0.5");
+}
