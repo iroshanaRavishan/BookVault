@@ -7,6 +7,8 @@ import {
   applyColor,
   applyMargin,
   applyBrightness,
+  applyBookmarkDim,
+  applyFocusMode 
 } from "../../../utils/applyThemeHelpers";
 
 export default function Appearance() {
@@ -253,34 +255,18 @@ export default function Appearance() {
   };
 
   const handleBookmarkBrightnessChange = () => {
-    const newActiveValue = isDimmed ? 1 : 0.5; 
-    const newInactiveValue = isDimmed ? 0.5 : 0.2; 
-    setIsDimmed(!isDimmed);
-
-    // Adjust bookmark dimming (inverse relationship)
-    const activebookmarkOpacity = Math.min(1, Math.max(0.3, newActiveValue));
-    const inactivebookmarkOpacity = Math.min(1, Math.max(0.3, newInactiveValue));
-
-    document.documentElement.style.setProperty("--active-bookmark-opacity", activebookmarkOpacity);
-    document.documentElement.style.setProperty("--inactive-bookmark-opacity", inactivebookmarkOpacity);
+    setIsDimmed((prev) => {
+      const newVal = !prev;
+      applyBookmarkDim(newVal);
+      return newVal;
+    });
   };
 
   const handleFocusModeToggle = () => {
     setIsFocusMode((prev) => {
-      const newFocusMode = !prev;
-
-      if (newFocusMode) {
-        // Close all opened side buttons
-        window.dispatchEvent(new Event("closeAllSideButtons"));
-
-        // Reduce background opacity
-        document.documentElement.style.setProperty("--flipbook-bg-opacity", "0.5");
-      } else {
-        // restore full opacity
-        document.documentElement.style.setProperty("--flipbook-bg-opacity", "1");
-      }
-
-      return newFocusMode;
+      const newVal = !prev;
+      applyFocusMode(newVal);
+      return newVal;
     });
   };
 
