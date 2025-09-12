@@ -80,7 +80,6 @@ export default function Appearance() {
     };
   }, [isAutoThemeEnabled, fromTime, toTime]);
 
-
   // Handler from time picker
   const handleSetTime = (type, timeString) => {
     if (type === "from") {
@@ -93,9 +92,7 @@ export default function Appearance() {
   const handleColorChange = (e) => {
     const newColor = e.target.value;
     setColor(newColor);
-
-    // update CSS variable globally
-    document.documentElement.style.setProperty("--flipbook-bg", newColor);
+    applyColor(newColor);
   };
 
   const handleMarginToggle = (e) => {
