@@ -15,3 +15,12 @@ export function applyMargin(isEnabled) {
 export function applyBrightness(brightness) {
   document.documentElement.style.setProperty("--flipbook-brightness", brightness);
 }
+
+// Bookmark dimming
+export function applyBookmarkDim(isDimmed) {
+  const newActiveValue = isDimmed ? 0.5 : 1;
+  const newInactiveValue = isDimmed ? 0.2 : 0.5;
+
+  const activebookmarkOpacity = Math.min(1, Math.max(0.3, newActiveValue));
+  const inactivebookmarkOpacity = Math.min(1, Math.max(0.3, newInactiveValue));
+}
