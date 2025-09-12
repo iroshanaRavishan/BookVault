@@ -30,6 +30,10 @@ export function applyBookmarkDim(isDimmed) {
 
 // Focus mode
 export function applyFocusMode(isFocus) {
-  window.dispatchEvent(new Event("closeAllSideButtons"));
-  document.documentElement.style.setProperty("--flipbook-bg-opacity", "0.5");
+  if (isFocus) {
+    window.dispatchEvent(new Event("closeAllSideButtons"));
+    document.documentElement.style.setProperty("--flipbook-bg-opacity", "0.5");
+  } else {
+    document.documentElement.style.setProperty("--flipbook-bg-opacity", "1");
+  }
 }
