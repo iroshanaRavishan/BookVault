@@ -7,6 +7,7 @@ import {
   applyColor,
   applyMargin,
   applyBrightness,
+  applyBookmarkDim
 } from "../../../utils/applyThemeHelpers";
 
 export default function Appearance() {
@@ -253,16 +254,10 @@ export default function Appearance() {
   };
 
   const handleBookmarkBrightnessChange = () => {
-    const newActiveValue = isDimmed ? 1 : 0.5; 
-    const newInactiveValue = isDimmed ? 0.5 : 0.2; 
-    setIsDimmed(!isDimmed);
-
-    // Adjust bookmark dimming (inverse relationship)
-    const activebookmarkOpacity = Math.min(1, Math.max(0.3, newActiveValue));
-    const inactivebookmarkOpacity = Math.min(1, Math.max(0.3, newInactiveValue));
-
-    document.documentElement.style.setProperty("--active-bookmark-opacity", activebookmarkOpacity);
-    document.documentElement.style.setProperty("--inactive-bookmark-opacity", inactivebookmarkOpacity);
+    setIsDimmed((prev) => {
+      const newVal = !prev;      
+      return newVal;
+    });
   };
 
   const handleFocusModeToggle = () => {
