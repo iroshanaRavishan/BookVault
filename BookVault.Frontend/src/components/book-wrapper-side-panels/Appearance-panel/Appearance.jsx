@@ -7,7 +7,8 @@ import {
   applyColor,
   applyMargin,
   applyBrightness,
-  applyBookmarkDim
+  applyBookmarkDim,
+  applyFocusMode 
 } from "../../../utils/applyThemeHelpers";
 
 export default function Appearance() {
@@ -263,20 +264,8 @@ export default function Appearance() {
 
   const handleFocusModeToggle = () => {
     setIsFocusMode((prev) => {
-      const newFocusMode = !prev;
-
-      if (newFocusMode) {
-        // Close all opened side buttons
-        window.dispatchEvent(new Event("closeAllSideButtons"));
-
-        // Reduce background opacity
-        document.documentElement.style.setProperty("--flipbook-bg-opacity", "0.5");
-      } else {
-        // restore full opacity
-        document.documentElement.style.setProperty("--flipbook-bg-opacity", "1");
-      }
-
-      return newFocusMode;
+      const newVal = !prev;
+      return newVal;
     });
   };
 
