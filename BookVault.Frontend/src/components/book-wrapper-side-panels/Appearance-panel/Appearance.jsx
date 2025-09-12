@@ -255,7 +255,8 @@ export default function Appearance() {
 
   const handleBookmarkBrightnessChange = () => {
     setIsDimmed((prev) => {
-      const newVal = !prev;      
+      const newVal = !prev;
+      applyBookmarkDim(newVal);
       return newVal;
     });
   };
