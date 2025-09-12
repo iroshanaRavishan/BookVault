@@ -5,7 +5,8 @@ import TimePicker from "../../time-picker/TimePicker";
 import { 
   applyTheme,
   applyColor,
-  applyMargin
+  applyMargin,
+  applyBrightness,
 } from "../../../utils/applyThemeHelpers";
 
 export default function Appearance() {
@@ -109,7 +110,7 @@ export default function Appearance() {
   const handleBrightnessChange = (e) => {
     const newValue = Number(e.target.value);
     setBrightness(newValue);
-    document.documentElement.style.setProperty("--flipbook-brightness", newValue);
+    applyBrightness(newValue);
   };
 
   const applyTheme = (dark) => {
