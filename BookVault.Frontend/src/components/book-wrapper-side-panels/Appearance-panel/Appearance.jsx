@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import styles from './appearance.module.css';
 import { useFullscreenContext } from "../../../context/FullscreenContext";
 import TimePicker from "../../time-picker/TimePicker";
+import { applyTheme, applyColor } from "../../../utils/applyThemeHelpers";
 
 export default function Appearance() {
   const [color, setColor] = useState("#f1c40f"); // default yellow
