@@ -1,4 +1,4 @@
-import { useState, useImperativeHandle, forwardRef } from "react";
+import { useState, useImperativeHandle, forwardRef, useEffect } from "react";
 import styles from './timepicker.module.css';
 import { FaChevronDown, FaChevronUp } from "react-icons/fa6";
 
@@ -56,6 +56,13 @@ const TimePicker = forwardRef(({ isAutoThemeEnabled, onSet, onChange }, ref) => 
       });
     }
   };
+
+  useEffect(() => {
+    if (onChange) {
+      const formatted = `${hour}:${minute.toString().padStart(2, "0")} ${ampm}`;
+      onChange(formatted); // always send normalized value
+    }
+  }, [hour, minute, ampm]);
 
   const handleSet = () => {
     const timeString = `${hour}:${minute.toString().padStart(2, "0")} ${ampm}`;
