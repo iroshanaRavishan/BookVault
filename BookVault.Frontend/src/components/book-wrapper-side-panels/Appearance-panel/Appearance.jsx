@@ -2,6 +2,12 @@ import { useEffect, useRef, useState } from "react";
 import styles from './appearance.module.css';
 import { useFullscreenContext } from "../../../context/FullscreenContext";
 import TimePicker from "../../time-picker/TimePicker";
+import { 
+  applyTheme,
+  applyColor,
+  applyMargin,
+  applyBrightness,
+} from "../../../utils/applyThemeHelpers";
 
 export default function Appearance() {
   const [color, setColor] = useState("#f1c40f"); // default yellow
@@ -80,7 +86,6 @@ export default function Appearance() {
     };
   }, [isAutoThemeEnabled, fromTime, toTime]);
 
-
   // Handler from time picker
   const handleSetTime = (type, timeString) => {
     if (type === "from") {
@@ -93,23 +98,19 @@ export default function Appearance() {
   const handleColorChange = (e) => {
     const newColor = e.target.value;
     setColor(newColor);
-
-    // update CSS variable globally
-    document.documentElement.style.setProperty("--flipbook-bg", newColor);
+    applyColor(newColor);
   };
 
   const handleMarginToggle = (e) => {
     const isChecked = e.target.checked;
     setMarginEnabled(isChecked);
-
-    // update CSS variable globally
-    document.documentElement.style.setProperty("--flipbook-margin", isChecked ? "45px" : "0px");
+    applyMargin(isChecked);
   };
 
   const handleBrightnessChange = (e) => {
     const newValue = Number(e.target.value);
     setBrightness(newValue);
-    document.documentElement.style.setProperty("--flipbook-brightness", newValue);
+    applyBrightness(newValue);
   };
 
   const applyTheme = (dark) => {
