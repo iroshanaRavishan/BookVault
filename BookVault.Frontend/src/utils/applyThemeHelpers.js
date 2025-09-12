@@ -23,4 +23,7 @@ export function applyBookmarkDim(isDimmed) {
 
   const activebookmarkOpacity = Math.min(1, Math.max(0.3, newActiveValue));
   const inactivebookmarkOpacity = Math.min(1, Math.max(0.3, newInactiveValue));
+
+  document.documentElement.style.setProperty("--active-bookmark-opacity", activebookmarkOpacity);
+  document.documentElement.style.setProperty("--inactive-bookmark-opacity", inactivebookmarkOpacity);
 }
