@@ -15,7 +15,7 @@ export const getAppearance = async (id) => {
 };
 
 export const createAppearance = async (payload) => {
-  const response = await fetch('https://localhost:7157/api/Appearance', {
+  const response = await fetch(`${API_URL}`, {
     method: "POST",
     headers: { 
       "Content-Type": "application/json" 
