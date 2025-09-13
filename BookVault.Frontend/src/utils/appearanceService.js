@@ -13,3 +13,13 @@ export const getAppearance = async (id) => {
 
   return response.json();
 };
+
+export const createAppearance = async (payload) => {
+  const response = await fetch('https://localhost:7157/api/Appearance', {
+    method: "POST",
+    headers: { 
+      "Content-Type": "application/json" 
+    },
+    body: JSON.stringify(payload),
+  });
+};
