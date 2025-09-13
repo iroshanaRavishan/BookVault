@@ -12,6 +12,7 @@ import {
 } from "../../../utils/applyThemeHelpers";
 
 import { getAppearance, createAppearance, updateAppearance } from "../../../utils/appearanceService";
+import { useUser } from "../../../context/UserContext";
 
 export default function Appearance() {
   const [color, setColor] = useState("#f1c40f"); // default yellow
@@ -35,6 +36,7 @@ export default function Appearance() {
   const toTimeRef = useRef();
   const darkTimerRef = useRef(null);
   const lightTimerRef = useRef(null);
+  const { user } = useUser();
 
   const { isFullScreen, handleFullScreenToggle } = useFullscreenContext();
 
@@ -62,7 +64,7 @@ export default function Appearance() {
         if (!data) {
           // POST default appearance
           const defaultPayload = {
-            userId: "12345678-90ab-cdef-1234-567890abcdef",
+            userId: user?.id,
             color: "#f1c40f",
             marginEnabled: true,
             brightness: 1,
@@ -118,7 +120,7 @@ export default function Appearance() {
     if (!appearanceId || !fromCurrent || !toCurrent) return;
 
     const payload = {
-      userId: "12345678-90ab-cdef-1234-567890abcdef",
+      userId: user?.id,
       color,
       marginEnabled,
       brightness,
