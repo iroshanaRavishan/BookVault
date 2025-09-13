@@ -3,6 +3,8 @@ import styles from './bookreadingborad.module.css';
 import { useParams } from 'react-router-dom';
 import FlipBook from '../flip-book-method-one/FlipBook';
 import SideButtonsWrapper from '../side-button-wrapper/SideButtonWrapper';
+import { getAppearance } from "../../utils/appearanceService";
+import { applyColor, applyMargin, applyBrightness, applyBookmarkDim, applyFocusMode, applyTheme } from "../../utils/applyThemeHelpers";
 
 export default function BookReadingBorad() {
   const { id } = useParams();
@@ -73,6 +75,15 @@ export default function BookReadingBorad() {
 
     loadBookData()
   }, [id]);
+
+  useEffect(() => {
+    const fetchAndApplyAppearance = async () => {
+      // Get persisted ID from localStorage
+      const appearanceId = localStorage.getItem("appearanceId");
+      if (!appearanceId) return; // nothing to fetch yet
+    };
+    fetchAndApplyAppearance();
+  }, []);
 
   useEffect(() => {
     // Scroll to top
