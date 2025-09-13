@@ -57,6 +57,22 @@ export default function Appearance() {
       if (appearanceId) {
         data = await getAppearance(appearanceId);
       }
+
+        if (!data) {
+          // POST default appearance
+          const defaultPayload = {
+            userId: "12345678-90ab-cdef-1234-567890abcdef",
+            color: "#f1c40f",
+            marginEnabled: true,
+            brightness: 1,
+            isDarkTheme: false,
+            isDimmed: false,
+            isFocusMode: false,
+            isAutoThemeEnabled: false,
+            fromTime: "12:00 AM",
+            toTime: "12:00 AM",
+          };
+        } 
     };
 
     fetchOrCreateAppearance();
