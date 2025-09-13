@@ -11,6 +11,8 @@ import {
   applyFocusMode 
 } from "../../../utils/applyThemeHelpers";
 
+import { getAppearance, createAppearance, updateAppearance } from "../../../utils/appearanceService";
+
 export default function Appearance() {
   const [color, setColor] = useState("#f1c40f"); // default yellow
   const [marginEnabled, setMarginEnabled] = useState(true); // default ON (45px)
@@ -24,6 +26,10 @@ export default function Appearance() {
   const [buttonsDisabled, setButtonsDisabled] = useState(true);
   const [fromCurrent, setFromCurrent] = useState("12:00 AM");
   const [toCurrent, setToCurrent] = useState("12:00 AM");
+  const [appearanceId, setAppearanceId] = useState(() => {
+    // Try to load saved ID from localStorage on initial render
+    return localStorage.getItem("appearanceId") || null;
+  });
   
   const fromTimeRef = useRef();
   const toTimeRef = useRef();
@@ -43,6 +49,10 @@ export default function Appearance() {
 
     setButtonsDisabled(fromNorm === toNorm);
   }, [fromCurrent, toCurrent, isAutoThemeEnabled]);
+
+  useEffect(() => {
+    if (!appearanceId || !fromCurrent || !toCurrent) return;
+  }, []);
 
   useEffect(() => {
     // clear any existing timers
