@@ -83,6 +83,14 @@ export default function BookReadingBorad() {
       if (!appearanceId) return; // nothing to fetch yet
         
       const data = await getAppearance(appearanceId); // pass ID
+
+      // Apply individually
+      if (data.color) applyColor(data.color);
+      if (data.marginEnabled !== undefined) applyMargin(data.marginEnabled);
+      if (data.brightness) applyBrightness(data.brightness);
+      if (data.isDimmed !== undefined) applyBookmarkDim(data.isDimmed);
+      if (data.isFocusMode !== undefined) applyFocusMode(data.isFocusMode);
+      if (data.isDarkTheme !== undefined) applyTheme(data.isDarkTheme);
     };
     fetchAndApplyAppearance();
   }, []);
