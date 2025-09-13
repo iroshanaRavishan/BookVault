@@ -12,6 +12,7 @@ import {
 } from "../../../utils/applyThemeHelpers";
 
 import { getAppearance, createAppearance, updateAppearance } from "../../../utils/appearanceService";
+import { useUser } from "../../../context/UserContext";
 
 export default function Appearance() {
   const [color, setColor] = useState("#f1c40f"); // default yellow
