@@ -11,6 +11,8 @@ import {
   applyFocusMode 
 } from "../../../utils/applyThemeHelpers";
 
+import { getAppearance, createAppearance, updateAppearance } from "../../../utils/appearanceService";
+
 export default function Appearance() {
   const [color, setColor] = useState("#f1c40f"); // default yellow
   const [marginEnabled, setMarginEnabled] = useState(true); // default ON (45px)
