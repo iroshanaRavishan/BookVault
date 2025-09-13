@@ -66,6 +66,14 @@ export default function Appearance() {
       toTime,
     };
 
+    const saveAppearance = async () => {
+      try {
+        await updateAppearance(appearanceId, payload);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
   }, []);
 
   useEffect(() => {
