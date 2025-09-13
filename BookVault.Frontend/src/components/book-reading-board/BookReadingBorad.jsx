@@ -78,20 +78,26 @@ export default function BookReadingBorad() {
 
   useEffect(() => {
     const fetchAndApplyAppearance = async () => {
-      // Get persisted ID from localStorage
-      const appearanceId = localStorage.getItem("appearanceId");
-      if (!appearanceId) return; // nothing to fetch yet
-        
-      const data = await getAppearance(appearanceId); // pass ID
+      try {
+        // Get persisted ID from localStorage
+        const appearanceId = localStorage.getItem("appearanceId");
+        if (!appearanceId) return; // nothing to fetch yet
 
-      // Apply individually
-      if (data.color) applyColor(data.color);
-      if (data.marginEnabled !== undefined) applyMargin(data.marginEnabled);
-      if (data.brightness) applyBrightness(data.brightness);
-      if (data.isDimmed !== undefined) applyBookmarkDim(data.isDimmed);
-      if (data.isFocusMode !== undefined) applyFocusMode(data.isFocusMode);
-      if (data.isDarkTheme !== undefined) applyTheme(data.isDarkTheme);
+        const data = await getAppearance(appearanceId); // pass ID
+
+        // Apply individually
+        if (data.color) applyColor(data.color);
+        if (data.marginEnabled !== undefined) applyMargin(data.marginEnabled);
+        if (data.brightness) applyBrightness(data.brightness);
+        if (data.isDimmed !== undefined) applyBookmarkDim(data.isDimmed);
+        if (data.isFocusMode !== undefined) applyFocusMode(data.isFocusMode);
+        if (data.isDarkTheme !== undefined) applyTheme(data.isDarkTheme);
+
+      } catch (err) {
+        console.error("Failed to load appearance settings", err);
+      }
     };
+
     fetchAndApplyAppearance();
   }, []);
 
