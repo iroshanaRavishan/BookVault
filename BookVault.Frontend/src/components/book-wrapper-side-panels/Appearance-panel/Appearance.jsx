@@ -51,6 +51,13 @@ export default function Appearance() {
   }, [fromCurrent, toCurrent, isAutoThemeEnabled]);
 
   useEffect(() => {
+    const fetchOrCreateAppearance = async () => {
+    };
+
+    fetchOrCreateAppearance();
+  }, []);
+
+  useEffect(() => {
     if (!appearanceId || !fromCurrent || !toCurrent) return;
 
     const payload = {
