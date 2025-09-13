@@ -38,4 +38,10 @@ export const updateAppearance = async (payload) => {
     },
     body: JSON.stringify(payload),
   });
+
+  if (!response.ok) {
+    throw new Error("Failed to update appearance settings");
+  }
+
+  return response.json();
 };
