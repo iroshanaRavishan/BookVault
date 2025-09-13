@@ -81,6 +81,8 @@ export default function BookReadingBorad() {
       // Get persisted ID from localStorage
       const appearanceId = localStorage.getItem("appearanceId");
       if (!appearanceId) return; // nothing to fetch yet
+        
+      const data = await getAppearance(appearanceId); // pass ID
     };
     fetchAndApplyAppearance();
   }, []);
