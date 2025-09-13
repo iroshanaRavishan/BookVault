@@ -78,6 +78,9 @@ export default function BookReadingBorad() {
 
   useEffect(() => {
     const fetchAndApplyAppearance = async () => {
+      // Get persisted ID from localStorage
+      const appearanceId = localStorage.getItem("appearanceId");
+      if (!appearanceId) return; // nothing to fetch yet
     };
     fetchAndApplyAppearance();
   }, []);
