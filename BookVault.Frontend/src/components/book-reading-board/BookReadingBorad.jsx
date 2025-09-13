@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import FlipBook from '../flip-book-method-one/FlipBook';
 import SideButtonsWrapper from '../side-button-wrapper/SideButtonWrapper';
 import { getAppearance } from "../../utils/appearanceService";
+import { applyColor, applyMargin, applyBrightness, applyBookmarkDim, applyFocusMode, applyTheme } from "../../utils/applyThemeHelpers";
 
 export default function BookReadingBorad() {
   const { id } = useParams();
