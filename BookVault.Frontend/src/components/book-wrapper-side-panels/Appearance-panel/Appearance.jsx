@@ -120,7 +120,7 @@ export default function Appearance() {
     if (!appearanceId || !fromCurrent || !toCurrent) return;
 
     const payload = {
-      userId: "12345678-90ab-cdef-1234-567890abcdef",
+      userId: user?.id,
       color,
       marginEnabled,
       brightness,
