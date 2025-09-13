@@ -77,6 +77,12 @@ export default function BookReadingBorad() {
   }, [id]);
 
   useEffect(() => {
+    const fetchAndApplyAppearance = async () => {
+    };
+    fetchAndApplyAppearance();
+  }, []);
+
+  useEffect(() => {
     // Scroll to top
     window.scrollTo(0, 0);
 
