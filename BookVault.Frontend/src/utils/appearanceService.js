@@ -29,3 +29,18 @@ export const createAppearance = async (payload) => {
 
   return response.json();
 };
+
+export const updateAppearance = async (id, payload) => {
+  const response = await fetch(`${API_URL}/${id}`, {
+    method: "PUT",
+    headers: { 
+      "Content-Type": "application/json" 
+    },
+    body: JSON.stringify(payload),
+  });
+
+  if (!response.ok)
+    throw new Error("Failed to update appearance settings");
+
+  return response.json();
+};
