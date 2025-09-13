@@ -91,6 +91,20 @@ export default function Appearance() {
         } else {
           setAppearanceId(data.id);
           localStorage.setItem("appearanceId", data.id); // persist
+
+          // Use existing appearance
+          setColor(data.color);
+          setMarginEnabled(data.marginEnabled);
+          setBrightness(data.brightness);
+          setIsDarkTheme(data.isDarkTheme);
+          setIsDimmed(data.isDimmed);
+          setIsFocusMode(data.isFocusMode);
+          setIsAutoThemeEnabled(data.isAutoThemeEnabled);
+          setFromTime(data.fromTime);
+          setToTime(data.toTime);
+          setFromCurrent(data.fromTime);
+          setToCurrent(data.toTime);
+        }
         } 
     };
 
