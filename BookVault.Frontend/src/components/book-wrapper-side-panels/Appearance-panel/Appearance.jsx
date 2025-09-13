@@ -52,7 +52,43 @@ export default function Appearance() {
 
   useEffect(() => {
     if (!appearanceId || !fromCurrent || !toCurrent) return;
-  }, []);
+
+    const payload = {
+      userId: "12345678-90ab-cdef-1234-567890abcdef",
+      color,
+      marginEnabled,
+      brightness,
+      isDarkTheme,
+      isDimmed,
+      isFocusMode,
+      isAutoThemeEnabled,
+      fromTime,
+      toTime,
+    };
+
+    const saveAppearance = async () => {
+      try {
+        await updateAppearance(appearanceId, payload);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    saveAppearance();
+  }, [
+    appearanceId,
+    color,
+    marginEnabled,
+    brightness,
+    isDarkTheme,
+    isDimmed,
+    isFocusMode,
+    isAutoThemeEnabled,
+    fromTime,
+    toTime,
+    fromCurrent,
+    toCurrent,
+  ]);
 
   useEffect(() => {
     // clear any existing timers
