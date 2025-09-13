@@ -26,6 +26,10 @@ export default function Appearance() {
   const [buttonsDisabled, setButtonsDisabled] = useState(true);
   const [fromCurrent, setFromCurrent] = useState("12:00 AM");
   const [toCurrent, setToCurrent] = useState("12:00 AM");
+  const [appearanceId, setAppearanceId] = useState(() => {
+    // Try to load saved ID from localStorage on initial render
+    return localStorage.getItem("appearanceId") || null;
+  });
   
   const fromTimeRef = useRef();
   const toTimeRef = useRef();
