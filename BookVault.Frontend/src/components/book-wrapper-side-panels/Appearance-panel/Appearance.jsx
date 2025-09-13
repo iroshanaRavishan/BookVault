@@ -52,6 +52,11 @@ export default function Appearance() {
 
   useEffect(() => {
     const fetchOrCreateAppearance = async () => {
+      let data = null;
+
+      if (appearanceId) {
+        data = await getAppearance(appearanceId);
+      }
     };
 
     fetchOrCreateAppearance();
