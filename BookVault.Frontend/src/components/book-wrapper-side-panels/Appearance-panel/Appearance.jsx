@@ -74,6 +74,7 @@ export default function Appearance() {
       }
     };
 
+    saveAppearance();
   }, []);
 
   useEffect(() => {
