@@ -52,6 +52,20 @@ export default function Appearance() {
 
   useEffect(() => {
     if (!appearanceId || !fromCurrent || !toCurrent) return;
+
+    const payload = {
+      userId: "12345678-90ab-cdef-1234-567890abcdef",
+      color,
+      marginEnabled,
+      brightness,
+      isDarkTheme,
+      isDimmed,
+      isFocusMode,
+      isAutoThemeEnabled,
+      fromTime,
+      toTime,
+    };
+
   }, []);
 
   useEffect(() => {
