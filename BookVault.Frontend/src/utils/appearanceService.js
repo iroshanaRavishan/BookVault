@@ -29,3 +29,13 @@ export const createAppearance = async (payload) => {
 
   return response.json();
 };
+
+export const updateAppearance = async (payload) => {
+  const response = await fetch(API_URL, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload),
+  });
+};
