@@ -52,11 +52,12 @@ export default function Appearance() {
 
   useEffect(() => {
     const fetchOrCreateAppearance = async () => {
-      let data = null;
+      try {
+        let data = null;
 
-      if (appearanceId) {
-        data = await getAppearance(appearanceId);
-      }
+        if (appearanceId) {
+          data = await getAppearance(appearanceId);
+        }
 
         if (!data) {
           // POST default appearance
@@ -105,7 +106,9 @@ export default function Appearance() {
           setFromCurrent(data.fromTime);
           setToCurrent(data.toTime);
         }
-        } 
+      } catch (err) {
+        console.error(err);
+      }
     };
 
     fetchOrCreateAppearance();
