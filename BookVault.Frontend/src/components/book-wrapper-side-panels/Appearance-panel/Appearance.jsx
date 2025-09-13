@@ -64,7 +64,7 @@ export default function Appearance() {
         if (!data) {
           // POST default appearance
           const defaultPayload = {
-            userId: "12345678-90ab-cdef-1234-567890abcdef",
+            userId: user?.id,
             color: "#f1c40f",
             marginEnabled: true,
             brightness: 1,
