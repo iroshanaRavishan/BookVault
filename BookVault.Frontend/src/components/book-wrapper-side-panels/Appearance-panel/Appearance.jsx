@@ -76,6 +76,18 @@ export default function Appearance() {
           const created = await createAppearance(defaultPayload);
           setAppearanceId(created.id);
           localStorage.setItem("appearanceId", created.id); // persist
+
+          setColor(created.color);
+          setMarginEnabled(created.marginEnabled);
+          setBrightness(created.brightness);
+          setIsDarkTheme(created.isDarkTheme);
+          setIsDimmed(created.isDimmed);
+          setIsFocusMode(created.isFocusMode);
+          setIsAutoThemeEnabled(created.isAutoThemeEnabled);
+          setFromTime(created.fromTime);
+          setToTime(created.toTime);
+          setFromCurrent(created.fromTime);
+          setToCurrent(created.toTime);
         } 
     };
 
