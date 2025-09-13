@@ -75,7 +75,20 @@ export default function Appearance() {
     };
 
     saveAppearance();
-  }, []);
+  }, [
+    appearanceId,
+    color,
+    marginEnabled,
+    brightness,
+    isDarkTheme,
+    isDimmed,
+    isFocusMode,
+    isAutoThemeEnabled,
+    fromTime,
+    toTime,
+    fromCurrent,
+    toCurrent,
+  ]);
 
   useEffect(() => {
     // clear any existing timers
