@@ -88,6 +88,9 @@ export default function Appearance() {
           setToTime(created.toTime);
           setFromCurrent(created.fromTime);
           setToCurrent(created.toTime);
+        } else {
+          setAppearanceId(data.id);
+          localStorage.setItem("appearanceId", data.id); // persist
         } 
     };
 
