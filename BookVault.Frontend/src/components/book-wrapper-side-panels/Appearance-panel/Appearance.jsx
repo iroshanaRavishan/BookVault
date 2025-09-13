@@ -72,6 +72,22 @@ export default function Appearance() {
             fromTime: "12:00 AM",
             toTime: "12:00 AM",
           };
+
+          const created = await createAppearance(defaultPayload);
+          setAppearanceId(created.id);
+          localStorage.setItem("appearanceId", created.id); // persist
+
+          setColor(created.color);
+          setMarginEnabled(created.marginEnabled);
+          setBrightness(created.brightness);
+          setIsDarkTheme(created.isDarkTheme);
+          setIsDimmed(created.isDimmed);
+          setIsFocusMode(created.isFocusMode);
+          setIsAutoThemeEnabled(created.isAutoThemeEnabled);
+          setFromTime(created.fromTime);
+          setToTime(created.toTime);
+          setFromCurrent(created.fromTime);
+          setToCurrent(created.toTime);
         } 
     };
 
