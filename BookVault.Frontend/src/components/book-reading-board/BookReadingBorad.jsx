@@ -3,6 +3,7 @@ import styles from './bookreadingborad.module.css';
 import { useParams } from 'react-router-dom';
 import FlipBook from '../flip-book-method-one/FlipBook';
 import SideButtonsWrapper from '../side-button-wrapper/SideButtonWrapper';
+import { getAppearance } from "../../utils/appearanceService";
 
 export default function BookReadingBorad() {
   const { id } = useParams();
