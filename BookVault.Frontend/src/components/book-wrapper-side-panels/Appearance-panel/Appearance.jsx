@@ -52,11 +52,12 @@ export default function Appearance() {
 
   useEffect(() => {
     const fetchOrCreateAppearance = async () => {
-      let data = null;
+      try {
+        let data = null;
 
-      if (appearanceId) {
-        data = await getAppearance(appearanceId);
-      }
+        if (appearanceId) {
+          data = await getAppearance(appearanceId);
+        }
 
         if (!data) {
           // POST default appearance
@@ -72,7 +73,42 @@ export default function Appearance() {
             fromTime: "12:00 AM",
             toTime: "12:00 AM",
           };
-        } 
+
+          const created = await createAppearance(defaultPayload);
+          setAppearanceId(created.id);
+          localStorage.setItem("appearanceId", created.id); // persist
+
+          setColor(created.color);
+          setMarginEnabled(created.marginEnabled);
+          setBrightness(created.brightness);
+          setIsDarkTheme(created.isDarkTheme);
+          setIsDimmed(created.isDimmed);
+          setIsFocusMode(created.isFocusMode);
+          setIsAutoThemeEnabled(created.isAutoThemeEnabled);
+          setFromTime(created.fromTime);
+          setToTime(created.toTime);
+          setFromCurrent(created.fromTime);
+          setToCurrent(created.toTime);
+        } else {
+          setAppearanceId(data.id);
+          localStorage.setItem("appearanceId", data.id); // persist
+
+          // Use existing appearance
+          setColor(data.color);
+          setMarginEnabled(data.marginEnabled);
+          setBrightness(data.brightness);
+          setIsDarkTheme(data.isDarkTheme);
+          setIsDimmed(data.isDimmed);
+          setIsFocusMode(data.isFocusMode);
+          setIsAutoThemeEnabled(data.isAutoThemeEnabled);
+          setFromTime(data.fromTime);
+          setToTime(data.toTime);
+          setFromCurrent(data.fromTime);
+          setToCurrent(data.toTime);
+        }
+      } catch (err) {
+        console.error(err);
+      }
     };
 
     fetchOrCreateAppearance();
