@@ -7,4 +7,10 @@ export const getAppearance = async () => {
       "Content-Type": "application/json",
     },
   });
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch appearance settings");
+  }
+
+  return response.json();
 };
