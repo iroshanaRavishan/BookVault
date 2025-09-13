@@ -51,6 +51,10 @@ export default function Appearance() {
   }, [fromCurrent, toCurrent, isAutoThemeEnabled]);
 
   useEffect(() => {
+    if (!appearanceId || !fromCurrent || !toCurrent) return;
+  }, []);
+
+  useEffect(() => {
     // clear any existing timers
     if (darkTimerRef.current) clearTimeout(darkTimerRef.current);
     if (lightTimerRef.current) clearTimeout(lightTimerRef.current);
