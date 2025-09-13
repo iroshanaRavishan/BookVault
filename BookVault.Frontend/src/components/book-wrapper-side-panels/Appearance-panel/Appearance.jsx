@@ -72,6 +72,10 @@ export default function Appearance() {
             fromTime: "12:00 AM",
             toTime: "12:00 AM",
           };
+
+          const created = await createAppearance(defaultPayload);
+          setAppearanceId(created.id);
+          localStorage.setItem("appearanceId", created.id); // persist
         } 
     };
 
