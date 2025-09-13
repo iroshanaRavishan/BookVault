@@ -22,4 +22,10 @@ export const createAppearance = async (payload) => {
     },
     body: JSON.stringify(payload),
   });
+
+  if (!response.ok) {
+    throw new Error("Failed to create appearance settings");
+  }
+
+  return response.json();
 };
