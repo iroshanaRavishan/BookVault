@@ -13,11 +13,14 @@ import {
 
 import { getAppearance, createAppearance, updateAppearance } from "../../../utils/appearanceService";
 import { useUser } from "../../../context/UserContext";
+import { RiResetLeftLine } from "react-icons/ri";
+import { FiCheck } from "react-icons/fi";
 
 export default function Appearance() {
   const [color, setColor] = useState("#f1c40f"); // default yellow
   const [marginEnabled, setMarginEnabled] = useState(true); // default ON (45px)
-  const [brightness, setBrightness] = useState(1); // default brightness
+  const [brightness, setBrightness] = useState(1); // live preview
+  const [savedBrightness, setSavedBrightness] = useState(1); // last saved value
   const [isDarkTheme, setIsDarkTheme] = useState(false); // default light
   const [isDimmed, setIsDimmed] = useState(false); // toggler state
   const [isFocusMode, setIsFocusMode] = useState(false); // focus mode state
@@ -39,6 +42,8 @@ export default function Appearance() {
   const { user } = useUser();
 
   const { isFullScreen, handleFullScreenToggle } = useFullscreenContext();
+
+  const hasBrightnessChanged = brightness !== savedBrightness;
 
   useEffect(() => {
     if (!isAutoThemeEnabled) {
@@ -99,6 +104,7 @@ export default function Appearance() {
           setColor(data.color);
           setMarginEnabled(data.marginEnabled);
           setBrightness(data.brightness);
+          setSavedBrightness(data.brightness);
           setIsDarkTheme(data.isDarkTheme);
           setIsDimmed(data.isDimmed);
           setIsFocusMode(data.isFocusMode);
