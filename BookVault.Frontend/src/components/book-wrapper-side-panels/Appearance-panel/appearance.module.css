@@ -228,10 +228,12 @@
 }
 
 .buttonGroup {
+  position: relative;
+  left: -10px;
   display: flex;
   flex-direction: row;
   gap: 10px;
-  width: 100%;
+  width: 103%;
 }
 
 .setButton {
