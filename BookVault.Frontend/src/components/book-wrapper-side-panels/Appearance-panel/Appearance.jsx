@@ -104,6 +104,7 @@ export default function Appearance() {
           setColor(data.color);
           setMarginEnabled(data.marginEnabled);
           setBrightness(data.brightness);
+          setSavedBrightness(data.brightness);
           setIsDarkTheme(data.isDarkTheme);
           setIsDimmed(data.isDimmed);
           setIsFocusMode(data.isFocusMode);
