@@ -207,6 +207,10 @@
   cursor: not-allowed;
 }
 
+.deleteButton:active:enabled {
+  background-color: #c0392b;
+}
+
 .notePageSeparator {
   display: inline-block;
   width: 1px;
