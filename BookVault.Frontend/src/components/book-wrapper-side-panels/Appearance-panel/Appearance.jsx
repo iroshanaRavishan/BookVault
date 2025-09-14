@@ -398,7 +398,7 @@ export default function Appearance() {
                 </label>
                 <div className={styles.timeRange}>
                   <div className={!isAutoThemeEnabled ? styles.disabledSection : ""}>
-                    <span style={{ fontSize: "12px" }}>From : </span>
+                    <span className={styles.timePickerCategory} style={{ fontSize: "12px" }}>From : </span>
                     <TimePicker 
                       id="from" 
                       ref={fromTimeRef} 
@@ -409,7 +409,7 @@ export default function Appearance() {
                   </div>
                   <span className={styles.timePickerSeparator}></span>
                   <div className={!isAutoThemeEnabled ? styles.disabledSection : ""}>
-                    <span style={{ fontSize: "12px" }}>To : </span>
+                    <span className={styles.timePickerCategory} style={{ fontSize: "12px" }}>To : </span>
                     <TimePicker 
                       id="to" 
                       ref={toTimeRef} 
