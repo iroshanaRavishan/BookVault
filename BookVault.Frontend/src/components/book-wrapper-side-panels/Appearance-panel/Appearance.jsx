@@ -394,7 +394,7 @@ export default function Appearance() {
                     checked={isAutoThemeEnabled}
                     onChange={(e) => setIsAutoThemeEnabled(e.target.checked)}
                   />
-                  <span style={{fontSize: '13px'}}>Automate Theme</span>
+                  <span  style={{fontSize: '13px', fontWeight: 400}}>Automate Theme</span>
                 </label>
                 <div className={styles.timeRange}>
                   <div className={!isAutoThemeEnabled ? styles.disabledSection : ""}>
