@@ -70,4 +70,8 @@
   --appearance-toggle-slider-border-color: #000000;
   --appearance-toggle-bg-unchecked-color: #ccc;
   --appearance-toggle-bg-checked-color:#797979;
+
+  --appearance-confirm-button-border-color: #bbbbbbff;
+  --appearance-confirm-button-text-disabled-color: #8f8f8fff;
+  --appearance-reset-button-border-color: #bbbbbbff;
 }
