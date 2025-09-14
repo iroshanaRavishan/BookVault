@@ -178,7 +178,7 @@
 
 .clearButton:disabled {
   background-color: #f7e38099;
-  color: #aaa;
+  color: var(--note-clear-button-text-disabled-color);
   cursor: not-allowed;
 }
 
