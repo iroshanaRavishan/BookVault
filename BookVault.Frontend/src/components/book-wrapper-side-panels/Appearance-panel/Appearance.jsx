@@ -388,7 +388,7 @@ export default function Appearance() {
             <span className={styles.themeDivider}>or</span>
             <div className={styles.appearanceOption} style={{width: '100%', marginTop: '0px'}}>
               <div className={styles.autoThemeSection}>
-                <label style={{display: 'flex', alignItems: 'center', gap: '8px'}}>
+                <label className={styles.automateTimeLabel} style={{display: 'flex', alignItems: 'center', gap: '8px'}}>
                   <input
                     type="checkbox"
                     checked={isAutoThemeEnabled}
