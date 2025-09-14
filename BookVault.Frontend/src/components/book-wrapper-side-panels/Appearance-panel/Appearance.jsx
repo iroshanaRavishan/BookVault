@@ -355,7 +355,9 @@ export default function Appearance() {
               </label>
             </div>
             <div className={styles.appearanceOption}>
-              <label>Brightness: </label>
+              <div className={styles.brightnessLabel}>
+                <label>Brightness: </label>
+              </div>
               <input
                 type="range"
                 min="0.8"
