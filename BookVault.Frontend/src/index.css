@@ -26,8 +26,8 @@
   --note-settings-button-background-color: #d3d3d3ff;
   --note-settings-button-border-color: #bbbbbbff;
   --note-settings-button-hover-bg-color: #acacacff;
-  --note-clear-button-border-color: #e7e7e7;
-  --note-delete-button-border-color: #e7e7e7;
+  --note-clear-button-border-color: #bbbbbbff;
+  --note-delete-button-border-color: #bbbbbbff;
   --note-navigation-highlighted-note-bg: #38320f2c;
   --note-navigation-non-heighlighted-button-text-color: #000000;
   --note-navigation-highlighted-note-number-hover-bg-color: #eeeeee;
