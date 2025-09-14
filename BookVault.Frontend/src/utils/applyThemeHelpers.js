@@ -107,6 +107,7 @@ export function applyTheme(isDark) {
 
     document.documentElement.style.setProperty("--appearance-confirm-button-border-color", "#8f8f8fff");
     document.documentElement.style.setProperty("--appearance-confirm-button-text-disabled-color", "#ffffffff");
+    document.documentElement.style.setProperty("--appearance-reset-button-border-color", "#8f8f8fff");
   } else {
     // Light theme overrides
     document.documentElement.style.setProperty("--header-pin-icon-color", "black");
@@ -174,5 +175,6 @@ export function applyTheme(isDark) {
 
     document.documentElement.style.setProperty("--appearance-confirm-button-border-color", "#bbbbbbff");
     document.documentElement.style.setProperty("--appearance-confirm-button-text-disabled-color", "#8f8f8fff");
+    document.documentElement.style.setProperty("--appearance-reset-button-border-color", "#bbbbbbff");
   }
 }
