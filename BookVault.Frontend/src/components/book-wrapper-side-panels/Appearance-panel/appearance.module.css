@@ -18,7 +18,7 @@
 }
 
 .appearanceOptions {
-  margin-bottom: 16px;
+  margin-bottom: 14px;
   font-size: 14px;
   color: var(--appearance-section-sub-text-color);
 }
@@ -212,6 +212,19 @@
   margin-left: 10px;
 }
 
+.automateTimeLabel {
+  display: flex;
+  flex-direction: row;
+  margin-top: -5px;
+}
+
+.timePickerCategory {
+  display: flex;
+  flex-direction: row;
+  margin-top: -2px;
+  margin-bottom: -3px;
+}
+
 .timePickerSeparator {
   width: 2px;
   height: 80px;
@@ -224,13 +237,16 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  width: 97%;
 }
 
 .buttonGroup {
+  position: relative;
+  left: -10px;
   display: flex;
   flex-direction: row;
   gap: 10px;
-  width: 100%;
+  width: 103%;
 }
 
 .setButton {
