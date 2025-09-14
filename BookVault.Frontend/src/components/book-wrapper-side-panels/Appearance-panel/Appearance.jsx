@@ -358,16 +358,22 @@ export default function Appearance() {
               <div className={styles.brightnessLabel}>
                 <label>Brightness: </label>
               </div>
-              <input
-                type="range"
-                min="0.8"
-                max="1.2"
-                step="0.01"
-                value={brightness}
-                onChange={handleBrightnessChange}
-                className={styles.birghnessSlider}
-                style={{ "--value": `${((brightness - 0.8) / 0.4) * 100}%` }}
-              />
+            <div className={styles.brightnessControl}>
+                <input
+                  type="range"
+                  min="0.8"
+                  max="1.2"
+                  step="0.01"
+                  value={brightness}
+                  onChange={handleBrightnessChange}
+                  className={styles.birghnessSlider}
+                  style={{ "--value": `${((brightness - 0.8) / 0.4) * 100}%` }}
+                />
+
+                <div className={styles.confirmResetButtons}>
+                 
+                </div>
+              </div>
             </div>
           </div>
         </div>
