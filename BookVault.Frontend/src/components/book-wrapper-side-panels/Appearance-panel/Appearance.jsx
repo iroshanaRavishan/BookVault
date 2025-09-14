@@ -43,6 +43,8 @@ export default function Appearance() {
 
   const { isFullScreen, handleFullScreenToggle } = useFullscreenContext();
 
+  const hasBrightnessChanged = brightness !== savedBrightness;
+
   useEffect(() => {
     if (!isAutoThemeEnabled) {
       setButtonsDisabled(true);
