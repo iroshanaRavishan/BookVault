@@ -212,6 +212,19 @@
   margin-left: 10px;
 }
 
+.automateTimeLabel {
+  display: flex;
+  flex-direction: row;
+  margin-top: -5px;
+}
+
+.timePickerCategory {
+  display: flex;
+  flex-direction: row;
+  margin-top: -2px;
+  margin-bottom: -3px;
+}
+
 .timePickerSeparator {
   width: 2px;
   height: 80px;

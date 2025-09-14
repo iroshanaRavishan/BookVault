@@ -334,7 +334,7 @@ export default function Appearance() {
           </div>
         </div>
 
-        <div className={styles.appearanceOptions}>
+        <div className={styles.appearanceOptions} style={{marginBottom: '5px'}}>
           <span className={styles.sectionHeader}>Book</span>
           <div>
             <div className={styles.appearanceOption}>
@@ -388,17 +388,17 @@ export default function Appearance() {
             <span className={styles.themeDivider}>or</span>
             <div className={styles.appearanceOption} style={{width: '100%', marginTop: '0px'}}>
               <div className={styles.autoThemeSection}>
-                <label style={{display: 'flex', alignItems: 'center', gap: '8px'}}>
+                <label className={styles.automateTimeLabel} style={{display: 'flex', alignItems: 'center', gap: '8px'}}>
                   <input
                     type="checkbox"
                     checked={isAutoThemeEnabled}
                     onChange={(e) => setIsAutoThemeEnabled(e.target.checked)}
                   />
-                  <span style={{fontSize: '13px'}}>Automate Theme</span>
+                  <span  style={{fontSize: '13px', fontWeight: 400}}>Automate Theme</span>
                 </label>
                 <div className={styles.timeRange}>
                   <div className={!isAutoThemeEnabled ? styles.disabledSection : ""}>
-                    <span style={{ fontSize: "12px" }}>From : </span>
+                    <span className={styles.timePickerCategory} style={{ fontSize: "12px" }}>From : </span>
                     <TimePicker 
                       id="from" 
                       ref={fromTimeRef} 
@@ -409,7 +409,7 @@ export default function Appearance() {
                   </div>
                   <span className={styles.timePickerSeparator}></span>
                   <div className={!isAutoThemeEnabled ? styles.disabledSection : ""}>
-                    <span style={{ fontSize: "12px" }}>To : </span>
+                    <span className={styles.timePickerCategory} style={{ fontSize: "12px" }}>To : </span>
                     <TimePicker 
                       id="to" 
                       ref={toTimeRef} 
@@ -438,6 +438,7 @@ export default function Appearance() {
                       toTimeRef.current?.handleSet();
                     }}
                     disabled={buttonsDisabled}
+                    // need to disable the set time button once the set time is hit but until change the time
                   >
                     Set time
                   </button>
