@@ -438,6 +438,7 @@ export default function Appearance() {
                       toTimeRef.current?.handleSet();
                     }}
                     disabled={buttonsDisabled}
+                    // need to disable the set time button once the set time is hit but until change the time
                   >
                     Set time
                   </button>
