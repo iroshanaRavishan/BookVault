@@ -151,7 +151,7 @@ export default function Appearance() {
     appearanceId,
     color,
     marginEnabled,
-    brightness,
+    savedBrightness,
     isDarkTheme,
     isDimmed,
     isFocusMode,
