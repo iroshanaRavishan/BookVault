@@ -113,7 +113,7 @@ export default function FlipBook({
   const { hasUnsavedChanges, setShowUnsavedWarningPopup } = useNoteContext();
   const [previousPage, setPreviousPage] = useState(0);
 
-  const contentPages = 10;
+  const contentPages = 30;
   const totalPages = 2 + contentPages + (contentPages % 2 === 1 ? 1 : 0) + 2;
   const flipBookRef = useRef();
   const pages = [];
@@ -487,7 +487,24 @@ export default function FlipBook({
   }, [bookmarks, leftBookmarks, rightBookmarkPages, leftPageIndex, rightPageIndex]);
 
 
-  const navButtonWidth = isFirstPage || isLastPage ? '480px' : '920px';
+  const navButtonWidth = isFullScreen
+    ? (isFirstPage || isLastPage ? "500px" : "1135px")
+    : (isFirstPage || isLastPage ? "480px" : "940px");
+
+  useEffect(() => {
+    if (!flipBookRef.current) return;
+
+    const storedPage = parseInt(localStorage.getItem("flipbook-current-page"), 10);
+
+    if (!isNaN(storedPage)) {
+      // give the flipbook time to initialize after remount
+      setTimeout(() => {
+        if (flipBookRef.current?.pageFlip) {
+          flipBookRef.current.pageFlip().flip(storedPage);
+        }
+      }, 450);
+    }
+  }, [isFullScreen]);
 
   return (
     <div 
@@ -517,9 +534,15 @@ export default function FlipBook({
                 onClick={() => goToPage(b.page)}
                 style={{
                   backgroundColor: currentPage === b.page
-                    ? b.color.replace(/hsl\(([^)]+),\s*([^)]+),\s*([^)]+),\s*[^)]+\)/, 'hsl($1, $2, $3, 1)')
-                    : b.color,
-                  width: currentPage === b.page ? '32px' : '21px',
+                    ? b.color.replace(
+                        /hsl\(([^)]+),\s*([^)]+),\s*([^)]+),\s*[^)]+\)/,
+                        `hsl($1, $2, $3, var(--active-bookmark-opacity))`
+                      )
+                    : b.color.replace(
+                        /hsl\(([^)]+),\s*([^)]+),\s*([^)]+),\s*[^)]+\)/,
+                        `hsl($1, $2, $3, var(--inactive-bookmark-opacity))`
+                      ),
+                  width: currentPage === b.page ? '32px' : isFullScreen ? '27px': '21px',
                   cursor: 'pointer'
                 }}
               >
@@ -584,10 +607,16 @@ export default function FlipBook({
                 `}
                 onClick={() => goToPage(b.page)}
                 style={{
-                  backgroundColor: currentPage === b.page - 1
-                    ? b.color.replace(/hsl\(([^)]+),\s*([^)]+),\s*([^)]+),\s*[^)]+\)/, 'hsl($1, $2, $3, 1)')
-                    : b.color,
-                  width: currentPage === b.page - 1 ? '32px' : '21px',
+                  backgroundColor: currentPage === b.page -1
+                    ? b.color.replace(
+                        /hsl\(([^)]+),\s*([^)]+),\s*([^)]+),\s*[^)]+\)/,
+                        `hsl($1, $2, $3, var(--active-bookmark-opacity))`
+                      )
+                    : b.color.replace(
+                        /hsl\(([^)]+),\s*([^)]+),\s*([^)]+),\s*[^)]+\)/,
+                        `hsl($1, $2, $3, var(--inactive-bookmark-opacity))`
+                      ),
+                  width: currentPage === b.page - 1 ? '32px' : isFullScreen ? '27px': '21px',
                   cursor: 'pointer'
                 }}
               >
@@ -643,14 +672,15 @@ export default function FlipBook({
       </div>
 
       <HTMLFlipBook
+        key={isFullScreen? 'fullscreen': 'normal'}
         ref={flipBookRef}
         width={230}
         style={{ filter: `brightness(var(--flipbook-brightness))` }}
         height={345}
         minWidth={180}
-        maxWidth={isFullScreen ? 568 : 460}
+        maxWidth={isFullScreen ? 556 : 460}
         minHeight={270}
-        maxHeight={isFullScreen ? 852 : 690}
+        maxHeight={isFullScreen ? 834 : 690}
         size="stretch"
         maxShadowOpacity={0.5}
         showCover={true}
@@ -670,6 +700,7 @@ export default function FlipBook({
           }
   
           setCurrentPage(data);
+          localStorage.setItem("flipbook-current-page", data); 
 
           // Calculate left/right bookmarks for the new page
           const newLeftPage = data % 2 === 0 ? data : data - 1;
@@ -737,7 +768,7 @@ export default function FlipBook({
       </HTMLFlipBook>
 
       {/* Navigation Buttons */}
-      <div className={styles.navButtons} style={{ width: navButtonWidth }}>
+      <div className={styles.navButtons} style={{ width: navButtonWidth, bottom: isFullScreen ? '15px' : '0px' }}>
         <span
           style={currentPage === 0 ? { display: 'none' } : {}}
           onClick={() => goToPage(0)}

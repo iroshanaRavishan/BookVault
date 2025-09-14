@@ -180,6 +180,7 @@
 
 .pagePreviewContaienrHeader {
     display: flex;
+    color: var(--bookmark-page-preview-header-text-color);
     flex-direction: row;
     justify-content: space-between;
     align-items: center;

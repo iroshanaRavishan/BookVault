@@ -1,0 +1,60 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 25px;
+}
+
+.timePickerWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 3px;
+  margin-top: 10px;
+}
+
+.timeColumn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.timeInput {
+  width: 30px;
+  height: 25px;
+  text-align: center;
+  font-size: 16px;
+  padding: 4px;
+  margin-bottom: 1px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.timeInput::-webkit-outer-spin-button,
+.timeInput::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.timeChangeButtonIcon {
+  width: 26px;
+  font-size: 18px;
+  border: none;
+  cursor: pointer;
+  user-select: none;
+}
+
+.timeChangeButton {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.timeChangeButton:active {
+  background-color: #ccc;
+}

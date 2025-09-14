@@ -1,7 +1,7 @@
 .panel {
   position: fixed;
-  background-color: #222;
-  color: white;
+  /* background-color: #222; */
+  /* color: white; */
   z-index: 99;
   overflow: hidden;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
