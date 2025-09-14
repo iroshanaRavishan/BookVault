@@ -334,7 +334,7 @@ export default function Appearance() {
           </div>
         </div>
 
-        <div className={styles.appearanceOptions}>
+        <div className={styles.appearanceOptions} style={{marginBottom: '5px'}}>
           <span className={styles.sectionHeader}>Book</span>
           <div>
             <div className={styles.appearanceOption}>
