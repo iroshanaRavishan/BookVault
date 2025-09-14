@@ -182,6 +182,10 @@
   cursor: not-allowed;
 }
 
+.clearButton:active:enabled {
+  background-color: #e2b500;
+}
+
 .deleteButton {
   background-color: #f78080;
   color: #494949;
