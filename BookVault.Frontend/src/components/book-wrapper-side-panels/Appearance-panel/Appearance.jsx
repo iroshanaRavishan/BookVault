@@ -13,6 +13,7 @@ import {
 
 import { getAppearance, createAppearance, updateAppearance } from "../../../utils/appearanceService";
 import { useUser } from "../../../context/UserContext";
+import { RiResetLeftLine } from "react-icons/ri";
 
 export default function Appearance() {
   const [color, setColor] = useState("#f1c40f"); // default yellow
