@@ -129,7 +129,7 @@ export default function Appearance() {
       userId: user?.id,
       color,
       marginEnabled,
-      brightness,
+      brightness: savedBrightness,
       isDarkTheme,
       isDimmed,
       isFocusMode,
