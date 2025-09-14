@@ -752,15 +752,15 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
                     {(quillRef.current?.getEditor().getLength() - 1) || 0} / {USER_NOTES.MAX_CHARS} characters
                 </span> 
                 <div className={styles.clearDeleteButtons}>
-                    <button onClick={handleClear} className={styles.clearButton} disabled={!content}>
-                        <BiSolidEraser style={{marginTop: '1px'}} />
-                    </button>
                     <button
                         onClick={() => handleDelete(notesByPage[highlightPage]?.id)}
                         className={styles.deleteButton}
                         disabled={!notesByPage[highlightPage]?.id}
                     >
                         <AiOutlineDelete style={{marginTop: '1px'}} />
+                    </button>
+                    <button onClick={handleClear} className={styles.clearButton} disabled={!content}>
+                        <BiSolidEraser style={{marginTop: '1px'}} />
                     </button>
                 </div>
             </div>

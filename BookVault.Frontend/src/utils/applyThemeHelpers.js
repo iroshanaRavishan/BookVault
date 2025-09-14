@@ -62,6 +62,7 @@ export function applyTheme(isDark) {
     document.documentElement.style.setProperty("--note-settings-button-background-color", "#e9e9e9ff");
     document.documentElement.style.setProperty("--note-settings-button-border-color", "#8f8f8fff");
     document.documentElement.style.setProperty("--note-clear-button-border-color", "#8f8f8fff");
+    document.documentElement.style.setProperty("--note-clear-button-text-disabled-color", "#ffffffff");
     document.documentElement.style.setProperty("--note-delete-button-border-color", "#8f8f8fff");
     document.documentElement.style.setProperty("--note-navigation-highlighted-note-bg", "#c4c4c4ff");
     document.documentElement.style.setProperty("--note-navigation-non-heighlighted-button-text-color", "#ffffffff");
@@ -131,6 +132,7 @@ export function applyTheme(isDark) {
     document.documentElement.style.setProperty("--note-settings-button-border-color", "#bbbbbbff");
     document.documentElement.style.setProperty("--note-settings-button-hover-bg-color", "#acacacff");
     document.documentElement.style.setProperty("--note-clear-button-border-color", "#bbbbbbff");
+    document.documentElement.style.setProperty("--note-clear-button-text-disabled-color", "#8f8f8fff");
     document.documentElement.style.setProperty("--note-delete-button-border-color", "#bbbbbbff");
     document.documentElement.style.setProperty("--note-navigation-highlighted-note-bg", "#bbbbbbff");
     document.documentElement.style.setProperty("--note-navigation-non-heighlighted-button-text-color", "#000000");
