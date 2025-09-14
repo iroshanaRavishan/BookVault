@@ -19,7 +19,8 @@ import { FiCheck } from "react-icons/fi";
 export default function Appearance() {
   const [color, setColor] = useState("#f1c40f"); // default yellow
   const [marginEnabled, setMarginEnabled] = useState(true); // default ON (45px)
-  const [brightness, setBrightness] = useState(1); // default brightness
+  const [brightness, setBrightness] = useState(1); // live preview
+  const [savedBrightness, setSavedBrightness] = useState(1); // last saved value
   const [isDarkTheme, setIsDarkTheme] = useState(false); // default light
   const [isDimmed, setIsDimmed] = useState(false); // toggler state
   const [isFocusMode, setIsFocusMode] = useState(false); // focus mode state
