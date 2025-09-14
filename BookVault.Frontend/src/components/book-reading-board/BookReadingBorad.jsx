@@ -3,6 +3,8 @@ import styles from './bookreadingborad.module.css';
 import { useParams } from 'react-router-dom';
 import FlipBook from '../flip-book-method-one/FlipBook';
 import SideButtonsWrapper from '../side-button-wrapper/SideButtonWrapper';
+import { getAppearance } from "../../utils/appearanceService";
+import { applyColor, applyMargin, applyBrightness, applyBookmarkDim, applyFocusMode, applyTheme } from "../../utils/applyThemeHelpers";
 
 export default function BookReadingBorad() {
   const { id } = useParams();
@@ -73,6 +75,31 @@ export default function BookReadingBorad() {
 
     loadBookData()
   }, [id]);
+
+  useEffect(() => {
+    const fetchAndApplyAppearance = async () => {
+      try {
+        // Get persisted ID from localStorage
+        const appearanceId = localStorage.getItem("appearanceId");
+        if (!appearanceId) return; // nothing to fetch yet
+
+        const data = await getAppearance(appearanceId); // pass ID
+
+        // Apply individually
+        if (data.color) applyColor(data.color);
+        if (data.marginEnabled !== undefined) applyMargin(data.marginEnabled);
+        if (data.brightness) applyBrightness(data.brightness);
+        if (data.isDimmed !== undefined) applyBookmarkDim(data.isDimmed);
+        if (data.isFocusMode !== undefined) applyFocusMode(data.isFocusMode);
+        if (data.isDarkTheme !== undefined) applyTheme(data.isDarkTheme);
+
+      } catch (err) {
+        console.error("Failed to load appearance settings", err);
+      }
+    };
+
+    fetchAndApplyAppearance();
+  }, []);
 
   useEffect(() => {
     // Scroll to top

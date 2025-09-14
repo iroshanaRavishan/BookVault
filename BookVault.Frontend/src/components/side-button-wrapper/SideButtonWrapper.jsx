@@ -9,6 +9,8 @@ import Bookmarks from "../book-wrapper-side-panels/bookmark-panel/Bookmarks";
 import Note from "../book-wrapper-side-panels/note-panel/Note";
 import { useNoteContext } from "../../context/NoteContext";
 import Appearance from "../book-wrapper-side-panels/Appearance-panel/Appearance";
+import { useFullscreenContext } from "../../context/FullscreenContext";
+import Statistics from "../book-wrapper-side-panels/statistics/Statistics";
 
 const rightButtonData = ["Bookmarks", "Appearance", "Reading Style", "Statistics"];
 const leftButtonData = ["Notes"];
@@ -38,6 +40,7 @@ export default function SideButtonsWrapper({
   const { showUnsavedWarningPopup, setShowUnsavedWarningPopup } = useNoteContext();
   const rightRefs = useRef([]);
   const leftRefs = useRef([]);
+  const { isFullScreen } = useFullscreenContext();
 
   useEffect(() => {
     const calcOffsets = (refs) => {
@@ -195,8 +198,8 @@ export default function SideButtonsWrapper({
       const newBookWidthPx = initialBookWidthPx - deltaX;
       const newBookWidthPercent = (newBookWidthPx / containerWidth) * 100;
 
-      // Clamp the width between 75% and 85%
-      const clampedWidth = Math.min(Math.max(newBookWidthPercent, 75), 85);
+      // Clamp the width between 77% and 85%
+      const clampedWidth = Math.min(Math.max(newBookWidthPercent, 77), 85);
 
       setBookWidth(clampedWidth);
     };
@@ -225,7 +228,7 @@ export default function SideButtonsWrapper({
                     <Appearance />
                   </div>,
     'Reading Style': <span>this is the content of the Reading Styles</span>,
-    'Statistics': <span>this is the content of the Statistics</span>,
+    'Statistics': <Statistics />,
     'Ask AI': <span>this is the content of the Ask AI</span>
   };
 
@@ -312,7 +315,9 @@ export default function SideButtonsWrapper({
           <div className={styles.panelBody} 
             style={{
               paddingRight: isLeftPanelPinned ? '14px':'',
-              height: isLeftPanelPinned? '790px': '627px'
+              height: isFullScreen 
+              ? (isLeftPanelPinned ? "948px" : "790px") 
+              : (isLeftPanelPinned ? "790px" : "627px")
             }}>
             <Note isPanelPinned={isLeftPanelPinned} currentPageInfo={currentPageInfo} />
           </div>

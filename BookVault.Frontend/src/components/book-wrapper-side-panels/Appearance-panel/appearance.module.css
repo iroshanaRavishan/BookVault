@@ -1,9 +1,10 @@
 .AppearancePanel {
-    padding: 0 0 0 0px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+  padding: 0 0 0 0px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  user-select: none;
 }
 
 .appearanceActions {
@@ -16,17 +17,241 @@
   width: 100%;
 }
 
-.appearanceActions button {
+.appearanceOptions {
+  margin-bottom: 16px;
+  font-size: 14px;
+  color: var(--appearance-section-sub-text-color);
+}
+
+.appearanceOption {
+  margin-left: 10px;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.autoThemeSection {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  padding-right: 10px;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--appearance-section-text-color);
+}
+
+.sectionHeader::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #00000018;
+  margin-left: 12px;
+}
+
+.toggleButton {
   padding: 8px 20px;
   border: none;
-  font-size: 14px;
+  font-size: 13px;
   border-radius: 6px;
-  background-color: #ffffff;
+  background-color: var(--appearance-action-button-bg-color);
+  color: var(--appearance-action-button-text-color);
+  width: 150px;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.toggleButton:hover {
+  background-color:var(--appearance-action-button-hover-bg-color);
+}
+
+.toggleButton:disabled {
+  background-color: var(--appearance-action-button-disabled-bg-color); 
+  color: var(--appearance-action-button-disabled-text-color);
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.toggleSwitch {
+  position: relative;
+  display: inline-block;
+  width: 35px;
+  height: 12px;
+}
+
+/* Hide default checkbox */
+.toggleSwitch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 2px;
+  bottom: 0;
+  background-color: var(--appearance-toggle-bg-unchecked-color);
+  transition: 0.4s;
+  border-radius: 20px;
+}
+
+/* Circle knob */
+.slider::before {
+  position: absolute;
+  content: "";
+  height: 12px; 
+  width: 12px;
+  left: 0px;
+  bottom: 3px;
+  background-color: var(--appearance-toggle-slider-bg-color);
+  border: 3px solid var(--appearance-toggle-slider-border-color); 
+  transition: 0.4s;
+  border-radius: 50%;
+  transform: translateY(34%);
+}
+
+/* Checked state */
+.toggleSwitch input:checked + .slider {
+  background-color: var(--appearance-toggle-bg-checked-color);
+}
+
+.toggleSwitch input:checked + .slider::before {
+  transform: translate(16px, 34%);
+}
+
+.birghnessSlider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 60%;
+  height: 6px;
+  border-radius: 3px;
+  background: linear-gradient(to right, var(--appearance-toggle-bg-checked-color) var(--value, 50%), var(--appearance-toggle-bg-unchecked-color) var(--value, 50%), var(--appearance-toggle-bg-unchecked-color) 100%);
+  outline: none;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: background 0.2s ease;
+}
+
+.birghnessSlider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--appearance-toggle-slider-bg-color); 
+  border: 3px solid var(--appearance-toggle-slider-border-color);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.colorPicker {
+  border: 2px solid var(--appearance-color-picker-button-border-color);
+  width: 40px;
+  height: 25px;
+  border-radius: 5px;   
+  cursor: pointer;
+  overflow: hidden;
+  padding: 0;
+  background: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.colorPicker:hover {
+  transform: scale(1.02);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.colorPicker:active {
+  transform: scale(0.95);
+}
+
+.colorPicker::-webkit-color-swatch {
+  border: none;
+  border-radius: 4px;
+  padding: 0;
+}
+
+.colorPicker::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+.themeDivider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #555; /* text color */
+  font-weight: 500;
+  margin: 10px 0 0 0;
+  width: 100%;
+}
+
+.themeDivider::before,
+.themeDivider::after {
+  content: "";
+  flex: 1;
+  border-bottom: 1px solid #00000027;
+}
+
+.themeDivider::before {
+  margin-right: 10px;
+}
+
+.themeDivider::after {
+  margin-left: 10px;
+}
+
+.timePickerSeparator {
+  width: 2px;
+  height: 80px;
+  background-color: #ccc;
+  transform: translateY(20%);
+}
+
+.timeRange {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.buttonGroup {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  width: 100%;
+}
+
+.setButton {
+  padding: 8px 20px;
+  border: none;
+  font-size: 13px;
+  border-radius: 6px;
+  background-color: var(--appearance-action-button-bg-color);
+  color: var(--appearance-action-button-text-color);
   width: 100%;
   cursor: pointer;
   transition: opacity 0.3s ease;
 }
 
-.appearanceActions button:hover {
-  background-color: #cecece;
+.setButton:hover {
+  background-color:var(--appearance-action-button-hover-bg-color);
+}
+
+.setButton:disabled {
+  background-color: var(--appearance-action-button-disabled-bg-color); 
+  color: var(--appearance-action-button-disabled-text-color);
+  cursor: not-allowed;
+  opacity: 0.7;
 }
