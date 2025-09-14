@@ -178,8 +178,12 @@
 
 .clearButton:disabled {
   background-color: #f7e38099;
-  color: #aaa;
+  color: var(--note-clear-button-text-disabled-color);
   cursor: not-allowed;
+}
+
+.clearButton:active:enabled {
+  background-color: #e2b500;
 }
 
 .deleteButton {
@@ -201,6 +205,10 @@
   background-color: #f7808099;
   color: #fff;
   cursor: not-allowed;
+}
+
+.deleteButton:active:enabled {
+  background-color: #c0392b;
 }
 
 .notePageSeparator {
