@@ -279,3 +279,11 @@
   align-items: baseline;
   height: 58px;
 }
+
+.brightnessControl {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  width: 100%;
+  gap: 15px;
+}
