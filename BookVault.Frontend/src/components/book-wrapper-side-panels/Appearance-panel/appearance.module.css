@@ -287,3 +287,11 @@
   width: 100%;
   gap: 15px;
 }
+
+.confirmResetButtons {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
