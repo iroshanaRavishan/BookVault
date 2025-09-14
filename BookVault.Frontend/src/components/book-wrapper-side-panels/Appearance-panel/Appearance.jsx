@@ -369,6 +369,10 @@ export default function Appearance() {
                   className={styles.birghnessSlider}
                   style={{ "--value": `${((brightness - 0.8) / 0.4) * 100}%` }}
                 />
+
+                <div className={styles.confirmResetButtons}>
+                 
+                </div>
               </div>
             </div>
           </div>
