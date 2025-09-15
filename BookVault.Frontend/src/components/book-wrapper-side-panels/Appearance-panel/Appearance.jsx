@@ -374,6 +374,9 @@ export default function Appearance() {
                   <button>
                     <RiResetLeftLine />
                   </button>
+                  <button >
+                    <FiCheck />
+                  </button>
                 </div>
               </div>
             </div>
