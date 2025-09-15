@@ -371,7 +371,9 @@ export default function Appearance() {
                 />
 
                 <div className={styles.confirmResetButtons}>
-                 
+                  <button>
+                    <RiResetLeftLine />
+                  </button>
                 </div>
               </div>
             </div>
