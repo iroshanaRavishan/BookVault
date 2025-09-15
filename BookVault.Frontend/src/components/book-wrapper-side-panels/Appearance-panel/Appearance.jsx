@@ -235,6 +235,18 @@ export default function Appearance() {
 
   // Save to DB when clicking OK
   const handleSaveBrightness = async () => {
+      const payload = {
+        userId: user?.id,
+        color,
+        marginEnabled,
+        brightness,
+        isDarkTheme,
+        isDimmed,
+        isFocusMode,
+        isAutoThemeEnabled,
+        fromTime,
+        toTime,
+      };
   };
 
 
