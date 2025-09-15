@@ -1,7 +1,8 @@
 import React from 'react'
+import styles from './statistics.module.css'
 
 export default function Statistics() {
   return (
-    <div>Statistics new componrn</div>
+    <div className={styles.panel}>Statistics new componrn</div>
   )
 }
