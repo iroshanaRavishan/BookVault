@@ -235,6 +235,7 @@ export default function Appearance() {
 
   // Save to DB when clicking OK
   const handleSaveBrightness = async () => {
+    try {
       const payload = {
         userId: user?.id,
         color,
@@ -250,6 +251,10 @@ export default function Appearance() {
       
       await updateAppearance(appearanceId, payload);
       setSavedBrightness(brightness); // update saved state
+      console.log("Appearance saved!");
+    } catch (err) {
+      console.error(err);
+    }
   };
 
 
