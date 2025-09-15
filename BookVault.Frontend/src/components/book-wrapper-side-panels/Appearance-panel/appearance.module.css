@@ -295,3 +295,51 @@
   align-items: center;
   gap: 10px;
 }
+
+.confirmResetButtons button {
+  border-radius: 5px;
+  padding: 2px 12px 1px 12px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.confirmButton {
+  background-color: #f7e380;
+  color: #494949;
+  border: 1px solid var(--appearance-confirm-button-border-color);
+}
+
+.confirmButton:hover:enabled {
+  background-color: #ffe066;
+}
+
+.confirmButton:disabled {
+  background-color: #f7e38099;
+  color: var(--appearance-confirm-button-text-disabled-color);
+  cursor: not-allowed;
+}
+
+.confirmButton:active:enabled {
+  background-color: #e2b500;
+}
+
+.resetButton {
+  background-color: #f78080;
+  color: #494949;
+  border: 1px solid var(--appearance-reset-button-border-color);
+}
+
+.resetButton:hover:enabled {
+  background-color: #e74c3c;
+}
+
+.resetButton:disabled {
+  background-color: #f7808099;
+  color: #fff;
+  cursor: not-allowed;
+}
+
+.resetButton:active:enabled {
+  background-color: #c0392b;
+}
