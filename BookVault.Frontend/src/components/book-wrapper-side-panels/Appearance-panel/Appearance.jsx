@@ -371,10 +371,14 @@ export default function Appearance() {
                 />
 
                 <div className={styles.confirmResetButtons}>
-                  <button>
+                  <button
+                    className={styles.resetButton}
+                  >
                     <RiResetLeftLine style={{marginTop: '2px'}} />
                   </button>
-                  <button >
+                  <button  
+                    className={styles.confirmButton} 
+                  >
                     <FiCheck style={{marginTop: '2px'}} />
                   </button>
                 </div>
