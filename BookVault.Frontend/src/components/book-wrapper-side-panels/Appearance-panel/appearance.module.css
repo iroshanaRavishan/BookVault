@@ -305,3 +305,9 @@
 .resetButton:hover:enabled {
   background-color: #e74c3c;
 }
+
+.resetButton:disabled {
+  background-color: #f7808099;
+  color: #fff;
+  cursor: not-allowed;
+}
