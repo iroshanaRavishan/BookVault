@@ -296,6 +296,12 @@
   gap: 10px;
 }
 
+.confirmButton {
+  background-color: #f7e380;
+  color: #494949;
+  border: 1px solid var(--appearance-confirm-button-border-color);
+}
+
 .resetButton {
   background-color: #f78080;
   color: #494949;
