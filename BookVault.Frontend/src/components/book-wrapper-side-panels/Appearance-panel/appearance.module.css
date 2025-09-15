@@ -295,3 +295,9 @@
   align-items: center;
   gap: 10px;
 }
+
+.resetButton {
+  background-color: #f78080;
+  color: #494949;
+  border: 1px solid var(--appearance-reset-button-border-color);
+}
