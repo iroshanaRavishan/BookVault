@@ -249,6 +249,7 @@ export default function Appearance() {
       };
       
       await updateAppearance(appearanceId, payload);
+      setSavedBrightness(brightness); // update saved state
   };
 
 
