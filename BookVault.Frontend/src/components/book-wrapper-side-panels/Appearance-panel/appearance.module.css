@@ -301,3 +301,7 @@
   color: #494949;
   border: 1px solid var(--appearance-reset-button-border-color);
 }
+
+.resetButton:hover:enabled {
+  background-color: #e74c3c;
+}
