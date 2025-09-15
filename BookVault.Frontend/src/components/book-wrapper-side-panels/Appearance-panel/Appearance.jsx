@@ -403,6 +403,7 @@ export default function Appearance() {
                   </button>
                   <button  
                     className={styles.confirmButton} 
+                    onClick={handleSaveBrightness} 
                   >
                     <FiCheck style={{marginTop: '2px'}} />
                   </button>
