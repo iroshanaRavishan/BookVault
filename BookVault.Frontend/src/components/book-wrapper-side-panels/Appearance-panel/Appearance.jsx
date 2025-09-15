@@ -268,6 +268,11 @@ export default function Appearance() {
       current += step;
       setBrightness(current);
       applyBrightness(current);
+
+      if (count >= 20) {
+        clearInterval(interval);
+        applyBrightness(savedBrightness);
+      }
     }, 20);
   };
 
