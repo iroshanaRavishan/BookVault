@@ -233,6 +233,31 @@ export default function Appearance() {
     applyBrightness(newValue);
   };
 
+  // Save to DB when clicking OK
+  const handleSaveBrightness = async () => {
+    try {
+      const payload = {
+        userId: user?.id,
+        color,
+        marginEnabled,
+        brightness,
+        isDarkTheme,
+        isDimmed,
+        isFocusMode,
+        isAutoThemeEnabled,
+        fromTime,
+        toTime,
+      };
+      
+      await updateAppearance(appearanceId, payload);
+      setSavedBrightness(brightness); // update saved state
+      console.log("Appearance saved!");
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+
   const handleThemeToggle = () => {
     setIsDarkTheme((prev) => {
       const newTheme = !prev;
