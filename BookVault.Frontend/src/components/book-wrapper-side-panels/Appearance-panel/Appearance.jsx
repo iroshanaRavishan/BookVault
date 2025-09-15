@@ -418,12 +418,14 @@ export default function Appearance() {
                   <button
                     onClick={handleCancelBrightness}
                     className={styles.resetButton}
+                    disabled={!hasBrightnessChanged} // disabled if no change
                   >
                     <RiResetLeftLine style={{marginTop: '2px'}} />
                   </button>
                   <button  
                     className={styles.confirmButton} 
                     onClick={handleSaveBrightness} 
+                    disabled={!hasBrightnessChanged} // disabled if no change
                   >
                     <FiCheck style={{marginTop: '2px'}} />
                   </button>
