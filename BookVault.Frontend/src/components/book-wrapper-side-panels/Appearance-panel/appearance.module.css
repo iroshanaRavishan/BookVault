@@ -296,6 +296,14 @@
   gap: 10px;
 }
 
+.confirmResetButtons button {
+  border-radius: 5px;
+  padding: 2px 12px 1px 12px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
 .confirmButton {
   background-color: #f7e380;
   color: #494949;
