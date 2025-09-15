@@ -257,6 +257,25 @@ export default function Appearance() {
     }
   };
 
+  // Reset to last saved value when clicking Cancel
+  const handleCancelBrightness = () => {
+    let step = (savedBrightness - brightness) / 20; // smooth transition in 20 steps
+    let current = brightness;
+    let count = 0;
+
+    const interval = setInterval(() => {
+      count++;
+      current += step;
+      setBrightness(current);
+      applyBrightness(current);
+
+      if (count >= 20) {
+        clearInterval(interval);
+        setBrightness(savedBrightness);
+        applyBrightness(savedBrightness);
+      }
+    }, 20);
+  };
 
   const handleThemeToggle = () => {
     setIsDarkTheme((prev) => {
