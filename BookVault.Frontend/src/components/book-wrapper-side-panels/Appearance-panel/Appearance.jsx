@@ -257,6 +257,9 @@ export default function Appearance() {
     }
   };
 
+  // Reset to last saved value when clicking Cancel
+  const handleCancelBrightness = () => {
+  };
 
   const handleThemeToggle = () => {
     setIsDarkTheme((prev) => {
