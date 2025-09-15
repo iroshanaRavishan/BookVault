@@ -271,6 +271,7 @@ export default function Appearance() {
 
       if (count >= 20) {
         clearInterval(interval);
+        setBrightness(savedBrightness);
         applyBrightness(savedBrightness);
       }
     }, 20);
