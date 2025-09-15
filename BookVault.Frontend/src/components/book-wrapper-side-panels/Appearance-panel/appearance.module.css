@@ -302,6 +302,10 @@
   border: 1px solid var(--appearance-confirm-button-border-color);
 }
 
+.confirmButton:hover:enabled {
+  background-color: #ffe066;
+}
+
 .resetButton {
   background-color: #f78080;
   color: #494949;
