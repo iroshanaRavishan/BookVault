@@ -311,3 +311,7 @@
   color: #fff;
   cursor: not-allowed;
 }
+
+.resetButton:active:enabled {
+  background-color: #c0392b;
+}
