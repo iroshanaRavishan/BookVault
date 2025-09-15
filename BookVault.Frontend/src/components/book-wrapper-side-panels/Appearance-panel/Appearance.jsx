@@ -2,11 +2,25 @@ import { useEffect, useRef, useState } from "react";
 import styles from './appearance.module.css';
 import { useFullscreenContext } from "../../../context/FullscreenContext";
 import TimePicker from "../../time-picker/TimePicker";
+import { 
+  applyTheme,
+  applyColor,
+  applyMargin,
+  applyBrightness,
+  applyBookmarkDim,
+  applyFocusMode 
+} from "../../../utils/applyThemeHelpers";
+
+import { getAppearance, createAppearance, updateAppearance } from "../../../utils/appearanceService";
+import { useUser } from "../../../context/UserContext";
+import { RiResetLeftLine } from "react-icons/ri";
+import { FiCheck } from "react-icons/fi";
 
 export default function Appearance() {
   const [color, setColor] = useState("#f1c40f"); // default yellow
   const [marginEnabled, setMarginEnabled] = useState(true); // default ON (45px)
-  const [brightness, setBrightness] = useState(1); // default brightness
+  const [brightness, setBrightness] = useState(1); // live preview
+  const [savedBrightness, setSavedBrightness] = useState(1); // last saved value
   const [isDarkTheme, setIsDarkTheme] = useState(false); // default light
   const [isDimmed, setIsDimmed] = useState(false); // toggler state
   const [isFocusMode, setIsFocusMode] = useState(false); // focus mode state
@@ -16,13 +30,20 @@ export default function Appearance() {
   const [buttonsDisabled, setButtonsDisabled] = useState(true);
   const [fromCurrent, setFromCurrent] = useState("12:00 AM");
   const [toCurrent, setToCurrent] = useState("12:00 AM");
+  const [appearanceId, setAppearanceId] = useState(() => {
+    // Try to load saved ID from localStorage on initial render
+    return localStorage.getItem("appearanceId") || null;
+  });
   
   const fromTimeRef = useRef();
   const toTimeRef = useRef();
   const darkTimerRef = useRef(null);
   const lightTimerRef = useRef(null);
+  const { user } = useUser();
 
   const { isFullScreen, handleFullScreenToggle } = useFullscreenContext();
+
+  const hasBrightnessChanged = brightness !== savedBrightness;
 
   useEffect(() => {
     if (!isAutoThemeEnabled) {
@@ -35,6 +56,111 @@ export default function Appearance() {
 
     setButtonsDisabled(fromNorm === toNorm);
   }, [fromCurrent, toCurrent, isAutoThemeEnabled]);
+
+  useEffect(() => {
+    const fetchOrCreateAppearance = async () => {
+      try {
+        let data = null;
+
+        if (appearanceId) {
+          data = await getAppearance(appearanceId);
+        }
+
+        if (!data) {
+          // POST default appearance
+          const defaultPayload = {
+            userId: user?.id,
+            color: "#f1c40f",
+            marginEnabled: true,
+            brightness: 1,
+            isDarkTheme: false,
+            isDimmed: false,
+            isFocusMode: false,
+            isAutoThemeEnabled: false,
+            fromTime: "12:00 AM",
+            toTime: "12:00 AM",
+          };
+
+          const created = await createAppearance(defaultPayload);
+          setAppearanceId(created.id);
+          localStorage.setItem("appearanceId", created.id); // persist
+
+          setColor(created.color);
+          setMarginEnabled(created.marginEnabled);
+          setBrightness(created.brightness);
+          setIsDarkTheme(created.isDarkTheme);
+          setIsDimmed(created.isDimmed);
+          setIsFocusMode(created.isFocusMode);
+          setIsAutoThemeEnabled(created.isAutoThemeEnabled);
+          setFromTime(created.fromTime);
+          setToTime(created.toTime);
+          setFromCurrent(created.fromTime);
+          setToCurrent(created.toTime);
+        } else {
+          setAppearanceId(data.id);
+          localStorage.setItem("appearanceId", data.id); // persist
+
+          // Use existing appearance
+          setColor(data.color);
+          setMarginEnabled(data.marginEnabled);
+          setBrightness(data.brightness);
+          setSavedBrightness(data.brightness);
+          setIsDarkTheme(data.isDarkTheme);
+          setIsDimmed(data.isDimmed);
+          setIsFocusMode(data.isFocusMode);
+          setIsAutoThemeEnabled(data.isAutoThemeEnabled);
+          setFromTime(data.fromTime);
+          setToTime(data.toTime);
+          setFromCurrent(data.fromTime);
+          setToCurrent(data.toTime);
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    fetchOrCreateAppearance();
+  }, []);
+
+  useEffect(() => {
+    if (!appearanceId || !fromCurrent || !toCurrent) return;
+
+    const payload = {
+      userId: user?.id,
+      color,
+      marginEnabled,
+      brightness: savedBrightness,
+      isDarkTheme,
+      isDimmed,
+      isFocusMode,
+      isAutoThemeEnabled,
+      fromTime,
+      toTime,
+    };
+
+    const saveAppearance = async () => {
+      try {
+        await updateAppearance(appearanceId, payload);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    saveAppearance();
+  }, [
+    appearanceId,
+    color,
+    marginEnabled,
+    savedBrightness,
+    isDarkTheme,
+    isDimmed,
+    isFocusMode,
+    isAutoThemeEnabled,
+    fromTime,
+    toTime,
+    fromCurrent,
+    toCurrent,
+  ]);
 
   useEffect(() => {
     // clear any existing timers
@@ -80,7 +206,6 @@ export default function Appearance() {
     };
   }, [isAutoThemeEnabled, fromTime, toTime]);
 
-
   // Handler from time picker
   const handleSetTime = (type, timeString) => {
     if (type === "from") {
@@ -93,154 +218,63 @@ export default function Appearance() {
   const handleColorChange = (e) => {
     const newColor = e.target.value;
     setColor(newColor);
-
-    // update CSS variable globally
-    document.documentElement.style.setProperty("--flipbook-bg", newColor);
+    applyColor(newColor);
   };
 
   const handleMarginToggle = (e) => {
     const isChecked = e.target.checked;
     setMarginEnabled(isChecked);
-
-    // update CSS variable globally
-    document.documentElement.style.setProperty("--flipbook-margin", isChecked ? "45px" : "0px");
+    applyMargin(isChecked);
   };
 
   const handleBrightnessChange = (e) => {
     const newValue = Number(e.target.value);
     setBrightness(newValue);
-    document.documentElement.style.setProperty("--flipbook-brightness", newValue);
+    applyBrightness(newValue);
   };
 
-  const applyTheme = (dark) => {
-    if (dark) {
-      document.documentElement.style.setProperty("--header-pin-icon-color", "#fff");
-      document.documentElement.style.setProperty("--panel-header", "#333");
-      document.documentElement.style.setProperty("--panel-header-name-color", "#fff");  
-      document.documentElement.style.setProperty("--panel-body-bg", "#3f3f3fff");
-      document.documentElement.style.setProperty("--note-panel-toolbar", "#3f3f3fff");
-      document.documentElement.style.setProperty("--note-quill-item-color", "#ffffffff");
-      document.documentElement.style.setProperty("--note-quill-item-background-hover-color", "#acacacff");
-      document.documentElement.style.setProperty("--undo-redo-action-button-border-color", "#8f8f8fff");
-      document.documentElement.style.setProperty("--undo-redo-action-button-bg-color", "#e9e9e9ff");
-      document.documentElement.style.setProperty("--undo-redo-action-button-hover-bg-color", "#c4c4c4ff");
-      document.documentElement.style.setProperty("--undo-redo-action-button-item-color", "#3d3d3dff");
-      document.documentElement.style.setProperty("--note-detail-bar-bg", "#3f3f3fff");
-      document.documentElement.style.setProperty("--note-section-text-color", "#bebebeff");
-      document.documentElement.style.setProperty("--note-action-bg", "#3f3f3fff");
-      document.documentElement.style.setProperty("--note-navigation-button-bg", "#f3f3f3");
-      document.documentElement.style.setProperty("--note-navigation-button-border-color", "#8f8f8fff");
-      document.documentElement.style.setProperty("--note-navigation-button-hover-bg-color", "#c4c4c4ff");
-      document.documentElement.style.setProperty("--note-settings-button-background-color", "#e9e9e9ff");
-      document.documentElement.style.setProperty("--note-settings-button-border-color", "#8f8f8fff");
-      document.documentElement.style.setProperty("--note-clear-button-border-color", "#8f8f8fff");
-      document.documentElement.style.setProperty("--note-delete-button-border-color", "#8f8f8fff");
-      document.documentElement.style.setProperty("--note-navigation-highlighted-note-bg", "#c4c4c4ff");
-      document.documentElement.style.setProperty("--note-navigation-non-heighlighted-button-text-color", "#ffffffff");
-      document.documentElement.style.setProperty("--note-navigation-highlighted-note-number-hover-bg-color", "#c4c4c4b6");
-      document.documentElement.style.setProperty("--note-settings-button-hover-bg-color", "#c4c4c4ff");
-      document.documentElement.style.setProperty("--note-action-button-bg-color", "#ffffffff");
-      document.documentElement.style.setProperty("--note-action-button-text-color", "#000000ff");
-      document.documentElement.style.setProperty("--note-action-button-hover-bg-color", "#c4c4c4ff");
-      document.documentElement.style.setProperty("--note-action-button-disabled-bg-color", "#ffffffff");
-      document.documentElement.style.setProperty("--note-action-button-disabled-text-color", "#858585ff");
-      document.documentElement.style.setProperty("--editor-bg-color", "#dbdbdbff");
-      document.documentElement.style.setProperty("--editor-line-color", "#808080ff");
-
-      document.documentElement.style.setProperty("--bookmark-action-button-bg-color", "#ffffffff");
-      document.documentElement.style.setProperty("--bookmark-action-button-text-color", "#000000ff");
-      document.documentElement.style.setProperty("--bookmark-section-text-color", "#bebebeff");
-      document.documentElement.style.setProperty("--bookmark-list-item-bg-color", "#1f1f1fb7");
-      document.documentElement.style.setProperty("--bookmark-list-item-hover-number-color", "#ffffffd2");
-      document.documentElement.style.setProperty("--bookmark-list-action-button-bg-color", "#dddddd25");
-      document.documentElement.style.setProperty("--bookmark-thumbnail-section-header-bg-color", "#616161ff");
-      document.documentElement.style.setProperty("--bookmark-list-action-button-color", "#1a1a1aff");
-      document.documentElement.style.setProperty("--bookmark-list-action-button-hover-bg-color", "#acacacff");
-      document.documentElement.style.setProperty("--bookmark-page-preview-border-color", "#e0e0e0ff");
-      document.documentElement.style.setProperty("--bookmark-action-button-disabled-bg-color", "#ffffffff");
-      document.documentElement.style.setProperty("--bookmark-action-button-disabled-text-color", "#858585ff");
-      document.documentElement.style.setProperty("--bookmark-page-preview-header-text-color", "#e0e0e0ff");
-
-      document.documentElement.style.setProperty("--book-reading-board-side-button-bg-color", "#333");
-      document.documentElement.style.setProperty("--book-reading-board-side-button-text-color", "#fff");
-
-      document.documentElement.style.setProperty("--appearance-action-button-bg-color", "#ffffffff");
-      document.documentElement.style.setProperty("--appearance-action-button-text-color", "#000000ff");
-      document.documentElement.style.setProperty("--appearance-action-button-hover-bg-color", "#c4c4c4ff");
-      document.documentElement.style.setProperty("--appearance-action-button-disabled-bg-color", "#ffffffff");
-      document.documentElement.style.setProperty("--appearance-action-button-disabled-text-color", "#858585ff");
-      document.documentElement.style.setProperty("--appearance-section-text-color", "#ffffffff");
-      document.documentElement.style.setProperty("--appearance-section-sub-text-color", "#dddddd");
-      document.documentElement.style.setProperty("--appearance-color-picker-button-border-color", "#e9e9e9ff");
-      document.documentElement.style.setProperty("--appearance-toggle-slider-bg-color", "#000");
-      document.documentElement.style.setProperty("--appearance-toggle-slider-border-color", "#fff");
-      document.documentElement.style.setProperty("--appearance-toggle-bg-unchecked-color", "#8f8f8fff");
-      document.documentElement.style.setProperty("--appearance-toggle-bg-checked-color", "#ddddddff");
-
-    } else {
-      document.documentElement.style.setProperty("--header-pin-icon-color", "black");
-      document.documentElement.style.setProperty("--panel-header", "#fff");
-      document.documentElement.style.setProperty("--panel-header-name-color", "#111");
-      document.documentElement.style.setProperty("--panel-body-bg", "#f1f1f1ff");
-      document.documentElement.style.setProperty("--note-panel-toolbar", "#f1f1f1ff");
-      document.documentElement.style.setProperty("--note-quill-item-color", "#000000");
-      document.documentElement.style.setProperty("--note-quill-item-background-hover-color", "#0000001e");
-      document.documentElement.style.setProperty("--undo-redo-action-button-border-color", "#bbbbbbff");
-      document.documentElement.style.setProperty("--undo-redo-action-button-bg-color", "#d3d3d3ff");
-      document.documentElement.style.setProperty("--undo-redo-action-button-hover-bg-color", "#acacacff");
-      document.documentElement.style.setProperty("--undo-redo-action-button-item-color", "#3a3a3aff");
-      document.documentElement.style.setProperty("--note-detail-bar-bg", "#f1f1f1ff");
-      document.documentElement.style.setProperty("--note-section-text-color", "#666");
-      document.documentElement.style.setProperty("--note-action-bg", "#f1f1f1ff");
-      document.documentElement.style.setProperty("--note-navigation-button-bg", "#d3d3d3ff");
-      document.documentElement.style.setProperty("--note-navigation-button-border-color", "#bbbbbbff");
-      document.documentElement.style.setProperty("--note-navigation-button-hover-bg-color", "#acacacff");
-      document.documentElement.style.setProperty("--note-settings-button-background-color", "#d3d3d3ff");
-      document.documentElement.style.setProperty("--note-settings-button-border-color", "#bbbbbbff");
-      document.documentElement.style.setProperty("--note-settings-button-hover-bg-color", "#acacacff");
-      document.documentElement.style.setProperty("--note-clear-button-border-color", "#bbbbbbff");
-      document.documentElement.style.setProperty("--note-delete-button-border-color", "#bbbbbbff");
-      document.documentElement.style.setProperty("--note-navigation-highlighted-note-bg", "#bbbbbbff");
-      document.documentElement.style.setProperty("--note-navigation-non-heighlighted-button-text-color", "#000000");
-      document.documentElement.style.setProperty("--note-navigation-highlighted-note-number-hover-bg-color", "#acacac8f");
-      document.documentElement.style.setProperty("--note-action-button-bg-color", "#313131ff");
-      document.documentElement.style.setProperty("--note-action-button-text-color", "#ffffffff");
-      document.documentElement.style.setProperty("--note-action-button-hover-bg-color", "#8b8b8bff");
-      document.documentElement.style.setProperty("--note-action-button-disabled-bg-color", "#727272ff");
-      document.documentElement.style.setProperty("--note-action-button-disabled-text-color", "#ffffffff");
-      document.documentElement.style.setProperty("--editor-bg-color", "#fafafaff");
-      document.documentElement.style.setProperty("--editor-line-color", "#bdbdbdff");
-
-      document.documentElement.style.setProperty("--bookmark-action-button-bg-color", "#313131ff");
-      document.documentElement.style.setProperty("--bookmark-action-button-text-color", "#ffffffff");
-      document.documentElement.style.setProperty("--bookmark-section-text-color", "#666");
-      document.documentElement.style.setProperty("--bookmark-list-item-bg-color", "#ecececff");
-      document.documentElement.style.setProperty("--bookmark-list-item-hover-number-color", "#474747ff");
-      document.documentElement.style.setProperty("--bookmark-list-action-button-bg-color", "#e0e0e0ff");
-      document.documentElement.style.setProperty("--bookmark-thumbnail-section-header-bg-color", "#838383ff");
-      document.documentElement.style.setProperty("--bookmark-list-action-button-color", "#3b3b3b");
-      document.documentElement.style.setProperty("--bookmark-list-action-button-hover-bg-color", "#c5c5c5");
-      document.documentElement.style.setProperty("--bookmark-page-preview-border-color", "#5e5e5eff");
-      document.documentElement.style.setProperty("--bookmark-action-button-disabled-bg-color", "#727272ff");
-      document.documentElement.style.setProperty("--bookmark-action-button-disabled-text-color", "#ffffffff");
-      document.documentElement.style.setProperty("--bookmark-page-preview-header-text-color", "#fff");
-
-      document.documentElement.style.setProperty("--book-reading-board-side-button-bg-color", "#fff");
-      document.documentElement.style.setProperty("--book-reading-board-side-button-text-color", "#333");
-
-      document.documentElement.style.setProperty("--appearance-action-button-bg-color", "#313131ff");
-      document.documentElement.style.setProperty("--appearance-action-button-text-color", "#ffffffff");
-      document.documentElement.style.setProperty("--appearance-action-button-hover-bg-color", "#8b8b8bff");
-      document.documentElement.style.setProperty("--appearance-action-button-disabled-bg-color", "#727272ff");
-      document.documentElement.style.setProperty("--appearance-action-button-disabled-text-color", "#ffffffff");
-      document.documentElement.style.setProperty("--appearance-section-text-color", "#000000ff");
-      document.documentElement.style.setProperty("--appearance-section-sub-text-color", "#252525ff");
-      document.documentElement.style.setProperty("--appearance-color-picker-button-border-color", "#888888");
-      document.documentElement.style.setProperty("--appearance-toggle-slider-bg-color", "#fff");
-      document.documentElement.style.setProperty("--appearance-toggle-slider-border-color", "#000");
-      document.documentElement.style.setProperty("--appearance-toggle-bg-unchecked-color", "#ccc");
-      document.documentElement.style.setProperty("--appearance-toggle-bg-checked-color", "#797979");
+  // Save to DB when clicking OK
+  const handleSaveBrightness = async () => {
+    try {
+      const payload = {
+        userId: user?.id,
+        color,
+        marginEnabled,
+        brightness,
+        isDarkTheme,
+        isDimmed,
+        isFocusMode,
+        isAutoThemeEnabled,
+        fromTime,
+        toTime,
+      };
+      
+      await updateAppearance(appearanceId, payload);
+      setSavedBrightness(brightness); // update saved state
+      console.log("Appearance saved!");
+    } catch (err) {
+      console.error(err);
     }
+  };
+
+  // Reset to last saved value when clicking Cancel
+  const handleCancelBrightness = () => {
+    let step = (savedBrightness - brightness) / 20; // smooth transition in 20 steps
+    let current = brightness;
+    let count = 0;
+
+    const interval = setInterval(() => {
+      count++;
+      current += step;
+      setBrightness(current);
+      applyBrightness(current);
+
+      if (count >= 20) {
+        clearInterval(interval);
+        setBrightness(savedBrightness);
+        applyBrightness(savedBrightness);
+      }
+    }, 20);
   };
 
   const handleThemeToggle = () => {
@@ -252,34 +286,18 @@ export default function Appearance() {
   };
 
   const handleBookmarkBrightnessChange = () => {
-    const newActiveValue = isDimmed ? 1 : 0.5; 
-    const newInactiveValue = isDimmed ? 0.5 : 0.2; 
-    setIsDimmed(!isDimmed);
-
-    // Adjust bookmark dimming (inverse relationship)
-    const activebookmarkOpacity = Math.min(1, Math.max(0.3, newActiveValue));
-    const inactivebookmarkOpacity = Math.min(1, Math.max(0.3, newInactiveValue));
-
-    document.documentElement.style.setProperty("--active-bookmark-opacity", activebookmarkOpacity);
-    document.documentElement.style.setProperty("--inactive-bookmark-opacity", inactivebookmarkOpacity);
+    setIsDimmed((prev) => {
+      const newVal = !prev;
+      applyBookmarkDim(newVal);
+      return newVal;
+    });
   };
 
   const handleFocusModeToggle = () => {
     setIsFocusMode((prev) => {
-      const newFocusMode = !prev;
-
-      if (newFocusMode) {
-        // Close all opened side buttons
-        window.dispatchEvent(new Event("closeAllSideButtons"));
-
-        // Reduce background opacity
-        document.documentElement.style.setProperty("--flipbook-bg-opacity", "0.5");
-      } else {
-        // restore full opacity
-        document.documentElement.style.setProperty("--flipbook-bg-opacity", "1");
-      }
-
-      return newFocusMode;
+      const newVal = !prev;
+      applyFocusMode(newVal);
+      return newVal;
     });
   };
 
@@ -366,7 +384,7 @@ export default function Appearance() {
           </div>
         </div>
 
-        <div className={styles.appearanceOptions}>
+        <div className={styles.appearanceOptions} style={{marginBottom: '5px'}}>
           <span className={styles.sectionHeader}>Book</span>
           <div>
             <div className={styles.appearanceOption}>
@@ -381,17 +399,38 @@ export default function Appearance() {
               </label>
             </div>
             <div className={styles.appearanceOption}>
-              <label>Brightness: </label>
-              <input
-                type="range"
-                min="0.8"
-                max="1.2"
-                step="0.01"
-                value={brightness}
-                onChange={handleBrightnessChange}
-                className={styles.birghnessSlider}
-                style={{ "--value": `${((brightness - 0.8) / 0.4) * 100}%` }}
-              />
+              <div className={styles.brightnessLabel}>
+                <label>Brightness: </label>
+              </div>
+            <div className={styles.brightnessControl}>
+                <input
+                  type="range"
+                  min="0.8"
+                  max="1.2"
+                  step="0.01"
+                  value={brightness}
+                  onChange={handleBrightnessChange}
+                  className={styles.birghnessSlider}
+                  style={{ "--value": `${((brightness - 0.8) / 0.4) * 100}%` }}
+                />
+
+                <div className={styles.confirmResetButtons}>
+                  <button
+                    onClick={handleCancelBrightness}
+                    className={styles.resetButton}
+                    disabled={!hasBrightnessChanged} // disabled if no change
+                  >
+                    <RiResetLeftLine style={{marginTop: '2px'}} />
+                  </button>
+                  <button  
+                    className={styles.confirmButton} 
+                    onClick={handleSaveBrightness} 
+                    disabled={!hasBrightnessChanged} // disabled if no change
+                  >
+                    <FiCheck style={{marginTop: '2px'}} />
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -420,17 +459,17 @@ export default function Appearance() {
             <span className={styles.themeDivider}>or</span>
             <div className={styles.appearanceOption} style={{width: '100%', marginTop: '0px'}}>
               <div className={styles.autoThemeSection}>
-                <label style={{display: 'flex', alignItems: 'center', gap: '8px'}}>
+                <label className={styles.automateTimeLabel} style={{display: 'flex', alignItems: 'center', gap: '8px'}}>
                   <input
                     type="checkbox"
                     checked={isAutoThemeEnabled}
                     onChange={(e) => setIsAutoThemeEnabled(e.target.checked)}
                   />
-                  <span style={{fontSize: '13px'}}>Automate Theme</span>
+                  <span  style={{fontSize: '13px', fontWeight: 400}}>Automate Theme</span>
                 </label>
                 <div className={styles.timeRange}>
                   <div className={!isAutoThemeEnabled ? styles.disabledSection : ""}>
-                    <span style={{ fontSize: "12px" }}>From : </span>
+                    <span className={styles.timePickerCategory} style={{ fontSize: "12px" }}>From : </span>
                     <TimePicker 
                       id="from" 
                       ref={fromTimeRef} 
@@ -441,7 +480,7 @@ export default function Appearance() {
                   </div>
                   <span className={styles.timePickerSeparator}></span>
                   <div className={!isAutoThemeEnabled ? styles.disabledSection : ""}>
-                    <span style={{ fontSize: "12px" }}>To : </span>
+                    <span className={styles.timePickerCategory} style={{ fontSize: "12px" }}>To : </span>
                     <TimePicker 
                       id="to" 
                       ref={toTimeRef} 
@@ -470,6 +509,7 @@ export default function Appearance() {
                       toTimeRef.current?.handleSet();
                     }}
                     disabled={buttonsDisabled}
+                    // need to disable the set time button once the set time is hit but until change the time
                   >
                     Set time
                   </button>
