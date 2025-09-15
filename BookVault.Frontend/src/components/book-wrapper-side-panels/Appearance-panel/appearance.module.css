@@ -306,6 +306,12 @@
   background-color: #ffe066;
 }
 
+.confirmButton:disabled {
+  background-color: #f7e38099;
+  color: var(--appearance-confirm-button-text-disabled-color);
+  cursor: not-allowed;
+}
+
 .resetButton {
   background-color: #f78080;
   color: #494949;
