@@ -247,6 +247,8 @@ export default function Appearance() {
         fromTime,
         toTime,
       };
+      
+      updateAppearance(appearanceId, payload);
   };
 
 
