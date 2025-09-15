@@ -233,6 +233,11 @@ export default function Appearance() {
     applyBrightness(newValue);
   };
 
+  // Save to DB when clicking OK
+  const handleSaveBrightness = async () => {
+  };
+
+
   const handleThemeToggle = () => {
     setIsDarkTheme((prev) => {
       const newTheme = !prev;
