@@ -312,6 +312,10 @@
   cursor: not-allowed;
 }
 
+.confirmButton:active:enabled {
+  background-color: #e2b500;
+}
+
 .resetButton {
   background-color: #f78080;
   color: #494949;
