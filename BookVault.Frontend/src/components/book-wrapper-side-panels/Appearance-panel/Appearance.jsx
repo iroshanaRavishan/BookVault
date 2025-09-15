@@ -416,6 +416,7 @@ export default function Appearance() {
 
                 <div className={styles.confirmResetButtons}>
                   <button
+                    onClick={handleCancelBrightness}
                     className={styles.resetButton}
                   >
                     <RiResetLeftLine style={{marginTop: '2px'}} />
