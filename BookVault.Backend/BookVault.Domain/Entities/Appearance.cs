@@ -17,5 +17,22 @@ namespace BookVault.Domain.Entities
         public bool IsDimmed { get; private set; }
         public bool IsFocusMode { get; private set; }
         public bool IsAutoThemeEnabled { get; private set; }
+        public string FromTime { get; private set; }
+        public string ToTime { get; private set; }  
+
+        // EF Core requires a private parameterless ctor
+        private Appearance()
+        {
+            UserId = Guid.Empty;
+            Color = "#ffffff";
+            MarginEnabled = true;
+            Brightness = 1.0;
+            IsDarkTheme = false;
+            IsDimmed = false;
+            IsFocusMode = false;
+            IsAutoThemeEnabled = false;
+            FromTime = "12:00 AM";
+            ToTime = "12:00 AM";
+        }
     }
 }
