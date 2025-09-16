@@ -50,5 +50,13 @@ namespace BookVault.Domain.Entities
             FromTime = fromTime;
             ToTime = toTime;
         }
+
+        // Static factory
+        public static Appearance Create(Guid userId, string color, bool marginEnabled, double brightness,
+            bool isDarkTheme, bool isDimmed, bool isFocusMode,
+            bool isAutoThemeEnabled)
+        {
+           
+        }
     }
 }
