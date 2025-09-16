@@ -47,6 +47,8 @@ namespace BookVault.Domain.Entities
             IsDimmed = isDimmed;
             IsFocusMode = isFocusMode;
             IsAutoThemeEnabled = isAutoThemeEnabled;
+            FromTime = fromTime;
+            ToTime = toTime;
         }
     }
 }
