@@ -34,5 +34,11 @@ namespace BookVault.Domain.Entities
             FromTime = "12:00 AM";
             ToTime = "12:00 AM";
         }
+
+        private Appearance(Guid userId, string color, bool marginEnabled, double brightness,
+            bool isDarkTheme, bool isDimmed, bool isFocusMode,
+            bool isAutoThemeEnabled)
+        {
+        }
     }
 }
