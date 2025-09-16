@@ -34,5 +34,30 @@ namespace BookVault.Domain.Entities
             FromTime = "12:00 AM";
             ToTime = "12:00 AM";
         }
+
+        private Appearance(Guid userId, string color, bool marginEnabled, double brightness,
+            bool isDarkTheme, bool isDimmed, bool isFocusMode,
+            bool isAutoThemeEnabled, string fromTime, string toTime)
+        {
+            UserId = userId;
+            Color = color;
+            MarginEnabled = marginEnabled;
+            Brightness = brightness;
+            IsDarkTheme = isDarkTheme;
+            IsDimmed = isDimmed;
+            IsFocusMode = isFocusMode;
+            IsAutoThemeEnabled = isAutoThemeEnabled;
+            FromTime = fromTime;
+            ToTime = toTime;
+        }
+
+        // Static factory
+        public static Appearance Create(Guid userId, string color, bool marginEnabled, double brightness,
+            bool isDarkTheme, bool isDimmed, bool isFocusMode,
+            bool isAutoThemeEnabled, string fromTime, string toTime)
+        {
+            return new Appearance(userId, color, marginEnabled, brightness,
+                isDarkTheme, isDimmed, isFocusMode, isAutoThemeEnabled, fromTime, toTime);
+        }
     }
 }
