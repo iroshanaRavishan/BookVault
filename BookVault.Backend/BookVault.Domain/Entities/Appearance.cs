@@ -31,6 +31,8 @@ namespace BookVault.Domain.Entities
             IsDimmed = false;
             IsFocusMode = false;
             IsAutoThemeEnabled = false;
+            FromTime = "12:00 AM";
+            ToTime = "12:00 AM";
         }
     }
 }
