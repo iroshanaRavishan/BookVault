@@ -9,5 +9,6 @@ namespace BookVault.Domain.Entities
 {
     public sealed class Appearance : EntityBase
     {
+        public Guid UserId { get; private set; }
     }
 }
