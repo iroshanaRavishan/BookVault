@@ -39,6 +39,10 @@ namespace BookVault.Domain.Entities
             bool isDarkTheme, bool isDimmed, bool isFocusMode,
             bool isAutoThemeEnabled, string fromTime, string toTime)
         {
+            UserId = userId;
+            Color = color;
+            MarginEnabled = marginEnabled;
+            Brightness = brightness;
         }
     }
 }
