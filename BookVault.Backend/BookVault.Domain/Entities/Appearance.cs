@@ -54,7 +54,7 @@ namespace BookVault.Domain.Entities
         // Static factory
         public static Appearance Create(Guid userId, string color, bool marginEnabled, double brightness,
             bool isDarkTheme, bool isDimmed, bool isFocusMode,
-            bool isAutoThemeEnabled)
+            bool isAutoThemeEnabled, string fromTime, string toTime)
         {
            
         }
