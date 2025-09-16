@@ -23,7 +23,14 @@ namespace BookVault.Domain.Entities
         // EF Core requires a private parameterless ctor
         private Appearance()
         {
-
+            UserId = Guid.Empty;
+            Color = "#ffffff";
+            MarginEnabled = true;
+            Brightness = 1.0;
+            IsDarkTheme = false;
+            IsDimmed = false;
+            IsFocusMode = false;
+            IsAutoThemeEnabled = false;
         }
     }
 }
