@@ -19,5 +19,11 @@ namespace BookVault.Domain.Entities
         public bool IsAutoThemeEnabled { get; private set; }
         public string FromTime { get; private set; }
         public string ToTime { get; private set; }  
+
+        // EF Core requires a private parameterless ctor
+        private Appearance()
+        {
+
+        }
     }
 }
