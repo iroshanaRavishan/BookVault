@@ -43,6 +43,10 @@ namespace BookVault.Domain.Entities
             Color = color;
             MarginEnabled = marginEnabled;
             Brightness = brightness;
+            IsDarkTheme = isDarkTheme;
+            IsDimmed = isDimmed;
+            IsFocusMode = isFocusMode;
+            IsAutoThemeEnabled = isAutoThemeEnabled;
         }
     }
 }
