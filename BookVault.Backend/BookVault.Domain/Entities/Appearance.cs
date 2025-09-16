@@ -17,5 +17,7 @@ namespace BookVault.Domain.Entities
         public bool IsDimmed { get; private set; }
         public bool IsFocusMode { get; private set; }
         public bool IsAutoThemeEnabled { get; private set; }
+        public string FromTime { get; private set; }
+        public string ToTime { get; private set; }  
     }
 }
