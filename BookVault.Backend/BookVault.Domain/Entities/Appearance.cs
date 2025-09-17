@@ -79,7 +79,9 @@ namespace BookVault.Domain.Entities
 
         // Validation rules
         private static void ValidateInputs(string color, double brightness, string fromTime, string toTime)
-        {     
+        {
+            if (string.IsNullOrWhiteSpace(color))
+                throw new ArgumentException("Color cannot be empty.", nameof(color));
         }
     }
 }
