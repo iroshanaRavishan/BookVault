@@ -82,6 +82,9 @@ namespace BookVault.Domain.Entities
         {
             if (string.IsNullOrWhiteSpace(color))
                 throw new ArgumentException("Color cannot be empty.", nameof(color));
+
+            if (!color.StartsWith("#") || (color.Length != 7 && color.Length != 4))
+                throw new ArgumentException("Color must be a valid hex code (e.g. #fff or #ffffff).", nameof(color));
         }
     }
 }
