@@ -91,6 +91,9 @@ namespace BookVault.Domain.Entities
 
             if (string.IsNullOrWhiteSpace(fromTime))
                 throw new ArgumentException("FromTime cannot be empty.", nameof(fromTime));
+
+            if (string.IsNullOrWhiteSpace(toTime))
+                throw new ArgumentException("ToTime cannot be empty.", nameof(toTime));
         }
     }
 }
