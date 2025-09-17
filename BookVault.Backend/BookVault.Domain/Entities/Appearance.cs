@@ -85,6 +85,9 @@ namespace BookVault.Domain.Entities
 
             if (!color.StartsWith("#") || (color.Length != 7 && color.Length != 4))
                 throw new ArgumentException("Color must be a valid hex code (e.g. #fff or #ffffff).", nameof(color));
+
+            if (brightness < 0 || brightness > 1.5)
+                throw new ArgumentException("Brightness must be between 0 and 1.", nameof(brightness));
         }
     }
 }
