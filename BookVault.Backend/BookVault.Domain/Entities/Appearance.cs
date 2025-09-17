@@ -94,6 +94,10 @@ namespace BookVault.Domain.Entities
 
             if (string.IsNullOrWhiteSpace(toTime))
                 throw new ArgumentException("ToTime cannot be empty.", nameof(toTime));
+
+            // Optional: validate format like "09:00 PM"
+            if (!DateTime.TryParse(fromTime, out _))
+                throw new ArgumentException("FromTime must be a valid time string.", nameof(fromTime));
         }
     }
 }
