@@ -76,5 +76,10 @@ namespace BookVault.Domain.Entities
             FromTime = fromTime;
             ToTime = toTime;
         }
+
+        // Validation rules
+        private static void ValidateInputs(string color, double brightness, string fromTime, string toTime)
+        {     
+        }
     }
 }
