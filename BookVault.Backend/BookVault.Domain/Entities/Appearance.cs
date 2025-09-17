@@ -68,8 +68,11 @@ namespace BookVault.Domain.Entities
             UserId = userId;
             Color = color;
             MarginEnabled = marginEnabled;
+            Brightness = brightness;
+            IsDarkTheme = isDarkTheme;
             IsDimmed = isDimmed;
             IsFocusMode = isFocusMode;
+            IsAutoThemeEnabled = isAutoThemeEnabled;
         }
     }
 }
