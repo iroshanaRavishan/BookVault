@@ -88,6 +88,9 @@ namespace BookVault.Domain.Entities
 
             if (brightness < 0 || brightness > 1.5)
                 throw new ArgumentException("Brightness must be between 0 and 1.", nameof(brightness));
+
+            if (string.IsNullOrWhiteSpace(fromTime))
+                throw new ArgumentException("FromTime cannot be empty.", nameof(fromTime));
         }
     }
 }
