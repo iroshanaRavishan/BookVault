@@ -76,5 +76,31 @@ namespace BookVault.Domain.Entities
             FromTime = fromTime;
             ToTime = toTime;
         }
+
+        // Validation rules
+        private static void ValidateInputs(string color, double brightness, string fromTime, string toTime)
+        {
+            if (string.IsNullOrWhiteSpace(color))
+                throw new ArgumentException("Color cannot be empty.", nameof(color));
+
+            if (!color.StartsWith("#") || (color.Length != 7 && color.Length != 4))
+                throw new ArgumentException("Color must be a valid hex code (e.g. #fff or #ffffff).", nameof(color));
+
+            if (brightness < 0 || brightness > 1.5)
+                throw new ArgumentException("Brightness must be between 0 and 1.", nameof(brightness));
+
+            if (string.IsNullOrWhiteSpace(fromTime))
+                throw new ArgumentException("FromTime cannot be empty.", nameof(fromTime));
+
+            if (string.IsNullOrWhiteSpace(toTime))
+                throw new ArgumentException("ToTime cannot be empty.", nameof(toTime));
+
+            // Optional: validate format like "09:00 PM"
+            if (!DateTime.TryParse(fromTime, out _))
+                throw new ArgumentException("FromTime must be a valid time string.", nameof(fromTime));
+
+            if (!DateTime.TryParse(toTime, out _))
+                throw new ArgumentException("ToTime must be a valid time string.", nameof(toTime));
+        }
     }
 }
