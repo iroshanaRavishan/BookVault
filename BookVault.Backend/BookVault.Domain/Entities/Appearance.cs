@@ -59,5 +59,12 @@ namespace BookVault.Domain.Entities
             return new Appearance(userId, color, marginEnabled, brightness,
                 isDarkTheme, isDimmed, isFocusMode, isAutoThemeEnabled, fromTime, toTime);
         }
+
+        // Update method
+        public void Update(Guid userId, string color, bool marginEnabled, double brightness,
+            bool isDarkTheme, bool isDimmed, bool isFocusMode,
+            bool isAutoThemeEnabled)
+        {
+        }
     }
 }
