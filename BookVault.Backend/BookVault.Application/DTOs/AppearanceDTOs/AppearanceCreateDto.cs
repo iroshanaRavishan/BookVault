@@ -10,5 +10,11 @@ namespace BookVault.Application.DTOs.AppearanceDTOs
     {
         public Guid UserId { get; set; }
         public string Color { get; set; } = "#f1c40f";
+        public bool MarginEnabled { get; set; } = true;
+        public double Brightness { get; set; } = 1;
+        public bool IsDarkTheme { get; set; } = false;
+        public bool IsDimmed { get; set; } = false;
+        public bool IsFocusMode { get; set; } = false;
+        public bool IsAutoThemeEnabled { get; set; } = true;
     }
 }
