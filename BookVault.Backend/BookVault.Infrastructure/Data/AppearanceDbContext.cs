@@ -15,6 +15,8 @@ namespace BookVault.Infrastructure.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.HasDefaultSchema("app");
+
         }
     }
 }
