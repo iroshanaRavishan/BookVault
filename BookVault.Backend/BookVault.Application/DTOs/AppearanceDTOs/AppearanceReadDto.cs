@@ -19,5 +19,7 @@ namespace BookVault.Application.DTOs.AppearanceDTOs
         public bool IsAutoThemeEnabled { get; set; }
         public string FromTime { get; set; }
         public string ToTime { get; set; }
+        public DateTimeOffset CreatedAt { get; set; } // from base entity
+        public DateTimeOffset LastModified { get; set; } // from base entity
     }
 }
