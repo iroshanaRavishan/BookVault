@@ -8,5 +8,7 @@ namespace BookVault.Application.DTOs.AppearanceDTOs
 {
     public class AppearanceCreateDto
     {
+        public Guid UserId { get; set; }
+        public string Color { get; set; } = "#f1c40f";
     }
 }
