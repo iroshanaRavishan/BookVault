@@ -75,6 +75,8 @@ namespace BookVault.Domain.Entities
             IsAutoThemeEnabled = isAutoThemeEnabled;
             FromTime = fromTime;
             ToTime = toTime;
+
+            UpdateLastModified();
         }
 
         // Validation rules
