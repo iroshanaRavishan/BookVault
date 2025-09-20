@@ -12,5 +12,9 @@ namespace BookVault.Infrastructure.Data
     public class AppearanceDbContext(DbContextOptions<AppearanceDbContext> options) : DbContext(options)
     {
         public DbSet<Appearance> Appearances => Set<Appearance>();
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+        }
     }
 }
