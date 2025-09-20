@@ -8,5 +8,7 @@ namespace BookVault.Application.DTOs.AppearanceDTOs
 {
     public class AppearanceReadDto
     {
+        public Guid Id { get; set; }   // From EntityBase
+        public Guid UserId { get; set; }
     }
 }
