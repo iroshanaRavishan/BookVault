@@ -17,6 +17,10 @@ namespace BookVault.Infrastructure.Data
         {
             modelBuilder.HasDefaultSchema("app");
 
+            // Apply the Appearance configuration
+            modelBuilder.ApplyConfiguration(new AppearanceConfiguration());
+
+            base.OnModelCreating(modelBuilder);
         }
     }
 }
