@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 
 namespace BookVault.Infrastructure.Data
 {
-    public class AppearanceDbContext(DbContextOptions<AppearanceDbContext> options) 
-        : DbContext(options)
+    public class AppearanceDbContext(DbContextOptions<AppearanceDbContext> options) : DbContext(options)
     {
+        public DbSet<Appearance> Appearances => Set<Appearance>();
     }
 }
