@@ -17,5 +17,7 @@ namespace BookVault.Application.DTOs.AppearanceDTOs
         public bool IsDimmed { get; set; }
         public bool IsFocusMode { get; set; }
         public bool IsAutoThemeEnabled { get; set; }
+        public string FromTime { get; set; }
+        public string ToTime { get; set; }
     }
 }
