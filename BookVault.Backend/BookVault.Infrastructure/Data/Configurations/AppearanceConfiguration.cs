@@ -49,6 +49,12 @@ namespace BookVault.Infrastructure.Data.Configurations
             builder.Property(a => a.ToTime)
                    .IsRequired()
                    .HasMaxLength(20);
+
+            builder.Property(a => a.Created)
+                   .IsRequired();
+
+            builder.Property(a => a.LastModified)
+                   .IsRequired();
         }
     }
 }
