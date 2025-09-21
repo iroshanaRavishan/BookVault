@@ -13,6 +13,7 @@ namespace BookVault.Infrastructure.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<Appearance> builder)
         {
+            builder.ToTable("Appearances");
         }
     }
 }
