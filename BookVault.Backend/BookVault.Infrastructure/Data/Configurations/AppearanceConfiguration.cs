@@ -32,6 +32,12 @@ namespace BookVault.Infrastructure.Data.Configurations
 
             builder.Property(a => a.IsDarkTheme)
                    .IsRequired();
+
+            builder.Property(a => a.IsDimmed)
+                   .IsRequired();
+
+            builder.Property(a => a.IsFocusMode)
+                   .IsRequired();
         }
     }
 }
