@@ -16,6 +16,9 @@ namespace BookVault.Infrastructure.Data.Configurations
             builder.ToTable("Appearances");
 
             builder.HasKey(a => a.Id);
+
+            builder.Property(a => a.UserId)
+                    .IsRequired();
         }
     }
 }
