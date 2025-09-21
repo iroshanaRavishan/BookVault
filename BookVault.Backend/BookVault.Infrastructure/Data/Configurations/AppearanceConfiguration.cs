@@ -14,6 +14,8 @@ namespace BookVault.Infrastructure.Data.Configurations
         public void Configure(EntityTypeBuilder<Appearance> builder)
         {
             builder.ToTable("Appearances");
+
+            builder.HasKey(a => a.Id);
         }
     }
 }
