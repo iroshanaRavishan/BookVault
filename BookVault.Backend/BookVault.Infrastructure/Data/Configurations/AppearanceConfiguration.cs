@@ -23,6 +23,38 @@ namespace BookVault.Infrastructure.Data.Configurations
             builder.Property(a => a.Color)
                    .IsRequired()
                    .HasMaxLength(10);
+
+            builder.Property(a => a.MarginEnabled)
+                   .IsRequired();
+
+            builder.Property(a => a.Brightness)
+                   .IsRequired();
+
+            builder.Property(a => a.IsDarkTheme)
+                   .IsRequired();
+
+            builder.Property(a => a.IsDimmed)
+                   .IsRequired();
+
+            builder.Property(a => a.IsFocusMode)
+                   .IsRequired();
+
+            builder.Property(a => a.IsAutoThemeEnabled)
+                   .IsRequired();
+
+            builder.Property(a => a.FromTime)
+                   .IsRequired()
+                   .HasMaxLength(20);
+
+            builder.Property(a => a.ToTime)
+                   .IsRequired()
+                   .HasMaxLength(20);
+
+            builder.Property(a => a.Created)
+                   .IsRequired();
+
+            builder.Property(a => a.LastModified)
+                   .IsRequired();
         }
     }
 }
