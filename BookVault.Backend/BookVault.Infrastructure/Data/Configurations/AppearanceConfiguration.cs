@@ -38,6 +38,9 @@ namespace BookVault.Infrastructure.Data.Configurations
 
             builder.Property(a => a.IsFocusMode)
                    .IsRequired();
+
+            builder.Property(a => a.IsAutoThemeEnabled)
+                   .IsRequired();
         }
     }
 }
