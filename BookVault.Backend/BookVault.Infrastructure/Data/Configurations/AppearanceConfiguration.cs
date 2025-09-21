@@ -19,6 +19,10 @@ namespace BookVault.Infrastructure.Data.Configurations
 
             builder.Property(a => a.UserId)
                     .IsRequired();
+
+            builder.Property(a => a.Color)
+                   .IsRequired()
+                   .HasMaxLength(10);
         }
     }
 }
