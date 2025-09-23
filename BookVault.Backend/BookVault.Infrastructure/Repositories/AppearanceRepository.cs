@@ -18,5 +18,37 @@ namespace BookVault.Infrastructure.Repositories
         {
             _context = context;
         }
+
+        public async Task<Appearance?> GetByIdAsync(Guid id)
+        {
+            return await _context.Appearances.FindAsync(id);
+        }
+
+        public async Task<IEnumerable<Appearance>> GetAllAsync()
+        {
+            return await _context.Appearances.ToListAsync();
+        }
+
+        public async Task AddAsync(Appearance appearance)
+        {
+            await _context.Appearances.AddAsync(appearance);
+        }
+
+        public async Task UpdateAsync(Appearance appearance)
+        {
+            _context.Appearances.Update(appearance);
+            await Task.CompletedTask;
+        }
+
+        public async Task DeleteAsync(Appearance appearance)
+        {
+            _context.Appearances.Remove(appearance);
+            await Task.CompletedTask;
+        }
+
+        public async Task SaveChangesAsync()
+        {
+            await _context.SaveChangesAsync();
+        }
     }
 }
