@@ -39,5 +39,10 @@ namespace BookVault.Infrastructure.Repositories
             _context.Appearances.Update(appearance);
             await Task.CompletedTask;
         }
+
+        public async Task DeleteAsync(Appearance appearance)
+        {
+            _context.Appearances.Remove(appearance);
+        }
     }
 }
