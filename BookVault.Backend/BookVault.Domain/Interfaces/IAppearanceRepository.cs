@@ -11,5 +11,6 @@ namespace BookVault.Domain.Interfaces
     {
         Task<Appearance?> GetByIdAsync(Guid id);
         Task<IEnumerable<Appearance>> GetAllAsync();
+        Task AddAsync(Appearance appearance);
     }
 }
