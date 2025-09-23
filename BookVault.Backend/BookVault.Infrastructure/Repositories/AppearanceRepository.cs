@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BookVault.Infrastructure.Repositories
 {
-    public class AppearanceRepository
+    public class AppearanceRepository : IAppearanceRepository
     {
     }
 }
