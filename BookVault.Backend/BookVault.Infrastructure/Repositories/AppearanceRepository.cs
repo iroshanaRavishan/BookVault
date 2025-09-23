@@ -18,5 +18,10 @@ namespace BookVault.Infrastructure.Repositories
         {
             _context = context;
         }
+
+        public async Task<Appearance?> GetByIdAsync(Guid id)
+        {
+            return await _context.Appearances.FindAsync(id);
+        }
     }
 }
