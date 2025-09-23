@@ -43,6 +43,7 @@ namespace BookVault.Infrastructure.Repositories
         public async Task DeleteAsync(Appearance appearance)
         {
             _context.Appearances.Remove(appearance);
+            await Task.CompletedTask;
         }
     }
 }
