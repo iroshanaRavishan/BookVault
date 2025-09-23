@@ -14,5 +14,6 @@ namespace BookVault.Domain.Interfaces
         Task AddAsync(Appearance appearance);
         Task UpdateAsync(Appearance appearance);
         Task DeleteAsync(Appearance appearance);
+        Task SaveChangesAsync();
     }
 }
