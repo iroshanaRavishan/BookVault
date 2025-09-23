@@ -12,5 +12,6 @@ namespace BookVault.Infrastructure.Repositories
 {
     public class AppearanceRepository : IAppearanceRepository
     {
+        private readonly AppearanceDbContext _context;
     }
 }
