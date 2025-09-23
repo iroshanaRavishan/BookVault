@@ -13,5 +13,6 @@ namespace BookVault.Domain.Interfaces
         Task<IEnumerable<Appearance>> GetAllAsync();
         Task AddAsync(Appearance appearance);
         Task UpdateAsync(Appearance appearance);
+        Task DeleteAsync(Appearance appearance);
     }
 }
