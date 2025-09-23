@@ -10,5 +10,6 @@ namespace BookVault.Domain.Interfaces
     public interface IAppearanceRepository
     {
         Task<Appearance?> GetByIdAsync(Guid id);
+        Task<IEnumerable<Appearance>> GetAllAsync();
     }
 }
