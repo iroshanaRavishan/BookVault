@@ -36,6 +36,11 @@ namespace BookVault.Application.Services
         // Manual mapping (instead of AutoMapper)
         private static AppearanceReadDto MapToReadDto(Appearance entity)
         {
+            return new AppearanceReadDto
+            {
+                Id = entity.Id,
+                UserId = entity.UserId,
+            };
         }
     }
 }
