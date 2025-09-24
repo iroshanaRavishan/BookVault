@@ -32,5 +32,10 @@ namespace BookVault.Application.Services
                 MarginSize = entity.MarginSize
             };
         }
+
+        // Manual mapping (instead of AutoMapper)
+        private static AppearanceReadDto MapToReadDto(Appearance entity)
+        {
+        }
     }
 }
