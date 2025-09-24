@@ -18,5 +18,11 @@ namespace BookVault.Application.Services
         {
             _repository = repository;
         }
+
+        public async Task<AppearanceReadDto?> GetByIdAsync(Guid id)
+        {
+            var entity = await _repository.GetByIdAsync(id);
+            return entity;
+        }
     }
 }
