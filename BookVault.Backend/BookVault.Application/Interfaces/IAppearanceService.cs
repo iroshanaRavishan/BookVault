@@ -11,5 +11,6 @@ namespace BookVault.Application.Interfaces
     {
         Task<AppearanceReadDto?> GetByIdAsync(Guid id);
         Task<IEnumerable<AppearanceReadDto>> GetAllAsync();
+        Task<AppearanceReadDto> CreateAsync(AppearanceCreateDto dto);
     }
 }
