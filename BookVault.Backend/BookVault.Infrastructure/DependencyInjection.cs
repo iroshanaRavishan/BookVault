@@ -99,6 +99,7 @@ namespace BookVault.Infrastructure
             services.AddScoped<IPdfThumbnailRepository, PdfThumbnailRepository>();
             services.AddScoped<IBookmarkRepository, BookmarkRepository>();
             services.AddScoped<INoteRepository, NoteRepository>();
+            services.AddScoped<IAppearanceRepository, AppearanceRepository>();
 
             return services;
         }
