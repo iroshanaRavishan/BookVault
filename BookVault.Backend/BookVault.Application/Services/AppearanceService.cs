@@ -12,5 +12,6 @@ namespace BookVault.Application.Services
 {
     public class AppearanceService : IAppearanceService
     {
+        private readonly IAppearanceRepository _repository;
     }
 }
