@@ -49,6 +49,8 @@ namespace BookVault.Application.Services
                 IsAutoThemeEnabled = entity.IsAutoThemeEnabled,
                 FromTime = entity.FromTime,
                 ToTime = entity.ToTime,
+                CreatedAt = entity.Created,
+                LastModified = entity.LastModified
             };
         }
     }
