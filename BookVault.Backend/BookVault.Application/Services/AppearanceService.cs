@@ -18,5 +18,32 @@ namespace BookVault.Application.Services
         {
             _repository = repository;
         }
+
+        public async Task<AppearanceReadDto?> GetByIdAsync(Guid id)
+        {
+            var entity = await _repository.GetByIdAsync(id);
+            return entity == null ? null : MapToReadDto(entity);
+        }
+
+        // Manual mapping (instead of AutoMapper)
+        private static AppearanceReadDto MapToReadDto(Appearance entity)
+        {
+            return new AppearanceReadDto
+            {
+                Id = entity.Id,
+                UserId = entity.UserId,
+                Color = entity.Color,
+                MarginEnabled = entity.MarginEnabled,
+                Brightness = entity.Brightness,
+                IsDarkTheme = entity.IsDarkTheme,
+                IsDimmed = entity.IsDimmed,
+                IsFocusMode = entity.IsFocusMode,
+                IsAutoThemeEnabled = entity.IsAutoThemeEnabled,
+                FromTime = entity.FromTime,
+                ToTime = entity.ToTime,
+                CreatedAt = entity.Created,
+                LastModified = entity.LastModified
+            };
+        }
     }
 }
