@@ -9,5 +9,6 @@ namespace BookVault.Application.Interfaces
 {
     public interface IAppearanceService
     {
+        Task<AppearanceReadDto?> GetByIdAsync(Guid id);
     }
 }
