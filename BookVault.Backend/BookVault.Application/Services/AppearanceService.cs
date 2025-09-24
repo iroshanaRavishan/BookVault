@@ -43,6 +43,10 @@ namespace BookVault.Application.Services
                 Color = entity.Color,
                 MarginEnabled = entity.MarginEnabled,
                 Brightness = entity.Brightness,
+                IsDarkTheme = entity.IsDarkTheme,
+                IsDimmed = entity.IsDimmed,
+                IsFocusMode = entity.IsFocusMode,
+                IsAutoThemeEnabled = entity.IsAutoThemeEnabled,
             };
         }
     }
