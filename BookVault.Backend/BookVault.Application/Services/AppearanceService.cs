@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BookVault.Application.Services
 {
-    public class AppearanceService
+    public class AppearanceService : IAppearanceService
     {
     }
 }
