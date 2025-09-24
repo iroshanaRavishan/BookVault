@@ -40,6 +40,9 @@ namespace BookVault.Application.Services
             {
                 Id = entity.Id,
                 UserId = entity.UserId,
+                Color = entity.Color,
+                MarginEnabled = entity.MarginEnabled,
+                Brightness = entity.Brightness,
             };
         }
     }
