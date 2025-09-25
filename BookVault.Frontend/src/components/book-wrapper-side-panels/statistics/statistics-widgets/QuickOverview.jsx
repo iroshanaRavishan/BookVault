@@ -9,6 +9,10 @@ export default function QuickOverview() {
       </div>
       <div className={styles.contentSection}>
         <div className={styles.contentSectionLeftDetails}>
+          <div className={styles.summaryContent}>
+            <span>You are active in 56% than last week.</span>
+            <span>AI Generated content</span>
+          </div>
         </div>
         <div className={styles.contentSectionRightDetails}>
           <span>Chart Goes in here...!</span>
