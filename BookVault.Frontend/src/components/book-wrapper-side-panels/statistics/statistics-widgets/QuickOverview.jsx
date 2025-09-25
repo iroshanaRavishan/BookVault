@@ -10,6 +10,8 @@ export default function QuickOverview() {
       <div className={styles.contentSection}>
         <div className={styles.contentSectionLeftDetails}>
         </div>
+        <div className={styles.contentSectionRightDetails}>
+        </div>
       </div>
     </div>
   )
