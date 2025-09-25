@@ -4,6 +4,8 @@ import styles from './quickoverview.module.css'
 export default function QuickOverview() {
   return (
     <div className={styles.quickOverview}>
+      <div className={styles.headerSection}>
+      </div>
     </div>
   )
 }
