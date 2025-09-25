@@ -11,6 +11,7 @@ export default function QuickOverview() {
         <div className={styles.contentSectionLeftDetails}>
         </div>
         <div className={styles.contentSectionRightDetails}>
+          <span>Chart Goes in here...!</span>
         </div>
       </div>
     </div>
