@@ -10,7 +10,7 @@ export default function QuickOverview() {
       <div className={styles.contentSection}>
         <div className={styles.contentSectionLeftDetails}>
           <div className={styles.summaryContent}>
-
+            <span>You are active in 56% than last week.</span>
           </div>
         </div>
         <div className={styles.contentSectionRightDetails}>
