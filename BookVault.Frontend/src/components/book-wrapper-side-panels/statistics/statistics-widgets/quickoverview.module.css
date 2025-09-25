@@ -13,3 +13,11 @@
 .contentSection {
     display: flex;
 }
+
+.contentSectionLeftDetails {
+    display: flex;
+}
+
+.contentSectionRightDetails {
+    display: flex;
+}
