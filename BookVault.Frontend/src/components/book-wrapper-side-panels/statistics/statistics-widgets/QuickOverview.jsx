@@ -7,6 +7,8 @@ export default function QuickOverview() {
       <div className={styles.headerSection}>
         <span>Quick Overview</span>
       </div>
+      <div className={styles.contentSection}>
+      </div>
     </div>
   )
 }
