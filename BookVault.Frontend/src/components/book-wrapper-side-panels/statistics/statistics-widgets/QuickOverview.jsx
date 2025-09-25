@@ -5,6 +5,9 @@ export default function QuickOverview() {
   return (
     <div className={styles.quickOverview}>
       <div className={styles.headerSection}>
+        <span>Quick Overview</span>
+      </div>
+      <div className={styles.contentSection}>
       </div>
     </div>
   )
