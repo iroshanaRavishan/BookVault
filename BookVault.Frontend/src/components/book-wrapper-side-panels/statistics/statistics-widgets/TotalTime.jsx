@@ -7,6 +7,8 @@ export default function TotalTime() {
         <div className={styles.headerSection}>
           <span>Total Time Spent</span>
         </div>
+        <div className={styles.contentSection}>
+        </div>
       </div>
   )
 }
