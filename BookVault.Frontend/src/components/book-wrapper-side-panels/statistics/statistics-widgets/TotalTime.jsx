@@ -8,6 +8,9 @@ export default function TotalTime() {
           <span>Total Time Spent</span>
         </div>
         <div className={styles.contentSection}>
+          <div>
+            <span className={styles.timeSpentValue}>5D 2h 56m</span>
+          </div>
         </div>
       </div>
   )
