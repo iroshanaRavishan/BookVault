@@ -5,6 +5,7 @@ export default function TotalTime() {
   return (
       <div className={styles.totalTimeSpentSection}>  
         <div className={styles.headerSection}>
+          <span>Total Time Spent</span>
         </div>
       </div>
   )
