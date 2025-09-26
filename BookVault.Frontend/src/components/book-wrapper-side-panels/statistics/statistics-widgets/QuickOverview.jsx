@@ -15,6 +15,7 @@ export default function QuickOverview() {
           </div>
           <div className={styles.summaryContent}>
             <span>Total Pages - 43</span>
+            <span>56.4%</span>
           </div>
         </div>
         <div className={styles.contentSectionRightDetails}>
