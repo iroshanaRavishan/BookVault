@@ -14,6 +14,9 @@ export default function TotalTime() {
           </div>
           <div className={styles.timeSpentDetailsChartSection}>
             <span>Screen timing Past 7 days Trends</span>
+            <div>
+              <span>Chart Goes in here...!</span>
+            </div>
           </div>
         </div>
       </div>
