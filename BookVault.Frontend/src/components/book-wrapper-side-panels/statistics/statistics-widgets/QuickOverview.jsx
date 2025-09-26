@@ -14,6 +14,7 @@ export default function QuickOverview() {
             <span>AI Generated content</span>
           </div>
           <div className={styles.summaryContent}>
+            <span>Total Pages - 43</span>
           </div>
         </div>
         <div className={styles.contentSectionRightDetails}>
