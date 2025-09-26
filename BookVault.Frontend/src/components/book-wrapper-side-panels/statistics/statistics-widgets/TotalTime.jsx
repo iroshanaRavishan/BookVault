@@ -3,6 +3,8 @@ import styles from './totaltime.module.css';
 
 export default function TotalTime() {
   return (
-      <div>TotalTime</div>
+      <div className={styles.totalTimeSpentSection}>  
+      
+      </div>
   )
 }
