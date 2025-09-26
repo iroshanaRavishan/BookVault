@@ -13,6 +13,8 @@ export default function QuickOverview() {
             <span>You are active in 56% than last week.</span>
             <span>AI Generated content</span>
           </div>
+          <div className={styles.summaryContent}>
+          </div>
         </div>
         <div className={styles.contentSectionRightDetails}>
           <span>Chart Goes in here...!</span>
