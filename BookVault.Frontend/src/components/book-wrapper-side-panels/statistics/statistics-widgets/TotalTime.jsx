@@ -13,6 +13,7 @@ export default function TotalTime() {
             <span className={styles.timeSpentComparison}>+2h 30m than last week</span>
           </div>
           <div className={styles.timeSpentDetailsChartSection}>
+            <span>Screen timing Past 7 days Trends</span>
           </div>
         </div>
       </div>
