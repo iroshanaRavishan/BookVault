@@ -22,6 +22,7 @@ export default function QuickOverview() {
           <span>Chart Goes in here...!</span>
         </div>
       </div>
+      <div className={styles.backgroundClipPath}></div>
     </div>
   )
 }
