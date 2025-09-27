@@ -5,6 +5,7 @@ export default function TotalTimeComparison() {
   return (
     <div className={styles.totalTimeComparisonSection}>
         <div className={styles.lastWeekSection}>
+            <span>Total time in the last week</span>
         </div>
     </div>
   )
