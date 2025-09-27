@@ -2,6 +2,7 @@ import React from 'react'
 import styles from './statistics.module.css'
 import QuickOverview from './statistics-widgets/QuickOverview'
 import TotalTime from './statistics-widgets/TotalTime'
+import TotalTimeComparison from './statistics-widgets/TotalTimeComparison'
 
 export default function Statistics() {
   return (
