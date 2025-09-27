@@ -3,6 +3,7 @@ import styles from './totaltimecomparison.module.css';
 
 export default function TotalTimeComparison() {
   return (
-    <div>Total Time</div>
+    <div className={styles.totalTimeComparisonSection}>
+    </div>
   )
 }
