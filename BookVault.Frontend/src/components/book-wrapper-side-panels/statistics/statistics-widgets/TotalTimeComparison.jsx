@@ -8,6 +8,7 @@ export default function TotalTimeComparison() {
             <span>Total time in the last week</span>
         </div>
         <div className={styles.prevWeekSection}>
+            <span>Vs Previous week</span>
         </div>
     </div>
   )
