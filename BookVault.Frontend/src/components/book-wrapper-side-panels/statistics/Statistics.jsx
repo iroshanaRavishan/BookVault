@@ -9,6 +9,7 @@ export default function Statistics() {
     <div className={styles.panel}>
       <QuickOverview />
       <TotalTime />
+      <TotalTimeComparison />
     </div>
   )
 }
