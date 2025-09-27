@@ -15,3 +15,10 @@
     padding: 10px;
     border-radius: 10px;
 }
+
+.totalTimeSeparator {
+  position: relative;
+  display: inline-block;
+  width: 1px; 
+  height: 100%; 
+}
