@@ -44,6 +44,9 @@ namespace BookVault.Infrastructure
             services.AddDbContext<NoteDbContext>(options =>
                options.UseNpgsql(connectionString, u => u.MigrationsAssembly(typeof(NoteDbContext).Assembly.FullName)));
 
+            services.AddDbContext<AppearanceDbContext>(options =>
+               options.UseNpgsql(connectionString, u => u.MigrationsAssembly(typeof(AppearanceDbContext).Assembly.FullName)));
+
             // Configure authentication
             services.AddAuthentication(options =>
             {
@@ -99,6 +102,7 @@ namespace BookVault.Infrastructure
             services.AddScoped<IPdfThumbnailRepository, PdfThumbnailRepository>();
             services.AddScoped<IBookmarkRepository, BookmarkRepository>();
             services.AddScoped<INoteRepository, NoteRepository>();
+            services.AddScoped<IAppearanceRepository, AppearanceRepository>();
 
             return services;
         }
