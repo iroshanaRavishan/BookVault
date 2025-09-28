@@ -1,0 +1,35 @@
+.totalTimeSpentSection {
+    background-color: rgb(255, 255, 255);
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.headerSection {
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.timeSpentSection {
+    background-color: rgb(255, 255, 255);
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.totalTimeSeparator {
+  position: relative;
+  display: inline-block;
+  width: 1px; 
+  height: 100%; 
+}
+
+.totalTimeSeparator::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%; 
+  transform: translateX(-50%);
+  width: 1px;
+  background-color: #ccc; 
+}
