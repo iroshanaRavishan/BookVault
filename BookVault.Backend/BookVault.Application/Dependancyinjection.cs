@@ -20,6 +20,7 @@ namespace BookVault.Application
             services.AddScoped<IPdfThumbnailService, PdfThumbnailService>();
             services.AddScoped<IBookmarkService, BookmarkService>();
             services.AddScoped<INoteService, NoteService>();
+            services.AddScoped<IAppearanceService, AppearanceService>();
 
             return services;
         }
