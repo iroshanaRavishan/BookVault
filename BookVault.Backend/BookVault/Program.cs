@@ -52,6 +52,7 @@ await using (var serviceScope = app.Services.CreateAsyncScope())
     var authContext = serviceScope.ServiceProvider.GetRequiredService<AuthDbContext>();
     var bookmarkContext = serviceScope.ServiceProvider.GetRequiredService<BookmarkDbContext>();
     var noteContext = serviceScope.ServiceProvider.GetRequiredService<NoteDbContext>();
+    var appearanceContext = serviceScope.ServiceProvider.GetRequiredService<AppearanceDbContext>();
     var logger = serviceScope.ServiceProvider.GetRequiredService<ILogger<Program>>();
 
     try
