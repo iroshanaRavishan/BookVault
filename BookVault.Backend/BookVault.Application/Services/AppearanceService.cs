@@ -28,6 +28,7 @@ namespace BookVault.Application.Services
         public async Task<IEnumerable<AppearanceReadDto>> GetAllAsync()
         {
             var entities = await _repository.GetAllAsync();
+            return entities.Select(MapToReadDto);
         }
 
         // Manual mapping (instead of AutoMapper)
