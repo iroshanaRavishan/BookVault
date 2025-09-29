@@ -76,6 +76,10 @@ await using (var serviceScope = app.Services.CreateAsyncScope())
         logger.LogInformation("Applying Note migrations...");
         await noteContext.Database.MigrateAsync();
         logger.LogInformation("noteDbContext migrations applied successfully");
+
+        logger.LogInformation("Applying Appearance migrations...");
+        await appearanceContext.Database.MigrateAsync();
+        logger.LogInformation("appearanceContext migrations applied successfully");
     }
     catch (Exception ex)
     {
