@@ -34,6 +34,7 @@ namespace BookVault.Application.Services
         public async Task<bool> DeleteAsync(Guid id)
         {
             var appearance = await _repository.GetByIdAsync(id);
+            if (appearance == null) return false;
         }
 
         // Manual mapping (instead of AutoMapper)
