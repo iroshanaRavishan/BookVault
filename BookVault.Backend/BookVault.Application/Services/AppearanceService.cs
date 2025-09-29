@@ -31,6 +31,10 @@ namespace BookVault.Application.Services
             return entities.Select(MapToReadDto);
         }
 
+        public async Task<bool> DeleteAsync(Guid id)
+        {
+        }
+
         // Manual mapping (instead of AutoMapper)
         private static AppearanceReadDto MapToReadDto(Appearance entity)
         {
