@@ -78,6 +78,7 @@ await using (var serviceScope = app.Services.CreateAsyncScope())
         logger.LogInformation("noteDbContext migrations applied successfully");
 
         logger.LogInformation("Applying Appearance migrations...");
+        await appearanceContext.Database.MigrateAsync();
     }
     catch (Exception ex)
     {
