@@ -25,6 +25,10 @@ namespace BookVault.Application.Services
             return entity == null ? null : MapToReadDto(entity);
         }
 
+        public async Task<IEnumerable<AppearanceReadDto>> GetAllAsync()
+        {
+        }
+
         // Manual mapping (instead of AutoMapper)
         private static AppearanceReadDto MapToReadDto(Appearance entity)
         {
