@@ -31,6 +31,10 @@ namespace BookVault.Application.Services
             return entities.Select(MapToReadDto);
         }
 
+        public async Task<AppearanceReadDto> CreateAsync(AppearanceCreateDto dto)
+        {
+        }
+
         public async Task<bool> DeleteAsync(Guid id)
         {
             var appearance = await _repository.GetByIdAsync(id);
