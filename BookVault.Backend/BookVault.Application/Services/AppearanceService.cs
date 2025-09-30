@@ -33,6 +33,8 @@ namespace BookVault.Application.Services
 
         public async Task<AppearanceReadDto> CreateAsync(AppearanceCreateDto dto)
         {
+
+            return null;
         }
 
         public async Task<bool> DeleteAsync(Guid id)
