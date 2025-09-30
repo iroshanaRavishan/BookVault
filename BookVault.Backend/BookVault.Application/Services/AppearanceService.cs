@@ -35,7 +35,8 @@ namespace BookVault.Application.Services
         {
 
         var appearance = Appearance.Create(
-            dto.UserId
+            dto.UserId,
+            dto.Color
         );
 
             return null;
