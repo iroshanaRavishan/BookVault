@@ -34,6 +34,9 @@ namespace BookVault.Application.Services
         public async Task<AppearanceReadDto> CreateAsync(AppearanceCreateDto dto)
         {
 
+        var appearance = Appearance.Create(      
+        );
+
             return null;
         }
 
