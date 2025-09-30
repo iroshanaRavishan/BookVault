@@ -37,6 +37,7 @@ namespace BookVault.Application.Services
             if (appearance == null) return false;
 
             await _repository.DeleteAsync(appearance);
+            await _repository.SaveChangesAsync();
         }
 
         // Manual mapping (instead of AutoMapper)
