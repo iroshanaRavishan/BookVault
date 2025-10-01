@@ -61,7 +61,8 @@ namespace BookVault.Application.Services
             appearance.Update(
                 dto.UserId,
                 dto.Color,
-                dto.MarginEnabled
+                dto.MarginEnabled,
+                dto.Brightness
             );
         }
 
