@@ -34,18 +34,18 @@ namespace BookVault.Application.Services
         public async Task<AppearanceReadDto> CreateAsync(AppearanceCreateDto dto)
         {
 
-        var appearance = Appearance.Create(
-            dto.UserId,
-            dto.Color,
-            dto.MarginEnabled,
-            dto.Brightness,
-            dto.IsDarkTheme,
-            dto.IsDimmed,
-            dto.IsFocusMode,
-            dto.IsAutoThemeEnabled,
-            dto.FromTime,
-            dto.ToTime
-        );
+            var appearance = Appearance.Create(
+                dto.UserId,
+                dto.Color,
+                dto.MarginEnabled,
+                dto.Brightness,
+                dto.IsDarkTheme,
+                dto.IsDimmed,
+                dto.IsFocusMode,
+                dto.IsAutoThemeEnabled,
+                dto.FromTime,
+                dto.ToTime
+            );
 
             return MapToReadDto(appearance);
         }
