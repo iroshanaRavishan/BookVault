@@ -47,6 +47,8 @@ namespace BookVault.Application.Services
                 dto.ToTime
             );
 
+            await _repository.AddAsync(appearance);
+
             return MapToReadDto(appearance);
         }
 
