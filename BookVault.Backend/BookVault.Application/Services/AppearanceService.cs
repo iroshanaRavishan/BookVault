@@ -53,6 +53,12 @@ namespace BookVault.Application.Services
             return MapToReadDto(appearance);
         }
 
+        public async Task<AppearanceReadDto?> UpdateAsync(Guid id, AppearanceUpdateDto dto)
+        {
+            var appearance = await _repository.GetByIdAsync(id);
+            if (appearance == null) return null;
+        }
+
         public async Task<bool> DeleteAsync(Guid id)
         {
             var appearance = await _repository.GetByIdAsync(id);
