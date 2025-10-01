@@ -42,7 +42,8 @@ namespace BookVault.Application.Services
             dto.IsDarkTheme,
             dto.IsDimmed,
             dto.IsFocusMode,
-            dto.IsAutoThemeEnabled
+            dto.IsAutoThemeEnabled,
+            dto.FromTime
         );
 
             return MapToReadDto(appearance);
