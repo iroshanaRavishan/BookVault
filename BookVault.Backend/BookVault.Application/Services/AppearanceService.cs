@@ -57,6 +57,11 @@ namespace BookVault.Application.Services
         {
             var appearance = await _repository.GetByIdAsync(id);
             if (appearance == null) return null;
+
+            appearance.Update(
+                dto.UserId,
+                dto.Color
+            );
         }
 
         public async Task<bool> DeleteAsync(Guid id)
