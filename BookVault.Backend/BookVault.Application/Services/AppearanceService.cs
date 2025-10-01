@@ -59,6 +59,7 @@ namespace BookVault.Application.Services
             if (appearance == null) return null;
 
             appearance.Update(
+                dto.UserId
             );
         }
 
