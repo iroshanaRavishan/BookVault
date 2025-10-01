@@ -40,7 +40,8 @@ namespace BookVault.Application.Services
             dto.MarginEnabled,
             dto.Brightness,
             dto.IsDarkTheme,
-            dto.IsDimmed
+            dto.IsDimmed,
+            dto.IsFocusMode
         );
 
             return MapToReadDto(appearance);
