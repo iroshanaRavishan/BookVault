@@ -42,7 +42,7 @@ namespace BookVault.Application.Services
 
         );
 
-            return appearance;
+            return MapToReadDto(appearance;
         }
 
         public async Task<bool> DeleteAsync(Guid id)
