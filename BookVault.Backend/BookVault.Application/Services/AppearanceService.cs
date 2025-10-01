@@ -48,6 +48,7 @@ namespace BookVault.Application.Services
             );
 
             await _repository.AddAsync(appearance);
+            await _repository.SaveChangesAsync();
 
             return MapToReadDto(appearance);
         }
