@@ -62,7 +62,8 @@ namespace BookVault.Application.Services
                 dto.UserId,
                 dto.Color,
                 dto.MarginEnabled,
-                dto.Brightness
+                dto.Brightness,
+                dto.IsDarkTheme
             );
         }
 
