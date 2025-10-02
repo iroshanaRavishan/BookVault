@@ -67,7 +67,8 @@ namespace BookVault.Application.Services
                 dto.IsDimmed,
                 dto.IsFocusMode,
                 dto.IsAutoThemeEnabled,
-                dto.FromTime
+                dto.FromTime,
+                dto.ToTime
             );
         }
 
