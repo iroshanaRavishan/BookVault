@@ -65,7 +65,8 @@ namespace BookVault.Application.Services
                 dto.Brightness,
                 dto.IsDarkTheme,
                 dto.IsDimmed,
-                dto.IsFocusMode
+                dto.IsFocusMode,
+                dto.IsAutoThemeEnabled
             );
         }
 
