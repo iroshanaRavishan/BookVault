@@ -63,7 +63,8 @@ namespace BookVault.Application.Services
                 dto.Color,
                 dto.MarginEnabled,
                 dto.Brightness,
-                dto.IsDarkTheme
+                dto.IsDarkTheme,
+                dto.IsDimmed
             );
         }
 
