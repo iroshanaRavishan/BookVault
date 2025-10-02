@@ -70,6 +70,8 @@ namespace BookVault.Application.Services
                 dto.FromTime,
                 dto.ToTime
             );
+
+            await _repository.UpdateAsync(appearance);
         }
 
         public async Task<bool> DeleteAsync(Guid id)
