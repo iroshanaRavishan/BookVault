@@ -11,6 +11,7 @@ export default function Statistics() {
       <QuickOverview />
       <TotalTime />
       <TotalTimeComparison />
+      <ReadingHourSummary />
     </div>
   )
 }
