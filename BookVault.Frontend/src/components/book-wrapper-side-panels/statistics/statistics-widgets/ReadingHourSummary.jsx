@@ -3,6 +3,6 @@ import styles from './readinghoursummary.module.css';
 
 export default function ReadingHourSummary() {
   return (
-    <div>hReadingHoursSummary</div>
+    <div className={styles.hoursSummarySection}></div>
   )
 }
