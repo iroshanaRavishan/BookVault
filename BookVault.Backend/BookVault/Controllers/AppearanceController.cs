@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BookVault.API.Controllers
 {
-    public class AppearanceController
+    public class AppearanceController : ControllerBase
     {
     }
 }
