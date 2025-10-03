@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BookVault.API.Controllers
 {
+    [Route("api/[controller]")]
     public class AppearanceController : ControllerBase
     {
     }
