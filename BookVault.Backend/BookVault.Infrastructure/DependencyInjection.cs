@@ -44,6 +44,9 @@ namespace BookVault.Infrastructure
             services.AddDbContext<NoteDbContext>(options =>
                options.UseNpgsql(connectionString, u => u.MigrationsAssembly(typeof(NoteDbContext).Assembly.FullName)));
 
+            services.AddDbContext<AppearanceDbContext>(options =>
+               options.UseNpgsql(connectionString, u => u.MigrationsAssembly(typeof(AppearanceDbContext).Assembly.FullName)));
+
             // Configure authentication
             services.AddAuthentication(options =>
             {
