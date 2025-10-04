@@ -19,6 +19,7 @@ namespace BookVault.API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<AppearanceReadDto>> GetById(Guid id)
         {
+            var result = await _service.GetByIdAsync(id);
         }
     }
 }
