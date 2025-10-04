@@ -21,6 +21,7 @@ namespace BookVault.API.Controllers
         {
             var result = await _service.GetByIdAsync(id);
             if (result == null) return NotFound();
+            return Ok(result);
         }
     }
 }
