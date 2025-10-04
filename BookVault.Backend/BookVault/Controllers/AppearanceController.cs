@@ -15,5 +15,10 @@ namespace BookVault.API.Controllers
         {
             _service = service;
         }
+
+        [HttpGet("{id}")]
+        public Task<ActionResult<AppearanceReadDto>> GetById(Guid id)
+        {
+        }
     }
 }
