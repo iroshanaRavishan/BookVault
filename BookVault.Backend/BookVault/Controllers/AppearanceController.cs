@@ -13,6 +13,7 @@ namespace BookVault.API.Controllers
 
         public AppearanceController(IAppearanceService service)
         {
+            _service = service;
         }
     }
 }
