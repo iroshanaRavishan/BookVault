@@ -11,7 +11,7 @@ namespace BookVault.API.Controllers
     {
         private readonly IAppearanceService _service;
 
-        public AppearanceController()
+        public AppearanceController(IAppearanceService service)
         {
         }
     }
