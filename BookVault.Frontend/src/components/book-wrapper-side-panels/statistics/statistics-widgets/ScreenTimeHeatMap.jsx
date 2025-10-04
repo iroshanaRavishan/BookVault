@@ -5,6 +5,7 @@ export default function ScreenTimeHeatMap() {
   return (
     <div className={styles.totalScreenTimeSection}>  
       <div className={styles.headerSection}>
+          <span>Total  Screen Time - Hourly basis for last 7 days</span>
       </div>
     </div>
   )
