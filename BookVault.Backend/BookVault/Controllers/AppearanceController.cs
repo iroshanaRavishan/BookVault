@@ -27,7 +27,7 @@ namespace BookVault.API.Controllers
         [HttpGet]
         public Task<ActionResult<IEnumerable<AppearanceReadDto>>> GetAll()
         {
-            var results = _service.GetAllAsync();
+            var results = await _service.GetAllAsync();
         }
     }
 }
