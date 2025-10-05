@@ -25,7 +25,7 @@ namespace BookVault.API.Controllers
         }
 
         [HttpGet]
-        public Task<ActionResult<IEnumerable<AppearanceReadDto>>> GetAll()
+        public async Task<ActionResult<IEnumerable<AppearanceReadDto>>> GetAll()
         {
             var results = await _service.GetAllAsync();
             return Ok(results);
