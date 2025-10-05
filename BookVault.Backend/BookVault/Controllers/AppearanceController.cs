@@ -23,5 +23,10 @@ namespace BookVault.API.Controllers
             if (result == null) return NotFound();
             return Ok(result);
         }
+
+        [HttpGet]
+        public Task<ActionResult<IEnumerable<AppearanceReadDto>>> GetAll()
+        {
+        }
     }
 }
