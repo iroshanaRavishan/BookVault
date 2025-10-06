@@ -39,7 +39,7 @@ namespace BookVault.API.Controllers
         }
 
         [HttpPut("{id}")]
-        public Task<ActionResult<AppearanceReadDto>> Update(Guid id)
+        public Task<ActionResult<AppearanceReadDto>> Update(Guid id, [FromBody] AppearanceUpdateDto dto)
         {
         }
     }
