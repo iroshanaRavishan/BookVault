@@ -35,7 +35,7 @@ namespace BookVault.API.Controllers
         public async Task<ActionResult<AppearanceReadDto>> Create([FromBody] AppearanceCreateDto dto)
         {
             var created = await _service.CreateAsync(dto);
-            return created;
+            return CreatedAtAction(nameof(GetById), new { id = created.Id }, created);
         }
     }
 }
