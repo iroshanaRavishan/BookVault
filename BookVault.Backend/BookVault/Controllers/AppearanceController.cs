@@ -43,7 +43,7 @@ namespace BookVault.API.Controllers
         {
             var updated = await _service.UpdateAsync(id, dto);
             if (updated == null) return NotFound();
-            return updated;
+            return Ok(updated);
         }
     }
 }
