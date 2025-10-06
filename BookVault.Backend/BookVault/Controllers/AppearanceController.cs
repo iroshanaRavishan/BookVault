@@ -32,7 +32,7 @@ namespace BookVault.API.Controllers
         }
 
         [HttpPost]
-        public Task<ActionResult<AppearanceReadDto>> Create([FromBody] AppearanceCreateDto dto)
+        public async Task<ActionResult<AppearanceReadDto>> Create([FromBody] AppearanceCreateDto dto)
         {
             var created = await _service.CreateAsync(dto);
         }
