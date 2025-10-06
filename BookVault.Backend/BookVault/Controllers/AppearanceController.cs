@@ -39,9 +39,11 @@ namespace BookVault.API.Controllers
         }
 
         [HttpPut("{id}")]
-        public Task<ActionResult<AppearanceReadDto>> Update(Guid id, [FromBody] AppearanceUpdateDto dto)
+        public async Task<ActionResult<AppearanceReadDto>> Update(Guid id, [FromBody] AppearanceUpdateDto dto)
         {
             var updated = await _service.UpdateAsync(id, dto);
+            if (updated == null) return NotFound();
+            return updated;
         }
     }
 }
