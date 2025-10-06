@@ -30,5 +30,11 @@ namespace BookVault.API.Controllers
             var results = await _service.GetAllAsync();
             return Ok(results);
         }
+
+        [HttpPost]
+        public Task<ActionResult<AppearanceReadDto>> Create([FromBody] AppearanceCreateDto dto)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
