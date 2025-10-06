@@ -42,6 +42,7 @@ namespace BookVault.API.Controllers
         public async Task<ActionResult<AppearanceReadDto>> Update(Guid id, [FromBody] AppearanceUpdateDto dto)
         {
             var updated = await _service.UpdateAsync(id, dto);
+            if (updated == null) return NotFound();
         }
     }
 }
