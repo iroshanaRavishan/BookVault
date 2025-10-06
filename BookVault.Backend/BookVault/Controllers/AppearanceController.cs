@@ -37,5 +37,7 @@ namespace BookVault.API.Controllers
             var created = await _service.CreateAsync(dto);
             return CreatedAtAction(nameof(GetById), new { id = created.Id }, created);
         }
+
+        [HttpPut("{id}")]
     }
 }
