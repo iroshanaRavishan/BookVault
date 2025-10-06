@@ -32,7 +32,7 @@ namespace BookVault.API.Controllers
         }
 
         [HttpPost]
-        public Task<ActionResult<AppearanceReadDto>> Create()
+        public Task<ActionResult<AppearanceReadDto>> Create([FromBody] AppearanceCreateDto dto)
         {
             throw new NotImplementedException();
         }
