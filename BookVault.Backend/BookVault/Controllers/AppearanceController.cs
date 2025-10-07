@@ -47,7 +47,7 @@ namespace BookVault.API.Controllers
         }
 
         [HttpDelete("{id}")]
-        public Task<IActionResult> Delete()
+        public Task<IActionResult> Delete(Guid id)
         {
         }
     }
