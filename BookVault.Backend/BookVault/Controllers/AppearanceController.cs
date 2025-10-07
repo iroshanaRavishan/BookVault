@@ -51,7 +51,7 @@ namespace BookVault.API.Controllers
         {
             var deleted = await _service.DeleteAsync(id);
             if (!deleted) return NotFound();
-            return Ok();
+            return NoContent();
         }
     }
 }
