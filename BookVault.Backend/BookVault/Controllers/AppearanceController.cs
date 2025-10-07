@@ -47,8 +47,11 @@ namespace BookVault.API.Controllers
         }
 
         [HttpDelete("{id}")]
-        public Task<IActionResult> Delete(Guid id)
+        public async Task<IActionResult> Delete(Guid id)
         {
+            var deleted = await _service.DeleteAsync(id);
+            if (!deleted) return NotFound();
+            return Ok();
         }
     }
 }
