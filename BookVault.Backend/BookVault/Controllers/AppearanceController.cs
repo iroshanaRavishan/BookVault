@@ -45,5 +45,10 @@ namespace BookVault.API.Controllers
             if (updated == null) return NotFound();
             return Ok(updated);
         }
+
+        [HttpDelete("{id}")]
+        public Task<IActionResult> Delete(Guid id)
+        {
+        }
     }
 }
