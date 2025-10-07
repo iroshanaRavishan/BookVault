@@ -45,5 +45,7 @@ namespace BookVault.API.Controllers
             if (updated == null) return NotFound();
             return Ok(updated);
         }
+
+        [HttpDelete("{id}")]
     }
 }
