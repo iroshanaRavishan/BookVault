@@ -2,7 +2,7 @@ import React from 'react'
 import styles from './statistics.module.css'
 import QuickOverview from './statistics-widgets/quick-overview/QuickOverview'
 import TotalTime from './statistics-widgets/total-time/TotalTime'
-import TotalTimeComparison from './statistics-widgets/TotalTimeComparison'
+import TotalTimeComparison from './statistics-widgets/total-time-comparison/TotalTimeComparison'
 import ReadingHourSummary from './statistics-widgets/reading-hours/ReadingHourSummary'
 import ScreenTimeHeatMap from './statistics-widgets/screen-time-heatmap/ScreenTimeHeatMap'
 
