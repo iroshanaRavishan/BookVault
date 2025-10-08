@@ -5,6 +5,7 @@ export default function Goal() {
   return (
     <div className={styles.goalSection}>  
       <div className={styles.headerSection}>
+          <span>Goal</span>
       </div>
     </div>
   )
