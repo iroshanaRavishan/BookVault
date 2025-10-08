@@ -3,6 +3,10 @@ import styles from './goal.module.css';
 
 export default function Goal() {
   return (
-    <div>Goal</div>
+    <div className={styles.goalSection}>  
+      <div className={styles.headerSection}>
+          <span>Goal</span>
+      </div>
+    </div>
   )
 }
