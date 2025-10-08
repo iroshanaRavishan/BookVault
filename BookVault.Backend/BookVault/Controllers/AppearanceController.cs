@@ -23,5 +23,35 @@ namespace BookVault.API.Controllers
             if (result == null) return NotFound();
             return Ok(result);
         }
+
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<AppearanceReadDto>>> GetAll()
+        {
+            var results = await _service.GetAllAsync();
+            return Ok(results);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<AppearanceReadDto>> Create([FromBody] AppearanceCreateDto dto)
+        {
+            var created = await _service.CreateAsync(dto);
+            return CreatedAtAction(nameof(GetById), new { id = created.Id }, created);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult<AppearanceReadDto>> Update(Guid id, [FromBody] AppearanceUpdateDto dto)
+        {
+            var updated = await _service.UpdateAsync(id, dto);
+            if (updated == null) return NotFound();
+            return Ok(updated);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            var deleted = await _service.DeleteAsync(id);
+            if (!deleted) return NotFound();
+            return NoContent();
+        }
     }
 }
