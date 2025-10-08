@@ -4,6 +4,7 @@ import QuickOverview from './statistics-widgets/quick-overview/QuickOverview'
 import TotalTime from './statistics-widgets/TotalTime'
 import TotalTimeComparison from './statistics-widgets/TotalTimeComparison'
 import ReadingHourSummary from './statistics-widgets/reading-hours/ReadingHourSummary'
+import ScreenTimeHeatMap from './statistics-widgets/screen-time-heatmap/ScreenTimeHeatMap'
 
 export default function Statistics() {
   return (
@@ -12,6 +13,7 @@ export default function Statistics() {
       <TotalTime />
       <TotalTimeComparison />
       <ReadingHourSummary />
+      <ScreenTimeHeatMap />
     </div>
   )
 }
