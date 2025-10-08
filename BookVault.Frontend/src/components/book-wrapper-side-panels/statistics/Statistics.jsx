@@ -5,7 +5,7 @@ import TotalTime from './statistics-widgets/total-time/TotalTime'
 import TotalTimeComparison from './statistics-widgets/total-time-comparison/TotalTimeComparison'
 import ReadingHourSummary from './statistics-widgets/reading-hours/ReadingHourSummary'
 import ScreenTimeHeatMap from './statistics-widgets/screen-time-heatmap/ScreenTimeHeatMap'
-import Goal from './statistics-widgets/Goal'
+import Goal from './statistics-widgets/goal/Goal'
 
 export default function Statistics() {
   return (
