@@ -15,6 +15,12 @@ export default function Goal() {
           <span>AI Generated content</span>
         </div>
       </div>
+      <div className={styles.goalSummarySection}>
+        <div className={styles.miniCharts}>
+        </div>
+        <div className={styles.sevenDayLineChart}>
+        </div>
+      </div>
     </div>
   )
 }

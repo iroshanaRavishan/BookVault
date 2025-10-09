@@ -36,6 +36,25 @@
     background-color: rgb(240, 240, 240);
 }
 
+.miniCharts {
+    width: 100%;
+    height: 60px;
+    background-color: rgb(240, 240, 240);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sevenDayLineChart {
+    width: 100%;
+    height: 100px;
+    background-color: rgb(240, 240, 240);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+}
+
 .goalSummarySection {
     display: flex;
     flex-direction: column;
