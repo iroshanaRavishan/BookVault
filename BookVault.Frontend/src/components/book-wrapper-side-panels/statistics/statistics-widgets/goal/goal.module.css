@@ -16,3 +16,11 @@
     gap: 10px;
     width: 100%;
 }
+
+.contentSectionLeftDetails {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(240, 240, 240);
+}
