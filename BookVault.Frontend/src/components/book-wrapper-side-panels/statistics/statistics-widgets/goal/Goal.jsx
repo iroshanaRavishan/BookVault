@@ -15,6 +15,8 @@ export default function Goal() {
           <span>AI Generated content</span>
         </div>
       </div>
+      <div className={styles.goalSummarySection}>
+      </div>
     </div>
   )
 }
