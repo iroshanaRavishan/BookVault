@@ -11,6 +11,8 @@ export default function Goal() {
         <div className={styles.contentSectionLeftDetails}>
           <span>Chart goes here</span>
         </div>
+        <div className={styles.contentSectionRightDetails}>
+        </div>
       </div>
     </div>
   )
