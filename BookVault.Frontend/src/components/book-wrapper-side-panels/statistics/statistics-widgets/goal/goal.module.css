@@ -26,3 +26,11 @@
     width: 100%;
     background-color: rgb(240, 240, 240);
 }
+
+.contentSectionRightDetails {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(240, 240, 240);
+}
