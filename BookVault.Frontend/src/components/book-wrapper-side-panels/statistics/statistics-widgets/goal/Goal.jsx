@@ -16,6 +16,8 @@ export default function Goal() {
         </div>
       </div>
       <div className={styles.goalSummarySection}>
+        <div className={styles.miniCharts}>
+        </div>
       </div>
     </div>
   )
