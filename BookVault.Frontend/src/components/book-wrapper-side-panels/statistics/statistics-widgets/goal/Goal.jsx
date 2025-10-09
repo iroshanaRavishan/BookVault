@@ -8,7 +8,9 @@ export default function Goal() {
           <span>Goal</span>
       </div>
       <div className={styles.contentSection}>
+        <div className={styles.contentSectionLeftDetails}>
           <span>Chart goes here</span>
+        </div>
       </div>
     </div>
   )
