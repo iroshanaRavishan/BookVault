@@ -36,3 +36,11 @@
     width: 100%;
     background-color: rgb(240, 240, 240);
 }
+
+.goalSummarySection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+}
