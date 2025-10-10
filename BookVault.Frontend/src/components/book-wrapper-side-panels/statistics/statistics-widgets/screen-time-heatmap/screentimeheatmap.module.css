@@ -11,3 +11,8 @@
   margin-bottom: 12px;
   color: #333;
 }
+
+.chartContainer {
+  display: flex;
+  flex-direction: column;
+}
