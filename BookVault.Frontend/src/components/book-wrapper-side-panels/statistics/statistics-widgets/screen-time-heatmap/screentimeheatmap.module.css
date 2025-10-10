@@ -46,3 +46,11 @@
   text-align: left;
   padding-right: 8px;
 }
+
+.cell {
+  width: 15px;
+  height: 15px;
+  border-radius: 3px;
+  background-color: #ebedf0;
+  transition: background-color 0.3s;
+}
