@@ -33,3 +33,9 @@
   display: flex;
   flex-direction: column;
 }
+
+.row {
+  display: grid;
+  grid-template-columns: 60px repeat(12, 1fr);
+  align-items: center;
+}
