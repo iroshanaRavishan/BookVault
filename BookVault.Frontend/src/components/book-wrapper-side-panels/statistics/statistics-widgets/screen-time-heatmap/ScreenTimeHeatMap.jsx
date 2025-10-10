@@ -25,6 +25,10 @@ export default function ScreenTimeHeatMap() {
             <span key={i}>{t}</span>
           ))}
         </div>
+
+        {/* Heatmap grid */}
+        <div className={styles.gridContainer}>
+        </div>
       </div>
     </div>
   );
