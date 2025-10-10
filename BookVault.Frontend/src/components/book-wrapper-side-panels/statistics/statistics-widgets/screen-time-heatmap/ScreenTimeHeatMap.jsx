@@ -31,6 +31,9 @@ export default function ScreenTimeHeatMap() {
           {days.map((day, dayIndex) => (
             <div key={dayIndex} className={styles.row}>
               <span className={styles.dayLabel}>{day}</span>
+              {data[dayIndex].map((value, timeIndex) => (
+                
+              ))}
             </div>
           ))}
         </div>
