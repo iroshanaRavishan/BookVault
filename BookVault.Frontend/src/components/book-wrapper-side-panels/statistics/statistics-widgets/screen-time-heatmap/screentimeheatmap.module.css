@@ -60,3 +60,8 @@
 .level2 { background-color: #7bc96f; }
 .level3 { background-color: #239a3b; }
 .level4 { background-color: #196127; }
+
+.cell:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}
