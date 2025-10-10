@@ -2,6 +2,8 @@ import React from 'react';
 import styles from './screentimeheatmap.module.css';
 
 export default function ScreenTimeHeatMap() {
+  const days = ["2", "3", "4", "5", "6", "7", "8"];
+  const times = ["0", "2", "4", "6", "8", "10", "12", "2", "4", "6", "8", "10"];
   return (
     <div className={styles.totalScreenTimeSection}>  
       <div className={styles.headerSection}>
