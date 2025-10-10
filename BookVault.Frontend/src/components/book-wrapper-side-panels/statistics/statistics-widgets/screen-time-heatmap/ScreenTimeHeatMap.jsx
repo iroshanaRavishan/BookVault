@@ -21,6 +21,9 @@ export default function ScreenTimeHeatMap() {
       <div className={styles.chartContainer}>
         <div className={styles.timeLabels}>
           <span></span> 
+          {times.map((t, i) => (
+            <span>{t}</span>
+          ))}
         </div>
       </div>
     </div>
