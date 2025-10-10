@@ -28,6 +28,9 @@ export default function ScreenTimeHeatMap() {
 
         {/* Heatmap grid */}
         <div className={styles.gridContainer}>
+          {days.map((day, dayIndex) => (
+            
+          )}
         </div>
       </div>
     </div>
