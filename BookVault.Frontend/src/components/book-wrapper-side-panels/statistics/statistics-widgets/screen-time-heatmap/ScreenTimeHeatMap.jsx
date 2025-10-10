@@ -20,6 +20,7 @@ export default function ScreenTimeHeatMap() {
       </div>
       <div className={styles.chartContainer}>
         <div className={styles.timeLabels}>
+          <span></span> 
         </div>
       </div>
     </div>
