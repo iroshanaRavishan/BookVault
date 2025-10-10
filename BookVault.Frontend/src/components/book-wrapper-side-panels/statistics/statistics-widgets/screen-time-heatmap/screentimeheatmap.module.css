@@ -54,3 +54,9 @@
   background-color: #ebedf0;
   transition: background-color 0.3s;
 }
+
+.level0 { background-color: #ebedf0; }
+.level1 { background-color: #c6e48b; }
+.level2 { background-color: #7bc96f; }
+.level3 { background-color: #239a3b; }
+.level4 { background-color: #196127; }
