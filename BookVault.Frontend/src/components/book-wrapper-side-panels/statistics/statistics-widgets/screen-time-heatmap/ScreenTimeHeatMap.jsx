@@ -18,8 +18,22 @@ export default function ScreenTimeHeatMap() {
       <div className={styles.headerSection}>
         <span>Total Screen Time - (Hourly basis) <small>for last 7 days</small></span>
       </div>
-      <div className={styles.contentSection}>
-        <span>Chart goes here</span>
+      <div className={styles.chartContainer}>
+        <div className={styles.timeLabels}>
+          <span></span> 
+          {times.map((t, i) => (
+            <span key={i}>{t}</span>
+          ))}
+        </div>
+
+        {/* Heatmap grid */}
+        <div className={styles.gridContainer}>
+          {days.map((day, dayIndex) => (
+            <div key={dayIndex} className={styles.row}>
+              <span className={styles.dayLabel}>{day}</span>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
