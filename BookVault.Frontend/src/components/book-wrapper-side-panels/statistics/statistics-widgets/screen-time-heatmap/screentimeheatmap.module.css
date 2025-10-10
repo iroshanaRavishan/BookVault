@@ -28,3 +28,8 @@
 .timeLabels span {
   text-align: center;
 }
+
+.gridContainer {
+  display: flex;
+  flex-direction: column;
+}
