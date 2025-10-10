@@ -22,5 +22,5 @@ export default function ScreenTimeHeatMap() {
         <span>Chart goes here</span>
       </div>
     </div>
-  )
+  );
 }
