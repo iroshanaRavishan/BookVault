@@ -10,6 +10,9 @@ export default function ScreenTimeHeatMap() {
     Array.from({ length: 7 }, () =>
       Array.from({ length: 12 }, () => Math.floor(Math.random() * 5))
     );
+
+  const data = generateRandomData();
+
   return (
     <div className={styles.totalScreenTimeSection}>  
       <div className={styles.headerSection}>
