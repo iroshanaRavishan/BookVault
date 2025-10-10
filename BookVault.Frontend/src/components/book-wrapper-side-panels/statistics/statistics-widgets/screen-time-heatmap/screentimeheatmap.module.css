@@ -24,3 +24,7 @@
   color: #555;
   margin-bottom: 4px;
 }
+
+.timeLabels span {
+  text-align: center;
+}
