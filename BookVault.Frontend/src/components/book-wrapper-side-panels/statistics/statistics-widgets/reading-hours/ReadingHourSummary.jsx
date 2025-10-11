@@ -8,7 +8,9 @@ export default function ReadingHourSummary() {
             <span>Last 30 days reading hours summary</span>
         </div>
         <div className={styles.contentSection}>
+          <span>&lt;</span>
             <span>Chart goes here</span>
+          <span>&gt;</span>
         </div>
     </div>
   )
