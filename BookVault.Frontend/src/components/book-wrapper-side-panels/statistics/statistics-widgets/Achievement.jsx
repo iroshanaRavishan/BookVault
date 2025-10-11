@@ -7,6 +7,8 @@ export default function Achievement() {
       <div className={styles.headerSection}>
         <span>Achievement</span>
       </div>
+      <div className={styles.contentSection}>
+      </div>
     </div>
   )
 }
