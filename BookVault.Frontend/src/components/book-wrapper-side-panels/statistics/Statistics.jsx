@@ -16,6 +16,7 @@ export default function Statistics() {
       <ReadingHourSummary />
       <ScreenTimeHeatMap />
       <Goal /> 
+      <Achievement />
     </div>
   )
 }
