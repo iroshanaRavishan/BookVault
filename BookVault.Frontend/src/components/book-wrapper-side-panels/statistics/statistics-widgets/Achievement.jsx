@@ -3,6 +3,7 @@ import styles from './achievement.module.css';
 
 export default function Achievement() {
   return (
-    <div>Achievement</div>
+    <div className={styles.achievementsContainer}>
+    </div>
   )
 }
