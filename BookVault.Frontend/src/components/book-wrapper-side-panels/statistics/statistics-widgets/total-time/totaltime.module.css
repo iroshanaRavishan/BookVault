@@ -41,6 +41,13 @@
   gap: 10px;
 }
 
+.timeSpentDetailsText {
+  font-weight: 500;
+  line-height: 16px;
+  text-align: left;
+  font-size: 14px;
+}
+
 .chartSection {
   display: flex;
   align-items: center;
