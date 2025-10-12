@@ -48,6 +48,13 @@
   font-size: 14px;
 }
 
+.dateValue {
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 32px;
+}
+
+
 .chartSection {
   display: flex;
   align-items: center;
