@@ -26,9 +26,8 @@
 
 .totalTimeSeparator {
   position: relative;
-  display: inline-block;
-  width: 1px; 
-  height: 100%; 
+  display: flex;
+  align-items: stretch;
 }
 
 .totalTimeSeparator::after {
