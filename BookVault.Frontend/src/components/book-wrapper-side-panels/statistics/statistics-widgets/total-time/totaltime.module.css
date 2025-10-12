@@ -30,7 +30,9 @@
   align-items: center;
   justify-content: center;
   gap: 10px;
+  text-align: center;
 }
+
 .timeSpentDetailsChartSection {
   display: flex;
   flex-direction: column;
@@ -42,6 +44,8 @@
 .chartSection {
   display: flex;
   align-items: center;
+  justify-content: center;
+  text-align: center;
   gap: 10px;
 }
 
