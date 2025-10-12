@@ -1,27 +1,27 @@
 .totalTimeSpentSection {
-    background-color: rgb(255, 255, 255);
-    padding: 10px;
-    border-radius: 10px;
+  background-color: rgb(255, 255, 255);
+  padding: 10px;
+  border-radius: 10px;
 }
 
 .headerSection {
-    font-weight: bold;
-    font-size: 18px;
-    margin-bottom: 10px;
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 10px;
 }
 
 .contentSection {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: stretch;
-    gap: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: stretch;
+  gap: 10px;
 }
 
 .timeSpentSection {
-    background-color: rgb(255, 255, 255);
-    padding: 10px;
-    border-radius: 10px;
+  background-color: rgb(255, 255, 255);
+  padding: 10px;
+  border-radius: 10px;
 }
 
 .totalTimeSeparator {
