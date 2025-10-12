@@ -10,6 +10,14 @@
     margin-bottom: 10px;
 }
 
+.contentSection {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: stretch;
+    gap: 10px;
+}
+
 .timeSpentSection {
     background-color: rgb(255, 255, 255);
     padding: 10px;
@@ -18,9 +26,8 @@
 
 .totalTimeSeparator {
   position: relative;
-  display: inline-block;
-  width: 1px; 
-  height: 100%; 
+  display: flex;
+  align-items: stretch;
 }
 
 .totalTimeSeparator::after {
@@ -28,8 +35,7 @@
   position: absolute;
   top: 0;
   bottom: 0;
-  left: 50%; 
-  transform: translateX(-50%);
   width: 1px;
-  background-color: #ccc; 
+  background-color: #c7c7c7;
+  height: 100%;
 }
