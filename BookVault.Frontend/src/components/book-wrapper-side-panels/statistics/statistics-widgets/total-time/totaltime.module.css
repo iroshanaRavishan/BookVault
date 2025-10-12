@@ -35,8 +35,7 @@
   position: absolute;
   top: 0;
   bottom: 0;
-  left: 50%; 
-  transform: translateX(-50%);
   width: 1px;
-  background-color: #ccc; 
+  background-color: #c7c7c7;
+  height: 100%;
 }
