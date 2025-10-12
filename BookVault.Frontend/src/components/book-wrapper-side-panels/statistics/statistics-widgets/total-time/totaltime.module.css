@@ -54,6 +54,12 @@
   line-height: 32px;
 }
 
+.dateLabel {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 16px;
+  margin-left: 2px;
+}
 
 .chartSection {
   display: flex;
