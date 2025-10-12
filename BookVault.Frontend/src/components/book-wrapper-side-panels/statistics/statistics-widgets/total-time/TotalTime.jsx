@@ -9,7 +9,9 @@ export default function TotalTime() {
         </div>
         <div className={styles.contentSection}>
           <div className={styles.timeSpentSummarySection}>
-            <span className={styles.timeSpentValue}>5D 2h 56m</span>
+            <span className={styles.timeSpentValue}> 
+              <span className={styles.dateValue}>5</span> 
+              </span>
             <span className={styles.timeSpentComparison}>+2h 30m than last week</span>
           </div>
           <span className={styles.totalTimeSeparator}></span>
