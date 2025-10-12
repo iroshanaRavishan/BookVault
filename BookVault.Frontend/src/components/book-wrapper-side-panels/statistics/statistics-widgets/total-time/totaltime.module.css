@@ -10,6 +10,13 @@
     margin-bottom: 10px;
 }
 
+.contentSection {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .timeSpentSection {
     background-color: rgb(255, 255, 255);
     padding: 10px;
