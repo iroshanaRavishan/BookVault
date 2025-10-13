@@ -11,7 +11,7 @@ export default function QuickOverview() {
         <div className={styles.contentSectionLeftDetails}>
           <div className={styles.summaryContent}>
             <span className={styles.aiGeneratedContentText}>You are active in 56% than last week.</span>
-            <span>AI Generated content</span>
+            <span className={styles.aiGeneratedIndicator}>Generated content</span>
           </div>
           <div className={styles.summaryContent}>
             <span>Total Pages - 43</span>
