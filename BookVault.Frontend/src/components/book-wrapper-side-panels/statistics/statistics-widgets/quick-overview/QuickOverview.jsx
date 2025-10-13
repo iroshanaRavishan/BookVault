@@ -18,8 +18,8 @@ export default function QuickOverview() {
             </span>
           </div>
           <div className={styles.summaryContent}>
-            <span>Total Pages - 43</span>
-            <span>56.4%</span>
+            <span className={styles.totaPageText}>Total Pages - 43</span>
+            <span className={styles.progressText}>56.4%</span>
           </div>
         </div>
         <div className={styles.contentSectionRightDetails}>
