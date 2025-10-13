@@ -16,6 +16,25 @@
     display: flex;
 }
 
+.summaryContent {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.aiGeneratedContentText {
+    font-size: 15px;
+    font-weight: 500;
+    color: #666;
+    line-height: 20px;
+}
+
+.aiGeneratedIndicator {
+    font-size: 12px;
+    font-weight: 600;
+    color: #858585;
+}
+
 .contentSectionLeftDetails {
     display: flex;
     flex-direction: column;
@@ -23,12 +42,6 @@
 
 .contentSectionRightDetails {
     display: flex;
-}
-
-.summaryContent {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
 }
 
 .quickOverview::before {
