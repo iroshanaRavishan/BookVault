@@ -16,6 +16,7 @@
 
 .contentSectionLeftDetails {
     display: flex;
+    flex-direction: column;
 }
 
 .contentSectionRightDetails {
