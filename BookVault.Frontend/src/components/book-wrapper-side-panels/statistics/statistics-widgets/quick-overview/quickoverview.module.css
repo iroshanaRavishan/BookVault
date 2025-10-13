@@ -41,6 +41,12 @@
     color: #555;
 }
 
+.progressText {
+    font-size: 30px;
+    font-weight: bold;
+    color: #333;
+}
+
 .contentSectionLeftDetails {
     display: flex;
     flex-direction: column;
