@@ -56,3 +56,9 @@
   transform: scale(2);
   animation: waveMove2 10s ease-in-out infinite alternate;
 }
+
+
+@keyframes waveMove1 {
+  0% { transform: translateX(0) scale(2); }
+  100% { transform: translateX(-50px) scale(2); }
+}
