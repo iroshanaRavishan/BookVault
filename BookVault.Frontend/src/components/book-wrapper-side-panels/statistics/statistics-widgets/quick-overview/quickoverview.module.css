@@ -62,3 +62,8 @@
   0% { transform: translateX(0) scale(2); }
   100% { transform: translateX(-50px) scale(2); }
 }
+
+@keyframes waveMove2 {
+  0% { transform: translateX(0) scale(2); }
+  100% { transform: translateX(50px) scale(2); }
+}
