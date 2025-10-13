@@ -57,6 +57,11 @@
   animation: waveMove2 10s ease-in-out infinite alternate;
 }
 
+.headerSection,
+.contentSection {
+  position: relative;
+  z-index: 1; 
+}
 
 @keyframes waveMove1 {
   0% { transform: translateX(0) scale(2); }
