@@ -1,7 +1,9 @@
 .quickOverview {
-    background-color: rgb(255, 255, 255);
     padding: 10px;
     border-radius: 10px;
+    position: relative;
+    background-color: #fff;
+    overflow: hidden; 
 }
 
 .headerSection {
@@ -16,6 +18,7 @@
 
 .contentSectionLeftDetails {
     display: flex;
+    flex-direction: column;
 }
 
 .contentSectionRightDetails {
