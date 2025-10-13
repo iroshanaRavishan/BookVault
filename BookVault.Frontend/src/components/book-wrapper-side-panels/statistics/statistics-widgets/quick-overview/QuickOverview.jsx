@@ -1,5 +1,6 @@
 import React from 'react'
-import styles from './quickoverview.module.css'
+import styles from './quickoverview.module.css';
+import { PiRobotLight } from "react-icons/pi";
 
 export default function QuickOverview() {
   return (
