@@ -41,3 +41,12 @@
   background-color: #f0f0ff;
   transform: scale(1.02);
 }
+
+.badgeIcon {
+  font-size: 24px;
+}
+
+.badgeName {
+  font-size: 16px;
+  color: #333;
+}
