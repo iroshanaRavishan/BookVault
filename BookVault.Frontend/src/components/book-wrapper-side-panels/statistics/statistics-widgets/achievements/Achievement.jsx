@@ -31,6 +31,9 @@ export default function Achievement() {
             ))}
           </div>
         </div>
+        <div className={styles.milestoneSection}>
+            
+        </div>
       </div>
     </div>
   )
