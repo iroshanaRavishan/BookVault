@@ -20,3 +20,9 @@
     overflow-x: auto; 
     padding-right: 8px;
 }
+
+.badgeItem {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
