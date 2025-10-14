@@ -1,5 +1,5 @@
 .achievementsContainer {
-    background-color: rgb(255, 255, 255);
+    background-color: #fff;
     padding: 10px;
     border-radius: 10px;
 }
@@ -12,4 +12,41 @@
 
 .contentSection {
     display: flex;
+}
+
+.scrollableBadges {
+    height: 120px;
+    max-height: 300px;
+    overflow-x: auto; 
+    padding-right: 8px;
+}
+
+.badgeItem {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.badge {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 10px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.badge:hover {
+    background-color: #f0f0ff;
+    transform: scale(1.02);
+}
+
+.badgeIcon {
+    font-size: 24px;
+}
+
+.badgeName {
+    font-size: 16px;
+    color: #333;
 }
