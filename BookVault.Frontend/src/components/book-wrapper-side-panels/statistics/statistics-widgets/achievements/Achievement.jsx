@@ -21,7 +21,8 @@ export default function Achievement() {
         <span>Achievement</span>
       </div>
       <div className={styles.contentSection}>
-        <span>Chart Goes in here...!</span>
+        <div className={styles.scrollableBadges}>
+        </div>
       </div>
     </div>
   )
