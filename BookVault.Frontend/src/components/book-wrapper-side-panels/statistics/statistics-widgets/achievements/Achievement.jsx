@@ -39,6 +39,7 @@ export default function Achievement() {
                 <span>Reading History</span>
               </section>
               <section className={styles.readingHistoryList}>
+                <span>Reading history list goes here</span>
               </section>
             </div>
         </div>
