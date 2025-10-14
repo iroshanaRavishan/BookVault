@@ -22,6 +22,9 @@ export default function Achievement() {
       </div>
       <div className={styles.contentSection}>
         <div className={styles.scrollableBadges}>
+          <div className={styles.badgeItem}>
+           
+          </div>
         </div>
       </div>
     </div>
