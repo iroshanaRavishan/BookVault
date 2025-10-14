@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './achievement.module.css';
+import { FaChevronUp } from "react-icons/fa";
 
 export default function Achievement() {
   const badges = [
