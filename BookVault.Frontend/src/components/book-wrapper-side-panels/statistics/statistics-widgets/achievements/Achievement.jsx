@@ -24,7 +24,9 @@ export default function Achievement() {
         <div className={styles.scrollableBadges}>
           <div className={styles.badgeItem}>
             {badges.map((badge) => (
-            
+              <div>
+                <span>{badge.icon}</span>
+              </div>
             ))}
           </div>
         </div>
