@@ -26,6 +26,7 @@ export default function Achievement() {
             {badges.map((badge) => (
               <div>
                 <span>{badge.icon}</span>
+                <span>{badge.name}</span>
               </div>
             ))}
           </div>
