@@ -42,6 +42,9 @@ export default function Achievement() {
               <section className={styles.readingHistoryList}>
                 <span>Reading history list goes here</span>
               </section>
+              <section>
+                <FaChevronUp />
+              </section>
             </div>
         </div>
       </div>
