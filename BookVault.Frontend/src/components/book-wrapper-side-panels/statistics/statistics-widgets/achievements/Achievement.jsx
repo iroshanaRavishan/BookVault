@@ -38,6 +38,8 @@ export default function Achievement() {
               <section className={styles.readingHistoryTitle}>
                 <span>Reading History</span>
               </section>
+              <section className={styles.readingHistoryList}>
+              </section>
             </div>
         </div>
       </div>
