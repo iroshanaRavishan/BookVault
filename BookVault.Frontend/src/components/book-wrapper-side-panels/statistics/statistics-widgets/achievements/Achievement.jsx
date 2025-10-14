@@ -23,7 +23,9 @@ export default function Achievement() {
       <div className={styles.contentSection}>
         <div className={styles.scrollableBadges}>
           <div className={styles.badgeItem}>
-           
+            {badges.map((badge) => (
+            
+            ))}
           </div>
         </div>
       </div>
