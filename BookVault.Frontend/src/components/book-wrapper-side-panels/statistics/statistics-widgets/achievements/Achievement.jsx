@@ -25,7 +25,7 @@ export default function Achievement() {
           <div className={styles.badgeItem}>
             {badges.map((badge) => (
               <div key={badge.id} className={styles.badge}>
-                <span>{badge.icon}</span>
+                <span className={styles.badgeIcon}>{badge.icon}</span>
                 <span>{badge.name}</span>
               </div>
             ))}
