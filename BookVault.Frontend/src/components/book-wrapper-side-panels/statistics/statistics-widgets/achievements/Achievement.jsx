@@ -33,6 +33,7 @@ export default function Achievement() {
         </div>
         <div className={styles.milestoneSection}>
             <div className={styles.milestoneToggler}></div>
+            <div className={styles.streakStatus}></div>
         </div>
       </div>
     </div>
