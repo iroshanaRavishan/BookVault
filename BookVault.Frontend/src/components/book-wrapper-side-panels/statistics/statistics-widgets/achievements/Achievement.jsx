@@ -35,6 +35,8 @@ export default function Achievement() {
         </div>
         <div className={styles.aiSummaryContent}>
           <span className={styles.aiGeneratedContentText}>You Just earned the 3 day badge!</span>
+          <span className={styles.aiGeneratedIndicator}>
+          </span>
         </div>
         <div className={styles.milestoneSection}>
             <div className={styles.milestoneToggler}></div>
