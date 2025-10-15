@@ -56,3 +56,10 @@
     flex-direction: column;
     gap: 10px;
 }
+
+.aiGeneratedContentText {
+    font-size: 15px;
+    font-weight: 500;
+    color: #666;
+    line-height: 20px;
+}
