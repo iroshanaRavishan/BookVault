@@ -45,17 +45,17 @@ export default function Achievement() {
             <span>Streaks Or Awards</span>
           </div>
           <div className={styles.streakStatus}></div>
-            <div className={styles.readingHistorySection}>
-              <section className={styles.readingHistoryTitle}>
-                <span>Reading History</span>
-              </section>
-              <section className={styles.readingHistoryList}>
-                <span>Reading history list goes here</span>
-              </section>
-              <section>
-                <FaChevronUp />
-              </section>
-            </div>
+          <div className={styles.readingHistorySection}>
+            <section className={styles.readingHistoryTitle}>
+              <span>Reading History</span>
+            </section>
+            <section className={styles.readingHistoryList}>
+              <span>Reading history list goes here</span>
+            </section>
+            <section>
+              <FaChevronUp />
+            </section>
+          </div>
         </div>
       </div>
     </div>
