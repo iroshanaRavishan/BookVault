@@ -37,6 +37,7 @@ export default function Achievement() {
           <span className={styles.aiGeneratedContentText}>You Just earned the 3 day badge!</span>
           <span className={styles.aiGeneratedIndicator}>
             <PiRobotLight />
+            Generated content
           </span>
         </div>
         <div className={styles.milestoneSection}>
