@@ -41,9 +41,9 @@ export default function Achievement() {
           </span>
         </div>
         <div className={styles.milestoneSection}>
-            <div className={styles.milestoneToggler}>
-              <span>Streaks Or Awards</span>
-            </div>
+          <div className={styles.milestoneToggler}>
+            <span>Streaks Or Awards</span>
+          </div>
             <div className={styles.streakStatus}></div>
             <div className={styles.readingHistorySection}>
               <section className={styles.readingHistoryTitle}>
