@@ -40,7 +40,7 @@
 
 .badge:hover {
     background-color: #ffffff;
-    transform: scale(1.02);
+    transform: scale(1.12);
 }
 
 .badgeIcon {
