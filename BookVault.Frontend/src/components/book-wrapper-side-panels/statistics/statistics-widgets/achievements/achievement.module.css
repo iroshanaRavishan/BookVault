@@ -70,3 +70,7 @@
     font-weight: 600;
     color: #858585;
 }
+
+.milestoneSection {
+    display: flex;
+}
