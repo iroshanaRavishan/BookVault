@@ -12,6 +12,7 @@
 
 .contentSection {
     display: flex;
+    flex-direction: column;
 }
 
 .scrollableBadges {
