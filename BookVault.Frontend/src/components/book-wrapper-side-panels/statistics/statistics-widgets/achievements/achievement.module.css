@@ -73,4 +73,5 @@
 
 .milestoneSection {
     display: flex;
+    flex-direction: column;
 }
