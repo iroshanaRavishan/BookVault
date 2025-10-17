@@ -39,7 +39,7 @@
 }
 
 .badge:hover {
-    background-color: #f0f0ff;
+    background-color: #ffffff;
     transform: scale(1.02);
 }
 
@@ -61,7 +61,7 @@
 .aiGeneratedContentText {
     font-size: 15px;
     font-weight: 500;
-    color: #666;
+    color: #424242;
     line-height: 20px;
 }
 
