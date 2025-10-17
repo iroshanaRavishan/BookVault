@@ -12,6 +12,7 @@
 
 .contentSection {
     display: flex;
+    flex-direction: column;
 }
 
 .scrollableBadges {
@@ -68,4 +69,11 @@
     font-size: 12px;
     font-weight: 600;
     color: #858585;
+}
+
+.milestoneSection {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 15px;
 }
