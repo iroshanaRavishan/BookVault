@@ -145,6 +145,15 @@
   height: 250px;
 }
 
+.streakTabContent,
+.awardsTabContent {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
+  opacity: 0;
+}
+
 .hiddenTab {
   pointer-events: none;
 }
