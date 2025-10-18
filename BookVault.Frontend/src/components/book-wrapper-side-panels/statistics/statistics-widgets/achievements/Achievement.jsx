@@ -53,6 +53,7 @@ export default function Achievement() {
               className={`${styles.toggleBtn} ${
                 active === "streaks" ? styles.active : ""
               }`}
+              onClick={() => setActive("streaks")}
             >
               Streaks
             </button>
