@@ -33,23 +33,23 @@
     align-items: center;
     gap: 10px;
     padding: 8px 10px;
-    background-color: #e2a5a5;
+    background-color: #f9f9f9;
     border-radius: 8px;
     transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
 .badge:hover {
-    background-color: #ffffff;
-    transform: scale(1.12);
+    background-color: #f0f0ff;
+    transform: scale(1.02);
 }
 
 .badgeIcon {
-    font-size: 20px;
+    font-size: 24px;
 }
 
 .badgeName {
     font-size: 16px;
-    color: #6b6b6b;
+    color: #333;
 }
 
 .aiSummaryContent {
@@ -59,9 +59,9 @@
 }
 
 .aiGeneratedContentText {
-    font-size: 12px;
+    font-size: 15px;
     font-weight: 500;
-    color: #424242;
+    color: #666;
     line-height: 20px;
 }
 
@@ -74,6 +74,6 @@
 .milestoneSection {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 10px;
     margin-top: 15px;
 }
