@@ -44,7 +44,9 @@ export default function Achievement() {
         </div>
         <div className={styles.milestoneSection}>
           <div className={styles.milestoneToggler}>
-            <span>Streaks Or Awards</span>
+            <div
+              className={`${styles.slider}`}
+            ></div>
           </div>
           <div className={styles.streakTabContent}>
             <div className={styles.streakStatus}></div>
