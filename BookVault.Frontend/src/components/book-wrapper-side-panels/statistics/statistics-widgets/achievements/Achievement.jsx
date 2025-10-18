@@ -50,12 +50,16 @@ export default function Achievement() {
               }`}
             ></div>
             <button
-              className={`${styles.toggleBtn}`}
+              className={`${styles.toggleBtn} ${
+                active === "streaks" ? styles.active : ""
+              }`}
             >
               Streaks
             </button>
             <button
-              className={`${styles.toggleBtn}`}
+              className={`${styles.toggleBtn} ${
+                active === "awards" ? styles.active : ""
+              }`}
             >
               Awards
             </button>
