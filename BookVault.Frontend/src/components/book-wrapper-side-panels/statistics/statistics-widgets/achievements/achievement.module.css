@@ -144,3 +144,12 @@
   overflow: hidden;
   height: 250px;
 }
+
+.hiddenTab {
+  pointer-events: none;
+}
+
+.activeTab {
+  opacity: 1;
+  pointer-events: auto;
+}
