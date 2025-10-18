@@ -67,7 +67,11 @@ export default function Achievement() {
             </button>
           </div>
           <div className={styles.tabContainer}>
-            <div className={styles.streakTabContent}>
+            <div
+              className={`${styles.streakTabContent} ${
+                active === "streaks" ? styles.activeTab : styles.hiddenTab
+              }`}
+            >
               <div className={styles.streakStatus}></div>
               <div className={styles.readingHistorySection}>
                 <section className={styles.readingHistoryTitle}>
