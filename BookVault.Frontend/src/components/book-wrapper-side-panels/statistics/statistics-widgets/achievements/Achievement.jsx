@@ -57,7 +57,9 @@ export default function Achievement() {
               Streaks
             </button>
             <button
-              className={`${styles.toggleBtn}`}
+              className={`${styles.toggleBtn} ${
+                active === "awards" ? styles.active : ""
+              }`}
             >
               Awards
             </button>
