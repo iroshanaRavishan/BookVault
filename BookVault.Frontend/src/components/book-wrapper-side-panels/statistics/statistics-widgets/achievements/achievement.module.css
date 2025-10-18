@@ -24,6 +24,10 @@
     -ms-overflow-style: none;
 }
 
+.scrollableBadges::-webkit-scrollbar {
+    display: none;
+}
+
 .badgeItem {
     display: flex;
     flex-direction: row;
