@@ -61,6 +61,7 @@ export default function Achievement() {
               className={`${styles.toggleBtn} ${
                 active === "awards" ? styles.active : ""
               }`}
+              onClick={() => setActive("awards")}
             >
               Awards
             </button>
