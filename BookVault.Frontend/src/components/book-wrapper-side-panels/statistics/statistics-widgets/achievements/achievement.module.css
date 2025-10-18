@@ -83,3 +83,9 @@
     gap: 10px;
     margin-top: 15px;
 }
+
+.milestoneToggler {
+    font-size: 16px;
+    font-weight: 600;
+    color: #444;
+}
