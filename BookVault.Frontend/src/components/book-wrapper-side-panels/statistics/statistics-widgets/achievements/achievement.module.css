@@ -98,6 +98,18 @@
     border: none;
 }
 
+.toggleBtn {
+    flex: 1;
+    background: transparent;
+    border: none;
+    font-size: 16px;
+    font-family: "Inter", sans-serif;
+    cursor: pointer;
+    z-index: 2;
+    color: #fff;
+    transition: color 0.3s ease;
+}
+
 .slider {
     position: absolute;
     top: 0;
