@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './achievement.module.css';
 import { FaChevronUp } from "react-icons/fa";
 import { PiRobotLight } from 'react-icons/pi';
@@ -16,6 +16,8 @@ export default function Achievement() {
     { id: 9, name: 'Series Finisher', icon: '🔚' },
     { id: 10, name: 'Bibliophile', icon: '📚' },
   ];
+
+  const [active, setActive] = useState("streaks");
 
   return (
     <div className={styles.achievementsContainer}>
