@@ -49,6 +49,12 @@ export default function Achievement() {
                 active === "awards" ? styles.right : styles.left
               }`}
             ></div>
+            <button>
+              Streaks
+            </button>
+            <button>
+              Awards
+            </button>
           </div>
           <div className={styles.streakTabContent}>
             <div className={styles.streakStatus}></div>
