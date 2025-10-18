@@ -137,3 +137,19 @@
     font-weight: 600;
     color: #ffffff;
 }
+
+.tabContainer {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  height: 250px;
+}
+
+.hiddenTab {
+  pointer-events: none;
+}
+
+.activeTab {
+  opacity: 1;
+  pointer-events: auto;
+}
