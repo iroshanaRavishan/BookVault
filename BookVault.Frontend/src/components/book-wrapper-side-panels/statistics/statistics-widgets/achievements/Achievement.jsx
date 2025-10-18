@@ -83,6 +83,7 @@ export default function Achievement() {
             <div className={styles.awardsTabContent}>
               <span>Awards tab section...!</span>
             </div>
+          </div>
         </div>
       </div>
     </div>
