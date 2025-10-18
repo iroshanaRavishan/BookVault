@@ -66,23 +66,25 @@ export default function Achievement() {
               Awards
             </button>
           </div>
-          <div className={styles.streakTabContent}>
-            <div className={styles.streakStatus}></div>
-            <div className={styles.readingHistorySection}>
-              <section className={styles.readingHistoryTitle}>
-                <span>Reading History</span>
-              </section>
-              <section className={styles.readingHistoryList}>
-                <span>Reading history list goes here</span>
-              </section>
-              <section>
-                <FaChevronUp />
-              </section>
+          <div className={styles.tabContainer}>
+            <div className={styles.streakTabContent}>
+              <div className={styles.streakStatus}></div>
+              <div className={styles.readingHistorySection}>
+                <section className={styles.readingHistoryTitle}>
+                  <span>Reading History</span>
+                </section>
+                <section className={styles.readingHistoryList}>
+                  <span>Reading history list goes here</span>
+                </section>
+                <section>
+                  <FaChevronUp />
+                </section>
+              </div>
             </div>
-          </div>
             <div className={styles.awardsTabContent}>
               <span>Awards tab section...!</span>
             </div>
+          </div>
         </div>
       </div>
     </div>
