@@ -162,3 +162,7 @@
   opacity: 1;
   pointer-events: auto;
 }
+
+.streakTabContent {
+  transform: translateX(-100%);
+}
