@@ -170,3 +170,7 @@
 .awardsTabContent {
   transform: translateX(100%);
 }
+
+.activeTab.streakTabContent {
+  transform: translateX(0%);
+}
