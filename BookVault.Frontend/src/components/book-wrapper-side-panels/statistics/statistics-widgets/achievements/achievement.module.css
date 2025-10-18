@@ -145,6 +145,15 @@
   height: 250px;
 }
 
+.streakTabContent,
+.awardsTabContent {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
+  opacity: 0;
+}
+
 .hiddenTab {
   pointer-events: none;
 }
@@ -152,4 +161,20 @@
 .activeTab {
   opacity: 1;
   pointer-events: auto;
+}
+
+.streakTabContent {
+  transform: translateX(-100%);
+}
+
+.awardsTabContent {
+  transform: translateX(100%);
+}
+
+.activeTab.streakTabContent {
+  transform: translateX(0%);
+}
+
+.activeTab.awardsTabContent {
+  transform: translateX(0%);
 }
