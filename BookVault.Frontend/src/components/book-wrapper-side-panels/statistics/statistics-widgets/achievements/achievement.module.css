@@ -129,3 +129,8 @@
 .right {
     transform: translateX(100%);
 }
+
+.toggleBtn.active {
+    font-weight: 600;
+    color: #ffffff;
+}
