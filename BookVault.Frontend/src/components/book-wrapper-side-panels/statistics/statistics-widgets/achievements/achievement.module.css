@@ -109,3 +109,11 @@
     transition: transform 0.3s ease-in-out;
     z-index: 1;
 }
+
+.left {
+    transform: translateX(0%);
+}
+
+.right {
+    transform: translateX(100%);
+}
