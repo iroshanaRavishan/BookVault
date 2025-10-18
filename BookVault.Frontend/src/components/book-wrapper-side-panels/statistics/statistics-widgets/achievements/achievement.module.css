@@ -20,6 +20,8 @@
     max-height: 300px;
     overflow-x: auto; 
     padding-right: 8px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
 }
 
 .badgeItem {
