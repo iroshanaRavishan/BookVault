@@ -85,7 +85,11 @@ export default function Achievement() {
                 </section>
               </div>
             </div>
-            <div className={styles.awardsTabContent}>
+            <div
+              className={`${styles.awardsTabContent} ${
+                active === "awards" ? styles.activeTab : styles.hiddenTab
+              }`}
+            >
               <span>Awards tab section...!</span>
             </div>
           </div>
