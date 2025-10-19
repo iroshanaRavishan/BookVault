@@ -154,6 +154,63 @@
   opacity: 0;
 }
 
+.streakStatus {
+    display: flex;
+    flex-direction: row;
+    font-size: 16px;
+    font-weight: 500;
+    color: #555;
+    background: linear-gradient(to top, #dd5902, #b9b9b9);
+    border-radius: 10px;
+    padding: 8px 10px;
+}
+
+.fireIcon {
+    display: flex;
+    align-items: center;
+    margin: 0 20px;
+}
+
+.streakTextSection {
+    display: flex;
+    flex-direction: column;
+    color: #ffffff;
+}   
+
+.streakText {
+    font-size: 13px;
+    font-weight: 400;
+}
+
+.streakSubText {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.readingHistorySection {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.readingHistoryTitle {
+    position: relative;
+    font-size: 18px;
+    font-weight: 600;
+    color: #444;
+}
+
+.readingHistoryTitle::after {
+    content: '';
+    position: absolute;
+    top: 55%;
+    right: 0;
+    width: 50%;
+    height: 1px;
+    background-color: #dbdbdb;
+}
+
 .hiddenTab {
   pointer-events: none;
 }

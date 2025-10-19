@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styles from './achievement.module.css';
 import { FaChevronUp } from "react-icons/fa";
 import { PiRobotLight } from 'react-icons/pi';
+import { ImFire } from "react-icons/im";
 
 export default function Achievement() {
   const badges = [
@@ -72,7 +73,15 @@ export default function Achievement() {
                 active === "streaks" ? styles.activeTab : styles.hiddenTab
               }`}
             >
-              <div className={styles.streakStatus}></div>
+              <div className={styles.streakStatus}>
+                <div className={styles.fireIcon}>
+                  <ImFire color='#fff' size={25}/>
+                </div>
+                <div className={styles.streakTextSection}>
+                  <span className={styles.streakText}>Your current reading streak is... </span>
+                  <span className={styles.streakSubText}>3 days!</span>
+                </div>
+              </div>
               <div className={styles.readingHistorySection}>
                 <section className={styles.readingHistoryTitle}>
                   <span>Reading History</span>
