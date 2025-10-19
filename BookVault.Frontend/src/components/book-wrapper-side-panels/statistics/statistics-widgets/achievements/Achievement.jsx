@@ -74,7 +74,7 @@ export default function Achievement() {
               }`}
             >
               <div className={styles.streakStatus}>
-                <div>
+                <div className={styles.fireIcon}>
                   <ImFire/>
                 </div>
               </div>
