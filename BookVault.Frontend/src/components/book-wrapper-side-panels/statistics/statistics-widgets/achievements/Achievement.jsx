@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styles from './achievement.module.css';
 import { FaChevronUp } from "react-icons/fa";
 import { PiRobotLight } from 'react-icons/pi';
+import { ImFire } from "react-icons/im";
 
 export default function Achievement() {
   const badges = [
