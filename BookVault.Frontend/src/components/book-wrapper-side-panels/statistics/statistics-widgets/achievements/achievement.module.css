@@ -194,6 +194,13 @@
     gap: 10px;
 }
 
+.readingHistoryTitle {
+    position: relative;
+    font-size: 18px;
+    font-weight: 600;
+    color: #444;
+}
+
 .hiddenTab {
   pointer-events: none;
 }
