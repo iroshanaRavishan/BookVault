@@ -187,6 +187,13 @@
     font-weight: 600;
 }
 
+.readingHistorySection {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
 .hiddenTab {
   pointer-events: none;
 }
