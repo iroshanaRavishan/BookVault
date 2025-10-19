@@ -75,7 +75,7 @@ export default function Achievement() {
             >
               <div className={styles.streakStatus}>
                 <div className={styles.fireIcon}>
-                  <ImFire/>
+                  <ImFire color='#fff' size={25}/>
                 </div>
               </div>
               <div className={styles.readingHistorySection}>
