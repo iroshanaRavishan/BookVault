@@ -154,6 +154,12 @@
   opacity: 0;
 }
 
+.fireIcon {
+    display: flex;
+    align-items: center;
+    margin: 0 20px;
+}
+
 .hiddenTab {
   pointer-events: none;
 }
