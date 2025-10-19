@@ -73,7 +73,11 @@ export default function Achievement() {
                 active === "streaks" ? styles.activeTab : styles.hiddenTab
               }`}
             >
-              <div className={styles.streakStatus}></div>
+              <div className={styles.streakStatus}>
+                <div>
+                  <ImFire/>
+                </div>
+              </div>
               <div className={styles.readingHistorySection}>
                 <section className={styles.readingHistoryTitle}>
                   <span>Reading History</span>
