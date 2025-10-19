@@ -77,6 +77,10 @@ export default function Achievement() {
                 <div className={styles.fireIcon}>
                   <ImFire color='#fff' size={25}/>
                 </div>
+                <div className={styles.streakTextSection}>
+                  <span className={styles.streakText}>Your current reading streak is... </span>
+                  <span className={styles.streakSubText}>3 days!</span>
+                </div>
               </div>
               <div className={styles.readingHistorySection}>
                 <section className={styles.readingHistoryTitle}>
