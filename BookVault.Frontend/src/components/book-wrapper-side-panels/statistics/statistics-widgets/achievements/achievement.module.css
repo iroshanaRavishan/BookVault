@@ -201,6 +201,16 @@
     color: #444;
 }
 
+.readingHistoryTitle::after {
+    content: '';
+    position: absolute;
+    top: 55%;
+    right: 0;
+    width: 50%;
+    height: 1px;
+    background-color: #dbdbdb;
+}
+
 .hiddenTab {
   pointer-events: none;
 }
