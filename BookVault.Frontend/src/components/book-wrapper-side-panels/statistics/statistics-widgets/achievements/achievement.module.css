@@ -154,6 +154,17 @@
   opacity: 0;
 }
 
+.streakStatus {
+    display: flex;
+    flex-direction: row;
+    font-size: 16px;
+    font-weight: 500;
+    color: #555;
+    background: linear-gradient(to top, #dd5902, #b9b9b9);
+    border-radius: 10px;
+    padding: 8px 10px;
+}
+
 .fireIcon {
     display: flex;
     align-items: center;
