@@ -97,6 +97,9 @@ export default function Achievement() {
                           <div className={styles.historyItemMins}>
                             <span>{item.mins} mins</span>
                           </div>
+                          <div className={styles.historyItemDate}>
+                            <span>05/03</span>
+                          </div>
                         </div>
                         <div className={styles.historyItemDate}>
                         </div>
