@@ -89,7 +89,15 @@ export default function Achievement() {
                 <section className={styles.readingHistoryList}>
                   {readingHistory.map((item) => (
                     <div key={item.id} className={styles.readingHistoryItem}>
-                      <span className={styles.historyItem}></span>
+                      <div className={styles.historyItem}>
+                        <div className={styles.historyItemDetails}>
+                          <div className={styles.historyItemChart}>
+
+                          </div>
+                        </div>
+                        <div className={styles.historyItemDate}>
+                        </div>
+                      </div>
                     </div>
                   ))}
                 </section>
