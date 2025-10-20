@@ -91,6 +91,9 @@ export default function Achievement() {
                     <div key={item.id} className={styles.readingHistoryItem}>
                       <div className={styles.historyItem}>
                         <div className={styles.historyItemDetails}>
+                          <div className={styles.historyItemChart}>
+
+                          </div>
                         </div>
                         <div className={styles.historyItemDate}>
                         </div>
