@@ -87,7 +87,19 @@ export default function Achievement() {
                   <span>Reading History</span>
                 </section>
                 <section className={styles.readingHistoryList}>
-                  <span>Reading history list goes here</span>
+                  {readingHistory.map((item) => (
+                    <div key={item.id} className={styles.readingHistoryItem}>
+                      <div className={styles.historyItem}>
+                        <div className={styles.historyItemDetails}>
+                          <div className={styles.historyItemChart}>
+
+                          </div>
+                        </div>
+                        <div className={styles.historyItemDate}>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
                 </section>
                 <section>
                   <FaChevronUp />
