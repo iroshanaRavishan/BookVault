@@ -102,6 +102,7 @@ export default function Achievement() {
                           </div>
                         </div>
                         <div className={styles.historyItemDate}>
+                          <span>05/03</span>
                         </div>
                       </div>
                     </div>
