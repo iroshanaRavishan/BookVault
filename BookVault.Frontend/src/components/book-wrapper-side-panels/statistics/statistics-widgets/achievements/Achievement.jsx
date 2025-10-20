@@ -92,6 +92,8 @@ export default function Achievement() {
                       <div className={styles.historyItem}>
                         <div className={styles.historyItemDetails}>
                         </div>
+                        <div className={styles.historyItemDate}>
+                        </div>
                       </div>
                     </div>
                   ))}
