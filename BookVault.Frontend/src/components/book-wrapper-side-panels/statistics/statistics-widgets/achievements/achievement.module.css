@@ -235,3 +235,15 @@
 .activeTab.awardsTabContent {
   transform: translateX(0%);
 }
+
+.readingHistoryItem {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 15px;
+    color: #555;
+    background-color: #adffb1;
+    margin: 5px 0;
+    border-radius: 5px;
+    padding: 6px 10px;
+}
