@@ -67,7 +67,12 @@ export default function Achievement() {
               Awards
             </button>
           </div>
-          <div className={styles.tabContainer}>
+          <div 
+            className={styles.tabContainer}   
+            style={{
+              height: active === "streaks" ? "600px" : "200px"
+            }}
+          >
             <div
               className={`${styles.streakTabContent} ${
                 active === "streaks" ? styles.activeTab : styles.hiddenTab
