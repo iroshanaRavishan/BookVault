@@ -139,18 +139,18 @@
 }
 
 .tabContainer {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
+    position: relative;
+    width: 100%;
+    overflow: hidden;
 }
 
 .streakTabContent,
 .awardsTabContent {
-  position: absolute;
-  width: 100%;
-  top: 0;
-  transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
-  opacity: 0;
+    position: absolute;
+    width: 100%;
+    top: 0;
+    transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
+    opacity: 0;
 }
 
 .streakStatus {
