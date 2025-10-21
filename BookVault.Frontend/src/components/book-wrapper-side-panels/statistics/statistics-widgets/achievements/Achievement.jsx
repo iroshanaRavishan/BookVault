@@ -18,6 +18,14 @@ export default function Achievement() {
     { id: 10, name: 'Bibliophile', icon: '📚' },
   ];
 
+  const readingHistory = [
+    {id: 1, mins: 30, date: '2024-06-20'},
+    {id: 2, mins: 45, date: '2024-06-19'},
+    {id: 3, mins: 20, date: '2024-06-18'},
+    {id: 4, mins: 60, date: '2024-06-17'},
+    {id: 5, mins: 15, date: '2024-06-16'},
+  ];
+
   const [active, setActive] = useState("streaks");
 
   return (
