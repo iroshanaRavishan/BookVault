@@ -243,6 +243,14 @@
     padding-right: 5px;
 }
 
+.readingHistoryList::-webkit-scrollbar {
+  width: 6px; 
+}
+
+.readingHistoryList::-webkit-scrollbar-track {
+  background: transparent;
+}
+
 .readingHistoryItem {
     font-size: 15px;
     color: #555;
