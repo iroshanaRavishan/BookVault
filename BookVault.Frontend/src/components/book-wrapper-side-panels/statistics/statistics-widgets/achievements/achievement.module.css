@@ -235,6 +235,14 @@
   transform: translateX(0%);
 }
 
+.readingHistoryList {
+  display: flex;
+  flex-direction: column;
+  height: 500px;
+  overflow-y: auto;
+  padding-right: 5px;
+}
+
 .readingHistoryItem {
     font-size: 15px;
     color: #555;
