@@ -251,6 +251,11 @@
   background: transparent;
 }
 
+.readingHistoryList::-webkit-scrollbar-thumb {
+  background-color: #d4d4d4;
+  border-radius: 10px;
+}
+
 .readingHistoryItem {
     font-size: 15px;
     color: #555;
