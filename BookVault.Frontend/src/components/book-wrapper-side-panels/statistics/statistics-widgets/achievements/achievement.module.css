@@ -283,11 +283,12 @@
     flex-direction: row;
 }
 
-
 .readingHistoryFooter {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
     color: #777;
+    padding: 2px 0;
+    gap: 10px;
 }
