@@ -125,7 +125,11 @@ export default function Achievement() {
                 <section className={styles.readingHistoryTitle}>
                   <span>Reading History</span>
                 </section>
-                <section className={styles.readingHistoryList}>
+                <section 
+                  className={`${styles.readingHistoryList} ${
+                    !isExpanded ? styles.noScroll : ""
+                  }`}
+                >
                   {readingHistory.map((item) => (
                     <div key={item.id} className={styles.readingHistoryItem}>
                       <div className={styles.historyItem}>
