@@ -157,7 +157,12 @@ export default function Achievement() {
                       Showing past 30 days' records only
                     </span>
                     <button onClick={() => setIsExpanded((prev) => !prev)}>
-                      {isExpanded ? "Collapse" : "Expand"} <FaChevronUp />
+                      {isExpanded ? "Collapse" : "Expand"}{" "}
+                      <FaChevronUp
+                        className={`${styles.chevronIcon} ${
+                          isExpanded ? styles.rotated : ""
+                        }`}
+                      />
                     </button>
                   </div>
                 </section>
