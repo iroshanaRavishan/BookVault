@@ -153,7 +153,9 @@ export default function Achievement() {
                 </section>
                 <section>
                   <div className={styles.readingHistoryFooter}>
-                    <span style={{fontSize: '12px'}}>Showing past 30 days' records only</span>
+                    <span style={{ fontSize: "12px" }}>
+                      Showing past 30 days' records only
+                    </span>
                     <button onClick={() => setIsExpanded((prev) => !prev)}>
                       {isExpanded ? "Collapse" : "Expand"} <FaChevronUp />
                     </button>

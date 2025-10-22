@@ -211,16 +211,16 @@
 }
 
 .hiddenTab {
-  pointer-events: none;
+    pointer-events: none;
 }
 
 .activeTab {
-  opacity: 1;
-  pointer-events: auto;
+    opacity: 1;
+    pointer-events: auto;
 }
 
 .streakTabContent {
-  transform: translateX(-100%);
+    transform: translateX(-100%);
 }
 
 .awardsTabContent {
