@@ -52,6 +52,7 @@ export default function Achievement() {
   ];
 
   const [active, setActive] = useState("streaks");
+  const [isExpanded, setIsExpanded] = useState(true);
 
   return (
     <div className={styles.achievementsContainer}>
