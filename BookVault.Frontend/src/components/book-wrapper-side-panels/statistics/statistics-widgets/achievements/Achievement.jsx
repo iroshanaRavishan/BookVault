@@ -155,7 +155,7 @@ export default function Achievement() {
                   <div className={styles.readingHistoryFooter}>
                     <span style={{fontSize: '12px'}}>Showing past 30 days' records only</span>
                     <button>
-                      <FaChevronUp />
+                      {isExpanded ? "Collapse" : "Expand"} <FaChevronUp />
                     </button>
                   </div>
                 </section>
