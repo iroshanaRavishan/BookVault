@@ -148,7 +148,7 @@ export default function Achievement() {
                 </section>
                 <section>
                   <div className={styles.readingHistoryFooter}>
-                    <span>Showing past 30 days' records only</span>
+                    <span style={{fontSize: '12px'}}>Showing past 30 days' records only</span>
                     <FaChevronUp />
                   </div>
                 </section>
