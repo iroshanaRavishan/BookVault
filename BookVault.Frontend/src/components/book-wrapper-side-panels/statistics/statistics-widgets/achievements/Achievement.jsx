@@ -52,6 +52,7 @@ export default function Achievement() {
   ];
 
   const [active, setActive] = useState("streaks");
+  const [isExpanded, setIsExpanded] = useState(true);
 
   return (
     <div className={styles.achievementsContainer}>
@@ -103,7 +104,7 @@ export default function Achievement() {
           <div 
             className={styles.tabContainer}   
             style={{
-              height: active === "streaks" ? "680px" : "200px"
+              height: active === "streaks" ? isExpanded? "680px" : "440px" : "200px"
             }}
           >
             <div
