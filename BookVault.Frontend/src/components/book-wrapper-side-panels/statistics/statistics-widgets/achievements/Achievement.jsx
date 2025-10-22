@@ -147,7 +147,9 @@ export default function Achievement() {
                   ))}
                 </section>
                 <section>
-                  <FaChevronUp />
+                  <div>
+                    <FaChevronUp />
+                  </div>
                 </section>
               </div>
             </div>
