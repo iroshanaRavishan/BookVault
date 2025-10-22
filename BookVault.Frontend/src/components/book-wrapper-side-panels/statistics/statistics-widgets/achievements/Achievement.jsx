@@ -103,7 +103,7 @@ export default function Achievement() {
           <div 
             className={styles.tabContainer}   
             style={{
-              height: active === "streaks" ? "600px" : "200px"
+              height: active === "streaks" ? "680px" : "200px"
             }}
           >
             <div
