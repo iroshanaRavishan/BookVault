@@ -262,6 +262,10 @@
     height: 0;
 }
 
+.noScroll {
+  overflow: hidden !important;
+}
+
 .readingHistoryItem {
     font-size: 15px;
     color: #555;
