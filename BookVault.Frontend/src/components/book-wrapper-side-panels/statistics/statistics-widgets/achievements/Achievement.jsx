@@ -147,7 +147,7 @@ export default function Achievement() {
                   ))}
                 </section>
                 <section>
-                  <div>
+                  <div className={styles.readingHistoryFooter}>
                     <FaChevronUp />
                   </div>
                 </section>
