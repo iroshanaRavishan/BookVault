@@ -103,7 +103,7 @@ export default function Achievement() {
           <div 
             className={styles.tabContainer}   
             style={{
-              height: active === "streaks" ? "600px" : "200px"
+              height: active === "streaks" ? "680px" : "200px"
             }}
           >
             <div
@@ -147,7 +147,10 @@ export default function Achievement() {
                   ))}
                 </section>
                 <section>
-                  <FaChevronUp />
+                  <div className={styles.readingHistoryFooter}>
+                    <span style={{fontSize: '12px'}}>Showing past 30 days' records only</span>
+                    <FaChevronUp />
+                  </div>
                 </section>
               </div>
             </div>
