@@ -70,6 +70,7 @@
   align-items: center;
   justify-content: center;
   color: #444;
+  transition: all 0.2s ease;
 }
 
 .miniChartBox:hover {
