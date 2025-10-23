@@ -18,7 +18,8 @@ export default function Goal() {
       <div className={styles.goalSummarySection}>
         <div className={styles.miniCharts}>
           {[...Array(7)].map((_, index) => (
-
+            <div>
+            </div>
           ))}
         </div>
         <div className={styles.sevenDayLineChart}>
