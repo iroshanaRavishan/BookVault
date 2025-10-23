@@ -71,3 +71,8 @@
   justify-content: center;
   color: #444;
 }
+
+.miniChartBox:hover {
+  background-color: #b2ffb6;
+  transform: scale(1.05);
+}
