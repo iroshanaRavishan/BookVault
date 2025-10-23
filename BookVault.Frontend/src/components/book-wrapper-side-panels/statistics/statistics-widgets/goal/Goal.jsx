@@ -18,8 +18,8 @@ export default function Goal() {
       <div className={styles.goalSummarySection}>
         <div className={styles.miniCharts}>
           {[...Array(7)].map((_, index) => (
-            <div>
-             <span>Day {index + 1}</span>
+            <div className={styles.miniChartBox}>
+              <span>Day {index + 1}</span>
             </div>
           ))}
         </div>
