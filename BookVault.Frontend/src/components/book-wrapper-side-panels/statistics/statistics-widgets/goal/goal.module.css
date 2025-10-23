@@ -66,6 +66,8 @@
 .miniChartBox {
   flex: 1;
   height: 50px;
+  background-color: #d6ffd8;
+  border-radius: 6px;
   display: flex;
   align-items: center;
   justify-content: center;
