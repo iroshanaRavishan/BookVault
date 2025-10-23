@@ -62,3 +62,12 @@
     justify-content: space-between;
     margin-top: 10px;
 }
+
+.miniChartBox {
+  flex: 1;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #444;
+}
