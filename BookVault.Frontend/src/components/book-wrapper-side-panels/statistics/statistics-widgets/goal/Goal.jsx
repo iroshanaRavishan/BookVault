@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './goal.module.css';
 import { FaCircleDot } from "react-icons/fa6";
+import { PiRobotLight } from 'react-icons/pi';
 
 export default function Goal() {
   return (
@@ -14,6 +15,7 @@ export default function Goal() {
         </div>
         <div className={styles.contentSectionRightDetails}>
           <span>
+            <PiRobotLight />
             Generated content
           </span>
         </div>
