@@ -13,7 +13,9 @@ export default function Goal() {
           <span>Chart goes here</span>
         </div>
         <div className={styles.contentSectionRightDetails}>
-          <span>AI Generated content</span>
+          <span>
+            Generated content
+          </span>
         </div>
       </div>
       <div className={styles.goalSummarySection}>
