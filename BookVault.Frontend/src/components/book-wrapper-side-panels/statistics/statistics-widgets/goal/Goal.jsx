@@ -19,7 +19,7 @@ export default function Goal() {
         <div className={styles.miniCharts}>
           {["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"].map((day, index) => (
             <div key={index} className={styles.miniChartBox}>
-              <span>Day {index + 1}</span>
+              <span>{day}</span>
             </div>
           ))}
         </div>
