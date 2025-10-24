@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './goal.module.css';
+import { FaCircleDot } from "react-icons/fa6";
 
 export default function Goal() {
   return (
