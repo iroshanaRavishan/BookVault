@@ -18,6 +18,7 @@ export default function Goal() {
             <PiRobotLight />
             Generated content
           </span>
+          <span>Sample text sample text. Sample text Sample TEXT sample.</span>
         </div>
       </div>
       <div className={styles.goalSummarySection}>
