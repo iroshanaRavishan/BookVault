@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './goal.module.css';
+import { FaCircleDot } from "react-icons/fa6";
 
 export default function Goal() {
   return (
@@ -19,6 +20,9 @@ export default function Goal() {
         <div className={styles.miniCharts}>
           {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((day, index) => (
             <div key={index} className={styles.miniChartBox}>
+              <div>
+                <FaCircleDot size={25} />
+              </div>
               <span className={styles.daysOfWeek}>{day}</span>
             </div>
           ))}
