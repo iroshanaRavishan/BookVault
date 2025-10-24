@@ -21,7 +21,7 @@ export default function Goal() {
           {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((day, index) => (
             <div key={index} className={styles.miniChartBox}>
               <div>
-                <FaCircleDot />
+                <FaCircleDot size={25} />
               </div>
               <span className={styles.daysOfWeek}>{day}</span>
             </div>
