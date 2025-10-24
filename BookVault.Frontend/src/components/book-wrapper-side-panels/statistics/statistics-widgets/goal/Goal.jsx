@@ -19,6 +19,9 @@ export default function Goal() {
         <div className={styles.miniCharts}>
           {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((day, index) => (
             <div key={index} className={styles.miniChartBox}>
+              <div>
+                <FaCircleDot />
+              </div>
               <span className={styles.daysOfWeek}>{day}</span>
             </div>
           ))}
