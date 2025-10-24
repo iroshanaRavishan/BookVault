@@ -17,9 +17,9 @@ export default function Goal() {
       </div>
       <div className={styles.goalSummarySection}>
         <div className={styles.miniCharts}>
-          {["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"].map((day, index) => (
+          {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((day, index) => (
             <div key={index} className={styles.miniChartBox}>
-              <span>{day}</span>
+              <span className={styles.daysOfWeek}>{day}</span>
             </div>
           ))}
         </div>
