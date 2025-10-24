@@ -14,7 +14,7 @@ export default function Goal() {
           <span>Chart goes here</span>
         </div>
         <div className={styles.contentSectionRightDetails}>
-          <span>
+          <span className={styles.aiGeneratedIndicator}>
             <PiRobotLight />
             Generated content
           </span>
