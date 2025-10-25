@@ -3,7 +3,7 @@ import styles from './screentimeheatmap.module.css';
 
 export default function ScreenTimeHeatMap() {
   const days = ["2", "3", "4", "5", "6", "7", "8"];
-  const times = ["0", "2", "4", "6", "8", "10", "12", "14", "16", "18", "10", "22"];
+  const times = ["0", "2", "4", "6", "8", "10", "12", "14", "16", "18", "20", "22"];
 
   // Just random data for visual testing (0–4 intensity)
   const generateRandomData = () =>
