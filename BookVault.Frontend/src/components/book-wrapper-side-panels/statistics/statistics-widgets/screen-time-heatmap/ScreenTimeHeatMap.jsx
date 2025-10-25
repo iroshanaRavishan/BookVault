@@ -33,7 +33,7 @@ export default function ScreenTimeHeatMap() {
         {/* Heatmap grid */}
         <div className={styles.gridContainer}>
           <span className={styles.daysIndicator}>
-            Date
+            <FaArrowLeftLong /> Date
           </span>
           {days.map((day, dayIndex) => (
             <div key={dayIndex} className={styles.row}>
