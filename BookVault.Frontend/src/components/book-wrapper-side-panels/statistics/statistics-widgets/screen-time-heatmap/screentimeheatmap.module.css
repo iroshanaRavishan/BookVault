@@ -53,8 +53,8 @@
 }
 
 .cell {
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 16px;
   border-radius: 3px;
   background-color: #ebedf0;
   transition: background-color 0.3s;
