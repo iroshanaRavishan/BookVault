@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './readinghoursummary.module.css';
+import { GoChevronLeft, GoChevronRight } from 'react-icons/go';
 
 export default function ReadingHourSummary() {
   return (
