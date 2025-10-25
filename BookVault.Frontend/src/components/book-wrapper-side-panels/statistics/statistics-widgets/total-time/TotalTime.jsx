@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './totaltime.module.css';
+import { GoChevronLeft, GoChevronRight } from "react-icons/go";
 
 export default function TotalTime() {
   return (
