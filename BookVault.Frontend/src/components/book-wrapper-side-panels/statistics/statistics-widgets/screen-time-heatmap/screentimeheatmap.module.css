@@ -82,6 +82,7 @@
 }
 
 .timeIndicator {
+  composes: indicator;
   top: -18px;
   left: 60%;
 }
