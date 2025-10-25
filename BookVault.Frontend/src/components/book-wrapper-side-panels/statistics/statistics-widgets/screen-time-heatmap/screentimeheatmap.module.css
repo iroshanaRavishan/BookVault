@@ -48,6 +48,8 @@
   color: #555;
   text-align: left;
   padding-right: 8px;
+  display: flex;
+  flex-direction: row-reverse;
 }
 
 .cell {
