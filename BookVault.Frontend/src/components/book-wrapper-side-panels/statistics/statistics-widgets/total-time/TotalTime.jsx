@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './totaltime.module.css';
+import { GoChevronLeft, GoChevronRight } from "react-icons/go";
 
 export default function TotalTime() {
   return (
@@ -22,9 +23,9 @@ export default function TotalTime() {
           <div className={styles.timeSpentDetailsChartSection}>
             <span className={styles.timeSpentDetailsText}>Screen timing Past 7 days Trends</span>
             <div className={styles.chartSection}>
-              <button>prev</button>
+              <button><GoChevronLeft /></button>
               <span>Chart Goes in here...!</span>
-              <button>next</button>
+              <button><GoChevronRight /></button>
             </div>
           </div>
         </div>
