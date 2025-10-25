@@ -70,3 +70,14 @@
   transform: scale(1.1);
   cursor: pointer;
 }
+
+.timeIndicator {
+  top: -18px;
+  left: 60%;
+}
+
+.daysIndicator {
+  top: 50%;
+  left: 8px;
+  transform: rotate(-90deg);
+}
