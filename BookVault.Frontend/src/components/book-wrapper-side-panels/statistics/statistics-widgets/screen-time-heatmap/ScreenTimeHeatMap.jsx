@@ -23,7 +23,7 @@ export default function ScreenTimeHeatMap() {
         <div className={styles.timeLabels}>
           <span></span> 
           <span className={styles.timeIndicator}>
-            Time
+            Time <FaArrowRightLong />
           </span>
           {times.map((t, i) => (
             <span key={i}>{t}</span>
