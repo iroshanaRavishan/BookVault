@@ -88,6 +88,7 @@
 }
 
 .daysIndicator {
+  composes: indicator;
   top: 50%;
   left: 8px;
   transform: rotate(-90deg);
