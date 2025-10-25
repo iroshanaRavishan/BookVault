@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './screentimeheatmap.module.css';
+import { FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6";
 
 export default function ScreenTimeHeatMap() {
   const days = ["2", "3", "4", "5", "6", "7", "8"];
