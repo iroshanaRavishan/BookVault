@@ -22,6 +22,9 @@ export default function ScreenTimeHeatMap() {
       <div className={styles.chartContainer}>
         <div className={styles.timeLabels}>
           <span></span> 
+          <span>
+            Time
+          </span>
           {times.map((t, i) => (
             <span key={i}>{t}</span>
           ))}
@@ -29,6 +32,9 @@ export default function ScreenTimeHeatMap() {
 
         {/* Heatmap grid */}
         <div className={styles.gridContainer}>
+          <span>
+            Date
+          </span>
           {days.map((day, dayIndex) => (
             <div key={dayIndex} className={styles.row}>
               <span className={styles.dayLabel}>{day}</span>
