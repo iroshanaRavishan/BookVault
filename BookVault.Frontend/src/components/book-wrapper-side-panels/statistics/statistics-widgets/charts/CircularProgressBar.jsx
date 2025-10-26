@@ -21,7 +21,10 @@ const CircularProgressBar = () => {
     },
     plugins: {
       tooltip: {
-        enabled: false
+        enabled: false,
+      },
+      legend: {
+        display: false,
       },
     },
   };
