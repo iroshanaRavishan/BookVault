@@ -9,6 +9,9 @@ const CircularProgressBar = () => {
   const data = {
     labels: ['Progress', 'Remaining'],
     datasets: [
+      {
+        data: [progress, 100 - progress],
+      },
     ],
   };
 
