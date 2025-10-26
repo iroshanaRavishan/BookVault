@@ -22,9 +22,6 @@ export default function QuickOverview() {
             <span className={styles.progressText}>56.4%</span>
           </div>
         </div>
-        <div className={styles.contentSectionRightDetails}>
-          <span>Chart Goes in here...!</span>
-        </div>
       </div>
       <div className={styles.backgroundClipPath}></div>
     </div>
