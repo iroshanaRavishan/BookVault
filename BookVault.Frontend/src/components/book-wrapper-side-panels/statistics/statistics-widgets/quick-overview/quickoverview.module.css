@@ -20,7 +20,7 @@
 .summaryContent {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 8px;
 }
 
 .aiGeneratedContentText {
@@ -39,7 +39,7 @@
 .totaPageText {
     font-size: 20px;
     font-weight: 500;
-    color: #555;
+    color: #686868;
 }
 
 .progressText {
@@ -55,6 +55,9 @@
 
 .contentSectionRightDetails {
     display: flex;
+    flex-direction: column;
+    align-items: end;
+    justify-content: end;
 }
 
 .quickOverview::before {
