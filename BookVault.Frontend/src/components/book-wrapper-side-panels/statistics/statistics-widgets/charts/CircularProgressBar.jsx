@@ -19,6 +19,14 @@ const CircularProgressBar = () => {
       duration: 1000,     
       easing: 'easeOutQuart',
     },
+    plugins: {
+      tooltip: {
+        enabled: false,
+      },
+      legend: {
+        display: false,
+      },
+    },
   };
 
   return (
