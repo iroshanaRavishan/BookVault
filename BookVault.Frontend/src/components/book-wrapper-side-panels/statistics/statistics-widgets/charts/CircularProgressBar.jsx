@@ -12,6 +12,7 @@ const CircularProgressBar = () => {
 
   const options = {
     responsive: true,
+    cutout: '80%',
   };
 
   return (
