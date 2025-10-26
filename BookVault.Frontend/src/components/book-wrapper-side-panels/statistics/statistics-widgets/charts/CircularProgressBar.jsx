@@ -6,9 +6,13 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const CircularProgressBar = () => {
+  const data = {
+    labels: ['Progress', 'Remaining'],
+  };
+
   return (
     <div style={{ width: '200px', height: '200px' }}>
-      <Doughnut />
+      <Doughnut data={data} />
     </div>
   );
 };
