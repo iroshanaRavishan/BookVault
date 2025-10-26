@@ -10,9 +10,13 @@ const CircularProgressBar = () => {
     labels: ['Progress', 'Remaining'],
   };
 
+  const options = {
+    responsive: true,
+  };
+
   return (
     <div style={{ width: '200px', height: '200px' }}>
-      <Doughnut data={data} />
+      <Doughnut data={data} options={options} />
     </div>
   );
 };
