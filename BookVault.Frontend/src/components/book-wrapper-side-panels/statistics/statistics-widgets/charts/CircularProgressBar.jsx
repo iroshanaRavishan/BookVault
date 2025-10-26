@@ -20,6 +20,9 @@ const CircularProgressBar = () => {
       easing: 'easeOutQuart',
     },
     plugins: {
+      tooltip: {
+        enabled: false
+      },
     },
   };
 
