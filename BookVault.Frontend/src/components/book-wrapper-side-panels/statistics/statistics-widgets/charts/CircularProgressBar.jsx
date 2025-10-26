@@ -19,6 +19,8 @@ const CircularProgressBar = () => {
       duration: 1000,     
       easing: 'easeOutQuart',
     },
+    plugins: {
+    },
   };
 
   return (
