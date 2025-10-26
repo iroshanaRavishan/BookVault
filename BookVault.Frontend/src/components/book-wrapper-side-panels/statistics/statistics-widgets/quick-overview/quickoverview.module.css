@@ -9,11 +9,12 @@
 .headerSection {
     font-weight: bold;
     font-size: 18px;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 
 .contentSection {
     display: flex;
+    flex-direction: column;
 }
 
 .summaryContent {
@@ -23,7 +24,7 @@
 }
 
 .aiGeneratedContentText {
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 500;
     color: #666;
     line-height: 20px;
