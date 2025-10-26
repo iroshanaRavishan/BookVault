@@ -16,6 +16,7 @@ const CircularProgressBar = () => {
     animation: {
       animateRotate: true,
       animateScale: true, 
+      duration: 1000,     
     },
   };
 
