@@ -8,6 +8,8 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 const CircularProgressBar = () => {
   const data = {
     labels: ['Progress', 'Remaining'],
+    datasets: [
+    ],
   };
 
   const options = {
