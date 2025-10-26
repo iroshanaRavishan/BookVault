@@ -24,6 +24,8 @@ export default function QuickOverview() {
         <div>
             <CircularProgressBar/>
           </div>
+        <div className={styles.contentSectionRightDetails}>
+            <CircularProgressBar />
         </div>
       </div>
       <div className={styles.backgroundClipPath}></div>
