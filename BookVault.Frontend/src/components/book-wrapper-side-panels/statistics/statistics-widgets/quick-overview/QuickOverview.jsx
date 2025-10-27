@@ -23,7 +23,7 @@ export default function QuickOverview() {
               <span className={styles.totaPageText}>Total Pages - 43</span>
             </div>
           </div>
-        <div className={styles.contentSectionRightDetails}>
+          <div className={styles.contentSectionRightDetails}>
             <CircularProgressBar />
           </div>
         </div>
