@@ -21,6 +21,9 @@ export default function QuickOverview() {
           <div className={styles.contentSectionLeftDetails}>
             <div className={styles.summaryContent}>
               <span className={styles.totaPageText}>Total Pages - 43</span>
+              <div>
+
+              </div>
             </div>
           </div>
           <div className={styles.contentSectionRightDetails}>
