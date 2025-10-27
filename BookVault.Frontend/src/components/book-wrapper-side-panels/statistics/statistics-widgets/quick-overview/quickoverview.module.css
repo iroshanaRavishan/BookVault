@@ -53,6 +53,10 @@
     align-items: center;
 }
 
+.badgeContainer {
+    margin-left: 15px;
+}
+
 .contentSectionLeftDetails {
     display: flex;
     flex-direction: column;
