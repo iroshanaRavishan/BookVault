@@ -17,6 +17,7 @@ export default function QuickOverview() {
             Generated content
           </span>
         </div>
+        <div className={styles.contentSectionDetails}>
           <div className={styles.summaryContent}>
             <span className={styles.totaPageText}>Total Pages - 43</span>
             <span className={styles.progressText}>56.4%</span>
@@ -25,6 +26,7 @@ export default function QuickOverview() {
           </div>
         <div className={styles.contentSectionRightDetails}>
             <CircularProgressBar />
+          </div>
         </div>
       </div>
       <div className={styles.backgroundClipPath}></div>
