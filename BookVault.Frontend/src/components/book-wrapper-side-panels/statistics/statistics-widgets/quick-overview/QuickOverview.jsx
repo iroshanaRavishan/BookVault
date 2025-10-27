@@ -19,11 +19,9 @@ export default function QuickOverview() {
         </div>
         <div className={styles.contentSectionDetails}>
           <div className={styles.contentSectionLeftDetails}>
-          <div className={styles.summaryContent}>
-            <span className={styles.totaPageText}>Total Pages - 43</span>
-            <span className={styles.progressText}>56.4%</span>
-        <div>
-            <CircularProgressBar/>
+            <div className={styles.summaryContent}>
+              <span className={styles.totaPageText}>Total Pages - 43</span>
+            </div>
           </div>
         <div className={styles.contentSectionRightDetails}>
             <CircularProgressBar />
