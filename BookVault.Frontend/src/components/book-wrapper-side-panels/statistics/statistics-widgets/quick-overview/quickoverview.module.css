@@ -45,7 +45,12 @@
 .progressText {
     font-size: 30px;
     font-weight: bold;
-    color: #333;
+
+.contentSectionDetails {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .contentSectionLeftDetails {
