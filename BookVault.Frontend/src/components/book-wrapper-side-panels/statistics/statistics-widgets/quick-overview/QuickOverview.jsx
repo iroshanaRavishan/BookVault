@@ -23,7 +23,8 @@ export default function QuickOverview() {
               <span className={styles.totaPageText}>Total Pages - 43</span>
               <div style={{display: 'flex', flexDirection: 'row'}}>
 
-                <div>
+                <div className={styles.badgeContainer}>
+                  📘
                 </div>
               </div>
             </div>
