@@ -2,6 +2,8 @@ import React from "react";
 import { Chart as ChartJS, BarElement,
   LineElement,
   CategoryScale,
+  LinearScale,
+  PointElement,
   Tooltip,
   Legend,
 } from "chart.js";
