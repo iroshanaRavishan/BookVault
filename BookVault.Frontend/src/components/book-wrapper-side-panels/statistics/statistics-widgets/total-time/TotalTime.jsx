@@ -14,9 +14,10 @@ export default function TotalTime() {
               <span className={styles.dateValue}>5</span> 
               <span className={styles.dateLabel}>D</span>
               <span className={styles.hoursValue}>2</span>
-              <span className={styles.hoursLable}>h</span>
-              <small>56m</small>
-              </span>
+              <span className={styles.hoursLable}>H</span>
+              <span className={styles.minsValue}>56</span>
+              <span className={styles.minsLable}>m</span>
+            </span>
             <span className={styles.timeSpentComparison}>+2h 30m than last week</span>
           </div>
           <span className={styles.totalTimeSeparator}></span>
