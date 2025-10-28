@@ -15,6 +15,8 @@ ChartJS.register(
   BarElement,
   LineElement,
   PointElement,
+  Tooltip,
+  Legend
 );
 
 const BarLineChart = () => {
