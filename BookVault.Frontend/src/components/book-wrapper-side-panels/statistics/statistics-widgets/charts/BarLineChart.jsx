@@ -1,5 +1,7 @@
 import React from "react";
-import { Chart as ChartJS, BarElement,
+import {
+  Chart as ChartJS,
+  BarElement,
   LineElement,
   CategoryScale,
   LinearScale,
