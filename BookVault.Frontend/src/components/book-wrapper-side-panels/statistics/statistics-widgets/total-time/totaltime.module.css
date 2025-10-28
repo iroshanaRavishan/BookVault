@@ -82,6 +82,12 @@
   margin-left: 5px;
 }
 
+.timeSpentComparison {
+  font-size: 12px;
+  font-weight: 500;
+  color: #4caf50;
+  text-align: left;
+}
 
 .chartSection {
   display: flex;
