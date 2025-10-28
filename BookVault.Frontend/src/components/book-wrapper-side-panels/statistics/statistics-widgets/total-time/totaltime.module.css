@@ -75,6 +75,27 @@
   margin-left: 2px;
 }
 
+.minsValue {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 24px;
+  margin-left: 5px;
+}
+
+.timeSpentComparison {
+  font-size: 12px;
+  font-weight: 500;
+  color: #4caf50;
+  text-align: left;
+}
+
+.lastOpenDate {
+  font-size: 11px;
+  font-weight: 600;
+  color: #757575;
+  text-align: left;
+}
+
 .chartSection {
   display: flex;
   align-items: center;
