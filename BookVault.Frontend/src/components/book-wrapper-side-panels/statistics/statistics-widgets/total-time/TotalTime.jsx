@@ -19,7 +19,7 @@ export default function TotalTime() {
               <span className={styles.minsValue}>56</span>
               <span className={styles.minsLable}>m</span>
             </span>
-            <span className={styles.timeSpentComparison}>+2h 30m than last week</span>
+            <span className={styles.timeSpentComparison}> <FaArrowUp size={20}/> +2h 30m than last week</span>
           </div>
           <span className={styles.totalTimeSeparator}></span>
           <div className={styles.timeSpentDetailsChartSection}>
