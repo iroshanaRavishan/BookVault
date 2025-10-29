@@ -49,6 +49,18 @@
   padding-right: 20px; 
 }
 
+.streakSummary::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 2px;              
+  height: 30px;            
+  background-color: #ccc;  
+  border-radius: 2px;      
+}
+
 .contentSectionDetails {
     flex: 1;
     display: flex;
