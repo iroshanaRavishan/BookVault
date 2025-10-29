@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styles from './quickoverview.module.css';
 import { PiRobotLight } from "react-icons/pi";
 import CircularProgressBar from '../charts/CircularProgressBar';
 
 export default function QuickOverview() {
+  const [currentProgress, setCurrentProgress] = useState(68.4); 
+
   return (
     <div className={styles.quickOverview}>
       <div className={styles.headerSection}>
