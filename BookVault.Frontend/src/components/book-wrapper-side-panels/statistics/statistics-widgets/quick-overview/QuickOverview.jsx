@@ -28,6 +28,8 @@ export default function QuickOverview() {
                 <span className={styles.streakSummary}>
                   <ImFire color='#ff0000ff' size={25}/>
                   <span className={styles.streakText}>
+                    <span>Streaks</span>
+                    <span>3 days </span>
                   </span>
                 </span>
                 <div className={styles.badgeContainer}>
