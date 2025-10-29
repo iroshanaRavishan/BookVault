@@ -26,6 +26,7 @@ export default function QuickOverview() {
               <span className={styles.totaPageText}>Total Pages - 43</span>
               <div style={{display: 'flex', flexDirection: 'row'}}>
                 <span className={styles.streakSummary}>
+                  <ImFire color='#ff0000ff' size={25}/>
                 </span>
                 <div className={styles.badgeContainer}>
                   📘
