@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import styles from './quickoverview.module.css';
 import { PiRobotLight } from "react-icons/pi";
 import CircularProgressBar from '../charts/CircularProgressBar';
+import { ImFire } from 'react-icons/im';
 
 export default function QuickOverview() {
   const [currentProgress, setCurrentProgress] = useState(68.4); 
