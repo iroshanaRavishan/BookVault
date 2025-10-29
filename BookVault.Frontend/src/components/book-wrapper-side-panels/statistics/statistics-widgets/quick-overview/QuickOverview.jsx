@@ -27,6 +27,8 @@ export default function QuickOverview() {
               <div style={{display: 'flex', flexDirection: 'row'}}>
                 <span className={styles.streakSummary}>
                   <ImFire color='#ff0000ff' size={25}/>
+                  <span className={styles.streakText}>
+                  </span>
                 </span>
                 <div className={styles.badgeContainer}>
                   📘
