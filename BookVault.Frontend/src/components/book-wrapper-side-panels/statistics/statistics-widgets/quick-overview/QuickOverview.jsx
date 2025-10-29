@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import styles from './quickoverview.module.css';
 import { PiRobotLight } from "react-icons/pi";
 import CircularProgressBar from '../charts/CircularProgressBar';
+import { ImFire } from 'react-icons/im';
 
 export default function QuickOverview() {
   const [currentProgress, setCurrentProgress] = useState(68.4); 
@@ -25,6 +26,11 @@ export default function QuickOverview() {
               <span className={styles.totaPageText}>Total Pages - 43</span>
               <div style={{display: 'flex', flexDirection: 'row'}}>
                 <span className={styles.streakSummary}>
+                  <ImFire color='#ff0000ff' size={25}/>
+                  <span className={styles.streakText}>
+                    <span>Streaks</span>
+                    <span>3 days </span>
+                  </span>
                 </span>
                 <div className={styles.badgeContainer}>
                   📘
