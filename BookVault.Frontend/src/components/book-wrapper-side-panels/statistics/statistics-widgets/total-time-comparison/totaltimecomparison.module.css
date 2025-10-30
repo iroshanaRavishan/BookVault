@@ -31,3 +31,12 @@
     border-radius: 10px;
     width: 100%;
 }
+
+.prevWeekSection span {
+  align-self: flex-start;
+  font-weight: 500;
+  padding-bottom: 8px;
+  font-size: 14px;
+  color: #8a8a8aff;
+  text-align: left;
+}
