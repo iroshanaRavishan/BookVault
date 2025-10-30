@@ -11,11 +11,13 @@ export default function TotalTime() {
         </div>
         <div className={styles.contentSection}>
           <div className={styles.timeSpentSummarySection}>
-            <div className={styles.timeSpentValue}> 
-              <span className={styles.dateValue}>5</span> 
-              <span className={styles.dateLabel}>D</span>
-              <span className={styles.hoursValue}>2</span>
-              <span className={styles.hoursLable}>H</span>
+            <div className={styles.timeSpentValueSection}>
+              <div className={styles.timeSpentValue}> 
+                <span className={styles.dateValue}>5</span> 
+                <span className={styles.dateLabel}>D</span>
+                <span className={styles.hoursValue}>2</span>
+                <span className={styles.hoursLable}>H</span>
+              <div>
               <span className={styles.minsValue}>56</span>
               <span className={styles.minsLable}>m</span>
             </div>
