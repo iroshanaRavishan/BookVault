@@ -22,12 +22,12 @@
 }
 
 .prevWeekSection {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
     padding: 10px;
     border-radius: 10px;
-  width: 100%;
+    width: 100%;
 }
