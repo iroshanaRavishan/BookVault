@@ -14,6 +14,8 @@ import { Chart } from "react-chartjs-2";
 ChartJS.register(
   BarElement,
   LineElement,
+  CategoryScale,
+  LinearScale,
   PointElement,
   Tooltip,
   Legend
