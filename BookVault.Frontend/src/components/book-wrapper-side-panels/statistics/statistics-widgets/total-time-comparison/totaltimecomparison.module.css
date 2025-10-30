@@ -40,3 +40,10 @@
     color: #8a8a8aff;
     text-align: left;
 }
+
+.progressBarsContainer {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+}
