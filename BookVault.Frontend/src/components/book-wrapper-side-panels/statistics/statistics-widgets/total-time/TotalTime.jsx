@@ -11,14 +11,14 @@ export default function TotalTime() {
         </div>
         <div className={styles.contentSection}>
           <div className={styles.timeSpentSummarySection}>
-            <span className={styles.timeSpentValue}> 
+            <div className={styles.timeSpentValue}> 
               <span className={styles.dateValue}>5</span> 
               <span className={styles.dateLabel}>D</span>
               <span className={styles.hoursValue}>2</span>
               <span className={styles.hoursLable}>H</span>
               <span className={styles.minsValue}>56</span>
               <span className={styles.minsLable}>m</span>
-            </span>
+            </div>
             <span className={styles.timeSpentComparison}> <FaArrowUp size={20}/> +2h 30m than last week</span>
             <span className={styles.lastOpenDate}> Last Open : 12/12/2020 </span>
           </div>
