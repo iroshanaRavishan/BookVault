@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './totaltime.module.css';
 import { GoChevronLeft, GoChevronRight } from "react-icons/go";
 import { FaArrowUp } from "react-icons/fa";
+import BarLineChart from '../charts/BarLineChart';
 
 export default function TotalTime() {
   return (
@@ -24,7 +25,7 @@ export default function TotalTime() {
               </div>
             </div>
             <span className={styles.timeSpentComparison}> <FaArrowUp size={20}/> +2h 30m than last week</span>
-            <span className={styles.lastOpenDate}> Last Open : 12/12/2020 </span>
+            <span className={styles.lastOpenDate}> Last Open  12/12/2020 </span>
           </div>
           <span className={styles.totalTimeSeparator}></span>
           <div className={styles.timeSpentDetailsChartSection}>
