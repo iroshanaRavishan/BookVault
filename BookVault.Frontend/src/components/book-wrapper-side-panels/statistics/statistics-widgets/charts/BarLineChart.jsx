@@ -24,6 +24,8 @@ ChartJS.register(
 const BarLineChart = () => {
   const chartRef = useRef(null);
 
+  const labels = ["12", "13", "14", "15", "16", "17", "18"];
+
   return (
     <div >
       <Chart type="bar" />
