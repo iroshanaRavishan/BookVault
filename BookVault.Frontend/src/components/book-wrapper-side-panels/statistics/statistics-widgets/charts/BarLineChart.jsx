@@ -32,6 +32,7 @@ const BarLineChart = () => {
       {
         type: "bar",
         data: [19, 9, 5, 11, 7, 13, 10],
+        borderWidth: 0,
       },
     ],
   };
