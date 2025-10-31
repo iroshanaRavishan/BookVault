@@ -26,6 +26,9 @@ const BarLineChart = () => {
 
   const labels = ["12", "13", "14", "15", "16", "17", "18"];
 
+  const data = {
+  };
+
   const options = {
     responsive: true,
     plugins: {
