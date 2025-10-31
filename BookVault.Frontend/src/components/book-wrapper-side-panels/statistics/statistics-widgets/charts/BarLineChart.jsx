@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import {
   Chart as ChartJS,
   BarElement,
@@ -22,6 +22,7 @@ ChartJS.register(
 );
 
 const BarLineChart = () => {
+  const chartRef = useRef(null);
 
   return (
     <div >
