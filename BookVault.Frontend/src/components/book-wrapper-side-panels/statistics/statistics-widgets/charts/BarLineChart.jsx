@@ -31,6 +31,10 @@ const BarLineChart = () => {
     datasets: [
       {
         type: "bar",
+        data: [19, 9, 5, 11, 7, 13, 10],
+        borderWidth: 0,
+        borderRadius: 2,
+        barThickness: 13,
       },
     ],
   };
