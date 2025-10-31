@@ -33,7 +33,7 @@ const BarLineChart = () => {
 
   return (
     <div >
-      <Chart type="bar" />
+      <Chart type="bar" options={options} />
     </div>
   );
 };
