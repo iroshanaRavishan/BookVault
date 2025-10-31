@@ -50,7 +50,7 @@ const BarLineChart = () => {
 
   return (
     <div >
-      <Chart type="bar" options={options} />
+      <Chart type="bar" data={data} options={options} />
     </div>
   );
 };
