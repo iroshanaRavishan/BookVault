@@ -28,6 +28,11 @@ const BarLineChart = () => {
 
   const data = {
     labels,
+    datasets: [
+      {
+        type: "bar",
+      },
+    ],
   };
 
   const options = {
@@ -45,7 +50,7 @@ const BarLineChart = () => {
 
   return (
     <div >
-      <Chart type="bar" options={options} />
+      <Chart type="bar" data={data} options={options} />
     </div>
   );
 };
