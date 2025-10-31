@@ -53,7 +53,7 @@ const BarLineChart = () => {
 
 
   return (
-    <div >
+    <div style={{ width: "200px", height: "100px", margin: "auto" }}>
       <Chart ref={chartRef} type="bar" data={data} options={options} />
     </div>
   );
