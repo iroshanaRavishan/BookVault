@@ -29,7 +29,9 @@ const BarLineChart = () => {
   const data = {
     labels,
     datasets: [
-      
+      {
+        type: "bar",
+      },
     ],
   };
 
