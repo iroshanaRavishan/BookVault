@@ -22,6 +22,7 @@ ChartJS.register(
 );
 
 const BarLineChart = () => {
+  const chartRef = useRef(null);
 
   return (
     <div >
