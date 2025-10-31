@@ -33,6 +33,15 @@
   text-align: center;
 }
 
+.timeSpentValueSection {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0px;
+  text-align: center;
+}
+
 .timeSpentDetailsChartSection {
   display: flex;
   flex-direction: column;
@@ -76,10 +85,9 @@
 }
 
 .minsValue {
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 600;
   line-height: 24px;
-  margin-left: 5px;
 }
 
 .timeSpentComparison {
@@ -90,7 +98,7 @@
 }
 
 .lastOpenDate {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
   color: #757575;
   text-align: left;
