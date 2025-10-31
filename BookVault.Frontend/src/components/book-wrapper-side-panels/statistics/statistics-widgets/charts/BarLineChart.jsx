@@ -29,6 +29,9 @@ const BarLineChart = () => {
   const options = {
     responsive: true,
     plugins: {
+      tooltip: {
+        enabled: true,
+      },
     },
   };
 
