@@ -33,6 +33,15 @@
   text-align: center;
 }
 
+.timeSpentValueSection {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0px;
+  text-align: center;
+}
+
 .timeSpentDetailsChartSection {
   display: flex;
   flex-direction: column;
