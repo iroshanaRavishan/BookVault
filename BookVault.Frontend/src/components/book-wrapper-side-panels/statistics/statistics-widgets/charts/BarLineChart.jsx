@@ -54,7 +54,7 @@ const BarLineChart = () => {
 
   return (
     <div >
-      <Chart type="bar" data={data} options={options} />
+      <Chart ref={chartRef} type="bar" data={data} options={options} />
     </div>
   );
 };
