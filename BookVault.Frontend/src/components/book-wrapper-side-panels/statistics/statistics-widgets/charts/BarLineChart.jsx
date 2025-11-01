@@ -72,6 +72,9 @@ const BarLineChart = () => {
         max: 24,
         ticks: { 
           stepSize: 3,
+          font: {
+              size: 10,
+          },
         },
       },
     },
