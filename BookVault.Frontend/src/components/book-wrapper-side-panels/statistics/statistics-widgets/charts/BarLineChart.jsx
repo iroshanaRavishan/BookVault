@@ -36,6 +36,9 @@ const BarLineChart = () => {
         borderRadius: 2,
         barThickness: 13,
       },
+      {
+        type: "line",
+      },
     ],
   };
 
