@@ -53,6 +53,7 @@ const BarLineChart = () => {
     responsive: true,
     interaction: {
       mode: "index",
+      intersect: false,
     },
     plugins: {
       legend: {
