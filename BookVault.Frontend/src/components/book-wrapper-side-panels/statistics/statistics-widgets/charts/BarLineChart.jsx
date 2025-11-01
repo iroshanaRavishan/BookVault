@@ -43,6 +43,8 @@ const BarLineChart = () => {
         borderWidth: 2,
         pointRadius: 2,
         pointBackgroundColor: "#ff0000",
+        tension: 0.7,
+        fill: false,
       },
     ],
   };
