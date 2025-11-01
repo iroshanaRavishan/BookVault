@@ -36,6 +36,12 @@ const BarLineChart = () => {
         borderRadius: 2,
         barThickness: 13,
       },
+      {
+        type: "line",
+        data: [19, 9, 5, 11, 7, 13, 10],
+        borderColor: "#ff0000",
+        pointBackgroundColor: "#ff0000",
+      },
     ],
   };
 
