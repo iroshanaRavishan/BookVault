@@ -55,6 +55,8 @@ const BarLineChart = () => {
       mode: "index",
       intersect: false,
     },
+    scales: {
+    },
     plugins: {
       legend: {
         display: false,
