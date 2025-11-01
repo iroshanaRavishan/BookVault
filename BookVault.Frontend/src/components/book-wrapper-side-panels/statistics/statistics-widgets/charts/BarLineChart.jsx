@@ -71,6 +71,7 @@ const BarLineChart = () => {
         min: 0,
         max: 24,
         ticks: { 
+          stepSize: 3,
         },
       },
     },
