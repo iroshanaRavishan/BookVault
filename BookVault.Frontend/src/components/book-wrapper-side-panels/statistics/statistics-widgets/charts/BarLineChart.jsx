@@ -67,6 +67,7 @@ const BarLineChart = () => {
       },
       y: {
         grid: { color: "#eee" },
+        beginAtZero: true,
       },
     },
     plugins: {
