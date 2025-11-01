@@ -59,11 +59,11 @@ const BarLineChart = () => {
       x: {
         grid: { display: false },
         ticks: {
-        font: {
-          size: 10,
+          font: {
+            size: 10,
+          },
+          color: "#666",
         },
-        color: "#666",
-      },
       },
       y: {
         grid: { color: "#eee" },
