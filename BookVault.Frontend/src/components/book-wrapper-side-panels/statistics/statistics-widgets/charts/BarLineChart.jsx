@@ -38,6 +38,7 @@ const BarLineChart = () => {
       },
       {
         type: "line",
+        data: [19, 9, 5, 11, 7, 13, 10],
       },
     ],
   };
