@@ -60,6 +60,7 @@ const BarLineChart = () => {
         grid: { display: false },
         ticks: {
         font: {
+          size: 10,
         },
         color: "#666",
       },
