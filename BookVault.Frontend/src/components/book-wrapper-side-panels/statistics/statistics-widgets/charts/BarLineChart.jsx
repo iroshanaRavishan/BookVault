@@ -59,6 +59,9 @@ const BarLineChart = () => {
       x: {
         grid: { display: false },
       },
+      y: {
+        grid: { color: "#eee" },
+      },
     },
     plugins: {
       legend: {
