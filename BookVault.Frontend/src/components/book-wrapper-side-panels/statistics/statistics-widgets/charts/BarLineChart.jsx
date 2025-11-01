@@ -51,6 +51,9 @@ const BarLineChart = () => {
 
   const options = {
     responsive: true,
+    interaction: {
+      mode: "index",
+    },
     plugins: {
       legend: {
         display: false,
