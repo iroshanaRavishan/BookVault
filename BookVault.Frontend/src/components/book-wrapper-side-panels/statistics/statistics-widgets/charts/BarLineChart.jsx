@@ -70,6 +70,8 @@ const BarLineChart = () => {
         beginAtZero: true,
         min: 0,
         max: 24,
+        ticks: { 
+        },
       },
     },
     plugins: {
