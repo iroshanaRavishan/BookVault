@@ -55,6 +55,17 @@ const BarLineChart = () => {
       mode: "index",
       intersect: false,
     },
+    scales: {
+      x: {
+        grid: { display: false },
+        ticks: {
+          color: "#666",
+        },
+      },
+      y: {
+        grid: { color: "#eee" },
+      },
+    },
     plugins: {
       legend: {
         display: false,
