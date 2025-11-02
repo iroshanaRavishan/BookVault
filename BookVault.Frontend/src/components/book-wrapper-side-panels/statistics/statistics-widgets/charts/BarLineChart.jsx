@@ -37,6 +37,7 @@ const BarLineChart = () => {
         barThickness: 13,
         backgroundColor: (ctx) => {
           const chart = ctx.chart;
+          const { ctx: canvasCtx, chartArea } = chart;
         },
       },
       {
