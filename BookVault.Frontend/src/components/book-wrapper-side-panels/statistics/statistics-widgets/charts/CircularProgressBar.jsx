@@ -10,6 +10,7 @@ const CircularProgressBar = () => {
     datasets: [
       {
         data: [progress, 100 - progress],
+        borderWidth: 0,
       },
     ],
   };
