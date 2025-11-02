@@ -42,7 +42,8 @@ const BarLineChart = () => {
 
           const gradient = canvasCtx.createLinearGradient(0, chartArea.bottom, 0, chartArea.top);
           gradient.addColorStop(0, "#f18f8fff");
-          gradient.addColorStop(1, "#0026fdff");
+          gradient.addColorStop(1, "#0026fdff"); // top
+          return gradient;
         },
       },
       {
