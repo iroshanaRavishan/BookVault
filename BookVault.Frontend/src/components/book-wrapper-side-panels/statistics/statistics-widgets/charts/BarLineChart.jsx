@@ -38,6 +38,7 @@ const BarLineChart = () => {
         backgroundColor: (ctx) => {
           const chart = ctx.chart;
           const { ctx: canvasCtx, chartArea } = chart;
+          if (!chartArea) return "#4CAF50";
         },
       },
       {
