@@ -39,6 +39,8 @@ const BarLineChart = () => {
           const chart = ctx.chart;
           const { ctx: canvasCtx, chartArea } = chart;
           if (!chartArea) return "#4CAF50";
+
+          const gradient = canvasCtx.createLinearGradient(0, chartArea.bottom, 0, chartArea.top);
         },
       },
       {
