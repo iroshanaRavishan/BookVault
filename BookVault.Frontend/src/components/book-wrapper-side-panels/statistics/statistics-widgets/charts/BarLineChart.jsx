@@ -35,6 +35,11 @@ const BarLineChart = () => {
         borderWidth: 0,
         borderRadius: 2,
         barThickness: 13,
+        backgroundColor: (ctx) => {
+          const chart = ctx.chart;
+          const { ctx: canvasCtx, chartArea } = chart;
+          if (!chartArea) return "#4CAF50";
+        },
       },
       {
         type: "line",
