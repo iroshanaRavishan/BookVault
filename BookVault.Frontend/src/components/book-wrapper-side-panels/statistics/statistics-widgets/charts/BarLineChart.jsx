@@ -35,6 +35,9 @@ const BarLineChart = () => {
         borderWidth: 0,
         borderRadius: 2,
         barThickness: 13,
+        backgroundColor: (ctx) => {
+          const chart = ctx.chart;
+        },
       },
       {
         type: "line",
