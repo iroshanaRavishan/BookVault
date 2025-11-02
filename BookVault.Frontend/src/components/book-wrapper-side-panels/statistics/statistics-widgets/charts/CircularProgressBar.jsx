@@ -12,6 +12,7 @@ const CircularProgressBar = () => {
         data: [progress, 100 - progress],
         borderWidth: 0,
         borderRadius: [0, 0],
+        cutout: '75%',
       },
     ],
   };
