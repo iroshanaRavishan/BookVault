@@ -7,6 +7,9 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 const CircularProgressBar = () => {
   const chartRef = useRef(null);
 
+  useEffect(() => {
+  }, []);
+
   const data = {
     labels: ['Progress', 'Remaining'],
     datasets: [
