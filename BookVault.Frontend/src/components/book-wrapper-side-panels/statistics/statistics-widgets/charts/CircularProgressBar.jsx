@@ -8,6 +8,7 @@ const CircularProgressBar = () => {
   const chartRef = useRef(null);
 
   useEffect(() => {
+    const chart = chartRef.current;
   }, []);
 
   const data = {
