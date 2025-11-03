@@ -14,6 +14,7 @@ const CircularProgressBar = () => {
     const ctx = chart.ctx;
 
     const gradient = ctx.createLinearGradient(0, 0, 0, ctx.canvas.height);
+    gradient.addColorStop(0, '#97b4f5ff');
   }, []);
 
   const data = {
