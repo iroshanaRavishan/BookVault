@@ -10,6 +10,8 @@ const CircularProgressBar = () => {
   useEffect(() => {
     const chart = chartRef.current;
     if (!chart) return;
+
+    const ctx = chart.ctx;
   }, []);
 
   const data = {
