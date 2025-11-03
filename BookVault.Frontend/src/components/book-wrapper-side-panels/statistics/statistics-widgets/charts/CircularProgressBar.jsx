@@ -56,6 +56,9 @@ const CircularProgressBar = () => {
   return (
     <div style={{ width: '200px', height: '200px' }}>
       <Doughnut ref={chartRef} data={data} options={options} />
+      <div>
+        <small>%</small>
+      </div>
     </div>
   );
 };
