@@ -19,11 +19,10 @@ const CircularProgressBar = () => {
 
   const options = {
     responsive: true,
-    cutout: '80%',
     animation: {
       animateRotate: true,
-      animateScale: true, 
-      duration: 1000,     
+      animateScale: true,
+      duration: 1000,
       easing: 'easeOutQuart',
     },
     plugins: {
