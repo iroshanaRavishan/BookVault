@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Doughnut } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const CircularProgressBar = () => {
+  const chartRef = useRef(null);
+
   const data = {
     labels: ['Progress', 'Remaining'],
     datasets: [
@@ -19,19 +21,18 @@ const CircularProgressBar = () => {
 
   const options = {
     responsive: true,
-    cutout: '80%',
     animation: {
       animateRotate: true,
-      animateScale: true, 
-      duration: 1000,     
+      animateScale: true,
+      duration: 1000,
       easing: 'easeOutQuart',
     },
     plugins: {
       tooltip: {
-        enabled: false,
+        enabled: false
       },
       legend: {
-        display: false,
+        display: false 
       },
     },
   };
