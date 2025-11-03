@@ -17,6 +17,7 @@ const CircularProgressBar = () => {
     gradient.addColorStop(0, '#97b4f5ff');
     gradient.addColorStop(1, '#4947e2ff');
 
+    // Apply gradient dynamically
     chart.data.datasets[0].backgroundColor = [gradient, '#f18f8f'];
   }, []);
 
