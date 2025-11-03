@@ -55,7 +55,15 @@ const CircularProgressBar = () => {
 
   return (
     <div style={{ width: '200px', height: '200px' }}>
-      <Doughnut data={data} options={options} />
+      <Doughnut ref={chartRef} data={data} options={options} />
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center'
+        }}
+      >
+        <small>%</small>
+      </div>
     </div>
   );
 };
