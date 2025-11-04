@@ -61,7 +61,10 @@ const CircularProgressBar = ({ progress }) => {
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          gap: '2px'
+          gap: '2px',
+          position: 'absolute',
+          top: '50%',
+          left: '50%',
         }}
       >
         {`${progress}`} %
