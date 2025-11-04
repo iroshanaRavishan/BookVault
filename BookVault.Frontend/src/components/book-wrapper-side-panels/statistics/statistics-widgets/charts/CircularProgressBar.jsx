@@ -21,7 +21,7 @@ const CircularProgressBar = ({ progress }) => {
     // Apply gradient dynamically
     chart.data.datasets[0].backgroundColor = [gradient, '#f18f8f'];
     chart.update();
-  }, []);
+  }, [progress]);
 
   const data = {
     labels: ['Progress', 'Remaining'],
