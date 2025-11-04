@@ -39,7 +39,7 @@ export default function QuickOverview() {
             </div>
           </div>
           <div className={styles.contentSectionRightDetails}>
-            <CircularProgressBar />
+            <CircularProgressBar progress={currentProgress}/>
           </div>
         </div>
       </div>
