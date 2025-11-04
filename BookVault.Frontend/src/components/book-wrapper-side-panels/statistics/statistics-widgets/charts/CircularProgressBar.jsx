@@ -64,7 +64,7 @@ const CircularProgressBar = ({ progress }) => {
           gap: '2px'
         }}
       >
-        <small>%</small>
+        {`${progress}`} %
       </div>
     </div>
   );
