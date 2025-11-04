@@ -59,7 +59,9 @@ const CircularProgressBar = () => {
       <div
         style={{
           display: 'flex',
-          justifyContent: 'center'
+          justifyContent: 'center',
+          alignItems: 'center',
+          gap: '2px'
         }}
       >
         <small>%</small>
