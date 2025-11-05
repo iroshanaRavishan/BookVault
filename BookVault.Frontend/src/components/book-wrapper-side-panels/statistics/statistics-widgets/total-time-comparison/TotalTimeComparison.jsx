@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './totaltimecomparison.module.css';
+import CircularProgressBar from '../charts/CircularProgressBar';
 
 export default function TotalTimeComparison() {
   return (
@@ -11,7 +12,7 @@ export default function TotalTimeComparison() {
         </div>
         <div className={styles.prevWeekSection}>
             <span style={{ textAlign: 'left' }}>Vs Prev week</span>
-            <span>Vs Previous week</span>
+            <CircularProgressBar progress={45.5} />
         </div>
     </div>
   )
