@@ -4,7 +4,7 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-const CircularProgressBar = ({ progress }) => {
+const CircularProgressBar = ({ progress, size }) => {
   const chartRef = useRef(null);
 
   useEffect(() => {
