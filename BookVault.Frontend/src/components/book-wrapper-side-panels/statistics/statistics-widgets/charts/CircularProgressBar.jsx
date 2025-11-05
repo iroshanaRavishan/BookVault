@@ -54,7 +54,13 @@ const CircularProgressBar = ({ progress }) => {
   };
 
   return (
-    <div style={{ width: '200px', height: '200px' }}>
+    <div 
+      style={{ 
+        width: '200px',
+        height: '200px', 
+        position: 'relative'
+      }}
+    >
       <Doughnut ref={chartRef} data={data} options={options} />
       <div
         style={{
@@ -66,6 +72,7 @@ const CircularProgressBar = ({ progress }) => {
           top: '50%',
           left: '50%',
           transform: 'translate(-50%, -50%)',
+          fontSize: '15px',
           fontWeight: '600',
           color: '#8a8a8aff',
         }}
