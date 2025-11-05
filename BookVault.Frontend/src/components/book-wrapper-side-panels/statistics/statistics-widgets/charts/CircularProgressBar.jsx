@@ -66,6 +66,7 @@ const CircularProgressBar = ({ progress }) => {
           top: '50%',
           left: '50%',
           transform: 'translate(-50%, -50%)',
+          fontSize: '15px',
           fontWeight: '600',
           color: '#8a8a8aff',
         }}
