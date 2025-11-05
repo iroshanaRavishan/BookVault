@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './totaltimecomparison.module.css';
+import CircularProgressBar from '../charts/CircularProgressBar';
 
 export default function TotalTimeComparison() {
   return (
