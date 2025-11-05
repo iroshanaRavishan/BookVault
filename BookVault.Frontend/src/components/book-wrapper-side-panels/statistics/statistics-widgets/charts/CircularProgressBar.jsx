@@ -65,6 +65,8 @@ const CircularProgressBar = ({ progress }) => {
           position: 'absolute',
           top: '50%',
           left: '50%',
+          fontWeight: '600',
+          color: '#8a8a8aff',
         }}
       >
         {`${progress}`} %
