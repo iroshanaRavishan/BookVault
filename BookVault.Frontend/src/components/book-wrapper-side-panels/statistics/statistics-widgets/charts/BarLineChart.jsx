@@ -101,6 +101,7 @@ const BarLineChart = () => {
 
   // Dashed hover line
   useEffect(() => {
+    const chart = chartRef.current;
   }, []);
 
   return (
