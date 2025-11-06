@@ -99,6 +99,9 @@ const BarLineChart = () => {
     },
   };
 
+  // Dashed hover line
+  useEffect(() => {
+  }, []);
 
   return (
     <div style={{ width: "200px", height: "100px", margin: "auto" }}>
