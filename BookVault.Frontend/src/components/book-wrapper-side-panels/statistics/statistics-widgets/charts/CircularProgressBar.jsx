@@ -77,7 +77,7 @@ const CircularProgressBar = ({ progress, size }) => {
           color: '#8a8a8aff',
         }}
       >
-        {`${progress}`} <small style={{fontSize: `${size/2}px`}}>%</small>
+        {`${progress}`} <small style={{fontSize: `${size/5}px`}}>%</small>
       </div>
     </div>
   );
