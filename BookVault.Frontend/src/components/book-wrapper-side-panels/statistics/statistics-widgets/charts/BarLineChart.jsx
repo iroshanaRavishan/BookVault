@@ -104,6 +104,10 @@ const BarLineChart = () => {
     const chart = chartRef.current;
     if (!chart) return;
 
+    const plugin = {
+      id: "hoverLine",
+    };
+
   }, []);
 
   return (
