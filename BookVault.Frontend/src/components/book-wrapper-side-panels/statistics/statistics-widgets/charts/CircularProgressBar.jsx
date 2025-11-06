@@ -54,9 +54,9 @@ const CircularProgressBar = ({ progress, size }) => {
   };
 
   return (
-    <div 
-      style={{ 
-        width: '200px',
+    <div
+      style={{
+        width: `${size}px`,
         height: '200px', 
         position: 'relative'
       }}
