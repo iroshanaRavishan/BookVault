@@ -109,6 +109,8 @@ const BarLineChart = () => {
       afterDatasetsDraw: (chartInstance) => {
         const activeElements = chartInstance.tooltip?.getActiveElements?.() || [];
         if (activeElements.length === 0) return;
+
+        const ctx = chartInstance.ctx;
       },
     };
 
