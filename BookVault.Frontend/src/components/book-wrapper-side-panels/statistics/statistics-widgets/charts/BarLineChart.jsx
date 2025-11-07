@@ -107,6 +107,7 @@ const BarLineChart = () => {
     const plugin = {
       id: "hoverLine",
       afterDatasetsDraw: (chartInstance) => {
+        const activeElements = chartInstance.tooltip.getActiveElements?.();
       },
     };
 
