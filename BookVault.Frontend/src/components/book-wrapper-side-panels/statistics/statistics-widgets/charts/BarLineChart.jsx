@@ -116,6 +116,7 @@ const BarLineChart = () => {
 
         ctx.save();
         ctx.beginPath();
+        ctx.restore();
       },
     };
 
