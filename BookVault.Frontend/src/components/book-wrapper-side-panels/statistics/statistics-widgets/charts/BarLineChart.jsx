@@ -70,7 +70,7 @@ const BarLineChart = () => {
         grid: { display: false },
         ticks: {
           font: {
-            size: 10,
+            size: 8,
           },
           color: "#666",
         },
@@ -84,7 +84,7 @@ const BarLineChart = () => {
           stepSize: 3,
           color: "#666",
           font: {
-              size: 10,
+              size: 8,
           },
         },
       },
