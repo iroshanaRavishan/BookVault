@@ -121,7 +121,7 @@ const BarLineChart = () => {
   }, []);
 
   return (
-    <div style={{ width: "200px", height: "100px", margin: "auto" }}>
+    <div className={styles.chartContainer}>
       <Chart ref={barLineChartRef} type="bar" data={data} options={options} />
     </div>
   );
