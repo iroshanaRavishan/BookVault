@@ -61,7 +61,7 @@ const CircularProgressBar = ({ progress, size }) => {
         position: 'relative'
       }}
     >
-      <Doughnut ref={chartRef} data={data} options={options} />
+      <Doughnut ref={progressBarChartRef} data={data} options={options} />
       <div
         style={{
           display: 'flex',
