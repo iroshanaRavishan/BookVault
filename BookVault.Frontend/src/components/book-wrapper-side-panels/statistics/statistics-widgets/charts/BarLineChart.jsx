@@ -79,7 +79,6 @@ const BarLineChart = () => {
         grid: { color: "#eee" },
         beginAtZero: true,
         ticks: { 
-          stepSize: 3,
           color: "#666",
           font: {
               size: 8,
