@@ -31,7 +31,7 @@ const BarLineChart = () => {
     datasets: [
       {
         type: "bar",
-        data: [19, 9, 5, 11, 7, 13, 10],
+        data: [2.5, 4.1, 1.6, 2.2, 3, 2.4, 4.5],
         borderWidth: 0,
         borderRadius: 2,
         barThickness: 13,
@@ -48,11 +48,11 @@ const BarLineChart = () => {
       },
       {
         type: "line",
-        data: [19, 9, 5, 11, 7, 13, 10],
-        borderColor: "#ff0000",
+        data: [2.5, 4.1, 1.6, 2.2, 3, 2.4, 4.5],
+        borderColor: "#f18f8fff",
         borderWidth: 2,
         pointRadius: 2,
-        pointBackgroundColor: "#ff0000",
+        pointBackgroundColor: "#f18f8fff",
         tension: 0.7,
         fill: false,
       },
@@ -70,7 +70,7 @@ const BarLineChart = () => {
         grid: { display: false },
         ticks: {
           font: {
-            size: 10,
+            size: 8,
           },
           color: "#666",
         },
@@ -84,7 +84,7 @@ const BarLineChart = () => {
           stepSize: 3,
           color: "#666",
           font: {
-              size: 10,
+              size: 8,
           },
         },
       },
