@@ -68,7 +68,9 @@ const CircularProgressBar = ({ progress, size }) => {
         }}
         className={styles.chartLabelWrapper}
       >
-        {`${progress}`} <span style={{ fontSize: `${size/7}px` }}>%</span>
+        <div>
+          {`${progress}`} <span style={{ fontSize: `${size/7}px` }}>%</span>
+        </div>
       </div>
     </div>
   );
