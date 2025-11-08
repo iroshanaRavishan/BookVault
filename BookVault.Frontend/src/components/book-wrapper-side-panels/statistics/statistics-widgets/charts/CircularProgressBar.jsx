@@ -4,7 +4,7 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-const CircularProgressBar = ({ progress, size }) => {
+const CircularProgressBar = ({ progress, size, hours }) => {
   const progressBarChartRef = useRef(null);
 
   useEffect(() => {
@@ -68,7 +68,9 @@ const CircularProgressBar = ({ progress, size }) => {
         }}
         className={styles.chartLabelWrapper}
       >
-        {`${progress}`} <small style={{fontSize: `${size/5}px`}}>%</small>
+        <div>
+          {`${progress}`} <span style={{ fontSize: `${size/7}px` }}>%</span>
+        </div>
       </div>
     </div>
   );
