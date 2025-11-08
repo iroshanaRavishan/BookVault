@@ -49,10 +49,10 @@ const BarLineChart = () => {
       {
         type: "line",
         data: [2.5, 4.1, 1.6, 2.2, 3, 2.4, 4.5],
-        borderColor: "#ff0000",
+        borderColor: "#f18f8fff",
         borderWidth: 2,
         pointRadius: 2,
-        pointBackgroundColor: "#ff0000",
+        pointBackgroundColor: "#f18f8fff",
         tension: 0.7,
         fill: false,
       },
