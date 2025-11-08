@@ -22,7 +22,7 @@ ChartJS.register(
 );
 
 const BarLineChart = () => {
-  const chartRef = useRef(null);
+  const barLineChartRef = useRef(null);
 
   const labels = ["12", "13", "14", "15", "16", "17", "18"];
 
@@ -78,8 +78,6 @@ const BarLineChart = () => {
       y: {
         grid: { color: "#eee" },
         beginAtZero: true,
-        min: 0,
-        max: 24,
         ticks: { 
           stepSize: 3,
           color: "#666",
