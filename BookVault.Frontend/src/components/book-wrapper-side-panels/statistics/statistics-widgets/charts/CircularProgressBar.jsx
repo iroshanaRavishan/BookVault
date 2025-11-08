@@ -5,10 +5,10 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const CircularProgressBar = ({ progress, size }) => {
-  const chartRef = useRef(null);
+  const progressBarChartRef = useRef(null);
 
   useEffect(() => {
-    const chart = chartRef.current;
+    const chart = progressBarChartRef.current;
     if (!chart) return;
 
     const ctx = chart.ctx;
@@ -61,7 +61,7 @@ const CircularProgressBar = ({ progress, size }) => {
         position: 'relative'
       }}
     >
-      <Doughnut ref={chartRef} data={data} options={options} />
+      <Doughnut ref={progressBarChartRef} data={data} options={options} />
       <div
         style={{
           display: 'flex',
