@@ -32,7 +32,7 @@
     width: 100%;
 }
 
-.prevWeekSection span {
+.preWeekSectionText {
     align-self: flex-start;
     font-weight: 500;
     padding-bottom: 8px;
