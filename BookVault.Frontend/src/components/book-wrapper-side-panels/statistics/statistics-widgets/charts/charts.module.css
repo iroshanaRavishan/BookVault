@@ -1,0 +1,7 @@
+.chartContainer {
+  position: relative;
+  width: 200px;
+  height: 100px;
+  margin: auto;
+  user-select: none;
+}
