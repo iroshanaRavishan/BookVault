@@ -79,7 +79,6 @@ const BarLineChart = () => {
         grid: { color: "#eee" },
         beginAtZero: true,
         ticks: { 
-          stepSize: 3,
           color: "#666",
           font: {
               size: 8,
@@ -122,7 +121,7 @@ const BarLineChart = () => {
 
   return (
     <div style={{ width: "200px", height: "100px", margin: "auto" }}>
-      <Chart ref={chartRef} type="bar" data={data} options={options} />
+      <Chart ref={barLineChartRef} type="bar" data={data} options={options} />
     </div>
   );
 };
