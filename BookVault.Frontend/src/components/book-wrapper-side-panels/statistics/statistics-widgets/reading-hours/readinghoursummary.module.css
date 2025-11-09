@@ -1,5 +1,5 @@
 .hoursSummarySection {
-    background-color: rgb(255, 255, 255);
+    background-color: #ffffff;
     padding: 10px;
     border-radius: 10px;
 }
@@ -15,5 +15,4 @@
     justify-content: space-between;
     align-items: center;
     height: 200px;
-    background-color: rgb(240, 240, 240);
 }
