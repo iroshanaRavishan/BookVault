@@ -71,7 +71,7 @@ const BarLineChart = () => {
         grid: { display: false },
         ticks: {
           font: {
-            size: 8,
+            size: 8
           },
           color: "#666",
         },
@@ -82,17 +82,17 @@ const BarLineChart = () => {
         ticks: { 
           color: "#666",
           font: {
-              size: 8,
+            size: 8
           },
         },
       },
     },
     plugins: {
       legend: {
-        display: false,
+        display: false
       },
       tooltip: {
-        enabled: true,
+        enabled: true
       },
     },
   };
