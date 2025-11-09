@@ -15,7 +15,7 @@ export default function TotalTimeComparison() {
         </div>
         <div className={styles.prevWeekSection}>
             <span style={{ textAlign: 'left' }} className={styles.preWeekSectionText}>Vs Prev week</span>
-            <CircularProgressBar progress={45.5} size={70} />
+            <CircularProgressBar progress={45.5} size={70} hours={4.6} />
         </div>
     </div>
   )

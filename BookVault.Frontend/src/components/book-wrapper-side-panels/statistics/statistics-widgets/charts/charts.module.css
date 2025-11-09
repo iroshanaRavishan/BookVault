@@ -5,11 +5,14 @@
 }
 
 .chartLabelWrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    font-weight: 600 !important;
-    color: #8a8a8aff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: 600 !important;
+  color: #8a8a8aff;
 }
