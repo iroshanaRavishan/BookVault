@@ -78,7 +78,7 @@ const CircularProgressBar = ({ progress, size, hours }) => {
           {`${progress}`} <span style={{ fontSize: `${size/7}px` }}>%</span>
         </div>
         {
-          hours != null && <div> {hours} hr </div>
+          hours != null && <div style={{ fontSize: `${size/6}px`, fontWeight: '1000', color: '#c2c2c2ff' }}> {hours} hr </div>
         }
       </div>
     </div>

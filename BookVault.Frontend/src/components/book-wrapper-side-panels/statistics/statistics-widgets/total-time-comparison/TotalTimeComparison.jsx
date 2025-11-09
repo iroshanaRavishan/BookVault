@@ -8,9 +8,9 @@ export default function TotalTimeComparison() {
         <div className={styles.lastWeekSection}>
             <span>Total time in the last week</span>
             <div className={styles.progressBarsContainer}>
-              <CircularProgressBar progress={34.8} size={70}/>
+              <CircularProgressBar progress={34.8} size={70} hours={3.5} />
               <span>Vs</span>
-              <CircularProgressBar progress={72.5} size={70} />
+              <CircularProgressBar progress={72.5} size={70} hours={9.3} />
             </div>
         </div>
         <div className={styles.prevWeekSection}>
