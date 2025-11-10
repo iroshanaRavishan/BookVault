@@ -11,6 +11,7 @@ import {
   Legend,
 } from "chart.js";
 import { Chart } from "react-chartjs-2";
+import { FaArrowRightLong, FaArrowUpLong } from "react-icons/fa6";
 
 ChartJS.register(
   BarElement,
@@ -100,7 +101,12 @@ const BarLineChart = ({ width, height }) => {
 
   return (
     <div className={styles.chartContainer} style={{ width: width, height: height }}>
-      <Chart ref={barLineChartRef} type="bar" data={data} options={options} />
+      <span >
+        Hours <FaArrowUpLong />
+        Date <FaArrowRightLong />
+      </span>
+
+      <Chart ref={barLineChartRef} type="bar" data={data} options={options} plugins={[hoverLinesPlugin]}/>
     </div>
   );
 };
