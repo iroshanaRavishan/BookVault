@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './readinghoursummary.module.css';
-import { GoChevronLeft, GoChevronRight } from 'react-icons/go';
+import BarLineChart from '../charts/BarLineChart';
 
 export default function ReadingHourSummary() {
   return (
