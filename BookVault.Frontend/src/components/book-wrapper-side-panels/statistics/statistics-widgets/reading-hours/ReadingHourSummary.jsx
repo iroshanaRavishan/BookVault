@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './readinghoursummary.module.css';
-import { GoChevronLeft, GoChevronRight } from 'react-icons/go';
+import BarLineChart from '../charts/BarLineChart';
 
 export default function ReadingHourSummary() {
   return (
@@ -9,7 +9,9 @@ export default function ReadingHourSummary() {
             <span>Last 30 days reading hours summary</span>
         </div>
         <div className={styles.contentSection}>
-          <span>Chart Goes in here...!</span>
+          <div>
+            <BarLineChart width="300px" height="150px" />
+          </div>
         </div>
     </div>
   )
