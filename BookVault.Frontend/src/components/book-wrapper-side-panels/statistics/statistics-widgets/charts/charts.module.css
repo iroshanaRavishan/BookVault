@@ -31,3 +31,11 @@
   font-weight: 600 !important;
   color: #8a8a8aff;
 }
+
+.progressIndicator {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 2px;
+}
