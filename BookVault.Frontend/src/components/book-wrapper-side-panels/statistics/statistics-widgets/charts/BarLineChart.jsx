@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef } from "react";
 import styles from './charts.module.css';
 import {
   Chart as ChartJS,
@@ -22,7 +22,7 @@ ChartJS.register(
   Legend
 );
 
-const BarLineChart = () => {
+const BarLineChart = ({ width, height }) => {
   const barLineChartRef = useRef(null);
 
   const labels = ["12", "13", "14", "15", "16", "17", "18"];
@@ -99,7 +99,7 @@ const BarLineChart = () => {
 
 
   return (
-    <div className={styles.chartContainer}>
+    <div className={styles.chartContainer} style={{ width: width, height: height }}>
       <Chart ref={barLineChartRef} type="bar" data={data} options={options} />
     </div>
   );
