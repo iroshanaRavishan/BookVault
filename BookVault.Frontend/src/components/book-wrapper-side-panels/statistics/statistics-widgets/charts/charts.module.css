@@ -14,6 +14,11 @@
   font-weight: 600 !important;
 }
 
+.chartIndicator {
+  composes: indicator;
+  top: -12%;
+}
+
 .chartLabelWrapper {
   display: flex;
   flex-direction: column;
