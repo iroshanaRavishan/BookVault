@@ -22,7 +22,7 @@ ChartJS.register(
   Legend
 );
 
-const BarLineChart = ({ width }) => {
+const BarLineChart = ({ width, height }) => {
   const barLineChartRef = useRef(null);
 
   const labels = ["12", "13", "14", "15", "16", "17", "18"];
