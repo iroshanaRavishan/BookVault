@@ -101,7 +101,7 @@ const BarLineChart = ({ width, height }) => {
 
   return (
     <div className={styles.chartContainer} style={{ width: width, height: height }}>
-      <span className={styles.chartIndicator}>
+      <span className={styles.chartIndicator} style={{ transform: width == '200px'? 'translateX(50%)': 'translateX(100%)' }} >
         Hours <FaArrowUpLong />
         Date <FaArrowRightLong style={{ marginTop: "2px" }} />
       </span>
