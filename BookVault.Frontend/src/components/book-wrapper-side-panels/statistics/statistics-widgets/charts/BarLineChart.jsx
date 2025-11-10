@@ -58,7 +58,7 @@ const BarLineChart = ({ width, height }) => {
         tension: 0.7,
         fill: false,
       },
-    ],
+    ].filter(Boolean),
   };
 
   const options = {
