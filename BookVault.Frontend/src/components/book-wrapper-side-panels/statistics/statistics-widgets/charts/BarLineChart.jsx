@@ -103,7 +103,7 @@ const BarLineChart = ({ width, height }) => {
     <div className={styles.chartContainer} style={{ width: width, height: height }}>
       <span >
         Hours <FaArrowUpLong />
-        Date <FaArrowRightLong />
+        Date <FaArrowRightLong style={{ marginTop: "2px" }} />
       </span>
 
       <Chart ref={barLineChartRef} type="bar" data={data} options={options} plugins={[hoverLinesPlugin]}/>
