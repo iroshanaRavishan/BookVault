@@ -6,7 +6,7 @@ export default function ReadingHourSummary() {
   return (
     <div className={styles.hoursSummarySection}>  
         <div className={styles.headerSection}>
-            <span>Last 30 days reading hours summary</span>
+            <span>Last 30 days' reading summary</span>
         </div>
         <div className={styles.contentSection}>
           <div>
