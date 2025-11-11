@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './screentimeheatmap.module.css';
-import { FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6";
+import { FaArrowUpLong, FaArrowRightLong } from "react-icons/fa6";
 
 export default function ScreenTimeHeatMap() {
   const days = ["2", "3", "4", "5", "6", "7", "8"];
@@ -17,7 +17,7 @@ export default function ScreenTimeHeatMap() {
   return (
     <div className={styles.totalScreenTimeSection}>  
       <div className={styles.headerSection}>
-        <span>Total Screen Time - (Hourly basis) <small>for last 7 days</small></span>
+        <span>Total Screen Time - (Hourly basis) <small style={{color: '#969696ff', fontWeight: 500, fontSize: '14px', fontStyle: 'italic'}}>for last 7 days</small></span>
       </div>
       <div className={styles.chartContainer}>
         <div className={styles.timeLabels}>
