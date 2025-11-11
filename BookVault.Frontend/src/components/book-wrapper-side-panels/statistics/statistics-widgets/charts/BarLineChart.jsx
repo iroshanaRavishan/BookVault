@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from './charts.module.css';
 import {
   Chart as ChartJS,
