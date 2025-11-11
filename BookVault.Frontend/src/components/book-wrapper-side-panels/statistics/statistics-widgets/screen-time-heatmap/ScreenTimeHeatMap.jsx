@@ -20,7 +20,7 @@ export default function ScreenTimeHeatMap() {
         <span>Total Screen Time - (Hourly basis) <small style={{color: '#969696ff', fontWeight: 500, fontSize: '14px', fontStyle: 'italic'}}>for last 7 days</small></span>
       </div>
       <div className={styles.chartContainer}>
-        <span >
+        <span className={styles.chartIndicator} >
           Date <FaArrowUpLong />
           Hours <FaArrowRightLong style={{ marginTop: "2px" }} />
         </span>
