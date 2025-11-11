@@ -36,7 +36,7 @@ const BarLineChart = ({ width, height, barThicknessVal=13 }) => {
         data: [2.5, 4.1, 1.6, 2.2, 3, 2.4, 4.5],
         borderWidth: 0,
         borderRadius: 2,
-        barThickness: 13,
+        barThickness: barThicknessVal,
         backgroundColor: (ctx) => {
           const chart = ctx.chart;
           const { ctx: canvasCtx, chartArea } = chart;
