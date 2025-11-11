@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from './charts.module.css';
 import {
   Chart as ChartJS,
@@ -11,7 +11,7 @@ import {
   Legend,
 } from "chart.js";
 import { Chart } from "react-chartjs-2";
-import { FaArrowRightLong, FaArrowUpLong } from "react-icons/fa6";
+import { FaArrowRightLong, FaArrowUpLong, FaTrophy } from "react-icons/fa6";
 
 ChartJS.register(
   BarElement,
@@ -23,7 +23,10 @@ ChartJS.register(
   Legend
 );
 
-const BarLineChart = ({ width, height }) => {
+const BarLineChart = ({ 
+  width,
+  height,
+  barThicknessVal=13 }) => {
   const barLineChartRef = useRef(null);
 
   const labels = ["12", "13", "14", "15", "16", "17", "18"];
@@ -36,7 +39,7 @@ const BarLineChart = ({ width, height }) => {
         data: [2.5, 4.1, 1.6, 2.2, 3, 2.4, 4.5],
         borderWidth: 0,
         borderRadius: 2,
-        barThickness: 13,
+        barThickness: barThicknessVal,
         backgroundColor: (ctx) => {
           const chart = ctx.chart;
           const { ctx: canvasCtx, chartArea } = chart;
