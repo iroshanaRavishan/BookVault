@@ -23,3 +23,20 @@
     flex-direction: column;
     margin: 12px 0 0 0;
 }
+
+.aiGeneratedContentText {
+    font-size: 13px;
+    font-weight: 500;
+    color: #666;
+    line-height: 20px;
+}
+
+.aiGeneratedIndicator {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center ;
+    font-size: 12px;
+    font-weight: 600;
+    color: #858585;
+}
