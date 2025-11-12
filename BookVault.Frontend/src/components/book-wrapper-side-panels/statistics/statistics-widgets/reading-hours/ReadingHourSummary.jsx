@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './readinghoursummary.module.css';
 import BarLineChart from '../charts/BarLineChart';
+import { PiRobotLight } from 'react-icons/pi';
 
 export default function ReadingHourSummary() {
   return (
