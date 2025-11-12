@@ -123,6 +123,12 @@
   width: 100%;
 }
 
+.chartTypes {
+  font-size: 12px;
+  font-weight: 500;
+  color: #808080;
+}
+
 .totalTimeSeparator {
   position: relative;
   display: flex;
