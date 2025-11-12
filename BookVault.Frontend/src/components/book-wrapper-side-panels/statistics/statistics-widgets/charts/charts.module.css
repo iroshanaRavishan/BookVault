@@ -54,3 +54,10 @@
   pointer-events: none;
 }
 
+.trophyIcon {
+  font-size: 14px;
+  color: #977507c5;
+  border: 1.9px solid #0000007a;
+  border-radius: 50%;
+  padding: 2px;
+}
