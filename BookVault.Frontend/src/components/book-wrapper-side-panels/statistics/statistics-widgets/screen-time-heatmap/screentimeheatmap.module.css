@@ -63,11 +63,11 @@
   transition: background-color 0.3s;
 }
 
-.level0 { background-color: #ebedf0; }
-.level1 { background-color: #c6e48b; }
-.level2 { background-color: #7bc96f; }
-.level3 { background-color: #239a3b; }
-.level4 { background-color: #196127; }
+.level0 { background-color: #f18f8f; }
+.level1 { background-color: #b06ed5; }
+.level2 { background-color: #7646e6; }
+.level3 { background-color: #3b4ef2; }
+.level4 { background-color: #0026fd; }
 
 .cell:hover {
   transform: scale(1.1);
