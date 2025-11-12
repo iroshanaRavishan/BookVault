@@ -16,7 +16,7 @@
 .chartContainer {
   display: flex;
   position: relative;
-  transform: translateX(-10%);
+  transform: translateX(-14%);
   flex-direction: column;
   margin-top: 30px;
 }
