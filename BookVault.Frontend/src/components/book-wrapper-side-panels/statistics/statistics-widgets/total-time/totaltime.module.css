@@ -114,6 +114,21 @@
   gap: 10px;
 }
 
+.chartNavigationButtons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  gap: 10px;
+  width: 100%;
+}
+
+.chartTypes {
+  font-size: 12px;
+  font-weight: 500;
+  color: #808080;
+}
+
 .totalTimeSeparator {
   position: relative;
   display: flex;
