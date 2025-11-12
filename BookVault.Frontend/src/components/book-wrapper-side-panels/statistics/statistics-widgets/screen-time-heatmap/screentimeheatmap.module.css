@@ -86,13 +86,6 @@
 
 .timeIndicator {
   composes: indicator;
-  top: -18px;
-  left: 60%;
-}
-
-.daysIndicator {
-  composes: indicator;
-  top: 50%;
-  left: 8px;
-  transform: rotate(-90deg);
+  top: -12%;
+  transform: translateX(138.5%);
 }
