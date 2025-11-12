@@ -84,7 +84,7 @@
   font-weight: 600 !important;
 }
 
-.timeIndicator {
+.chartIndicator {
   composes: indicator;
   top: -12%;
   transform: translateX(138.5%);
