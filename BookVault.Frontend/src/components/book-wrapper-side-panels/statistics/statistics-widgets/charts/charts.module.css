@@ -39,3 +39,10 @@
   align-items: center;
   gap: 2px;
 }
+
+.progressIndicator span {
+  line-height: 1;
+  display: inline-flex;
+  align-items: flex-start;
+  padding: 0 !important;
+}
