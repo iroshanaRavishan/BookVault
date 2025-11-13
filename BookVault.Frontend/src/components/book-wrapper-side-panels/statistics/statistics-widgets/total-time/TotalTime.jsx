@@ -5,6 +5,8 @@ import { FaArrowUp } from "react-icons/fa";
 import BarLineChart from '../charts/BarLineChart';
 
 export default function TotalTime() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
   return (
       <div className={styles.totalTimeSpentSection}>  
         <div className={styles.headerSection}>
