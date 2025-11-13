@@ -6,6 +6,7 @@ import BarLineChart from '../charts/BarLineChart';
 
 export default function TotalTime() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const labels = Array.from({ length: 7 }, (_, i) => `${i + 1}`);
 
   return (
       <div className={styles.totalTimeSpentSection}>  
