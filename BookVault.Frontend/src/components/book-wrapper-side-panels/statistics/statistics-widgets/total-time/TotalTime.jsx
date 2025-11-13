@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './totaltime.module.css';
 import { GoChevronLeft, GoChevronRight } from "react-icons/go";
 import { FaArrowUp } from "react-icons/fa";
 import BarLineChart from '../charts/BarLineChart';
 
 export default function TotalTime() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const labels = Array.from({ length: 7 }, (_, i) => `${i + 1}`);
+
   return (
       <div className={styles.totalTimeSpentSection}>  
         <div className={styles.headerSection}>
@@ -34,7 +37,7 @@ export default function TotalTime() {
               <div className={styles.sliderWrapper}>
                 <div className={styles.slider}>
                 <button><GoChevronLeft /></button>
-                <span><BarLineChart /></span>
+                <span className={styles.chartTypes}></span>
                 <button><GoChevronRight /></button>
               </div>
             </div>
