@@ -38,7 +38,9 @@ export default function TotalTime() {
               <div className={styles.sliderWrapper}>
                 <div className={styles.slider}>
               <div className={styles.chartNavigationButtons}>
-                <button><GoChevronLeft /></button>
+                <button className={styles.chartNavigationButton}>
+                  <GoChevronLeft />
+                </button>
                 <span className={styles.chartTypes}></span>
                 <button><GoChevronRight /></button>
               </div>
