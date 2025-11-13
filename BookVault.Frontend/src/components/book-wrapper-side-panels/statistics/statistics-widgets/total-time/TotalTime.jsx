@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './totaltime.module.css';
 import { GoChevronLeft, GoChevronRight } from "react-icons/go";
 import { FaArrowUp } from "react-icons/fa";
