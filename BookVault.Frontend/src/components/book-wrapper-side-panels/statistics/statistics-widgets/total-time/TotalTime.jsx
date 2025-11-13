@@ -32,6 +32,7 @@ export default function TotalTime() {
             <span className={styles.timeSpentDetailsText}>Screen timing trend in past 7 day's </span>
             <div className={styles.chartSection}>
               <div className={styles.sliderWrapper}>
+                <div className={styles.slider}>
                 <button><GoChevronLeft /></button>
                 <span><BarLineChart /></span>
                 <button><GoChevronRight /></button>
