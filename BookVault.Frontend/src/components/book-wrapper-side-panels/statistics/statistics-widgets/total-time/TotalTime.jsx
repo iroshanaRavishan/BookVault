@@ -20,7 +20,7 @@ export default function TotalTime() {
     );
   };
 
-  };
+  const handlePrev = () => {  };
 
   return (
       <div className={styles.totalTimeSpentSection}>  
