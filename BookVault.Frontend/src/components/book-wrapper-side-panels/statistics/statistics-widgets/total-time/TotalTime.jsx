@@ -15,7 +15,15 @@ export default function TotalTime() {
   ];
 
   const handleNext = () => {
+    setCurrentIndex((prev) =>
+      prev < charts.length - 1 ? prev + 1 : prev
+    );
+  };
 
+  const handlePrev = () => {
+    setCurrentIndex((prev) =>
+      prev > 0 ? prev - 1 : prev
+    );
   };
 
   return (
