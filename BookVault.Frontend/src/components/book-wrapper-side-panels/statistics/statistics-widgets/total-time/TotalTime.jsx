@@ -54,11 +54,15 @@ export default function TotalTime() {
             <div className={styles.chartSection}>
               <div className={styles.sliderWrapper}>
                 <div className={styles.slider}>
+                  <div className={styles.slide}></div>
+
               <div className={styles.chartNavigationButtons}>
                 <button className={styles.chartNavigationButton}>
                   <GoChevronLeft />
                 </button>
-                <span className={styles.chartTypes}></span>
+                <span className={styles.chartTypes}>
+                  {charts[currentIndex].label}
+                </span>
                 <button className={styles.chartNavigationButton}>
                   <GoChevronRight />
                 </button>
