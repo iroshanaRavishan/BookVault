@@ -14,6 +14,10 @@ export default function TotalTime() {
     { component: "Line With Cumulative Chart", label: "Cumulative chart" },
   ];
 
+  const handleNext = () => {
+
+  };
+
   return (
       <div className={styles.totalTimeSpentSection}>  
         <div className={styles.headerSection}>
