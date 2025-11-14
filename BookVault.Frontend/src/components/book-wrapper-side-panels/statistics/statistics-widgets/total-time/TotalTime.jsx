@@ -58,7 +58,9 @@ export default function TotalTime() {
                 <button className={styles.chartNavigationButton}>
                   <GoChevronLeft />
                 </button>
-                <span className={styles.chartTypes}></span>
+                <span className={styles.chartTypes}>
+                  {charts[currentIndex].label}
+                </span>
                 <button className={styles.chartNavigationButton}>
                   <GoChevronRight />
                 </button>
