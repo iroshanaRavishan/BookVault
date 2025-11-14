@@ -9,6 +9,10 @@ export default function TotalTime() {
   const labels = Array.from({ length: 7 }, (_, i) => `${i + 1}`);
   const values = Array.from({ length: 7 }, () => +(Math.random() * 5).toFixed(2));
 
+  const charts = [
+    { component: <BarLineChart showLine={true} width="200px" height="100px" values={values} labels={labels} />, label: "Bar chart with line" },
+  ];
+
   return (
       <div className={styles.totalTimeSpentSection}>  
         <div className={styles.headerSection}>
@@ -42,7 +46,9 @@ export default function TotalTime() {
                   <GoChevronLeft />
                 </button>
                 <span className={styles.chartTypes}></span>
-                <button><GoChevronRight /></button>
+                <button className={styles.chartNavigationButton}>
+                  <GoChevronRight />
+                </button>
               </div>
             </div>
           </div>
