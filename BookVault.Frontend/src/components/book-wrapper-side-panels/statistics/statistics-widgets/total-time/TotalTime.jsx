@@ -20,7 +20,11 @@ export default function TotalTime() {
     );
   };
 
-  const handlePrev = () => {  };
+  const handlePrev = () => {
+    setCurrentIndex((prev) =>
+      prev > 0 ? prev - 1 : prev
+    );
+  };
 
   return (
       <div className={styles.totalTimeSpentSection}>  
