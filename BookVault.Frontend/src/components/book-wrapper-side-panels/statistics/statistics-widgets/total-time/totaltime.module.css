@@ -136,6 +136,19 @@
   position: relative;
 }
 
+.slider {
+  display: flex;
+  width: 100%;
+  transition: transform 0.4s ease-in-out;
+}
+
+.slide {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .totalTimeSeparator {
   position: relative;
   display: flex;
