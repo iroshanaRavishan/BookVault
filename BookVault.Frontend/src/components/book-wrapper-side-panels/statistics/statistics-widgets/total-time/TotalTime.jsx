@@ -42,7 +42,9 @@ export default function TotalTime() {
                   <GoChevronLeft />
                 </button>
                 <span className={styles.chartTypes}></span>
-                <button><GoChevronRight /></button>
+                <button className={styles.chartNavigationButton}>
+                  <GoChevronRight />
+                </button>
               </div>
             </div>
           </div>
