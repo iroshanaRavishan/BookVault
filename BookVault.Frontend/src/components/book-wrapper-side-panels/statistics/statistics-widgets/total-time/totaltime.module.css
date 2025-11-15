@@ -154,6 +154,11 @@
   color: #606060;
 }
 
+.chartNavigationButton:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
 .totalTimeSeparator {
   position: relative;
   display: flex;
