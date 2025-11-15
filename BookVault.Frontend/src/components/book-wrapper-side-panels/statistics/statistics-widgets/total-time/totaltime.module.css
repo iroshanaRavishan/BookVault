@@ -128,7 +128,12 @@
   border: none;
   cursor: pointer;
   font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: #7575751a;
+  border-radius: 5px;
+  padding: 2px 5px;
   color: #808080;
 }
 
