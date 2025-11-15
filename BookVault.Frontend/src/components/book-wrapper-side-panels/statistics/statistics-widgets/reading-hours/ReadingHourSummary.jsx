@@ -4,6 +4,7 @@ import BarLineChart from '../charts/BarLineChart';
 import { PiRobotLight } from 'react-icons/pi';
 
 export default function ReadingHourSummary() {
+  const labels = Array.from({ length: 30 }, (_, i) => `${i + 1}`);
   return (
     <div className={styles.hoursSummarySection}>  
         <div className={styles.headerSection}>
