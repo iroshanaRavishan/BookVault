@@ -11,7 +11,7 @@ export default function ReadingHourSummary() {
         </div>
         <div className={styles.contentSection}>
           <div>
-            <BarLineChart width="300px" height="150px" />
+            <BarLineChart showLine={false} width="300px" height="150px" />
           </div>
         </div>
     </div>
