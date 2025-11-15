@@ -53,7 +53,10 @@ export default function TotalTime() {
             <span className={styles.timeSpentDetailsText}>Screen timing trend in past 7 day's </span>
             <div className={styles.chartSection}>
               <div className={styles.sliderWrapper}>
-                <div className={styles.slider}>
+                <div
+                  className={styles.slider}
+                  style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+                >
                   <div className={styles.slide}></div>
 
               <div className={styles.chartNavigationButtons}>
