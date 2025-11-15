@@ -5,6 +5,8 @@ import { PiRobotLight } from 'react-icons/pi';
 
 export default function ReadingHourSummary() {
   const labels = Array.from({ length: 30 }, (_, i) => `${i + 1}`);
+  const values = Array.from({ length: 30 }, () => +(Math.random() * 5).toFixed(2));
+
   return (
     <div className={styles.hoursSummarySection}>  
         <div className={styles.headerSection}>
