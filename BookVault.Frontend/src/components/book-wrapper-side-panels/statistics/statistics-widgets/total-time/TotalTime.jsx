@@ -63,7 +63,7 @@ export default function TotalTime() {
                 <span className={styles.chartTypes}>
                   {charts[currentIndex].label}
                 </span>
-                <button className={styles.chartNavigationButton}>
+                <button className={styles.chartNavigationButton} onClick={handleNext} >
                   <GoChevronRight />
                 </button>
               </div>
