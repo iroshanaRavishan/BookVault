@@ -149,6 +149,16 @@
   align-items: center;
 }
 
+.chartNavigationButton:hover {
+  background-color: #75757533;
+  color: #606060;
+}
+
+.chartNavigationButton:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
 .totalTimeSeparator {
   position: relative;
   display: flex;
