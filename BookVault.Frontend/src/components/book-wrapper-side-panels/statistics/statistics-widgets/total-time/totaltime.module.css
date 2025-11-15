@@ -123,6 +123,15 @@
   width: 100%;
 }
 
+.chartNavigationButton {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  background-color: #7575751a;
+  color: #808080;
+}
+
 .chartTypes {
   font-size: 12px;
   font-weight: 500;
