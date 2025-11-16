@@ -57,7 +57,10 @@ export default function TotalTime() {
                   className={styles.slider}
                   style={{ transform: `translateX(-${currentIndex * 100}%)` }}
                 >
-                  <div className={styles.slide}></div>
+                  <div className={styles.slide}>{charts[0].component}</div>
+                  <div className={styles.slide}>{charts[1].component}</div>
+                </div>
+              </div>
 
               <div className={styles.chartNavigationButtons}>
                 <button className={styles.chartNavigationButton} onClick={handlePrev} disabled={currentIndex === 0}>
