@@ -32,6 +32,7 @@ const BarLineChart = ({
   barThicknessVal=13,
   targetLineValue = 4.5 }) => {
   const barLineChartRef = useRef(null);
+  const [iconPosition, setIconPosition] = useState(null);
 
   const data = {
     labels,
@@ -53,7 +54,8 @@ const BarLineChart = ({
           return gradient;
         },
       },
-      {
+      // Only show line chart if showLine is true
+      showLine && {
         type: "line",
         data: values,
         borderColor: "#f18f8fff",
