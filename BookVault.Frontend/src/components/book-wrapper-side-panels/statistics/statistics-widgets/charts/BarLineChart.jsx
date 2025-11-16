@@ -113,7 +113,9 @@ const BarLineChart = ({
         Date <FaArrowRightLong style={{ marginTop: "2px" }} />
       </span>
 
-      <Chart ref={barLineChartRef} type="bar" data={data} options={options} plugins={[hoverLinesPlugin]}/>
+      <div>
+        <Chart key={targetLineValue} ref={barLineChartRef} type="bar" data={data} options={options} plugins={[hoverLinesPlugin]}/>
+      </div>
     </div>
   );
 };
