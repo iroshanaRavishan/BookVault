@@ -54,7 +54,8 @@ const BarLineChart = ({
           return gradient;
         },
       },
-      {
+      // Only show line chart if showLine is true
+      showLine && {
         type: "line",
         data: values,
         borderColor: "#f18f8fff",
