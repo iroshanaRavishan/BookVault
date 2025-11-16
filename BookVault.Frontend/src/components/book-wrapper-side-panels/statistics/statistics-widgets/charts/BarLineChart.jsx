@@ -28,6 +28,7 @@ const BarLineChart = ({
   width,
   height,
   values, 
+  labels, 
   barThicknessVal=13 }) => {
   const barLineChartRef = useRef(null);
 
