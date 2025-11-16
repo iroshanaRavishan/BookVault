@@ -29,7 +29,8 @@ const BarLineChart = ({
   height,
   values, 
   labels, 
-  barThicknessVal=13 }) => {
+  barThicknessVal=13,
+  targetLineValue = 4.5 }) => {
   const barLineChartRef = useRef(null);
 
   const labels = ["12", "13", "14", "15", "16", "17", "18"];
