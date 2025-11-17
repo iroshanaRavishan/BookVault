@@ -115,6 +115,8 @@ const BarLineChart = ({
       const { chartArea } = chartInstance;
 
       const y = activeElements[0].element.y;
+
+      ctx.save();
     }
   };
 
