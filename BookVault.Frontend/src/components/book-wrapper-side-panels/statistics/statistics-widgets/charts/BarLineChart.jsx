@@ -108,7 +108,8 @@ const BarLineChart = ({
   const hoverLinesPlugin =    {
     id: "hoverLine",
     beforeDatasetsDraw(chartInstance) {
-      const activeElements = chartInstance.tooltip?.getActiveElements?.();
+      const activeElements = chartInstance.tooltip?.getActiveElements?.() || [];
+      if (activeElements.length === 0) return;
     }
   };
 
