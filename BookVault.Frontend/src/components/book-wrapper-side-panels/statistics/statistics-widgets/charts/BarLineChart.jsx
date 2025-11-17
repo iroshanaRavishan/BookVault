@@ -105,6 +105,12 @@ const BarLineChart = ({
     },
   };
 
+  const hoverLinesPlugin =    {
+    id: "hoverLine",
+    beforeDatasetsDraw(chartInstance) {
+      const activeElements = chartInstance.tooltip?.getActiveElements?.();
+    }
+  };
 
   return (
     <div className={styles.chartContainer} style={{ width: width, height: height }}>
