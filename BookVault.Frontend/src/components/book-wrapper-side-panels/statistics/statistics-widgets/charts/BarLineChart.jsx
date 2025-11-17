@@ -105,6 +105,9 @@ const BarLineChart = ({
     },
   };
 
+  const hoverLinesPlugin =    {
+    id: "hoverLine",
+  };
 
   return (
     <div className={styles.chartContainer} style={{ width: width, height: height }}>
