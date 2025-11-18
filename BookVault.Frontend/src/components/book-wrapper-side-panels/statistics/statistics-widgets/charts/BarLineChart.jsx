@@ -130,6 +130,10 @@ const BarLineChart = ({
     }
   };
 
+  useEffect(() => {
+    const chart = barLineChartRef.current;
+  }, []);
+
   return (
     <div className={styles.chartContainer} style={{ width: width, height: height }}>
       <span className={styles.chartIndicator} style={{ transform: width == '200px'? 'translateX(50%)': 'translateX(100%)' }} >
