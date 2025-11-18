@@ -121,6 +121,8 @@ const BarLineChart = ({
       ctx.lineWidth = 1.2;
       ctx.strokeStyle = "#999";
 
+      ctx.beginPath();
+
       ctx.restore();
     }
   };
