@@ -133,6 +133,8 @@ const BarLineChart = ({
   useEffect(() => {
     const chart = barLineChartRef.current;
     if (!chart) return;
+
+    const instance = chart.chartInstance || chart;
   }, []);
 
   return (
