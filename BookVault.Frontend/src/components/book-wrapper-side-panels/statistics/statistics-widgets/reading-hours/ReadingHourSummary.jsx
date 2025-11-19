@@ -18,6 +18,8 @@ export default function ReadingHourSummary() {
           </div>
           <div className={styles.summaryContent}>
             <span className={styles.aiGeneratedContentText}>You have reached the goal 4 times within past 30 days,  </span>
+            <span className={styles.aiGeneratedIndicator}>
+            </span>
           </div>
         </div>
     </div>
