@@ -16,7 +16,7 @@ export default function ReadingHourSummary() {
           <div>
             <BarLineChart showLine={false} width="300px" height="150px" values={values} labels={labels} barThicknessVal={6} targetLineValue={3.8}/>
           </div>
-          <div>
+          <div className={styles.summaryContent}>
           </div>
         </div>
     </div>
