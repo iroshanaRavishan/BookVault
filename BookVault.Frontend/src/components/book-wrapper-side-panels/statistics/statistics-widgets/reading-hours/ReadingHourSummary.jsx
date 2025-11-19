@@ -19,6 +19,8 @@ export default function ReadingHourSummary() {
           <div className={styles.summaryContent}>
             <span className={styles.aiGeneratedContentText}>You have reached the goal 4 times within past 30 days,  </span>
             <span className={styles.aiGeneratedIndicator}>
+              <PiRobotLight />
+              Generated content
             </span>
           </div>
         </div>
