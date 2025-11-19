@@ -131,7 +131,9 @@ const BarLineChart = ({
   };
 
   const staticYLinePlugin = !showLine
-    ? { }
+    ? {
+        id: "staticYLine",
+      }
     : null;
 
   useEffect(() => {
