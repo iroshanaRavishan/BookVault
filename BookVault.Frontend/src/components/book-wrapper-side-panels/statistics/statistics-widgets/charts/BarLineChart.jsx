@@ -145,7 +145,9 @@ const BarLineChart = ({
         clearInterval(interval);
       }
     }, 10);
-  }, []);
+
+    return () => clearInterval(interval);
+  }, [targetLineValue]);
 
   return (
     <div className={styles.chartContainer} style={{ width: width, height: height }}>
