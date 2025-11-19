@@ -130,6 +130,10 @@ const BarLineChart = ({
     }
   };
 
+  const staticYLinePlugin = !showLine
+    ? { }
+    : null;
+
   useEffect(() => {
     const chart = barLineChartRef.current;
     if (!chart) return;
