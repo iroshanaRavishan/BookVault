@@ -139,6 +139,7 @@ const BarLineChart = ({
     const interval = setInterval(() => {
       if (instance.$staticLine) {
         setIconPosition({
+          x: instance.$staticLine.x,
         });
       }
     }, 10);
