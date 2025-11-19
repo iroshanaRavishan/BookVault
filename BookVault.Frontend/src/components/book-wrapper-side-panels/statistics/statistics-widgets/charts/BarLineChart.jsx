@@ -135,6 +135,9 @@ const BarLineChart = ({
     if (!chart) return;
 
     const instance = chart.chartInstance || chart;
+
+    const interval = setInterval(() => {
+    }, 10);
   }, []);
 
   return (
