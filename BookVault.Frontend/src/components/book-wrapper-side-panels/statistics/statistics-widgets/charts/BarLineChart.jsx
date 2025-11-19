@@ -137,6 +137,8 @@ const BarLineChart = ({
     const instance = chart.chartInstance || chart;
 
     const interval = setInterval(() => {
+      if (instance.$staticLine) {
+      }
     }, 10);
   }, []);
 
