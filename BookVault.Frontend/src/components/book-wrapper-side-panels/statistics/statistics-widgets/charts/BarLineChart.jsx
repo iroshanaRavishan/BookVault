@@ -142,6 +142,7 @@ const BarLineChart = ({
           x: instance.$staticLine.x,
           y: instance.$staticLine.y,
         });
+        clearInterval(interval);
       }
     }, 10);
   }, []);
