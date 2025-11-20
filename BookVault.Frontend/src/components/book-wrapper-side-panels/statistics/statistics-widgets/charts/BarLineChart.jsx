@@ -140,6 +140,8 @@ const BarLineChart = ({
           ctx.save();
           ctx.strokeStyle = "#0000004d";
           ctx.lineWidth = 1;
+          ctx.setLineDash([2]);
+          ctx.beginPath();
           ctx.restore();
         },
       }
