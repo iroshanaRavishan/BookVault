@@ -133,6 +133,9 @@ const BarLineChart = ({
   const staticYLinePlugin = !showLine
     ? {
         id: "staticYLine",
+        beforeDatasetsDraw(chartInstance) {
+          const { ctx, chartArea, scales } = chartInstance;
+        },
       }
     : null;
 
