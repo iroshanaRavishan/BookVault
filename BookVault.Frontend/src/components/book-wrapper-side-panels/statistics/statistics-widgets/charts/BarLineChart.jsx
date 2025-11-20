@@ -142,6 +142,7 @@ const BarLineChart = ({
           ctx.lineWidth = 1;
           ctx.setLineDash([2]);
           ctx.beginPath();
+          ctx.stroke();
           ctx.restore();
         },
       }
