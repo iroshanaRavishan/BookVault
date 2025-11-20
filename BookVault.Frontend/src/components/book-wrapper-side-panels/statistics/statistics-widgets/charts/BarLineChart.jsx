@@ -136,6 +136,9 @@ const BarLineChart = ({
         beforeDatasetsDraw(chartInstance) {
           const { ctx, chartArea, scales } = chartInstance;
           const y = scales.y.getPixelForValue(targetLineValue);
+
+          ctx.save();
+          ctx.restore();
         },
       }
     : null;
