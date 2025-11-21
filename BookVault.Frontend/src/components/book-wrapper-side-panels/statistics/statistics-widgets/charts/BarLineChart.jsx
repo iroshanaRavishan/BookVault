@@ -147,6 +147,9 @@ const BarLineChart = ({
           ctx.stroke();
           ctx.restore();
         },
+
+        afterDatasetsDraw(chartInstance) {
+        },
       }
     : null;
 
