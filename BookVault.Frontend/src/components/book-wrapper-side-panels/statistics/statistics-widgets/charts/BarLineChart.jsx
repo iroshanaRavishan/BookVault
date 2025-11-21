@@ -150,6 +150,7 @@ const BarLineChart = ({
 
         afterDatasetsDraw(chartInstance) {
           const { ctx, chartArea, scales } = chartInstance;
+          const y = scales.y.getPixelForValue(targetLineValue);
         },
       }
     : null;
