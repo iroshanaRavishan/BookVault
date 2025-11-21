@@ -147,6 +147,11 @@ const BarLineChart = ({
           ctx.stroke();
           ctx.restore();
         },
+
+        afterDatasetsDraw(chartInstance) {
+          const { ctx, chartArea, scales } = chartInstance;
+          const y = scales.y.getPixelForValue(targetLineValue);
+        },
       }
     : null;
 
