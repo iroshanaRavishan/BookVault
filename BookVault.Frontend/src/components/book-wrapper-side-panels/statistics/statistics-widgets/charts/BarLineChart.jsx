@@ -161,6 +161,8 @@ const BarLineChart = ({
           const textY = y - 2;
 
           ctx.fillText(text, textX, textY);
+          ctx.restore();
+
           chartInstance.$staticLine = {};
         },
       }
