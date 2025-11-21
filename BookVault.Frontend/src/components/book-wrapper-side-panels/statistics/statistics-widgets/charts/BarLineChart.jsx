@@ -153,6 +153,7 @@ const BarLineChart = ({
           const y = scales.y.getPixelForValue(targetLineValue);
 
           ctx.save();
+          ctx.font = "bold 10px sans-serif"; 
           chartInstance.$staticLine = {};
         },
       }
