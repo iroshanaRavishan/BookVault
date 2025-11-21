@@ -163,7 +163,10 @@ const BarLineChart = ({
           ctx.fillText(text, textX, textY);
           ctx.restore();
 
-          chartInstance.$staticLine = { x: textX + 35 };
+          chartInstance.$staticLine = {
+            x: textX + 35,
+            y: textY - 7.5,
+          };
         },
       }
     : null;
