@@ -149,6 +149,7 @@ const BarLineChart = ({
         },
 
         afterDatasetsDraw(chartInstance) {
+          const { ctx, chartArea, scales } = chartInstance;
         },
       }
     : null;
