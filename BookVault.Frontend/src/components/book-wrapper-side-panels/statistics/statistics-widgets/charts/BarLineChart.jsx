@@ -153,6 +153,7 @@ const BarLineChart = ({
           const y = scales.y.getPixelForValue(targetLineValue);
 
           ctx.save();
+          chartInstance.$staticLine = {};
         },
       }
     : null;
