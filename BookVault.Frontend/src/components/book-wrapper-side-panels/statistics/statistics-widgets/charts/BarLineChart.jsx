@@ -154,6 +154,7 @@ const BarLineChart = ({
 
           ctx.save();
           ctx.font = "bold 10px sans-serif"; 
+          ctx.fillStyle = "#333";
           chartInstance.$staticLine = {};
         },
       }
