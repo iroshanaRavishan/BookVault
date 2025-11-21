@@ -155,6 +155,9 @@ const BarLineChart = ({
           ctx.save();
           ctx.font = "bold 10px sans-serif"; 
           ctx.fillStyle = "#333";
+        
+          const text = `${targetLineValue} hrs`;
+          const textX = chartArea.right - 56;
           chartInstance.$staticLine = {};
         },
       }
