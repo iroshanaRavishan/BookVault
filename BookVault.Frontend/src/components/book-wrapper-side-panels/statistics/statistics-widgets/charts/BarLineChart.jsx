@@ -157,6 +157,7 @@ const BarLineChart = ({
           ctx.fillStyle = "#333";
         
           const text = `${targetLineValue} hrs`;
+          const textX = chartArea.right - 56;
           chartInstance.$staticLine = {};
         },
       }
