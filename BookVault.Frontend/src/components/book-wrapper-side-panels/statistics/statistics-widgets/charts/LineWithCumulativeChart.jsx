@@ -4,7 +4,9 @@ import styles from './charts.module.css';
 const LineWithCumulativeChart = () => {
 
   return (
-    <div className={styles.chartContainer}>LineWithCumulativeChart</div>
+    <div className={styles.chartContainer} style={{ width: '200px', height: '100px' }}>
+      LineWithCumulativeChart
+    </div>
   );
 };
 
