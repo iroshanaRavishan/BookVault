@@ -12,7 +12,7 @@ export default function TotalTime() {
 
   const charts = [
     { component: <BarLineChart showLine={true} width="200px" height="100px" values={values} labels={labels} />, label: "Bar chart with line" },
-    { component: "Line With Cumulative Chart", label: "Cumulative chart" },
+    { component: <LineWithCumulativeChart />, label: "Cumulative chart" },
   ];
 
   const handleNext = () => {
