@@ -1,5 +1,6 @@
 import React from "react";
 import styles from './charts.module.css';
+import { Chart as ChartJS } from "chart.js";
 import { FaArrowRightLong, FaArrowUpLong } from "react-icons/fa6";
 
 const LineWithCumulativeChart = () => {
