@@ -3,6 +3,7 @@ import styles from './totaltime.module.css';
 import { GoChevronLeft, GoChevronRight } from "react-icons/go";
 import { FaArrowUp } from "react-icons/fa";
 import BarLineChart from '../charts/BarLineChart';
+import LineWithCumulativeChart from '../charts/LineWithCumulativeChart';
 
 export default function TotalTime() {
   const [currentIndex, setCurrentIndex] = useState(0);
