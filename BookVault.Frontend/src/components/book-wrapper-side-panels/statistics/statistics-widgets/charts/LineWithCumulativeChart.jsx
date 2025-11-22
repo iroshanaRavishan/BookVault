@@ -8,7 +8,7 @@ const LineWithCumulativeChart = () => {
     <div className={styles.chartContainer} style={{ width: '200px', height: '100px' }}>
       <span className={styles.chartIndicator} style={{ transform: 'translateX(50%)' }}>
         Hours <FaArrowUpLong />
-        Date  <FaArrowRightLong /> 
+        Date  <FaArrowRightLong style={{marginTop: '2px'}} /> 
       </span>
     </div>
   );
