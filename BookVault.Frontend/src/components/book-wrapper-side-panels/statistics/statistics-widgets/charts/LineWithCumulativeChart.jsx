@@ -1,6 +1,6 @@
 import React from "react";
 import styles from './charts.module.css';
-import { Chart as ChartJS } from "chart.js";
+import { Chart as ChartJS, LineElement } from "chart.js";
 import { Chart } from "react-chartjs-2";
 import { FaArrowRightLong, FaArrowUpLong } from "react-icons/fa6";
 
