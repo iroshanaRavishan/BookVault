@@ -5,7 +5,7 @@ const LineWithCumulativeChart = () => {
 
   return (
     <div className={styles.chartContainer} style={{ width: '200px', height: '100px' }}>
-      LineWithCumulativeChart
+      <span className={styles.chartIndicator}></span>    
     </div>
   );
 };
