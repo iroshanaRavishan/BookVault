@@ -7,6 +7,7 @@ import { FaArrowRightLong, FaArrowUpLong } from "react-icons/fa6";
 ChartJS.register(LineElement, CategoryScale);
 
 const LineWithCumulativeChart = () => {
+  const cumulativeChartRef = useRef(null);
 
   return (
     <div className={styles.chartContainer} style={{ width: '200px', height: '100px' }}>
