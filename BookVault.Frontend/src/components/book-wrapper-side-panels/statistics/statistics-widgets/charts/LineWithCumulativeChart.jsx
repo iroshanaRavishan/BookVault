@@ -15,7 +15,7 @@ const LineWithCumulativeChart = () => {
         Hours <FaArrowUpLong />
         Date  <FaArrowRightLong style={{marginTop: '2px'}} /> 
       </span>
-      <Chart type="line" />      
+      <Chart ref={cumulativeChartRef} type="line" />      
     </div>
   );
 };
