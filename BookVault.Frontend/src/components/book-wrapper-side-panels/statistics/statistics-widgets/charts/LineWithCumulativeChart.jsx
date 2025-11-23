@@ -15,7 +15,8 @@ ChartJS.register(
   LineElement,
   CategoryScale,
   LinearScale,
-  PointElement
+  PointElement,
+  Filler
 );
 
 const LineWithCumulativeChart = () => {
