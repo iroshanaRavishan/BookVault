@@ -9,7 +9,11 @@ import {
 import { Chart } from "react-chartjs-2";
 import { FaArrowRightLong, FaArrowUpLong } from "react-icons/fa6";
 
-ChartJS.register(LineElement, CategoryScale);
+ChartJS.register(
+  LineElement,
+  CategoryScale,
+  LinearScale 
+);
 
 const LineWithCumulativeChart = () => {
   const cumulativeChartRef = useRef(null);
