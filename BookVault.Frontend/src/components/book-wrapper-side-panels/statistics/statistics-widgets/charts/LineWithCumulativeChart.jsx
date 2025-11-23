@@ -5,7 +5,8 @@ import {
   LineElement,
   CategoryScale,
   LinearScale,
-  PointElement
+  PointElement,
+  Filler
 } from "chart.js";
 import { Chart } from "react-chartjs-2";
 import { FaArrowRightLong, FaArrowUpLong } from "react-icons/fa6";
@@ -14,7 +15,8 @@ ChartJS.register(
   LineElement,
   CategoryScale,
   LinearScale,
-  PointElement
+  PointElement,
+  Filler
 );
 
 const LineWithCumulativeChart = () => {
