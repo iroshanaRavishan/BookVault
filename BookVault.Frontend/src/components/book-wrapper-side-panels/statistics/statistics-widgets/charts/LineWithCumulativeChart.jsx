@@ -27,6 +27,10 @@ const LineWithCumulativeChart = () => {
   const cumulativeChartRef = useRef(null);
   const values = [2.5, 4.1, 1.6, 2.2, 3, 2.4, 4.5];
 
+  const cumulative = values.map(
+    (sum => value => sum += value)(0)
+  );
+
   const labels = ["12", "13", "14", "15", "16", "17", "18"];
   return (
     <div className={styles.chartContainer} style={{ width: '200px', height: '100px' }}>
