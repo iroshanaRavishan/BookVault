@@ -25,6 +25,7 @@ ChartJS.register(
 
 const LineWithCumulativeChart = () => {
   const cumulativeChartRef = useRef(null);
+  const values = [2.5, 4.1, 1.6, 2.2, 3, 2.4, 4.5];
 
   return (
     <div className={styles.chartContainer} style={{ width: '200px', height: '100px' }}>
