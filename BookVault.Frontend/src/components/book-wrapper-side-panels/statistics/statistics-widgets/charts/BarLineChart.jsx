@@ -198,7 +198,7 @@ const BarLineChart = ({
       </span>
 
       <div className={styles.chartWrapper} >
-        <Chart key={targetLineValue} ref={barLineChartRef} type="bar" data={data} options={options} plugins={[hoverLinesPlugin]}/>
+        <Chart key={targetLineValue} ref={barLineChartRef} type="bar" data={data} options={options} plugins={[hoverLinesPlugin, staticYLinePlugin].filter(Boolean)}/>
       </div>
     </div>
   );
