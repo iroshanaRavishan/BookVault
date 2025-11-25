@@ -56,6 +56,10 @@
 }
 
 .cell {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
   width: 20px;
   height: 16px;
   border-radius: 3px;
