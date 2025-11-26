@@ -19,11 +19,10 @@
 .contentSectionLeftDetails {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
-    height: 150px;
+    height: 160px;
     width: 100%;
-    background-color: rgb(240, 240, 240);
 }
 
 .contentSectionRightDetails {
@@ -31,13 +30,12 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-    height: 150px;
+    height: 160px;
     width: 100%;
-    background-color: rgb(240, 240, 240);
 }
 
 .miniCharts {
-    width: 100%;
+    width: 90%;
     display: flex;
     justify-content: space-between;
     align-items: center;
