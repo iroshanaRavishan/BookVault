@@ -25,6 +25,7 @@ ChartJS.register(
 
 const BarLineChart = ({ 
   showLine,
+  showBars,
   width,
   height,
   values, 
