@@ -66,6 +66,7 @@
     position: relative;
     flex: 1;
     height: 40px;
+    width: 5px;
     border-radius: 6px;
     display: flex;
     flex-direction: column;
