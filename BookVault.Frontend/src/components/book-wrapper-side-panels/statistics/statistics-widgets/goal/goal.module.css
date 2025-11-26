@@ -39,10 +39,9 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 5px;
-    background-color: rgb(240, 240, 240);
-    padding: 10px;
+    padding: 0 10px;
     border-radius: 8px;
+    padding-left: 30px;
 }
 
 .sevenDayLineChart {
