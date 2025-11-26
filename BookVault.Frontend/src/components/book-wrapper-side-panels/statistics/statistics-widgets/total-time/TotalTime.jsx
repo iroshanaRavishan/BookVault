@@ -11,7 +11,7 @@ export default function TotalTime() {
   const values = Array.from({ length: 7 }, () => +(Math.random() * 5).toFixed(2));
 
   const charts = [
-    { component: <BarLineChart showLine={true} width="200px" height="100px" values={values} labels={labels} />, label: "Bar chart with line" },
+    { component: <BarLineChart showLine={true} showBars={true} width="200px" height="100px" values={values} labels={labels} />, label: "Bar chart with line" },
     { component: <LineWithCumulativeChart />, label: "Cumulative chart" },
   ];
 
