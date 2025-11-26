@@ -120,7 +120,7 @@ const BarLineChart = ({
       ctx.save();
       ctx.setLineDash([3, 3]);
       ctx.lineWidth = 1.2;
-      ctx.strokeStyle = "#999";
+      ctx.strokeStyle = "#888";
 
       ctx.beginPath();
       ctx.moveTo(chartArea.left, y);
