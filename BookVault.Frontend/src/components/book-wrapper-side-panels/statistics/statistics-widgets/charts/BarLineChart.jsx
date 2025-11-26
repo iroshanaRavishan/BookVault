@@ -118,9 +118,9 @@ const BarLineChart = ({
       const y = activeElements[0].element.y;
 
       ctx.save();
-      ctx.setLineDash([5, 5]);
-      ctx.lineWidth = 1.2;
-      ctx.strokeStyle = "#999";
+      ctx.setLineDash([3, 3]);
+      ctx.lineWidth = 1;
+      ctx.strokeStyle = "#888";
 
       ctx.beginPath();
       ctx.moveTo(chartArea.left, y);
