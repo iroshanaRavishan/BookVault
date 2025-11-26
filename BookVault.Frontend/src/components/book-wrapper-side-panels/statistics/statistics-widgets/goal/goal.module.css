@@ -30,9 +30,8 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-    height: 150px;
+    height: 160px;
     width: 100%;
-    background-color: rgb(240, 240, 240);
 }
 
 .miniCharts {
