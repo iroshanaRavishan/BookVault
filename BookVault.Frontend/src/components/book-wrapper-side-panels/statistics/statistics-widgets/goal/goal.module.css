@@ -65,8 +65,7 @@
 .miniChartBox {
     position: relative;
     flex: 1;
-    height: 50px;
-    background-color: #d6ffd8;
+    height: 40px;
     border-radius: 6px;
     display: flex;
     flex-direction: column;
