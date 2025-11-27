@@ -80,6 +80,7 @@
 }
 
 .miniChartBox:hover {
+    cursor: pointer;
 }
 
 .daysOfWeek {
