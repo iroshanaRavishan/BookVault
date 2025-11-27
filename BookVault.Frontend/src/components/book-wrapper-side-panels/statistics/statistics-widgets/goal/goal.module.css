@@ -80,8 +80,6 @@
 }
 
 .miniChartBox:hover {
-    background-color: #b2ffb6;
-    transform: scale(1.05);
 }
 
 .daysOfWeek {
