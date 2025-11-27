@@ -75,12 +75,11 @@
     font-size: 13px;
     font-weight: 500;
     color: #444;
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
+    padding: 10px 0 10px 0;
 }
 
 .miniChartBox:hover {
-    background-color: #b2ffb6;
-    transform: scale(1.05);
 }
 
 .daysOfWeek {
