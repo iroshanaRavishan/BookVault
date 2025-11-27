@@ -31,7 +31,9 @@ const BarLineChart = ({
   values, 
   labels, 
   barThicknessVal=13,
-  targetLineValue = 4.5 }) => {
+  targetLineValue = 4.5,
+  showIndicator
+ }) => {
   const barLineChartRef = useRef(null);
   const [iconPosition, setIconPosition] = useState(null);
 
