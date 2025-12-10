@@ -238,9 +238,10 @@
 .readingHistoryList {
     display: flex;
     flex-direction: column;
-    height: 500px;
+    /* height: 500px; */
     overflow-y: auto;
     padding-right: 5px;
+    /* box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.4); */
 }
 
 .readingHistoryList::-webkit-scrollbar {
