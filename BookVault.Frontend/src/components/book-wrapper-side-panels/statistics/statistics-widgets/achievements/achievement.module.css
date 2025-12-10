@@ -303,6 +303,13 @@
     margin-left: 20px;
 }
 
+.collapsBtn {
+    padding: 8px 20px;
+    width: 120px;
+    border-radius: 25px;
+    background: rgb(76, 148, 76);
+}
+
 .readingHistoryFooter {
     display: flex;
     flex-direction: column;
