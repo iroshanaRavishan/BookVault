@@ -290,6 +290,11 @@
     align-items: center;
 }
 
+.historyItemMins {
+    font-size: 13px;
+    font-weight: 600;
+}
+
 .readingHistoryFooter {
     display: flex;
     flex-direction: column;
