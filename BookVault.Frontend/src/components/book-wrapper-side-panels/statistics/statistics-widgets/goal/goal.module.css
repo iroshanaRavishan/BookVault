@@ -17,6 +17,17 @@
     position: relative;
 }
 
+.contentSection::before {
+    content: "";
+    width: 0.5px;
+    background-color: #ccc;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
 .contentSectionLeftDetails {
     display: flex;
     flex-direction: column;
@@ -83,6 +94,20 @@
     cursor: pointer;
     box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.2);
 }
+
+.miniChartBox::after {
+    content: "";
+    position: absolute;
+    top: 100%;             
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;              
+    border-left: 1px dashed #888;
+    opacity: 0;             
+    transition: height 0.5s ease-out, opacity 0.2s ease-in;
+}
+
 
 .daysOfWeek {
     font-size: 12px;
