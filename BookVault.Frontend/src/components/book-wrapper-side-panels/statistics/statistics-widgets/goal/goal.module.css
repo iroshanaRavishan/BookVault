@@ -95,6 +95,18 @@
     box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.2);
 }
 
+.miniChartBox::after {
+    content: "";
+    position: absolute;
+    top: 100%;             
+    left: 50%;
+    width: 0;
+    height: 0;              
+    border-left: 1px dashed #888;
+    opacity: 0;             
+}
+
+
 .daysOfWeek {
     font-size: 12px;
     font-weight: 600;
