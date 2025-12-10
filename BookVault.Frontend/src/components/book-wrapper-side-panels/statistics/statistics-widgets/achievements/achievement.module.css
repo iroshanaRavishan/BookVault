@@ -299,6 +299,10 @@
     font-weight: 600;
 }
 
+.historyItemTroophy {
+    margin-left: 20px;
+}
+
 .readingHistoryFooter {
     display: flex;
     flex-direction: column;
