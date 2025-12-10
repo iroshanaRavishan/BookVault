@@ -17,6 +17,17 @@
     position: relative;
 }
 
+.contentSection::before {
+    content: "";
+    width: 0.5px;
+    background-color: #ccc;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
 .contentSectionLeftDetails {
     display: flex;
     flex-direction: column;
