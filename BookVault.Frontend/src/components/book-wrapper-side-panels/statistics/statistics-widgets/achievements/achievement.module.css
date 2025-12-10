@@ -290,6 +290,10 @@
     align-items: center;
 }
 
+.historyItemChart {
+
+}
+
 .historyItemMins {
     font-size: 13px;
     font-weight: 600;
