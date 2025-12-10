@@ -310,6 +310,8 @@
     background: rgb(76, 148, 76);
     border: none;
     font-size: 14px;
+    font-family: "Inter", sans-serif;
+    color: #fff;
 }
 
 .readingHistoryFooter {
