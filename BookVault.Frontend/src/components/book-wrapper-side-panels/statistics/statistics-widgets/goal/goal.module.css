@@ -108,6 +108,10 @@
     transition: height 0.5s ease-out, opacity 0.2s ease-in;
 }
 
+.miniChartBox:hover::after {
+    height: 140px;          
+    opacity: 1;
+}
 
 .daysOfWeek {
     font-size: 12px;
@@ -118,4 +122,12 @@
     font-size: 12px;
     font-weight: 600;
     color: #858585;
+}
+
+.preWeekSectionText {
+    align-self: flex-start;
+    font-weight: 500;
+    font-size: 13px;
+    color: #8a8a8aff;
+    text-align: left;
 }
