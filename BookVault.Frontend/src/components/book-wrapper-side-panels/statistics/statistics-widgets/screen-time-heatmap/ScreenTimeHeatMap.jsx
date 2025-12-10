@@ -45,7 +45,7 @@ export default function ScreenTimeHeatMap() {
                   title={`${day} - ${times[timeIndex]}h`}
                 >
                   {value == 4 && (
-                    <span><FaTrophy color='gold'/></span>
+                    <span><FaTrophy color='gold' size={12}/></span>
                   )}
                 </div>
               ))}
