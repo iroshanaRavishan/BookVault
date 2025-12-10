@@ -123,3 +123,9 @@
     font-weight: 600;
     color: #858585;
 }
+
+.preWeekSectionText {
+    align-self: flex-start;
+    font-weight: 500;
+    color: #8a8a8aff;
+}
