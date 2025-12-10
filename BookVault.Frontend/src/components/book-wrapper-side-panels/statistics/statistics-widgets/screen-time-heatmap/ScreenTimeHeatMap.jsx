@@ -43,7 +43,11 @@ export default function ScreenTimeHeatMap() {
                   key={timeIndex}
                   className={`${styles.cell} ${styles[`level${value}`]}`}
                   title={`${day} - ${times[timeIndex]}h`}
-                ></div>
+                >
+                  {value == 4 && (
+                    <span><FaTrophy /></span>
+                  )}
+                </div>
               ))}
             </div>
           ))}
