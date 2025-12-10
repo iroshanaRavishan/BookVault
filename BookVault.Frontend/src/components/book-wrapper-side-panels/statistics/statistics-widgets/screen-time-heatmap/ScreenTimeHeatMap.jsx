@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './screentimeheatmap.module.css';
 import { FaArrowUpLong, FaArrowRightLong } from "react-icons/fa6";
+import { FaTrophy } from "react-icons/fa6";
 
 export default function ScreenTimeHeatMap() {
   const days = ["2", "3", "4", "5", "6", "7", "8"];
@@ -42,7 +43,11 @@ export default function ScreenTimeHeatMap() {
                   key={timeIndex}
                   className={`${styles.cell} ${styles[`level${value}`]}`}
                   title={`${day} - ${times[timeIndex]}h`}
-                ></div>
+                >
+                  {value == 4 && (
+                    <span><FaTrophy color='gold' size={12}/></span>
+                  )}
+                </div>
               ))}
             </div>
           ))}
