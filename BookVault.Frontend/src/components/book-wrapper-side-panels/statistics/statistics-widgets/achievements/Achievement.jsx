@@ -31,7 +31,7 @@ export default function Achievement() {
     {id: 10, mins: 60, date: '2024-06-17'},
     {id: 11, mins: 15, date: '2024-06-16'},
     {id: 12, mins: 50, date: '2024-06-15'},
-    {id: 13, mins: 30, date: '2024-06-20'},
+    {id: 13, mins: 10, date: '2024-06-20'},
     {id: 14, mins: 45, date: '2024-06-19'},
     {id: 15, mins: 20, date: '2024-06-18'},
     {id: 16, mins: 60, date: '2024-06-17'},
@@ -43,12 +43,12 @@ export default function Achievement() {
     {id: 22, mins: 60, date: '2024-06-17'},
     {id: 23, mins: 15, date: '2024-06-16'},
     {id: 24, mins: 50, date: '2024-06-15'},
-    {id: 25, mins: 50, date: '2024-06-15'},
+    {id: 25, mins: 10, date: '2024-06-15'},
     {id: 26, mins: 50, date: '2024-06-15'},
     {id: 27, mins: 50, date: '2024-06-15'},
-    {id: 28, mins: 50, date: '2024-06-15'},
+    {id: 28, mins: 30, date: '2024-06-15'},
     {id: 29, mins: 50, date: '2024-06-15'},
-    {id: 10, mins: 50, date: '2024-06-15'},
+    {id: 30, mins: 10, date: '2024-06-15'},
   ];
 
   const [active, setActive] = useState("streaks");
