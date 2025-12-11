@@ -311,6 +311,7 @@
     border: none;
     font-size: 14px;
     font-family: "Inter", sans-serif;
+    cursor: pointer;
     color: #fff;
 }
 
