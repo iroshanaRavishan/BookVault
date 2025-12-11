@@ -158,7 +158,7 @@ export default function Achievement() {
                     </span>
                     <button onClick={() => setIsExpanded((prev) => !prev)}>
                       {isExpanded ? "Collapse" : "Expand"}{" "}
-                      <FaChevronUp
+                      <FaChevronDown
                         className={`${styles.chevronIcon} ${
                           isExpanded ? styles.rotated : ""
                         }`}
