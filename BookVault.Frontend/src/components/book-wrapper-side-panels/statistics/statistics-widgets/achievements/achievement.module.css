@@ -313,6 +313,7 @@
     font-family: "Inter", sans-serif;
     cursor: pointer;
     color: #fff;
+    transition: color 0.3s ease;
     display: flex;
     flex-direction: row;
     justify-content: center;
