@@ -313,6 +313,9 @@
     font-family: "Inter", sans-serif;
     cursor: pointer;
     color: #fff;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }
 
 .readingHistoryFooter {
