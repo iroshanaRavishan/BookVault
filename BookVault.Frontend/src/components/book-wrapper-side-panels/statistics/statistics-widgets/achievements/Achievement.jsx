@@ -127,7 +127,7 @@ export default function Achievement() {
                 </section>
                 <section 
                   className={`${styles.readingHistoryList} ${
-                    !isExpanded ? styles.noScroll : ""
+                    !isExpanded ? "" : ""
                   }`}
                 >
                   {readingHistory.map((item) => (
