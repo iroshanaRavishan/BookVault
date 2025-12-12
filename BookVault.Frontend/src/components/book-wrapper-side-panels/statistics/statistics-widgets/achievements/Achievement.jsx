@@ -130,7 +130,7 @@ export default function Achievement() {
                     !isExpanded ? "" : ""
                   }`}
                   style={{
-                    height: "890px"
+                    height: isExpanded === true ? "890px" : "335px"
                   }}
                 >
                   {readingHistory.map((item) => (
