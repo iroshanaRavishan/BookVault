@@ -129,6 +129,9 @@ export default function Achievement() {
                   className={`${styles.readingHistoryList} ${
                     !isExpanded ? "" : ""
                   }`}
+                  style={{
+                    height: "890px"
+                  }}
                 >
                   {readingHistory.map((item) => (
                     <div key={item.id} className={styles.readingHistoryItem}>
