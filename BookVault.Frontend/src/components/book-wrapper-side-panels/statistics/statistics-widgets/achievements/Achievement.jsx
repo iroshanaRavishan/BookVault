@@ -159,7 +159,10 @@ export default function Achievement() {
                     <span style={{ fontSize: "12px", fontStyle: 'italic' }}>
                       Showing past 30 days' records only
                     </span>
-                    <button onClick={() => setIsExpanded((prev) => !prev)}>
+                    <button 
+                      className={styles.collapsBtn}
+                      onClick={() => setIsExpanded((prev) => !prev)}
+                    >
                       {isExpanded ? "Collapse" : "Expand"}{" "}
                       <FaChevronDown
                         className={`${styles.chevronIcon} ${
