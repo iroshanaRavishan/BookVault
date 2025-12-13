@@ -14,7 +14,7 @@ export default function Goal() {
       </div>
       <div className={styles.contentSection}>
         <div className={styles.contentSectionLeftDetails}>
-          <span style={{ textAlign: 'left', marginBottom: '10px' }}>Minutes to complete to today’s goal</span>
+          <span style={{ textAlign: 'left', marginBottom: '10px' }} className={styles.preWeekSectionText}>Minutes to complete to today’s goal</span>
         </div>
         <div className={styles.contentSectionRightDetails}>
           <span className={styles.aiGeneratedIndicator}>
