@@ -4,6 +4,9 @@ import { FaCircleDot } from "react-icons/fa6";
 import { PiRobotLight } from 'react-icons/pi';
 
 export default function Goal() {
+  const labels = Array.from({ length: 7 }, (_, i) => `${i + 1}`);
+  const values = Array.from({ length: 7 }, () => +(Math.random() * 5).toFixed(2));
+
   return (
     <div className={styles.goalSection}>  
       <div className={styles.headerSection}>
