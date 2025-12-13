@@ -14,7 +14,7 @@ export default function Goal() {
       </div>
       <div className={styles.contentSection}>
         <div className={styles.contentSectionLeftDetails}>
-          <span>Chart goes here</span>
+          <span>Minutes to complete to today’s goal</span>
         </div>
         <div className={styles.contentSectionRightDetails}>
           <span className={styles.aiGeneratedIndicator}>
