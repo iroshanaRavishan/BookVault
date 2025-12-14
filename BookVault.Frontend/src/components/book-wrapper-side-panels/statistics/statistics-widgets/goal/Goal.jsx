@@ -37,7 +37,7 @@ export default function Goal() {
           ))}
         </div>
         <div className={styles.sevenDayLineChart}>
-          <span>Seven days line chart goes in here</span>
+          <BarLineChart showLine={true} showBars={false} width="500px" height="200px" values={values} labels={labels} showIndicator={false} />
         </div>
       </div>
     </div>
