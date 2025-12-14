@@ -139,7 +139,7 @@ export default function Achievement() {
                       <div className={styles.historyItem}>
                         <div className={styles.historyItemDetails}>
                           <div className={styles.historyItemChart}>
-                            <span>chart</span>
+                            <MiniProgressChart progress={item.mins}/>
                           </div>
                           <div className={styles.historyItemMins}>
                             <span>{item.mins} mins</span>
