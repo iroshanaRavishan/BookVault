@@ -28,6 +28,7 @@ export default function Goal() {
       <div className={styles.goalSummarySection}>
         <div className={styles.miniCharts}>
           {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((day, index) => (
+            const randomProgress = Math.floor(Math.random() * (90 - 10 + 1)) + 10;
             <div key={index} className={styles.miniChartBox}>
               <div>
                 <FaCircleDot size={25} />
