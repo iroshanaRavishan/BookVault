@@ -31,7 +31,7 @@ export default function Goal() {
             const randomProgress = Math.floor(Math.random() * (90 - 10 + 1)) + 10;
             <div key={index} className={styles.miniChartBox}>
               <div>
-                <FaCircleDot size={25} />
+                <MiniProgressChart progress={randomProgress} />
               </div>
               <span className={styles.daysOfWeek}>{day}</span>
             </div>
