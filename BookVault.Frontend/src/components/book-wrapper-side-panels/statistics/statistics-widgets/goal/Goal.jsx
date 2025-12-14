@@ -1,6 +1,5 @@
 import React from 'react';
 import styles from './goal.module.css';
-import { FaCircleDot } from "react-icons/fa6";
 import { PiRobotLight } from 'react-icons/pi';
 import MiniProgressChart from '../charts/MiniProgressChart';
 import BarLineChart from '../charts/BarLineChart';
