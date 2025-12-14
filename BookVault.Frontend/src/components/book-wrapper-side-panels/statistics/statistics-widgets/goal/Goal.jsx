@@ -15,6 +15,7 @@ export default function Goal() {
       <div className={styles.contentSection}>
         <div className={styles.contentSectionLeftDetails}>
           <span style={{ textAlign: 'left', marginBottom: '10px' }} className={styles.preWeekSectionText}>Minutes to complete to today’s goal</span>
+          <CircularProgressBar progress={45.5} size={100} hours={4.6} />
         </div>
         <div className={styles.contentSectionRightDetails}>
           <span className={styles.aiGeneratedIndicator}>
