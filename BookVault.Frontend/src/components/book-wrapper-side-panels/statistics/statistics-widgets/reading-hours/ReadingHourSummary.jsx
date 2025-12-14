@@ -14,7 +14,7 @@ export default function ReadingHourSummary() {
         </div>
         <div className={styles.contentSection}>
           <div>
-            <BarLineChart showLine={false} showBars={true} width="300px" height="150px" values={values} labels={labels} barThicknessVal={6} targetLineValue={3.8}/>
+            <BarLineChart showLine={false} showBars={true} width="300px" height="150px" values={values} labels={labels} barThicknessVal={6} targetLineValue={3.8} showIndicator={true}/>
           </div>
           <div className={styles.summaryContent}>
             <span className={styles.aiGeneratedContentText}>You have reached the goal 4 times within past 30 days,  </span>
