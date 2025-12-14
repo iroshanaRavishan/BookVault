@@ -3,6 +3,7 @@ import styles from './achievement.module.css';
 import { FaChevronDown, FaTrophy } from "react-icons/fa";
 import { PiRobotLight } from 'react-icons/pi';
 import { ImFire } from "react-icons/im";
+import MiniProgressChart from '../charts/MiniProgressChart';
 
 export default function Achievement() {
   const badges = [
@@ -138,7 +139,7 @@ export default function Achievement() {
                       <div className={styles.historyItem}>
                         <div className={styles.historyItemDetails}>
                           <div className={styles.historyItemChart}>
-                            <span>chart</span>
+                            <MiniProgressChart progress={item.mins}/>
                           </div>
                           <div className={styles.historyItemMins}>
                             <span>{item.mins} mins</span>
