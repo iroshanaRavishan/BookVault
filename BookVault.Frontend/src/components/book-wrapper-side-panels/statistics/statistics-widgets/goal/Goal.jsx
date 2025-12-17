@@ -30,13 +30,15 @@ export default function Goal() {
         <div className={styles.miniCharts}>
           {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((day, index) => {
             const randomProgress = Math.floor(Math.random() * (90 - 10 + 1)) + 10;
-            <div key={index} className={styles.miniChartBox}>
-              <div>
-                <MiniProgressChart progress={randomProgress} />
+            return (
+              <div key={index} className={styles.miniChartBox}>
+                <div>
+                  <MiniProgressChart progress={randomProgress} />
+                </div>
+                <span className={styles.daysOfWeek}>{day}</span>
               </div>
-              <span className={styles.daysOfWeek}>{day}</span>
-            </div>
-          ))}
+            );
+          })}
         </div>
         <div className={styles.sevenDayLineChart}>
           <BarLineChart showLine={true} showBars={false} width="500px" height="200px" values={values} labels={labels} showIndicator={false} />
