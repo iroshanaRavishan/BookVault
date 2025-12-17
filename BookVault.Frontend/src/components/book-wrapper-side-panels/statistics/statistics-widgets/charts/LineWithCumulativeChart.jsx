@@ -41,6 +41,7 @@ const LineWithCumulativeChart = () => {
     datasets: [
       {
         data: values,
+        borderColor: "#f18f8fff",
       },
     ],
   };
