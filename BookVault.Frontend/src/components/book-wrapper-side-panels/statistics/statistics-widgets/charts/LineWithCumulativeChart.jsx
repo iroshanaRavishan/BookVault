@@ -38,7 +38,12 @@ const LineWithCumulativeChart = () => {
 
   const data = {
     labels,
-    datasets: [],
+    datasets: [
+      {
+        data: values,
+        borderColor: "#f18f8fff",
+      },
+    ],
   };
   
   return (
