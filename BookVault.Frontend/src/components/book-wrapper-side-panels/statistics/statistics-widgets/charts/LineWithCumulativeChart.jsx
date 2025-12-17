@@ -38,6 +38,7 @@ const LineWithCumulativeChart = () => {
 
   const data = {
     labels,
+    datasets: [],
   };
   
   return (
