@@ -35,6 +35,11 @@ const LineWithCumulativeChart = () => {
 
   const maxValue = Math.max(...cumulative);
   const suggestedMax = Math.ceil(maxValue / 5) * 5;
+
+  const data = {
+    labels,
+  };
+  
   return (
     <div className={styles.chartContainer} style={{ width: '200px', height: '100px' }}>
       <span className={styles.chartIndicator} style={{ transform: 'translateX(50%)' }}>
