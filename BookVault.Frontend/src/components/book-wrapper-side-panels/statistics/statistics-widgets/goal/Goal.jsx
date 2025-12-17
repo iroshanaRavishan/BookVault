@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './goal.module.css';
 import { PiRobotLight } from 'react-icons/pi';
+import CircularProgressBar from '../charts/CircularProgressBar';
 import MiniProgressChart from '../charts/MiniProgressChart';
 import BarLineChart from '../charts/BarLineChart';
 
