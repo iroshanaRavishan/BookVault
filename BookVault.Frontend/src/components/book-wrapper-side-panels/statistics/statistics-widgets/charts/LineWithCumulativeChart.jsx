@@ -47,6 +47,11 @@ const LineWithCumulativeChart = () => {
         pointRadius: 3,
         fill: true,
       },
+      {
+        data: cumulative,
+        borderColor: "#0026fdff",
+        tension: 0.7,
+      },
     ],
   };
   
