@@ -47,6 +47,9 @@ const LineWithCumulativeChart = () => {
         pointRadius: 3,
         fill: true,
       },
+      {
+        data: cumulative,
+      },
     ],
   };
   
