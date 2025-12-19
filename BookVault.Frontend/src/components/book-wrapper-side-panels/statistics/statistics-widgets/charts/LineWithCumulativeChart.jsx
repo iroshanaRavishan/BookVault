@@ -55,7 +55,7 @@ const LineWithCumulativeChart = () => {
         pointRadius: 3,
         fill: true,
         backgroundColor: (ctx) => {
-
+          const chart = ctx.chart;
         },
       },
     ],
