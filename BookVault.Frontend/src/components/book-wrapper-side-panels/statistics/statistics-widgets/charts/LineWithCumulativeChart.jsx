@@ -53,6 +53,10 @@ const LineWithCumulativeChart = () => {
         tension: 0.7,
         borderWidth: 1,
         pointRadius: 3,
+        fill: true,
+        backgroundColor: (ctx) => {
+
+        },
       },
     ],
   };
