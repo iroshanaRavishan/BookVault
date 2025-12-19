@@ -49,6 +49,7 @@ const LineWithCumulativeChart = () => {
       },
       {
         data: cumulative,
+        borderColor: "#0026fdff",
       },
     ],
   };
