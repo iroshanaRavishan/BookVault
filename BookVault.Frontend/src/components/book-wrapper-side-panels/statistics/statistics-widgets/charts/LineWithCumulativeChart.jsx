@@ -62,6 +62,7 @@ const LineWithCumulativeChart = () => {
   };
 
   const options = {
+    responsive: true,
   };
 
   return (
