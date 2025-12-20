@@ -65,6 +65,7 @@ const LineWithCumulativeChart = () => {
     responsive: true,
     plugins: {
       legend: { display: false },
+      tooltip: { enabled: true },
     },
   };
 
