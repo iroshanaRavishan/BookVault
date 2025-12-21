@@ -71,6 +71,9 @@ const LineWithCumulativeChart = () => {
       x: { 
         ticks: { 
             color: "#666",
+            font: {
+                size: 8,
+            } , 
         },
         grid: { display: false }
      },
