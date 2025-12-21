@@ -79,6 +79,7 @@ const LineWithCumulativeChart = () => {
      },
       y: {
         beginAtZero: true,
+        grid: { color: "#eee" },
       },
     },
   };
