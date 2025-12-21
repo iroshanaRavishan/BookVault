@@ -69,6 +69,7 @@ const LineWithCumulativeChart = () => {
     },
     scales: {
       x: { 
+        grid: { display: false }
      },
       y: {
       },
