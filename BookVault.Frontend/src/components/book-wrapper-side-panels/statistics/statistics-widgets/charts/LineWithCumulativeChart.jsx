@@ -82,6 +82,7 @@ const LineWithCumulativeChart = () => {
         suggestedMax,
         ticks: { 
             stepSize: 5,
+            color: "#666",
         },
         grid: { color: "#eee" },
       },
