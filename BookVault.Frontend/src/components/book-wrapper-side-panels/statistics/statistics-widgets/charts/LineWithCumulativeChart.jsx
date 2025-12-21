@@ -67,6 +67,8 @@ const LineWithCumulativeChart = () => {
       legend: { display: false },
       tooltip: { enabled: true },
     },
+    scales: {
+    },
   };
 
   return (
