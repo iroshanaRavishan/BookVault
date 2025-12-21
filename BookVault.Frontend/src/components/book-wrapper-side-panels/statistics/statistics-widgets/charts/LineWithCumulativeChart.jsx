@@ -70,6 +70,7 @@ const LineWithCumulativeChart = () => {
     scales: {
       x: { 
         ticks: { 
+            color: "#666",
         },
         grid: { display: false }
      },
