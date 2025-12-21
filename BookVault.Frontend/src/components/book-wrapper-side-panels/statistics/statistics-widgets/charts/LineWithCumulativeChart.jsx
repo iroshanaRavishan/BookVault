@@ -68,6 +68,8 @@ const LineWithCumulativeChart = () => {
       tooltip: { enabled: true },
     },
     scales: {
+      x: { 
+     }
     },
   };
 
