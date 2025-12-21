@@ -83,6 +83,9 @@ const LineWithCumulativeChart = () => {
         ticks: { 
             stepSize: 5,
             color: "#666",
+            font: {
+                size: 8,
+            },
         },
         grid: { color: "#eee" },
       },
