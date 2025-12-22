@@ -95,7 +95,8 @@ const LineWithCumulativeChart = () => {
   const hoverLinesPlugin = {
     id: "hoverLines",
     afterDatasetsDraw: (chartInstance) => {
-      const activeElements = chartInstance.tooltip?.getActiveElements();
+      const activeElements = chartInstance.tooltip?.getActiveElements?.() || [];
+      if (activeElements.length === 0) return;
     }
   };
 
