@@ -93,6 +93,7 @@ const LineWithCumulativeChart = () => {
   };
 
   const hoverLinesPlugin = {
+    id: "hoverLines",
   };
 
   return (
