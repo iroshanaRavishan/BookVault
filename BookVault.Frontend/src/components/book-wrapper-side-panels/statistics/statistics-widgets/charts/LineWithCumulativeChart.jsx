@@ -94,7 +94,7 @@ const LineWithCumulativeChart = () => {
 
   const hoverLinesPlugin = {
     id: "hoverLines",
-    afterDatasetsDraw: () => {
+    afterDatasetsDraw: (chartInstance) => {
     }
   };
 
