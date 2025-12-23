@@ -113,6 +113,7 @@ const LineWithCumulativeChart = () => {
       // Horizontal line
       ctx.beginPath();
       ctx.moveTo(chartArea.left, y);
+      ctx.lineTo(chartArea.right, y);
     }
   };
 
