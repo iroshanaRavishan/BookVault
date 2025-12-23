@@ -106,6 +106,8 @@ const LineWithCumulativeChart = () => {
       const y = element.y;
 
       ctx.save();
+      ctx.setLineDash([3, 3]);
+      ctx.lineWidth = 1;
     }
   };
 
