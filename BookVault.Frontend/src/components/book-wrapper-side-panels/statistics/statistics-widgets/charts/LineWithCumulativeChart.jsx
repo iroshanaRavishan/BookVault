@@ -109,6 +109,10 @@ const LineWithCumulativeChart = () => {
       ctx.setLineDash([3, 3]);
       ctx.lineWidth = 1;
       ctx.strokeStyle = "#888";
+
+      // Horizontal line
+      ctx.beginPath();
+      ctx.moveTo(chartArea.left, y);
     }
   };
 
