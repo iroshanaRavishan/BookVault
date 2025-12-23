@@ -102,6 +102,7 @@ const LineWithCumulativeChart = () => {
       const { chartArea } = chartInstance;
 
       const element = activeElements[0].element;
+      const x = element.x;
     }
   };
 
