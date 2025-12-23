@@ -108,6 +108,7 @@ const LineWithCumulativeChart = () => {
       ctx.save();
       ctx.setLineDash([3, 3]);
       ctx.lineWidth = 1;
+      ctx.strokeStyle = "#888";
     }
   };
 
