@@ -112,6 +112,7 @@ const LineWithCumulativeChart = () => {
 
       // Horizontal line
       ctx.beginPath();
+      ctx.moveTo(chartArea.left, y);
     }
   };
 
