@@ -104,6 +104,8 @@ const LineWithCumulativeChart = () => {
       const element = activeElements[0].element;
       const x = element.x;
       const y = element.y;
+
+      ctx.save();
     }
   };
 
