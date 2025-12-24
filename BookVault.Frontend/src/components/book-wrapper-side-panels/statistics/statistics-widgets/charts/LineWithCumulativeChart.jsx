@@ -120,6 +120,7 @@ const LineWithCumulativeChart = () => {
       ctx.beginPath();
       ctx.moveTo(x, chartArea.top);
       ctx.lineTo(x, chartArea.bottom);
+      ctx.stroke();
     }
   };
 
