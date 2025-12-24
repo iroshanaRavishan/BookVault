@@ -118,6 +118,7 @@ const LineWithCumulativeChart = () => {
 
       // Vertical line
       ctx.beginPath();
+      ctx.moveTo(x, chartArea.top);
     }
   };
 
