@@ -121,6 +121,8 @@ const LineWithCumulativeChart = () => {
       ctx.moveTo(x, chartArea.top);
       ctx.lineTo(x, chartArea.bottom);
       ctx.stroke();
+
+      ctx.restore();
     }
   };
 
