@@ -4,8 +4,16 @@ import styles from './charts.module.css';
 const MiniProgressChart = () => {
   const progressMiniBarChartRef = useRef(null);
   return (
-    <div>MiniProgressChart</div>
-  )
-}
+    <div
+      style={{
+        width: '25px',
+        height: '25px',
+        position: 'relative'
+      }}
+    >
+      MiniProgressChart
+    </div>
+  );
+};
 
 export default MiniProgressChart;
