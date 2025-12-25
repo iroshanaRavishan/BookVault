@@ -132,7 +132,7 @@ const LineWithCumulativeChart = () => {
         Hours <FaArrowUpLong />
         Date  <FaArrowRightLong style={{marginTop: '2px'}} /> 
       </span>
-      <Chart ref={cumulativeChartRef} type="line" />      
+      <Chart ref={cumulativeChartRef} type="line" data={data} options={options} plugins={[hoverLinesPlugin]} />      
     </div>
   );
 };
