@@ -11,7 +11,7 @@ const MiniProgressChart = () => {
         position: 'relative'
       }}
     >
-      MiniProgressChart
+         <div>MiniProgressChart
     </div>
   );
 };
