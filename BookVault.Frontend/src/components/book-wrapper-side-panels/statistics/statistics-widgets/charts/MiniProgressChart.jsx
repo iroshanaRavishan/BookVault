@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import styles from './charts.module.css';
 
 const MiniProgressChart = () => {
-  const progressMiniBarChartRef = useRef();
+  const progressMiniBarChartRef = useRef(null);
   return (
     <div>MiniProgressChart</div>
   )
