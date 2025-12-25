@@ -7,6 +7,8 @@ const MiniProgressChart = () => {
     <div
       style={{
         width: '25px',
+        height: '25px',
+        position: 'relative'
       }}
     >
       MiniProgressChart
