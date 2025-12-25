@@ -11,7 +11,7 @@ const MiniProgressChart = () => {
     >
       MiniProgressChart
     </div>
-  )
-}
+  );
+};
 
 export default MiniProgressChart;
