@@ -11,7 +11,7 @@ const MiniProgressChart = ({ progress }) => {
     const ctx = chart.ctx;
 
     // Create gradient for the progress arc
-    const gradient = ctx.createLinearGradient(0, 0, 0, 25);
+    const gradient = ctx.createLinearGradient(0, 0, 0, ctx.canvas.height);
   }, [progress]);
 
   return (
