@@ -6,6 +6,7 @@ const MiniProgressChart = ({ progress }) => {
 
   useEffect(() => {
     const chart = progressMiniBarChartRef.current;
+    if (!chart) return;
   }, [progress]);
 
   return (
