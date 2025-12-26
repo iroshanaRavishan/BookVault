@@ -5,6 +5,7 @@ const MiniProgressChart = ({ progress }) => {
   const progressMiniBarChartRef = useRef(null);
 
   useEffect(() => {
+    const chart = progressMiniBarChartRef.current;
   }, []);
 
   return (
