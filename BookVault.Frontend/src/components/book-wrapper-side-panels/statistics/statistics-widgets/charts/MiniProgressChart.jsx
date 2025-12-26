@@ -1,8 +1,12 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import styles from './charts.module.css';
 
-const MiniProgressChart = () => {
+const MiniProgressChart = ({ progress }) => {
   const progressMiniBarChartRef = useRef(null);
+
+  useEffect(() => {
+  }, []);
+
   return (
     <div
       style={{
@@ -11,7 +15,7 @@ const MiniProgressChart = () => {
         position: 'relative'
       }}
     >
-         <div>MiniProgressChart
+         <div>MiniProgressChart</div>
     </div>
   );
 };
