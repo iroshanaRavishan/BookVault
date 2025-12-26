@@ -3,6 +3,10 @@ import styles from './charts.module.css';
 
 const MiniProgressChart = ({ progress }) => {
   const progressMiniBarChartRef = useRef(null);
+
+  useEffect(() => {
+  }, []);
+
   return (
     <div
       style={{
