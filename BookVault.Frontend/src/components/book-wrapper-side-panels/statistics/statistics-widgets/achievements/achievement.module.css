@@ -1,0 +1,339 @@
+.achievementsContainer {
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.headerSection {
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.contentSection {
+    display: flex;
+    flex-direction: column;
+}
+
+.scrollableBadges {
+    height: 120px;
+    max-height: 300px;
+    overflow-x: auto; 
+    padding-right: 8px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.scrollableBadges::-webkit-scrollbar {
+    display: none;
+}
+
+.badgeItem {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.badge {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 10px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.badge:hover {
+    background-color: #f0f0ff;
+    transform: scale(1.02);
+}
+
+.badgeIcon {
+    font-size: 24px;
+}
+
+.badgeName {
+    font-size: 16px;
+    color: #333;
+}
+
+.aiSummaryContent {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.aiGeneratedContentText {
+    font-size: 15px;
+    font-weight: 500;
+    color: #666;
+    line-height: 20px;
+}
+
+.aiGeneratedIndicator {
+    font-size: 12px;
+    font-weight: 600;
+    color: #858585;
+}
+
+.milestoneSection {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 15px;
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.milestoneToggler {
+    font-size: 16px;
+    font-weight: 600;
+    color: #444;
+    background-color: #b8b8b8;
+    border-radius: 25px;
+    padding: 6px 12px;
+    margin: 10px 30px;
+    position: relative;
+    display: flex;
+    overflow: hidden;
+    border: none;
+}
+
+.toggleBtn {
+    flex: 1;
+    background: transparent;
+    border: none;
+    font-size: 16px;
+    font-family: "Inter", sans-serif;
+    cursor: pointer;
+    z-index: 2;
+    color: #fff;
+    transition: color 0.3s ease;
+}
+
+.slider {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    background-color: #6b6b6b;
+    border-radius: 25px;
+    transition: transform 0.3s ease-in-out;
+    z-index: 1;
+}
+
+.left {
+    transform: translateX(0%);
+}
+
+.right {
+    transform: translateX(100%);
+}
+
+.toggleBtn.active {
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.tabContainer {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.streakTabContent,
+.awardsTabContent {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
+    opacity: 0;
+}
+
+.streakStatus {
+    display: flex;
+    flex-direction: row;
+    font-size: 16px;
+    font-weight: 500;
+    color: #555;
+    background: linear-gradient(to top, #dd5902, #b9b9b9);
+    border-radius: 10px;
+    padding: 8px 10px;
+}
+
+.fireIcon {
+    display: flex;
+    align-items: center;
+    margin: 0 20px;
+}
+
+.streakTextSection {
+    display: flex;
+    flex-direction: column;
+    color: #ffffff;
+}   
+
+.streakText {
+    font-size: 13px;
+    font-weight: 400;
+}
+
+.streakSubText {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.readingHistorySection {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.readingHistoryTitle {
+    position: relative;
+    font-size: 18px;
+    font-weight: 600;
+    color: #444;
+}
+
+.readingHistoryTitle::after {
+    content: '';
+    position: absolute;
+    top: 55%;
+    right: 0;
+    width: 50%;
+    height: 1px;
+    background-color: #dbdbdb;
+}
+
+.hiddenTab {
+    pointer-events: none;
+}
+
+.activeTab {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.streakTabContent {
+    transform: translateX(-100%);
+}
+
+.awardsTabContent {
+  transform: translateX(100%);
+}
+
+.activeTab.streakTabContent {
+  transform: translateX(0%);
+}
+
+.activeTab.awardsTabContent {
+  transform: translateX(0%);
+}
+
+.readingHistoryList {
+    display: flex;
+    flex-direction: column;
+    /* height: 500px; */
+    overflow-y: auto;
+    padding-right: 5px;
+    /* box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.4); */
+}
+
+.readingHistoryList::-webkit-scrollbar {
+    width: 6px; 
+}
+
+.readingHistoryList::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.readingHistoryList::-webkit-scrollbar-thumb {
+    background-color: #d4d4d4;
+    border-radius: 10px;
+    }
+
+.readingHistoryList::-webkit-scrollbar-button:single-button {
+    display: none !important; 
+    width: 0;
+    height: 0;
+}
+
+.noScroll {
+  overflow: hidden !important;
+}
+
+.readingHistoryItem {
+    font-size: 15px;
+    color: #555;
+    background-color: #adffb1;
+    margin: 5px 0;
+    border-radius: 10px;
+    padding: 6px 10px;
+}
+
+.historyItem {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 4px;
+}
+
+.historyItemDetails {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+}
+
+.historyItemChart {
+
+}
+
+.historyItemMins {
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.historyItemTroophy {
+    margin-left: 20px;
+}
+
+.collapsBtn {
+    padding: 8px 20px;
+    width: 120px;
+    border-radius: 25px;
+    background: rgb(76, 148, 76);
+    border: none;
+    font-size: 14px;
+    font-family: "Inter", sans-serif;
+    cursor: pointer;
+    color: #fff;
+    transition: color 0.3s ease;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+}
+
+.readingHistoryFooter {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    color: #777;
+    padding: 2px 0;
+    gap: 6px;
+}
+
+.chevronIcon {
+    transition: transform 0.3s ease-in-out;
+}
+
+.rotated {
+    transform: rotate(180deg);
+}

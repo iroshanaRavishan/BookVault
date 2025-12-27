@@ -1,9 +1,12 @@
 import React from 'react'
 import styles from './statistics.module.css'
-import QuickOverview from './statistics-widgets/QuickOverview'
-import TotalTime from './statistics-widgets/TotalTime'
-import TotalTimeComparison from './statistics-widgets/TotalTimeComparison'
-import ReadingHourSummary from './statistics-widgets/ReadingHourSummary'
+import QuickOverview from './statistics-widgets/quick-overview/QuickOverview'
+import TotalTime from './statistics-widgets/total-time/TotalTime'
+import TotalTimeComparison from './statistics-widgets/total-time-comparison/TotalTimeComparison'
+import ReadingHourSummary from './statistics-widgets/reading-hours/ReadingHourSummary'
+import ScreenTimeHeatMap from './statistics-widgets/screen-time-heatmap/ScreenTimeHeatMap'
+import Goal from './statistics-widgets/goal/Goal'
+import Achievement from './statistics-widgets/achievements/Achievement'
 
 export default function Statistics() {
   return (
@@ -12,6 +15,9 @@ export default function Statistics() {
       <TotalTime />
       <TotalTimeComparison />
       <ReadingHourSummary />
+      <ScreenTimeHeatMap />
+      <Goal /> 
+      <Achievement />
     </div>
   )
 }

@@ -1,0 +1,133 @@
+.goalSection {
+    background-color: rgb(255, 255, 255);
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.headerSection {
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.contentSection {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    position: relative;
+}
+
+.contentSection::before {
+    content: "";
+    width: 0.5px;
+    background-color: #ccc;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.contentSectionLeftDetails {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: 160px;
+    width: 100%;
+}
+
+.contentSectionRightDetails {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    height: 160px;
+    width: 100%;
+}
+
+.miniCharts {
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+    border-radius: 8px;
+    padding-left: 30px;
+}
+
+.sevenDayLineChart {
+    width: 100%;
+    height: 145px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 10px;
+}
+
+.goalSummarySection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.miniChartBox {
+    position: relative;
+    flex: 1;
+    height: 40px;
+    width: 5px;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 500;
+    color: #444;
+    transition: all 0.3s ease;
+    padding: 10px 0 10px 0;
+}
+
+.miniChartBox:hover {
+    cursor: pointer;
+    box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.2);
+}
+
+.miniChartBox::after {
+    content: "";
+    position: absolute;
+    top: 100%;             
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;              
+    border-left: 1px dashed #888;
+    opacity: 0;             
+    transition: height 0.5s ease-out, opacity 0.2s ease-in;
+}
+
+.miniChartBox:hover::after {
+    height: 140px;          
+    opacity: 1;
+}
+
+.daysOfWeek {
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.aiGeneratedIndicator {
+    font-size: 12px;
+    font-weight: 600;
+    color: #858585;
+}
+
+.preWeekSectionText {
+    align-self: flex-start;
+    font-weight: 500;
+    font-size: 13px;
+    color: #8a8a8aff;
+    text-align: left;
+}

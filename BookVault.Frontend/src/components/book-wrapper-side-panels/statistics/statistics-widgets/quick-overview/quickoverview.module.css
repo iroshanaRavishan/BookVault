@@ -1,0 +1,138 @@
+.quickOverview {
+    padding: 10px;
+    border-radius: 10px;
+    position: relative;
+    background-color: #fff;
+    overflow: hidden; 
+    user-select: none;
+}
+
+.headerSection {
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.contentSection {
+    display: flex;
+    flex-direction: column;
+}
+
+.summaryContent {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.aiGeneratedContentText {
+    font-size: 14px;
+    font-weight: 500;
+    color: #666;
+    line-height: 20px;
+}
+
+.aiGeneratedIndicator {
+    font-size: 12px;
+    font-weight: 600;
+    color: #858585;
+}
+
+.totaPageText {
+    font-size: 20px;
+    font-weight: 500;
+    color: #686868;
+}
+
+.streakSummary {
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding-right: 20px; 
+}
+
+.streakSummary::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 2px;              
+    height: 30px;            
+    background-color: #ccc;  
+    border-radius: 2px;      
+}
+
+.streakText {
+    display: flex;
+    flex-direction: column;
+    line-height: 12px;
+    margin-left: 5px;
+    color: #7c7c7c;
+    font-size: 12px;
+    font-weight: bold;
+  }
+
+.contentSectionDetails {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.badgeContainer {
+    margin-left: 15px;
+}
+
+.contentSectionLeftDetails {
+    display: flex;
+    flex-direction: column;
+}
+
+.contentSectionRightDetails {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    justify-content: end;
+}
+
+.quickOverview::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #a0c4ff, #bdb2ff);
+  clip-path: path(
+    "M0,100 Q50,10 100,100 T200,100 T300,200 T400,100 V200 H0 Z"
+  );
+  opacity: 0.4;
+  transform: scale(2);
+  animation: waveMove1 12s ease-in-out infinite alternate;
+}
+
+.quickOverview::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #ffc6ff, #ffadad);
+  clip-path: path(
+    "M0,450 Q60,50 120,110 T240,120 T300,120 T480,120 V200 H0 Z"
+  );
+  opacity: 0.5;
+  transform: scale(2);
+  animation: waveMove2 10s ease-in-out infinite alternate;
+}
+
+.headerSection,
+.contentSection {
+  position: relative;
+  z-index: 1; 
+}
+
+@keyframes waveMove1 {
+  0% { transform: translateX(0) scale(2); }
+  100% { transform: translateX(-50px) scale(2); }
+}
+
+@keyframes waveMove2 {
+  0% { transform: translateX(0) scale(2); }
+  100% { transform: translateX(50px) scale(2); }
+}

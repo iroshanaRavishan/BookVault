@@ -1,0 +1,190 @@
+.totalTimeSpentSection {
+  background-color: rgb(255, 255, 255);
+  padding: 10px;
+  border-radius: 10px;
+  user-select: none;
+}
+
+.headerSection {
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.contentSection {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: stretch;
+  gap: 10px;
+}
+
+.timeSpentSection {
+  background-color: rgb(255, 255, 255);
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.timeSpentSummarySection {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 10px;
+  text-align: center;
+}
+
+.timeSpentValueSection {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0px;
+  text-align: center;
+}
+
+.timeSpentDetailsChartSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+}
+
+.timeSpentDetailsText {
+  font-weight: 500;
+  line-height: 16px;
+  text-align: left;
+  font-size: 14px;
+}
+
+.dateValue {
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 32px;
+}
+
+.dateLabel {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 16px;
+  margin-left: 2px;
+}
+
+.hoursValue {
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 24px;
+  margin-left: 5px;
+}
+
+.hoursLable, .minsLable {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 14px;
+  margin-left: 2px;
+}
+
+.minsValue {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+}
+
+.timeSpentComparison {
+  font-size: 12px;
+  font-weight: 500;
+  color: #4caf50;
+  text-align: left;
+}
+
+.lastOpenDate {
+  font-size: 12px;
+  font-weight: 600;
+  color: #757575;
+  text-align: left;
+}
+
+.chartSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 10px;
+}
+
+.chartNavigationButtons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  gap: 10px;
+  width: 100%;
+}
+
+.chartNavigationButton {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #7575751a;
+  border-radius: 5px;
+  padding: 2px 5px;
+  color: #808080;
+}
+
+.chartTypes {
+  font-size: 12px;
+  font-weight: 500;
+  color: #808080;
+}
+
+.sliderWrapper {
+  width: 200px;       
+  padding-top: 9px;      
+  overflow: hidden;
+  position: relative;
+}
+
+.slider {
+  display: flex;
+  width: 100%;
+  transition: transform 0.4s ease-in-out;
+}
+
+.slide {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.chartNavigationButton:hover {
+  background-color: #75757533;
+  color: #606060;
+}
+
+.chartNavigationButton:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.totalTimeSeparator {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+}
+
+.totalTimeSeparator::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background-color: #c7c7c7;
+  height: 100%;
+}

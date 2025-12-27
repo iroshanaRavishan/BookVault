@@ -1,0 +1,55 @@
+.totalTimeComparisonSection {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.lastWeekSection {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(255, 255, 255);
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.lastWeekSection span {
+    font-weight: 500;
+    padding-bottom: 8px;
+    font-size: 14px;
+    color: #8a8a8aff;
+}
+
+.prevWeekSection {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    width: 100%;
+}
+
+.preWeekSectionText {
+    align-self: flex-start;
+    font-weight: 500;
+    padding-bottom: 8px;
+    font-size: 14px;
+    color: #8a8a8aff;
+    text-align: left;
+}
+
+.progressBarsContainer {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+}
+
+.progressBarsContainer span {
+    font-weight: 700;
+    font-size: 16px;
+    color: #8a8a8aff;
+}
