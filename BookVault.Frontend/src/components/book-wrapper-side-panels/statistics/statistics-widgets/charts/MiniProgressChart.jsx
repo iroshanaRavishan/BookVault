@@ -24,7 +24,7 @@ const MiniProgressChart = ({ progress }) => {
     labels: ['Progress', 'Remaining'],
     datasets: [
       {
-        data: [progress],
+        data: [progress, 100 - progress]
       },
     ],
   };
