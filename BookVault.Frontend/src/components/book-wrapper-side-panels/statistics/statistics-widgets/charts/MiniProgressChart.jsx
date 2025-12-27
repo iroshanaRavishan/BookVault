@@ -20,6 +20,10 @@ const MiniProgressChart = ({ progress }) => {
     chart.update();
   }, [progress]);
 
+  const data = {
+
+  };
+
   return (
     <div
       style={{
