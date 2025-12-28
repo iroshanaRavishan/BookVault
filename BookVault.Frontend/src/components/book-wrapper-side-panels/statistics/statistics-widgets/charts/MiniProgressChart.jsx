@@ -32,6 +32,9 @@ const MiniProgressChart = ({ progress }) => {
     ],
   };
 
+  const options = {
+  };
+
   return (
     <div
       style={{
