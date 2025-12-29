@@ -344,5 +344,6 @@
     align-items: center;
     position: relative;
     margin-bottom: 20px;
+    user-select: none;
     color: #666666;
 }
