@@ -338,6 +338,13 @@
     transform: rotate(180deg);
 }
 
+.badgeTitle {
+    position: relative;
+    font-size: 15px;
+    font-weight: 600;
+    display: flex;
+}
+
 .badgeCategoryHeader {
     display: flex;
     justify-content: space-between;
