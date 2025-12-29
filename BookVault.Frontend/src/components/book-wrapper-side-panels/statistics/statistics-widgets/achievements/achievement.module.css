@@ -337,3 +337,11 @@
 .rotated {
     transform: rotate(180deg);
 }
+
+.badgeCategoryHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    color: #666666;
+}
