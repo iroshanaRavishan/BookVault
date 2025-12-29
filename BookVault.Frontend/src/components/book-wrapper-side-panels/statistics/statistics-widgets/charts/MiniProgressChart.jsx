@@ -34,6 +34,9 @@ const MiniProgressChart = ({ progress }) => {
 
   const options = {
     responsive: true,
+    animation: {
+
+    },
   };
 
   return (
