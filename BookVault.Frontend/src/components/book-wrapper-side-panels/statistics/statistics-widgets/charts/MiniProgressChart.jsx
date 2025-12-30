@@ -37,7 +37,8 @@ const MiniProgressChart = ({ progress }) => {
     animation: {
       animateRotate: true,
       animateScale: true,
-      duration: 1000
+      duration: 1000,
+      easing: 'easeOutQuart'
     },
   };
 
