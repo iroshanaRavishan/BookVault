@@ -41,6 +41,8 @@ const MiniProgressChart = ({ progress }) => {
       easing: 'easeOutQuart'
     },
     plugins: {
+      tooltip: {
+      }
     },
   };
 
