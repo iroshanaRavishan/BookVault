@@ -45,6 +45,7 @@ const MiniProgressChart = ({ progress }) => {
         enabled: false
       },
       legend: {
+        display: false 
       },
     },
   };
