@@ -42,6 +42,7 @@ const MiniProgressChart = ({ progress }) => {
     },
     plugins: {
       tooltip: {
+        enabled: false
       }
     },
   };
