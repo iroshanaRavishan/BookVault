@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import styles from './charts.module.css';
+import { Doughnut } from 'react-chartjs-2';
 
 const MiniProgressChart = ({ progress }) => {
   const progressMiniBarChartRef = useRef(null);
