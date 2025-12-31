@@ -62,7 +62,7 @@ const MiniProgressChart = ({ progress }) => {
         position: 'relative'
       }}
     >
-      <Doughnut data={data} options={options} />
+      <Doughnut ref={progressMiniBarChartRef} data={data} options={options} />
     </div>
   );
 };
