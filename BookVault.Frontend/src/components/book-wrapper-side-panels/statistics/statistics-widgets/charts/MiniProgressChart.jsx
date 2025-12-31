@@ -1,7 +1,9 @@
 import React, { useRef, useEffect } from 'react';
 import styles from './charts.module.css';
 import { Doughnut } from 'react-chartjs-2';
-import { ArcElement, Tooltip, Legend } from 'chart.js';
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+
+ChartJS.register(ArcElement, Tooltip, Legend);
 
 const MiniProgressChart = ({ progress }) => {
   const progressMiniBarChartRef = useRef(null);
