@@ -3,7 +3,7 @@ import styles from './messageWall.module.css';
 
 export default function MessageWall(){
   return (
-    <div>
+    <div className={styles.wall}>
       Message Wall
     </div>
   );
