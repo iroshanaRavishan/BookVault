@@ -5,7 +5,8 @@ export default function MessageWall({ messages, isTyping }) {
   return (
     <div className={styles.wall}>
       {messages.map((msg, index) => (
-        <div></div>
+        <div key={index}>
+        </div>
       ))}
     </div>
   );

@@ -3,3 +3,16 @@
   padding: 12px;
   overflow-y: auto;
 }
+
+.message {
+  display: flex;
+  margin-bottom: 8px;
+}
+
+.user {
+  justify-content: flex-end !important;
+}
+
+.bot {
+  justify-content: flex-start !important;
+}
