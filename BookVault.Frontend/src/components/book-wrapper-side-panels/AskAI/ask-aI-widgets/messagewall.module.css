@@ -25,3 +25,8 @@
   position: relative;
   background: #fff;
 }
+
+.user .bubble {
+  background: #dcf8c6;
+  border-bottom-right-radius: 2px;
+}
