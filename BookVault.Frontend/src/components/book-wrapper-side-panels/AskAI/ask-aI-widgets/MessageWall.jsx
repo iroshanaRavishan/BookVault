@@ -8,6 +8,7 @@ export default function MessageWall({ messages, isTyping }) {
         <div key={index} className={`${styles.message} ${styles[msg.sender]}`}>
           <div className={styles.bubble}>
             {msg.text}
+            <span className={styles.time}>{msg.time}</span>
           </div>
         </div>
       ))}
