@@ -16,3 +16,22 @@
 .bot {
   justify-content: flex-start !important;
 }
+
+.bubble {
+  max-width: 70%;
+  padding: 8px 12px;
+  border-radius: 12px;
+  font-size: 14px;
+  position: relative;
+  background: #fff;
+}
+
+.user .bubble {
+  background: #dcf8c6;
+  border-bottom-right-radius: 2px;
+}
+
+.bot .bubble {
+  background: #ffffff;
+  border-bottom-left-radius: 2px;
+}

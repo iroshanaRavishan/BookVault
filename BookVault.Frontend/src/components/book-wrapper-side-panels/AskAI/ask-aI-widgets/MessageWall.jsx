@@ -6,6 +6,9 @@ export default function MessageWall({ messages, isTyping }) {
     <div className={styles.wall}>
       {messages.map((msg, index) => (
         <div key={index} className={`${styles.message} ${styles[msg.sender]}`}>
+          <div className={styles.bubble}>
+            {msg.text}
+          </div>
         </div>
       ))}
     </div>
