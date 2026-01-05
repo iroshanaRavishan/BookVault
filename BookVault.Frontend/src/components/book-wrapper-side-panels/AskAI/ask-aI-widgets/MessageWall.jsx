@@ -12,6 +12,10 @@ export default function MessageWall({ messages, isTyping }) {
           </div>
         </div>
       ))}
+
+      {isTyping && (
+        <div></div>
+      )}
     </div>
   );
 }
