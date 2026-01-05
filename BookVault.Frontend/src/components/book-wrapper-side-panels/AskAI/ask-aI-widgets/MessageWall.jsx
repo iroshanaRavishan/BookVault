@@ -14,7 +14,8 @@ export default function MessageWall({ messages, isTyping }) {
       ))}
 
       {isTyping && (
-        <div></div>
+        <div className={`${styles.message} ${styles.bot}`}>
+        </div>
       )}
     </div>
   );
