@@ -4,6 +4,13 @@
   overflow-y: auto;
 }
 
+.dateSeparator {
+  text-align: center;
+  font-size: 12px;
+  color: #777;
+  margin: 12px 0;
+}
+
 .message {
   display: flex;
   margin-bottom: 8px;
