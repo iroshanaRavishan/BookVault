@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styles from './achievement.module.css';
-import { FaChevronDown, FaTrophy } from "react-icons/fa";
+import { FaChevronDown, FaChevronRight, FaTrophy } from "react-icons/fa";
 import { PiRobotLight } from 'react-icons/pi';
 import { ImFire } from "react-icons/im";
 import MiniProgressChart from '../charts/MiniProgressChart';
