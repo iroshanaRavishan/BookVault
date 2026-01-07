@@ -364,3 +364,8 @@
     height: 1px;
     background-color: #cccccc;
 }
+
+.historyItemDate {
+    font-size: 12px;
+    color: #444;
+}
