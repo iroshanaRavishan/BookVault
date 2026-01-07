@@ -185,6 +185,7 @@ export default function Achievement() {
               }`}
             >
               <div>
+                <span>Ice Breakers</span>
                 <FaChevronRight size={13} />
               </div>
             </div>
