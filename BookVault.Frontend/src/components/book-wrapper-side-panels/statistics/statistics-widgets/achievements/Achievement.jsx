@@ -184,7 +184,9 @@ export default function Achievement() {
                 active === "awards" ? styles.activeTab : styles.hiddenTab
               }`}
             >
-              <span>Awards tab section...!</span>
+              <div>
+                <FaChevronRight size={13} />
+              </div>
             </div>
           </div>
         </div>
