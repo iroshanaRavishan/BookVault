@@ -145,7 +145,11 @@ export default function Achievement() {
                             <span>{item.mins} mins</span>
                           </div>
                           <div className={styles.historyItemTroophy}>
-                            <span><FaTrophy color='black' size={20}/></span>
+                            {
+                              item.dailyGoal ? (
+                                <span><FaTrophy color='black' size={20}/></span>
+                              ) : null
+                            }
                           </div>
                         </div>
                         <div className={styles.historyItemDate}>
