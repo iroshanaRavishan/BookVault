@@ -145,7 +145,11 @@ export default function Achievement() {
                             <span>{item.mins} mins</span>
                           </div>
                           <div className={styles.historyItemTroophy}>
-                            <span><FaTrophy color='black' size={20}/></span>
+                            {
+                              item.dailyGoal ? (
+                                <span><FaTrophy color='black' size={20}/></span>
+                              ) : null
+                            }
                           </div>
                         </div>
                         <div className={styles.historyItemDate}>
@@ -180,7 +184,10 @@ export default function Achievement() {
                 active === "awards" ? styles.activeTab : styles.hiddenTab
               }`}
             >
-              <span>Awards tab section...!</span>
+              <div>
+                <span>Ice Breakers</span>
+                <FaChevronRight size={13} />
+              </div>
             </div>
           </div>
         </div>
