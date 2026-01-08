@@ -10,3 +10,11 @@
     flex-grow: 1;
     overflow-y: auto;
 }
+
+.actionArea {
+    display: flex;
+    gap: 10px;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    overflow: hidden !important;
+}
