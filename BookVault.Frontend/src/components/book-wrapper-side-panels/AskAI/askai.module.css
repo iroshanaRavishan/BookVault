@@ -5,3 +5,8 @@
     gap: 10px;
     height: 100%;
 }
+
+.messageWall {
+    flex-grow: 1;
+    overflow-y: auto;
+}
