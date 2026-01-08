@@ -18,3 +18,28 @@
     border-radius: 15px;
     overflow: hidden !important;
 }
+
+.actionWrapper {
+    flex-grow: 1;
+    display: flex;
+    gap: 10px;
+    align-items: end;
+    justify-content: space-between;
+    padding-right: 8px;
+}
+
+.sendButton {
+    position: absolute;
+    top: 90.5%;
+    right: 5%;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 10px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
