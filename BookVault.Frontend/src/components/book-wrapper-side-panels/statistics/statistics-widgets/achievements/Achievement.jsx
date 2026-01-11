@@ -188,6 +188,8 @@ export default function Achievement() {
                 <span className={styles.badgeTitle}>Ice Breakers</span>
                 <FaChevronRight size={13} />
               </div>
+              <div className={styles.scrollableBadges}>
+              </div>
             </div>
           </div>
         </div>
