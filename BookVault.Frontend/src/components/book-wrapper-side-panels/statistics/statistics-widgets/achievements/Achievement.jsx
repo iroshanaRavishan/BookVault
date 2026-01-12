@@ -190,6 +190,8 @@ export default function Achievement() {
               </div>
               <div className={styles.scrollableBadges}>
                 <div className={styles.badgeItem}>
+                  {badges.map((badge) => (
+                  ))}
                 </div>
               </div>
             </div>
