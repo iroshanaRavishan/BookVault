@@ -189,7 +189,8 @@ export default function Achievement() {
                 <FaChevronRight size={13} />
               </div>
               <div className={styles.scrollableBadges}>
-
+                <div className={styles.badgeItem}>
+                </div>
               </div>
 
               <div className={styles.badgeCategoryHeader}>
