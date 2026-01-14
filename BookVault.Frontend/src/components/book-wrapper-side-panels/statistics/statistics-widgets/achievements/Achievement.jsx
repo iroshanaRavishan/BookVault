@@ -200,6 +200,9 @@ export default function Achievement() {
               </div>
 
               <div className={styles.badgeCategoryHeader}>
+              </div>
+
+              <div className={styles.badgeCategoryHeader}>
                 <span className={styles.badgeTitle}>Ice Breakers</span>
                 <FaChevronRight size={13} />
               </div>
