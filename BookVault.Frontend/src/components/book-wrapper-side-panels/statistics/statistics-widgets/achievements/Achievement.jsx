@@ -203,7 +203,10 @@ export default function Achievement() {
                 <span className={styles.badgeTitle}>Ice Breakers</span>
                 <FaChevronRight size={13} />
               </div>
-
+              <div className={styles.scrollableBadges}>
+                <div className={styles.badgeItem}>
+                </div>
+              </div>
 
               <div className={styles.badgeCategoryHeader}>
                 <span className={styles.badgeTitle}>Ice Breakers</span>
