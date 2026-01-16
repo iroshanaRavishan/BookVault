@@ -9,7 +9,7 @@
 
 .wall {
   flex: 1;
-  padding: 12px;
+  /* padding: 12px; */
   overflow-y: auto;
 }
 
@@ -55,9 +55,9 @@
 .time {
   display: block;
   font-size: 10px;
-  color: #555;
-  margin-top: 4px;
+  color: #55555575;
   text-align: right;
+  font-style: italic;
 }
 
 /* Typing indicator */

@@ -11,6 +11,7 @@ import { useNoteContext } from "../../context/NoteContext";
 import Appearance from "../book-wrapper-side-panels/Appearance-panel/Appearance";
 import { useFullscreenContext } from "../../context/FullscreenContext";
 import Statistics from "../book-wrapper-side-panels/statistics/Statistics";
+import AskAI from "../book-wrapper-side-panels/AskAI/AskAI";
 
 const rightButtonData = ["Bookmarks", "Appearance", "Reading Style", "Statistics"];
 const leftButtonData = ["Notes"];
@@ -229,7 +230,7 @@ export default function SideButtonsWrapper({
                   </div>,
     'Reading Style': <span>this is the content of the Reading Styles</span>,
     'Statistics': <Statistics />,
-    'Ask AI': <span>this is the content of the Ask AI</span>
+    'Ask AI': <AskAI />
   };
 
   return (
@@ -356,7 +357,7 @@ export default function SideButtonsWrapper({
           <div 
             className={styles.panelBody}
             style={{
-              height:'627px'
+              height: mainPanel.name === 'Ask AI' ? '487px' : '627px'
             }}
           >
             {panelContentMap[mainPanel.name] || ''}
