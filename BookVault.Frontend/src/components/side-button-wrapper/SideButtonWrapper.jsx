@@ -230,7 +230,7 @@ export default function SideButtonsWrapper({
                   </div>,
     'Reading Style': <span>this is the content of the Reading Styles</span>,
     'Statistics': <Statistics />,
-    'Ask AI': <span>this is the content of the Ask AI</span>
+    'Ask AI': <AskAI />
   };
 
   return (
