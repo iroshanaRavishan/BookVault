@@ -11,6 +11,7 @@ import { useNoteContext } from "../../context/NoteContext";
 import Appearance from "../book-wrapper-side-panels/Appearance-panel/Appearance";
 import { useFullscreenContext } from "../../context/FullscreenContext";
 import Statistics from "../book-wrapper-side-panels/statistics/Statistics";
+import AskAI from "../book-wrapper-side-panels/AskAI/AskAI";
 
 const rightButtonData = ["Bookmarks", "Appearance", "Reading Style", "Statistics"];
 const leftButtonData = ["Notes"];
