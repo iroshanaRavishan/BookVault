@@ -106,6 +106,7 @@
 }
 
 .panelBody {
+  position: relative; 
   padding: 10px 10px;
   overflow-y: auto;
   font-size: 15px;
