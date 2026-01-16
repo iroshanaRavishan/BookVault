@@ -357,7 +357,7 @@ export default function SideButtonsWrapper({
           <div 
             className={styles.panelBody}
             style={{
-              height:'627px'
+              height: mainPanel.name === 'Ask AI' ? '487px' : '627px'
             }}
           >
             {panelContentMap[mainPanel.name] || ''}
