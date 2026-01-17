@@ -9,7 +9,8 @@
 
 .messageWall {
     flex-grow: 1;
-    overflow-y: auto;
+    /* overflow-y: auto; */
+    height: 200px;
 }
 
 .messageWall::-webkit-scrollbar {
