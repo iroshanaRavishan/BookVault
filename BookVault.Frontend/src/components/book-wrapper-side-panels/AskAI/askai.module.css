@@ -12,6 +12,9 @@
     flex-grow: 1;
     /* overflow-y: auto; */
     height: 200px;
+    outline: none;
+    background-color: transparent;
+    font-family: inherit;
 }
 
 .messageWall::-webkit-scrollbar {
