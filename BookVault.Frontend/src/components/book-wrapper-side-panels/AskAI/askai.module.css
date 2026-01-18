@@ -2,6 +2,7 @@
     width: 100%;
     flex-direction: column;
     display: flex;
+    justify-content: flex-end;
     gap: 10px;
     height: 100%;
     padding-bottom: 5px;
@@ -11,6 +12,9 @@
     flex-grow: 1;
     /* overflow-y: auto; */
     height: 200px;
+    outline: none;
+    background-color: transparent;
+    font-family: inherit;
 }
 
 .messageWall::-webkit-scrollbar {
