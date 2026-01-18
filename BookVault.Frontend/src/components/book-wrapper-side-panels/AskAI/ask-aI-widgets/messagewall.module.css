@@ -34,21 +34,25 @@
 }
 
 .bubble {
-  max-width: 70%;
-  padding: 8px 12px;
+  max-width: 80%;
+  padding: 4px 8px;
   border-radius: 12px;
-  font-size: 14px;
+  font-size: 13px;
+  font-weight: 400;
   position: relative;
   background: #fff;
+  line-height: 18px;
 }
 
 .user .bubble {
   background: #dcf8c6;
+  border: 1px solid #a2d5ab;
   border-bottom-right-radius: 2px;
 }
 
 .bot .bubble {
   background: #ffffff;
+  border: 1px solid #ccc;
   border-bottom-left-radius: 2px;
 }
 
