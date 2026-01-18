@@ -2,6 +2,7 @@
     width: 100%;
     flex-direction: column;
     display: flex;
+    justify-content: flex-end;
     gap: 10px;
     height: 100%;
     padding-bottom: 5px;
