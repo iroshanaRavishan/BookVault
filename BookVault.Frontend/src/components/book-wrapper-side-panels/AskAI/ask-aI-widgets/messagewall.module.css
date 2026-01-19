@@ -9,8 +9,10 @@
 
 .wall {
   flex: 1;
-  /* padding: 12px; */
   overflow-y: auto;
+  height: 96%;
+  padding: 0px 8px 10px 10px; 
+  margin-right: 1px;
 }
 
 .dateSeparator {
