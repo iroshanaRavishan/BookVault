@@ -2,6 +2,8 @@ import React from 'react';
 import styles from './messageWall.module.css';
 
 export default function MessageWall({ messages, isTyping }) {
+  const bottomRef = useRef(null); 
+  const wallRef = useRef(null);
   return (
     <div className={styles.wall}>
       {messages.map((msg, index) => (
