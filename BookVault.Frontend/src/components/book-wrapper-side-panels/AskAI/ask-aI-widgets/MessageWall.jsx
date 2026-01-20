@@ -5,6 +5,8 @@ export default function MessageWall({ messages, isTyping }) {
   const bottomRef = useRef(null); 
   const wallRef = useRef(null);
 
+  const [showScrollDown, setShowScrollDown] = useState(false);
+
   useEffect(() => {
     
   }, []);
