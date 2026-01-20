@@ -1,9 +1,17 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styles from './messageWall.module.css';
 
 export default function MessageWall({ messages, isTyping }) {
   const bottomRef = useRef(null); 
   const wallRef = useRef(null);
+
+  const [showScrollDown, setShowScrollDown] = useState(false);
+  const [userScrolledUp, setUserScrolledUp] = useState(false);
+
+  useEffect(() => {
+    
+  }, []);
+
   return (
     <div className={styles.wall}>
       {messages.map((msg, index) => (
