@@ -11,7 +11,7 @@ export default function MessageWall({ messages, isTyping }) {
   useEffect(() => {
     // user did NOT scroll and system action
     setUserScrolledUp(false);
-    
+    setShowScrollDown(false);
   }, [messages, isTyping]);
 
   return (
