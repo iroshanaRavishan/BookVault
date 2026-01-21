@@ -25,6 +25,9 @@ export default function MessageWall({ messages, isTyping }) {
           <div className={styles.bubble}>
             {msg.text}
             <span className={styles.time}>{msg.time}</span>
+              {hoveredId === msg.id && msg.sender === 'user' && (
+                
+              )}
           </div>
         </div>
       ))}
