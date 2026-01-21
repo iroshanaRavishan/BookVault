@@ -12,6 +12,11 @@ export default function MessageWall({ messages, isTyping }) {
     // user did NOT scroll and system action
     setUserScrolledUp(false);
     setShowScrollDown(false);
+
+    wallRef.current?.scrollTo({
+      top: wallRef.current.scrollHeight,
+      behavior: 'smooth',
+    });
   }, [messages, isTyping]);
 
   return (
