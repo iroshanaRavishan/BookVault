@@ -10,8 +10,13 @@ export default function MessageWall({ messages, isTyping }) {
 
   useEffect(() => {
     // user did NOT scroll and system action
-    setUserScrolledUp(false);
-    
+    // setUserScrolledUp(false);
+    // setShowScrollDown(false);
+
+    wallRef.current?.scrollTo({
+      top: wallRef.current.scrollHeight,
+      behavior: 'smooth',
+    });
   }, [messages, isTyping]);
 
   return (
