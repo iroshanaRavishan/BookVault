@@ -10,17 +10,24 @@ export default function MessageWall({ messages, isTyping }) {
 
   useEffect(() => {
     // user did NOT scroll and system action
-    setUserScrolledUp(false);
-    
+    // setUserScrolledUp(false);
+    // setShowScrollDown(false);
+
+    wallRef.current?.scrollTo({
+      top: wallRef.current.scrollHeight,
+      behavior: 'smooth',
+    });
   }, [messages, isTyping]);
 
   return (
-    <div className={styles.wall}>
-      {messages.map((msg, index) => (
-        <div key={index} className={`${styles.message} ${styles[msg.sender]}`}>
+    <div className={styles.wallContainer}>
+      <div className={`${styles.message} ${styles[msg.sender]}`}>
           <div className={styles.bubble}>
             {msg.text}
             <span className={styles.time}>{msg.time}</span>
+              {hoveredId === msg.id && msg.sender === 'user' && (
+                
+              )}
           </div>
         </div>
       ))}
