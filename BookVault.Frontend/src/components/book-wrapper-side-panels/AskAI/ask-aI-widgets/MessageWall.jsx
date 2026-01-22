@@ -21,7 +21,10 @@ export default function MessageWall({ messages, isTyping }) {
 
   return (
     <div className={styles.wallContainer}>
-      <div ref={wallRef}>
+      <div   
+        ref={wallRef}
+        className={styles.wall}
+      >
         {messages.map((msg) => {
           const showDateSeparator = msg.date !== lastRenderedDate;
           lastRenderedDate = msg.date;
