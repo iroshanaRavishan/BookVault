@@ -21,16 +21,20 @@ export default function MessageWall({ messages, isTyping }) {
 
   return (
     <div className={styles.wallContainer}>
-      <div className={`${styles.message} ${styles[msg.sender]}`}>
-          <div className={styles.bubble}>
-            {msg.text}
-            <span className={styles.time}>{msg.time}</span>
-              {hoveredId === msg.id && msg.sender === 'user' && (
-                
-              )}
-          </div>
-        </div>
-      ))}
+      <div ref={wallRef}>
+        {messages.map((msg) => {
+          return (
+              <div className={`${styles.message} ${styles[msg.sender]}`}>
+                <div className={styles.bubble}>
+                  {msg.text}
+                  <span className={styles.time}>{msg.time}</span>
+                  {hoveredId === msg.id && msg.sender === 'user' && (
+                    
+                  )}
+                </div>
+              </div>
+          );
+        })}
 
       {isTyping && (
         <div className={`${styles.message} ${styles.bot}`}>
