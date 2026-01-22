@@ -23,6 +23,8 @@ export default function MessageWall({ messages, isTyping }) {
     <div className={styles.wallContainer}>
       <div ref={wallRef}>
         {messages.map((msg) => {
+          const showDateSeparator = msg.date !== lastRenderedDate;
+          lastRenderedDate = msg.date;
           return (
               <div className={`${styles.message} ${styles[msg.sender]}`}>
                 <div className={styles.bubble}>
