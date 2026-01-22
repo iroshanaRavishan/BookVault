@@ -24,6 +24,7 @@ export default function MessageWall({ messages, isTyping }) {
       <div   
         ref={wallRef}
         className={styles.wall}
+        onScroll={handleScroll}
       >
         {messages.map((msg) => {
           const showDateSeparator = msg.date !== lastRenderedDate;
