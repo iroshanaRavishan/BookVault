@@ -21,16 +21,26 @@ export default function MessageWall({ messages, isTyping }) {
 
   return (
     <div className={styles.wallContainer}>
-      <div className={`${styles.message} ${styles[msg.sender]}`}>
-          <div className={styles.bubble}>
-            {msg.text}
-            <span className={styles.time}>{msg.time}</span>
-              {hoveredId === msg.id && msg.sender === 'user' && (
-                
-              )}
-          </div>
-        </div>
-      ))}
+      <div   
+        ref={wallRef}
+        className={styles.wall}
+        onScroll={handleScroll}
+      >
+        {messages.map((msg) => {
+          const showDateSeparator = msg.date !== lastRenderedDate;
+          lastRenderedDate = msg.date;
+          return (
+              <div className={`${styles.message} ${styles[msg.sender]}`}>
+                <div className={styles.bubble}>
+                  {msg.text}
+                  <span className={styles.time}>{msg.time}</span>
+                  {hoveredId === msg.id && msg.sender === 'user' && (
+                    
+                  )}
+                </div>
+              </div>
+          );
+        })}
 
       {isTyping && (
         <div className={`${styles.message} ${styles.bot}`}>
