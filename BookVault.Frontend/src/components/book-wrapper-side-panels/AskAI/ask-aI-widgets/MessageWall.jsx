@@ -31,6 +31,12 @@ export default function MessageWall({ messages, isTyping }) {
           lastRenderedDate = msg.date;
           return (
             <React.Fragment key={msg.id}>
+              {showDateSeparator && (
+                <div className={styles.dateSeparator}>
+                  {msg.date}
+                </div>
+              )}
+
               <div className={`${styles.message} ${styles[msg.sender]}`}>
                 <div className={styles.bubble}>
                   {msg.text}
