@@ -95,6 +95,10 @@
   animation-delay: 0.4s;
 }
 
+.wallContainer {
+  height: 100%;
+}
+
 @keyframes blink {
   0% { opacity: 0.2; }
   20% { opacity: 1; }
