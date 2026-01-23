@@ -95,6 +95,12 @@
   animation-delay: 0.4s;
 }
 
+.actions {
+  position: absolute;
+  display: flex;
+  align-items: flex-end;
+}
+
 .wallContainer {
   height: 100%;
 }
