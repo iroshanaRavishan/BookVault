@@ -16,10 +16,14 @@
 }
 
 .dateSeparator {
-  text-align: center;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 12px 0;
+  font-weight: 600;
   font-size: 12px;
   color: #777;
-  margin: 12px 0;
+  user-select: none;
 }
 
 .message {
@@ -89,6 +93,10 @@
 
 .typing span:nth-child(3) {
   animation-delay: 0.4s;
+}
+
+.wallContainer {
+  height: 100%;
 }
 
 @keyframes blink {
