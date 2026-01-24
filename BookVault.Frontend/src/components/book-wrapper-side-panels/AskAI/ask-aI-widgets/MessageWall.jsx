@@ -39,7 +39,7 @@ export default function MessageWall({ messages, isTyping }) {
                 </div>
               )}
 
-              <div className={`${styles.message} ${styles[msg.sender]}`}>
+              <div className={`${styles.message} ${styles[msg.sender]}`} onMouseEnter={() => setHoveredId(msg.id)}>
                 <div className={styles.bubble}>
                   {msg.text}
                   <span className={styles.time}>{msg.time}</span>
