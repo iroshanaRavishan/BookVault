@@ -5,6 +5,8 @@ export default function MessageWall({ messages, isTyping }) {
   const bottomRef = useRef(null); 
   const wallRef = useRef(null);
 
+  const [hoveredId, setHoveredId] = useState(null);
+  const [editingMsg, setEditingMsg] = useState(null);
   const [showScrollDown, setShowScrollDown] = useState(false);
   const [userScrolledUp, setUserScrolledUp] = useState(false);
 
@@ -29,6 +31,7 @@ export default function MessageWall({ messages, isTyping }) {
         {messages.map((msg) => {
           const showDateSeparator = msg.date !== lastRenderedDate;
           lastRenderedDate = msg.date;
+
           return (
             <React.Fragment key={msg.id}>
               {showDateSeparator && (
@@ -37,12 +40,18 @@ export default function MessageWall({ messages, isTyping }) {
                 </div>
               )}
 
-              <div className={`${styles.message} ${styles[msg.sender]}`}>
+              <div
+                className={`${styles.message} ${styles[msg.sender]}`}
+                onMouseEnter={() => setHoveredId(msg.id)}
+                onMouseLeave={() => setHoveredId(null)}
+              >
                 <div className={styles.bubble}>
                   {msg.text}
                   <span className={styles.time}>{msg.time}</span>
                   {hoveredId === msg.id && msg.sender === 'user' && (
-                    
+                    <div className={styles.actions}>
+                     
+                    </div>
                   )}
                 </div>
               </div>
