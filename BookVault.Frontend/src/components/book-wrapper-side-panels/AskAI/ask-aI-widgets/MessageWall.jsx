@@ -31,6 +31,7 @@ export default function MessageWall({ messages, isTyping }) {
         {messages.map((msg) => {
           const showDateSeparator = msg.date !== lastRenderedDate;
           lastRenderedDate = msg.date;
+
           return (
             <React.Fragment key={msg.id}>
               {showDateSeparator && (
@@ -39,7 +40,11 @@ export default function MessageWall({ messages, isTyping }) {
                 </div>
               )}
 
-              <div className={`${styles.message} ${styles[msg.sender]}`} onMouseEnter={() => setHoveredId(msg.id)}>
+              <div
+                className={`${styles.message} ${styles[msg.sender]}`}
+                onMouseEnter={() => setHoveredId(msg.id)}
+                onMouseLeave={() => setHoveredId(null)}
+              >
                 <div className={styles.bubble}>
                   {msg.text}
                   <span className={styles.time}>{msg.time}</span>
