@@ -5,6 +5,8 @@ export default function MessageWall({ messages, isTyping }) {
   const bottomRef = useRef(null); 
   const wallRef = useRef(null);
 
+  const [hoveredId, setHoveredId] = useState(null);
+  const [editingMsg, setEditingMsg] = useState(null);
   const [showScrollDown, setShowScrollDown] = useState(false);
   const [userScrolledUp, setUserScrolledUp] = useState(false);
 
@@ -37,7 +39,7 @@ export default function MessageWall({ messages, isTyping }) {
                 </div>
               )}
 
-              <div className={`${styles.message} ${styles[msg.sender]}`}>
+              <div className={`${styles.message} ${styles[msg.sender]}`} onMouseEnter={() => setHoveredId(msg.id)}>
                 <div className={styles.bubble}>
                   {msg.text}
                   <span className={styles.time}>{msg.time}</span>
