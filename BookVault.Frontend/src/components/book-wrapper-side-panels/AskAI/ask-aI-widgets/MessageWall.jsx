@@ -5,6 +5,7 @@ export default function MessageWall({ messages, isTyping }) {
   const bottomRef = useRef(null); 
   const wallRef = useRef(null);
 
+  const [hoveredId, setHoveredId] = useState(null);
   const [showScrollDown, setShowScrollDown] = useState(false);
   const [userScrolledUp, setUserScrolledUp] = useState(false);
 
