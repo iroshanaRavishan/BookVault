@@ -7,6 +7,7 @@ export default function MessageWall({ messages, isTyping }) {
 
   const [hoveredId, setHoveredId] = useState(null);
   const [editingMsg, setEditingMsg] = useState(null);
+  const [editedText, setEditedText] = useState('');
   const [showScrollDown, setShowScrollDown] = useState(false);
   const [userScrolledUp, setUserScrolledUp] = useState(false);
 
