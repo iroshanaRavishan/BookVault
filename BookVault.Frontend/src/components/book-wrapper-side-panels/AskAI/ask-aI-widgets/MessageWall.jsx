@@ -7,6 +7,7 @@ export default function MessageWall({ messages, isTyping }) {
 
   const [hoveredId, setHoveredId] = useState(null);
   const [editingMsg, setEditingMsg] = useState(null);
+  const [editedText, setEditedText] = useState('');
   const [showScrollDown, setShowScrollDown] = useState(false);
   const [userScrolledUp, setUserScrolledUp] = useState(false);
 
@@ -45,6 +46,9 @@ export default function MessageWall({ messages, isTyping }) {
                 onMouseEnter={() => setHoveredId(msg.id)}
                 onMouseLeave={() => setHoveredId(null)}
               >
+                {msg.sender === 'bot' && (
+                   <span className={styles.botIcon}><img src='/src/assets/logo mark.png' className={styles.profilePicture} /> </span>
+                )}
                 <div className={styles.bubble}>
                   {msg.text}
                   <span className={styles.time}>{msg.time}</span>
