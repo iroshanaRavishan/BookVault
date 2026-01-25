@@ -48,7 +48,6 @@ export default function MessageWall({ messages, isTyping }) {
               >
                 {msg.sender === 'bot' && (
                    <span className={styles.botIcon}><img src='/src/assets/logo mark.png' className={styles.profilePicture} /> </span>
-
                 )}
                 <div className={styles.bubble}>
                   {msg.text}
