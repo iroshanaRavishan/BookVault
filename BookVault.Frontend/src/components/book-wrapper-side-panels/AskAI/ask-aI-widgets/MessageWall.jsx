@@ -46,6 +46,8 @@ export default function MessageWall({ messages, isTyping }) {
                 onMouseEnter={() => setHoveredId(msg.id)}
                 onMouseLeave={() => setHoveredId(null)}
               >
+                {msg.sender === 'bot' (
+                )}
                 <div className={styles.bubble}>
                   {msg.text}
                   <span className={styles.time}>{msg.time}</span>
