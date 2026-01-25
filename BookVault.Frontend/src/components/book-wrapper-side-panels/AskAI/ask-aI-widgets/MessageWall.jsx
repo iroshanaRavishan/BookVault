@@ -46,7 +46,9 @@ export default function MessageWall({ messages, isTyping }) {
                 onMouseEnter={() => setHoveredId(msg.id)}
                 onMouseLeave={() => setHoveredId(null)}
               >
-                {msg.sender === 'bot' (
+                {msg.sender === 'bot' && (
+                   <span className={styles.botIcon}><img src='/src/assets/logo mark.png' className={styles.profilePicture} /> </span>
+
                 )}
                 <div className={styles.bubble}>
                   {msg.text}
