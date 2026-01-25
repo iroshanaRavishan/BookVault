@@ -111,6 +111,14 @@
   height: 100%;
 }
 
+.botIcon {
+  display: inline-flex;
+  margin-right: 6px; 
+  vertical-align: middle;
+  color: #555; 
+  font-size: 16px; 
+}
+
 @keyframes blink {
   0% { opacity: 0.2; }
   20% { opacity: 1; }
