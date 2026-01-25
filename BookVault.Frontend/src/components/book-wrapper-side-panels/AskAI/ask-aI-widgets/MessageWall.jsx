@@ -54,7 +54,8 @@ export default function MessageWall({ messages, isTyping }) {
                   <span className={styles.time}>{msg.time}</span>
                   {hoveredId === msg.id && msg.sender === 'user' && (
                     <div className={styles.actions}>
-                     
+                      <MdModeEditOutline onClick={() => startEdit(msg)} size={15}/>
+                      <RiFileCopyFill onClick={() => copyText(msg.text)} size={15}/>
                     </div>
                   )}
                 </div>
