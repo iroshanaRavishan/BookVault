@@ -69,15 +69,18 @@ export default function MessageWall({ messages, isTyping, onDelete }) {
           );
         })}
 
-      {isTyping && (
-        <div className={`${styles.message} ${styles.bot}`}>
-          <div className={styles.typing}>
-            <span></span>
-            <span></span>
-            <span></span>
+        {isTyping && (
+          <div className={`${styles.message} ${styles.bot}`}>
+            <span className={styles.botIcon}>
+            </span>
+            <div className={styles.typing}>
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 }
