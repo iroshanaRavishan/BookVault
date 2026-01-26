@@ -57,6 +57,7 @@ export default function MessageWall({ messages, isTyping, onDelete }) {
                       <MdModeEditOutline onClick={() => startEdit(msg)} size={15}/>
                       <RiFileCopyFill onClick={() => copyText(msg.text)} size={15}/>
                       <MdDelete
+                        onClick={() => onDelete(msg.id)}
                         size={16}
                         className={styles.deleteIcon}
                       />
@@ -68,15 +69,18 @@ export default function MessageWall({ messages, isTyping, onDelete }) {
           );
         })}
 
-      {isTyping && (
-        <div className={`${styles.message} ${styles.bot}`}>
-          <div className={styles.typing}>
-            <span></span>
-            <span></span>
-            <span></span>
+        {isTyping && (
+          <div className={`${styles.message} ${styles.bot}`}>
+            <span className={styles.botIcon}>
+            </span>
+            <div className={styles.typing}>
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 }
