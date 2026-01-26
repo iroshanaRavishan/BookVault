@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styles from './messageWall.module.css';
 
-export default function MessageWall({ messages, isTyping }) {
+export default function MessageWall({ messages, isTyping, onDelete }) {
   const bottomRef = useRef(null); 
   const wallRef = useRef(null);
 
@@ -56,6 +56,10 @@ export default function MessageWall({ messages, isTyping }) {
                     <div className={styles.actions}>
                       <MdModeEditOutline onClick={() => startEdit(msg)} size={15}/>
                       <RiFileCopyFill onClick={() => copyText(msg.text)} size={15}/>
+                      <MdDelete
+                        size={16}
+                        className={styles.deleteIcon}
+                      />
                     </div>
                   )}
                 </div>
