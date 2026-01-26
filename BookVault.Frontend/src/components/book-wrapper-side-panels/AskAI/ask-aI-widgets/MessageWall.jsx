@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styles from './messageWall.module.css';
 
-export default function MessageWall({ messages, isTyping }) {
+export default function MessageWall({ messages, isTyping, onDelete }) {
   const bottomRef = useRef(null); 
   const wallRef = useRef(null);
 
