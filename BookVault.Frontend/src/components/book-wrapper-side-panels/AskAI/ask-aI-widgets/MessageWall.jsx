@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styles from './messageWall.module.css';
 
-export default function MessageWall({ messages, isTyping, onDelete }) {
+export default function MessageWall({ messages, isTyping, onEdit, onDelete }) {
   const bottomRef = useRef(null); 
   const wallRef = useRef(null);
 
@@ -72,6 +72,7 @@ export default function MessageWall({ messages, isTyping, onDelete }) {
         {isTyping && (
           <div className={`${styles.message} ${styles.bot}`}>
             <span className={styles.botIcon}>
+              <img src='/src/assets/logo mark.png' className={styles.profilePicture} />
             </span>
             <div className={styles.typing}>
               <span></span>
@@ -80,6 +81,7 @@ export default function MessageWall({ messages, isTyping, onDelete }) {
             </div>
           </div>
         )}
+        <div ref={bottomRef} />
       </div>
     </div>
   );
