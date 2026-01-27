@@ -72,6 +72,7 @@ export default function MessageWall({ messages, isTyping, onDelete }) {
         {isTyping && (
           <div className={`${styles.message} ${styles.bot}`}>
             <span className={styles.botIcon}>
+              <img src='/src/assets/logo mark.png' className={styles.profilePicture} />
             </span>
             <div className={styles.typing}>
               <span></span>
