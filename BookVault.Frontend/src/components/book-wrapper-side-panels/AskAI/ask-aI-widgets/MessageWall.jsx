@@ -81,6 +81,7 @@ export default function MessageWall({ messages, isTyping, onEdit, onDelete }) {
             </div>
           </div>
         )}
+        <div ref={bottomRef} />
       </div>
     </div>
   );
