@@ -24,6 +24,8 @@ export default function MessageWall({ messages, isTyping, onEdit, onDelete }) {
 
   const startEdit = () => {
 
+  const startEdit = (msg) => {
+    setEditingMsg(msg);
   };
 
   return (
