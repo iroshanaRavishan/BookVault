@@ -22,6 +22,12 @@ export default function MessageWall({ messages, isTyping, onEdit, onDelete }) {
     });
   }, [messages, isTyping]);
 
+  const startEdit = () => {
+
+  const startEdit = (msg) => {
+    setEditingMsg(msg);
+  };
+
   return (
     <div className={styles.wallContainer}>
       <div   
