@@ -22,7 +22,10 @@ export default function MessageWall({ messages, isTyping, onEdit, onDelete }) {
     });
   }, [messages, isTyping]);
 
-  const startEdit = () => {
+  const handleScroll = () => {
+    const el = wallRef.current;
+    if (!el) return;
+  };
 
   const startEdit = (msg) => {
     setEditingMsg(msg);
