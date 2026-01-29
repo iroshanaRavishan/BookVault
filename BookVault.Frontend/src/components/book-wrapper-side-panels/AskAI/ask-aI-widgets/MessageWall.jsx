@@ -22,7 +22,8 @@ export default function MessageWall({ messages, isTyping, onEdit, onDelete }) {
     });
   }, [messages, isTyping]);
 
-  const startEdit = () => {
+  const handleScroll = () => {
+  };
 
   const startEdit = (msg) => {
     setEditingMsg(msg);
