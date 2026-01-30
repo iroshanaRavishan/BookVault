@@ -28,6 +28,8 @@ export default function MessageWall({ messages, isTyping, onEdit, onDelete }) {
 
     const distanceFromBottom =
       el.scrollHeight - el.scrollTop - el.clientHeight;
+
+    const isAtBottom = distanceFromBottom < 100;
   };
 
   const startEdit = (msg) => {
