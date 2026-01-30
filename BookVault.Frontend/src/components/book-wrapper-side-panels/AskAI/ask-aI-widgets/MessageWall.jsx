@@ -25,6 +25,15 @@ export default function MessageWall({ messages, isTyping, onEdit, onDelete }) {
   const handleScroll = () => {
     const el = wallRef.current;
     if (!el) return;
+
+    const distanceFromBottom =
+      el.scrollHeight - el.scrollTop - el.clientHeight;
+
+    const isAtBottom = distanceFromBottom < 100;
+
+    // only user scroll sets this
+    setUserScrolledUp(!isAtBottom);
+    setShowScrollDown(!isAtBottom);
   };
 
   const startEdit = (msg) => {
