@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import styles from './messageWall.module.css';
 import { MdDelete, MdModeEditOutline } from "react-icons/md";
 import { RiFileCopyFill } from "react-icons/ri";
+import ChatInput from './ChatInput';
 import { IoChevronDown } from 'react-icons/io5';
 
 export default function MessageWall({ messages, isTyping, onEdit, onDelete }) {
@@ -105,6 +106,10 @@ export default function MessageWall({ messages, isTyping, onEdit, onDelete }) {
         )}
         <div ref={bottomRef} />
       </div>
+      {/* EDIT POPUP */}
+      {editingMsg && (
+        <ChatInput />
+      )}
     </div>
   );
 }
