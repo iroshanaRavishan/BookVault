@@ -106,6 +106,10 @@ export default function MessageWall({ messages, isTyping, onEdit, onDelete }) {
         )}
         <div ref={bottomRef} />
       </div>
+      {/* EDIT POPUP */}
+      {editingMsg && (
+        <ChatInput />
+      )}
     </div>
   );
 }
