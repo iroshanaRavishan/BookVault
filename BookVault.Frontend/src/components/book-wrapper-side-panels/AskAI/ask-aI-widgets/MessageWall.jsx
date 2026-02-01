@@ -46,6 +46,7 @@ export default function MessageWall({ messages, isTyping, onEdit, onDelete }) {
   };
 
   const copyText = (text) => {
+    navigator.clipboard.writeText(text);
   };
 
   let lastRenderedDate = null;
