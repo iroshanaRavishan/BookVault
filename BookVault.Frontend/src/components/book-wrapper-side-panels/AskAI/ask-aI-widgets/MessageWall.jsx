@@ -45,6 +45,9 @@ export default function MessageWall({ messages, isTyping, onEdit, onDelete }) {
     setEditedText(msg.text);
   };
 
+  const copyText = (text) => {
+  };
+
   let lastRenderedDate = null;
 
   return (
