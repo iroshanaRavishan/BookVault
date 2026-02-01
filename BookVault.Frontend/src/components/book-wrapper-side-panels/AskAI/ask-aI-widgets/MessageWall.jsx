@@ -45,6 +45,8 @@ export default function MessageWall({ messages, isTyping, onEdit, onDelete }) {
     setEditedText(msg.text);
   };
 
+  let lastRenderedDate = null;
+
   return (
     <div className={styles.wallContainer}>
       <div   
