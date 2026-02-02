@@ -45,6 +45,12 @@ export default function MessageWall({ messages, isTyping, onEdit, onDelete }) {
     setEditedText(msg.text);
   };
 
+  const cancelEdit = () => {
+    setEditingMsg(null);
+    setEditedText('');
+  };
+
+
   const copyText = (text) => {
     navigator.clipboard.writeText(text);
   };
