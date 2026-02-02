@@ -47,6 +47,7 @@ export default function MessageWall({ messages, isTyping, onEdit, onDelete }) {
 
   const cancelEdit = () => {
     setEditingMsg(null);
+    setEditedText('');
   };
 
 
