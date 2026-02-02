@@ -51,6 +51,7 @@ export default function MessageWall({ messages, isTyping, onEdit, onDelete }) {
   };
 
   const sendEdit = () => {
+    onEdit(editingMsg.id, editedText);
     cancelEdit();
   };
 
