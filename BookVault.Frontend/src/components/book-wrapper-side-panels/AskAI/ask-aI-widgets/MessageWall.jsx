@@ -122,6 +122,13 @@ export default function MessageWall({ messages, isTyping, onEdit, onDelete }) {
         )}
         <div ref={bottomRef} />
       </div>
+
+      {showScrollDown && (
+        <button>
+          <IoChevronDown size={16} />
+        </button>
+      )}
+
       {/* EDIT POPUP */}
       {editingMsg && (
         <ChatInput />
