@@ -122,6 +122,12 @@ export default function MessageWall({ messages, isTyping, onEdit, onDelete }) {
         )}
         <div ref={bottomRef} />
       </div>
+
+      {showScrollDown && (
+        <button>
+        </button>
+      )}
+
       {/* EDIT POPUP */}
       {editingMsg && (
         <ChatInput />
