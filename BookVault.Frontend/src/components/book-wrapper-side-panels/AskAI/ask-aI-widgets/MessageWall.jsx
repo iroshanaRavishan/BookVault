@@ -127,6 +127,8 @@ export default function MessageWall({ messages, isTyping, onEdit, onDelete }) {
         <button
           className={styles.scrollDownButton}
           onClick={() => {
+            wallRef.current.scrollTo({
+            });
           }}
         >
           <IoChevronDown size={16} />
