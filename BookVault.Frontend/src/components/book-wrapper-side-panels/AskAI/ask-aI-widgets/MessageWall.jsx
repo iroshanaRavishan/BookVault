@@ -129,6 +129,7 @@ export default function MessageWall({ messages, isTyping, onEdit, onDelete }) {
           onClick={() => {
             wallRef.current.scrollTo({
               top: wallRef.current.scrollHeight,
+              behavior: 'smooth',
             });
           }}
         >
