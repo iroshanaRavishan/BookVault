@@ -146,6 +146,17 @@
   font-size: 16px; 
 }
 
+.profilePicture {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  object-fit: cover;
+  transition: all 200ms;
+  padding: 5px;
+  border: 2px solid #f29b28;
+  z-index: 2;
+}
+
 @keyframes blink {
   0% { opacity: 0.2; }
   20% { opacity: 1; }
