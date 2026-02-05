@@ -15,6 +15,33 @@
   margin-right: 1px;
 }
 
+.wall {
+    transition: height 0.15s ease;
+}
+
+.wall::-webkit-scrollbar {
+    width: 6px !important;
+    height: 20px !important;
+}
+
+.wall::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.wall::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+}
+
+.wall::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.wall {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
+}
+
 .dateSeparator {
   display: flex;
   align-items: center;
@@ -111,12 +138,40 @@
   height: 100%;
 }
 
+.scrollDownButton {
+  position: relative;
+  bottom: 25px;
+  left: 46%;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  cursor: pointer;
+  background: rgba(0, 0, 0, 0.2);
+  border: none;
+  padding: 0;
+  color: white;
+  z-index: 5;
+  transition: all 0.3s ease;
+}
+
+
 .botIcon {
   display: inline-flex;
   margin-right: 6px; 
   vertical-align: middle;
   color: #555; 
   font-size: 16px; 
+}
+
+.profilePicture {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  object-fit: cover;
+  transition: all 200ms;
+  padding: 5px;
+  border: 2px solid #f29b28;
+  z-index: 2;
 }
 
 @keyframes blink {
