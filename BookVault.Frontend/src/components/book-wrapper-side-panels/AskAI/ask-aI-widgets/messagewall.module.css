@@ -138,6 +138,23 @@
   height: 100%;
 }
 
+.scrollDownButton {
+  position: relative;
+  bottom: 25px;
+  left: 46%;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  cursor: pointer;
+  background: rgba(0, 0, 0, 0.2);
+  border: none;
+  padding: 0;
+  color: white;
+  z-index: 5;
+  transition: all 0.3s ease;
+}
+
+
 .botIcon {
   display: inline-flex;
   margin-right: 6px; 
