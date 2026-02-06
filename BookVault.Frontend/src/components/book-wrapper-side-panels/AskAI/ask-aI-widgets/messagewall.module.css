@@ -134,6 +134,13 @@
   height: 18px;
 }
 
+.popupActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 10px;
+}
+
 .wallContainer {
   height: 100%;
 }
@@ -154,6 +161,10 @@
   transition: all 0.3s ease;
 }
 
+.scrollDownButton:hover {
+  background: rgba(0, 0, 0, 0.3);
+  transform: translateY(2px);
+}
 
 .botIcon {
   display: inline-flex;
