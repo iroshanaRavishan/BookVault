@@ -139,7 +139,8 @@ export default function MessageWall({ messages, isTyping, onEdit, onDelete }) {
 
       {/* EDIT POPUP */}
       {editingMsg && (
-        <ChatInput />
+        <div className={styles.overlay}>
+        </div>
       )}
     </div>
   );
