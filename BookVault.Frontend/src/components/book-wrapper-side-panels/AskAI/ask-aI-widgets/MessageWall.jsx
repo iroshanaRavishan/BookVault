@@ -141,7 +141,16 @@ export default function MessageWall({ messages, isTyping, onEdit, onDelete }) {
       {editingMsg && (
         <div className={styles.overlay}>
           <div className={styles.popup}>
-            <ChatInput/>
+            <ChatInput
+              value={editedText}
+              onChange={(e) => setEditedText(e.target.value)}
+              onSend={sendEdit}
+              onCancel={cancelEdit}
+              showCancel
+              autoFocus
+              placeholder="Edit message..."
+              isEditing
+            />
           </div>
         </div>
       )}
