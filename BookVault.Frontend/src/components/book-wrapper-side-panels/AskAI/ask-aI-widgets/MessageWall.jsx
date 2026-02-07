@@ -140,6 +140,8 @@ export default function MessageWall({ messages, isTyping, onEdit, onDelete }) {
       {/* EDIT POPUP */}
       {editingMsg && (
         <div className={styles.overlay}>
+          <div className={styles.popup}>
+          </div>
         </div>
       )}
     </div>
