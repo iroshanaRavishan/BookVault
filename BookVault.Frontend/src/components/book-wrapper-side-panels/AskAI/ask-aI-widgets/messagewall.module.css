@@ -152,6 +152,9 @@
   transform: scale(1.05);
 }
 
+.deleteIcon:hover {
+  color: #e53935 !important; 
+}
 
 .popupActions {
   display: flex;
