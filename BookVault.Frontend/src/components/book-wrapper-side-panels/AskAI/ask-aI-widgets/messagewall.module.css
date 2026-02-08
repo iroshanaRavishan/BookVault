@@ -147,6 +147,12 @@
   transition: color 0.15s ease, transform 0.15s ease;
 }
 
+.actions svg:hover {
+  color: #000;
+  transform: scale(1.05);
+}
+
+
 .popupActions {
   display: flex;
   justify-content: flex-end;
