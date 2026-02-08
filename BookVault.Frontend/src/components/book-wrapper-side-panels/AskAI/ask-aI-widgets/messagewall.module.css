@@ -53,6 +53,14 @@
   user-select: none;
 }
 
+.dateSeparator::before,
+.dateSeparator::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
 .message {
   display: flex;
   margin-bottom: 8px;
@@ -132,6 +140,31 @@
   color: #555555d8;
   right: 2px;
   height: 18px;
+}
+
+.actions svg {
+  cursor: pointer;
+  transition: color 0.15s ease, transform 0.15s ease;
+}
+
+.actions svg:hover {
+  color: #000;
+  transform: scale(1.05);
+}
+
+.deleteIcon:hover {
+  color: #e53935 !important; 
+}
+
+/* Popup */
+.overlay {
+  position: absolute;     
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;   
 }
 
 .popupActions {
