@@ -53,6 +53,14 @@
   user-select: none;
 }
 
+.dateSeparator::before,
+.dateSeparator::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
 .message {
   display: flex;
   margin-bottom: 8px;
