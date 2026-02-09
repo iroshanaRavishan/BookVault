@@ -5,8 +5,7 @@ export default function AskAI() {
   const conversationIdRef = useRef(crypto.randomUUID());
   const hasNamedChatRef = useRef(false);
   return (
-    <div>
-    <MessageWall />
+    <div className={styles.panel}>
     </div>
-  )
+  );
 }
