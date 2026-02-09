@@ -167,6 +167,19 @@
   z-index: 5;   
 }
 
+.popup {
+  background: #f5f5f5;
+  padding: 10px;
+  width: 290px;
+  border-radius: 15px;
+}
+
+.popup textarea {
+  width: 100%;
+  min-height: 150px;
+  resize: none;
+}
+
 .popupActions {
   display: flex;
   justify-content: flex-end;
