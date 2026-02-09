@@ -6,6 +6,8 @@ export default function AskAI() {
   const hasNamedChatRef = useRef(false);
   return (
     <div className={styles.panel}>
+      <div className={styles.chatActionsIconBar}>
+      </div>
     </div>
   );
 }
