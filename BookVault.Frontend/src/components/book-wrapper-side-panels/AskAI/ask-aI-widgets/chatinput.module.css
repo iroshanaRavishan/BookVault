@@ -1,0 +1,9 @@
+.actionWrapper {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-right: 0px !important;
+    align-items: end;
+    justify-content: space-between;
+}
