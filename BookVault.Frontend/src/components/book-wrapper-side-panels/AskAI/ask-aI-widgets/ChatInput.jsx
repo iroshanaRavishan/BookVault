@@ -7,7 +7,11 @@ export default function ChatInput() {
       className={styles.actionWrapper}
       style={{paddingRight: isEditing ? '0px' : '4px'}}
     >
-      <div>
+      <div 
+        className={styles.textareaWrapper} 
+        style={{ height: isEditing ? '200px' : '' }}
+      >
+
       </div>
     </div>
   );
