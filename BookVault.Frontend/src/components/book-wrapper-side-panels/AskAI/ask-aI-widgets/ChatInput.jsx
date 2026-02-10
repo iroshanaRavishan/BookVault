@@ -1,9 +1,14 @@
 import React from 'react';
+import styles from './chatinput.module.css';
 
 export default function ChatInput() {
   return (
-    <div>
-      ChatInput
+    <div 
+      className={styles.actionWrapper}
+      style={{paddingRight: isEditing ? '0px' : '4px'}}
+    >
+      <div>
+      </div>
     </div>
   );
 }
