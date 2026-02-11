@@ -1,4 +1,5 @@
 import React from 'react';
+import { IoCloseCircleSharp } from 'react-icons/io5';
 import styles from './chatinput.module.css';
 import { MdModeEditOutline } from 'react-icons/md';
 
@@ -9,8 +10,9 @@ export default function ChatInput({ showCancel = false}) {
       style={{paddingRight: isEditing ? '0px' : '4px'}}
     >
       {showCancel && (
-        <div > 
-          <span> <MdModeEditOutline size={20}/> Edit the prompt here</span>
+        <div className={styles.editingHeader}> 
+          <span className={styles.editingHeaderSpan}> <MdModeEditOutline size={20}/> Edit the prompt here</span>
+          <IoCloseCircleSharp />
         </div>
         )}
       <div 
