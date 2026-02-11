@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './chatinput.module.css';
+import { MdModeEditOutline } from 'react-icons/md';
 
 export default function ChatInput({ showCancel = false}) {
   return (
