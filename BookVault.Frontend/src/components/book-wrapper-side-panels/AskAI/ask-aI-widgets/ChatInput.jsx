@@ -9,6 +9,7 @@ export default function ChatInput({ showCancel = false}) {
     >
       {showCancel && (
         <div > 
+          <span> <MdModeEditOutline size={20}/> Edit the prompt here</span>
         </div>
         )}
       <div 
