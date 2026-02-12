@@ -4,7 +4,7 @@ import styles from "./ChipStack.module.css";
 export default function ChipStack() {
 
   return (
-    <div>
+    <div className={styles.wrapper}>
       ChipStack
     </div>
   );
