@@ -1,0 +1,8 @@
+.wrapper {
+  position: relative;
+  height: 84px;
+  width: 100%;
+  overflow: hidden;
+  user-select: none;
+  pointer-events: none;
+}
