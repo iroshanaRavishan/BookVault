@@ -17,8 +17,13 @@ export default function ChipStack() {
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.track}>
-        {chips.map((text) => (
+      <div
+        className={styles.track}
+        style={{
+          transform: animate ? "translateY(-36px)" : "translateY(0)"
+        }}
+      >
+        {chips.map((text, i) => (
           <div key={i} className={styles.chip}>
             {text}
           </div>
