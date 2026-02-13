@@ -17,7 +17,7 @@ export default function ChipStack() {
 
   return (
     <div className={styles.wrapper}>
-      <div>
+      <div className={styles.track}>
         {chips.map((text) => (
           <div>
             {text}
