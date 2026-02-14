@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { IoCloseCircleSharp } from 'react-icons/io5';
 import styles from './chatinput.module.css';
 import { MdModeEditOutline } from 'react-icons/md';
 
 export default function ChatInput({ showCancel = false}) {
+  const textareaRef = useRef(null);
   return (
     <div 
       className={styles.actionWrapper}
