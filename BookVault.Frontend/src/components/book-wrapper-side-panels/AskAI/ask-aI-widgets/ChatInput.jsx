@@ -23,7 +23,7 @@ export default function ChatInput({ showCancel = false}) {
         className={styles.textareaWrapper} 
         style={{ height: isEditing ? '200px' : '' }}
       >
-
+        <textarea/>
       </div>
     </div>
   );
