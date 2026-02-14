@@ -16,6 +16,7 @@ export default function ChatInput({ showCancel = false}) {
           <IoCloseCircleSharp
             className={styles.cancelButton}
             color="#e53e3e"
+            onClick={onCancel}
             size={25}
           />
         </div>
