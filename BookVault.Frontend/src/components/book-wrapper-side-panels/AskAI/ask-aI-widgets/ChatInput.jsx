@@ -12,7 +12,11 @@ export default function ChatInput({ showCancel = false}) {
       {showCancel && (
         <div className={styles.editingHeader}> 
           <span className={styles.editingHeaderSpan}> <MdModeEditOutline size={20}/> Edit the prompt here</span>
-          <IoCloseCircleSharp />
+          <IoCloseCircleSharp
+            className={styles.cancelButton}
+            color="#e53e3e"
+            size={25}
+          />
         </div>
         )}
       <div 
