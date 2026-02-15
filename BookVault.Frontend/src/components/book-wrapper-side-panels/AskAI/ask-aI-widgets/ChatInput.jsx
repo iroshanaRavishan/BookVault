@@ -3,7 +3,11 @@ import { IoCloseCircleSharp } from 'react-icons/io5';
 import styles from './chatinput.module.css';
 import { MdModeEditOutline } from 'react-icons/md';
 
-export default function ChatInput({ showCancel = false}) {
+export default function ChatInput({
+  value,
+  placeholder = 'Ask something...',
+  showCancel = false
+}) {
   const textareaRef = useRef(null);
   return (
     <div 
@@ -27,6 +31,9 @@ export default function ChatInput({ showCancel = false}) {
       >
         <textarea
             ref={textareaRef}
+            className={styles.messageInputArea}
+            rows={1}
+            placeholder={placeholder}
         />
       </div>
     </div>

@@ -8,6 +8,25 @@
     justify-content: space-between;
 }
 
+.messageInputArea {
+    flex-grow: 1;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    font-size: 14px;
+    font-family: inherit;
+    color: rgb(0, 0, 0);
+    resize: none;
+    min-height: 30px;
+    line-height: 20px;
+    padding: 10px 8px 10px 10px; 
+    overflow-y: hidden; 
+    margin-bottom: 12px;
+    width: 100%;
+    max-height: 150px;
+    box-sizing: border-box;
+}
+
 .editingHeader {
     display: flex;
     flex-direction: row;
