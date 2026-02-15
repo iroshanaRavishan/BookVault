@@ -27,6 +27,7 @@ export default function ChatInput({ placeholder = 'Ask something...', showCancel
       >
         <textarea
             ref={textareaRef}
+            className={styles.messageInputArea}
             rows={1}
             placeholder={placeholder}
         />
