@@ -9,6 +9,8 @@ export default function ChatInput({
   showCancel = false
 }) {
   const textareaRef = useRef(null);
+  const isControlled = value !== undefined;
+
   return (
     <div 
       className={styles.actionWrapper}
@@ -34,6 +36,7 @@ export default function ChatInput({
             className={styles.messageInputArea}
             rows={1}
             placeholder={placeholder}
+            value={isControlled ? value : undefined}
         />
       </div>
     </div>
