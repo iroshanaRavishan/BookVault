@@ -41,6 +41,7 @@ export default function ChatInput({
             rows={1}
             placeholder={placeholder}
             value={isControlled ? value : undefined}
+            onKeyDown={handleKeyDown}
         />
       </div>
     </div>
