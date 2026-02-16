@@ -6,7 +6,8 @@ import { MdModeEditOutline } from 'react-icons/md';
 export default function ChatInput({
   value,
   placeholder = 'Ask something...',
-  showCancel = false
+  showCancel = false,
+  isEditing = false,
 }) {
   const textareaRef = useRef(null);
   const isControlled = value !== undefined;
