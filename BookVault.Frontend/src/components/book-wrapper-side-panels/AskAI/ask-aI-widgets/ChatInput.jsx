@@ -11,6 +11,10 @@ export default function ChatInput({
   const textareaRef = useRef(null);
   const isControlled = value !== undefined;
 
+  const handleKeyDown = (e) => {
+    
+  };
+
   return (
     <div 
       className={styles.actionWrapper}
