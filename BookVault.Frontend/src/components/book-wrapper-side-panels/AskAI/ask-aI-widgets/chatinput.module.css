@@ -47,3 +47,14 @@
     align-items: center;
     gap: 6px;
 }
+
+.editingPopUpBorder {
+    position: relative;
+    display: flex;
+    gap: 10px;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    padding-right: 4px !important;
+    /* overflow: hidden !important; */
+    /* z-index: 100; */
+}
