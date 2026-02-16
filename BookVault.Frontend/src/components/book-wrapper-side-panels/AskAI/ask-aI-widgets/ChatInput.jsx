@@ -6,10 +6,15 @@ import { MdModeEditOutline } from 'react-icons/md';
 export default function ChatInput({
   value,
   placeholder = 'Ask something...',
-  showCancel = false
+  showCancel = false,
+  isEditing = false,
 }) {
   const textareaRef = useRef(null);
   const isControlled = value !== undefined;
+
+  const handleKeyDown = (e) => {
+    
+  };
 
   return (
     <div 
@@ -33,10 +38,13 @@ export default function ChatInput({
       >
         <textarea
             ref={textareaRef}
-            className={styles.messageInputArea}
+            className={styles.messageInputArea} ${
+                isEditing ? styles.editingPopUpBorder : ''
+            }`}
             rows={1}
             placeholder={placeholder}
             value={isControlled ? value : undefined}
+            onKeyDown={handleKeyDown}
         />
       </div>
     </div>
