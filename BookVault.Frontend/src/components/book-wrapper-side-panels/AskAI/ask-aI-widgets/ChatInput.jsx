@@ -12,6 +12,11 @@ export default function ChatInput({
   const textareaRef = useRef(null);
   const isControlled = value !== undefined;
 
+  const handleInput = (e) => {
+    const textarea = textareaRef.current;
+  };
+
+
   const handleKeyDown = (e) => {
     
   };
