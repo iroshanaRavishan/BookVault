@@ -12,6 +12,13 @@ export default function ChatInput({
   const textareaRef = useRef(null);
   const isControlled = value !== undefined;
 
+  const handleInput = (e) => {
+    const textarea = textareaRef.current;
+    const maxHeight = 150;
+
+  };
+
+
   const handleKeyDown = (e) => {
     
   };
@@ -38,12 +45,13 @@ export default function ChatInput({
       >
         <textarea
             ref={textareaRef}
-            className={styles.messageInputArea} ${
+            className={`${styles.messageInputArea} ${
                 isEditing ? styles.editingPopUpBorder : ''
             }`}
             rows={1}
             placeholder={placeholder}
             value={isControlled ? value : undefined}
+            onChange={handleInput}
             onKeyDown={handleKeyDown}
         />
       </div>
