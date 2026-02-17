@@ -14,6 +14,8 @@ export default function ChatInput({
 
   const handleInput = (e) => {
     const textarea = textareaRef.current;
+    const maxHeight = 150;
+
   };
 
 
