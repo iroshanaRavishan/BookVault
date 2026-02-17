@@ -38,7 +38,7 @@ export default function ChatInput({
       >
         <textarea
             ref={textareaRef}
-            className={styles.messageInputArea} ${
+            className={`${styles.messageInputArea} ${
                 isEditing ? styles.editingPopUpBorder : ''
             }`}
             rows={1}
