@@ -55,7 +55,11 @@ export default function ChatInput({
             onKeyDown={handleKeyDown}
         />
         {isScrollable && showScrollUp && (
-          <button className={styles.scrollUpButton} >
+          <button
+            className={styles.scrollUpButton}
+            onClick={scrollToTop}
+            type="button"
+          >
             Up
           </button>
         )}
