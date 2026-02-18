@@ -20,7 +20,9 @@ export default function ChatInput({
 
 
   const handleKeyDown = (e) => {
-    
+    if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault(); // prevent new line
+    }
   };
 
   return (
@@ -54,6 +56,15 @@ export default function ChatInput({
             onChange={handleInput}
             onKeyDown={handleKeyDown}
         />
+        {isScrollable && showScrollUp && (
+          <button
+            className={styles.scrollUpButton}
+            onClick={scrollToTop}
+            type="button"
+          >
+            Up
+          </button>
+        )}
       </div>
     </div>
   );
