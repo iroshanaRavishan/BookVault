@@ -25,6 +25,11 @@ export default function ChatInput({
     }
   };
 
+  const scrollToTop = () => {
+
+  };
+
+
   return (
     <div 
       className={styles.actionWrapper}
