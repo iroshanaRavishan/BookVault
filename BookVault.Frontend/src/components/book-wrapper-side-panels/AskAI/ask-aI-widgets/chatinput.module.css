@@ -54,6 +54,21 @@
     scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
 }
 
+.scrollUpButton {
+    position: absolute;
+    right: 40px;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(0, 0, 0, 0.2);
+    color: white;
+    cursor: pointer;
+    z-index: 10;
+    padding: 0;
+    transition: all 0.3s ease;
+}
+
 .editingHeader {
     display: flex;
     flex-direction: row;
