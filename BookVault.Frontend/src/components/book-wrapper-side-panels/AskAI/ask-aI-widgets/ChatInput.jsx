@@ -26,6 +26,7 @@ export default function ChatInput({
   const handleKeyDown = (e) => {
     if (e.key === 'Enter' && !e.shiftKey) {
         e.preventDefault(); // prevent new line
+        handleSend();
     }
   };
 
