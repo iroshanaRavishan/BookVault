@@ -32,6 +32,11 @@ export default function ChatInput({
       textarea.style.overflowY = 'hidden';
 
     }
+
+    // send height to AskAi
+    onHeightChange?.(newHeight);
+
+    onChange?.(e);
   };
 
 
