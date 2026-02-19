@@ -16,12 +16,17 @@ export default function ChatInput({
     const textarea = textareaRef.current;
     const maxHeight = 150;
 
+    if (!isControlled) {
+      textarea.value = e.target.value;
+    }
+
   };
 
 
   const handleKeyDown = (e) => {
     if (e.key === 'Enter' && !e.shiftKey) {
         e.preventDefault(); // prevent new line
+        handleSend();
     }
   };
 
