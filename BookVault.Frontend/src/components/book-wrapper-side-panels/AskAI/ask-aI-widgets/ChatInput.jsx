@@ -20,6 +20,8 @@ export default function ChatInput({
       textarea.value = e.target.value;
     }
 
+    textarea.style.height = 'auto';
+
   };
 
 
