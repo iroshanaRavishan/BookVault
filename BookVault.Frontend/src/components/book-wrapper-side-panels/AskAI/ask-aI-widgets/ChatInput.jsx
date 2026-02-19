@@ -16,12 +16,34 @@ export default function ChatInput({
     const textarea = textareaRef.current;
     const maxHeight = 150;
 
+    if (!isControlled) {
+      textarea.value = e.target.value;
+    }
+
+    textarea.style.height = 'auto';
+
+    let newHeight;
+
+    if (textarea.scrollHeight > maxHeight) {
+      textarea.style.height = `${maxHeight}px`;
+      textarea.style.overflowY = 'auto';
+    } else {
+      textarea.style.height = `${textarea.scrollHeight}px`;
+      textarea.style.overflowY = 'hidden';
+
+    }
+
+    // send height to AskAi
+    onHeightChange?.(newHeight);
+
+    onChange?.(e);
   };
 
 
   const handleKeyDown = (e) => {
     if (e.key === 'Enter' && !e.shiftKey) {
         e.preventDefault(); // prevent new line
+        handleSend();
     }
   };
 
