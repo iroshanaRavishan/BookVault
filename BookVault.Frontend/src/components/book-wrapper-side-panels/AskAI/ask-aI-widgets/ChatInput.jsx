@@ -22,6 +22,14 @@ export default function ChatInput({
 
     textarea.style.height = 'auto';
 
+    let newHeight;
+
+    if (textarea.scrollHeight > maxHeight) {
+      textarea.style.overflowY = 'auto';
+    } else {
+      textarea.style.overflowY = 'hidden';
+
+    }
   };
 
 
