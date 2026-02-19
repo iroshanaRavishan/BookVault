@@ -16,6 +16,10 @@ export default function ChatInput({
     const textarea = textareaRef.current;
     const maxHeight = 150;
 
+    if (!isControlled) {
+      textarea.value = e.target.value;
+    }
+
   };
 
 
