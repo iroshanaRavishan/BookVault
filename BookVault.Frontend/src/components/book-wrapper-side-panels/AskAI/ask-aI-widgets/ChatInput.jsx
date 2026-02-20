@@ -62,6 +62,8 @@ export default function ChatInput({
     });
   };
 
+  const handleSend = () => {
+  };
 
   return (
     <div 
