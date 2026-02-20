@@ -50,7 +50,8 @@ export default function ChatInput({
   const handleScroll = () => {
     const textarea = textareaRef.current;
     setShowScrollUp(
-      textarea.scrollTop > 5
+      textarea.scrollTop > 5 &&
+      textarea.scrollHeight > textarea.clientHeight
     );
   };
 
