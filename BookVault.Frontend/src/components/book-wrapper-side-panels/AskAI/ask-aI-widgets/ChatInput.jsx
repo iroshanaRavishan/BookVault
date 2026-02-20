@@ -47,6 +47,9 @@ export default function ChatInput({
     }
   };
 
+  const handleScroll = () => {
+  };
+
   const scrollToTop = () => {
     textareaRef.current.scrollTo({
       top: 0,
