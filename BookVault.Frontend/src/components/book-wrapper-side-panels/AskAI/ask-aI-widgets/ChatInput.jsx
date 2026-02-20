@@ -47,6 +47,14 @@ export default function ChatInput({
     }
   };
 
+  const handleScroll = () => {
+    const textarea = textareaRef.current;
+    setShowScrollUp(
+      textarea.scrollTop > 5 &&
+      textarea.scrollHeight > textarea.clientHeight
+    );
+  };
+
   const scrollToTop = () => {
     textareaRef.current.scrollTo({
       top: 0,
@@ -54,6 +62,11 @@ export default function ChatInput({
     });
   };
 
+  const handleSend = () => {
+    const text = isControlled
+      ? value.trim()
+      : textareaRef.current.value.trim();
+  };
 
   return (
     <div 
