@@ -63,6 +63,9 @@ export default function ChatInput({
   };
 
   const handleSend = () => {
+    const text = isControlled
+      ? value.trim()
+      : textareaRef.current.value.trim();
   };
 
   return (
