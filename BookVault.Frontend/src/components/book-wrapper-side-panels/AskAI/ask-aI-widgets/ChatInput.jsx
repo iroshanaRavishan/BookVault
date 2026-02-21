@@ -76,6 +76,8 @@ export default function ChatInput({
     } else {
       textareaRef.current.value = "";
     }
+
+    textareaRef.current.style.height = "auto";
   };
 
   return (
