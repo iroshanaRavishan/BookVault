@@ -73,6 +73,8 @@ export default function ChatInput({
 
     if (isControlled) {
       onChange?.({ target: { value: "" } });
+    } else {
+      textareaRef.current.value = "";
     }
   };
 
