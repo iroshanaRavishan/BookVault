@@ -66,6 +66,19 @@ export default function ChatInput({
     const text = isControlled
       ? value.trim()
       : textareaRef.current.value.trim();
+
+    if (!text) return;
+
+    onSend(text);
+
+    if (isControlled) {
+      onChange?.({ target: { value: "" } });
+    } else {
+      textareaRef.current.value = "";
+    }
+
+    textareaRef.current.style.height = "auto";
+    onHeightChange?.(0);  // Ensure height resets
   };
 
   return (
