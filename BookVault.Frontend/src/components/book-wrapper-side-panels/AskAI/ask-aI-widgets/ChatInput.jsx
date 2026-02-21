@@ -78,6 +78,7 @@ export default function ChatInput({
     }
 
     textareaRef.current.style.height = "auto";
+    onHeightChange?.(0);  // Ensure height resets
   };
 
   return (
