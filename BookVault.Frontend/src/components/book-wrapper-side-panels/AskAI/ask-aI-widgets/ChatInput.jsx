@@ -68,6 +68,12 @@ export default function ChatInput({
       : textareaRef.current.value.trim();
 
     if (!text) return;
+
+    onSend(text);
+
+    if (isControlled) {
+      onChange?.({ target: { value: "" } });
+    }
   };
 
   return (
