@@ -121,6 +121,9 @@ export default function ChatInput({
             Up
           </button>
         )}
+        
+        <div className={styles.pageAttachContainer}>
+        </div>
       </div>
     </div>
   );
