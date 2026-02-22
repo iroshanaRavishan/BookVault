@@ -10,6 +10,9 @@ export default function ChatInput({
   isEditing = false,
 }) {
   const textareaRef = useRef(null);
+  const [isScrollable, setIsScrollable] = useState(false);
+  const [showScrollUp, setShowScrollUp] = useState(false);
+
   const isControlled = value !== undefined;
 
   useEffect(() => {
