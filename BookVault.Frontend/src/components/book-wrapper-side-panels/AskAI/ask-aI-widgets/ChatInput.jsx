@@ -14,6 +14,7 @@ export default function ChatInput({
 
   useEffect(() => {
     if (autoFocus && textareaRef.current) {
+      textareaRef.current.focus();
     }
   }, [autoFocus]);
 
