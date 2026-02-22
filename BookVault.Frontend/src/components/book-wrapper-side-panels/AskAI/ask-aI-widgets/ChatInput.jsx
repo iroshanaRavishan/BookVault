@@ -7,10 +7,26 @@ export default function ChatInput({
   value,
   placeholder = 'Ask something...',
   showCancel = false,
+  autoFocus = false,
   isEditing = false,
 }) {
   const textareaRef = useRef(null);
+  const [isScrollable, setIsScrollable] = useState(false);
+  const [showScrollUp, setShowScrollUp] = useState(false);
+
   const isControlled = value !== undefined;
+
+  useEffect(() => {
+    if (autoFocus && textareaRef.current) {
+      textareaRef.current.focus();
+    }
+  }, [autoFocus]);
+
+  // runs when parent changes text
+  useEffect(() => {
+    if (!isControlled) return;
+  }, [value]); 
+
 
   const handleInput = (e) => {
     const textarea = textareaRef.current;
