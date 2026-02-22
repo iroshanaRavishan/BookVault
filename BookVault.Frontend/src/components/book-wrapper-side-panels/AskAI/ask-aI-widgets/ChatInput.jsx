@@ -7,6 +7,7 @@ export default function ChatInput({
   value,
   placeholder = 'Ask something...',
   showCancel = false,
+  autoFocus = false,
   isEditing = false,
 }) {
   const textareaRef = useRef(null);
