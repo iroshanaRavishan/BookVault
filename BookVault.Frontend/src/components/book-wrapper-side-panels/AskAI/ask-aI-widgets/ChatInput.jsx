@@ -22,6 +22,11 @@ export default function ChatInput({
     }
   }, [autoFocus]);
 
+  // runs when parent changes text
+  useEffect(() => {
+    if (!isControlled) return;
+  }, [value]); 
+
 
   const handleInput = (e) => {
     const textarea = textareaRef.current;
