@@ -12,6 +12,12 @@ export default function ChatInput({
   const textareaRef = useRef(null);
   const isControlled = value !== undefined;
 
+  useEffect(() => {
+    if (autoFocus && textareaRef.current) {
+    }
+  }, [autoFocus]);
+
+
   const handleInput = (e) => {
     const textarea = textareaRef.current;
     const maxHeight = 150;
