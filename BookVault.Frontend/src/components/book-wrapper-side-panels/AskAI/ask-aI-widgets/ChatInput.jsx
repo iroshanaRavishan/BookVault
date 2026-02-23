@@ -32,6 +32,8 @@ export default function ChatInput({
 
     textarea.style.height = "auto";
 
+    let newHeight;
+    onHeightChange?.(newHeight);
   }, [value]); 
 
 
