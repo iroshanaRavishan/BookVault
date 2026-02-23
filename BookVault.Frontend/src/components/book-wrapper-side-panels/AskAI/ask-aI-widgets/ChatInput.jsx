@@ -36,6 +36,8 @@ export default function ChatInput({
 
     if (textarea.scrollHeight > maxHeight) {
       setIsScrollable(true);
+    } else {
+      setShowScrollUp(false);
     }
 
     onHeightChange?.(newHeight);
