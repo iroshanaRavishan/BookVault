@@ -25,6 +25,9 @@ export default function ChatInput({
   // runs when parent changes text
   useEffect(() => {
     if (!isControlled) return;
+    if (!textareaRef.current) return;
+
+    const textarea = textareaRef.current;
   }, [value]); 
 
 
