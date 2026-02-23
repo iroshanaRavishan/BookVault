@@ -25,6 +25,23 @@ export default function ChatInput({
   // runs when parent changes text
   useEffect(() => {
     if (!isControlled) return;
+    if (!textareaRef.current) return;
+
+    const textarea = textareaRef.current;
+    const maxHeight = 150;
+
+    textarea.style.height = "auto";
+
+    let newHeight;
+
+    if (textarea.scrollHeight > maxHeight) {
+      textarea.style.height = maxHeight + "px";
+      setIsScrollable(true);
+    } else {
+      setShowScrollUp(false);
+    }
+
+    onHeightChange?.(newHeight);
   }, [value]); 
 
 
