@@ -30,6 +30,8 @@ export default function ChatInput({
     const textarea = textareaRef.current;
     const maxHeight = 150;
 
+    textarea.style.height = "auto";
+
   }, [value]); 
 
 
