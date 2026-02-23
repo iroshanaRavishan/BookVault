@@ -38,6 +38,7 @@ export default function ChatInput({
       textarea.style.height = maxHeight + "px";
       setIsScrollable(true);
     } else {
+      textarea.style.height = textarea.scrollHeight + "px";
       setShowScrollUp(false);
     }
 
