@@ -43,6 +43,7 @@ export default function ChatInput({
       textarea.style.height = textarea.scrollHeight + "px";
       textarea.style.overflowY = "hidden";
       newHeight = textarea.scrollHeight;
+      setIsScrollable(false);
       setShowScrollUp(false);
     }
 
