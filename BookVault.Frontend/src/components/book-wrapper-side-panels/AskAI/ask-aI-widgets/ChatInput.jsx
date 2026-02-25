@@ -66,10 +66,14 @@ export default function ChatInput({
     if (textarea.scrollHeight > maxHeight) {
       textarea.style.height = `${maxHeight}px`;
       textarea.style.overflowY = 'auto';
+      newHeight = maxHeight;
+      setIsScrollable(true);
     } else {
       textarea.style.height = `${textarea.scrollHeight}px`;
       textarea.style.overflowY = 'hidden';
-
+      newHeight = textarea.scrollHeight;
+      setIsScrollable(false);
+      setShowScrollUp(false);
     }
 
     // send height to AskAi
@@ -149,11 +153,14 @@ export default function ChatInput({
             placeholder={placeholder}
             value={isControlled ? value : undefined}
             onChange={handleInput}
+            onInput={!isControlled ? handleInput : undefined}
+            onScroll={handleScroll}
             onKeyDown={handleKeyDown}
         />
         {isScrollable && showScrollUp && (
           <button
             className={styles.scrollUpButton}
+            style={{top: isEditing ? '162px' : '168px'}}
             onClick={scrollToTop}
             type="button"
           >
