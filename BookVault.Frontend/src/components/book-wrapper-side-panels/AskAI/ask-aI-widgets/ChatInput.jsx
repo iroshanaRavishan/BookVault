@@ -71,7 +71,8 @@ export default function ChatInput({
     } else {
       textarea.style.height = `${textarea.scrollHeight}px`;
       textarea.style.overflowY = 'hidden';
-
+      newHeight = textarea.scrollHeight;
+      setIsScrollable(false);
     }
 
     // send height to AskAi
