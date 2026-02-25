@@ -153,6 +153,7 @@ export default function ChatInput({
             placeholder={placeholder}
             value={isControlled ? value : undefined}
             onChange={handleInput}
+            onInput={!isControlled ? handleInput : undefined}
             onKeyDown={handleKeyDown}
         />
         {isScrollable && showScrollUp && (
