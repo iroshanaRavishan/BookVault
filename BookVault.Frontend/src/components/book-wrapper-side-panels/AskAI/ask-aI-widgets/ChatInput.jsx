@@ -160,6 +160,7 @@ export default function ChatInput({
         {isScrollable && showScrollUp && (
           <button
             className={styles.scrollUpButton}
+            style={{top: isEditing ? '162px' : '168px'}}
             onClick={scrollToTop}
             type="button"
           >
