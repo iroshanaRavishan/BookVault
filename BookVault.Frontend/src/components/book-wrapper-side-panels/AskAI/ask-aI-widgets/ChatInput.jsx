@@ -8,6 +8,7 @@ export default function ChatInput({
   value,
   onChange,
   onSend,
+  onCancel,
   placeholder = 'Ask something...',
   showCancel = false,
   autoFocus = false,
