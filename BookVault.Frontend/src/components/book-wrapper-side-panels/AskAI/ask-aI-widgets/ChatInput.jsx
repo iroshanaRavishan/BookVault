@@ -172,7 +172,7 @@ export default function ChatInput({
             onClick={scrollToTop}
             type="button"
           >
-            Up
+            <IoChevronUp size={16} />
           </button>
         )}
         
