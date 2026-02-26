@@ -161,6 +161,10 @@ export default function ChatInput({
             onScroll={handleScroll}
             onKeyDown={handleKeyDown}
         />
+
+        <div className={styles.topShadow} style={{display: isEditing ? 'none' : ''}}></div>
+        <div className={styles.bottomShadow} style={{display: isEditing ? 'none' : ''}}></div>
+
         {isScrollable && showScrollUp && (
           <button
             className={styles.scrollUpButton}
