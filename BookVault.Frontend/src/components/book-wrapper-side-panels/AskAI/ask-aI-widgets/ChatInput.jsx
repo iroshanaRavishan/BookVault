@@ -1,10 +1,13 @@
-import React, { useRef } from 'react';
-import { IoCloseCircleSharp } from 'react-icons/io5';
+import React, { useRef, useState, useEffect } from 'react';
+import { IoSend, IoChevronUp, IoCloseCircleSharp } from 'react-icons/io5';
 import styles from './chatinput.module.css';
+import { FiPaperclip } from 'react-icons/fi';
 import { MdModeEditOutline } from 'react-icons/md';
 
 export default function ChatInput({
   value,
+  onChange,
+  onSend,
   placeholder = 'Ask something...',
   showCancel = false,
   autoFocus = false,
