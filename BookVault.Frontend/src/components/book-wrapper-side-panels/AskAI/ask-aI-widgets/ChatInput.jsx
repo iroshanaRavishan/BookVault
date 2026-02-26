@@ -1,10 +1,14 @@
-import React, { useRef } from 'react';
-import { IoCloseCircleSharp } from 'react-icons/io5';
+import React, { useRef, useState, useEffect } from 'react';
+import { IoSend, IoChevronUp, IoCloseCircleSharp } from 'react-icons/io5';
 import styles from './chatinput.module.css';
+import { FiPaperclip } from 'react-icons/fi';
 import { MdModeEditOutline } from 'react-icons/md';
 
 export default function ChatInput({
   value,
+  onChange,
+  onSend,
+  onCancel,
   placeholder = 'Ask something...',
   showCancel = false,
   autoFocus = false,
@@ -157,6 +161,10 @@ export default function ChatInput({
             onScroll={handleScroll}
             onKeyDown={handleKeyDown}
         />
+
+        <div className={styles.topShadow} style={{display: isEditing ? 'none' : ''}}></div>
+        <div className={styles.bottomShadow} style={{display: isEditing ? 'none' : ''}}></div>
+
         {isScrollable && showScrollUp && (
           <button
             className={styles.scrollUpButton}
