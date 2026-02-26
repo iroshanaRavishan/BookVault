@@ -5,6 +5,8 @@ import { MdModeEditOutline } from 'react-icons/md';
 
 export default function ChatInput({
   value,
+  onChange,
+  onSend,
   placeholder = 'Ask something...',
   showCancel = false,
   autoFocus = false,
