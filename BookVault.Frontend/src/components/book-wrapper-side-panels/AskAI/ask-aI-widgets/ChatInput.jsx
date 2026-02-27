@@ -14,6 +14,7 @@ export default function ChatInput({
   showCancel = false,
   autoFocus = false,
   isEditing = false,
+  attachedPage
 }) {
   const textareaRef = useRef(null);
   const [isScrollable, setIsScrollable] = useState(false);
