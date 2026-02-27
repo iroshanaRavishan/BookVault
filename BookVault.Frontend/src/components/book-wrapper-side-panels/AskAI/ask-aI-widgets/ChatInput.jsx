@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import { IoSend, IoChevronUp, IoCloseCircleSharp } from 'react-icons/io5';
 import styles from './chatinput.module.css';
 import { FiPaperclip } from 'react-icons/fi';
+import ChatPageSelector from './ChatPageSelector';
 import { MdModeEditOutline } from 'react-icons/md';
 
 export default function ChatInput({
@@ -13,6 +14,9 @@ export default function ChatInput({
   showCancel = false,
   autoFocus = false,
   isEditing = false,
+  attachedPage,
+  setAttachedPage,
+  onHeightChange   
 }) {
   const textareaRef = useRef(null);
   const [isScrollable, setIsScrollable] = useState(false);
@@ -177,6 +181,7 @@ export default function ChatInput({
         )}
         
         <div className={styles.pageAttachContainer}>
+            <ChatPageSelector />
         </div>
       </div>
     </div>
