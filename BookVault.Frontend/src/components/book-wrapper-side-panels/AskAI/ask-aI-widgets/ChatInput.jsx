@@ -182,6 +182,7 @@ export default function ChatInput({
         
         <div className={styles.pageAttachContainer}>
           <div className={styles.pageAttachWrapper}>
+            <span className={styles.pageAttachSection}> Click to attach the page </span>   
           </div>
         </div>
       </div>
