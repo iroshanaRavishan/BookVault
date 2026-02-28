@@ -181,7 +181,8 @@ export default function ChatInput({
         )}
         
         <div className={styles.pageAttachContainer}>
-            <ChatPageSelector />
+          <div className={styles.pageAttachWrapper}>
+          </div>
         </div>
       </div>
     </div>
