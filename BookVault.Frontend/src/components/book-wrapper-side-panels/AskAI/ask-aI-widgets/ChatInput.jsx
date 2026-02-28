@@ -181,7 +181,10 @@ export default function ChatInput({
         )}
         
         <div className={styles.pageAttachContainer}>
-            <ChatPageSelector />
+          <div className={styles.pageAttachWrapper}>
+            <span className={styles.pageAttachSection}><FiPaperclip size={15} /> Click to attach the page </span>   
+            <ChatPageSelector selectedPage={attachedPage} />
+          </div>
         </div>
       </div>
     </div>
