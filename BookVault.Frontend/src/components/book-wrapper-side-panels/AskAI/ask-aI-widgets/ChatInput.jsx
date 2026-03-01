@@ -190,7 +190,7 @@ export default function ChatInput({
             />
           </div>
 
-          <button>
+          <button className={styles.sendButton}>
             <IoSend color="black" />
           </button>
         </div>
