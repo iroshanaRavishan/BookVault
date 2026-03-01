@@ -189,6 +189,10 @@ export default function ChatInput({
               onSelectPage={setAttachedPage}
             />
           </div>
+
+          <button>
+            <IoSend color="black" />
+          </button>
         </div>
       </div>
     </div>
