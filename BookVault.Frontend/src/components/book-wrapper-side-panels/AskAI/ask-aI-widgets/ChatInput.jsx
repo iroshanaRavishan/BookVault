@@ -190,7 +190,7 @@ export default function ChatInput({
             />
           </div>
 
-          <button className={styles.sendButton}>
+          <button className={styles.sendButton} style={{bottom: isEditing ? '9%': '5%'}} >
             <IoSend color="black" />
           </button>
         </div>
