@@ -8,6 +8,12 @@
     justify-content: space-between;
 }
 
+.textareaWrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden;   
+}
+
 .messageInputArea {
     flex-grow: 1;
     border: none;
