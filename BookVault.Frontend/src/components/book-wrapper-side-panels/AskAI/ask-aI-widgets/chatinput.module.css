@@ -74,6 +74,19 @@
     z-index: 4;
 }
 
+.bottomShadow {
+    position: absolute;
+    bottom: 40px;
+    left: 0;
+    margin: 0 auto;
+    right: 0;
+    height: 12px;
+    pointer-events: none;
+    width: 93.5%;
+    background: linear-gradient(to top, rgb(241, 241, 241, 1), transparent);
+    z-index: 4;
+}
+
 /* Scroll-to-top button */
 .scrollUpButton {
     position: absolute;
