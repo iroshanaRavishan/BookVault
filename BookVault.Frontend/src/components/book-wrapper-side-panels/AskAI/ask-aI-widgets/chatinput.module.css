@@ -61,6 +61,20 @@
     scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
 }
 
+.topShadow {
+    position: absolute;
+    top: 0px;
+    left: 0;
+    margin: 0 auto;
+    right: 0;
+    height: 12px;
+    width: 93.5%;
+    pointer-events: none;
+    background: linear-gradient(to bottom, rgba(241, 241, 241, 1), transparent);
+    z-index: 4;
+}
+
+/* Scroll-to-top button */
 .scrollUpButton {
     position: absolute;
     right: 40px;
