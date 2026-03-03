@@ -171,6 +171,10 @@
     transition: all 0.3s ease;
 }
 
+.sendButton:hover {
+    transform: translateX(2px);
+}
+
 .editingHeader {
     display: flex;
     flex-direction: row;
