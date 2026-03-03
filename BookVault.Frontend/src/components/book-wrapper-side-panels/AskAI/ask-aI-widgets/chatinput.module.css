@@ -122,6 +122,23 @@
     box-sizing: border-box;
 }
 
+.pageAttachWrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    /* left: 10px; */
+    /* bottom: 10px; */
+    font-size: 12px;
+    background-color: transparent;
+    border: none;
+    /* border-radius: 20px; */
+    transition: all 0.3s ease;
+    color: #666;
+    user-select: none;
+}
+
 .pageAttachSection {
     display: flex;
     flex-direction: row;
