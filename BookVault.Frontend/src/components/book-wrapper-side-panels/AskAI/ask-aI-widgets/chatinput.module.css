@@ -103,6 +103,11 @@
     transition: all 0.3s ease;
 }
 
+.scrollUpButton:hover {
+  background: rgba(0, 0, 0, 0.3);
+  transform: translateY(-2px);
+}
+
 .pageAttachContainer {
     /* position: absolute; */
     /* bottom: 12px; */
@@ -115,6 +120,23 @@
     padding-bottom: 6px;
     /* margin-top: 20px; */
     box-sizing: border-box;
+}
+
+.pageAttachWrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    /* left: 10px; */
+    /* bottom: 10px; */
+    font-size: 12px;
+    background-color: transparent;
+    border: none;
+    /* border-radius: 20px; */
+    transition: all 0.3s ease;
+    color: #666;
+    user-select: none;
 }
 
 .pageAttachSection {
@@ -135,6 +157,19 @@
     user-select: none;
 }
 
+.sendButton {
+    /* position: relative; */
+    left: 92%;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0px;
+    transition: all 0.3s ease;
+}
 
 .editingHeader {
     display: flex;
