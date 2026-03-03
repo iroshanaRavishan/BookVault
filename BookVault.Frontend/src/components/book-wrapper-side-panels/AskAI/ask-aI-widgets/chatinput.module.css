@@ -171,6 +171,10 @@
     transition: all 0.3s ease;
 }
 
+.sendButton:hover {
+    transform: translateX(2px);
+}
+
 .editingHeader {
     display: flex;
     flex-direction: row;
@@ -190,6 +194,20 @@
     justify-content: center;
     align-items: center;
     gap: 6px;
+}
+
+.cancelButton {
+    position: relative;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0px;
+    border-radius: 20px;
+    transition: all 0.2s ease;
+}
+
+.cancelButton:hover {
+  transform: scale(1.1);
 }
 
 .editingPopUpBorder {
