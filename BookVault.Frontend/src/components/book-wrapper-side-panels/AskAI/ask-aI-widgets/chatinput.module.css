@@ -196,6 +196,16 @@
     gap: 6px;
 }
 
+.cancelButton {
+    position: relative;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0px;
+    border-radius: 20px;
+    transition: all 0.2s ease;
+}
+
 .editingPopUpBorder {
     position: relative;
     display: flex;
