@@ -158,7 +158,7 @@
 }
 
 .sendButton {
-    position: relative;
+    /* position: relative; */
     left: 92%;
     background-color: transparent;
     border: none;
