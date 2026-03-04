@@ -20,7 +20,8 @@ export default function ChipStack() {
       <div
         className={styles.track}
         style={{
-          transform: animate ? "translateY(-36px)" : "translateY(0)"
+          transform: animate ? "translateY(-36px)" : "translateY(0)",
+          transition: animate ? "transform 0.6s ease-in-out" : "none",
         }}
       >
         {chips.map((text, i) => (
