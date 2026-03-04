@@ -1,4 +1,4 @@
-import React from "react";
+import { useEffect, useState } from "react";
 import styles from "./ChipStack.module.css";
 
 const initialChips = [
@@ -14,13 +14,16 @@ const initialChips = [
 ];
 
 export default function ChipStack() {
+  const [chips, setChips] = useState(initialChips);
+  const [animate, setAnimate] = useState(true);
 
   return (
     <div className={styles.wrapper}>
       <div
         className={styles.track}
         style={{
-          transform: animate ? "translateY(-36px)" : "translateY(0)"
+          transform: animate ? "translateY(-36px)" : "translateY(0)",
+          transition: animate ? "transform 0.6s ease-in-out" : "none",
         }}
       >
         {chips.map((text, i) => (
