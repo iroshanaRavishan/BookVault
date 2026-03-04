@@ -14,6 +14,7 @@ const initialChips = [
 ];
 
 export default function ChipStack() {
+  const [chips, setChips] = useState(initialChips);
 
   return (
     <div className={styles.wrapper}>
