@@ -21,6 +21,11 @@ export default function ChipStack() {
     const interval = setInterval(() => {
       // start animation
       setAnimate(true);
+
+      // after animation completes, rotate array
+      setTimeout(() => {
+        setAnimate(false);
+      }, 600); 
     }, 2200);
 
     return () => clearInterval(interval);
