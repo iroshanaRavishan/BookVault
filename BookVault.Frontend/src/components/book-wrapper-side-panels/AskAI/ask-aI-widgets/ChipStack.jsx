@@ -17,6 +17,24 @@ export default function ChipStack() {
   const [chips, setChips] = useState(initialChips);
   const [animate, setAnimate] = useState(true);
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      // start animation
+      setAnimate(true);
+
+      // after animation completes, rotate array
+      setTimeout(() => {
+        setAnimate(false);
+        setChips((prev) => {
+          const [first, ...rest] = prev;
+          return [...rest, first];
+        });
+      }, 600); 
+    }, 2200);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className={styles.wrapper}>
       <div
