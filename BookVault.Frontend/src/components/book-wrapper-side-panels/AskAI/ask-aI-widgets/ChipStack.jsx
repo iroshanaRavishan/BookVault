@@ -17,6 +17,15 @@ export default function ChipStack() {
   const [chips, setChips] = useState(initialChips);
   const [animate, setAnimate] = useState(true);
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      // start animation
+      setAnimate(true);
+    }, 2200);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className={styles.wrapper}>
       <div
