@@ -44,3 +44,14 @@
   pointer-events: none;
 }
 
+.wrapper::before {
+  top: 0;
+  background: linear-gradient(to bottom, #f1f1f1, transparent);
+}
+
+.wrapper::after {
+  bottom: 0;
+  background: linear-gradient(to top, #f1f1f1, transparent);
+}
+
+
