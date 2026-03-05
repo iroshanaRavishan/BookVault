@@ -12,3 +12,22 @@
   flex-direction: column;
   align-items: center;
 }
+
+.chip {
+  height: 30px;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #5785e2;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #111827;
+  transform: translateY(-11px);
+  width: fit-content;
+  padding: 0px 24px;
+  background: #bb7ee4e3;
+  color: #ffffff;
+  box-shadow: 2px 3px 4px 0px rgba(0, 0, 0, 0.15)
+}
