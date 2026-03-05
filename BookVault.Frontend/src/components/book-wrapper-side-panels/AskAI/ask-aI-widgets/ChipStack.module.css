@@ -31,3 +31,16 @@
   color: #ffffff;
   box-shadow: 2px 3px 4px 0px rgba(0, 0, 0, 0.15)
 }
+
+/* blur top & bottom */
+.wrapper::before,
+.wrapper::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 25px;
+  z-index: 10;
+  pointer-events: none;
+}
+
