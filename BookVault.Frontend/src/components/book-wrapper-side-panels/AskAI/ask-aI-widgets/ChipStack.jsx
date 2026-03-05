@@ -25,6 +25,10 @@ export default function ChipStack() {
       // after animation completes, rotate array
       setTimeout(() => {
         setAnimate(false);
+        setChips((prev) => {
+          const [first, ...rest] = prev;
+          return [...rest, first];
+        });
       }, 600); 
     }, 2200);
 
