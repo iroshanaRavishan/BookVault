@@ -3,6 +3,9 @@ import styles from './historyactionpopup.module.css';
 
 export default function HistoryActionPopup() {
   return (
-    <div>HistoryActionPopup</div>
+    <div className={styles.historyActionPopupPanel}>
+        <div className={styles.historyActionPopupBody}>
+
+    </div>
   )
 }
