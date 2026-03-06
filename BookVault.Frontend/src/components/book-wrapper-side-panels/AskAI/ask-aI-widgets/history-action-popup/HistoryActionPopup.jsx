@@ -3,6 +3,15 @@ import styles from './historyactionpopup.module.css';
 
 export default function HistoryActionPopup() {
   return (
-    <div>HistoryActionPopup</div>
+    <div className={styles.historyActionPopupPanel}>
+        <div className={styles.historyActionPopupBody}>
+            <div className={styles.actionItem}>
+                <span>Advance Settigns</span>
+            </div>
+            <div className={styles.actionItem}>
+                <span>Advance Settigns</span>
+            </div>
+        </div>
+    </div>
   )
 }
