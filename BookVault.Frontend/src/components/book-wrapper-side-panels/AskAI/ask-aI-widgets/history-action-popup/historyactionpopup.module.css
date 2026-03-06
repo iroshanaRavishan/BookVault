@@ -1,0 +1,15 @@
+
+.historyActionPopupPanel {
+    position: absolute;
+    top: 130px;
+    right: 0px;
+    background: white;
+    padding: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    width: 160px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
