@@ -13,3 +13,10 @@
     flex-direction: column;
     justify-content: flex-start;
 }
+
+.historyActionPopupBody {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 10px;
+}
