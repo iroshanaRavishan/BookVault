@@ -5,7 +5,13 @@ export default function HistoryActionPopup() {
   return (
     <div className={styles.historyActionPopupPanel}>
         <div className={styles.historyActionPopupBody}>
-
+            <div className={styles.actionItem}>
+                <span>Advance Settigns</span>
+            </div>
+            <div className={styles.actionItem}>
+                <span>Advance Settigns</span>
+            </div>
+        </div>
     </div>
   )
 }
