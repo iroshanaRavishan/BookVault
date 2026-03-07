@@ -11,6 +11,14 @@ export default function HistoryActionPopup() {
             <div className={styles.actionItem}>
                 <span>Advance Settigns</span>
             </div>
+            <div className={styles.actionItem}>
+                <span>Advance Settigns</span>
+            </div>
+            <div className={styles.deletionActionItem}>
+                <div className={styles.actionItem}>
+                    <span>Advance Settigns</span>
+                </div>
+            </div>
         </div>
     </div>
   )
