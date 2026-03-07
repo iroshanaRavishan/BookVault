@@ -15,17 +15,33 @@
 }
 
 .actionItem {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  line-height: 1.4;
-  font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    line-height: 1.4;
+    font-size: 14px;
 }
 
 .actionItem:hover {
-  background-color: #f0f0f0;
-  cursor: pointer;
+    background-color: #f0f0f0;
+    cursor: pointer;
+  }
+
+.deletionActionItem {
+    font-size: 12px;
+    font-weight: 600;
+    margin-top: 10px;
+    position: relative;
+    display: flex;       
+    flex-direction: column;   
 }
+
+.deletionActionItem::before {
+    content: "";
+    flex-grow: 1;           
+    height: 1px;
+    background-color: #ccc;
+  }
 
 .historyActionPopupBody {
     display: flex;
