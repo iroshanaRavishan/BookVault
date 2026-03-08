@@ -7,7 +7,11 @@ export default function ChatPageSelector({ selectedPage, onSelectPage }) {
 
   return (
     <span className={styles.pageText}>
-
+      {currentPageInfo.right > 0 (
+          <span>
+            right page goes here
+          </span>
+        )}
     </span>
   );
 }
