@@ -6,6 +6,8 @@ export default function ChatPageSelector({ selectedPage, onSelectPage }) {
   const { currentPageInfo } = useFlipBook();
 
   return (
-    <div>ChatPageSelector</div>
+    <span className={styles.pageText}>
+
+    </span>
   );
 }
