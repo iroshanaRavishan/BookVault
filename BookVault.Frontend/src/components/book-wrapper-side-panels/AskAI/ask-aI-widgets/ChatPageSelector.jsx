@@ -1,7 +1,17 @@
 import React from "react";
+import styles from "./chatpageselector.module.css";
+import { useFlipBook } from "../../../../context/FlipBookContext";
 
-export default function ChatPageSelector() {
+export default function ChatPageSelector({ selectedPage, onSelectPage }) {
+  const { currentPageInfo } = useFlipBook();
+
   return (
-    <div>ChatPageSelector</div>
+    <span className={styles.pageText}>
+      {currentPageInfo.right > 0 (
+          <span>
+            right page goes here
+          </span>
+        )}
+    </span>
   );
 }
