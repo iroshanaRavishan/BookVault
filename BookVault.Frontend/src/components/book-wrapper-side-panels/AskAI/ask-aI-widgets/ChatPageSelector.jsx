@@ -15,7 +15,9 @@ export default function ChatPageSelector({
       {currentPageInfo.right > 0 &&
         currentPageInfo.right <= currentPageInfo.total && (
           <span
-            className={styles.pageNumber}
+            className={`${styles.pageNumber} ${isActive(
+              currentPageInfo.right
+            )}`}
             style={{ padding: '5px 8px 8.2px 8px' }}
             onClick={() => onSelectPage(currentPageInfo.right)}
           >
