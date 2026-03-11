@@ -14,7 +14,9 @@ export default function ChatPageSelector({
     <span className={styles.pageText}>
       {currentPageInfo.right > 0 &&
         currentPageInfo.right <= currentPageInfo.total && (
-          <span style={{ padding: '5px 8px 8.2px 8px' }}
+          <span
+            className={styles.pageNumber}
+            style={{ padding: '5px 8px 8.2px 8px' }}
             onClick={() => onSelectPage(currentPageInfo.right)}
           >
             right page goes here
