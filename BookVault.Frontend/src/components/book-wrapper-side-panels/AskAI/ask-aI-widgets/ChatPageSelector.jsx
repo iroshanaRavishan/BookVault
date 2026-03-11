@@ -21,7 +21,7 @@ export default function ChatPageSelector({
             style={{ padding: '5px 8px 8.2px 8px' }}
             onClick={() => onSelectPage(currentPageInfo.right)}
           >
-            right page goes here
+            {currentPageInfo.right}
           </span>
         )}
     </span>
