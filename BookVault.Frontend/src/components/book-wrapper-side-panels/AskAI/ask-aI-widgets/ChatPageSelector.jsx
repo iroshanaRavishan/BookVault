@@ -18,7 +18,7 @@ export default function ChatPageSelector({
             className={styles.pageNumber}
             style={{ padding: '5px 8px 8.2px 8px' }} 
           >
-            left page
+            {currentPageInfo.left}
           </span>
       }
       {currentPageInfo.right > 0 &&
