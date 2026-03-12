@@ -12,8 +12,8 @@ export default function ChatPageSelector({
 
   return (
     <span className={styles.pageText}>
-      {
-        currentPageInfo.left > 
+      {currentPageInfo.left > 0 &&
+        currentPageInfo.left <= currentPageInfo.total && (
           <span
             className={`${styles.pageNumber} ${isActive(
               currentPageInfo.left
@@ -23,7 +23,7 @@ export default function ChatPageSelector({
           >
             {currentPageInfo.left}
           </span>
-      }
+        )}
       {currentPageInfo.right > 0 &&
         currentPageInfo.right <= currentPageInfo.total && (
           <span
