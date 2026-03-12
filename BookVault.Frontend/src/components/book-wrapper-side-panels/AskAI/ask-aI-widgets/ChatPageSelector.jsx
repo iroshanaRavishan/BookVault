@@ -15,10 +15,13 @@ export default function ChatPageSelector({
       {
         currentPageInfo.left > 
           <span
-            className={styles.pageNumber}
-            style={{ padding: '5px 8px 8.2px 8px' }} 
+            className={`${styles.pageNumber} ${isActive(
+              currentPageInfo.left
+            )}`}
+            style={{ padding: '5px 8px 8.2px 8px' }}
+            onClick={() => onSelectPage(currentPageInfo.left)}
           >
-            left page
+            {currentPageInfo.left}
           </span>
       }
       {currentPageInfo.right > 0 &&
