@@ -27,7 +27,7 @@ export default function ChatPageSelector({
 
       {
         currentPageInfo.left > 0 &&
-        (
+        currentPageInfo.right > 0 &&(
           <span className={styles.separator}></span>
         )
       }
