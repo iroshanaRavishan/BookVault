@@ -17,3 +17,18 @@
 .pageNumber:hover {
   background: #e4e4e4;
 }
+
+.active {
+  background: #d1d0ca;
+  color: #2b2b2b;
+  font-weight: 900;
+}
+
+.separator {
+  display: inline-block;
+  width: 1px;
+  height: 24px;
+  background-color: #ccc;
+  margin: 0 5px; 
+  vertical-align: middle;
+}
