@@ -12,7 +12,8 @@ export default function ChatPageSelector({
 
   return (
     <span className={styles.pageText}>
-      {currentPageInfo.left > 0 &&
+      { 
+        currentPageInfo.left > 0 &&
         currentPageInfo.left <= currentPageInfo.total && (
           <span
             className={`${styles.pageNumber} ${isActive(
@@ -23,8 +24,8 @@ export default function ChatPageSelector({
           >
             {currentPageInfo.left}
           </span>
-        )}
-
+        )
+      }
       {
         currentPageInfo.left > 0 &&
         currentPageInfo.right > 0 &&
@@ -33,8 +34,8 @@ export default function ChatPageSelector({
           <span className={styles.separator}></span>
         )
       }
-
-      {currentPageInfo.right > 0 &&
+      {
+        currentPageInfo.right > 0 &&
         currentPageInfo.right <= currentPageInfo.total && (
           <span
             className={`${styles.pageNumber} ${isActive(
@@ -45,7 +46,8 @@ export default function ChatPageSelector({
           >
             {currentPageInfo.right}
           </span>
-        )}
+        )
+      }
     </span>
   );
 }
