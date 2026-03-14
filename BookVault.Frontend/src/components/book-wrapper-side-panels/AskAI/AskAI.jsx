@@ -11,6 +11,8 @@ export default function AskAI() {
   return (
     <div className={styles.panel}>
       <div className={styles.chatActionsIconBar}>
+        <div className={styles.chatBackAndName}>
+        </div>
       </div>
     </div>
   );
