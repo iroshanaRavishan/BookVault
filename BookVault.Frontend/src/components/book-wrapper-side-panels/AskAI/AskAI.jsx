@@ -6,6 +6,8 @@ export default function AskAI() {
   const hasNamedChatRef = useRef(false);
 
   const [messages, setMessages] = useState([]);
+  const [isTyping, setIsTyping] = useState(false);
+
   return (
     <div className={styles.panel}>
       <div className={styles.chatActionsIconBar}>
