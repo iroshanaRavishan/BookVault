@@ -1,4 +1,5 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import styles from './askai.module.css';
 import MessageWall from './ask-aI-widgets/MessageWall';
 
 import { IoArrowBack } from 'react-icons/io5';
