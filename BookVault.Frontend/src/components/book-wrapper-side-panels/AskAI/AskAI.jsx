@@ -10,6 +10,12 @@ import { IoArrowBack } from 'react-icons/io5';
   const [isTyping, setIsTyping] = useState(false);
   const [showInitialUI, setShowInitialUI] = useState(true);
 
+  useEffect(() => {
+    if (messages.length > 0) {
+      setShowInitialUI(false);
+    }
+  }, [messages]);
+
   return (
     <div className={styles.panel}>
       <div
