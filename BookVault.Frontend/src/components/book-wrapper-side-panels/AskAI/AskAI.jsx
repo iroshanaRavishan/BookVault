@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import MessageWall from './ask-aI-widgets/MessageWall';
 
-export default function AskAI() {
+import { IoArrowBack } from 'react-icons/io5';
   const conversationIdRef = useRef(crypto.randomUUID());
   const hasNamedChatRef = useRef(false);
 
@@ -16,6 +16,7 @@ export default function AskAI() {
         style={{opacity: showInitialUI ? '0': '1'}}
       >
         <div className={styles.chatBackAndName}>
+          <IoArrowBack/>
           <span className={styles.chatName}>Chat Name</span>
         </div>
       </div>
