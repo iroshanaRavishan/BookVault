@@ -7,6 +7,7 @@ export default function AskAI() {
 
   const [messages, setMessages] = useState([]);
   const [isTyping, setIsTyping] = useState(false);
+  const [showInitialUI, setShowInitialUI] = useState(true);
 
   return (
     <div className={styles.panel}>
