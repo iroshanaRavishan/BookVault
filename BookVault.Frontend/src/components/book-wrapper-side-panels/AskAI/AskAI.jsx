@@ -11,7 +11,10 @@ export default function AskAI() {
 
   return (
     <div className={styles.panel}>
-      <div className={styles.chatActionsIconBar}>
+      <div
+        className={styles.chatActionsIconBar} 
+        style={{opacity: showInitialUI ? '0': '1'}}
+      >
         <div className={styles.chatBackAndName}>
           <span className={styles.chatName}>Chat Name</span>
         </div>
