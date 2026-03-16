@@ -2,7 +2,11 @@ import React, { useEffect, useRef, useState } from 'react';
 import styles from './askai.module.css';
 import MessageWall from './ask-aI-widgets/MessageWall';
 
-import { IoArrowBack } from 'react-icons/io5';
+import { FiPlus } from 'react-icons/fi';
+import { MdDelete } from 'react-icons/md';
+import { IoArrowBack, IoSettingsSharp } from 'react-icons/io5';
+
+export default function AskAI() {
   const conversationIdRef = useRef(crypto.randomUUID());
   const hasNamedChatRef = useRef(false);
 
@@ -23,8 +27,15 @@ import { IoArrowBack } from 'react-icons/io5';
         style={{opacity: showInitialUI ? '0': '1'}}
       >
         <div className={styles.chatBackAndName}>
-          <IoArrowBack/>
+          <IoArrowBack
+            style={{ marginTop: "2px", cursor: "pointer" }}
+          />
           <span className={styles.chatName}>Chat Name</span>
+       
+        <div className={styles.chatActionsIcons}>
+          <FiPlus/>
+          <MdDelete />
+          <IoSettingsSharp />
         </div>
       </div>
     </div>
