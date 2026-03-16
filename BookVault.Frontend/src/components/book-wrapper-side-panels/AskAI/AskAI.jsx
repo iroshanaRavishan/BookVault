@@ -2,7 +2,11 @@ import React, { useEffect, useRef, useState } from 'react';
 import styles from './askai.module.css';
 import MessageWall from './ask-aI-widgets/MessageWall';
 
-import { IoArrowBack } from 'react-icons/io5';
+import { FiPlus } from 'react-icons/fi';
+import { MdDelete } from 'react-icons/md';
+import { IoArrowBack, IoSettingsSharp } from 'react-icons/io5';
+
+export default function AskAI() {
   const conversationIdRef = useRef(crypto.randomUUID());
   const hasNamedChatRef = useRef(false);
 
