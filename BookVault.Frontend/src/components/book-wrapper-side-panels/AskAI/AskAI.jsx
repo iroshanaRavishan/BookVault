@@ -27,6 +27,9 @@ import { IoArrowBack } from 'react-icons/io5';
             style={{ marginTop: "2px", cursor: "pointer" }}
           />
           <span className={styles.chatName}>Chat Name</span>
+       
+        <div className={styles.chatActionsIcons}>
+          
         </div>
       </div>
     </div>
