@@ -33,7 +33,9 @@ export default function AskAI() {
           <span className={styles.chatName}>Chat Name</span>
        
         <div className={styles.chatActionsIcons}>
-          
+          <FiPlus/>
+          <MdDelete />
+          <IoSettingsSharp />
         </div>
       </div>
     </div>
