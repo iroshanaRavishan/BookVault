@@ -23,7 +23,9 @@ import { IoArrowBack } from 'react-icons/io5';
         style={{opacity: showInitialUI ? '0': '1'}}
       >
         <div className={styles.chatBackAndName}>
-          <IoArrowBack/>
+          <IoArrowBack
+            style={{ marginTop: "2px", cursor: "pointer" }}
+          />
           <span className={styles.chatName}>Chat Name</span>
         </div>
       </div>
