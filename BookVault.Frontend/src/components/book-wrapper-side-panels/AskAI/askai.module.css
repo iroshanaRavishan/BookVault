@@ -54,6 +54,12 @@
     /* margin-top: 10px; */
 }
 
+.chipStackContainer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 36px 0;
+}
 
 .actionArea {
     display: flex;
