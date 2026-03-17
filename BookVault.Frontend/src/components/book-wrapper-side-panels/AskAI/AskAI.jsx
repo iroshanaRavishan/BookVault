@@ -35,7 +35,7 @@ export default function AskAI() {
         </div>
        
         <div className={styles.chatActionsIcons}>
-          <FiPlus/>
+          <FiPlus style={{ cursor: "pointer" }} />
           <MdDelete />
           <IoSettingsSharp />
         </div>
