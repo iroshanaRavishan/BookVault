@@ -40,6 +40,10 @@ export default function AskAI() {
           <IoSettingsSharp />
         </div>
       </div>
+
+      <div className={styles.initialUiContainer}>
+
+      </div>
     </div>
   );
 }
