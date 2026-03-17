@@ -31,13 +31,23 @@ export default function AskAI() {
           <IoArrowBack
             style={{ marginTop: "2px", cursor: "pointer" }}
           />
-          <span className={styles.chatName}>Chat Name</span>
+          <span className={styles.chatName}>{currentChatName}</span>
+        </div>
        
         <div className={styles.chatActionsIcons}>
-          <FiPlus/>
+          <FiPlus style={{ cursor: "pointer" }} />
           <MdDelete />
           <IoSettingsSharp />
         </div>
+      </div>
+
+      <div className={styles.initialUiContainer}>
+        <div className={styles.logoContainer}>
+        </div>
+
+        <div className={styles.chipStackContainer}>
+        </div>
+
       </div>
     </div>
   );
