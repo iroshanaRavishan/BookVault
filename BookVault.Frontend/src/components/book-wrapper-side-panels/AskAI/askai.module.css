@@ -40,6 +40,13 @@
     scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
 }
 
+.initialUiContainer {
+    position: absolute;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .chatBackAndName {
     display: flex;
     align-items: center;
