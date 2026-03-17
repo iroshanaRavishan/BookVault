@@ -42,7 +42,8 @@ export default function AskAI() {
       </div>
 
       <div className={styles.initialUiContainer}>
-
+        <div className={styles.logoContainer}>
+        </div>
       </div>
     </div>
   );
