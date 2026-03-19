@@ -54,6 +54,32 @@
     /* margin-top: 10px; */
 }
 
+.profilePicture {
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    object-fit: cover;
+    transition: all 200ms;
+    padding: 5px;
+    border: 3px solid #f29b28;
+    margin-right: 15px;
+    z-index: 2;
+}
+
+.AiPicture {
+    position: absolute;
+    top: 2%;
+    left: 57%;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    transition: all 200ms;
+    padding: 2px;
+    /* border: 2px solid #f1f1f1; */
+    margin-right: 10px;
+}
+
 .chipStackContainer {
     width: 100%;
     display: flex;
