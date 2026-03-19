@@ -43,6 +43,8 @@ export default function AskAI() {
 
       <div className={styles.initialUiContainer}>
         <div className={styles.logoContainer}>
+          <img src='/src/assets/logo mark.png' />       
+          <img src='/src/assets/AI.png' />       
         </div>
 
         <div className={styles.chipStackContainer}>
