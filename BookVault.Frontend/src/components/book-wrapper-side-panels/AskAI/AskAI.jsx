@@ -45,7 +45,7 @@ export default function AskAI() {
         <div className={styles.logoContainer}>
           <img src='/src/assets/logo mark.png' className={styles.profilePicture} />       
           <img src='/src/assets/AI.png' className={styles.AiPicture} />       
-          <div>
+          <div className={styles.onlineTitle}>
             Always live
           </div>
           <div className={styles.subtitle}>
