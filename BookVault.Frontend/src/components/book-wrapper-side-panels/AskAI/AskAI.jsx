@@ -54,6 +54,7 @@ export default function AskAI() {
         </div>
 
         <div className={styles.chipStackContainer}>
+        <div className={styles.infoBar}>
         </div>
 
       </div>

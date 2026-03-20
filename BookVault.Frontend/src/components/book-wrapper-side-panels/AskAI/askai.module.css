@@ -108,6 +108,16 @@
     margin: 36px 0;
 }
 
+.infoBar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    width: 100%;
+    color: #666666d8;
+}
+
 .actionArea {
     display: flex;
     gap: 10px;
