@@ -48,6 +48,9 @@ export default function AskAI() {
           <div>
             Always live
           </div>
+          <div>
+            Make the read smart with the AI. Get instant answers about your books...
+          </div>
         </div>
 
         <div className={styles.chipStackContainer}>
