@@ -45,12 +45,16 @@ export default function AskAI() {
         <div className={styles.logoContainer}>
           <img src='/src/assets/logo mark.png' className={styles.profilePicture} />       
           <img src='/src/assets/AI.png' className={styles.AiPicture} />       
-          <div>
+          <div className={styles.onlineTitle}>
             Always live
+          </div>
+          <div className={styles.subtitle}>
+            Make the read smart with the AI. Get instant answers about your books...
           </div>
         </div>
 
         <div className={styles.chipStackContainer}>
+        <div className={styles.infoBar}>
         </div>
 
       </div>
