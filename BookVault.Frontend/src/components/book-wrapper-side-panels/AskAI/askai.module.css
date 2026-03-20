@@ -54,6 +54,14 @@
     /* margin-top: 10px; */
 }
 
+.subtitle {
+    font-size: 12px;
+    font-weight: 500;
+    color: #8a8a8a;
+    margin-top: -5px;
+    z-index: 4;
+}
+
 .profilePicture {
     width: 75px;
     height: 75px;
