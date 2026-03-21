@@ -57,7 +57,10 @@ export default function AskAI() {
         <div className={styles.chipStackContainer}>
         <div className={styles.infoBar}>
           <button className={styles.historyButton}>
-            History{" "}<FaChevronRight />
+            History{" "}
+            <span>
+              <FaChevronRight />
+            </span>
           </button>
         </div>
 
