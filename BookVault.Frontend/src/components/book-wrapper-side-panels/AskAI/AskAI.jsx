@@ -5,6 +5,7 @@ import MessageWall from './ask-aI-widgets/MessageWall';
 import { FiPlus } from 'react-icons/fi';
 import { MdDelete } from 'react-icons/md';
 import { IoArrowBack, IoSettingsSharp } from 'react-icons/io5';
+import { FaChevronRight } from "react-icons/fa";
 
 export default function AskAI() {
   const conversationIdRef = useRef(crypto.randomUUID());
@@ -55,6 +56,9 @@ export default function AskAI() {
 
         <div className={styles.chipStackContainer}>
         <div className={styles.infoBar}>
+          <button className={styles.historyButton}>
+            History{" "}<FaChevronRight />
+          </button>
         </div>
 
       </div>
