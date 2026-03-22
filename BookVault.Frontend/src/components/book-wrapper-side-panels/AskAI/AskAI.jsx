@@ -55,6 +55,9 @@ export default function AskAI() {
         </div>
 
         <div className={styles.chipStackContainer}>
+          <ChipStack />
+        </div>
+
         <div className={styles.infoBar}>
           <button className={styles.historyButton}>
             History{" "}
