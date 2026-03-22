@@ -57,7 +57,9 @@
     margin-top: 3px;
     color: #8a8a8a;
 }
-
+.chevron.rotate {
+  transform: rotate(90deg);
+}
 
 
 .chatBackAndName {
