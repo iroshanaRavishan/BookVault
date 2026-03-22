@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styles from './askai.module.css';
 import MessageWall from './ask-aI-widgets/MessageWall';
-
+import ChipStack from './ask-aI-widgets/ChipStack';
 import { FiPlus } from 'react-icons/fi';
 import { MdDelete } from 'react-icons/md';
 import { IoArrowBack, IoSettingsSharp } from 'react-icons/io5';
