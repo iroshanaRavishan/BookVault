@@ -47,6 +47,21 @@
     align-items: center;
 }
 
+
+.chevron {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.chevron svg {
+    margin-top: 3px;
+    color: #8a8a8a;
+}
+.chevron.rotate {
+  transform: rotate(90deg);
+}
+
+
 .chatBackAndName {
     display: flex;
     align-items: center;
