@@ -58,7 +58,7 @@ export default function AskAI() {
         <div className={styles.infoBar}>
           <button className={styles.historyButton}>
             History{" "}
-            <span>
+            <span className={styles.chevron}>
               <FaChevronRight />
             </span>
           </button>
