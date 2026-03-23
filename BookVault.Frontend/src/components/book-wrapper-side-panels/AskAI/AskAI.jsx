@@ -67,7 +67,9 @@ export default function AskAI() {
           </button>
 
           {canContinueChat && (
-            <button>Continue to chat</button>
+            <button className={styles.continueChatButton}>
+              Continue to chat
+          </button>
           )}
         </div>
 
