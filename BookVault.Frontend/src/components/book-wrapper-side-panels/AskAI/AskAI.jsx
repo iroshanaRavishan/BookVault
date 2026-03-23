@@ -6,6 +6,7 @@ import { FiPlus } from 'react-icons/fi';
 import { MdDelete } from 'react-icons/md';
 import { IoArrowBack, IoSettingsSharp } from 'react-icons/io5';
 import { FaChevronRight } from "react-icons/fa";
+import { FaArrowRightLong } from "react-icons/fa6";
 
 export default function AskAI() {
   const conversationIdRef = useRef(crypto.randomUUID());
@@ -65,6 +66,15 @@ export default function AskAI() {
               <FaChevronRight />
             </span>
           </button>
+
+          {canContinueChat && (
+            <button className={styles.continueChatButton}>
+              Continue to chat
+              <span className={styles.chevron}>
+                <FaArrowRightLong />
+              </span>
+          </button>
+          )}
         </div>
 
       </div>
