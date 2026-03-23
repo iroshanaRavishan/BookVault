@@ -65,6 +65,10 @@ export default function AskAI() {
               <FaChevronRight />
             </span>
           </button>
+
+          {canContinueChat && (
+            <button>Continue to chat</button>
+          )}
         </div>
 
       </div>
