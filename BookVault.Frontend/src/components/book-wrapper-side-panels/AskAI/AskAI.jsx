@@ -71,6 +71,7 @@ export default function AskAI() {
             <button className={styles.continueChatButton}>
               Continue to chat
               <span className={styles.chevron}>
+                <FaArrowRightLong />
               </span>
           </button>
           )}
