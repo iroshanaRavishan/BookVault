@@ -69,6 +69,8 @@ export default function AskAI() {
           {canContinueChat && (
             <button className={styles.continueChatButton}>
               Continue to chat
+              <span className={styles.chevron}>
+              </span>
           </button>
           )}
         </div>
