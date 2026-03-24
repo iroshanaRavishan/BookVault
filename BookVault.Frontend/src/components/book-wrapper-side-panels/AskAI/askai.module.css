@@ -82,6 +82,16 @@
     gap: 8px;
     /* margin-top: 10px; */
 }
+.chatName {
+    font-size: 13px;
+    /* font-weight: 700; */
+    color: #333333;
+    display: flex;
+    user-select: none;
+    flex-direction: row;
+    align-items: center;
+    gap: 6px;
+}
 
 .onlineTitle {
     font-size: 13px;
