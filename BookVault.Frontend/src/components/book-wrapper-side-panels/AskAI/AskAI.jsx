@@ -77,6 +77,11 @@ export default function AskAI() {
           )}
         </div>
 
+        {showHistory && (
+          <div className={styles.historyPanel}>
+            
+          </div>
+        )}
       </div>
     </div>
   );
