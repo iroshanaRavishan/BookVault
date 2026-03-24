@@ -79,7 +79,10 @@ export default function AskAI() {
 
         {showHistory && (
           <div className={styles.historyPanel}>
-            
+            {chatList.map((
+              <div className={styles.historyItem}>
+              </div>
+            ))} 
           </div>
         )}
       </div>
