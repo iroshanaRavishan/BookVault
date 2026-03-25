@@ -25,6 +25,8 @@ export default function AskAI() {
 
   const handleBeforeLeave = () => {
     if (message.trim().length > 0) {
+      // Unsaved text -> show confirm
+      pendingActionRef.current = action;
     } 
   };
 
