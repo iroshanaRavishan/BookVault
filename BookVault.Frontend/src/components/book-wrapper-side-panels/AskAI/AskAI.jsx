@@ -23,6 +23,14 @@ export default function AskAI() {
     }
   }, [messages]);
 
+  const handleBeforeLeave = () => {
+    if (message.trim().length > 0) {
+      // Unsaved text -> show confirm
+      pendingActionRef.current = action;
+      setShowConfirm(true);
+    } 
+  };
+
   return (
     <div className={styles.panel}>
       <div
