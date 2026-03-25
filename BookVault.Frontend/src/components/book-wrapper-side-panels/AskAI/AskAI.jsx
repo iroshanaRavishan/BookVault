@@ -23,6 +23,10 @@ export default function AskAI() {
     }
   }, [messages]);
 
+  const handleBeforeLeave = () => {
+
+  };
+
   return (
     <div className={styles.panel}>
       <div
