@@ -24,7 +24,8 @@ export default function AskAI() {
   }, [messages]);
 
   const handleBeforeLeave = () => {
-
+    if (message.trim().length > 0) {
+    } 
   };
 
   return (
