@@ -28,6 +28,9 @@ export default function AskAI() {
       // Unsaved text -> show confirm
       pendingActionRef.current = action;
       setShowConfirm(true);
+    } else {
+      // No text -> proceed directly
+      action();
     } 
   };
 
