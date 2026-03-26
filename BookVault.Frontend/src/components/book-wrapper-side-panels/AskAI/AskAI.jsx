@@ -24,6 +24,7 @@ export default function AskAI() {
   }, [messages]);
 
   const deleteMessage = (id) => {
+    setMessages(prev => prev.filter(m => m.id !== id));
   };
 
 
