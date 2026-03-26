@@ -24,7 +24,9 @@ export default function AskAI() {
   }, [messages]);
 
   const editMessage = (id, newText) => {
-    setMessages( newText)
+    setMessages(prev =>
+      prev.map(m => (m.id === id ? { ...m, text: newText } : m))
+    );
   };
 
   const deleteMessage = (id) => {
