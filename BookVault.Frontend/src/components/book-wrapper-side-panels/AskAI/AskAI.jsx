@@ -23,6 +23,11 @@ export default function AskAI() {
     }
   }, [messages]);
 
+  const deleteMessage = (id) => {
+    setMessages(prev => prev.filter(m => m.id !== id));
+  };
+
+
   const handleBeforeLeave = (action) => {
     if (message.trim().length > 0) {
       // Unsaved text -> show confirm
