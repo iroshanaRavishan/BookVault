@@ -23,7 +23,8 @@ export default function AskAI() {
     }
   }, [messages]);
 
-  const editMessage = (id) => {
+  const editMessage = (id, newText) => {
+    setMessages( newText)
   };
 
   const deleteMessage = (id) => {
