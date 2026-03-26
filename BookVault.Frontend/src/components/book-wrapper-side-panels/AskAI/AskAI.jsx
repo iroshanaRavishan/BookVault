@@ -16,6 +16,7 @@ export default function AskAI() {
   const [isTyping, setIsTyping] = useState(false);
   const [showInitialUI, setShowInitialUI] = useState(true);
   const [currentChatName, setCurrentChatName] = useState("New Chat");
+  const [showConfirm, setShowConfirm] = useState(false);
 
   useEffect(() => {
     if (messages.length > 0) {
