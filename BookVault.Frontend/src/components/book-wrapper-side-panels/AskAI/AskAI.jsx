@@ -6,6 +6,7 @@ import { FiPlus } from 'react-icons/fi';
 import { MdDelete } from 'react-icons/md';
 import { IoArrowBack, IoSettingsSharp } from 'react-icons/io5';
 import { FaChevronRight } from "react-icons/fa";
+import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import { FaArrowRightLong } from "react-icons/fa6";
 
 export default function AskAI() {
@@ -109,7 +110,10 @@ export default function AskAI() {
               >
                 <span> {chat.chatName} </span>
                 <span className={styles.historyItemDate}>
-                  
+                  {/* date */}
+                  <HiOutlineDotsHorizontal 
+                    className={styles.dotsIcon} 
+                  />
                 </span>
               </div>
             ))} 
