@@ -108,6 +108,9 @@ export default function AskAI() {
                 className={styles.historyItem}
               >
                 <span> {chat.chatName} </span>
+                <span className={styles.historyItemDate}>
+                  
+                </span>
               </div>
             ))} 
 
