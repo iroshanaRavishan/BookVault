@@ -6,6 +6,7 @@ import { FiPlus } from 'react-icons/fi';
 import { MdDelete } from 'react-icons/md';
 import { IoArrowBack, IoSettingsSharp } from 'react-icons/io5';
 import { FaChevronRight } from "react-icons/fa";
+import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import { FaArrowRightLong } from "react-icons/fa6";
 
 export default function AskAI() {
@@ -16,12 +17,35 @@ export default function AskAI() {
   const [isTyping, setIsTyping] = useState(false);
   const [showInitialUI, setShowInitialUI] = useState(true);
   const [currentChatName, setCurrentChatName] = useState("New Chat");
+  const [showConfirm, setShowConfirm] = useState(false);
 
   useEffect(() => {
     if (messages.length > 0) {
       setShowInitialUI(false);
     }
   }, [messages]);
+
+  const editMessage = (id, newText) => {
+    setMessages(prev =>
+      prev.map(m => (m.id === id ? { ...m, text: newText } : m))
+    );
+  };
+
+  const deleteMessage = (id) => {
+    setMessages(prev => prev.filter(m => m.id !== id));
+  };
+
+
+  const handleBeforeLeave = (action) => {
+    if (message.trim().length > 0) {
+      // Unsaved text -> show confirm
+      pendingActionRef.current = action;
+      setShowConfirm(true);
+    } else {
+      // No text -> proceed directly
+      action();
+    } 
+  };
 
   return (
     <div className={styles.panel}>
@@ -77,6 +101,33 @@ export default function AskAI() {
           )}
         </div>
 
+        {showHistory && (
+          <div className={styles.historyPanel}>
+            {chatList.map(chat => (
+              <div
+                key={chat.conversationId}
+                className={styles.historyItem}
+              >
+                <span> {chat.chatName} </span>
+                <span className={styles.historyItemDate}>
+                  {/* date */}
+                  <HiOutlineDotsHorizontal 
+                    className={styles.dotsIcon} 
+                    onClick={(e) => {
+                      e.stopPropagation();
+                    }}
+                  />
+                </span>
+              </div>
+            ))} 
+
+            {showHistoryActionPopup &&(
+              <div className={styles.historyActionPopupPanel}>
+              </div>
+            )}
+            
+          </div>
+        )}
       </div>
     </div>
   );
