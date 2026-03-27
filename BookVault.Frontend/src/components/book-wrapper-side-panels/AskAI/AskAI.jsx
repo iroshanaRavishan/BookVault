@@ -109,7 +109,10 @@ export default function AskAI() {
               >
                 <span> {chat.chatName} </span>
                 <span className={styles.historyItemDate}>
-                  
+                  {/* date */}
+                  <HiOutlineDotsHorizontal 
+                    className={styles.dotsIcon} 
+                  />
                 </span>
               </div>
             ))} 
