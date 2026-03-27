@@ -113,6 +113,9 @@ export default function AskAI() {
                   {/* date */}
                   <HiOutlineDotsHorizontal 
                     className={styles.dotsIcon} 
+                    onClick={(e) => {
+                      e.stopPropagation();
+                    }}
                   />
                 </span>
               </div>
