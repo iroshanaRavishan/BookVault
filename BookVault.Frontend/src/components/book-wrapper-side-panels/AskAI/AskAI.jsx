@@ -110,6 +110,12 @@ export default function AskAI() {
                 <span> {chat.chatName} </span>
               </div>
             ))} 
+
+            {showHistoryActionPopup &&(
+              <div>
+              </div>
+            )}
+            
           </div>
         )}
       </div>
