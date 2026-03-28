@@ -47,6 +47,9 @@ export default function AskAI() {
     } 
   };
 
+  const toggleHistory = () => {
+  };
+
   return (
     <div className={styles.panel}>
       <div
