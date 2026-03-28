@@ -52,6 +52,7 @@ export default function AskAI() {
     const history = getChatHistory();
     setChatList(history);
     setShowHistory(prev => !prev); 
+    setInitialUiSlide(prev => !prev);
   };
 
   return (
