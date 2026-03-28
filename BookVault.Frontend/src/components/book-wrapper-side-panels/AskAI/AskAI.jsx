@@ -50,6 +50,7 @@ export default function AskAI() {
 
   const toggleHistory = () => {
     const history = getChatHistory();
+    setChatList(history);
   };
 
   return (
