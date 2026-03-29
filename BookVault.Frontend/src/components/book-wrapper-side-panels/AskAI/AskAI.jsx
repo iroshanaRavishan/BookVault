@@ -29,7 +29,9 @@ export default function AskAI() {
 
   const startNewChat = () => {
     setIsResetting(true);
+    setMessages([]);
     setCurrentChatName("New Chat");
+    conversationIdRef.current = crypto.randomUUID();
   };
 
   const editMessage = (id, newText) => {
