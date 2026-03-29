@@ -26,6 +26,9 @@ export default function AskAI() {
     }
   }, [messages]);
 
+  const startNewChat = () => {
+  };
+
   const editMessage = (id, newText) => {
     setMessages(prev =>
       prev.map(m => (m.id === id ? { ...m, text: newText } : m))
