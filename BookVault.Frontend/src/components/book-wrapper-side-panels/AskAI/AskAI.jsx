@@ -16,7 +16,9 @@ export default function AskAI() {
   const [messages, setMessages] = useState([]);
   const [isTyping, setIsTyping] = useState(false);
   const [showInitialUI, setShowInitialUI] = useState(true);
+  const [isResetting, setIsResetting] = useState(false);
   const [currentChatName, setCurrentChatName] = useState("New Chat");
+  const [chatList, setChatList] = useState([]);
   const [showConfirm, setShowConfirm] = useState(false);
 
   useEffect(() => {
@@ -24,6 +26,11 @@ export default function AskAI() {
       setShowInitialUI(false);
     }
   }, [messages]);
+
+  const startNewChat = () => {
+    setIsResetting(true);
+    setCurrentChatName("New Chat");
+  };
 
   const editMessage = (id, newText) => {
     setMessages(prev =>
@@ -45,6 +52,13 @@ export default function AskAI() {
       // No text -> proceed directly
       action();
     } 
+  };
+
+  const toggleHistory = () => {
+    const history = getChatHistory();
+    setChatList(history);
+    setShowHistory(prev => !prev); 
+    setInitialUiSlide(prev => !prev);
   };
 
   return (
