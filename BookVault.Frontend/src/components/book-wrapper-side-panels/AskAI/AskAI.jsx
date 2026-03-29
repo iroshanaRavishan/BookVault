@@ -28,6 +28,7 @@ export default function AskAI() {
   }, [messages]);
 
   const startNewChat = () => {
+    setIsResetting(true);
   };
 
   const editMessage = (id, newText) => {
