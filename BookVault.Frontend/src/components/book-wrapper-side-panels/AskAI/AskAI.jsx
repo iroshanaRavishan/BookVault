@@ -37,6 +37,8 @@ export default function AskAI() {
     setTimeout(() => setIsResetting(false), 0);
   };
 
+  const hasMessages = messages.length > 0;
+
   const STORAGE_KEY = "ai_chat_history";
 
   const getChatHistory = () => {
