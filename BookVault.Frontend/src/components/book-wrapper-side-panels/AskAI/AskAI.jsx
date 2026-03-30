@@ -38,6 +38,7 @@ export default function AskAI() {
   };
 
   const getChatHistory = () => {
+    return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
   };
 
   const saveChatHistory = (history) => {
