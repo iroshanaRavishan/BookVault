@@ -37,6 +37,9 @@ export default function AskAI() {
     setTimeout(() => setIsResetting(false), 0);
   };
 
+  const getChatHistory = () => {
+  };
+
   const saveChatHistory = (history) => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(history));
   };
