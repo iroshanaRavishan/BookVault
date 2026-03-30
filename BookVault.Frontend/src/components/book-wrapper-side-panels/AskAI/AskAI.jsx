@@ -38,6 +38,7 @@ export default function AskAI() {
   };
 
   const saveChatHistory = (history) => {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(history));
   };
 
   const editMessage = (id, newText) => {
