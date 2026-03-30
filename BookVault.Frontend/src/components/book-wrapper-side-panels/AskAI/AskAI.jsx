@@ -34,6 +34,7 @@ export default function AskAI() {
     setCurrentChatName("New Chat");
     conversationIdRef.current = crypto.randomUUID();
     hasNamedChatRef.current = false; 
+    setTimeout(() => setIsResetting(false), 0);
   };
 
   const editMessage = (id, newText) => {
