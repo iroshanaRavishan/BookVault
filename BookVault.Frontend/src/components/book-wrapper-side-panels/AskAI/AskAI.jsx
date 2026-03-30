@@ -37,7 +37,7 @@ export default function AskAI() {
     setTimeout(() => setIsResetting(false), 0);
   };
 
-  const saveChatHistory = () => {
+  const saveChatHistory = (history) => {
   };
 
   const editMessage = (id, newText) => {
