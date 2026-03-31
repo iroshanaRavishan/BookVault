@@ -83,6 +83,7 @@ export default function AskAI() {
     setCurrentChatName(chat.chatName);
     // set message goes here
     setShowHistory(false);
+    setShowInitialUI(false);
   };
 
   return (
