@@ -80,7 +80,9 @@ export default function AskAI() {
 
   const loadConversation = (chat) => {
     conversationIdRef.current = chat.conversationId;
-     setCurrentChatName(chat.chatName);
+    setCurrentChatName(chat.chatName);
+    // set message goes here
+    setShowHistory(false);
   };
 
   return (
