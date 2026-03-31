@@ -78,6 +78,9 @@ export default function AskAI() {
     setInitialUiSlide(prev => !prev);
   };
 
+  const loadConversation = () => {
+  };
+
   return (
     <div className={styles.panel}>
       <div
