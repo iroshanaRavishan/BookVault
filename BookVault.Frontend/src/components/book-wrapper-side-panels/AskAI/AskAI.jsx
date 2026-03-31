@@ -78,7 +78,7 @@ export default function AskAI() {
     setInitialUiSlide(prev => !prev);
   };
 
-  const loadConversation = () => {
+  const loadConversation = (chat) => {
   };
 
   return (
