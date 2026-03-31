@@ -60,6 +60,9 @@ export default function AskAI() {
   };
 
 
+  const loadHistory = async () => {
+  };
+
   const handleBeforeLeave = (action) => {
     if (message.trim().length > 0) {
       // Unsaved text -> show confirm
