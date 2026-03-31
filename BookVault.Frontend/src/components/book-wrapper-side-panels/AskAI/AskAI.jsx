@@ -79,6 +79,7 @@ export default function AskAI() {
   };
 
   const loadConversation = (chat) => {
+    conversationIdRef.current = chat.conversationId;
   };
 
   return (
