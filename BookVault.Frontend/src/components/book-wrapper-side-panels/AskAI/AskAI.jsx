@@ -61,6 +61,8 @@ export default function AskAI() {
 
 
   const loadHistory = async () => {
+    const res = await fetch("/api/chat/history");
+    const data = await res.json();
   };
 
   const handleBeforeLeave = (action) => {
