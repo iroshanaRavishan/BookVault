@@ -103,6 +103,7 @@ export default function AskAI() {
             onClick={() => {
               handleBeforeLeave(() => {
                 setShowInitialUI(true);
+                setCanContinueChat(messages.length > 0);
               });
             }}
           />
