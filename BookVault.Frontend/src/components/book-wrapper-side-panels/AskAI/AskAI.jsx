@@ -105,6 +105,7 @@ export default function AskAI() {
                 setShowInitialUI(true);
                 setCanContinueChat(messages.length > 0);
                 setInputHeight(0);
+                setMessage("");
               });
             }}
           />
