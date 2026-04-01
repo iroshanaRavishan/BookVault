@@ -101,7 +101,9 @@ export default function AskAI() {
           <IoArrowBack
             style={{ marginTop: "2px", cursor: "pointer" }}
             onClick={() => {
-              handleBeforeLeave(() => {});
+              handleBeforeLeave(() => {
+                setShowInitialUI(true);
+              });
             }}
           />
           <span className={styles.chatName}>{currentChatName}</span>
