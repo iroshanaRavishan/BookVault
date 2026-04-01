@@ -100,7 +100,9 @@ export default function AskAI() {
         <div className={styles.chatBackAndName}>
           <IoArrowBack
             style={{ marginTop: "2px", cursor: "pointer" }}
-            onClick={() => {}}
+            onClick={() => {
+              handleBeforeLeave(() => {});
+            }}
           />
           <span className={styles.chatName}>{currentChatName}</span>
         </div>
