@@ -104,6 +104,7 @@ export default function AskAI() {
               handleBeforeLeave(() => {
                 setShowInitialUI(true);
                 setCanContinueChat(messages.length > 0);
+                setInputHeight(0);
               });
             }}
           />
