@@ -90,7 +90,8 @@ export default function AskAI() {
     setMessages(
       chat.messages.map(m => ({
         id: crypto.randomUUID(),
-        text: m.content
+        text: m.content,
+        sender: m.role === "user" ? "user" : "bot"
       }))
     );
 
