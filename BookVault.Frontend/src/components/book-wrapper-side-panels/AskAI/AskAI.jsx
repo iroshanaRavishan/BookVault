@@ -89,7 +89,8 @@ export default function AskAI() {
     setCurrentChatName(chat.chatName);
     setMessages(
       chat.messages.map(m => ({
-        id: crypto.randomUUID()
+        id: crypto.randomUUID(),
+        text: m.content
       }))
     );
 
