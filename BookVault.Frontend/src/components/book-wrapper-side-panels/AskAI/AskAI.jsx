@@ -87,7 +87,9 @@ export default function AskAI() {
   const loadConversation = (chat) => {
     conversationIdRef.current = chat.conversationId;
     setCurrentChatName(chat.chatName);
-    setMessages();
+    setMessages(
+      chat.messages.map(m => ({}))
+    );
 
     setShowHistory(false);
     setShowInitialUI(false);
