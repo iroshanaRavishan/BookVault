@@ -91,7 +91,8 @@ export default function AskAI() {
       chat.messages.map(m => ({
         id: crypto.randomUUID(),
         text: m.content,
-        sender: m.role === "user" ? "user" : "bot"
+        sender: m.role === "user" ? "user" : "bot",
+        date: new Date(m.created_at).toDateString(),
       }))
     );
 
