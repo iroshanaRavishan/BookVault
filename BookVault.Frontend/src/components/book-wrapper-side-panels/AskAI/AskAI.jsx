@@ -88,7 +88,9 @@ export default function AskAI() {
     conversationIdRef.current = chat.conversationId;
     setCurrentChatName(chat.chatName);
     setMessages(
-      chat.messages.map(m => ({}))
+      chat.messages.map(m => ({
+        id: crypto.randomUUID()
+      }))
     );
 
     setShowHistory(false);
