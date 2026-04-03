@@ -127,7 +127,11 @@ export default function AskAI() {
        
         <div className={styles.chatActionsIcons}>
           <FiPlus
-            onClick={handleBeforeLeave}
+            onClick={() =>
+              handleBeforeLeave(() => {
+                startNewChat();
+              })
+            }
             style={{ cursor: "pointer" }} />
           <MdDelete />
           <IoSettingsSharp />
