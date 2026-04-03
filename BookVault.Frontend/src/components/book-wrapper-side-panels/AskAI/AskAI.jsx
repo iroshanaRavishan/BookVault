@@ -21,6 +21,7 @@ export default function AskAI() {
   const [currentChatName, setCurrentChatName] = useState("New Chat");
   const [chatList, setChatList] = useState([]);
   const [showConfirm, setShowConfirm] = useState(false);
+  const [showHistoryActionPopup, setShowHistoryActionPopup] = useState(false);
 
   useEffect(() => {
     if (messages.length > 0) {
