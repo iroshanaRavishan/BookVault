@@ -17,9 +17,11 @@ export default function AskAI() {
   const [isTyping, setIsTyping] = useState(false);
   const [showInitialUI, setShowInitialUI] = useState(true);
   const [isResetting, setIsResetting] = useState(false);
+  const [canContinueChat, setCanContinueChat] = useState(false);
   const [currentChatName, setCurrentChatName] = useState("New Chat");
   const [chatList, setChatList] = useState([]);
   const [showConfirm, setShowConfirm] = useState(false);
+  const [showHistoryActionPopup, setShowHistoryActionPopup] = useState(false);
 
   useEffect(() => {
     if (messages.length > 0) {
@@ -37,6 +39,14 @@ export default function AskAI() {
     setTimeout(() => setIsResetting(false), 0);
   };
 
+  const hasMessages = messages.length > 0;
+
+  const STORAGE_KEY = "ai_chat_history";
+
+  const getChatHistory = () => {
+    return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+  };
+
   const saveChatHistory = (history) => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(history));
   };
@@ -51,6 +61,11 @@ export default function AskAI() {
     setMessages(prev => prev.filter(m => m.id !== id));
   };
 
+
+  const loadHistory = async () => {
+    const res = await fetch("/api/chat/history");
+    const data = await res.json();
+  };
 
   const handleBeforeLeave = (action) => {
     if (message.trim().length > 0) {
@@ -70,6 +85,26 @@ export default function AskAI() {
     setInitialUiSlide(prev => !prev);
   };
 
+  const loadConversation = (chat) => {
+    conversationIdRef.current = chat.conversationId;
+    setCurrentChatName(chat.chatName);
+    setMessages(
+      chat.messages.map(m => ({
+        id: crypto.randomUUID(),
+        text: m.content,
+        sender: m.role === "user" ? "user" : "bot",
+        time: new Date(m.created_at).toLocaleTimeString([], {
+          hour: "2-digit",
+          minute: "2-digit",
+        }),
+        date: new Date(m.created_at).toDateString(),
+      }))
+    );
+
+    setShowHistory(false);
+    setShowInitialUI(false);
+  };
+
   return (
     <div className={styles.panel}>
       <div
@@ -79,12 +114,28 @@ export default function AskAI() {
         <div className={styles.chatBackAndName}>
           <IoArrowBack
             style={{ marginTop: "2px", cursor: "pointer" }}
+            onClick={() => {
+              handleBeforeLeave(() => {
+                setShowInitialUI(true);
+                setCanContinueChat(messages.length > 0);
+                setInputHeight(0);
+                setMessage("");
+              });
+            }}
           />
           <span className={styles.chatName}>{currentChatName}</span>
         </div>
        
         <div className={styles.chatActionsIcons}>
-          <FiPlus style={{ cursor: "pointer" }} />
+          <FiPlus
+            onClick={() =>
+              handleBeforeLeave(() => {
+                startNewChat();
+                setMessage("");
+                setInputHeight(0);
+              })
+            }
+            style={{ cursor: "pointer" }} />
           <MdDelete />
           <IoSettingsSharp />
         </div>
@@ -130,6 +181,7 @@ export default function AskAI() {
               <div
                 key={chat.conversationId}
                 className={styles.historyItem}
+                onClick={() => loadConversation(chat)}
               >
                 <span> {chat.chatName} </span>
                 <span className={styles.historyItemDate}>
@@ -138,6 +190,7 @@ export default function AskAI() {
                     className={styles.dotsIcon} 
                     onClick={(e) => {
                       e.stopPropagation();
+                      setShowHistoryActionPopup(prev => !prev)
                     }}
                   />
                 </span>
