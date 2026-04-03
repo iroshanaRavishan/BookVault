@@ -130,6 +130,7 @@ export default function AskAI() {
             onClick={() =>
               handleBeforeLeave(() => {
                 startNewChat();
+                setMessage("");
               })
             }
             style={{ cursor: "pointer" }} />
