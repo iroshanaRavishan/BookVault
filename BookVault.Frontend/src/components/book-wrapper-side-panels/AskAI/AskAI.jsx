@@ -92,7 +92,10 @@ export default function AskAI() {
         id: crypto.randomUUID(),
         text: m.content,
         sender: m.role === "user" ? "user" : "bot",
-        time: new Date(m.created_at),
+        time: new Date(m.created_at).toLocaleTimeString([], {
+          hour: "2-digit",
+          minute: "2-digit",
+        }),
         date: new Date(m.created_at).toDateString(),
       }))
     );
