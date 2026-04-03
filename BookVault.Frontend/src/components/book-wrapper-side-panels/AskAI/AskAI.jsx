@@ -131,6 +131,7 @@ export default function AskAI() {
               handleBeforeLeave(() => {
                 startNewChat();
                 setMessage("");
+                setInputHeight(0);
               })
             }
             style={{ cursor: "pointer" }} />
