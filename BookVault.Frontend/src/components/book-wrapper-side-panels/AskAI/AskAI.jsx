@@ -126,7 +126,9 @@ export default function AskAI() {
         </div>
        
         <div className={styles.chatActionsIcons}>
-          <FiPlus style={{ cursor: "pointer" }} />
+          <FiPlus
+            onClick={handleBeforeLeave}
+            style={{ cursor: "pointer" }} />
           <MdDelete />
           <IoSettingsSharp />
         </div>
