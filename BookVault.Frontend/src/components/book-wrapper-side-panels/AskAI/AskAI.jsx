@@ -180,6 +180,7 @@ export default function AskAI() {
               <div
                 key={chat.conversationId}
                 className={styles.historyItem}
+                onClick={() => loadConversation(chat)}
               >
                 <span> {chat.chatName} </span>
                 <span className={styles.historyItemDate}>
