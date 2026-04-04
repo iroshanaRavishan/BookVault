@@ -109,6 +109,11 @@
     transition: all 0.2s ease;
 }
 
+.chatActionsIconBar svg:hover {
+    color: #2c2c2c;
+    transform: scale(1.05);
+}
+
 .onlineTitle {
     font-size: 13px;
     font-weight: 700;
