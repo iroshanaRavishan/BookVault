@@ -171,6 +171,7 @@ export default function AskAI() {
               onClick={() => {
                 setShowHistory(false);   
                 setInitialUiSlide(false);
+                setShowInitialUI(false); 
               }}
             >
               Continue to chat
