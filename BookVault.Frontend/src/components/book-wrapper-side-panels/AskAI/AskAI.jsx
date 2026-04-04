@@ -172,6 +172,7 @@ export default function AskAI() {
                 setShowHistory(false);   
                 setInitialUiSlide(false);
                 setShowInitialUI(false); 
+                setCanContinueChat(false);
               }}
             >
               Continue to chat
