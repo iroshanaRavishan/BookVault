@@ -170,6 +170,7 @@ export default function AskAI() {
               className={styles.continueChatButton}
               onClick={() => {
                 setShowHistory(false);   
+                setInitialUiSlide(false);
               }}
             >
               Continue to chat
