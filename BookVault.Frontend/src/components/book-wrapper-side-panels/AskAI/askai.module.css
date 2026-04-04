@@ -99,6 +99,16 @@
     gap: 6px;
 }
 
+.chatActionsIcons {
+    display: flex;
+    gap: 10px;
+}
+
+.chatActionsIconBar svg {
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
 .onlineTitle {
     font-size: 13px;
     font-weight: 700;
