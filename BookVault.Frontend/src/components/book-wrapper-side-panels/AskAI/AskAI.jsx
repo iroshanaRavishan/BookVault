@@ -51,7 +51,7 @@ export default function AskAI() {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(history));
   };
 
-  const saveMessageToLocal = () => {
+  const saveMessageToLocal = (conversationId) => {
     const history = getChatHistory();
   };
 
