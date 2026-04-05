@@ -52,6 +52,7 @@ export default function AskAI() {
   };
 
   const saveMessageToLocal = () => {
+    const history = getChatHistory();
   };
 
   const editMessage = (id, newText) => {
