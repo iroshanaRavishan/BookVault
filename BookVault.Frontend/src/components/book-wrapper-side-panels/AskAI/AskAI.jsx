@@ -54,6 +54,8 @@ export default function AskAI() {
   const saveMessageToLocal = (conversationId, message) => {
     const history = getChatHistory();
     let convo = history.find(c => c.conversationId === conversationId);
+
+    convo.messages.push(message);
   };
 
   const editMessage = (id, newText) => {
