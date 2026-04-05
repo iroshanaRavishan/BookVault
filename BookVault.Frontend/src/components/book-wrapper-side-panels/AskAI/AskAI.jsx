@@ -51,9 +51,11 @@ export default function AskAI() {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(history));
   };
 
-  const saveMessageToLocal = (conversationId) => {
+  const saveMessageToLocal = (conversationId, message) => {
     const history = getChatHistory();
     let convo = history.find(c => c.conversationId === conversationId);
+
+    convo.messages.push(message);
   };
 
   const editMessage = (id, newText) => {
