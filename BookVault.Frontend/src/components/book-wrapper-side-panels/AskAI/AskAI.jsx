@@ -155,7 +155,7 @@ export default function AskAI() {
           <img src='/src/assets/logo mark.png' className={styles.profilePicture} />       
           <img src='/src/assets/AI.png' className={styles.AiPicture} />       
           <div className={styles.onlineTitle}>
-            Always live <GoDotFill />
+            Always live <GoDotFill style={{marginTop: '2px'}} color='green' size={20}/>
           </div>
           <div className={styles.subtitle}>
             Make the read smart with the AI. Get instant answers about your books...
