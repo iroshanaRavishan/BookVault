@@ -32,6 +32,7 @@ export default function AskAI() {
   const startNewChat = () => {
     setIsResetting(true);
     setMessages([]);
+    setAttachedPage(null);
     setShowInitialUI(true);
     setCurrentChatName("New Chat");
     conversationIdRef.current = crypto.randomUUID();
@@ -116,6 +117,7 @@ export default function AskAI() {
     <div className={styles.panel}>
       <div
         className={styles.chatActionsIconBar} 
+        //  ${ hasMessages ? styles.fine : styles.slideUp}
         style={{opacity: showInitialUI ? '0': '1'}}
       >
         <div className={styles.chatBackAndName}>
@@ -153,7 +155,7 @@ export default function AskAI() {
           <img src='/src/assets/logo mark.png' className={styles.profilePicture} />       
           <img src='/src/assets/AI.png' className={styles.AiPicture} />       
           <div className={styles.onlineTitle}>
-            Always live
+            Always live <GoDotFill style={{marginTop: '2px'}} color='green' size={20}/>
           </div>
           <div className={styles.subtitle}>
             Make the read smart with the AI. Get instant answers about your books...
@@ -165,9 +167,10 @@ export default function AskAI() {
         </div>
 
         <div className={styles.infoBar}>
-          <button className={styles.historyButton}>
+          {/* <span>AI generated response may be inaccurate</span> */}
+          <button className={styles.historyButton} onClick={toggleHistory}>
             History{" "}
-            <span className={styles.chevron}>
+            <span className={`${styles.chevron} ${showHistory ? styles.rotate : ""}`}>
               <FaChevronRight />
             </span>
           </button>
