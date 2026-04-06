@@ -170,7 +170,7 @@ export default function AskAI() {
           {/* <span>AI generated response may be inaccurate</span> */}
           <button className={styles.historyButton} onClick={toggleHistory}>
             History{" "}
-            <span className={styles.chevron}>
+            <span className={`${styles.chevron} ${showHistory ? styles.rotate : ""}`}>
               <FaChevronRight />
             </span>
           </button>
