@@ -167,7 +167,8 @@ export default function AskAI() {
         </div>
 
         <div className={styles.infoBar}>
-          <button className={styles.historyButton}>
+          {/* <span>AI generated response may be inaccurate</span> */}
+          <button className={styles.historyButton} onClick={toggleHistory}>
             History{" "}
             <span className={styles.chevron}>
               <FaChevronRight />
