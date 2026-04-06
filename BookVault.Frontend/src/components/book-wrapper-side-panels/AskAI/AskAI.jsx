@@ -32,6 +32,7 @@ export default function AskAI() {
   const startNewChat = () => {
     setIsResetting(true);
     setMessages([]);
+    setAttachedPage(null);
     setShowInitialUI(true);
     setCurrentChatName("New Chat");
     conversationIdRef.current = crypto.randomUUID();
@@ -116,6 +117,7 @@ export default function AskAI() {
     <div className={styles.panel}>
       <div
         className={styles.chatActionsIconBar} 
+        //  ${ hasMessages ? styles.fine : styles.slideUp}
         style={{opacity: showInitialUI ? '0': '1'}}
       >
         <div className={styles.chatBackAndName}>
