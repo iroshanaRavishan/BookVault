@@ -42,6 +42,9 @@ export default function AskAI() {
 
   const hasMessages = messages.length > 0;
 
+  const getChatName = () => {
+  };
+
   const STORAGE_KEY = "ai_chat_history";
 
   const getChatHistory = () => {
