@@ -42,6 +42,10 @@ export default function AskAI() {
 
   const hasMessages = messages.length > 0;
 
+  const getChatName = (text) => {
+    return text.length > 30 ? text.slice(0, 30) + "..." : text;
+  };
+
   const STORAGE_KEY = "ai_chat_history";
 
   const getChatHistory = () => {
@@ -57,6 +61,7 @@ export default function AskAI() {
     let convo = history.find(c => c.conversationId === conversationId);
 
     convo.messages.push(message);
+    saveChatHistory(history);
   };
 
   const editMessage = (id, newText) => {
@@ -70,9 +75,12 @@ export default function AskAI() {
   };
 
 
+  // this is for loading the history which is not implemented yet
   const loadHistory = async () => {
     const res = await fetch("/api/chat/history");
     const data = await res.json();
+    setMessages(data);
+    setShowInitialUI(false);
   };
 
   const handleBeforeLeave = (action) => {
