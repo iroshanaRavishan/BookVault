@@ -70,9 +70,12 @@ export default function AskAI() {
   };
 
 
+  // this is for loading the history which is not implemented yet
   const loadHistory = async () => {
     const res = await fetch("/api/chat/history");
     const data = await res.json();
+    setMessages(data);
+    setShowInitialUI(false);
   };
 
   const handleBeforeLeave = (action) => {
