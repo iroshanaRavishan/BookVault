@@ -57,6 +57,7 @@ export default function AskAI() {
     let convo = history.find(c => c.conversationId === conversationId);
 
     convo.messages.push(message);
+    saveChatHistory(history);
   };
 
   const editMessage = (id, newText) => {
