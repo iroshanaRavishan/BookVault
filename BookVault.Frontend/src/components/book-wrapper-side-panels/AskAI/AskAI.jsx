@@ -60,6 +60,14 @@ export default function AskAI() {
     const history = getChatHistory();
     let convo = history.find(c => c.conversationId === conversationId);
 
+    if (!convo) {
+      convo = {
+        conversationId,
+        chatName,
+        messages: [],
+      };
+    }
+
     convo.messages.push(message);
     saveChatHistory(history);
   };
