@@ -66,6 +66,7 @@ export default function AskAI() {
         chatName,
         messages: [],
       };
+      history.push(convo);
     }
 
     convo.messages.push(message);
