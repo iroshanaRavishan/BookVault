@@ -61,6 +61,9 @@ export default function AskAI() {
     let convo = history.find(c => c.conversationId === conversationId);
 
     if (!convo) {
+      convo = {
+        conversationId,
+      };
     }
 
     convo.messages.push(message);
