@@ -61,6 +61,11 @@
     transform: translateY(15px);
 }
 
+.historyPanel {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
+}
+
 .historyItemDate {
     font-size: 11px;
     color: #555;
