@@ -63,6 +63,8 @@ export default function AskAI() {
     if (!convo) {
       convo = {
         conversationId,
+        chatName,
+        messages: [],
       };
     }
 
