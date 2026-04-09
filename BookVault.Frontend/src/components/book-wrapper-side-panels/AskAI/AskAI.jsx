@@ -84,6 +84,7 @@ export default function AskAI() {
   };
 
   const sendMessage = async () => {
+    if (isResetting) return;
   };
 
   // this is for loading the history which is not implemented yet
