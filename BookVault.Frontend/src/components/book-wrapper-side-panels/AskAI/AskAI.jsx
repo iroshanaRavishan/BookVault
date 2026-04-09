@@ -85,6 +85,11 @@ export default function AskAI() {
 
   const sendMessage = async () => {
     if (isResetting) return;
+
+    // if user types while initial UI is visible then new chat
+    if (showInitialUI) {
+      startNewChat();
+    }
   };
 
   // this is for loading the history which is not implemented yet
