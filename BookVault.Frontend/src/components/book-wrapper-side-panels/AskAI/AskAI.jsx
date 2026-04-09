@@ -60,6 +60,15 @@ export default function AskAI() {
     const history = getChatHistory();
     let convo = history.find(c => c.conversationId === conversationId);
 
+    if (!convo) {
+      convo = {
+        conversationId,
+        chatName,
+        messages: [],
+      };
+      history.push(convo);
+    }
+
     convo.messages.push(message);
     saveChatHistory(history);
   };
@@ -74,14 +83,22 @@ export default function AskAI() {
     setMessages(prev => prev.filter(m => m.id !== id));
   };
 
+  const sendMessage = async () => {
+    if (isResetting) return;
+
+    // if user types while initial UI is visible then new chat
+    if (showInitialUI) {
+      startNewChat();
+    }
+  };
 
   // this is for loading the history which is not implemented yet
-  const loadHistory = async () => {
-    const res = await fetch("/api/chat/history");
-    const data = await res.json();
-    setMessages(data);
-    setShowInitialUI(false);
-  };
+  // const loadHistory = async () => {
+  //   const res = await fetch("/api/chat/history");
+  //   const data = await res.json();
+  //   setMessages(data);
+  //   setShowInitialUI(false);
+  // };
 
   const handleBeforeLeave = (action) => {
     if (message.trim().length > 0) {
