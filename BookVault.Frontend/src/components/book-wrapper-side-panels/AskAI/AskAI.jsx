@@ -83,6 +83,9 @@ export default function AskAI() {
     setMessages(prev => prev.filter(m => m.id !== id));
   };
 
+  const sendMessage = async () => {
+    if (isResetting) return;
+  };
 
   // this is for loading the history which is not implemented yet
   // const loadHistory = async () => {
