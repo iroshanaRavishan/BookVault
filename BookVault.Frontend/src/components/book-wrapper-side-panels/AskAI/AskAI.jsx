@@ -89,7 +89,15 @@ export default function AskAI() {
     // if user types while initial UI is visible then new chat
     if (showInitialUI) {
       startNewChat();
+      setCanContinueChat(false);
     }
+
+     setShowHistory(false);
+
+    const now = new Date();
+
+    let chatNameToUse = currentChatName;
+
   };
 
   // this is for loading the history which is not implemented yet
