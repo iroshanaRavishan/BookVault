@@ -91,6 +91,8 @@ export default function AskAI() {
       startNewChat();
       setCanContinueChat(false);
     }
+
+     setShowHistory(false);
   };
 
   // this is for loading the history which is not implemented yet
