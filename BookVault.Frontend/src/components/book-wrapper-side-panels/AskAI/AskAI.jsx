@@ -95,6 +95,9 @@ export default function AskAI() {
      setShowHistory(false);
 
     const now = new Date();
+
+    let chatNameToUse = currentChatName;
+
   };
 
   // this is for loading the history which is not implemented yet
