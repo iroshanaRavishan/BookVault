@@ -93,6 +93,8 @@ export default function AskAI() {
     }
 
      setShowHistory(false);
+
+    const now = new Date();
   };
 
   // this is for loading the history which is not implemented yet
