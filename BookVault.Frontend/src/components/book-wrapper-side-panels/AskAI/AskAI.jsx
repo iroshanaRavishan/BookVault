@@ -15,6 +15,7 @@ export default function AskAI() {
 
   const [messages, setMessages] = useState([]);
   const [isTyping, setIsTyping] = useState(false);
+  const [attachedPage, setAttachedPage] = useState(null);
   const [showInitialUI, setShowInitialUI] = useState(true);
   const [isResetting, setIsResetting] = useState(false);
   const [canContinueChat, setCanContinueChat] = useState(false);
@@ -255,6 +256,10 @@ export default function AskAI() {
             
           </div>
         )}
+      </div>
+
+      <div className={styles.actionArea}>
+
       </div>
     </div>
   );
