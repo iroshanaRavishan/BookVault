@@ -98,6 +98,16 @@
     transition: background 0.2s ease;
 }
 
+.historyItem::after {
+    content: "";
+    position: absolute;
+     bottom: -6px;            
+    left: 0px;          
+    right: 0px;         
+    height: 1px;         
+    background-color: #44444427;
+}
+
 .historyItemDate {
     font-size: 11px;
     color: #555;
