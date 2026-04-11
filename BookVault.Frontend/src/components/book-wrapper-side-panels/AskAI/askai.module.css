@@ -108,6 +108,10 @@
     background-color: #44444427;
 }
 
+.historyItem:hover:not(:has(.dotsIcon:hover)) {
+    background: #0000000a;
+}
+
 .historyItemDate {
     font-size: 11px;
     color: #555;
