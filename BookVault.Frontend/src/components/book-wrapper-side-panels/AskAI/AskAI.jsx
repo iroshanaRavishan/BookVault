@@ -257,6 +257,10 @@ export default function AskAI() {
           </div>
         )}
       </div>
+
+      <div className={styles.actionArea}>
+
+      </div>
     </div>
   );
 }
