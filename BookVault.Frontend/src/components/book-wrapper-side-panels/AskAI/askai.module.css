@@ -84,6 +84,20 @@
     scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
 }
 
+.historyItem {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 3px 10px;
+    cursor: pointer;
+    font-size: 14px;
+    height: 20px;
+    border-radius: 4px;
+    transition: background 0.2s ease;
+}
+
 .historyItemDate {
     font-size: 11px;
     color: #555;
