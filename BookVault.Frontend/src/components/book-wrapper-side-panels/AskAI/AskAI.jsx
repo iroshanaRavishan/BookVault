@@ -259,7 +259,7 @@ export default function AskAI() {
       </div>
 
       <div className={styles.actionArea}>
-
+        <ChatInput />
       </div>
     </div>
   );
