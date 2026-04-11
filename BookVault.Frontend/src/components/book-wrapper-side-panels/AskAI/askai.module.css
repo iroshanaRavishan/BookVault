@@ -84,6 +84,34 @@
     scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
 }
 
+.historyItem {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 3px 10px;
+    cursor: pointer;
+    font-size: 14px;
+    height: 20px;
+    border-radius: 4px;
+    transition: background 0.2s ease;
+}
+
+.historyItem::after {
+    content: "";
+    position: absolute;
+     bottom: -6px;            
+    left: 0px;          
+    right: 0px;         
+    height: 1px;         
+    background-color: #44444427;
+}
+
+.historyItem:hover:not(:has(.dotsIcon:hover)) {
+    background: #0000000a;
+}
+
 .historyItemDate {
     font-size: 11px;
     color: #555;
