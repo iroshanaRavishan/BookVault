@@ -84,7 +84,7 @@ export default function AskAI() {
     setMessages(prev => prev.filter(m => m.id !== id));
   };
 
-  const sendMessage = async () => {
+  const sendMessage = async ({ text, page }) => {
     if (isResetting) return;
 
     // if user types while initial UI is visible then new chat
