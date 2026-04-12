@@ -99,6 +99,11 @@ export default function AskAI() {
 
     let chatNameToUse = currentChatName;
 
+
+    // Simulate assistant response (replace with real AI later)
+    setTimeout(async () => {
+      const botText = "Hi, how can I help you today...";
+    }, 1000);
   };
 
   // this is for loading the history which is not implemented yet
