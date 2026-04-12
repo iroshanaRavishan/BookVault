@@ -57,7 +57,7 @@ export default function AskAI() {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(history));
   };
 
-  const saveMessageToLocal = (conversationId, message) => {
+  const saveMessageToLocal = (conversationId, chatName, message) => {
     const history = getChatHistory();
     let convo = history.find(c => c.conversationId === conversationId);
 
@@ -84,7 +84,7 @@ export default function AskAI() {
     setMessages(prev => prev.filter(m => m.id !== id));
   };
 
-  const sendMessage = async () => {
+  const sendMessage = async ({ text, page }) => {
     if (isResetting) return;
 
     // if user types while initial UI is visible then new chat
