@@ -96,6 +96,9 @@ export default function AskAI() {
      setShowHistory(false);
 
     const now = new Date();
+    const userMessage = {
+      content: text,
+    };
 
     let chatNameToUse = currentChatName;
 
