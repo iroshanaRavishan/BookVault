@@ -98,6 +98,7 @@ export default function AskAI() {
 
     const now = new Date();
     const userMessage = {
+      role: "user",
       content: text,
     };
 
