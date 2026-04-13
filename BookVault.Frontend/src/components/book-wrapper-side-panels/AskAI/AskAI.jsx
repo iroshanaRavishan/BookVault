@@ -106,6 +106,7 @@ export default function AskAI() {
 
     let chatNameToUse = currentChatName;
 
+    setIsTyping(true);
 
     // Simulate assistant response (replace with real AI later)
     setTimeout(async () => {
