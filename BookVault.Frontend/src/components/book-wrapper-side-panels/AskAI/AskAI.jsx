@@ -98,6 +98,7 @@ export default function AskAI() {
 
     const now = new Date();
     const userMessage = {
+      conversation_id: conversationIdRef.current,
       role: "user",
       content: text,
       created_at: now.toISOString(),
