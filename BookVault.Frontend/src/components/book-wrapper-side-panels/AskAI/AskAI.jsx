@@ -8,6 +8,7 @@ import { IoArrowBack, IoSettingsSharp } from 'react-icons/io5';
 import { FaChevronRight } from "react-icons/fa";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import { FaArrowRightLong } from "react-icons/fa6";
+import HistoryActionPopup from './ask-aI-widgets/history-action-popup/HistoryActionPopup';
 
 export default function AskAI() {
   const conversationIdRef = useRef(crypto.randomUUID());
@@ -97,7 +98,9 @@ export default function AskAI() {
 
     const now = new Date();
     const userMessage = {
+      role: "user",
       content: text,
+      created_at: now.toISOString(),
     };
 
     let chatNameToUse = currentChatName;
