@@ -100,6 +100,7 @@ export default function AskAI() {
     const userMessage = {
       role: "user",
       content: text,
+      created_at: now.toISOString(),
     };
 
     let chatNameToUse = currentChatName;
