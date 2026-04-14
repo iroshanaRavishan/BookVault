@@ -118,6 +118,14 @@ export default function AskAI() {
         content: botText,
         created_at: new Date().toISOString(),
       };
+
+      setMessages(prev => [
+        ...prev,
+        {
+          text: botText,
+          sender: "bot",
+        },
+      ]);
     }, 1000);
   };
 
