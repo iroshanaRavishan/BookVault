@@ -123,6 +123,7 @@ export default function AskAI() {
         ...prev,
         {
           text: botText,
+          sender: "bot",
         },
       ]);
     }, 1000);
