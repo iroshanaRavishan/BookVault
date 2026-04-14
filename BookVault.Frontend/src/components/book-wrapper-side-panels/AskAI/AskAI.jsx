@@ -111,6 +111,11 @@ export default function AskAI() {
     // Simulate assistant response (replace with real AI later)
     setTimeout(async () => {
       const botText = "Hi, how can I help you today...";
+
+      const botMessage = {
+        role: "assistant",
+        content: botText,
+      };
     }, 1000);
   };
 
