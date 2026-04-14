@@ -106,10 +106,18 @@ export default function AskAI() {
 
     let chatNameToUse = currentChatName;
 
+    setIsTyping(true);
 
     // Simulate assistant response (replace with real AI later)
     setTimeout(async () => {
       const botText = "Hi, how can I help you today...";
+
+      const botMessage = {
+        conversation_id: conversationIdRef.current,
+        role: "assistant",
+        content: botText,
+        created_at: new Date().toISOString(),
+      };
     }, 1000);
   };
 
