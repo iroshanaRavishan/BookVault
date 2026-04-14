@@ -116,6 +116,7 @@ export default function AskAI() {
         conversation_id: conversationIdRef.current,
         role: "assistant",
         content: botText,
+        created_at: new Date().toISOString(),
       };
     }, 1000);
   };
