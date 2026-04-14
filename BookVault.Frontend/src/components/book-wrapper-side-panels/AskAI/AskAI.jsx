@@ -113,6 +113,7 @@ export default function AskAI() {
       const botText = "Hi, how can I help you today...";
 
       const botMessage = {
+        conversation_id: conversationIdRef.current,
         role: "assistant",
         content: botText,
       };
