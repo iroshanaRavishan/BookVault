@@ -273,6 +273,7 @@ export default function AskAI() {
                       onClick={(e) => {
                         e.stopPropagation();
                         setShowHistoryActionPopup(true);
+                        setShowOverlay(true);
                       }}
                     />
                   </span>
