@@ -272,6 +272,8 @@ export default function AskAI() {
                       className={styles.dotsIcon} 
                       onClick={(e) => {
                         e.stopPropagation();
+                        setActiveChat(chat); 
+                        setActiveChatId(chat.conversationId);
                         setShowHistoryActionPopup(true);
                         setShowOverlay(true);
                       }}
