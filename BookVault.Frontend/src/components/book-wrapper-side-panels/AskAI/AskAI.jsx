@@ -256,27 +256,28 @@ export default function AskAI() {
         </div>
 
         {showHistory && (
-          <div className={styles.historyPanel}>
-            {chatList.map(chat => (
-              <div
-                key={chat.conversationId}
-                className={styles.historyItem}
-                onClick={() => loadConversation(chat)}
-              >
-                <span> {chat.chatName} </span>
-                <span className={styles.historyItemDate}>
-                  {/* date */}
-                  <HiOutlineDotsHorizontal 
-                    className={styles.dotsIcon} 
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setShowHistoryActionPopup(prev => !prev)
-                    }}
-                  />
-                </span>
-              </div>
-            ))} 
-
+          <div className={styles.wrapper}>
+            <div className={styles.historyPanel}>
+              {chatList.map(chat => (
+                <div
+                  key={chat.conversationId}
+                  className={styles.historyItem}
+                  onClick={() => loadConversation(chat)}
+                >
+                  <span>{chat.chatName} </span>
+                  <span className={styles.historyItemDot}>
+                  
+                    <HiOutlineDotsHorizontal 
+                      className={styles.dotsIcon} 
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setShowHistoryActionPopup(prev => !prev)
+                      }}
+                    />
+                  </span>
+                </div>
+              ))} 
+            </div>
             {showHistoryActionPopup &&(
               <div className={styles.historyActionPopupPanel}>
               </div>
