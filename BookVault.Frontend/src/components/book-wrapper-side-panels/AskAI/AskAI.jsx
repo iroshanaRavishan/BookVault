@@ -272,7 +272,7 @@ export default function AskAI() {
                       className={styles.dotsIcon} 
                       onClick={(e) => {
                         e.stopPropagation();
-                        setShowHistoryActionPopup(prev => !prev)
+                        setShowHistoryActionPopup(true);
                       }}
                     />
                   </span>
