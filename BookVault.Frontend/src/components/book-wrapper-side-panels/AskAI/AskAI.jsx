@@ -15,6 +15,7 @@ export default function AskAI() {
   const hasNamedChatRef = useRef(false);
 
   const [messages, setMessages] = useState([]);
+  const [showOverlay, setShowOverlay] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
   const [attachedPage, setAttachedPage] = useState(null);
   const [showInitialUI, setShowInitialUI] = useState(true);
