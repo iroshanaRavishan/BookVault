@@ -109,6 +109,7 @@ export default function AskAI() {
 
     if (!hasNamedChatRef.current) {
       chatNameToUse = getChatName(text);
+      setCurrentChatName(chatNameToUse);
     }
 
     saveMessageToLocal(conversationIdRef.current, chatNameToUse, {
