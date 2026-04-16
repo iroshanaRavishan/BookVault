@@ -15,6 +15,7 @@ export default function AskAI() {
   const hasNamedChatRef = useRef(false);
 
   const [messages, setMessages] = useState([]);
+  const [showOverlay, setShowOverlay] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
   const [attachedPage, setAttachedPage] = useState(null);
   const [showInitialUI, setShowInitialUI] = useState(true);
@@ -106,10 +107,36 @@ export default function AskAI() {
 
     let chatNameToUse = currentChatName;
 
+    if (!hasNamedChatRef.current) {
+      chatNameToUse = getChatName(text);
+    }
+
+    saveMessageToLocal(conversationIdRef.current, chatNameToUse, {
+      role: "user",
+      content: text,
+      created_at: now.toISOString(),
+    });
+
+    setIsTyping(true);
 
     // Simulate assistant response (replace with real AI later)
     setTimeout(async () => {
       const botText = "Hi, how can I help you today...";
+
+      const botMessage = {
+        conversation_id: conversationIdRef.current,
+        role: "assistant",
+        content: botText,
+        created_at: new Date().toISOString(),
+      };
+
+      setMessages(prev => [
+        ...prev,
+        {
+          text: botText,
+          sender: "bot",
+        },
+      ]);
     }, 1000);
   };
 
@@ -240,27 +267,31 @@ export default function AskAI() {
         </div>
 
         {showHistory && (
-          <div className={styles.historyPanel}>
-            {chatList.map(chat => (
-              <div
-                key={chat.conversationId}
-                className={styles.historyItem}
-                onClick={() => loadConversation(chat)}
-              >
-                <span> {chat.chatName} </span>
-                <span className={styles.historyItemDate}>
-                  {/* date */}
-                  <HiOutlineDotsHorizontal 
-                    className={styles.dotsIcon} 
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setShowHistoryActionPopup(prev => !prev)
-                    }}
-                  />
-                </span>
-              </div>
-            ))} 
-
+          <div className={styles.wrapper}>
+            <div className={styles.historyPanel}>
+              {chatList.map(chat => (
+                <div
+                  key={chat.conversationId}
+                  className={styles.historyItem}
+                  onClick={() => loadConversation(chat)}
+                >
+                  <span>{chat.chatName} </span>
+                  <span className={styles.historyItemDot}>
+                  
+                    <HiOutlineDotsHorizontal 
+                      className={styles.dotsIcon} 
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setActiveChat(chat); 
+                        setActiveChatId(chat.conversationId);
+                        setShowHistoryActionPopup(true);
+                        setShowOverlay(true);
+                      }}
+                    />
+                  </span>
+                </div>
+              ))} 
+            </div>
             {showHistoryActionPopup &&(
               <div className={styles.historyActionPopupPanel}>
               </div>
