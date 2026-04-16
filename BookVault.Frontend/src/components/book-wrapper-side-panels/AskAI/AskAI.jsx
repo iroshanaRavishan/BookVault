@@ -107,6 +107,10 @@ export default function AskAI() {
 
     let chatNameToUse = currentChatName;
 
+    saveMessageToLocal(conversationIdRef.current, chatNameToUse, {
+      role: "user",
+    });
+
     setIsTyping(true);
 
     // Simulate assistant response (replace with real AI later)
