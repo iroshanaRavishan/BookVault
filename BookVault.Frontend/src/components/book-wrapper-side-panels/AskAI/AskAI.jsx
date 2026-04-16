@@ -110,6 +110,7 @@ export default function AskAI() {
     saveMessageToLocal(conversationIdRef.current, chatNameToUse, {
       role: "user",
       content: text,
+      created_at: now.toISOString(),
     });
 
     setIsTyping(true);
