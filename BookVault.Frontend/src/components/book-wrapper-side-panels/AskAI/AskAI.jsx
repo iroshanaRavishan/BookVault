@@ -135,9 +135,9 @@ export default function AskAI() {
       setMessages(prev => [
         ...prev,
         {
-          id: crypto.randomUUID(),
           text: botText,
           sender: "bot",
+          date: new Date().toDateString(),
         },
       ]);
     }, 1000);
