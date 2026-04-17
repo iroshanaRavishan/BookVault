@@ -138,6 +138,7 @@ export default function AskAI() {
           id: crypto.randomUUID(),
           text: botText,
           sender: "bot",
+          time: new Date().toLocaleTimeString(),
           date: new Date().toDateString(),
         },
       ]);
