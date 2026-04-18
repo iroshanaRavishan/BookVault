@@ -78,6 +78,7 @@ export default function AskAI() {
     }
 
     convo.messages.push(message);
+    convo.updatedAt = now;
     saveChatHistory(history);
   };
 
@@ -160,6 +161,9 @@ export default function AskAI() {
   //   setMessages(data);
   //   setShowInitialUI(false);
   // };
+
+  const closePopup = () => {
+  };
 
   const handleBeforeLeave = (action) => {
     if (message.trim().length > 0) {
