@@ -62,6 +62,7 @@ export default function AskAI() {
   const saveMessageToLocal = (conversationId, chatName, message) => {
     const history = getChatHistory();
     let convo = history.find(c => c.conversationId === conversationId);
+    const now = new Date().toISOString();
 
     if (!convo) {
       convo = {
