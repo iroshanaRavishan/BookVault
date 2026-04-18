@@ -62,11 +62,16 @@ export default function AskAI() {
   const saveMessageToLocal = (conversationId, chatName, message) => {
     const history = getChatHistory();
     let convo = history.find(c => c.conversationId === conversationId);
+    const now = new Date().toISOString();
 
     if (!convo) {
       convo = {
         conversationId,
         chatName,
+        createdAt: now,
+        updatedAt: now,
+        pinned: false,
+        pinnedAt: null,
         messages: [],
       };
       history.push(convo);
@@ -135,8 +140,14 @@ export default function AskAI() {
       setMessages(prev => [
         ...prev,
         {
+          id: crypto.randomUUID(),
           text: botText,
           sender: "bot",
+          time: new Date().toLocaleTimeString([], {
+            hour: "2-digit",
+            minute: "2-digit",
+          }),
+          date: new Date().toDateString(),
         },
       ]);
     }, 1000);
