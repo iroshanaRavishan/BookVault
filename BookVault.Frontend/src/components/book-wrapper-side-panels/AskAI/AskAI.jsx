@@ -162,6 +162,9 @@ export default function AskAI() {
   //   setShowInitialUI(false);
   // };
 
+  const closePopup = () => {
+  };
+
   const handleBeforeLeave = (action) => {
     if (message.trim().length > 0) {
       // Unsaved text -> show confirm
