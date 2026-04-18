@@ -69,6 +69,8 @@ export default function AskAI() {
         chatName,
         createdAt: now,
         updatedAt: now,
+        pinned: false,
+        pinnedAt: null,
         messages: [],
       };
       history.push(convo);
