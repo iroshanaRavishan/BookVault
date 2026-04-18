@@ -78,6 +78,7 @@ export default function AskAI() {
     }
 
     convo.messages.push(message);
+    convo.updatedAt = now;
     saveChatHistory(history);
   };
 
