@@ -67,6 +67,8 @@ export default function AskAI() {
       convo = {
         conversationId,
         chatName,
+        createdAt: now,
+        updatedAt: now,
         messages: [],
       };
       history.push(convo);
