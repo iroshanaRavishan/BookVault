@@ -90,6 +90,7 @@ export default function AskAI() {
 
       // both pinned newest pinned first
       if (a.pinned && b.pinned) {
+        return new Date(b.pinnedAt) - new Date(a.pinnedAt);
       }
     });
   };
