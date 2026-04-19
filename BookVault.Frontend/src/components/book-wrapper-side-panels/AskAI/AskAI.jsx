@@ -82,6 +82,18 @@ export default function AskAI() {
     saveChatHistory(history);
   };
 
+  const sortChats = (chats) => {
+    return [...chats].sort((a, b) => {
+      // pinned always on top
+      if (a.pinned && !b.pinned) return -1;
+      if (!a.pinned && b.pinned) return 1;
+
+      // both pinned newest pinned first
+      if (a.pinned && b.pinned) {
+      }
+    });
+  };
+
   const editMessage = (id, newText) => {
     setMessages(prev =>
       prev.map(m => (m.id === id ? { ...m, text: newText } : m))
