@@ -89,7 +89,7 @@ export default function AskAI() {
       if (!a.pinned && b.pinned) return 1;
 
       // both pinned newest pinned first
-      if (a.pinned) {
+      if (a.pinned && b.pinned) {
       }
     });
   };
