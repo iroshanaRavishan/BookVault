@@ -86,6 +86,7 @@ export default function AskAI() {
     return [...chats].sort((a, b) => {
       // pinned always on top
       if (a.pinned && !b.pinned) return -1;
+      if (!a.pinned && b.pinned) return 1;
     });
   };
 
