@@ -87,6 +87,10 @@ export default function AskAI() {
       // pinned always on top
       if (a.pinned && !b.pinned) return -1;
       if (!a.pinned && b.pinned) return 1;
+
+      // both pinned newest pinned first
+      if (a.pinned) {
+      }
     });
   };
 
