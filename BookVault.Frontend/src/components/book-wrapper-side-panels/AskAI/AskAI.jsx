@@ -82,6 +82,11 @@ export default function AskAI() {
     saveChatHistory(history);
   };
 
+  const sortChats = (chats) => {
+  };
+
+
+
   const editMessage = (id, newText) => {
     setMessages(prev =>
       prev.map(m => (m.id === id ? { ...m, text: newText } : m))
