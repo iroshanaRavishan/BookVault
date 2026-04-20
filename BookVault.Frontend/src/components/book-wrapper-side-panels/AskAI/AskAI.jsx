@@ -311,7 +311,9 @@ export default function AskAI() {
               {chatList.map(chat => (
                 <div
                   key={chat.conversationId}
-                  className={styles.historyItem}
+                    className={`${styles.historyItem} ${
+                      activeChatId === chat.conversationId ? styles.activeHistoryItem : ""
+                    }`}
                   onClick={() => loadConversation(chat)}
                 >
                   <span>{chat.chatName} </span>
