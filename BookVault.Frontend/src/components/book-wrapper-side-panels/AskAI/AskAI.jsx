@@ -180,6 +180,10 @@ export default function AskAI() {
 
   const closePopup = () => {
     setShowOverlay(false); // start fade-out
+
+    setTimeout(() => {
+      setActiveChatId(null);
+    }, 200); 
   };
 
   const handleBeforeLeave = (action) => {
