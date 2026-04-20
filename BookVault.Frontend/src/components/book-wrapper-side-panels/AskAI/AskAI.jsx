@@ -182,6 +182,7 @@ export default function AskAI() {
     setShowOverlay(false); // start fade-out
 
     setTimeout(() => {
+      setShowHistoryActionPopup(false); // remove after animation
       setActiveChatId(null);
     }, 200); 
   };
