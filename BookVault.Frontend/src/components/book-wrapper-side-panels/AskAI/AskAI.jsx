@@ -179,6 +179,7 @@ export default function AskAI() {
   // };
 
   const closePopup = () => {
+    setShowOverlay(false); // start fade-out
   };
 
   const handleBeforeLeave = (action) => {
