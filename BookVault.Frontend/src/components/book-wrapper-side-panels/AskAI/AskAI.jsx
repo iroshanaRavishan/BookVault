@@ -92,6 +92,9 @@ export default function AskAI() {
       if (a.pinned && b.pinned) {
         return new Date(b.pinnedAt) - new Date(a.pinnedAt);
       }
+
+      // normal chats last active first
+      return new Date(b.updatedAt) - new Date(a.updatedAt);
     });
   };
 
