@@ -173,6 +173,8 @@ export default function AskAI() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(botMessage),
       });
+
+      saveMessageToLocal(conversationIdRef.current, chatNameToUse, { role: "assistant"});
     }, 1000);
   };
 
