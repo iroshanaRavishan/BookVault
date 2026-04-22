@@ -174,7 +174,10 @@ export default function AskAI() {
         body: JSON.stringify(botMessage),
       });
 
-      saveMessageToLocal(conversationIdRef.current, chatNameToUse, { role: "assistant"});
+      saveMessageToLocal(conversationIdRef.current, chatNameToUse, {
+        role: "assistant",
+        content: botText,
+      });
     }, 1000);
   };
 
