@@ -167,6 +167,12 @@ export default function AskAI() {
           date: new Date().toDateString(),
         },
       ]);
+
+      await fetch("/api/messages", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(botMessage),
+      });
     }, 1000);
   };
 
