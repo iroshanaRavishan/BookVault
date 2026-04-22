@@ -179,6 +179,7 @@ export default function AskAI() {
         content: botText,
         created_at: new Date().toISOString(),
       });
+        setIsTyping(false);
     }, 1000);
   };
 
