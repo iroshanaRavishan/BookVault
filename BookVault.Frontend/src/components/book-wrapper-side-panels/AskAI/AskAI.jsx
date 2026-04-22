@@ -177,6 +177,7 @@ export default function AskAI() {
       saveMessageToLocal(conversationIdRef.current, chatNameToUse, {
         role: "assistant",
         content: botText,
+        created_at: new Date().toISOString(),
       });
     }, 1000);
   };
