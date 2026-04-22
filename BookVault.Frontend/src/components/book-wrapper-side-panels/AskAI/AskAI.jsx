@@ -167,6 +167,19 @@ export default function AskAI() {
           date: new Date().toDateString(),
         },
       ]);
+
+      await fetch("/api/messages", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(botMessage),
+      });
+
+      saveMessageToLocal(conversationIdRef.current, chatNameToUse, {
+        role: "assistant",
+        content: botText,
+        created_at: new Date().toISOString(),
+      });
+        setIsTyping(false);
     }, 1000);
   };
 
