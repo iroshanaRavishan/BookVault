@@ -127,6 +127,14 @@ export default function AskAI() {
       created_at: now.toISOString(),
     };
 
+    // Update UI immediately
+    setMessages(prev => [
+      ...prev,
+      {
+        id: crypto.randomUUID(),
+        text,
+      },
+    ]);
     // Save user message
     await fetch("/api/messages", {
       method: "POST",
