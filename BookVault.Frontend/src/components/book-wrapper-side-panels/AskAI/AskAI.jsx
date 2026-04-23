@@ -168,11 +168,11 @@ export default function AskAI() {
         },
       ]);
 
-      await fetch("/api/messages", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(botMessage),
-      });
+      // await fetch("/api/messages", {
+      //   method: "POST",
+      //   headers: { "Content-Type": "application/json" },
+      //   body: JSON.stringify(botMessage),
+      // });
 
       saveMessageToLocal(conversationIdRef.current, chatNameToUse, {
         role: "assistant",
