@@ -127,6 +127,21 @@ export default function AskAI() {
       created_at: now.toISOString(),
     };
 
+    // Update UI immediately
+    setMessages(prev => [
+      ...prev,
+      {
+        id: crypto.randomUUID(),
+        text,
+      },
+    ]);
+    // Save user message
+    await fetch("/api/messages", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(userMessage),
+    });
+
     let chatNameToUse = currentChatName;
 
     if (!hasNamedChatRef.current) {
@@ -168,11 +183,11 @@ export default function AskAI() {
         },
       ]);
 
-      await fetch("/api/messages", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(botMessage),
-      });
+      // await fetch("/api/messages", {
+      //   method: "POST",
+      //   headers: { "Content-Type": "application/json" },
+      //   body: JSON.stringify(botMessage),
+      // });
 
       saveMessageToLocal(conversationIdRef.current, chatNameToUse, {
         role: "assistant",
