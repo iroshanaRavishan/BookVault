@@ -135,6 +135,7 @@ export default function AskAI() {
         text,
         page,
         sender: "user",
+        time: now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
       },
     ]);
     // // Save user message
