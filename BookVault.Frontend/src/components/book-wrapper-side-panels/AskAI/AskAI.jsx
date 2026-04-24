@@ -133,6 +133,7 @@ export default function AskAI() {
       {
         id: crypto.randomUUID(),
         text,
+        page,
       },
     ]);
     // // Save user message
