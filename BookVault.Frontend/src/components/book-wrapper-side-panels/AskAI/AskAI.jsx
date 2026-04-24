@@ -133,14 +133,17 @@ export default function AskAI() {
       {
         id: crypto.randomUUID(),
         text,
+        page,
+        sender: "user",
+        time: now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
       },
     ]);
-    // Save user message
-    await fetch("/api/messages", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(userMessage),
-    });
+    // // Save user message
+    // await fetch("/api/messages", {
+    //   method: "POST",
+    //   headers: { "Content-Type": "application/json" },
+    //   body: JSON.stringify(userMessage),
+    // });
 
     let chatNameToUse = currentChatName;
 
