@@ -134,6 +134,7 @@ export default function AskAI() {
         id: crypto.randomUUID(),
         text,
         page,
+        sender: "user",
       },
     ]);
     // // Save user message
