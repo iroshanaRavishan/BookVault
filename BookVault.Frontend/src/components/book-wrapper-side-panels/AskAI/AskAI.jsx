@@ -88,6 +88,7 @@ export default function AskAI() {
     const updated = history.map(chat => {
       if (chat.conversationId === conversationId) {
       }
+      return chat;
     });
   };
 
