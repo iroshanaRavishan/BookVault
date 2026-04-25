@@ -82,6 +82,14 @@ export default function AskAI() {
     saveChatHistory(history);
   };
 
+  const togglePinChat = () => {
+    const history = getChatHistory();
+
+    const updated = history.map(chat => {
+    });
+  };
+
+
   const sortChats = (chats) => {
     return [...chats].sort((a, b) => {
       // pinned always on top
@@ -136,6 +144,7 @@ export default function AskAI() {
         page,
         sender: "user",
         time: now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+        date: now.toDateString(),
       },
     ]);
     // // Save user message
