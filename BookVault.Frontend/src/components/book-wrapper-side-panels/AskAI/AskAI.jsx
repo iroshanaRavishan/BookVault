@@ -84,6 +84,9 @@ export default function AskAI() {
 
   const togglePinChat = () => {
     const history = getChatHistory();
+
+    const updated = history.map(chat => {
+    });
   };
 
 
