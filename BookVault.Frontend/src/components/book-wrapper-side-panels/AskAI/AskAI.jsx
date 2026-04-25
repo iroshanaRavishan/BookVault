@@ -82,7 +82,7 @@ export default function AskAI() {
     saveChatHistory(history);
   };
 
-  const togglePinChat = () => {
+  const togglePinChat = (conversationId) => {
     const history = getChatHistory();
 
     const updated = history.map(chat => {
