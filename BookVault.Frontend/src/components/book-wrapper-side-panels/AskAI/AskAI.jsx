@@ -82,6 +82,10 @@ export default function AskAI() {
     saveChatHistory(history);
   };
 
+  const togglePinChat = () => {
+  };
+
+
   const sortChats = (chats) => {
     return [...chats].sort((a, b) => {
       // pinned always on top
