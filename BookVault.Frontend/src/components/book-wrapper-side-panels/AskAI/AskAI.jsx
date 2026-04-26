@@ -94,6 +94,8 @@ export default function AskAI() {
       }
       return chat;
     });
+
+    saveChatHistory(updated);
   };
 
 
