@@ -249,9 +249,8 @@ export default function AskAI() {
 
   const toggleHistory = () => {
     const history = getChatHistory();
-    setChatList(history);
+    setChatList(sortChats(history));
     setShowHistory(prev => !prev); 
-    setInitialUiSlide(prev => !prev);
   };
 
   const deleteConversation = (conversationId) => {
