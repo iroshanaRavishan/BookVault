@@ -254,6 +254,9 @@ export default function AskAI() {
     setInitialUiSlide(prev => !prev);
   };
 
+  const deleteConversation = () => {
+  };
+
   const loadConversation = (chat) => {
     conversationIdRef.current = chat.conversationId;
     setCurrentChatName(chat.chatName);
