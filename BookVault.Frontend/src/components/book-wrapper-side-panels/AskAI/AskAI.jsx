@@ -254,7 +254,8 @@ export default function AskAI() {
     setInitialUiSlide(prev => !prev);
   };
 
-  const deleteConversation = () => {
+  const deleteConversation = (conversationId) => {
+    const history = getChatHistory();
   };
 
   const loadConversation = (chat) => {
