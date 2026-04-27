@@ -288,6 +288,9 @@ export default function AskAI() {
     setShowInitialUI(false);
   };
 
+  useEffect(() => {
+  }, []);
+
   return (
     <div className={styles.panel}>
       <div
