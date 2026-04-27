@@ -264,6 +264,8 @@ export default function AskAI() {
 
     // update UI
     setChatList(updatedHistory);
+
+    setActiveChatId(null);
   };
 
   const loadConversation = (chat) => {
