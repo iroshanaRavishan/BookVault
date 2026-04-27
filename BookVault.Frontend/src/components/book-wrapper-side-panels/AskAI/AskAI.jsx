@@ -289,6 +289,7 @@ export default function AskAI() {
   };
 
   useEffect(() => {
+    if (!showHistoryActionPopup) return;
   }, []);
 
   return (
