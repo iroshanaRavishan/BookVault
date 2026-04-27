@@ -259,6 +259,8 @@ export default function AskAI() {
     const updatedHistory = history.filter(
       (chat) => chat.conversationId !== conversationId
     );
+
+    saveChatHistory(updatedHistory);
   };
 
   const loadConversation = (chat) => {
