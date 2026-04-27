@@ -87,9 +87,15 @@ export default function AskAI() {
 
     const updated = history.map(chat => {
       if (chat.conversationId === conversationId) {
+        return {
+          ...chat,
+          pinned: !chat.pinned,
+        };
       }
       return chat;
     });
+
+    saveChatHistory(updated);
   };
 
 
@@ -243,9 +249,23 @@ export default function AskAI() {
 
   const toggleHistory = () => {
     const history = getChatHistory();
-    setChatList(history);
+    setChatList(sortChats(history));
     setShowHistory(prev => !prev); 
-    setInitialUiSlide(prev => !prev);
+  };
+
+  const deleteConversation = (conversationId) => {
+    const history = getChatHistory();
+
+    const updatedHistory = history.filter(
+      (chat) => chat.conversationId !== conversationId
+    );
+
+    saveChatHistory(updatedHistory);
+
+    // update UI
+    setChatList(updatedHistory);
+
+    setActiveChatId(null);
   };
 
   const loadConversation = (chat) => {
@@ -267,6 +287,9 @@ export default function AskAI() {
     setShowHistory(false);
     setShowInitialUI(false);
   };
+
+  useEffect(() => {
+  }, []);
 
   return (
     <div className={styles.panel}>
