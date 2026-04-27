@@ -255,6 +255,10 @@ export default function AskAI() {
 
   const deleteConversation = (conversationId) => {
     const history = getChatHistory();
+
+    const updatedHistory = history.filter(
+      (chat) => chat.conversationId !== conversationId
+    );
   };
 
   const loadConversation = (chat) => {
