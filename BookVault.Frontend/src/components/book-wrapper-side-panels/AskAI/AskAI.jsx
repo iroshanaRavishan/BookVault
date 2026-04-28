@@ -295,6 +295,8 @@ export default function AskAI() {
         closePopup(); // fade-out function
       }
     };
+
+    document.addEventListener("mousedown", handleClickOutside);
   }, [showHistoryActionPopup]);
 
   return (
