@@ -290,7 +290,9 @@ export default function AskAI() {
 
   useEffect(() => {
     if (!showHistoryActionPopup) return;
-  }, []);
+      const handleClickOutside = (e) => {
+    };
+  }, [showHistoryActionPopup]);
 
   return (
     <div className={styles.panel}>
