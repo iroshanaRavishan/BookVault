@@ -289,7 +289,18 @@ export default function AskAI() {
   };
 
   useEffect(() => {
-  }, []);
+    if (!showHistoryActionPopup) return;
+    const handleClickOutside = (e) => {
+      if (
+        popupRef.current &&
+        !popupRef.current.contains(e.target)
+      ) {
+        closePopup(); // fade-out function
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+  }, [showHistoryActionPopup]);
 
   return (
     <div className={styles.panel}>
