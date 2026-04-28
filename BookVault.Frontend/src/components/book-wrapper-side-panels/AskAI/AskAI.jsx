@@ -292,7 +292,7 @@ export default function AskAI() {
     if (!showHistoryActionPopup) return;
       const handleClickOutside = (e) => {
     };
-  }, []);
+  }, [showHistoryActionPopup]);
 
   return (
     <div className={styles.panel}>
