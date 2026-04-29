@@ -307,7 +307,10 @@ export default function AskAI() {
   }, [showHistoryActionPopup]);
 
   return (
-    <div className={styles.panel}>
+    <div
+      className={styles.panel}
+      onClick={(e) => {}}
+    >
       <div
         className={styles.chatActionsIconBar} 
         //  ${ hasMessages ? styles.fine : styles.slideUp}
