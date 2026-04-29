@@ -300,10 +300,22 @@ export default function AskAI() {
     };
 
     document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
   }, [showHistoryActionPopup]);
 
   return (
-    <div className={styles.panel}>
+    <div
+      className={styles.panel}
+      onClick={(e) => {
+        if ( showHistoryActionPopup ) {
+          setShowHistoryActionPopup(false);
+          setShowOverlay(false);
+        }
+      }}
+    >
       <div
         className={styles.chatActionsIconBar} 
         //  ${ hasMessages ? styles.fine : styles.slideUp}
