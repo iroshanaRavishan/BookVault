@@ -310,7 +310,10 @@ export default function AskAI() {
     <div
       className={styles.panel}
       onClick={(e) => {
-        if ( showHistoryActionPopup ) {
+        if (
+          showHistoryActionPopup &&
+          popupRef.current
+        ) {
           setShowHistoryActionPopup(false);
           setShowOverlay(false);
         }
