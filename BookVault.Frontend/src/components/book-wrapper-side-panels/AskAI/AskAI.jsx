@@ -312,6 +312,7 @@ export default function AskAI() {
       onClick={(e) => {
         if ( showHistoryActionPopup ) {
           setShowHistoryActionPopup(false);
+          setShowOverlay(false);
         }
       }}
     >
