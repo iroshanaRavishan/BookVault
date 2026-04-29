@@ -309,7 +309,11 @@ export default function AskAI() {
   return (
     <div
       className={styles.panel}
-      onClick={(e) => {}}
+      onClick={(e) => {
+        if ( showHistoryActionPopup ) {
+          setShowHistoryActionPopup(false);
+        }
+      }}
     >
       <div
         className={styles.chatActionsIconBar} 
