@@ -411,7 +411,8 @@ export default function AskAI() {
                 >
                   <span>{chat.chatName} </span>
                   <span className={styles.historyItemDot}>
-                  
+                    <span className={styles.floatingPinIcon}>
+                    </span>
                     <HiOutlineDotsHorizontal 
                       className={styles.dotsIcon} 
                       onClick={(e) => {
