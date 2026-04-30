@@ -312,7 +312,8 @@ export default function AskAI() {
       onClick={(e) => {
         if (
           showHistoryActionPopup &&
-          popupRef.current
+          popupRef.current &&
+          !popupRef.current.contains(e.target)
         ) {
           setShowHistoryActionPopup(false);
           setShowOverlay(false);
