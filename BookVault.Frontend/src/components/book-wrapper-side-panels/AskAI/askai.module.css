@@ -235,6 +235,17 @@
     color: #666666d8;
 }
 
+.continueChatButton {
+    border: 1px solid #ccc;
+    padding: 2px 18px;
+    color: rgb(54, 54, 54);
+    cursor: pointer;
+    font-size: 11px;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+
+}
+
 .actionArea {
     display: flex;
     gap: 10px;
