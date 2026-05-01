@@ -55,6 +55,11 @@
               opacity 0.4s ease;
 }
 
+.slideHalfUp {
+    --slide-translate: -7.6%;
+    opacity: 0.95;
+}
+
 .historyPanel {
     position: relative;
     top: 0%;
