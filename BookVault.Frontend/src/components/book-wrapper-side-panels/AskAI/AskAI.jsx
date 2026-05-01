@@ -13,6 +13,7 @@ import HistoryActionPopup from './ask-aI-widgets/history-action-popup/HistoryAct
 export default function AskAI() {
   const conversationIdRef = useRef(crypto.randomUUID());
   const hasNamedChatRef = useRef(false);
+  const popupRef = useRef(null);
 
   const [messages, setMessages] = useState([]);
   const [showOverlay, setShowOverlay] = useState(false);
