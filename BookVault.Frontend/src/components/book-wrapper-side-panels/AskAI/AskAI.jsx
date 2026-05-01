@@ -15,6 +15,7 @@ export default function AskAI() {
   const hasNamedChatRef = useRef(false);
   const popupRef = useRef(null);
 
+  const [activeChat, setActiveChat] = useState(null);
   const [messages, setMessages] = useState([]);
   const [showOverlay, setShowOverlay] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
