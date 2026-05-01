@@ -5,7 +5,7 @@ import ChipStack from './ask-aI-widgets/ChipStack';
 import { FiPlus } from 'react-icons/fi';
 import { MdDelete } from 'react-icons/md';
 import { IoArrowBack, IoSettingsSharp } from 'react-icons/io5';
-import { FaChevronRight } from "react-icons/fa";
+import { FaChevronDown, FaChevronRight, FaChevronUp } from "react-icons/fa";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import { FaArrowRightLong } from "react-icons/fa6";
 import HistoryActionPopup from './ask-aI-widgets/history-action-popup/HistoryActionPopup';
@@ -13,7 +13,6 @@ import HistoryActionPopup from './ask-aI-widgets/history-action-popup/HistoryAct
 export default function AskAI() {
   const conversationIdRef = useRef(crypto.randomUUID());
   const hasNamedChatRef = useRef(false);
-  const popupRef = useRef(null);
 
   const [messages, setMessages] = useState([]);
   const [showOverlay, setShowOverlay] = useState(false);
