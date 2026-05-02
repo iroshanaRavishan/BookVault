@@ -443,7 +443,7 @@ export default function AskAI() {
       </div>
 
       {showConfirm && (
-        <div></div>
+        <div className={styles.modalBackdrop}></div>
       )}
     </div>
   );
