@@ -441,6 +441,10 @@ export default function AskAI() {
       <div className={styles.actionArea}>
         <ChatInput />
       </div>
+
+      {showConfirm && (
+        <div></div>
+      )}
     </div>
   );
 }
