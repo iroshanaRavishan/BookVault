@@ -45,6 +45,20 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+}
+
+.slideDown {
+    --slide-translate: 0%;
+    opacity: 1;
+    pointer-events: auto;
+    transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+              opacity 0.4s ease;
+}
+
+.slideHalfUp {
+    --slide-translate: -7.6%;
+    opacity: 0.95;
+}
 
 .historyPanel {
     position: relative;
@@ -112,8 +126,14 @@
     background: #0000000a;
 }
 
-.historyItemDate {
-    font-size: 11px;
+.floatingPinIcon {
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    transition: transform 0.25s ease;
+    transform: translateX(27px);
+}
+
     color: #555;
     margin-top: 4px;
     margin-bottom: 8px;
@@ -229,6 +249,17 @@
     color: #666666d8;
 }
 
+.continueChatButton {
+    border: 1px solid #ccc;
+    padding: 2px 18px;
+    color: rgb(54, 54, 54);
+    cursor: pointer;
+    font-size: 11px;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+
+}
+
 .actionArea {
     display: flex;
     gap: 10px;
@@ -245,5 +276,25 @@
   height: 100%;
   background: rgba(0, 0, 0, 0.4);
   display: flex; align-items: center; justify-content: center;
-    z-index: 4;
+  z-index: 4;
 }
+
+.modal {
+  background: white;
+  padding: 20px;
+  width: 70%;
+  border-radius: 8px;
+  text-align: center;
+  animation: fadeInScale 0.3s ease-out;
+}
+
+.modalButtons {
+  padding: 8px 15px;
+  border: none;
+  font-size: 13px;
+  border-radius: 6px;
+  background-color: #494949;
+  color: white;
+  cursor: pointer;
+}
+
