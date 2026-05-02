@@ -414,6 +414,7 @@ export default function AskAI() {
                   <span>{chat.chatName} </span>
                   <span className={styles.historyItemDot}>
                     <span className={styles.floatingPinIcon}>
+                      {chat.pinned ? <BsPinFill className={styles.pinnedIcon} /> : ""}
                     </span>
                     <HiOutlineDotsHorizontal 
                       className={styles.dotsIcon} 
