@@ -98,6 +98,8 @@ export default function AskAI() {
     });
 
     saveChatHistory(updated);
+
+    const sorted = sortChats(updated);
   };
 
 
