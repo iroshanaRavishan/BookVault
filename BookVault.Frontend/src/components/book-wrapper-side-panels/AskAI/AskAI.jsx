@@ -92,6 +92,7 @@ export default function AskAI() {
         return {
           ...chat,
           pinned: !chat.pinned,
+          pinnedAt: !chat.pinned ? new Date().toISOString() : null,
         };
       }
       return chat;
