@@ -179,7 +179,7 @@ export default function AskAI() {
     let chatNameToUse = currentChatName;
 
     if (!hasNamedChatRef.current) {
-      chatNameToUse = getChatName(text);
+      chatNameToUse = getDisplayName(text, 35);
       setCurrentChatName(chatNameToUse);
       hasNamedChatRef.current = true;
     }
