@@ -102,6 +102,11 @@ export default function AskAI() {
 
     const sorted = sortChats(updated);
     setChatList(sorted);
+
+    // refresh activeChat from updated data
+    const updatedActive = sorted.find(
+      c => c.conversationId === conversationId
+    );
   };
 
 
