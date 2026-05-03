@@ -107,6 +107,8 @@ export default function AskAI() {
     const updatedActive = sorted.find(
       c => c.conversationId === conversationId
     );
+
+    setActiveChat(updatedActive);
   };
 
 
