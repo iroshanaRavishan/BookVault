@@ -10,10 +10,12 @@ export default function HistoryActionPopup() {
       className={styles.historyActionPopupPanel}
       onClick={(e) => e.stopPropagation()}
     >
-        <div className={styles.historyActionPopupBody}>
-            <div className={styles.actionItem}>
-                <span>Advance Settigns</span>
-            </div>
+      <div className={styles.historyActionPopupBody}>
+        
+         <div className={styles.actionItem}>
+          <BsPinFill className={styles.actionIcon} />
+          <span style={{marginBottom:'2px'}}> Pin</span>
+        </div>
 
         <div className={styles.actionItem}>
           <TiExport className={styles.actionIcon} />
