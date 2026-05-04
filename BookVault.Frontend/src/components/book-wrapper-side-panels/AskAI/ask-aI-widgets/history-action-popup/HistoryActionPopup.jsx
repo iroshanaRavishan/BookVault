@@ -3,7 +3,10 @@ import styles from './historyactionpopup.module.css';
 
 export default function HistoryActionPopup() {
   return (
-    <div className={styles.historyActionPopupPanel}>
+    <div
+      className={styles.historyActionPopupPanel}
+      onClick={(e) => e.stopPropagation()}
+    >
         <div className={styles.historyActionPopupBody}>
             <div className={styles.actionItem}>
                 <span>Advance Settigns</span>
