@@ -1,5 +1,8 @@
 import React from 'react';
 import styles from './historyactionpopup.module.css';
+import { BsFillPinAngleFill, BsPinFill } from "react-icons/bs";
+import { TiExport } from "react-icons/ti";
+import { MdDelete, MdModeEdit } from 'react-icons/md';
 
 export default function HistoryActionPopup() {
   return (
