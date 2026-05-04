@@ -27,12 +27,13 @@ export default function HistoryActionPopup() {
           <span style={{marginBottom:'2px'}}>Rename</span>
         </div>
 
-            <div className={styles.deletionActionItem}>
-                <div className={styles.actionItem}>
-                    <span>Advance Settigns</span>
-                </div>
-            </div>
+        <div className={styles.deletionActionItem}>
+          <div className={styles.actionItem}>
+            <MdDelete className={styles.actionIcon} />
+            <span style={{marginBottom:'2px'}}>Delete</span>
+          </div>
         </div>
+      </div>
     </div>
   )
 }
