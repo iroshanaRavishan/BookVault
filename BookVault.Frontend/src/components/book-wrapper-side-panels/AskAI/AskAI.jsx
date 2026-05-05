@@ -442,8 +442,8 @@ export default function AskAI() {
               ))} 
             </div>
             {showHistoryActionPopup && (
-              <div className={styles.historyActionPopupPanel}>
-                <div ref={popupRef}>
+              <div className={styles.overlay}>
+                <div ref={popupRef} className={styles.historyActionPopupPanel}>
                   <HistoryActionPopup isPinned={activeChat?.pinned}/>
                 </div>
               </div>
