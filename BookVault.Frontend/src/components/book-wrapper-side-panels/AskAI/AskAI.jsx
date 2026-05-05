@@ -441,9 +441,11 @@ export default function AskAI() {
                 </div>
               ))} 
             </div>
-            {showHistoryActionPopup &&(
+            {showHistoryActionPopup && (
               <div className={styles.historyActionPopupPanel}>
+                <div>
                   <HistoryActionPopup/>
+                </div>
               </div>
             )}
             
