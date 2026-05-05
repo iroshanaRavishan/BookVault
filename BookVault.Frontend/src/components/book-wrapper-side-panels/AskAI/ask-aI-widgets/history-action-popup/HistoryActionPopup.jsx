@@ -13,7 +13,7 @@ export default function HistoryActionPopup({ isPinned }) {
       <div className={styles.historyActionPopupBody}>
         
          <div className={styles.actionItem}>
-          <BsPinFill className={styles.actionIcon} />
+            {isPinned ? <BsPinFill className={styles.actionIcon} /> : < BsFillPinAngleFill className={styles.actionIcon}/>}
           <span style={{marginBottom:'2px'}}> Pin</span>
         </div>
 
