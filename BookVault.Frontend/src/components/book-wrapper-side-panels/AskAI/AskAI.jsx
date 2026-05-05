@@ -443,7 +443,7 @@ export default function AskAI() {
             </div>
             {showHistoryActionPopup && (
               <div className={styles.historyActionPopupPanel}>
-                <div>
+                <div ref={popupRef}>
                   <HistoryActionPopup/>
                 </div>
               </div>
