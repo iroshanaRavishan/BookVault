@@ -283,6 +283,7 @@ export default function AskAI() {
       startNewChat();
     }
 
+    setShowHistoryActionPopup(false);
     setActiveChatId(null);
   };
 
