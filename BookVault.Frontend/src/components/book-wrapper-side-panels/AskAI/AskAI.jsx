@@ -285,6 +285,7 @@ export default function AskAI() {
 
     setShowHistoryActionPopup(false);
     setActiveChatId(null);
+    closeExportPopup();
   };
 
   const loadConversation = (chat) => {
