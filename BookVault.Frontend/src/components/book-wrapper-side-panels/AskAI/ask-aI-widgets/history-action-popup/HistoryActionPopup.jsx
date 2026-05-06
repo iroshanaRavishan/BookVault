@@ -4,7 +4,7 @@ import { BsFillPinAngleFill, BsPinFill } from "react-icons/bs";
 import { TiExport } from "react-icons/ti";
 import { MdDelete, MdModeEdit } from 'react-icons/md';
 
-export default function HistoryActionPopup({ isPinned }) {
+export default function HistoryActionPopup({ isPinned, onTogglePin }) {
   return (
     <div
       className={styles.historyActionPopupPanel}
