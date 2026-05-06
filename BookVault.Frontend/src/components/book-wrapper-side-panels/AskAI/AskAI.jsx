@@ -112,7 +112,6 @@ export default function AskAI() {
     setActiveChat(updatedActive);
   };
 
-
   const sortChats = (chats) => {
     return [...chats].sort((a, b) => {
       // pinned always on top
@@ -445,7 +444,10 @@ export default function AskAI() {
             {showHistoryActionPopup && (
               <div className={styles.overlay}>
                 <div ref={popupRef} className={styles.historyActionPopupPanel}>
-                  <HistoryActionPopup isPinned={activeChat?.pinned}/>
+                  <HistoryActionPopup
+                    isPinned={activeChat?.pinned}
+                    onTogglePin={() => togglePinChat(activeChatId)}
+                  />
                 </div>
               </div>
             )}
