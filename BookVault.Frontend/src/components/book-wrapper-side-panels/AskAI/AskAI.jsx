@@ -278,6 +278,11 @@ export default function AskAI() {
     // update UI
     setChatList(updatedHistory);
 
+    // if currently open chat is deleted reset UI
+    if (conversationIdRef.current === conversationId) {
+      startNewChat();
+    }
+
     setActiveChatId(null);
   };
 
