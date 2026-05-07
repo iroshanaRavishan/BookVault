@@ -22,9 +22,17 @@
     font-size: 14px;
 }
 
-.actionItem:hover {
+  .actionItem:hover {
     background-color: #f0f0f0;
     cursor: pointer;
+  }
+
+  .deleteActionItem:hover {
+    background-color: #ffeaea;
+  }
+
+  .actionIcon {
+    margin-right: 10px;
   }
 
 .deletionActionItem {
