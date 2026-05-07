@@ -287,6 +287,7 @@ export default function AskAI() {
     }
 
     setShowHistoryActionPopup(false);
+    setShowOverlay(false);
     setActiveChatId(null);
     closeExportPopup();
   };
