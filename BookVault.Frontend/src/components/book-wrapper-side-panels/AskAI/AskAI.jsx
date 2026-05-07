@@ -458,6 +458,7 @@ export default function AskAI() {
                   <HistoryActionPopup
                     isPinned={activeChat?.pinned}
                     onTogglePin={() => togglePinChat(activeChatId)}
+                    onDelete={() => deleteConversation(activeChatId)}
                   />
                 </div>
               </div>
