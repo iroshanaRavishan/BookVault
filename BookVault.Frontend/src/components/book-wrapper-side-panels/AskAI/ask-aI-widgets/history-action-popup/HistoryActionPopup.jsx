@@ -31,7 +31,7 @@ export default function HistoryActionPopup({ isPinned, onTogglePin, onDelete }) 
           className={styles.deletionActionItem}
           onClick={onDelete}
         >
-          <div className={styles.actionItem}>
+          <div className={`${styles.actionItem} ${styles.deleteActionItem}`}>
             <MdDelete className={styles.actionIcon} />
             <span style={{marginBottom:'2px'}}>Delete</span>
           </div>
