@@ -9,6 +9,9 @@ import { FaChevronDown, FaChevronRight, FaChevronUp } from "react-icons/fa";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import { FaArrowRightLong } from "react-icons/fa6";
 import HistoryActionPopup from './ask-aI-widgets/history-action-popup/HistoryActionPopup';
+import { BsFillPinAngleFill, BsPinFill } from 'react-icons/bs';
+import { BiSolidEraser } from 'react-icons/bi';
+import { GiCancel } from "react-icons/gi";
 
 export default function AskAI() {
   const conversationIdRef = useRef(crypto.randomUUID());
