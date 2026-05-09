@@ -17,6 +17,7 @@ export default function AskAI() {
   const conversationIdRef = useRef(crypto.randomUUID());
   const hasNamedChatRef = useRef(false);
   const popupRef = useRef(null);
+  const historyRef = useRef(null);
 
   const [activeChat, setActiveChat] = useState(null);
   const [messages, setMessages] = useState([]);
