@@ -173,6 +173,7 @@ export default function AskAI() {
         date: now.toDateString(),
       },
     ]);
+    
     // // Save user message
     // await fetch("/api/messages", {
     //   method: "POST",
