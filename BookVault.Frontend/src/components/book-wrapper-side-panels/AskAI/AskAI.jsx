@@ -143,6 +143,7 @@ export default function AskAI() {
   };
 
   const sendMessage = async ({ text, page }) => {
+    const messageId = crypto.randomUUID();
     if (isResetting) return;
 
     // if user types while initial UI is visible then new chat
