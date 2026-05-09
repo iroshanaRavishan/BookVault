@@ -361,7 +361,7 @@ export default function AskAI() {
               });
             }}
           />
-          <span className={styles.chatName}>{currentChatName}</span>
+          <span className={styles.chatName}>{getDisplayName(currentChatName, 35)}</span>
         </div>
        
         <div className={styles.chatActionsIcons}>
@@ -423,7 +423,7 @@ export default function AskAI() {
         </div>
 
         {showHistory && (
-          <div className={styles.wrapper}>
+          <div className={styles.wrapper} ref={historyRef}>
             <div className={styles.historyPanel}>
               {chatList.map(chat => (
                 <div
