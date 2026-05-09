@@ -165,7 +165,7 @@ export default function AskAI() {
     setMessages(prev => [
       ...prev,
       {
-        id: crypto.randomUUID(),
+        id: messageId,
         text,
         page,
         sender: "user",
