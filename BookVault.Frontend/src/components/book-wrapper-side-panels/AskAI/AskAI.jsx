@@ -297,7 +297,7 @@ export default function AskAI() {
     setCurrentChatName(chat.chatName);
     setMessages(
       chat.messages.map(m => ({
-        id: crypto.randomUUID(),
+        id: m.id,
         text: m.content,
         sender: m.role === "user" ? "user" : "bot",
         time: new Date(m.created_at).toLocaleTimeString([], {
