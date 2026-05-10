@@ -134,13 +134,7 @@ export default function AskAI() {
   };
 
   const editMessage = (id, newText) => {
-    setMessages(prev =>
-      prev.map(m => (m.id === id ? { ...m, text: newText } : m))
-    );
-  };
-
-  const deleteMessage = (id) => {
-    setMessages(prev => prev.filter(m => m.id !== id));
+    const originalMsg = messages.find(m => m.id === id);
   };
 
   const sendMessage = async ({ text, page }) => {
