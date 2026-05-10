@@ -451,6 +451,7 @@ export default function AskAI() {
                         e.stopPropagation();
                         setActiveChat(chat); 
                         setActiveChatId(chat.conversationId);
+                        setSelectedChatForAction(chat); 
                         setShowHistoryActionPopup(true);
                         setShowOverlay(true);
                       }}
