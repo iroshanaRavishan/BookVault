@@ -135,6 +135,7 @@ export default function AskAI() {
 
   const editMessage = (id, newText) => {
     const originalMsg = messages.find(m => m.id === id);
+    if (!originalMsg) return;
   };
 
   const sendMessage = async ({ text, page }) => {
