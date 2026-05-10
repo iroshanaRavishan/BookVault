@@ -141,6 +141,7 @@ export default function AskAI() {
     sendMessage({
       text: newText,
       page: originalMsg.page,
+      editedFrom: id,
     });
   };
 
