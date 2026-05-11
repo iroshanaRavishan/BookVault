@@ -33,6 +33,7 @@ export default function AskAI() {
   const [chatList, setChatList] = useState([]);
   const [showConfirm, setShowConfirm] = useState(false);
   const [showHistoryActionPopup, setShowHistoryActionPopup] = useState(false);
+  const [selectedChatForAction, setSelectedChatForAction] = useState(null);
 
   useEffect(() => {
     if (messages.length > 0) {
