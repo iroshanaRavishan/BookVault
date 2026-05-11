@@ -339,6 +339,8 @@ export default function AskAI() {
   }, [showHistoryActionPopup]);
 
   const handleExportClick = (chat) => {
+    setSelectedChatForAction(chat);
+
   };
 
 
