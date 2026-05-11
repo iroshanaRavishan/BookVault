@@ -338,6 +338,10 @@ export default function AskAI() {
     };
   }, [showHistoryActionPopup]);
 
+  const handleExportClick = (chat) => {
+  };
+
+
   return (
     <div
       className={styles.panel}
