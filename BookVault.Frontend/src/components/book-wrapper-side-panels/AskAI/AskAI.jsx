@@ -342,8 +342,10 @@ export default function AskAI() {
   const handleExportClick = (chat) => {
     setSelectedChatForAction(chat);
 
+    if (showExportPopup) {
+      // CLOSE with animation
+    }
   };
-
 
   return (
     <div
