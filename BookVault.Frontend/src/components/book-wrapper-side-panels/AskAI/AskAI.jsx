@@ -494,7 +494,10 @@ export default function AskAI() {
       </div>
 
       {showConfirm && (
-        <div className={styles.modalBackdrop}></div>
+        <div className={styles.modalBackdrop}>
+          <div className={styles.modal}>
+          </div>
+        </div>
       )}
     </div>
   );
