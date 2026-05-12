@@ -238,11 +238,12 @@ export default function AskAI() {
       // });
 
       saveMessageToLocal(conversationIdRef.current, chatNameToUse, {
+        id: assistantMessageId,
         role: "assistant",
         content: botText,
         created_at: new Date().toISOString(),
       });
-        setIsTyping(false);
+      setIsTyping(false);
     }, 1000);
   };
 
