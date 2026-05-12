@@ -497,6 +497,9 @@ export default function AskAI() {
         <div className={styles.modalBackdrop}>
           <div className={styles.modal}>
             <div className={styles.popupHeader}>
+              <span className={styles.headerText}>
+                The changes will be discarded. Please save or discard them before going back.
+              </span>
             </div>
           </div>
         </div>
