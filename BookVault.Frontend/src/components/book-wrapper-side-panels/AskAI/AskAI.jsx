@@ -176,7 +176,7 @@ export default function AskAI() {
         text,
         page,
         sender: "user",
-        time: now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+        time: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
         date: now.toDateString(),
       },
     ]);
