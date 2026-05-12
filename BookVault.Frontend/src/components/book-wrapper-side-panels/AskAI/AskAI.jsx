@@ -503,6 +503,13 @@ export default function AskAI() {
             </div>
 
             <div className={styles.modalActionButtons}>
+              <button>
+                Back
+              </button>
+
+              <button>
+                Ok, discard changes 
+              </button>
             </div>
           </div>
         </div>
