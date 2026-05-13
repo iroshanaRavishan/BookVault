@@ -357,6 +357,9 @@ export default function AskAI() {
     }
   };
 
+  const closeExportPopup = () => {
+  };
+
   return (
     <div
       className={styles.panel}
