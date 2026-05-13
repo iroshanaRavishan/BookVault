@@ -358,6 +358,7 @@ export default function AskAI() {
   };
 
   const closeExportPopup = () => {
+    setShowExportPopup(false);
     setIsClosingExport(false);
   };
 
