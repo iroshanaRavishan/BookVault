@@ -347,6 +347,7 @@ export default function AskAI() {
 
     if (showExportPopup) {
       // CLOSE with animation
+      setIsClosingExport(true);
     }
   };
 
