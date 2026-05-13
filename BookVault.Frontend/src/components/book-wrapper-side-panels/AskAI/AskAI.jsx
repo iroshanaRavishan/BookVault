@@ -348,6 +348,9 @@ export default function AskAI() {
     if (showExportPopup) {
       // CLOSE with animation
       setIsClosingExport(true);
+    } else {
+      // OPEN
+      setShowExportPopup(true);
     }
   };
 
