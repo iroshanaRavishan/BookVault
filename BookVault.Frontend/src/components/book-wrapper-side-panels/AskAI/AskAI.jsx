@@ -269,6 +269,7 @@ export default function AskAI() {
       setShowExportPopup(false);
       setShowHistoryActionPopup(false);
       setActiveChatId(null);
+      setSelectedChatForAction(null);
     }, 200); 
   };
 
