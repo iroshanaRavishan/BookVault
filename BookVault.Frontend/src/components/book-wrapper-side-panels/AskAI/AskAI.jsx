@@ -12,6 +12,8 @@ import HistoryActionPopup from './ask-aI-widgets/history-action-popup/HistoryAct
 import { BsFillPinAngleFill, BsPinFill } from 'react-icons/bs';
 import { BiSolidEraser } from 'react-icons/bi';
 import { GiCancel } from "react-icons/gi";
+import { TiExport } from 'react-icons/ti';
+import { RiShareForwardFill } from 'react-icons/ri';
 
 export default function AskAI() {
   const conversationIdRef = useRef(crypto.randomUUID());
