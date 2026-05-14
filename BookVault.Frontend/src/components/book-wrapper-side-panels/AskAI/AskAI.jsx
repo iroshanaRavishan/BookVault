@@ -261,7 +261,9 @@ export default function AskAI() {
   // };
 
   const closePopup = () => {
-    setShowOverlay(false); // start fade-out
+    setShowOverlay(false);
+    // start export closing animation
+    setIsClosingExport(true);
 
     setTimeout(() => {
       setShowHistoryActionPopup(false); // remove after animation
