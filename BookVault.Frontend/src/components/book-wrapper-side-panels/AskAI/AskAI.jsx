@@ -266,7 +266,8 @@ export default function AskAI() {
     setIsClosingExport(true);
 
     setTimeout(() => {
-      setShowHistoryActionPopup(false); // remove after animation
+      setShowExportPopup(false);
+      setShowHistoryActionPopup(false);
       setActiveChatId(null);
     }, 200); 
   };
