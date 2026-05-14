@@ -267,6 +267,8 @@ export default function AskAI() {
 
     setTimeout(() => {
       setShowExportPopup(false);
+      setIsClosingExport(false);
+
       setShowHistoryActionPopup(false);
       setActiveChatId(null);
       setSelectedChatForAction(null);
