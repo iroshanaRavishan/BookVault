@@ -38,6 +38,7 @@ export default function AskAI() {
   const [editingChatId, setEditingChatId] = useState(null);
   const [editingValue, setEditingValue] = useState("");
   const [showExportPopup, setShowExportPopup] = useState(false);
+  const [isClosingExport, setIsClosingExport] = useState(false);
   const [selectedChatForAction, setSelectedChatForAction] = useState(null);
 
   useEffect(() => {
