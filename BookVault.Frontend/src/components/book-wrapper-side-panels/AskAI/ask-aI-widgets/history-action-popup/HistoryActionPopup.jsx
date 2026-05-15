@@ -3,6 +3,7 @@ import styles from './historyactionpopup.module.css';
 import { BsFillPinAngleFill, BsPinFill } from "react-icons/bs";
 import { TiExport } from "react-icons/ti";
 import { MdDelete, MdModeEdit } from 'react-icons/md';
+import { RiShareForwardFill } from 'react-icons/ri';
 
 export default function HistoryActionPopup({ isPinned, onTogglePin, onDelete, onExport }) {
   return (
@@ -18,7 +19,7 @@ export default function HistoryActionPopup({ isPinned, onTogglePin, onDelete, on
         </div>
 
         <div className={styles.actionItem}>
-          <TiExport className={styles.actionIcon} />
+          <RiShareForwardFill className={styles.actionIcon} />
           <span>Export</span>
         </div>
 
