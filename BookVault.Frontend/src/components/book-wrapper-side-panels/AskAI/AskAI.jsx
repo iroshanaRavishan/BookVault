@@ -9,15 +9,23 @@ import { FaChevronDown, FaChevronRight, FaChevronUp } from "react-icons/fa";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import { FaArrowRightLong } from "react-icons/fa6";
 import HistoryActionPopup from './ask-aI-widgets/history-action-popup/HistoryActionPopup';
+import { BsFillPinAngleFill, BsPinFill } from 'react-icons/bs';
+import { BiSolidEraser } from 'react-icons/bi';
+import { GiCancel } from "react-icons/gi";
+import { TiExport } from 'react-icons/ti';
+import { RiShareForwardFill } from 'react-icons/ri';
 
 export default function AskAI() {
   const conversationIdRef = useRef(crypto.randomUUID());
   const hasNamedChatRef = useRef(false);
   const popupRef = useRef(null);
+  const pendingActionRef = useRef(null);
+  const historyRef = useRef(null);
 
   const [activeChat, setActiveChat] = useState(null);
   const [messages, setMessages] = useState([]);
   const [showOverlay, setShowOverlay] = useState(false);
+  const [activeChatId, setActiveChatId] = useState(null);
   const [isTyping, setIsTyping] = useState(false);
   const [attachedPage, setAttachedPage] = useState(null);
   const [showInitialUI, setShowInitialUI] = useState(true);
@@ -27,6 +35,11 @@ export default function AskAI() {
   const [chatList, setChatList] = useState([]);
   const [showConfirm, setShowConfirm] = useState(false);
   const [showHistoryActionPopup, setShowHistoryActionPopup] = useState(false);
+  const [editingChatId, setEditingChatId] = useState(null);
+  const [editingValue, setEditingValue] = useState("");
+  const [showExportPopup, setShowExportPopup] = useState(false);
+  const [isClosingExport, setIsClosingExport] = useState(false);
+  const [selectedChatForAction, setSelectedChatForAction] = useState(null);
 
   useEffect(() => {
     if (messages.length > 0) {
@@ -111,7 +124,6 @@ export default function AskAI() {
     setActiveChat(updatedActive);
   };
 
-
   const sortChats = (chats) => {
     return [...chats].sort((a, b) => {
       // pinned always on top
@@ -129,16 +141,20 @@ export default function AskAI() {
   };
 
   const editMessage = (id, newText) => {
-    setMessages(prev =>
-      prev.map(m => (m.id === id ? { ...m, text: newText } : m))
-    );
-  };
+    const originalMsg = messages.find(m => m.id === id);
+    if (!originalMsg) return;
 
-  const deleteMessage = (id) => {
-    setMessages(prev => prev.filter(m => m.id !== id));
+    // send as a NEW message (this triggers bot reply)
+    sendMessage({
+      text: newText,
+      page: originalMsg.page,
+      editedFrom: id,
+    });
   };
 
   const sendMessage = async ({ text, page }) => {
+    const messageId = crypto.randomUUID();
+    const assistantMessageId = crypto.randomUUID();
     if (isResetting) return;
 
     // if user types while initial UI is visible then new chat
@@ -161,14 +177,15 @@ export default function AskAI() {
     setMessages(prev => [
       ...prev,
       {
-        id: crypto.randomUUID(),
+        id: messageId,
         text,
         page,
         sender: "user",
-        time: now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+        time: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
         date: now.toDateString(),
       },
     ]);
+    
     // // Save user message
     // await fetch("/api/messages", {
     //   method: "POST",
@@ -185,6 +202,7 @@ export default function AskAI() {
     }
 
     saveMessageToLocal(conversationIdRef.current, chatNameToUse, {
+      id: messageId,
       role: "user",
       content: text,
       created_at: now.toISOString(),
@@ -197,6 +215,7 @@ export default function AskAI() {
       const botText = "Hi, how can I help you today...";
 
       const botMessage = {
+        id: assistantMessageId,
         conversation_id: conversationIdRef.current,
         role: "assistant",
         content: botText,
@@ -224,11 +243,12 @@ export default function AskAI() {
       // });
 
       saveMessageToLocal(conversationIdRef.current, chatNameToUse, {
+        id: assistantMessageId,
         role: "assistant",
         content: botText,
         created_at: new Date().toISOString(),
       });
-        setIsTyping(false);
+      setIsTyping(false);
     }, 1000);
   };
 
@@ -241,11 +261,17 @@ export default function AskAI() {
   // };
 
   const closePopup = () => {
-    setShowOverlay(false); // start fade-out
+    setShowOverlay(false);
+    // start export closing animation
+    setIsClosingExport(true);
 
     setTimeout(() => {
-      setShowHistoryActionPopup(false); // remove after animation
+      setShowExportPopup(false);
+      setIsClosingExport(false);
+
+      setShowHistoryActionPopup(false);
       setActiveChatId(null);
+      setSelectedChatForAction(null);
     }, 200); 
   };
 
@@ -278,7 +304,15 @@ export default function AskAI() {
     // update UI
     setChatList(updatedHistory);
 
+    // if currently open chat is deleted reset UI
+    if (conversationIdRef.current === conversationId) {
+      startNewChat();
+    }
+
+    setShowHistoryActionPopup(false);
+    setShowOverlay(false);
     setActiveChatId(null);
+    closeExportPopup();
   };
 
   const loadConversation = (chat) => {
@@ -286,7 +320,7 @@ export default function AskAI() {
     setCurrentChatName(chat.chatName);
     setMessages(
       chat.messages.map(m => ({
-        id: crypto.randomUUID(),
+        id: m.id,
         text: m.content,
         sender: m.role === "user" ? "user" : "bot",
         time: new Date(m.created_at).toLocaleTimeString([], {
@@ -319,6 +353,27 @@ export default function AskAI() {
     };
   }, [showHistoryActionPopup]);
 
+  const handleExportClick = (chat) => {
+    setSelectedChatForAction(chat);
+
+    if (showExportPopup) {
+      // CLOSE with animation
+      setIsClosingExport(true);
+      setTimeout(() => {
+        setShowExportPopup(false);
+        setIsClosingExport(false);
+      }, 200);
+    } else {
+      // OPEN
+      setShowExportPopup(true);
+    }
+  };
+
+  const closeExportPopup = () => {
+    setShowExportPopup(false);
+    setIsClosingExport(false);
+  };
+
   return (
     <div
       className={styles.panel}
@@ -350,7 +405,7 @@ export default function AskAI() {
               });
             }}
           />
-          <span className={styles.chatName}>{currentChatName}</span>
+          <span className={styles.chatName}>{getDisplayName(currentChatName, 35)}</span>
         </div>
        
         <div className={styles.chatActionsIcons}>
@@ -368,7 +423,7 @@ export default function AskAI() {
         </div>
       </div>
 
-      <div className={styles.initialUiContainer}>
+      <div className={`${styles.initialUiContainer} ${ showInitialUI ? styles.slideDown : styles.slideUp }`}>
         <div className={styles.logoContainer}>
           <img src='/src/assets/logo mark.png' className={styles.profilePicture} />       
           <img src='/src/assets/AI.png' className={styles.AiPicture} />       
@@ -412,7 +467,7 @@ export default function AskAI() {
         </div>
 
         {showHistory && (
-          <div className={styles.wrapper}>
+          <div className={styles.wrapper} ref={historyRef}>
             <div className={styles.historyPanel}>
               {chatList.map(chat => (
                 <div
@@ -433,6 +488,7 @@ export default function AskAI() {
                         e.stopPropagation();
                         setActiveChat(chat); 
                         setActiveChatId(chat.conversationId);
+                        setSelectedChatForAction(chat); 
                         setShowHistoryActionPopup(true);
                         setShowOverlay(true);
                       }}
@@ -441,8 +497,19 @@ export default function AskAI() {
                 </div>
               ))} 
             </div>
-            {showHistoryActionPopup &&(
-              <div className={styles.historyActionPopupPanel}>
+            {showHistoryActionPopup && (
+              <div className={styles.overlay}>
+                <div ref={popupRef} className={styles.historyActionPopupPanel}>
+                  <HistoryActionPopup
+                    isPinned={activeChat?.pinned}
+                    onTogglePin={() => togglePinChat(activeChatId)}
+                    onDelete={() => deleteConversation(activeChatId)}
+                    onExport={() => 
+                      selectedChatForAction &&
+                      handleExportClick(selectedChatForAction)
+                    }
+                  />
+                </div>
               </div>
             )}
             
@@ -455,7 +522,25 @@ export default function AskAI() {
       </div>
 
       {showConfirm && (
-        <div className={styles.modalBackdrop}></div>
+        <div className={styles.modalBackdrop}>
+          <div className={styles.modal}>
+            <div className={styles.popupHeader}>
+              <span className={styles.headerText}>
+                The changes will be discarded. Please save or discard them before going back.
+              </span>
+            </div>
+
+            <div className={styles.modalActionButtons}>
+              <button>
+                Back
+              </button>
+
+              <button>
+                Ok, discard changes 
+              </button>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );
