@@ -361,6 +361,7 @@ export default function AskAI() {
       setIsClosingExport(true);
       setTimeout(() => {
         setShowExportPopup(false);
+        setIsClosingExport(false);
       }, 200);
     } else {
       // OPEN
