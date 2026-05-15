@@ -505,6 +505,7 @@ export default function AskAI() {
                     onTogglePin={() => togglePinChat(activeChatId)}
                     onDelete={() => deleteConversation(activeChatId)}
                     onExport={() => 
+                      selectedChatForAction &&
                       handleExportClick(selectedChatForAction)
                     }
                   />
