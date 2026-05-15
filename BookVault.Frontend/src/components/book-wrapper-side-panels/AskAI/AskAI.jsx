@@ -504,7 +504,9 @@ export default function AskAI() {
                     isPinned={activeChat?.pinned}
                     onTogglePin={() => togglePinChat(activeChatId)}
                     onDelete={() => deleteConversation(activeChatId)}
-                    onExport={}
+                    onExport={() => 
+                      handleExportClick(selectedChatForAction)
+                    }
                   />
                 </div>
               </div>
