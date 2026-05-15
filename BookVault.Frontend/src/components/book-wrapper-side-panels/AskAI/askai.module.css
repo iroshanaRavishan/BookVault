@@ -288,6 +288,12 @@
   animation: fadeInScale 0.3s ease-out;
 }
 
+.popupHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .modalButtons {
   padding: 8px 15px;
   border: none;
