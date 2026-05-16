@@ -1,9 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styles from './askai.module.css';
 import MessageWall from './ask-aI-widgets/MessageWall';
+import { GoDotFill } from "react-icons/go";
 import ChipStack from './ask-aI-widgets/ChipStack';
-import { FiPlus } from 'react-icons/fi';
-import { MdDelete } from 'react-icons/md';
+import { FiCheck, FiPlus } from 'react-icons/fi';
+import { MdDelete, MdOutlineCancel } from 'react-icons/md';
 import { IoArrowBack, IoSettingsSharp } from 'react-icons/io5';
 import { FaChevronDown, FaChevronRight, FaChevronUp } from "react-icons/fa";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
