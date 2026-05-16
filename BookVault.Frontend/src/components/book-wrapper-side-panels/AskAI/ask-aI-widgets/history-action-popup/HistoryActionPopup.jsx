@@ -18,7 +18,7 @@ export default function HistoryActionPopup({ isPinned, onTogglePin, onDelete, on
           <span style={{marginBottom:'2px'}}> {isPinned ? "Unpin" : "Pin"}</span>
         </div>
 
-        <div className={styles.actionItem}>
+        <div className={styles.actionItem} onClick={onExport}>
           <RiShareForwardFill className={styles.actionIcon} />
           <span>Export</span>
         </div>
