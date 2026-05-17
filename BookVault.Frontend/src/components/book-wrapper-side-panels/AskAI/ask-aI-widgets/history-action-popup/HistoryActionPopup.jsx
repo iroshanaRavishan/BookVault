@@ -5,7 +5,7 @@ import { TiExport } from "react-icons/ti";
 import { MdDelete, MdModeEdit } from 'react-icons/md';
 import { RiShareForwardFill } from 'react-icons/ri';
 
-export default function HistoryActionPopup({ isPinned, onTogglePin, onDelete, onExport }) {
+export default function HistoryActionPopup({ isPinned, onTogglePin, onDelete, onRename, onExport }) {
   return (
     <div
       className={styles.historyActionPopupPanel}
@@ -23,7 +23,7 @@ export default function HistoryActionPopup({ isPinned, onTogglePin, onDelete, on
           <span>Export</span>
         </div>
 
-        <div className={styles.actionItem}>
+        <div className={styles.actionItem} onClick={onRename}>
           <MdModeEdit className={styles.actionIcon} />
           <span style={{marginBottom:'2px'}}>Rename</span>
         </div>
