@@ -508,6 +508,7 @@ export default function AskAI() {
                     onDelete={() => {
                       setShowDeleteConfirm(true);
                     }}
+                    onRename={() => {}}
                     onExport={() => 
                       selectedChatForAction &&
                       handleExportClick(selectedChatForAction)
