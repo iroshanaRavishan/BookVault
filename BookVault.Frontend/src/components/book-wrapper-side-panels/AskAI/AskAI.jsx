@@ -510,6 +510,7 @@ export default function AskAI() {
                     }}
                     onRename={() => {
                       setEditingChatId(activeChatId);
+                      closePopup();
                     }}
                     onExport={() => 
                       selectedChatForAction &&
