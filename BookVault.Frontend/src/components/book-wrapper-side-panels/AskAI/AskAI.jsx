@@ -537,6 +537,7 @@ export default function AskAI() {
             <div className={styles.modalActionButtons}>
               <button
                 className={styles.modalButtons}
+                onClick={() => setShowConfirm(false)}
               >
                 Back
               </button>
