@@ -529,7 +529,14 @@ export default function AskAI() {
       </div>
 
       <div className={styles.actionArea}>
-        <ChatInput value={message}/>
+        <ChatInput
+          value={message}
+          onSend={(text) => {
+            sendMessage({
+              text
+            });
+          }}
+        />
       </div>
 
       {showConfirm && (
