@@ -566,7 +566,9 @@ export default function AskAI() {
       )}
 
       {showExportPopup && (
-        <ExportPopup/>
+        <ExportPopup
+          onClose={closeExportPopup}
+        />
       )}
     </div>
   );
