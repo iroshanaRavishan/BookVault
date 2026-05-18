@@ -566,7 +566,7 @@ export default function AskAI() {
       )}
 
       {showExportPopup && (
-       <div></div>
+        <ExportPopup/>
       )}
     </div>
   );
