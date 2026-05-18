@@ -564,6 +564,10 @@ export default function AskAI() {
           </div>
         </div>
       )}
+
+      {showExportPopup && (
+       <div></div>
+      )}
     </div>
   );
 }
