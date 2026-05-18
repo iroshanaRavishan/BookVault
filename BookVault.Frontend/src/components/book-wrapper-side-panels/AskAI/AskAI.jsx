@@ -536,6 +536,7 @@ export default function AskAI() {
               text
             });
           }}
+          onChange={(e) => setMessage(e.target.value)}
         />
       </div>
 
