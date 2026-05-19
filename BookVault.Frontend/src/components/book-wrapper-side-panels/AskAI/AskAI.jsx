@@ -1,9 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styles from './askai.module.css';
 import MessageWall from './ask-aI-widgets/MessageWall';
+import { GoDotFill } from "react-icons/go";
 import ChipStack from './ask-aI-widgets/ChipStack';
-import { FiPlus } from 'react-icons/fi';
-import { MdDelete } from 'react-icons/md';
+import { FiCheck, FiPlus } from 'react-icons/fi';
+import { MdDelete, MdOutlineCancel } from 'react-icons/md';
 import { IoArrowBack, IoSettingsSharp } from 'react-icons/io5';
 import { FaChevronDown, FaChevronRight, FaChevronUp } from "react-icons/fa";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
@@ -33,6 +34,7 @@ export default function AskAI() {
   const [canContinueChat, setCanContinueChat] = useState(false);
   const [currentChatName, setCurrentChatName] = useState("New Chat");
   const [chatList, setChatList] = useState([]);
+  const [message, setMessage] = useState("");
   const [showConfirm, setShowConfirm] = useState(false);
   const [showHistoryActionPopup, setShowHistoryActionPopup] = useState(false);
   const [editingChatId, setEditingChatId] = useState(null);
@@ -40,6 +42,7 @@ export default function AskAI() {
   const [showExportPopup, setShowExportPopup] = useState(false);
   const [isClosingExport, setIsClosingExport] = useState(false);
   const [selectedChatForAction, setSelectedChatForAction] = useState(null);
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
 
   useEffect(() => {
     if (messages.length > 0) {
@@ -370,6 +373,7 @@ export default function AskAI() {
   };
 
   const closeExportPopup = () => {
+    setIsClosingExport(true);
     setShowExportPopup(false);
     setIsClosingExport(false);
   };
@@ -499,11 +503,18 @@ export default function AskAI() {
             </div>
             {showHistoryActionPopup && (
               <div className={styles.overlay}>
-                <div ref={popupRef} className={styles.historyActionPopupPanel}>
+                <div ref={popupRef} className={styles.historyActionPopupPanel} onClick={(e) => e.stopPropagation()}>
                   <HistoryActionPopup
                     isPinned={activeChat?.pinned}
                     onTogglePin={() => togglePinChat(activeChatId)}
-                    onDelete={() => deleteConversation(activeChatId)}
+                    onDelete={() => {
+                      setShowDeleteConfirm(true);
+                    }}
+                    onRename={() => {
+                      setEditingChatId(activeChatId);
+                      setEditingValue(activeChat?.chatName || "");
+                      closePopup();
+                    }}
                     onExport={() => 
                       selectedChatForAction &&
                       handleExportClick(selectedChatForAction)
@@ -518,7 +529,18 @@ export default function AskAI() {
       </div>
 
       <div className={styles.actionArea}>
-        <ChatInput />
+        <ChatInput
+          value={message}
+          onSend={(text) => {
+            sendMessage({
+              text
+            });
+
+            setAttachedPage(null);
+            setReplyingTo(null);
+          }}
+          onChange={(e) => setMessage(e.target.value)}
+        />
       </div>
 
       {showConfirm && (
@@ -531,7 +553,10 @@ export default function AskAI() {
             </div>
 
             <div className={styles.modalActionButtons}>
-              <button>
+              <button
+                className={styles.modalButtons}
+                onClick={() => setShowConfirm(false)}
+              >
                 Back
               </button>
 
@@ -541,6 +566,13 @@ export default function AskAI() {
             </div>
           </div>
         </div>
+      )}
+
+      {showExportPopup && (
+        <ExportPopup
+          onSelect={handleExportSelect}
+          onClose={closeExportPopup}
+        />
       )}
     </div>
   );
