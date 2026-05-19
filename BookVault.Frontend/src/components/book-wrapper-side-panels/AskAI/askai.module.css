@@ -304,3 +304,6 @@
   cursor: pointer;
 }
 
+.modalButtons:hover {
+  background-color: #666;
+}
