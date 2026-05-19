@@ -535,6 +535,9 @@ export default function AskAI() {
             sendMessage({
               text
             });
+
+            setAttachedPage(null);
+            setReplyingTo(null);
           }}
           onChange={(e) => setMessage(e.target.value)}
         />
