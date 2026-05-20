@@ -567,6 +567,7 @@ export default function AskAI() {
                   setMessage("");
 
                   if (pendingActionRef.current) {
+                    pendingActionRef.current();
                     pendingActionRef.current = null;
                   }
                 }}
