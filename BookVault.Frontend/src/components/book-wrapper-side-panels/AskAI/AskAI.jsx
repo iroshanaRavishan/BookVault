@@ -560,7 +560,12 @@ export default function AskAI() {
                 Back
               </button>
 
-              <button className={styles.modalButtons}>
+              <button
+                className={styles.modalButtons}
+                onClick={() => {
+                  setShowConfirm(false);
+                }}
+              >
                 Ok, discard changes 
               </button>
             </div>
