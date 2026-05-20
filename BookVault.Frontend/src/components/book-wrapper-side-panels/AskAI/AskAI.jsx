@@ -587,6 +587,10 @@ export default function AskAI() {
           isClosing={isClosingExport}
         />
       )}
+      {showDeleteConfirm && (
+        <div className={styles.modalBackdrop} >
+        </div>
+      )}
     </div>
   );
 }
