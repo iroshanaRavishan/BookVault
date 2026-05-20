@@ -565,6 +565,9 @@ export default function AskAI() {
                 onClick={() => {
                   setShowConfirm(false);
                   setMessage("");
+
+                  if (pendingActionRef.current) {
+                  }
                 }}
                 style={{backgroundColor: '#f78080ff'}}
               >
