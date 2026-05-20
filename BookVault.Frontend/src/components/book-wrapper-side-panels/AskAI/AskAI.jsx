@@ -564,6 +564,7 @@ export default function AskAI() {
                 className={styles.modalButtons}
                 onClick={() => {
                   setShowConfirm(false);
+                  setMessage("");
                 }}
                 style={{backgroundColor: '#f78080ff'}}
               >
