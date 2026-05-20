@@ -588,7 +588,10 @@ export default function AskAI() {
         />
       )}
       {showDeleteConfirm && (
-        <div className={styles.modalBackdrop} >
+        <div
+          className={styles.modalBackdrop}
+          style={{ zIndex: "20" }}
+        >
         </div>
       )}
     </div>
