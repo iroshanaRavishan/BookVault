@@ -572,6 +572,7 @@ export default function AskAI() {
         <ExportPopup
           onSelect={handleExportSelect}
           onClose={closeExportPopup}
+          isClosing={isClosingExport}
         />
       )}
     </div>
