@@ -560,7 +560,7 @@ export default function AskAI() {
                 Back
               </button>
 
-              <button>
+              <button className={styles.modalButtons}>
                 Ok, discard changes 
               </button>
             </div>
