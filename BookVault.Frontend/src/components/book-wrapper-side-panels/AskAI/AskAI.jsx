@@ -565,6 +565,7 @@ export default function AskAI() {
                 onClick={() => {
                   setShowConfirm(false);
                 }}
+                style={{backgroundColor: '#f78080ff'}}
               >
                 Ok, discard changes 
               </button>
