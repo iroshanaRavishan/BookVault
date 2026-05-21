@@ -600,7 +600,11 @@ export default function AskAI() {
             </div>
 
             <div className={styles.modalActionButtons}>
-              <button className={styles.modalButtons}>
+              <button
+                className={styles.modalButtons}
+                onClick={() => {
+                }}
+              >
                 Cancel
               </button>
             </div>
