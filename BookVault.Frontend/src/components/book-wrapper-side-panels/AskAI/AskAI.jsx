@@ -592,6 +592,9 @@ export default function AskAI() {
           className={styles.modalBackdrop}
           style={{ zIndex: "20" }}
         >
+          <div className={styles.modal}>
+          
+          </div>
         </div>
       )}
     </div>
