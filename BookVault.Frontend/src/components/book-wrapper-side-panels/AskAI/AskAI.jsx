@@ -603,6 +603,7 @@ export default function AskAI() {
               <button
                 className={styles.modalButtons}
                 onClick={() => {
+                  setShowDeleteConfirm(false);
                 }}
               >
                 Cancel
