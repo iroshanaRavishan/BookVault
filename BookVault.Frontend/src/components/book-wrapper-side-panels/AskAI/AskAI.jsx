@@ -594,6 +594,9 @@ export default function AskAI() {
         >
           <div className={styles.modal}>
             <div className={styles.popupHeader}>
+              <span className={styles.headerText}>
+                This action cannot be undone.Do you want to delete this chat?
+              </span>
             </div>
           </div>
         </div>
