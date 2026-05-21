@@ -593,7 +593,8 @@ export default function AskAI() {
           style={{ zIndex: "20" }}
         >
           <div className={styles.modal}>
-          
+            <div className={styles.popupHeader}>
+            </div>
           </div>
         </div>
       )}
