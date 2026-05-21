@@ -598,6 +598,10 @@ export default function AskAI() {
                 This action cannot be undone.Do you want to delete this chat?
               </span>
             </div>
+
+            <div className={styles.modalActionButtons}>
+
+            </div>
           </div>
         </div>
       )}
