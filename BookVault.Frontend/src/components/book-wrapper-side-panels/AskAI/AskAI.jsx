@@ -581,7 +581,7 @@ export default function AskAI() {
       )}
 
       {showConfirmRename && (
-        <div className={styles.modalBackdrop}>
+        <div className={styles.modalBackdrop} style={{zIndex:'10'}}>
 
         </div>
       )}
