@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styles from './askai.module.css';
 import MessageWall from './ask-aI-widgets/MessageWall';
+import ChatInput from './ask-aI-widgets/ChatInput';
+import ExportPopup from "./ask-aI-widgets/export-popup/ExportPopup";
 import { GoDotFill } from "react-icons/go";
 import ChipStack from './ask-aI-widgets/ChipStack';
 import { FiCheck, FiPlus } from 'react-icons/fi';
@@ -33,6 +35,7 @@ export default function AskAI() {
   const [isResetting, setIsResetting] = useState(false);
   const [canContinueChat, setCanContinueChat] = useState(false);
   const [currentChatName, setCurrentChatName] = useState("New Chat");
+  const [showHistory, setShowHistory] = useState(false);
   const [chatList, setChatList] = useState([]);
   const [message, setMessage] = useState("");
   const [showConfirm, setShowConfirm] = useState(false);
@@ -560,7 +563,19 @@ export default function AskAI() {
                 Back
               </button>
 
-              <button>
+              <button
+                className={styles.modalButtons}
+                onClick={() => {
+                  setShowConfirm(false);
+                  setMessage("");
+
+                  if (pendingActionRef.current) {
+                    pendingActionRef.current();
+                    pendingActionRef.current = null;
+                  }
+                }}
+                style={{backgroundColor: '#f78080ff'}}
+              >
                 Ok, discard changes 
               </button>
             </div>
@@ -568,11 +583,51 @@ export default function AskAI() {
         </div>
       )}
 
+      {showConfirmRename && (
+        <div className={styles.modalBackdrop} style={{zIndex:'10'}}>
+          <div className={styles.modal}>
+            <div className={styles.popupHeader}>
+              <span className={styles.headerText}>
+                Do you want to cancel renaming and switch to the selected conversation?
+              </span>
+            </div>
+
+            <div className={styles.modalActionButtons}>
+            </div>
+          </div>
+        </div>
+      )}
       {showExportPopup && (
         <ExportPopup
           onSelect={handleExportSelect}
           onClose={closeExportPopup}
+          isClosing={isClosingExport}
         />
+      )}
+      {showDeleteConfirm && (
+        <div
+          className={styles.modalBackdrop}
+          style={{ zIndex: "20" }}
+        >
+          <div className={styles.modal}>
+            <div className={styles.popupHeader}>
+              <span className={styles.headerText}>
+                This action cannot be undone.Do you want to delete this chat?
+              </span>
+            </div>
+
+            <div className={styles.modalActionButtons}>
+              <button
+                className={styles.modalButtons}
+                onClick={() => {
+                  setShowDeleteConfirm(false);
+                }}
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );
