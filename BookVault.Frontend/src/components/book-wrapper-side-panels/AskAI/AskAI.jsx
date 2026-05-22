@@ -35,6 +35,7 @@ export default function AskAI() {
   const [isResetting, setIsResetting] = useState(false);
   const [canContinueChat, setCanContinueChat] = useState(false);
   const [currentChatName, setCurrentChatName] = useState("New Chat");
+  const [showHistory, setShowHistory] = useState(false);
   const [chatList, setChatList] = useState([]);
   const [message, setMessage] = useState("");
   const [showConfirm, setShowConfirm] = useState(false);
