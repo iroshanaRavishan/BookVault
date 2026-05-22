@@ -584,6 +584,9 @@ export default function AskAI() {
         <div className={styles.modalBackdrop} style={{zIndex:'10'}}>
           <div className={styles.modal}>
             <div className={styles.popupHeader}>
+              <span className={styles.headerText}>
+                Do you want to cancel renaming and switch to the selected conversation?
+              </span>
             </div>
 
             <div className={styles.modalActionButtons}>
