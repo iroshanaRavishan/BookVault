@@ -580,6 +580,11 @@ export default function AskAI() {
         </div>
       )}
 
+      {showConfirmRename && (
+        <div className={styles.modalBackdrop}>
+
+        </div>
+      )}
       {showExportPopup && (
         <ExportPopup
           onSelect={handleExportSelect}
