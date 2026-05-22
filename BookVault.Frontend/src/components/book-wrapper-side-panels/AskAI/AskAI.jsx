@@ -582,7 +582,8 @@ export default function AskAI() {
 
       {showConfirmRename && (
         <div className={styles.modalBackdrop} style={{zIndex:'10'}}>
-
+          <div className={styles.modal}>
+          </div>
         </div>
       )}
       {showExportPopup && (
