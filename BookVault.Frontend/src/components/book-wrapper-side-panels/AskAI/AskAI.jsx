@@ -46,6 +46,7 @@ export default function AskAI() {
   const [isClosingExport, setIsClosingExport] = useState(false);
   const [selectedChatForAction, setSelectedChatForAction] = useState(null);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const [openedChatId, setOpenedChatId] = useState(null);
 
   useEffect(() => {
     if (messages.length > 0) {
