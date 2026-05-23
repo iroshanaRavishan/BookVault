@@ -644,7 +644,13 @@ export default function AskAI() {
                 Cancel
               </button>
 
-              <button className={styles.modalButtons} style={{ backgroundColor: "#f78080ff" }}>
+              <button
+                className={styles.modalButtons}
+                style={{ backgroundColor: "#f78080ff" }}
+                onClick={() => {
+                  deleteConversation(activeChatId);
+                }}
+              >
                 Delete
               </button>
             </div>
