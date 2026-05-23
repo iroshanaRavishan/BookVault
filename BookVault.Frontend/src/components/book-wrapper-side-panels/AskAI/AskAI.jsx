@@ -650,6 +650,7 @@ export default function AskAI() {
                 onClick={() => {
                   deleteConversation(activeChatId);
                   setShowDeleteConfirm(false);
+                  setOpenedChatId(null)
                 }}
               >
                 Delete
