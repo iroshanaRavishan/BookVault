@@ -597,7 +597,7 @@ export default function AskAI() {
                 No, back to the history
               </button>
 
-              <button className={styles.modalButtons} >
+              <button className={styles.modalButtons}  style={{ backgroundColor: "#f78080ff" }} >
                 Yes
               </button>
             </div>
