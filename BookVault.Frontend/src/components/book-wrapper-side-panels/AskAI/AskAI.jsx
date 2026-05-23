@@ -609,6 +609,7 @@ export default function AskAI() {
                   setEditingChatId(null);
 
                   if (pendingActionRef.current) {
+                    pendingActionRef.current();
                     pendingActionRef.current = null;
                   }
                 }}
