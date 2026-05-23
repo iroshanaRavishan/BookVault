@@ -644,7 +644,7 @@ export default function AskAI() {
                 Cancel
               </button>
 
-              <button>
+              <button className={styles.modalButtons} style={{ backgroundColor: "#f78080ff" }}>
                 Delete
               </button>
             </div>
