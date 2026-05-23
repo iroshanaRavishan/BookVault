@@ -643,6 +643,10 @@ export default function AskAI() {
               >
                 Cancel
               </button>
+
+              <button>
+                Delete
+              </button>
             </div>
           </div>
         </div>
