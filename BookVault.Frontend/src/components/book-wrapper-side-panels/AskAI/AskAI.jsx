@@ -607,6 +607,10 @@ export default function AskAI() {
                 onClick={() => {
                   setShowConfirmRename(false);
                   setEditingChatId(null);
+
+                  if (pendingActionRef.current) {
+                    pendingActionRef.current = null;
+                  }
                 }}
                 style={{ backgroundColor: "#f78080ff" }}
               >
