@@ -593,6 +593,9 @@ export default function AskAI() {
             </div>
 
             <div className={styles.modalActionButtons}>
+              <button className={styles.modalButtons} >
+                No, back to the history
+              </button>
             </div>
           </div>
         </div>
