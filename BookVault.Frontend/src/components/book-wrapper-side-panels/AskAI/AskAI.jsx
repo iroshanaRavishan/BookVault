@@ -649,6 +649,7 @@ export default function AskAI() {
                 style={{ backgroundColor: "#f78080ff" }}
                 onClick={() => {
                   deleteConversation(activeChatId);
+                  setShowDeleteConfirm(false);
                 }}
               >
                 Delete
