@@ -606,6 +606,7 @@ export default function AskAI() {
                 className={styles.modalButtons}
                 onClick={() => {
                   setShowConfirmRename(false);
+                  setEditingChatId(null);
                 }}
                 style={{ backgroundColor: "#f78080ff" }}
               >
