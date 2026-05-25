@@ -511,7 +511,11 @@ export default function AskAI() {
                   showOverlay ? styles.fadeIn : styles.fadeOut
                 }`}
               >
-                <div ref={popupRef} className={styles.historyActionPopupPanel} onClick={(e) => e.stopPropagation()}>
+                <div
+                  ref={popupRef}
+                  className={styles.historyActionPopupPanel}
+                  onClick={(e) => e.stopPropagation()}
+                >
                   <HistoryActionPopup
                     isPinned={activeChat?.pinned}
                     onTogglePin={() => togglePinChat(activeChatId)}
