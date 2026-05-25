@@ -483,7 +483,13 @@ export default function AskAI() {
                     className={`${styles.historyItem} ${
                       activeChatId === chat.conversationId ? styles.activeHistoryItem : ""
                     }`}
-                  onClick={() => loadConversation(chat)}
+                  onClick={() => {
+                    if (editingChatId) {
+                      // trying to switch chat while editing
+                    }
+
+                    loadConversation(chat);
+                  }}
                 >
                   <span>{chat.chatName} </span>
                   <span className={styles.historyItemDot}>
