@@ -484,7 +484,7 @@ export default function AskAI() {
                       activeChatId === chat.conversationId ? styles.activeHistoryItem : ""
                     }`}
                   onClick={() => {
-                    if (editingChatId) {
+                    if (editingChatId && editingChatId !== chat.conversationId) {
                       // trying to switch chat while editing
                     }
 
