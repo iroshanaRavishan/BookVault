@@ -510,6 +510,7 @@ export default function AskAI() {
                 className={`${styles.overlay} ${
                   showOverlay ? styles.fadeIn : styles.fadeOut
                 }`}
+                onClick={() => { onDelete() }}
               >
                 <div
                   ref={popupRef}
