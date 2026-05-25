@@ -506,7 +506,11 @@ export default function AskAI() {
               ))} 
             </div>
             {showHistoryActionPopup && (
-              <div className={styles.overlay}>
+              <div
+                className={`${styles.overlay} ${
+                  showOverlay ? styles.fadeIn : styles.fadeOut
+                }`}
+              >
                 <div ref={popupRef} className={styles.historyActionPopupPanel} onClick={(e) => e.stopPropagation()}>
                   <HistoryActionPopup
                     isPinned={activeChat?.pinned}
