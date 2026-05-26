@@ -495,7 +495,7 @@ export default function AskAI() {
                     loadConversation(chat);
                   }}
                 >
-                  <span>{chat.chatName} </span>
+                  {editingChatId === chat.conversationId ? () : ()}
                   <span className={styles.historyItemDot}>
                     <span className={styles.floatingPinIcon}>
                       {chat.pinned ? <BsPinFill className={styles.pinnedIcon} /> : ""}
