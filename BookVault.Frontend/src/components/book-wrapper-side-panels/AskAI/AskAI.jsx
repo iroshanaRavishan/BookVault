@@ -428,7 +428,9 @@ export default function AskAI() {
             }
             style={{ cursor: "pointer" }} />
           <MdDelete />
-          <IoSettingsSharp />
+          <RiShareForwardFill 
+            // IMPLEMENT THE chat export feature here
+          />
         </div>
       </div>
 
