@@ -495,8 +495,9 @@ export default function AskAI() {
                     loadConversation(chat);
                   }}
                 >
-                  {editingChatId === chat.conversationId ? () : ()}
-                  <span className={styles.historyItemDot}>
+                  {editingChatId === chat.conversationId ? ( <div> </div> ) : ( <span></span>)}
+
+                  <div className={styles.historyItemDot}>
                     <span className={styles.floatingPinIcon}>
                       {chat.pinned ? <BsPinFill className={styles.pinnedIcon} /> : ""}
                     </span>
@@ -511,7 +512,7 @@ export default function AskAI() {
                         setShowOverlay(true);
                       }}
                     />
-                  </span>
+                  </div>
                 </div>
               ))} 
             </div>
