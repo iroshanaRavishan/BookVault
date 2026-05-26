@@ -42,10 +42,12 @@ export default function AskAI() {
   const [showHistoryActionPopup, setShowHistoryActionPopup] = useState(false);
   const [editingChatId, setEditingChatId] = useState(null);
   const [editingValue, setEditingValue] = useState("");
+  const [showConfirmRename, setShowConfirmRename] = useState(false);
   const [showExportPopup, setShowExportPopup] = useState(false);
   const [isClosingExport, setIsClosingExport] = useState(false);
   const [selectedChatForAction, setSelectedChatForAction] = useState(null);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const [openedChatId, setOpenedChatId] = useState(null);
 
   useEffect(() => {
     if (messages.length > 0) {
@@ -482,9 +484,18 @@ export default function AskAI() {
                     className={`${styles.historyItem} ${
                       activeChatId === chat.conversationId ? styles.activeHistoryItem : ""
                     }`}
-                  onClick={() => loadConversation(chat)}
+                  onClick={() => {
+                    if (editingChatId && editingChatId !== chat.conversationId) {
+                      // trying to switch chat while editing
+                      pendingActionRef.current = () => loadConversation(chat);
+                      setShowConfirmRename(true);
+                      return;
+                    }
+
+                    loadConversation(chat);
+                  }}
                 >
-                  <span>{chat.chatName} </span>
+                  {editingChatId === chat.conversationId ? () : ()}
                   <span className={styles.historyItemDot}>
                     <span className={styles.floatingPinIcon}>
                       {chat.pinned ? <BsPinFill className={styles.pinnedIcon} /> : ""}
@@ -505,8 +516,20 @@ export default function AskAI() {
               ))} 
             </div>
             {showHistoryActionPopup && (
-              <div className={styles.overlay}>
-                <div ref={popupRef} className={styles.historyActionPopupPanel} onClick={(e) => e.stopPropagation()}>
+              <div
+                className={`${styles.overlay} ${
+                  showOverlay ? styles.fadeIn : styles.fadeOut
+                }`}
+                onClick={() => {
+                  onDelete();
+                  closePopup();
+                }}
+              >
+                <div
+                  ref={popupRef}
+                  className={styles.historyActionPopupPanel}
+                  onClick={(e) => e.stopPropagation()}
+                >
                   <HistoryActionPopup
                     isPinned={activeChat?.pinned}
                     onTogglePin={() => togglePinChat(activeChatId)}
@@ -593,6 +616,30 @@ export default function AskAI() {
             </div>
 
             <div className={styles.modalActionButtons}>
+              <button
+                className={styles.modalButtons}
+                onClick={() => {
+                  setShowConfirmRename(false);
+                }}
+              >
+                No, back to the history
+              </button>
+
+              <button
+                className={styles.modalButtons}
+                onClick={() => {
+                  setShowConfirmRename(false);
+                  setEditingChatId(null);
+
+                  if (pendingActionRef.current) {
+                    pendingActionRef.current();
+                    pendingActionRef.current = null;
+                  }
+                }}
+                style={{ backgroundColor: "#f78080ff" }}
+              >
+                Yes
+              </button>
             </div>
           </div>
         </div>
@@ -624,6 +671,18 @@ export default function AskAI() {
                 }}
               >
                 Cancel
+              </button>
+
+              <button
+                className={styles.modalButtons}
+                style={{ backgroundColor: "#f78080ff" }}
+                onClick={() => {
+                  deleteConversation(activeChatId);
+                  setShowDeleteConfirm(false);
+                  setOpenedChatId(null)
+                }}
+              >
+                Delete
               </button>
             </div>
           </div>
