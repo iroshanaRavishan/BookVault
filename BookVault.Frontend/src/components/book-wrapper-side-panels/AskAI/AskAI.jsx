@@ -486,6 +486,7 @@ export default function AskAI() {
                   onClick={() => {
                     if (editingChatId && editingChatId !== chat.conversationId) {
                       // trying to switch chat while editing
+                      pendingActionRef.current = () => loadConversation(chat);
                     }
 
                     loadConversation(chat);
