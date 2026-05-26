@@ -488,6 +488,8 @@ export default function AskAI() {
                     if (editingChatId && editingChatId !== chat.conversationId) {
                       // trying to switch chat while editing
                       pendingActionRef.current = () => loadConversation(chat);
+                      setShowConfirmRename(true);
+                      return;
                     }
 
                     loadConversation(chat);
