@@ -42,6 +42,7 @@ export default function AskAI() {
   const [showHistoryActionPopup, setShowHistoryActionPopup] = useState(false);
   const [editingChatId, setEditingChatId] = useState(null);
   const [editingValue, setEditingValue] = useState("");
+  const [showConfirmRename, setShowConfirmRename] = useState(false);
   const [showExportPopup, setShowExportPopup] = useState(false);
   const [isClosingExport, setIsClosingExport] = useState(false);
   const [selectedChatForAction, setSelectedChatForAction] = useState(null);
