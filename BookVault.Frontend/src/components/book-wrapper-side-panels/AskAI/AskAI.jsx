@@ -426,9 +426,14 @@ export default function AskAI() {
                 setInputHeight(0);
               })
             }
-            style={{ cursor: "pointer" }} />
-          <MdDelete />
-          <IoSettingsSharp />
+            style={{ cursor: "pointer" }} 
+          />
+          <MdDelete 
+            onClick={() => { }}
+          />
+          <RiShareForwardFill 
+            // IMPLEMENT THE chat export feature here
+          />
         </div>
       </div>
 
@@ -495,8 +500,13 @@ export default function AskAI() {
                     loadConversation(chat);
                   }}
                 >
-                  {editingChatId === chat.conversationId ? () : ()}
-                  <span className={styles.historyItemDot}>
+                  {editingChatId === chat.conversationId ? (
+                    <div> </div>
+                  ) : (
+                    <span className={styles.displayChatName}>{getDisplayName(chat.chatName, 30)}</span>
+                  )}
+
+                  <div className={styles.historyItemDot}>
                     <span className={styles.floatingPinIcon}>
                       {chat.pinned ? <BsPinFill className={styles.pinnedIcon} /> : ""}
                     </span>
@@ -511,7 +521,7 @@ export default function AskAI() {
                         setShowOverlay(true);
                       }}
                     />
-                  </span>
+                  </div>
                 </div>
               ))} 
             </div>
