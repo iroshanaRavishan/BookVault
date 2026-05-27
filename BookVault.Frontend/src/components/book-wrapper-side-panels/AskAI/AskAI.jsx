@@ -64,6 +64,7 @@ export default function AskAI() {
     conversationIdRef.current = crypto.randomUUID();
     hasNamedChatRef.current = false; 
     setTimeout(() => setIsResetting(false), 0);
+    setOpenedChatId(conversationIdRef.current)
   };
 
   const hasMessages = messages.length > 0;
