@@ -64,6 +64,7 @@ export default function AskAI() {
     conversationIdRef.current = crypto.randomUUID();
     hasNamedChatRef.current = false; 
     setTimeout(() => setIsResetting(false), 0);
+    setOpenedChatId(conversationIdRef.current)
   };
 
   const hasMessages = messages.length > 0;
@@ -317,6 +318,7 @@ export default function AskAI() {
       startNewChat();
     }
 
+    setShowDeleteConfirm(false);
     setShowHistoryActionPopup(false);
     setShowOverlay(false);
     setActiveChatId(null);
@@ -341,6 +343,7 @@ export default function AskAI() {
 
     setShowHistory(false);
     setShowInitialUI(false);
+    setOpenedChatId(chat.conversationId)
   };
 
   useEffect(() => {
