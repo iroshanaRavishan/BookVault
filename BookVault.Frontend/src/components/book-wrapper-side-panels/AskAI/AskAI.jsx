@@ -318,6 +318,7 @@ export default function AskAI() {
       startNewChat();
     }
 
+    setShowDeleteConfirm(false);
     setShowHistoryActionPopup(false);
     setShowOverlay(false);
     setActiveChatId(null);
