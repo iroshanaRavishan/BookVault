@@ -500,7 +500,11 @@ export default function AskAI() {
                     loadConversation(chat);
                   }}
                 >
-                  {editingChatId === chat.conversationId ? ( <div> </div> ) : ( <span></span>)}
+                  {editingChatId === chat.conversationId ? (
+                    <div> </div>
+                  ) : (
+                    <span className={styles.displayChatName}>Chat Name</span>
+                  )}
 
                   <div className={styles.historyItemDot}>
                     <span className={styles.floatingPinIcon}>
