@@ -343,6 +343,7 @@ export default function AskAI() {
 
     setShowHistory(false);
     setShowInitialUI(false);
+    setOpenedChatId(chat.conversationId)
   };
 
   useEffect(() => {
