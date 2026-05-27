@@ -426,8 +426,11 @@ export default function AskAI() {
                 setInputHeight(0);
               })
             }
-            style={{ cursor: "pointer" }} />
-          <MdDelete />
+            style={{ cursor: "pointer" }} 
+          />
+          <MdDelete 
+            onClick={() => { }}
+          />
           <RiShareForwardFill 
             // IMPLEMENT THE chat export feature here
           />
