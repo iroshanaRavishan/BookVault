@@ -503,7 +503,7 @@ export default function AskAI() {
                   {editingChatId === chat.conversationId ? (
                     <div> </div>
                   ) : (
-                    <span className={styles.displayChatName}>Chat Name</span>
+                    <span className={styles.displayChatName}>{getDisplayName(chat.chatName, 30)}</span>
                   )}
 
                   <div className={styles.historyItemDot}>
