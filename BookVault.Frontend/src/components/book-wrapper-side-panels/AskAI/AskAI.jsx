@@ -442,6 +442,7 @@ export default function AskAI() {
         
       {!showInitialUI && (
         <div className={styles.messageWall}>
+          <MessageWall />
         </div>
       )}
 
