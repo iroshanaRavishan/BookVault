@@ -269,6 +269,10 @@ export default function AskAI() {
   //   setShowInitialUI(false);
   // };
 
+  const renameConversation = () => {
+
+  };
+
   const closePopup = () => {
     setShowOverlay(false);
     // start export closing animation
