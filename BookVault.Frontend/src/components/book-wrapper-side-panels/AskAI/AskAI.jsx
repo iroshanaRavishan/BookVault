@@ -523,6 +523,9 @@ export default function AskAI() {
                       <button className={styles.renameActionButton} >
                         Ok
                       </button>
+                      <button>
+                        Cancel
+                      </button>
                     </div>
                   ) : (
                     <span className={styles.displayChatName}>{getDisplayName(chat.chatName, 30)}</span>
