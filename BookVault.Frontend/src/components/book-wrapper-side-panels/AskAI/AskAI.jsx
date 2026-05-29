@@ -523,7 +523,7 @@ export default function AskAI() {
                       <button className={styles.renameActionButton} >
                         Ok
                       </button>
-                      <button>
+                      <button className={styles.renameActionButton}>
                         Cancel
                       </button>
                     </div>
