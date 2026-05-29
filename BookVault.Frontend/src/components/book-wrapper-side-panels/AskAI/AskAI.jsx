@@ -37,6 +37,7 @@ export default function AskAI() {
   const [currentChatName, setCurrentChatName] = useState("New Chat");
   const [showHistory, setShowHistory] = useState(false);
   const [chatList, setChatList] = useState([]);
+  const [initialUiSlide, setInitialUiSlide] = useState(false);
   const [message, setMessage] = useState("");
   const [showConfirm, setShowConfirm] = useState(false);
   const [showHistoryActionPopup, setShowHistoryActionPopup] = useState(false);
