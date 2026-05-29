@@ -332,3 +332,10 @@
 .modalButtons:hover {
   background-color: #666;
 }
+
+.displayChatName{
+    display: flex;
+    overflow-x: hidden;
+    width: 100%;
+    padding: 0px 10px;
+}
