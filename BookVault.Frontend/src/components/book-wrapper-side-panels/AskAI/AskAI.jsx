@@ -510,7 +510,7 @@ export default function AskAI() {
                   }}
                 >
                   {editingChatId === chat.conversationId ? (
-                    <div> </div>
+                    <div style={{ display: "flex" }}> </div>
                   ) : (
                     <span className={styles.displayChatName}>{getDisplayName(chat.chatName, 30)}</span>
                   )}
