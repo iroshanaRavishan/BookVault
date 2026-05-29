@@ -513,7 +513,11 @@ export default function AskAI() {
                     <div
                       style={{ display: "flex", gap: "3px", alignItems: "center" }}
                       className={styles.displayChatName}
-                    > </div>
+                    >
+                      <button >
+                        Ok
+                      </button>
+                    </div>
                   ) : (
                     <span className={styles.displayChatName}>{getDisplayName(chat.chatName, 30)}</span>
                   )}
