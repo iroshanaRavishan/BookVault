@@ -364,6 +364,13 @@
   background-color: #666;
 }
 
+.historyActionPopupPanel {
+    position: fixed;
+    top: 315px;
+    left: 242px;
+    transform: translateX(100%);
+}
+
 .displayChatName{
     display: flex;
     overflow-x: hidden;
