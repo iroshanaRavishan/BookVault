@@ -269,6 +269,14 @@
     transition: transform 0.3s ease;
 }
 
+.historyButton:hover {
+    background-color: #818181;
+    color: white;
+}
+
+.historyButton:hover .chevron svg {
+   color: white;
+}
 
 .continueChatButton {
     border: 1px solid #ccc;
