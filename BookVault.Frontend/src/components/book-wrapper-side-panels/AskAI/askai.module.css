@@ -287,6 +287,12 @@
     border-radius: 15px;
     transition: all 0.3s ease;
 
+    display: flex;  
+    gap: 6px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    transition: transform 0.3s ease;
 }
 
 .actionArea {
