@@ -271,7 +271,7 @@ export default function AskAI() {
   // };
 
   const renameConversation = () => {
-
+    const history = getChatHistory();
   };
 
   const closePopup = () => {
