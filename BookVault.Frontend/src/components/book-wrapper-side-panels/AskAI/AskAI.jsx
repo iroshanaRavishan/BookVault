@@ -272,6 +272,11 @@ export default function AskAI() {
 
   const renameConversation = (conversationId, newName) => {
     const history = getChatHistory();
+
+    const updated = history.map(chat => {
+     
+    });
+
   };
 
   const closePopup = () => {
