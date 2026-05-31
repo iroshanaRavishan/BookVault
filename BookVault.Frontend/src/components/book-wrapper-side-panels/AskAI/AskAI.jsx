@@ -37,6 +37,7 @@ export default function AskAI() {
   const [currentChatName, setCurrentChatName] = useState("New Chat");
   const [showHistory, setShowHistory] = useState(false);
   const [chatList, setChatList] = useState([]);
+  const [initialUiSlide, setInitialUiSlide] = useState(false);
   const [message, setMessage] = useState("");
   const [showConfirm, setShowConfirm] = useState(false);
   const [showHistoryActionPopup, setShowHistoryActionPopup] = useState(false);
@@ -269,6 +270,15 @@ export default function AskAI() {
   //   setShowInitialUI(false);
   // };
 
+  const renameConversation = (conversationId, newName) => {
+    const history = getChatHistory();
+
+    const updated = history.map(chat => {
+     
+    });
+
+  };
+
   const closePopup = () => {
     setShowOverlay(false);
     // start export closing animation
@@ -439,8 +449,14 @@ export default function AskAI() {
           />
         </div>
       </div>
+        
+      {!showInitialUI && (
+        <div className={styles.messageWall}>
+          <MessageWall messages={messages} isTyping={isTyping}/>
+        </div>
+      )}
 
-      <div className={`${styles.initialUiContainer} ${ showInitialUI ? styles.slideDown : styles.slideUp }`}>
+
         <div className={styles.logoContainer}>
           <img src='/src/assets/logo mark.png' className={styles.profilePicture} />       
           <img src='/src/assets/AI.png' className={styles.AiPicture} />       
@@ -504,7 +520,18 @@ export default function AskAI() {
                   }}
                 >
                   {editingChatId === chat.conversationId ? (
-                    <div> </div>
+                    <div
+                      style={{ display: "flex", gap: "3px", alignItems: "center" }}
+                      onClick={(e) => e.stopPropagation()}
+                      className={styles.displayChatName}
+                    >
+                      <button className={styles.renameActionButton} >
+                        Ok
+                      </button>
+                      <button className={styles.renameActionButton}>
+                        Cancel
+                      </button>
+                    </div>
                   ) : (
                     <span className={styles.displayChatName}>{getDisplayName(chat.chatName, 30)}</span>
                   )}
