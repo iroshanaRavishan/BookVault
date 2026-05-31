@@ -270,7 +270,7 @@ export default function AskAI() {
   //   setShowInitialUI(false);
   // };
 
-  const renameConversation = () => {
+  const renameConversation = (conversationId, newName) => {
     const history = getChatHistory();
   };
 
