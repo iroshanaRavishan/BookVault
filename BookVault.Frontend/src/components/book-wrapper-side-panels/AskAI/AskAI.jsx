@@ -463,7 +463,11 @@ export default function AskAI() {
         
       {!showInitialUI && (
         <div className={styles.messageWall}>
-          <MessageWall messages={messages} isTyping={isTyping}/>
+          <MessageWall
+            messages={messages}
+            isTyping={isTyping}
+            onEdit={editMessage}
+          />
         </div>
       )}
 
