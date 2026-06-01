@@ -274,7 +274,11 @@ export default function AskAI() {
     const history = getChatHistory();
 
     const updated = history.map(chat => {
-      if (chat.conversationId === conversationId) { }
+      if (chat.conversationId === conversationId) {
+        return {
+          ...chat,
+        };
+      }
     });
 
   };
