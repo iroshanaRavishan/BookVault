@@ -142,6 +142,12 @@
     transform: translateX(27px);
 }
 
+.historyItemDot {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
     color: #555;
     margin-top: 4px;
     margin-bottom: 8px;
