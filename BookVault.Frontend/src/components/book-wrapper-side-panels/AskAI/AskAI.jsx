@@ -278,6 +278,7 @@ export default function AskAI() {
         return {
           ...chat,
           chatName: newName,
+          updatedAt: new Date().toISOString(),
         };
       }
     });
