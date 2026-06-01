@@ -278,11 +278,13 @@ export default function AskAI() {
         return {
           ...chat,
           chatName: newName,
+          updatedAt: new Date().toISOString(),
         };
       }
       return chat;
     });
 
+    saveChatHistory(updated);
   };
 
   const closePopup = () => {
