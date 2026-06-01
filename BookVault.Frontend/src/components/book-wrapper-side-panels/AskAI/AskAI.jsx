@@ -277,6 +277,7 @@ export default function AskAI() {
       if (chat.conversationId === conversationId) {
         return {
           ...chat,
+          chatName: newName,
         };
       }
     });
