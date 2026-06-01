@@ -116,7 +116,7 @@
     /* margin: 10px 0px; */
 }
 
-.historyItem::after {
+/* .historyItem::after {
     content: "";
     position: absolute;
      bottom: -6px;            
@@ -124,7 +124,7 @@
     right: 0px;         
     height: 1px;         
     background-color: #44444427;
-}
+} */
 
 .historyItem:hover:not(:has(.dotsIcon:hover)) {
     background: #0000000a;
