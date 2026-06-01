@@ -450,7 +450,10 @@ export default function AskAI() {
             style={{ cursor: "pointer" }} 
           />
           <MdDelete 
-            onClick={() => { setShowDeleteConfirm(true); }}
+            onClick={() => {
+              setShowDeleteConfirm(true);
+              setActiveChatId(openedChatId)
+            }}
           />
           <RiShareForwardFill 
             // IMPLEMENT THE chat export feature here
