@@ -49,6 +49,13 @@
     align-items: center;
 }
 
+/* when messages exist */
+.slideUp {
+    transform: translateY(-120px);
+    opacity: 0;
+    pointer-events: none;
+}
+
 /* when hidden */
 .slideUp {
     --slide-translate: -100%;
