@@ -150,6 +150,24 @@ export default function AskAI() {
     });
   };
 
+// const editMessage = (id, newText) => {
+//   setMessages(prev => {
+//     const originalMsg = prev.find(m => m.id === id);
+
+//     if (!originalMsg) return prev;
+
+//     const newMessage = {
+//       ...originalMsg,
+//       id: Date.now(), // new unique id
+//       text: newText,
+//       editedFrom: id, // optional (track original)
+//       time: new Date().toLocaleTimeString(),
+//     };
+
+//     return [...prev, newMessage];
+//   });
+// };
+
   const editMessage = (id, newText) => {
     const originalMsg = messages.find(m => m.id === id);
     if (!originalMsg) return;
