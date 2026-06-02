@@ -472,10 +472,12 @@ export default function AskAI() {
       )}
 
       <div
-        className={`${styles.initialUiContainer} ${
-          showInitialUI ? styles.slideDown : styles.slideUp
-        } ${showHistory ? styles.slideHalfUp : ""}`}
-        style={{height:'365px' }}
+        className={`
+          ${styles.initialUiContainer} 
+          ${showInitialUI ? styles.slideDown : styles.slideUp} 
+          ${showHistory ? styles.slideHalfUp : ""}
+        `}
+        style={{ height:'365px' }}
       >
         <div className={styles.logoContainer}>
           <img src='/src/assets/logo mark.png' className={styles.profilePicture} />       
