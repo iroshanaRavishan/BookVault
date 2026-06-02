@@ -565,11 +565,11 @@ export default function AskAI() {
                       onClick={(e) => e.stopPropagation()}
                       className={styles.displayChatName}
                     >
-                      <button className={styles.renameActionButton} >
-                        Ok
+                      <button className={styles.renameActionButton}>
+                        <FiCheck />
                       </button>
                       <button className={styles.renameActionButton}>
-                        Cancel
+                        <MdOutlineCancel/>
                       </button>
                     </div>
                   ) : (
