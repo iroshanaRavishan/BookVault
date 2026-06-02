@@ -50,11 +50,11 @@
 }
 
 /* when messages exist */
-.slideUp {
+/* .slideUp {
     transform: translateY(-120px);
     opacity: 0;
     pointer-events: none;
-}
+} */
 
 /* when hidden */
 .slideUp {
