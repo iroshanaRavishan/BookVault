@@ -148,7 +148,12 @@
 }
 
 .historyItem:hover .floatingPinIcon {
-    transform: translateX(0px);
+    transform: translateX(0px); /* move left */
+}
+
+.historyItem:hover .dotsIcon {
+    opacity: 1;
+    transform: translateX(0);
 }
 
 .floatingPinIcon {
