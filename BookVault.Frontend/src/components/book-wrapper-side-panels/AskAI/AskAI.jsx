@@ -566,10 +566,10 @@ export default function AskAI() {
                       className={styles.displayChatName}
                     >
                       <button className={styles.renameActionButton}>
-                        <FiCheck />
+                        <FiCheck style={{marginTop:'3px'}} size={18}/>
                       </button>
                       <button className={styles.renameActionButton}>
-                        <MdOutlineCancel/>
+                        <MdOutlineCancel style={{marginTop:'3px'}} size={18}/>
                       </button>
                     </div>
                   ) : (
