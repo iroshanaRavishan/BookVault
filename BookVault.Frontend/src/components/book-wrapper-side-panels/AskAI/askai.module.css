@@ -449,6 +449,18 @@
   transition: opacity 0.2s ease;
 }
 
+.inputTextbox {
+  transition: border-color 0.2s, box-shadow 0.2s;
+  padding: 6px 10px;
+  font-size: 13px;
+  outline: none;
+  margin-left: -10px;
+  height: 12px;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
 .displayChatName{
     display: flex;
     overflow-x: hidden;
