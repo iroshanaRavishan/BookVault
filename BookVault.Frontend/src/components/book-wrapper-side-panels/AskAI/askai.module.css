@@ -199,6 +199,10 @@
     transition: 0.3s;
 }
 
+.dotsIcon:hover {
+    background: #00000014;
+}
+
 .chevron {
   display: inline-block;
   transition: transform 0.3s ease;
