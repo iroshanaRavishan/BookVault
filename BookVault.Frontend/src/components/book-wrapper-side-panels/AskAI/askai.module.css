@@ -192,6 +192,13 @@
     cursor: pointer;
 }
 
+.historyItem:hover .dotsIcon {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transition: 0.3s;
+}
+
 .chevron {
   display: inline-block;
   transition: transform 0.3s ease;
