@@ -573,9 +573,11 @@ export default function AskAI() {
                       >
                         <FiCheck style={{marginTop:'3px'}} size={18}/>
                       </button>
+
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
+                          setEditingChatId(null);
                         }}
                         className={`${styles.renameActionButton} ${styles.delete}`}
                       >
