@@ -569,6 +569,8 @@ export default function AskAI() {
                         onClick={(e) => {
                           e.stopPropagation();
                           if (!editingValue.trim()) return;
+
+                          renameConversation(chat.conversationId, editingValue.trim());
                         }}
                         className={`${styles.renameActionButton} ${styles.correct}`}
                       >
