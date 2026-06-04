@@ -568,7 +568,7 @@ export default function AskAI() {
                       <button className={styles.renameActionButton}>
                         <FiCheck style={{marginTop:'3px'}} size={18}/>
                       </button>
-                      <button className={styles.renameActionButton}>
+                      <button className={`${styles.renameActionButton} ${styles.delete}`}>
                         <MdOutlineCancel style={{marginTop:'3px'}} size={18}/>
                       </button>
                     </div>
