@@ -565,7 +565,7 @@ export default function AskAI() {
                       onClick={(e) => e.stopPropagation()}
                       className={styles.displayChatName}
                     >
-                      <button className={styles.renameActionButton}>
+                      <button className={`${styles.renameActionButton} ${styles.correct}`} >
                         <FiCheck style={{marginTop:'3px'}} size={18}/>
                       </button>
                       <button className={`${styles.renameActionButton} ${styles.delete}`}>
