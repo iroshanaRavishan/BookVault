@@ -568,7 +568,12 @@ export default function AskAI() {
                       <button className={`${styles.renameActionButton} ${styles.correct}`} >
                         <FiCheck style={{marginTop:'3px'}} size={18}/>
                       </button>
-                      <button className={`${styles.renameActionButton} ${styles.delete}`}>
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                        }}
+                        className={`${styles.renameActionButton} ${styles.delete}`}
+                      >
                         <MdOutlineCancel style={{marginTop:'3px'}} size={18}/>
                       </button>
                     </div>
