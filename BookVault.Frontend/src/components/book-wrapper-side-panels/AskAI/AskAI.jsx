@@ -568,6 +568,7 @@ export default function AskAI() {
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
+                          if (!editingValue.trim()) return;
                         }}
                         className={`${styles.renameActionButton} ${styles.correct}`}
                       >
