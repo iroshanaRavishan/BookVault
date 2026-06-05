@@ -59,6 +59,11 @@ export default function AskAI() {
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (!editingChatId) return;
+
+      if ( historyRef.current) {
+        // clicked outside then cancel immediately
+        setEditingChatId(null);
+      }
     };
 
     document.addEventListener("mousedown", handleClickOutside);
