@@ -60,8 +60,11 @@ export default function AskAI() {
     const handleClickOutside = (e) => {
       if (!editingChatId) return;
 
-      if ( historyRef.current) {
-        // clicked outside then cancel immediately
+      if (
+        historyRef.current &&
+        !historyRef.current.contains(e.target)
+      ) {
+        // clicked outside → cancel immediately
         setEditingChatId(null);
       }
     };
