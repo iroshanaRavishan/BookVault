@@ -56,6 +56,10 @@ export default function AskAI() {
     }
   }, [messages]);
 
+  useEffect(() => {
+
+  }, [editingChatId]);
+
   const startNewChat = () => {
     setIsResetting(true);
     setMessages([]);
