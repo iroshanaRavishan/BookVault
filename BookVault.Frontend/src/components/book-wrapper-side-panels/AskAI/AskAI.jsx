@@ -60,6 +60,10 @@ export default function AskAI() {
     const handleClickOutside = (e) => {
       if (!editingChatId) return;
     };
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
   }, [editingChatId]);
 
   const startNewChat = () => {
