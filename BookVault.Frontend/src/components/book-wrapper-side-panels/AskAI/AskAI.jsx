@@ -57,7 +57,9 @@ export default function AskAI() {
   }, [messages]);
 
   useEffect(() => {
-
+    const handleClickOutside = (e) => {
+      if (!editingChatId) return;
+    };
   }, [editingChatId]);
 
   const startNewChat = () => {
