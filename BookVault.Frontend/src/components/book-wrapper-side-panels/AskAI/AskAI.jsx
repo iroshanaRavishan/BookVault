@@ -61,6 +61,8 @@ export default function AskAI() {
       if (!editingChatId) return;
     };
 
+    document.addEventListener("mousedown", handleClickOutside);
+
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
