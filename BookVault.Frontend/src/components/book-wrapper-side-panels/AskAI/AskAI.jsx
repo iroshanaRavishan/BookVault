@@ -56,6 +56,26 @@ export default function AskAI() {
     }
   }, [messages]);
 
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (!editingChatId) return;
+
+      if (
+        historyRef.current &&
+        !historyRef.current.contains(e.target)
+      ) {
+        // clicked outside → cancel immediately
+        setEditingChatId(null);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [editingChatId]);
+
   const startNewChat = () => {
     setIsResetting(true);
     setMessages([]);
@@ -149,6 +169,24 @@ export default function AskAI() {
       return new Date(b.updatedAt) - new Date(a.updatedAt);
     });
   };
+
+// const editMessage = (id, newText) => {
+//   setMessages(prev => {
+//     const originalMsg = prev.find(m => m.id === id);
+
+//     if (!originalMsg) return prev;
+
+//     const newMessage = {
+//       ...originalMsg,
+//       id: Date.now(), // new unique id
+//       text: newText,
+//       editedFrom: id, // optional (track original)
+//       time: new Date().toLocaleTimeString(),
+//     };
+
+//     return [...prev, newMessage];
+//   });
+// };
 
   const editMessage = (id, newText) => {
     const originalMsg = messages.find(m => m.id === id);
@@ -274,9 +312,25 @@ export default function AskAI() {
     const history = getChatHistory();
 
     const updated = history.map(chat => {
-     
+      if (chat.conversationId === conversationId) {
+        return {
+          ...chat,
+          chatName: newName,
+          updatedAt: new Date().toISOString(),
+        };
+      }
+      return chat;
     });
 
+    saveChatHistory(updated);
+
+    const sorted = sortChats(updated);
+    setChatList(sorted);
+
+    // update active chat if needed
+    if (conversationIdRef.current === conversationId) {
+      setCurrentChatName(newName);
+    }
   };
 
   const closePopup = () => {
@@ -442,7 +496,10 @@ export default function AskAI() {
             style={{ cursor: "pointer" }} 
           />
           <MdDelete 
-            onClick={() => { }}
+            onClick={() => {
+              setShowDeleteConfirm(true);
+              setActiveChatId(openedChatId)
+            }}
           />
           <RiShareForwardFill 
             // IMPLEMENT THE chat export feature here
@@ -452,11 +509,22 @@ export default function AskAI() {
         
       {!showInitialUI && (
         <div className={styles.messageWall}>
-          <MessageWall messages={messages} isTyping={isTyping}/>
+          <MessageWall
+            messages={messages}
+            isTyping={isTyping}
+            onEdit={editMessage}
+          />
         </div>
       )}
 
-
+      <div
+        className={`
+          ${styles.initialUiContainer} 
+          ${showInitialUI ? styles.slideDown : styles.slideUp} 
+          ${showHistory ? styles.slideHalfUp : ""}
+        `}
+        style={{ height: showHistory ? '595px' : '365px' }}
+      >
         <div className={styles.logoContainer}>
           <img src='/src/assets/logo mark.png' className={styles.profilePicture} />       
           <img src='/src/assets/AI.png' className={styles.AiPicture} />       
@@ -525,11 +593,26 @@ export default function AskAI() {
                       onClick={(e) => e.stopPropagation()}
                       className={styles.displayChatName}
                     >
-                      <button className={styles.renameActionButton} >
-                        Ok
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          if (!editingValue.trim()) return;
+
+                          renameConversation(chat.conversationId, editingValue.trim());
+                        }}
+                        className={`${styles.renameActionButton} ${styles.correct}`}
+                      >
+                        <FiCheck style={{marginTop:'3px'}} size={18}/>
                       </button>
-                      <button className={styles.renameActionButton}>
-                        Cancel
+
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setEditingChatId(null);
+                        }}
+                        className={`${styles.renameActionButton} ${styles.delete}`}
+                      >
+                        <MdOutlineCancel style={{marginTop:'3px'}} size={18}/>
                       </button>
                     </div>
                   ) : (
