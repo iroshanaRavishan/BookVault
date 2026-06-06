@@ -593,7 +593,7 @@ export default function AskAI() {
                       onClick={(e) => e.stopPropagation()}
                       className={styles.displayChatName}
                     >
-                      <input value={editingValue} />  
+                      <input value={editingValue}  autoFocus />  
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
