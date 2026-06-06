@@ -600,6 +600,7 @@ export default function AskAI() {
                           if (!editingValue.trim()) return;
 
                           renameConversation(chat.conversationId, editingValue.trim());
+                          setEditingChatId(null);
                         }}
                         className={`${styles.renameActionButton} ${styles.correct}`}
                       >
