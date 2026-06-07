@@ -594,7 +594,8 @@ export default function AskAI() {
                       className={styles.displayChatName}
                     >
                       <input
-                        value={editingValue} 
+                        value={editingValue}
+                        onChange={(e) => setEditingValue(e.target.value)}
                         onClick={(e) => e.stopPropagation()}
                         autoFocus 
                         onFocus={(e) => e.target.select()}
