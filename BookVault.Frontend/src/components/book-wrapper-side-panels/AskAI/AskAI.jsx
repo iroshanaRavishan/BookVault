@@ -598,6 +598,7 @@ export default function AskAI() {
                         onClick={(e) => e.stopPropagation()}
                         autoFocus 
                         onFocus={(e) => e.target.select()}
+                        className={styles.inputTextbox}
                         placeholder="Enter chat name" 
                       />  
                       <button
