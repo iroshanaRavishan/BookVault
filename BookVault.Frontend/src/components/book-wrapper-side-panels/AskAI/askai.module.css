@@ -461,6 +461,10 @@
   opacity: 0;
 }
 
+.activeHistoryItem {
+  background-color: rgba(0, 0, 0, 0.15);
+}
+
 .inputTextbox {
   transition: border-color 0.2s, box-shadow 0.2s;
   padding: 6px 10px;
