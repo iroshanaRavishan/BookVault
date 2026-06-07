@@ -597,7 +597,9 @@ export default function AskAI() {
                         value={editingValue} 
                         onClick={(e) => e.stopPropagation()}
                         autoFocus 
-                        onFocus={(e) => e.target.select()}/>  
+                        onFocus={(e) => e.target.select()}
+                        placeholder="Enter chat name" 
+                      />  
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
