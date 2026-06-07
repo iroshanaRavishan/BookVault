@@ -453,6 +453,14 @@
   position: relative;
 }
 
+.fadeIn {
+  opacity: 1;
+}
+
+.fadeOut {
+  opacity: 0;
+}
+
 .inputTextbox {
   transition: border-color 0.2s, box-shadow 0.2s;
   padding: 6px 10px;
