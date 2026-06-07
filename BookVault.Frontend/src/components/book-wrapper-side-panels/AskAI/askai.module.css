@@ -449,6 +449,10 @@
   transition: opacity 0.2s ease;
 }
 
+.wrapper {
+  position: relative;
+}
+
 .inputTextbox {
   transition: border-color 0.2s, box-shadow 0.2s;
   padding: 6px 10px;
