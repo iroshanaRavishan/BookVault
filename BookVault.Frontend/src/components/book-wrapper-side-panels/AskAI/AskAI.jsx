@@ -596,7 +596,8 @@ export default function AskAI() {
                       <input
                         value={editingValue} 
                         onClick={(e) => e.stopPropagation()}
-                        autoFocus />  
+                        autoFocus 
+                        onFocus={(e) => e.target.select()}/>  
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
