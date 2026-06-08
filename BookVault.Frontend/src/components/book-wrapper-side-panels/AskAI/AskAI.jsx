@@ -515,6 +515,7 @@ export default function AskAI() {
             messages={messages}
             isTyping={isTyping}
             onEdit={editMessage}
+            onReply={setReplyingTo}
           />
         </div>
       )}
