@@ -48,6 +48,7 @@ export default function AskAI() {
   const [showExportPopup, setShowExportPopup] = useState(false);
   const [isClosingExport, setIsClosingExport] = useState(false);
   const [selectedChatForAction, setSelectedChatForAction] = useState(null);
+  const [replyingTo, setReplyingTo] = useState(null);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [openedChatId, setOpenedChatId] = useState(null);
 
