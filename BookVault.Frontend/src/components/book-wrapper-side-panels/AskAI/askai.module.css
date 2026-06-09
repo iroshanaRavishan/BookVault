@@ -47,6 +47,15 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    /* overflow-y: auto; */
+    height: 365px;
+    gap: 15px;
+    text-align: center;
+    padding: 30px 10px 0 10px;
+    inset: 0;
+        transition:
+        transform 0.6s ease,
+        opacity 0.4s ease;
 }
 
 /* when messages exist */
