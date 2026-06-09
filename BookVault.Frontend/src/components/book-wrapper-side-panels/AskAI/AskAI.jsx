@@ -34,6 +34,7 @@ export default function AskAI() {
   const [showInitialUI, setShowInitialUI] = useState(true);
   const [isResetting, setIsResetting] = useState(false);
   const [canContinueChat, setCanContinueChat] = useState(false);
+  const [inputHeight, setInputHeight] = useState(0);
   const [currentChatName, setCurrentChatName] = useState("New Chat");
   const [showHistory, setShowHistory] = useState(false);
   const [chatList, setChatList] = useState([]);
@@ -47,6 +48,7 @@ export default function AskAI() {
   const [showExportPopup, setShowExportPopup] = useState(false);
   const [isClosingExport, setIsClosingExport] = useState(false);
   const [selectedChatForAction, setSelectedChatForAction] = useState(null);
+  const [replyingTo, setReplyingTo] = useState(null);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [openedChatId, setOpenedChatId] = useState(null);
 
@@ -513,6 +515,7 @@ export default function AskAI() {
             messages={messages}
             isTyping={isTyping}
             onEdit={editMessage}
+            onReply={setReplyingTo}
           />
         </div>
       )}
@@ -593,12 +596,22 @@ export default function AskAI() {
                       onClick={(e) => e.stopPropagation()}
                       className={styles.displayChatName}
                     >
+                      <input
+                        value={editingValue}
+                        onChange={(e) => setEditingValue(e.target.value)}
+                        onClick={(e) => e.stopPropagation()}
+                        autoFocus 
+                        onFocus={(e) => e.target.select()}
+                        className={styles.inputTextbox}
+                        placeholder="Enter chat name" 
+                      />  
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
                           if (!editingValue.trim()) return;
 
                           renameConversation(chat.conversationId, editingValue.trim());
+                          setEditingChatId(null);
                         }}
                         className={`${styles.renameActionButton} ${styles.correct}`}
                       >
