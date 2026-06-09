@@ -500,6 +500,12 @@
   background-color: rgba(0, 0, 0, 0.15);
 }
 
+.pinnedIcon {
+    color: #00000044;
+    margin-top: 13px;  
+    font-size: 12px;
+}
+
 .inputTextbox {
   transition: border-color 0.2s, box-shadow 0.2s;
   padding: 6px 10px;
