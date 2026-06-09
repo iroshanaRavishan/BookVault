@@ -518,6 +518,11 @@
   border-radius: 5px;
 }
 
+.inputTextbox:focus {
+  outline: none;
+}
+
+
 .displayChatName{
     display: flex;
     overflow-x: hidden;
