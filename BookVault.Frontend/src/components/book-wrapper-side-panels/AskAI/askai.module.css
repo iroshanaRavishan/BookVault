@@ -522,6 +522,11 @@
   outline: none;
 }
 
+.renameActionButton {
+  padding: 0px 2px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
 
 .displayChatName{
     display: flex;
