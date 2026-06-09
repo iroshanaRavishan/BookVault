@@ -56,6 +56,11 @@
         transition:
         transform 0.6s ease,
         opacity 0.4s ease;
+    --slide-translate: 0%;
+    --ui-offset: 0px;
+    transform: translateY(calc(var(--slide-translate) + var(--ui-offset)));
+    opacity: 1;
+    pointer-events: auto;
     z-index: 10;
     transition:
     transform 0.3s ease,
