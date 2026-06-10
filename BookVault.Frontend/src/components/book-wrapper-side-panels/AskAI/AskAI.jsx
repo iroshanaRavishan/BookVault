@@ -695,7 +695,8 @@ export default function AskAI() {
           value={message}
           onSend={(text) => {
             sendMessage({
-              text
+              text,
+              page: attachedPage,
             });
 
             setAttachedPage(null);
