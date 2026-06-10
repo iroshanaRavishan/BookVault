@@ -702,6 +702,7 @@ export default function AskAI() {
             setReplyingTo(null);
           }}
           onChange={(e) => setMessage(e.target.value)}
+          attachedPage={attachedPage}
         />
       </div>
 
