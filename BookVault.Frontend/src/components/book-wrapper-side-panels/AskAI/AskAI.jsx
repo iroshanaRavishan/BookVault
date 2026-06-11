@@ -231,6 +231,7 @@ export default function AskAI() {
         text,
         page,
         sender: "user",
+        attachedPage: page,
         time: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
         date: now.toDateString(),
       },
@@ -695,13 +696,16 @@ export default function AskAI() {
           value={message}
           onSend={(text) => {
             sendMessage({
-              text
+              text,
+              page: attachedPage,
             });
 
             setAttachedPage(null);
             setReplyingTo(null);
           }}
           onChange={(e) => setMessage(e.target.value)}
+          attachedPage={attachedPage}
+          setAttachedPage={setAttachedPage}
         />
       </div>
 
