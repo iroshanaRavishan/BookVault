@@ -231,6 +231,7 @@ export default function AskAI() {
         text,
         page,
         sender: "user",
+        attachedPage: page,
         time: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
         date: now.toDateString(),
       },
@@ -526,7 +527,12 @@ export default function AskAI() {
           ${showInitialUI ? styles.slideDown : styles.slideUp} 
           ${showHistory ? styles.slideHalfUp : ""}
         `}
-        style={{ height: showHistory ? '595px' : '365px' }}
+        style={{
+          "--ui-offset": showHistory
+            ? `-${Math.max(0, inputHeight - 40) + 200}px`
+            : `-${Math.max(0, inputHeight - 40)}px`,
+          height: showHistory ? '595px' : '365px' 
+        }}
       >
         <div className={styles.logoContainer}>
           <img src='/src/assets/logo mark.png' className={styles.profilePicture} />       
@@ -695,13 +701,18 @@ export default function AskAI() {
           value={message}
           onSend={(text) => {
             sendMessage({
-              text
+              text,
+              page: attachedPage,
+              repliedTo: replyingTo,
             });
 
             setAttachedPage(null);
             setReplyingTo(null);
           }}
           onChange={(e) => setMessage(e.target.value)}
+          attachedPage={attachedPage}
+          setAttachedPage={setAttachedPage}
+          replyingTo={replyingTo}
         />
       </div>
 
