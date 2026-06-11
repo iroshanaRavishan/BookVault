@@ -703,6 +703,7 @@ export default function AskAI() {
             sendMessage({
               text,
               page: attachedPage,
+              repliedTo: replyingTo,
             });
 
             setAttachedPage(null);
