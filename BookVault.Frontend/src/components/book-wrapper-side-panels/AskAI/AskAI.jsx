@@ -527,7 +527,12 @@ export default function AskAI() {
           ${showInitialUI ? styles.slideDown : styles.slideUp} 
           ${showHistory ? styles.slideHalfUp : ""}
         `}
-        style={{ height: showHistory ? '595px' : '365px' }}
+        style={{
+          "--ui-offset": showHistory
+            ? `-${Math.max(0, inputHeight - 40) + 200}px`
+            : `-${Math.max(0, inputHeight - 40)}px`,
+          height: showHistory ? '595px' : '365px' 
+        }}
       >
         <div className={styles.logoContainer}>
           <img src='/src/assets/logo mark.png' className={styles.profilePicture} />       
