@@ -713,6 +713,7 @@ export default function AskAI() {
           attachedPage={attachedPage}
           setAttachedPage={setAttachedPage}
           replyingTo={replyingTo}
+          onCancelReply={() => setReplyingTo(null)}
         />
       </div>
 
