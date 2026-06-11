@@ -527,7 +527,12 @@ export default function AskAI() {
           ${showInitialUI ? styles.slideDown : styles.slideUp} 
           ${showHistory ? styles.slideHalfUp : ""}
         `}
-        style={{ height: showHistory ? '595px' : '365px' }}
+        style={{
+          "--ui-offset": showHistory
+            ? `-${Math.max(0, inputHeight - 40) + 200}px`
+            : `-${Math.max(0, inputHeight - 40)}px`,
+          height: showHistory ? '595px' : '365px' 
+        }}
       >
         <div className={styles.logoContainer}>
           <img src='/src/assets/logo mark.png' className={styles.profilePicture} />       
@@ -698,6 +703,7 @@ export default function AskAI() {
             sendMessage({
               text,
               page: attachedPage,
+              repliedTo: replyingTo,
             });
 
             setAttachedPage(null);
@@ -706,6 +712,7 @@ export default function AskAI() {
           onChange={(e) => setMessage(e.target.value)}
           attachedPage={attachedPage}
           setAttachedPage={setAttachedPage}
+          replyingTo={replyingTo}
         />
       </div>
 
