@@ -155,7 +155,8 @@ export default function ChatInput({
       >
         {replyingTo && (
           <div className={styles.replyPreview}>
-            
+            <div className={styles.replyPreviewContent}>
+            </div>
           </div>
         )}
         <textarea
