@@ -16,7 +16,8 @@ export default function ChatInput({
   isEditing = false,
   attachedPage,
   setAttachedPage,
-  onHeightChange   
+  onHeightChange,   
+  replyingTo,
 }) {
   const textareaRef = useRef(null);
   const [isScrollable, setIsScrollable] = useState(false);
