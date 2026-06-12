@@ -156,6 +156,8 @@ export default function ChatInput({
         {replyingTo && (
           <div className={styles.replyPreview}>
             <div className={styles.replyPreviewContent}>
+              <span className={styles.replyLabel}>
+              </span>
             </div>
           </div>
         )}
