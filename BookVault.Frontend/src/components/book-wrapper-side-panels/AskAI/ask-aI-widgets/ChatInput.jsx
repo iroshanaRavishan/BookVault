@@ -154,7 +154,8 @@ export default function ChatInput({
         style={{ height: isEditing ? '200px' : '' }}
       >
         {replyingTo && (
-          <div>
+          <div className={styles.replyPreview}>
+            
           </div>
         )}
         <textarea
