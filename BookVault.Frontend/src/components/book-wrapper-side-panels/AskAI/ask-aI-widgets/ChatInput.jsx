@@ -16,7 +16,8 @@ export default function ChatInput({
   isEditing = false,
   attachedPage,
   setAttachedPage,
-  onHeightChange   
+  onHeightChange,   
+  replyingTo,
 }) {
   const textareaRef = useRef(null);
   const [isScrollable, setIsScrollable] = useState(false);
@@ -152,6 +153,15 @@ export default function ChatInput({
         className={styles.textareaWrapper} 
         style={{ height: isEditing ? '200px' : '' }}
       >
+        {replyingTo && (
+          <div className={styles.replyPreview}>
+            <div className={styles.replyPreviewContent}>
+              <span className={styles.replyLabel}>
+                Replying to {replyingTo.sender === "bot" ? "AI" : "You"}
+              </span>
+            </div>
+          </div>
+        )}
         <textarea
             ref={textareaRef}
             className={`${styles.messageInputArea} ${
