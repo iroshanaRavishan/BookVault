@@ -153,6 +153,10 @@ export default function ChatInput({
         className={styles.textareaWrapper} 
         style={{ height: isEditing ? '200px' : '' }}
       >
+        {replyingTo && (
+          <div>
+          </div>
+        )}
         <textarea
             ref={textareaRef}
             className={`${styles.messageInputArea} ${
