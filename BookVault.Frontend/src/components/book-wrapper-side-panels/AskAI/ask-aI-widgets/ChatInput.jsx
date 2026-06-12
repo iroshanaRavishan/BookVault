@@ -157,6 +157,7 @@ export default function ChatInput({
           <div className={styles.replyPreview}>
             <div className={styles.replyPreviewContent}>
               <span className={styles.replyLabel}>
+                Replying to {replyingTo.sender === "bot" ? "AI" : "You"}
               </span>
             </div>
           </div>
