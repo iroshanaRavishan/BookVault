@@ -400,6 +400,7 @@ export default function AskAI() {
         id: m.id,
         text: m.content,
         sender: m.role === "user" ? "user" : "bot",
+        repliedTo: m.repliedTo || null,
         time: new Date(m.created_at).toLocaleTimeString([], {
           hour: "2-digit",
           minute: "2-digit",
