@@ -202,7 +202,7 @@ export default function AskAI() {
     });
   };
 
-  const sendMessage = async ({ text, page }) => {
+  const sendMessage = async ({ text, page, repliedTo = null }) => {
     const messageId = crypto.randomUUID();
     const assistantMessageId = crypto.randomUUID();
     if (isResetting) return;
@@ -400,6 +400,7 @@ export default function AskAI() {
         id: m.id,
         text: m.content,
         sender: m.role === "user" ? "user" : "bot",
+        repliedTo: m.repliedTo || null,
         time: new Date(m.created_at).toLocaleTimeString([], {
           hour: "2-digit",
           minute: "2-digit",
@@ -609,7 +610,8 @@ export default function AskAI() {
                         autoFocus 
                         onFocus={(e) => e.target.select()}
                         className={styles.inputTextbox}
-                        placeholder="Enter chat name" 
+                        placeholder="Enter chat name"
+                        onKeyDown={(e) => {}}
                       />  
                       <button
                         onClick={(e) => {
@@ -713,6 +715,7 @@ export default function AskAI() {
           attachedPage={attachedPage}
           setAttachedPage={setAttachedPage}
           replyingTo={replyingTo}
+          onCancelReply={() => setReplyingTo(null)}
         />
       </div>
 
