@@ -334,6 +334,10 @@ export default function AskAI() {
     if (conversationIdRef.current === conversationId) {
       setCurrentChatName(newName);
     }
+
+    setActiveChat(
+      sorted.find(c => c.conversationId === conversationId)
+    );
   };
 
   const closePopup = () => {

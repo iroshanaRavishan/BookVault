@@ -159,7 +159,12 @@ export default function ChatInput({
               <span className={styles.replyLabel}>
                 Replying to {replyingTo.sender === "bot" ? "AI" : "You"}
               </span>
+              <span className={styles.replyText}> </span>
             </div>
+            <IoCloseCircleSharp
+              className={styles.cancelReplyButton}
+              size={20}
+            />
           </div>
         )}
         <textarea
@@ -167,6 +172,7 @@ export default function ChatInput({
             className={`${styles.messageInputArea} ${
                 isEditing ? styles.editingPopUpBorder : ''
             }`}
+            style={{marginBottom:showPageSelector? '': '10px'}}
             rows={1}
             placeholder={placeholder}
             value={isControlled ? value : undefined}
@@ -190,16 +196,17 @@ export default function ChatInput({
           </button>
         )}
         
-        <div className={styles.pageAttachContainer}>
-          <div className={styles.pageAttachWrapper}>
-            <span className={styles.pageAttachSection}><FiPaperclip size={15} /> Click to attach the page </span>   
-            <ChatPageSelector
-              // currentPageInfo={currentPageInfo}
-              selectedPage={attachedPage}
-              onSelectPage={setAttachedPage}
-            />
-          </div>
-
+        <div className={styles.pageAttachContainer} style={{padding: showPageSelector == true ? '': '2px'}}>
+          {showPageSelector && (
+            <div className={styles.pageAttachWrapper}>
+              <span className={styles.pageAttachSection}><FiPaperclip size={15} /> Click to attach the page </span>   
+              <ChatPageSelector
+                // currentPageInfo={currentPageInfo}
+                selectedPage={attachedPage}
+                onSelectPage={setAttachedPage}
+              />
+            </div>
+          )}
           <button className={styles.sendButton} style={{bottom: isEditing ? '9%': '5%'}} onClick={handleSend}>
             <IoSend color="black" />
           </button>
