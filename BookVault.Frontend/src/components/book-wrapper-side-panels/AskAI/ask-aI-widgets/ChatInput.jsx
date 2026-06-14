@@ -197,15 +197,16 @@ export default function ChatInput({
         )}
         
         <div className={styles.pageAttachContainer} style={{padding: showPageSelector == true ? '': '2px'}}>
-          <div className={styles.pageAttachWrapper}>
-            <span className={styles.pageAttachSection}><FiPaperclip size={15} /> Click to attach the page </span>   
-            <ChatPageSelector
-              // currentPageInfo={currentPageInfo}
-              selectedPage={attachedPage}
-              onSelectPage={setAttachedPage}
-            />
-          </div>
-
+          {showPageSelector && (
+            <div className={styles.pageAttachWrapper}>
+              <span className={styles.pageAttachSection}><FiPaperclip size={15} /> Click to attach the page </span>   
+              <ChatPageSelector
+                // currentPageInfo={currentPageInfo}
+                selectedPage={attachedPage}
+                onSelectPage={setAttachedPage}
+              />
+            </div>
+          )}
           <button className={styles.sendButton} style={{bottom: isEditing ? '9%': '5%'}} onClick={handleSend}>
             <IoSend color="black" />
           </button>
