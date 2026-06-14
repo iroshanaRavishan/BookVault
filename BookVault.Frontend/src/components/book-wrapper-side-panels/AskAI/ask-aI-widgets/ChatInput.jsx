@@ -172,6 +172,7 @@ export default function ChatInput({
             className={`${styles.messageInputArea} ${
                 isEditing ? styles.editingPopUpBorder : ''
             }`}
+            style={{marginBottom:showPageSelector? '': '10px'}}
             rows={1}
             placeholder={placeholder}
             value={isControlled ? value : undefined}
