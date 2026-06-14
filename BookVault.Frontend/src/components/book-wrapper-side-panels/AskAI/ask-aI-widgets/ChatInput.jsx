@@ -159,6 +159,7 @@ export default function ChatInput({
               <span className={styles.replyLabel}>
                 Replying to {replyingTo.sender === "bot" ? "AI" : "You"}
               </span>
+              <span className={styles.replyText}> </span>
             </div>
             <IoCloseCircleSharp />
           </div>
