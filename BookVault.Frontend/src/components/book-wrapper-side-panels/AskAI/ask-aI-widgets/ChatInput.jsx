@@ -161,7 +161,10 @@ export default function ChatInput({
               </span>
               <span className={styles.replyText}> </span>
             </div>
-            <IoCloseCircleSharp />
+            <IoCloseCircleSharp
+              className={styles.cancelReplyButton}
+              size={20}
+            />
           </div>
         )}
         <textarea
