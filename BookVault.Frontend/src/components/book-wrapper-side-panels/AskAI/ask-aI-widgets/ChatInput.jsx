@@ -160,6 +160,7 @@ export default function ChatInput({
                 Replying to {replyingTo.sender === "bot" ? "AI" : "You"}
               </span>
             </div>
+            <IoCloseCircleSharp />
           </div>
         )}
         <textarea
