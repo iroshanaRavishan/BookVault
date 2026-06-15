@@ -160,7 +160,12 @@ export default function ChatInput({
               <span className={styles.replyLabel}>
                 Replying to {replyingTo.sender === "bot" ? "AI" : "You"}
               </span>
-              <span className={styles.replyText}> </span>
+
+              <span className={styles.replyText}>
+                {replyingTo.text.length > 80
+                  ? replyingTo.text.slice(0, 80) + "..."
+                  : replyingTo.text}
+              </span>
             </div>
             <IoCloseCircleSharp
               className={styles.cancelReplyButton}
