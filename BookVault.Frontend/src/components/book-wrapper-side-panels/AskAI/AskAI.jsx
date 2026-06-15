@@ -718,6 +718,7 @@ export default function AskAI() {
           onChange={(e) => setMessage(e.target.value)}
           attachedPage={attachedPage}
           setAttachedPage={setAttachedPage}
+          onHeightChange={setInputHeight}
           replyingTo={replyingTo}
           onCancelReply={() => setReplyingTo(null)}
         />
