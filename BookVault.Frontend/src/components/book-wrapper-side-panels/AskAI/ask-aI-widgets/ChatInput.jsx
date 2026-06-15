@@ -163,6 +163,7 @@ export default function ChatInput({
             </div>
             <IoCloseCircleSharp
               className={styles.cancelReplyButton}
+              onClick={onCancelReply}
               size={20}
             />
           </div>
