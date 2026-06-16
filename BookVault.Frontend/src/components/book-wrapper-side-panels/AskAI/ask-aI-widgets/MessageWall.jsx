@@ -12,7 +12,7 @@ import { GoBookmarkFill } from 'react-icons/go';
 import { IoMdAttach } from "react-icons/io";
 import { FiPaperclip } from 'react-icons/fi';
 
-export default function MessageWall({ messages, isTyping, onEdit, onDelete }) {
+export default function MessageWall({ messages, isTyping, onEdit, onReply }) {
   const bottomRef = useRef(null); 
   const wallRef = useRef(null);
   const messageRefs = useRef({});
