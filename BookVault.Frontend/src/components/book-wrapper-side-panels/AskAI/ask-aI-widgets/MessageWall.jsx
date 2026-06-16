@@ -93,6 +93,7 @@ export default function MessageWall({ messages, isTyping, onEdit, onReply }) {
               )}
 
               <div
+                ref={(el) => (messageRefs.current[msg.id] = el)}
                 className={`${styles.message} ${styles[msg.sender]}`}
                 onMouseEnter={() => setHoveredId(msg.id)}
                 onMouseLeave={() => setHoveredId(null)}
