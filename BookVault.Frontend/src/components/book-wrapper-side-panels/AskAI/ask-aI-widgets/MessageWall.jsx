@@ -48,6 +48,10 @@ export default function MessageWall({ messages, isTyping, onEdit, onReply }) {
     setShowScrollDown(!isAtBottom);
   };
 
+  const scrollToMessage = (id) => {
+    const el = messageRefs.current[id];
+  };
+
   const startEdit = (msg) => {
     setEditingMsg(msg);
     setEditedText(msg.text);
@@ -89,6 +93,7 @@ export default function MessageWall({ messages, isTyping, onEdit, onReply }) {
               )}
 
               <div
+                ref={(el) => (messageRefs.current[msg.id] = el)}
                 className={`${styles.message} ${styles[msg.sender]}`}
                 onMouseEnter={() => setHoveredId(msg.id)}
                 onMouseLeave={() => setHoveredId(null)}
