@@ -4,10 +4,18 @@ import { MdDelete, MdModeEditOutline } from "react-icons/md";
 import { RiFileCopyFill } from "react-icons/ri";
 import ChatInput from './ChatInput';
 import { IoChevronDown } from 'react-icons/io5';
+import { HiReply } from 'react-icons/hi';
+import { PiBookFill } from "react-icons/pi";
+import { LuNotebook } from "react-icons/lu";
+import { BsJournalBookmarkFill } from 'react-icons/bs';
+import { GoBookmarkFill } from 'react-icons/go';
+import { IoMdAttach } from "react-icons/io";
+import { FiPaperclip } from 'react-icons/fi';
 
-export default function MessageWall({ messages, isTyping, onEdit, onDelete }) {
+export default function MessageWall({ messages, isTyping, onEdit, onReply }) {
   const bottomRef = useRef(null); 
   const wallRef = useRef(null);
+  const messageRefs = useRef({});
 
   const [hoveredId, setHoveredId] = useState(null);
   const [editingMsg, setEditingMsg] = useState(null);
