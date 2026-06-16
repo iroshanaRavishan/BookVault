@@ -15,6 +15,7 @@ import { FiPaperclip } from 'react-icons/fi';
 export default function MessageWall({ messages, isTyping, onEdit, onDelete }) {
   const bottomRef = useRef(null); 
   const wallRef = useRef(null);
+  const messageRefs = useRef({});
 
   const [hoveredId, setHoveredId] = useState(null);
   const [editingMsg, setEditingMsg] = useState(null);
