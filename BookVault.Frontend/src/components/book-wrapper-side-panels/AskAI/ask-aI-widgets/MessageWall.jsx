@@ -62,6 +62,10 @@ export default function MessageWall({ messages, isTyping, onEdit, onReply }) {
     void el.offsetWidth; // trick to restart animation
 
     el.classList.add(styles.highlight);
+
+    setTimeout(() => {
+      el.classList.remove(styles.highlight);
+    }, 2500);
   };
 
   const startEdit = (msg) => {
