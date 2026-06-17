@@ -50,6 +50,7 @@ export default function MessageWall({ messages, isTyping, onEdit, onReply }) {
 
   const scrollToMessage = (id) => {
     const el = messageRefs.current[id];
+    if (!el) return;
   };
 
   const startEdit = (msg) => {
