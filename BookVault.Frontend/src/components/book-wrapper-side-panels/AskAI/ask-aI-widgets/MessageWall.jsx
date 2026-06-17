@@ -56,6 +56,10 @@ export default function MessageWall({ messages, isTyping, onEdit, onReply }) {
       behavior: 'smooth',
       block: 'center',
     });
+
+    // force reflow so animation can restart
+    el.classList.remove(styles.highlight);
+    void el.offsetWidth; // trick to restart animation
   };
 
   const startEdit = (msg) => {
