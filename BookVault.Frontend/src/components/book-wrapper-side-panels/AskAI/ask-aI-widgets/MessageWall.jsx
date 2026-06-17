@@ -179,6 +179,7 @@ export default function MessageWall({ messages, isTyping, onEdit, onReply }) {
               autoFocus
               placeholder="Edit message..."
               isEditing
+              showPageSelector={false}
             />
           </div>
         </div>
