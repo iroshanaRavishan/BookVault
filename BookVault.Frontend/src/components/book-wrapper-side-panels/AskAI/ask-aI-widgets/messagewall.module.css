@@ -231,6 +231,12 @@
   z-index: 2;
 }
 
+.originalPreview {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
 @keyframes blink {
   0% { opacity: 0.2; }
   20% { opacity: 1; }
