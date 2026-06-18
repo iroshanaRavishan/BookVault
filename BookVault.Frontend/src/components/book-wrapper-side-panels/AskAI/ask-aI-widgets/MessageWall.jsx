@@ -120,7 +120,9 @@ export default function MessageWall({ messages, isTyping, onEdit, onReply }) {
                 <div className={styles.bubble}>
                   {originalMsg && (
                     <div
-                      className={styles.originalPreview}  >
+                      className={styles.originalPreview}
+                      onClick={() => scrollToMessage(originalMsg.id)}
+                    >
                       
                     </div>
                   )}
