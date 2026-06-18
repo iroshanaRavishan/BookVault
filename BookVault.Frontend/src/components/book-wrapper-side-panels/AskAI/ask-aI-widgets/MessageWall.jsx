@@ -50,6 +50,22 @@ export default function MessageWall({ messages, isTyping, onEdit, onReply }) {
 
   const scrollToMessage = (id) => {
     const el = messageRefs.current[id];
+    if (!el) return;
+
+    el.scrollIntoView({
+      behavior: 'smooth',
+      block: 'center',
+    });
+
+    // force reflow so animation can restart
+    el.classList.remove(styles.highlight);
+    void el.offsetWidth; // trick to restart animation
+
+    el.classList.add(styles.highlight);
+
+    setTimeout(() => {
+      el.classList.remove(styles.highlight);
+    }, 2500);
   };
 
   const startEdit = (msg) => {
@@ -102,17 +118,20 @@ export default function MessageWall({ messages, isTyping, onEdit, onReply }) {
                    <span className={styles.botIcon}><img src='/src/assets/logo mark.png' className={styles.profilePicture} /> </span>
                 )}
                 <div className={styles.bubble}>
+                  {originalMsg && (
+                    <div
+                      className={styles.originalPreview}
+                      onClick={() => scrollToMessage(originalMsg.id)}
+                    >
+                      
+                    </div>
+                  )}
                   {msg.text}
                   <span className={styles.time}>{msg.time}</span>
                   {hoveredId === msg.id && msg.sender === 'user' && (
                     <div className={styles.actions}>
                       <MdModeEditOutline onClick={() => startEdit(msg)} size={15}/>
                       <RiFileCopyFill onClick={() => copyText(msg.text)} size={15}/>
-                      <MdDelete
-                        onClick={() => onDelete(msg.id)}
-                        size={16}
-                        className={styles.deleteIcon}
-                      />
                     </div>
                   )}
                 </div>
@@ -163,6 +182,7 @@ export default function MessageWall({ messages, isTyping, onEdit, onReply }) {
               autoFocus
               placeholder="Edit message..."
               isEditing
+              showPageSelector={false}
             />
           </div>
         </div>
