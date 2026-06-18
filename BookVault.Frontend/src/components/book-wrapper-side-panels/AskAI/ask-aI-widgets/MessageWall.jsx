@@ -124,11 +124,6 @@ export default function MessageWall({ messages, isTyping, onEdit, onReply }) {
                     <div className={styles.actions}>
                       <MdModeEditOutline onClick={() => startEdit(msg)} size={15}/>
                       <RiFileCopyFill onClick={() => copyText(msg.text)} size={15}/>
-                      <MdDelete
-                        onClick={() => onDelete(msg.id)}
-                        size={16}
-                        className={styles.deleteIcon}
-                      />
                     </div>
                   )}
                 </div>
