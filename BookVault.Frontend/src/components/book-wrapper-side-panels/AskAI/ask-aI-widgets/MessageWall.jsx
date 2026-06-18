@@ -118,6 +118,9 @@ export default function MessageWall({ messages, isTyping, onEdit, onReply }) {
                    <span className={styles.botIcon}><img src='/src/assets/logo mark.png' className={styles.profilePicture} /> </span>
                 )}
                 <div className={styles.bubble}>
+                  {originalMsg && (
+                    <div> </div>
+                  )}
                   {msg.text}
                   <span className={styles.time}>{msg.time}</span>
                   {hoveredId === msg.id && msg.sender === 'user' && (
