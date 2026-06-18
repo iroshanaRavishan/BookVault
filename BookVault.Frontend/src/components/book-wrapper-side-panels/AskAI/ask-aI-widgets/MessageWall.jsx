@@ -119,7 +119,9 @@ export default function MessageWall({ messages, isTyping, onEdit, onReply }) {
                 )}
                 <div className={styles.bubble}>
                   {originalMsg && (
-                    <div className={styles.originalPreview}>
+                    <div
+                      className={styles.originalPreview}  >
+                      
                     </div>
                   )}
                   {msg.text}
