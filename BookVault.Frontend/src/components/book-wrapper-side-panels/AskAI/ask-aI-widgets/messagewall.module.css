@@ -231,6 +231,23 @@
   z-index: 2;
 }
 
+.originalPreview {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  background-color: rgba(0, 0, 0, 0.05);
+  border-left: 3px solid #888;
+
+  padding: 2px 8px;
+  margin-bottom: 6px;
+
+  font-size: 12px;
+  cursor: pointer;
+
+  border-radius: 6px;
+}
+
 @keyframes blink {
   0% { opacity: 0.2; }
   20% { opacity: 1; }
