@@ -97,7 +97,9 @@ export default function MessageWall({ messages, isTyping, onEdit, onReply }) {
         onScroll={handleScroll}
       >
         {messages.map((msg) => {
-          const originalMsg = messages.find(m => m.id === msg.editedFrom);
+          const originalMsg = msg.editedFrom
+            ? messages.find(m => m.id === msg.editedFrom)
+            : null;
           const repliedMsg = msg.repliedTo;
           const showDateSeparator = msg.date !== lastRenderedDate;
           lastRenderedDate = msg.date;
