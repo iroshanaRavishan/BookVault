@@ -101,6 +101,9 @@ export default function MessageWall({ messages, isTyping, onEdit, onReply }) {
             ? messages.find(m => m.id === msg.editedFrom)
             : null;
           const repliedMsg = msg.repliedTo;
+
+          const previewText =  originalMsg.text.slice(0, 50) + "...";
+
           const showDateSeparator = msg.date !== lastRenderedDate;
           lastRenderedDate = msg.date;
 
