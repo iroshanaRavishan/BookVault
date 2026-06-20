@@ -248,6 +248,10 @@
   border-radius: 6px;
 }
 
+.originalPreview:hover {
+  background-color: rgba(0, 0, 0, 0.08);
+}
+
 @keyframes blink {
   0% { opacity: 0.2; }
   20% { opacity: 1; }
