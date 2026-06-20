@@ -267,6 +267,11 @@
   opacity: 0.8;
 }
 
+.highlight {
+  border-radius: 12px;
+  animation: flashHighlight 1s ease;
+}
+
 @keyframes blink {
   0% { opacity: 0.2; }
   20% { opacity: 1; }
