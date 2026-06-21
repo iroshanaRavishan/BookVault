@@ -132,6 +132,7 @@ export default function MessageWall({ messages, isTyping, onEdit, onReply }) {
                       className={styles.originalPreview}
                       onClick={() => scrollToMessage(originalMsg.id)}
                     >
+                      <span className={styles.editIconInEditedMessageSection}></span>
                       
                     </div>
                   )}
