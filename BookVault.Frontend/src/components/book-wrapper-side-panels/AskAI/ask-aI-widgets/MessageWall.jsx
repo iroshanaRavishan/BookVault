@@ -140,7 +140,10 @@ export default function MessageWall({ messages, isTyping, onEdit, onReply }) {
                     </div>
                   )}
                   {msg.text}
-                  <span className={styles.time}>{msg.time}</span>
+                    {msg.attachedPage && (
+                      <span className={styles.attachedPageSection}>
+                      </span>
+                    )}
                   {hoveredId === msg.id && msg.sender === 'user' && (
                     <div className={`${styles.actions} ${styles.userActions}`}>
                       <MdModeEditOutline onClick={() => startEdit(msg)} size={15}/>
