@@ -140,6 +140,7 @@ export default function MessageWall({ messages, isTyping, onEdit, onReply }) {
                     </div>
                   )}
                   {msg.text}
+                  <div className={styles.msgInforArea}>
                     {msg.attachedPage && (
                       <span className={styles.attachedPageSection}>
                       </span>
