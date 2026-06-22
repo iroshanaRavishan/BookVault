@@ -132,13 +132,22 @@ export default function MessageWall({ messages, isTyping, onEdit, onReply }) {
                       className={styles.originalPreview}
                       onClick={() => scrollToMessage(originalMsg.id)}
                     >
-                      
+                      <span className={styles.editIconInEditedMessageSection}><MdModeEditOutline /></span>
+                        <span className={styles.originalText}>
+                          {'Edited'}:{" "}
+                          {previewText}
+                      </span>
                     </div>
                   )}
                   {msg.text}
-                  <span className={styles.time}>{msg.time}</span>
+                  <div className={styles.msgInforArea}>
+                    {msg.attachedPage && (
+                      <span className={styles.attachedPageSection}>
+                      </span>
+                    )}
+                  </div>
                   {hoveredId === msg.id && msg.sender === 'user' && (
-                    <div className={styles.actions}>
+                    <div className={`${styles.actions} ${styles.userActions}`}>
                       <MdModeEditOutline onClick={() => startEdit(msg)} size={15}/>
                       <RiFileCopyFill onClick={() => copyText(msg.text)} size={15}/>
                     </div>
