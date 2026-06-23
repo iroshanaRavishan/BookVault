@@ -147,6 +147,9 @@ export default function MessageWall({ messages, isTyping, onEdit, onReply }) {
                         {msg.attachedPage}
                       </span>
                     )}
+                    { msg.sender == 'user' && (
+                      <span>{msg}</span>
+                    )}
                   </div>
                   {hoveredId === msg.id && msg.sender === 'user' && (
                     <div className={`${styles.actions} ${styles.userActions}`}>
