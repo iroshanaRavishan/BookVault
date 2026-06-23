@@ -148,7 +148,7 @@ export default function MessageWall({ messages, isTyping, onEdit, onReply }) {
                       </span>
                     )}
                     { msg.sender == 'user' && (
-                      <span>{msg}</span>
+                      <span>{msg.time}</span>
                     )}
                   </div>
                   {hoveredId === msg.id && msg.sender === 'user' && (
