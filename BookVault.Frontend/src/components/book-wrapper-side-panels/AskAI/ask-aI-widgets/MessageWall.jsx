@@ -144,6 +144,7 @@ export default function MessageWall({ messages, isTyping, onEdit, onReply }) {
                     {msg.attachedPage && (
                       <span className={styles.attachedPageSection}>
                         <FiPaperclip className={styles.pageAttachedIcon} size={11}/>
+                        {msg.attachedPage}
                       </span>
                     )}
                   </div>
