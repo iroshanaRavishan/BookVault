@@ -143,6 +143,7 @@ export default function MessageWall({ messages, isTyping, onEdit, onReply }) {
                   <div className={styles.msgInforArea}>
                     {msg.attachedPage && (
                       <span className={styles.attachedPageSection}>
+                        <FiPaperclip size={11}/>
                       </span>
                     )}
                   </div>
