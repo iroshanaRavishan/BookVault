@@ -159,7 +159,7 @@ export default function MessageWall({ messages, isTyping, onEdit, onReply }) {
                     </div>
                   )}
                   {hoveredId === msg.id && msg.sender === 'bot' && (
-                    <div>
+                    <div className={`${styles.actions} ${styles.botActions}`}>
                       <HiReply size={15} onClick={() => onReply(msg)} />
                       <RiFileCopyFill onClick={() => copyText(msg.text)} size={15}/>
                     </div>
