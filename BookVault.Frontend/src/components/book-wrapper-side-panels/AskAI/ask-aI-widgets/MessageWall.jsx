@@ -158,6 +158,9 @@ export default function MessageWall({ messages, isTyping, onEdit, onReply }) {
                       <RiFileCopyFill onClick={() => copyText(msg.text)} size={15}/>
                     </div>
                   )}
+                  {hoveredId === msg.id && msg.sender === 'bot' && (
+                    <div> </div>
+                  )}
                 </div>
               </div>
             </React.Fragment>
