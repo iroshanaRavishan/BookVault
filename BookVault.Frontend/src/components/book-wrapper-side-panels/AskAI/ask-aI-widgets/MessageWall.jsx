@@ -160,7 +160,8 @@ export default function MessageWall({ messages, isTyping, onEdit, onReply }) {
                   )}
                   {hoveredId === msg.id && msg.sender === 'bot' && (
                     <div>
-                      <HiReply size={15}/>
+                      <HiReply size={15} />
+                      <RiFileCopyFill />
                     </div>
                   )}
                 </div>
