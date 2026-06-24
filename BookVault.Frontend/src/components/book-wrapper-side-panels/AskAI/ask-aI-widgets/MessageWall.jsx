@@ -159,7 +159,9 @@ export default function MessageWall({ messages, isTyping, onEdit, onReply }) {
                     </div>
                   )}
                   {hoveredId === msg.id && msg.sender === 'bot' && (
-                    <div> </div>
+                    <div>
+                      <HiReply size={15}/>
+                    </div>
                   )}
                 </div>
               </div>
