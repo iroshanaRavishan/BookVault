@@ -154,8 +154,13 @@
   transform: scale(1.05);
 }
 
-.deleteIcon:hover {
-  color: #e53935 !important; 
+.userActions{
+  right: 0px;
+}
+
+.botActions {
+  left: 0px;
+  margin-top: 15px;
 }
 
 /* Popup */
