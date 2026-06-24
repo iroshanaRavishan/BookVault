@@ -154,7 +154,7 @@ export default function MessageWall({ messages, isTyping, onEdit, onReply }) {
                   {hoveredId === msg.id && msg.sender === 'user' && (
                     <div className={`${styles.actions} ${styles.userActions}`}>
                       <MdModeEditOutline onClick={() => startEdit(msg)} size={15}/>
-                      <HiReply size={15} />
+                      <HiReply size={15} onClick={() => onReply(msg)} />
                       <RiFileCopyFill onClick={() => copyText(msg.text)} size={15}/>
                     </div>
                   )}
