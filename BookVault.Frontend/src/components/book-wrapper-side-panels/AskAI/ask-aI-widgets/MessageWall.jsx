@@ -140,7 +140,10 @@ export default function MessageWall({ messages, isTyping, onEdit, onReply }) {
                     </div>
                   )}
                   {repliedMsg && (
-                    <div className={styles.originalPreview}>
+                    <div
+                      className={styles.originalPreview}
+                      onClick={() => scrollToMessage(repliedMsg.id)}
+                    >
                       <span className={styles.editIconInEditedMessageSection}>
                         <HiReply />
                       </span>
