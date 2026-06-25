@@ -147,6 +147,10 @@ export default function MessageWall({ messages, isTyping, onEdit, onReply }) {
                       <span className={styles.editIconInEditedMessageSection}>
                         <HiReply />
                       </span>
+
+                      <span className={styles.originalText}>
+                       
+                      </span>
                     </div>
                   )}
                   {msg.text}
