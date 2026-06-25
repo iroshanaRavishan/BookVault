@@ -140,7 +140,9 @@ export default function MessageWall({ messages, isTyping, onEdit, onReply }) {
                     </div>
                   )}
                   {repliedMsg && (
-                    <div></div>
+                    <div className={styles.originalPreview}>
+                      <span className={styles.editIconInEditedMessageSection}> </span>
+                    </div>
                   )}
                   {msg.text}
                   <div className={styles.msgInforArea}>
