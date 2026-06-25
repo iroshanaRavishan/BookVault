@@ -139,16 +139,42 @@ export default function MessageWall({ messages, isTyping, onEdit, onReply }) {
                       </span>
                     </div>
                   )}
+                  {repliedMsg && (
+                    <div
+                      className={styles.originalPreview}
+                      onClick={() => scrollToMessage(repliedMsg.id)}
+                    >
+                      <span className={styles.editIconInEditedMessageSection}>
+                        <HiReply />
+                      </span>
+
+                      <span className={styles.originalText}>
+                       
+                      </span>
+                    </div>
+                  )}
                   {msg.text}
                   <div className={styles.msgInforArea}>
                     {msg.attachedPage && (
                       <span className={styles.attachedPageSection}>
+                        <FiPaperclip className={styles.pageAttachedIcon} size={11}/>
+                        {msg.attachedPage}
                       </span>
+                    )}
+                    { msg.sender == 'user' && (
+                      <span>{msg.time}</span>
                     )}
                   </div>
                   {hoveredId === msg.id && msg.sender === 'user' && (
                     <div className={`${styles.actions} ${styles.userActions}`}>
                       <MdModeEditOutline onClick={() => startEdit(msg)} size={15}/>
+                      <HiReply size={15} onClick={() => onReply(msg)} />
+                      <RiFileCopyFill onClick={() => copyText(msg.text)} size={15}/>
+                    </div>
+                  )}
+                  {hoveredId === msg.id && msg.sender === 'bot' && (
+                    <div className={`${styles.actions} ${styles.botActions}`}>
+                      <HiReply size={15} onClick={() => onReply(msg)} />
                       <RiFileCopyFill onClick={() => copyText(msg.text)} size={15}/>
                     </div>
                   )}

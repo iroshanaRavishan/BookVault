@@ -88,21 +88,23 @@
 .user .bubble {
   background: #dcf8c6;
   border: 1px solid #a2d5ab;
-  border-bottom-right-radius: 2px;
+  border-top-right-radius: 2px;
+  max-width: 72%;
 }
 
 .bot .bubble {
   background: #ffffff;
   border: 1px solid #ccc;
-  border-bottom-left-radius: 2px;
+  border-top-left-radius: 2px;
+  max-width: 72%;
 }
 
 .time {
-  display: block;
+  /* display: block;
   font-size: 10px;
   color: #55555575;
   text-align: right;
-  font-style: italic;
+  font-style: italic; */
 }
 
 /* Typing indicator */
@@ -152,8 +154,13 @@
   transform: scale(1.05);
 }
 
-.deleteIcon:hover {
-  color: #e53935 !important; 
+.userActions{
+  right: 0px;
+}
+
+.botActions {
+  left: 0px;
+  margin-top: 15px;
 }
 
 /* Popup */
@@ -172,6 +179,7 @@
   padding: 10px;
   width: 290px;
   border-radius: 15px;
+  height: 220px;
 }
 
 .popup textarea {
