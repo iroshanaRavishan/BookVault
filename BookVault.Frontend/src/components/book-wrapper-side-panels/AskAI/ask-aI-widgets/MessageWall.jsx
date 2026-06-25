@@ -139,6 +139,9 @@ export default function MessageWall({ messages, isTyping, onEdit, onReply }) {
                       </span>
                     </div>
                   )}
+                  {repliedMsg && (
+                    <div></div>
+                  )}
                   {msg.text}
                   <div className={styles.msgInforArea}>
                     {msg.attachedPage && (
