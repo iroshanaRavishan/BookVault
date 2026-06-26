@@ -149,7 +149,7 @@ export default function MessageWall({ messages, isTyping, onEdit, onReply }) {
                       </span>
 
                       <span className={styles.originalText}>
-                       
+                        {"Replied"}:{" "}
                       </span>
                     </div>
                   )}
