@@ -280,6 +280,19 @@
   animation: flashHighlight 1s ease;
 }
 
+.msgInforArea {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 20px;
+
+  font-size: 10px;
+  color: #00000075;
+  text-align: right;
+  font-style: italic;
+}
+
 @keyframes blink {
   0% { opacity: 0.2; }
   20% { opacity: 1; }
