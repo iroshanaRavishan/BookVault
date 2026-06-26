@@ -293,6 +293,16 @@
   font-style: italic;
 }
 
+.attachedPageSection::after {
+  content: "";
+  position: absolute;
+  top: 4px;
+  right: -11px;
+  width: 1px;
+  height: 60%;
+  background-color: #55555575;
+}
+
 @keyframes blink {
   0% { opacity: 0.2; }
   20% { opacity: 1; }
