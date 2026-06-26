@@ -293,6 +293,13 @@
   font-style: italic;
 }
 
+.attachedPageSection {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  gap: 2px;
+}
+
 .attachedPageSection::after {
   content: "";
   position: absolute;
