@@ -310,6 +310,10 @@
   background-color: #55555575;
 }
 
+.pageAttachedIcon {
+  padding-top: 3.5px;
+}
+
 @keyframes blink {
   0% { opacity: 0.2; }
   20% { opacity: 1; }
