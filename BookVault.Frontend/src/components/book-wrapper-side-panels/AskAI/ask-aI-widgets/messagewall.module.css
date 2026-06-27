@@ -280,6 +280,49 @@
   animation: flashHighlight 1s ease;
 }
 
+.msgInforArea {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 20px;
+
+  font-size: 10px;
+  color: #00000075;
+  text-align: right;
+  font-style: italic;
+}
+
+.attachedPageSection {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  gap: 2px;
+}
+
+.attachedPageSection::after {
+  content: "";
+  position: absolute;
+  top: 4px;
+  right: -11px;
+  width: 1px;
+  height: 60%;
+  background-color: #55555575;
+}
+
+.pageAttachedIcon {
+  padding-top: 3.5px;
+}
+
+@keyframes flashHighlight {
+  0% {
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+
 @keyframes blink {
   0% { opacity: 0.2; }
   20% { opacity: 1; }

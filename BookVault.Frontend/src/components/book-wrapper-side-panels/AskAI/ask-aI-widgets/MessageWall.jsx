@@ -149,7 +149,12 @@ export default function MessageWall({ messages, isTyping, onEdit, onReply }) {
                       </span>
 
                       <span className={styles.originalText}>
-                       
+                        {"Replied"}:{" "}
+                        {
+                          repliedMsg.text.length > 50
+                            ? repliedMsg.text.slice(0, 50) + "..."
+                            : repliedMsg.text
+                        }
                       </span>
                     </div>
                   )}
