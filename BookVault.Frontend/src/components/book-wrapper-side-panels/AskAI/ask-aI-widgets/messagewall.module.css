@@ -314,6 +314,15 @@
   padding-top: 3.5px;
 }
 
+@keyframes flashHighlight {
+  0% {
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+
 @keyframes blink {
   0% { opacity: 0.2; }
   20% { opacity: 1; }
