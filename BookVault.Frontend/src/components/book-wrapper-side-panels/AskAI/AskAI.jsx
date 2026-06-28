@@ -618,6 +618,7 @@ export default function AskAI() {
                         onKeyDown={(e) => {
                           if (e.key === "Enter") {
                             if (!editingValue.trim()) return;
+                            setEditingChatId(null);
                           }
                         }}
                       />  
