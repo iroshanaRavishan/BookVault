@@ -616,7 +616,9 @@ export default function AskAI() {
                         className={styles.inputTextbox}
                         placeholder="Enter chat name"
                         onKeyDown={(e) => {
-                          if (e.key === "Enter") { }
+                          if (e.key === "Enter") {
+                            if (!editingValue.trim()) return;
+                          }
                         }}
                       />  
                       <button
