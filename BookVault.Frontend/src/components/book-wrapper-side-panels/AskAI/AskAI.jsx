@@ -621,6 +621,10 @@ export default function AskAI() {
                             renameConversation(chat.conversationId, editingValue.trim());
                             setEditingChatId(null);
                           }
+
+                          if (e.key === "Escape") {
+                            setEditingChatId(null);
+                          }
                         }}
                       />  
                       <button
