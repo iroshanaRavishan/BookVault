@@ -615,7 +615,9 @@ export default function AskAI() {
                         onFocus={(e) => e.target.select()}
                         className={styles.inputTextbox}
                         placeholder="Enter chat name"
-                        onKeyDown={(e) => {}}
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter") { }
+                        }}
                       />  
                       <button
                         onClick={(e) => {
