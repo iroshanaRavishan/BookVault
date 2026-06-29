@@ -1,0 +1,9 @@
+.overlay {
+  position: fixed;
+  top: 280px;
+  left: 245px;
+  display: flex;
+  align-items: flex-end;
+  z-index: 100000;
+  font-size: 12px;
+}
