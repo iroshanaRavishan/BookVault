@@ -3,6 +3,9 @@ import styles from "./exportpopup.module.css";
 
 export default function ExportPopup({ onSelect }) {
   return (
-    <div className={styles.overlay}></div>
+    <div className={styles.overlay}>
+      <div className={styles.popup}>
+      </div>
+    </div>
   );
 }
