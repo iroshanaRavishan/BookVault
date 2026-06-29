@@ -1,0 +1,25 @@
+.overlay {
+  position: fixed;
+  top: 280px;
+  left: 245px;
+  display: flex;
+  align-items: flex-end;
+  z-index: 100000;
+  font-size: 12px;
+}
+
+.popup {
+  width: 70px;
+  height: 45px;
+  background: #fff;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.slideIn {
+  animation: slideIn 0.2s ease forwards;
+}
+
+.slideOut {
+  animation: slideOut 0.2s ease forwards;
+}
