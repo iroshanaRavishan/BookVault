@@ -23,3 +23,9 @@
 .slideOut {
   animation: slideOut 0.2s ease forwards;
 }
+
+.option {
+  border-radius: 3px;
+  padding: 2px 5px;
+  cursor: pointer;
+}
