@@ -202,7 +202,7 @@ export default function AskAI() {
     });
   };
 
-  const sendMessage = async ({ text, page, repliedTo = null }) => {
+  const sendMessage = async ({ text, page, editedFrom = null, repliedTo = null }) => {
     const messageId = crypto.randomUUID();
     const assistantMessageId = crypto.randomUUID();
     if (isResetting) return;
