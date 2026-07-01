@@ -232,7 +232,11 @@ export default function AskAI() {
         page,
         sender: "user",
         editedFrom,
-        repliedTo: repliedTo,
+        repliedTo: repliedTo
+          ? {
+              id: repliedTo.id,
+            }
+          : null,
         attachedPage: page,
         time: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
         date: now.toDateString(),
