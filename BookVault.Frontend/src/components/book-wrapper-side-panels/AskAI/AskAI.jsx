@@ -258,6 +258,7 @@ export default function AskAI() {
       role: "user",
       content: text,
       created_at: now.toISOString(),
+      editedFrom
     });
 
     setIsTyping(true);
