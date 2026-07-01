@@ -408,6 +408,7 @@ export default function AskAI() {
         sender: m.role === "user" ? "user" : "bot",
         editedFrom: m.editedFrom || null,
         repliedTo: m.repliedTo || null,
+        attachedPage: m.attachedPage || null,
         time: new Date(m.created_at).toLocaleTimeString([], {
           hour: "2-digit",
           minute: "2-digit",
