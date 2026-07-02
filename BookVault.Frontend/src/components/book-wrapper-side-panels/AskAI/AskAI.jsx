@@ -270,6 +270,7 @@ export default function AskAI() {
         ? {
             id: repliedTo.id,
             text: repliedTo.text,
+            sender: repliedTo.sender,
           }
         : null,
     });
