@@ -473,6 +473,9 @@ export default function AskAI() {
 
   const handleExportSelect = async (type) => {
     if (!selectedChatForAction) return;
+
+    const chat = selectedChatForAction;
+
   };
 
   const closeExportPopup = () => {
