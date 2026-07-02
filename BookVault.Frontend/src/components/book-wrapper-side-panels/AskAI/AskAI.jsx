@@ -471,7 +471,7 @@ export default function AskAI() {
     }
   };
 
-  const handleExportSelect = async () => {
+  const handleExportSelect = async (type) => {
     if (!selectedChatForAction) return;
   };
 
