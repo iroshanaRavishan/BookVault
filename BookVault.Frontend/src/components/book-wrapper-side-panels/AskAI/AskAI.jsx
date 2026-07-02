@@ -471,6 +471,9 @@ export default function AskAI() {
     }
   };
 
+  const handleExportSelect = async () => {
+  };
+
   const closeExportPopup = () => {
     setIsClosingExport(true);
     setShowExportPopup(false);
