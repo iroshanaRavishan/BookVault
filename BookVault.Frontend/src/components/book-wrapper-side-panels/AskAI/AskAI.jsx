@@ -483,6 +483,7 @@ export default function AskAI() {
     setTimeout(() => {
       setShowHistoryActionPopup(false);
       setActiveChatId(null);
+      setSelectedChatForAction(null);
     }, 150);
   };
 
