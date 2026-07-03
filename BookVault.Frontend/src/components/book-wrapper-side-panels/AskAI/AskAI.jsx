@@ -477,6 +477,7 @@ export default function AskAI() {
     const chat = selectedChatForAction;
 
     setShowExportPopup(false);
+    setIsClosingExport(false);
   };
 
   const closeExportPopup = () => {
