@@ -491,6 +491,10 @@ export default function AskAI() {
     if (type === "pdf") {
       exportChatToPDF(chat);
     }
+
+    if (type === "word") {
+      await exportChatToWord(chat);
+    }
   };
 
   const closeExportPopup = () => {
