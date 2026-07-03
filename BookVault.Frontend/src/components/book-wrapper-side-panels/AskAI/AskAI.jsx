@@ -478,6 +478,11 @@ export default function AskAI() {
 
     setShowExportPopup(false);
     setIsClosingExport(false);
+
+    // delay cleanup of parent popup slightly
+    setTimeout(() => {
+      setShowHistoryActionPopup(false);
+    }, 150);
   };
 
   const closeExportPopup = () => {
