@@ -482,6 +482,7 @@ export default function AskAI() {
     // delay cleanup of parent popup slightly
     setTimeout(() => {
       setShowHistoryActionPopup(false);
+      setActiveChatId(null);
     }, 150);
   };
 
