@@ -3,6 +3,7 @@ import styles from './askai.module.css';
 import MessageWall from './ask-aI-widgets/MessageWall';
 import ChatInput from './ask-aI-widgets/ChatInput';
 import ExportPopup from "./ask-aI-widgets/export-popup/ExportPopup";
+import { exportChatToPDF, exportChatToWord } from "../../../utils/exportService";
 import { GoDotFill } from "react-icons/go";
 import ChipStack from './ask-aI-widgets/ChipStack';
 import { FiCheck, FiPlus } from 'react-icons/fi';
