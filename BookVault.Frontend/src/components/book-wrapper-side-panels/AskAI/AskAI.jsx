@@ -485,6 +485,12 @@ export default function AskAI() {
       setActiveChatId(null);
       setSelectedChatForAction(null);
     }, 150);
+
+    console.log("EXPORT CHAT:", chat);
+
+    if (type === "pdf") {
+      exportChatToPDF(chat);
+    }
   };
 
   const closeExportPopup = () => {
