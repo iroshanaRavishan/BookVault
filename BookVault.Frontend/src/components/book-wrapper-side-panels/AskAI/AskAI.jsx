@@ -25,6 +25,7 @@ export default function AskAI() {
   const popupRef = useRef(null);
   const pendingActionRef = useRef(null);
   const historyRef = useRef(null);
+  const exportPopupRef = useRef(null);
 
   const [activeChat, setActiveChat] = useState(null);
   const [messages, setMessages] = useState([]);
