@@ -53,6 +53,7 @@ export default function AskAI() {
   const [replyingTo, setReplyingTo] = useState(null);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [openedChatId, setOpenedChatId] = useState(null);
+  const [chatLocation, setChatLocation] = useState(null);
 
   useEffect(() => {
     if (messages.length > 0) {
