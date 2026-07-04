@@ -864,6 +864,7 @@ export default function AskAI() {
       )}
       {showExportPopup && (
         <ExportPopup
+          popupRef={exportPopupRef}
           onSelect={handleExportSelect}
           onClose={closeExportPopup}
           isClosing={isClosingExport}
