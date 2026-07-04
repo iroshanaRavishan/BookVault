@@ -749,8 +749,9 @@ export default function AskAI() {
                       setEditingValue(activeChat?.chatName || "");
                       closePopup();
                     }}
-                    onExport={() => 
-                      selectedChatForAction &&
+                    onExport={() => {
+                      if (!selectedChatForAction) return;
+
                       handleExportClick(selectedChatForAction)
                     }
                   />
