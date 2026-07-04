@@ -3,6 +3,7 @@ import styles from './askai.module.css';
 import MessageWall from './ask-aI-widgets/MessageWall';
 import ChatInput from './ask-aI-widgets/ChatInput';
 import ExportPopup from "./ask-aI-widgets/export-popup/ExportPopup";
+import { exportChatToPDF, exportChatToWord } from "../../../utils/exportService";
 import { GoDotFill } from "react-icons/go";
 import ChipStack from './ask-aI-widgets/ChipStack';
 import { FiCheck, FiPlus } from 'react-icons/fi';
@@ -24,6 +25,7 @@ export default function AskAI() {
   const popupRef = useRef(null);
   const pendingActionRef = useRef(null);
   const historyRef = useRef(null);
+  const exportPopupRef = useRef(null);
 
   const [activeChat, setActiveChat] = useState(null);
   const [messages, setMessages] = useState([]);
@@ -51,6 +53,7 @@ export default function AskAI() {
   const [replyingTo, setReplyingTo] = useState(null);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [openedChatId, setOpenedChatId] = useState(null);
+  const [chatLocation, setChatLocation] = useState(null);
 
   useEffect(() => {
     if (messages.length > 0) {
@@ -202,7 +205,7 @@ export default function AskAI() {
     });
   };
 
-  const sendMessage = async ({ text, page, repliedTo = null }) => {
+  const sendMessage = async ({ text, page, editedFrom = null, repliedTo = null }) => {
     const messageId = crypto.randomUUID();
     const assistantMessageId = crypto.randomUUID();
     if (isResetting) return;
@@ -231,6 +234,14 @@ export default function AskAI() {
         text,
         page,
         sender: "user",
+        editedFrom,
+        repliedTo: repliedTo
+          ? {
+              id: repliedTo.id,
+              text: repliedTo.text,
+              sender: repliedTo.sender,
+            }
+          : null,
         attachedPage: page,
         time: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
         date: now.toDateString(),
@@ -257,6 +268,15 @@ export default function AskAI() {
       role: "user",
       content: text,
       created_at: now.toISOString(),
+      editedFrom,
+      repliedTo: repliedTo
+        ? {
+            id: repliedTo.id,
+            text: repliedTo.text,
+            sender: repliedTo.sender,
+          }
+        : null,
+        attachedPage: attachedPage,
     });
 
     setIsTyping(true);
@@ -404,7 +424,9 @@ export default function AskAI() {
         id: m.id,
         text: m.content,
         sender: m.role === "user" ? "user" : "bot",
+        editedFrom: m.editedFrom || null,
         repliedTo: m.repliedTo || null,
+        attachedPage: m.attachedPage || null,
         time: new Date(m.created_at).toLocaleTimeString([], {
           hour: "2-digit",
           minute: "2-digit",
@@ -449,6 +471,32 @@ export default function AskAI() {
     } else {
       // OPEN
       setShowExportPopup(true);
+    }
+  };
+
+  const handleExportSelect = async (type) => {
+    if (!selectedChatForAction) return;
+
+    const chat = selectedChatForAction;
+
+    setShowExportPopup(false);
+    setIsClosingExport(false);
+
+    // delay cleanup of parent popup slightly
+    setTimeout(() => {
+      setShowHistoryActionPopup(false);
+      setActiveChatId(null);
+      setSelectedChatForAction(null);
+    }, 150);
+
+    console.log("EXPORT CHAT:", chat);
+
+    if (type === "pdf") {
+      exportChatToPDF(chat);
+    }
+
+    if (type === "word") {
+      await exportChatToWord(chat);
     }
   };
 
@@ -510,7 +558,11 @@ export default function AskAI() {
             }}
           />
           <RiShareForwardFill 
-            // IMPLEMENT THE chat export feature here
+            onClick={() => {
+                handleExportClick(activeChat)
+                setChatLocation('activeChat')
+              }
+            }
           />
         </div>
       </div>
@@ -699,10 +751,12 @@ export default function AskAI() {
                       setEditingValue(activeChat?.chatName || "");
                       closePopup();
                     }}
-                    onExport={() => 
-                      selectedChatForAction &&
-                      handleExportClick(selectedChatForAction)
-                    }
+                    onExport={() => {
+                      if (!selectedChatForAction) return;
+
+                      handleExportClick(selectedChatForAction);
+                      setChatLocation("selectedChat");
+                    }}
                   />
                 </div>
               </div>
@@ -811,6 +865,7 @@ export default function AskAI() {
       )}
       {showExportPopup && (
         <ExportPopup
+          popupRef={exportPopupRef}
           onSelect={handleExportSelect}
           onClose={closeExportPopup}
           isClosing={isClosingExport}
