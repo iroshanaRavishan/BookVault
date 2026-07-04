@@ -556,7 +556,10 @@ export default function AskAI() {
             }}
           />
           <RiShareForwardFill 
-            // IMPLEMENT THE chat export feature here
+            onClick={() => {
+                handleExportClick(activeChat)
+              }
+            }
           />
         </div>
       </div>
