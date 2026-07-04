@@ -558,6 +558,7 @@ export default function AskAI() {
           <RiShareForwardFill 
             onClick={() => {
                 handleExportClick(activeChat)
+                setChatLocation('activeChat')
               }
             }
           />
