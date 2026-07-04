@@ -752,8 +752,9 @@ export default function AskAI() {
                     onExport={() => {
                       if (!selectedChatForAction) return;
 
-                      handleExportClick(selectedChatForAction)
-                    }
+                      handleExportClick(selectedChatForAction);
+                      setChatLocation("selectedChat");
+                    }}
                   />
                 </div>
               </div>
