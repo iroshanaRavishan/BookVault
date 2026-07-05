@@ -68,7 +68,9 @@ export default function AskAI() {
       if (
         exportPopupRef.current &&
         !exportPopupRef.current.contains(e.target)
-      )
+      ) {
+        closeExportPopup();
+      }
     };
   }, [showExportPopup]);
 
