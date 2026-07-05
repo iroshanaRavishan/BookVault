@@ -72,6 +72,9 @@ export default function AskAI() {
         closeExportPopup();
       }
     };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
   }, [showExportPopup]);
 
   useEffect(() => {
