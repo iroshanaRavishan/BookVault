@@ -75,6 +75,9 @@ export default function AskAI() {
 
     document.addEventListener("mousedown", handleClickOutside);
 
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
   }, [showExportPopup]);
 
   useEffect(() => {
