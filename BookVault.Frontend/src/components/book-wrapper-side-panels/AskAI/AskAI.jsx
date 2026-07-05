@@ -63,6 +63,13 @@ export default function AskAI() {
 
   useEffect(() => {
     if (!showExportPopup) return;
+
+    const handleClickOutside = (e) => {
+      if (
+        exportPopupRef.current &&
+        !exportPopupRef.current.contains(e.target)
+      )
+    };
   }, [showExportPopup]);
 
   useEffect(() => {
