@@ -62,6 +62,25 @@ export default function AskAI() {
   }, [messages]);
 
   useEffect(() => {
+    if (!showExportPopup) return;
+
+    const handleClickOutside = (e) => {
+      if (
+        exportPopupRef.current &&
+        !exportPopupRef.current.contains(e.target)
+      ) {
+        closeExportPopup();
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [showExportPopup]);
+
+  useEffect(() => {
     const handleClickOutside = (e) => {
       if (!editingChatId) return;
 
