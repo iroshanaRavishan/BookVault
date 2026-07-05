@@ -62,6 +62,10 @@ export default function AskAI() {
   }, [messages]);
 
   useEffect(() => {
+    if (!showExportPopup) return;
+  }, [showExportPopup]);
+
+  useEffect(() => {
     const handleClickOutside = (e) => {
       if (!editingChatId) return;
 
