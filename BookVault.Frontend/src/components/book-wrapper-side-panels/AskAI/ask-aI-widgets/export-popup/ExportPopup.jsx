@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./exportpopup.module.css";
 
-export default function ExportPopup({ onSelect, isClosing }) {
+export default function ExportPopup({ onSelect, isClosing, popupRef }) {
   return (
     <div className={styles.overlay} onClick={onClose}>
       <div className={`${styles.popup} ${
