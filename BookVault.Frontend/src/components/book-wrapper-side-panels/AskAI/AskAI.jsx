@@ -888,6 +888,7 @@ export default function AskAI() {
           onSelect={handleExportSelect}
           onClose={closeExportPopup}
           isClosing={isClosingExport}
+          chatLocation={chatLocation}
         />
       )}
       {showDeleteConfirm && (
