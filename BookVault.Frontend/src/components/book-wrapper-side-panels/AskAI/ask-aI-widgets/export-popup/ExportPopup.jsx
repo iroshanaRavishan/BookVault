@@ -7,6 +7,7 @@ export default function ExportPopup({ onSelect, isClosing, popupRef }) {
       <div className={`${styles.popup} ${
           isClosing ? styles.slideOut : styles.slideIn
         }`}
+        onClick={(e) => e.stopPropagation()}
       >
         <div className={styles.option} >
           As PDF
