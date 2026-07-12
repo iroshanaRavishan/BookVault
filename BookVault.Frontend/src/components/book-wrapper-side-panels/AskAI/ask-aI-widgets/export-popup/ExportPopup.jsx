@@ -8,11 +8,11 @@ export default function ExportPopup({ onSelect, isClosing, popupRef }) {
           isClosing ? styles.slideOut : styles.slideIn
         }`}
       >
-        <div>
+        <div className={styles.option} >
           As PDF
         </div>
 
-        <div>
+        <div className={styles.option}>
           As Word
         </div>
       </div>
