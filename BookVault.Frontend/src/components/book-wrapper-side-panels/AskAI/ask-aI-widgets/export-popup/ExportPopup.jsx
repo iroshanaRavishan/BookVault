@@ -8,6 +8,9 @@ export default function ExportPopup({ onSelect, isClosing, popupRef }) {
           isClosing ? styles.slideOut : styles.slideIn
         }`}
       >
+        <div>
+          As PDF
+        </div>
       </div>
     </div>
   );
