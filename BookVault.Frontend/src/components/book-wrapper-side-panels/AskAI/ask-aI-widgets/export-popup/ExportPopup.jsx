@@ -11,6 +11,10 @@ export default function ExportPopup({ onSelect, isClosing, popupRef }) {
         <div>
           As PDF
         </div>
+
+        <div>
+          As Word
+        </div>
       </div>
     </div>
   );
