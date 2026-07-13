@@ -6,8 +6,8 @@ export default function ExportPopup({ onSelect, isClosing, chatLocation, popupRe
     <div 
       className={styles.overlay}
       style={{ 
-        top: "80px",
-        right: "10px"
+        top: chatLocation === "selectedChat" ? "280px" : "80px",
+        right: chatLocation === "selectedChat" ? "15px" : "10px"
       }}
       ref={popupRef}
     >
