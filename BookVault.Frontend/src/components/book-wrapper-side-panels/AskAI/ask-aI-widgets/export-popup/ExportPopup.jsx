@@ -9,7 +9,7 @@ export default function ExportPopup({ onSelect, isClosing, popupRef }) {
         }`}
         onClick={(e) => e.stopPropagation()}
       >
-        <div className={styles.option} >
+        <div className={styles.option} onClick={() => onSelect("pdf")}>
           As PDF
         </div>
 
