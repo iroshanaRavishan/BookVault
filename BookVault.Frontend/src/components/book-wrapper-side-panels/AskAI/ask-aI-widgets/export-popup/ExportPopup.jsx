@@ -5,6 +5,10 @@ export default function ExportPopup({ onSelect, isClosing, chatLocation, popupRe
   return (
     <div 
       className={styles.overlay}
+      style={{ 
+        top: "80px",
+        right: "10px"
+      }}
       ref={popupRef}
     >
       <div
