@@ -38,7 +38,8 @@ export default function SearchFilters() {
     <div className={styles.searchFilters}>
       <div className={styles.searchInputWrapper}>
         <FaSearch className={styles.icon} />
-        <input   type="text"
+        <input 
+          type="text"
           placeholder="Search books..."
           className={styles.searchInput}
           value={searchText}
