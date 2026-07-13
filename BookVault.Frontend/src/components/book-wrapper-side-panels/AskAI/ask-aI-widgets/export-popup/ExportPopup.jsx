@@ -13,7 +13,7 @@ export default function ExportPopup({ onSelect, isClosing, popupRef }) {
           As PDF
         </div>
 
-        <div className={styles.option}>
+        <div className={styles.option} onClick={() => onSelect("word")}>
           As Word
         </div>
       </div>
