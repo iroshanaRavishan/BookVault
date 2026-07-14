@@ -1,3 +1,5 @@
+import { jsPDF } from "jspdf";
+
 // Format messages
 const formatMessages = (messages) => {
   console.log("messages:", messages);
