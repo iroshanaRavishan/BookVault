@@ -6,5 +6,5 @@ const formatMessages = (messages) => {
     const sender = msg.role === "user" ? "You" : "AI";
 
     return `${sender}:\n${msg.content}\n\n`;
-  })
+  }).join("");
 };
