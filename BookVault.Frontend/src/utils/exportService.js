@@ -5,6 +5,6 @@ const formatMessages = (messages) => {
   return messages.map(msg => {
     const sender = msg.role === "user" ? "You" : "AI";
 
-    return msg.content;
+    return `${sender}:\n${msg.content}\n\n`;
   })
 };
