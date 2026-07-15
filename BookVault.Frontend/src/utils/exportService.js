@@ -13,4 +13,5 @@ const formatMessages = (messages) => {
 
 // PDF EXPORT
 export const exportChatToPDF = () => {
+  const doc = new jsPDF();
 };
