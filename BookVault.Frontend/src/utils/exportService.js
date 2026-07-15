@@ -17,4 +17,7 @@ export const exportChatToPDF = () => {
 
   const pageWidth = doc.internal.pageSize.getWidth();
   const pageHeight = doc.internal.pageSize.getHeight();
+
+  // Margins
+  const marginLeft = 15;
 };
