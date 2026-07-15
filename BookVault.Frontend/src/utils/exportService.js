@@ -20,4 +20,5 @@ export const exportChatToPDF = () => {
 
   // Margins
   const marginLeft = 15;
+  const marginRight = 15;
 };
