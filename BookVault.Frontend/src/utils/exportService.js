@@ -10,3 +10,7 @@ const formatMessages = (messages) => {
     return `${sender}:\n${msg.content}\n\n`;
   }).join("");
 };
+
+// PDF EXPORT
+export const exportChatToPDF = () => {
+};
