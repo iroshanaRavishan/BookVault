@@ -14,4 +14,7 @@ const formatMessages = (messages) => {
 // PDF EXPORT
 export const exportChatToPDF = () => {
   const doc = new jsPDF();
+
+  const pageWidth = doc.internal.pageSize.getWidth();
+  const pageHeight = doc.internal.pageSize.getHeight();
 };
