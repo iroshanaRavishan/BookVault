@@ -30,5 +30,6 @@ export const exportChatToPDF = (chat) => {
 
   // Chat title
   doc.setFont("helvetica", "bold");
+  doc.setFontSize(18);
 
 };
