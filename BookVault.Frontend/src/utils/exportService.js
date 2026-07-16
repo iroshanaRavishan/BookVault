@@ -23,4 +23,6 @@ export const exportChatToPDF = (chat) => {
   const marginRight = 15;
   const marginTop = 20;
   const marginBottom = 20;
+
+  const maxWidth = pageWidth - marginLeft - marginRight;
 };
