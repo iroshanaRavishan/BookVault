@@ -35,4 +35,9 @@ export const exportChatToPDF = (chat) => {
     align: "center",
   });
 
+  y += 15;
+
+  chat.messages.forEach((msg) => {
+    y += 8;
+  });
 };
