@@ -37,5 +37,7 @@ export const exportChatToPDF = (chat) => {
 
   y += 15;
 
-  chat.messages.forEach();
+  chat.messages.forEach((msg) => {
+    y += 8;
+  });
 };
