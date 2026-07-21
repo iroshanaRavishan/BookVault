@@ -43,6 +43,7 @@ export const exportChatToPDF = (chat) => {
       // Check page before every line
       if (y > pageHeight) {
         doc.addPage();
+        y = marginTop;
       }
     });
     y += 8;
