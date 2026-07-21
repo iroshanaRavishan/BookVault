@@ -45,6 +45,11 @@ export const exportChatToPDF = (chat) => {
         doc.addPage();
         y = marginTop;
       }
+
+      if (isUser) {
+       
+      }
+
       y += 6;
     });
     y += 8;
