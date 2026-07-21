@@ -40,6 +40,10 @@ export const exportChatToPDF = (chat) => {
   chat.messages.forEach((msg) => {
     lines.forEach((line) => {
 
+      // Check page before every line
+      if (y > pageHeight) {
+     
+      }
     });
     y += 8;
   });
