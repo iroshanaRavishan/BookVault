@@ -41,6 +41,7 @@ export const exportChatToPDF = (chat) => {
     const isUser = msg.role === "user";
 
     const sender = isUser ? "You" : "BookVault";
+    const message = msg.content || "";
 
     lines.forEach((line) => {
 
