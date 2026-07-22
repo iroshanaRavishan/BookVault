@@ -38,6 +38,8 @@ export const exportChatToPDF = (chat) => {
   y += 15;
 
   chat.messages.forEach((msg) => {
+    const isUser = msg.role === "user";
+
     lines.forEach((line) => {
 
       // Check page before every line
