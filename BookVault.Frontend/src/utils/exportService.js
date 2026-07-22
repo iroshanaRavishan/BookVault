@@ -38,6 +38,27 @@ export const exportChatToPDF = (chat) => {
   y += 15;
 
   chat.messages.forEach((msg) => {
+    const isUser = msg.role === "user";
+
+    const sender = isUser ? "You" : "BookVault";
+    const message = msg.content || "";
+
+    lines.forEach((line) => {
+
+      // Check page before every line
+      if (y > pageHeight - marginBottom) {
+        doc.addPage();
+        y = marginTop;
+      }
+
+      if (isUser) {
+        doc.text(line, pageWidth - marginRight, y, {
+          align: "right",
+        });
+      }
+
+      y += 6;
+    });
     y += 8;
   });
 };
