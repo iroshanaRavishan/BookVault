@@ -47,7 +47,9 @@ export const exportChatToPDF = (chat) => {
       }
 
       if (isUser) {
-        doc.text(line, pageWidth - marginRight);
+        doc.text(line, pageWidth - marginRight, y, {
+          align: "right",
+        });
       }
 
       y += 6;
