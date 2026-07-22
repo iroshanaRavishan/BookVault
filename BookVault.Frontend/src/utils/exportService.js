@@ -45,7 +45,7 @@ export const exportChatToPDF = (chat) => {
 
     // ---------- Check page before sender ----------
     if (y > pageHeight - marginBottom - 20) {
-
+      doc.addPage();
     }
 
     lines.forEach((line) => {
