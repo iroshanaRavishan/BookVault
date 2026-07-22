@@ -40,6 +40,8 @@ export const exportChatToPDF = (chat) => {
   chat.messages.forEach((msg) => {
     const isUser = msg.role === "user";
 
+    const sender = isUser ? "You" : "BookVault";
+
     lines.forEach((line) => {
 
       // Check page before every line
