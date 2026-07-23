@@ -43,6 +43,12 @@ export const exportChatToPDF = (chat) => {
     const sender = isUser ? "You" : "BookVault";
     const message = msg.content || "";
 
+    // ---------- Check page before sender ----------
+    if (y > pageHeight - marginBottom - 20) {
+      doc.addPage();
+      y = marginTop;
+    }
+
     lines.forEach((line) => {
 
       // Check page before every line
