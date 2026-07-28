@@ -49,6 +49,10 @@ export const exportChatToPDF = (chat) => {
       y = marginTop;
     }
 
+    // Sender
+    doc.setFont("helvetica", "bold");
+
+
     lines.forEach((line) => {
 
       // Check page before every line
