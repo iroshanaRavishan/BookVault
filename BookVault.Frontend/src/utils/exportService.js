@@ -81,6 +81,8 @@ export const exportChatToPDF = (chat) => {
         doc.text(line, pageWidth - marginRight, y, {
           align: "right",
         });
+      } else {
+        doc.text(line, marginLeft, y);
       }
 
       y += 6;
