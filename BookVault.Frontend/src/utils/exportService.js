@@ -89,4 +89,6 @@ export const exportChatToPDF = (chat) => {
     });
     y += 8;
   });
+
+  doc.save(`${chat.chatName || "chat"}.pdf`);
 };
