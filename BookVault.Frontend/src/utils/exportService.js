@@ -63,6 +63,9 @@ export const exportChatToPDF = (chat) => {
 
     y += 6;
 
+    // Message
+    doc.setFont("helvetica", "normal");
+
     const lines = doc.splitTextToSize(message, maxWidth);
 
     lines.forEach((line) => {
