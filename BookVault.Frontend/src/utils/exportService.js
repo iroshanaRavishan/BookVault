@@ -54,7 +54,7 @@ export const exportChatToPDF = (chat) => {
     doc.setFontSize(12);
 
     if (isUser) {
-      doc.text(sender);
+      doc.text(sender, pageWidth - marginRight);
     }
     const lines = doc.splitTextToSize(message, maxWidth);
 
