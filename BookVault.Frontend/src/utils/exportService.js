@@ -60,6 +60,9 @@ export const exportChatToPDF = (chat) => {
     } else {
       doc.text(sender, marginLeft, y);
     }
+
+    y += 6;
+
     const lines = doc.splitTextToSize(message, maxWidth);
 
     lines.forEach((line) => {
