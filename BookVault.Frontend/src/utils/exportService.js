@@ -94,4 +94,6 @@ export const exportChatToPDF = (chat) => {
 };
 
 // WORD EXPORT
-export const exportChatToWord = async () => {};
+export const exportChatToWord = async () => {
+  const children = [];
+};
