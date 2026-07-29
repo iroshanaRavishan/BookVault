@@ -92,3 +92,6 @@ export const exportChatToPDF = (chat) => {
 
   doc.save(`${chat.chatName || "chat"}.pdf`);
 };
+
+// WORD EXPORT
+export const exportChatToWord = async () => {};
