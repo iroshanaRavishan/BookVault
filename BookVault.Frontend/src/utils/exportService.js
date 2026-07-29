@@ -52,7 +52,10 @@ export const exportChatToPDF = (chat) => {
     // Sender
     doc.setFont("helvetica", "bold");
     doc.setFontSize(12);
-    
+
+    if (isUser) {
+      doc.text(sender);
+    }
     const lines = doc.splitTextToSize(message, maxWidth);
 
     lines.forEach((line) => {
