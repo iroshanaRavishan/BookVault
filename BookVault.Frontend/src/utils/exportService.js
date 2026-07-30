@@ -96,4 +96,12 @@ export const exportChatToPDF = (chat) => {
 // WORD EXPORT
 export const exportChatToWord = async (chat) => {
   const children = [];
+
+  // Chat Title
+  children.push(
+    new Paragraph({
+      alignment: AlignmentType.CENTER,
+    })
+  );
+
 };
