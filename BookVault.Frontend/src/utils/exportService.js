@@ -103,7 +103,12 @@ export const exportChatToWord = async (chat) => {
       alignment: AlignmentType.CENTER,
       spacing: {
         after: 400,
-      }
+      },
+      children: [
+        new TextRun({
+          text: chat.chatName || "Chat Export",
+        }),
+      ],
     })
   );
 
