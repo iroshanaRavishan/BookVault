@@ -107,6 +107,7 @@ export const exportChatToWord = async (chat) => {
       children: [
         new TextRun({
           text: chat.chatName || "Chat Export",
+          bold: true,
         }),
       ],
     })
