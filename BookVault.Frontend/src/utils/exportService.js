@@ -101,6 +101,9 @@ export const exportChatToWord = async (chat) => {
   children.push(
     new Paragraph({
       alignment: AlignmentType.CENTER,
+      spacing: {
+        after: 400,
+      }
     })
   );
 
