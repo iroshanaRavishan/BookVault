@@ -108,6 +108,7 @@ export const exportChatToWord = async (chat) => {
         new TextRun({
           text: chat.chatName || "Chat Export",
           bold: true,
+          size: 32, // 16pt
         }),
       ],
     })
