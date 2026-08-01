@@ -49,6 +49,26 @@ export const exportChatToPDF = (chat) => {
       y = marginTop;
     }
 
+    // Sender
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(12);
+
+    if (isUser) {
+      doc.text(sender, pageWidth - marginRight, y, {
+        align: "right",
+      });
+    } else {
+      doc.text(sender, marginLeft, y);
+    }
+
+    y += 6;
+
+    // Message
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(11);
+
+    const lines = doc.splitTextToSize(message, maxWidth);
+
     lines.forEach((line) => {
 
       // Check page before every line
@@ -61,10 +81,51 @@ export const exportChatToPDF = (chat) => {
         doc.text(line, pageWidth - marginRight, y, {
           align: "right",
         });
+      } else {
+        doc.text(line, marginLeft, y);
       }
 
       y += 6;
     });
     y += 8;
   });
+
+  doc.save(`${chat.chatName || "chat"}.pdf`);
+};
+
+// WORD EXPORT
+export const exportChatToWord = async (chat) => {
+  const children = [];
+
+  // Chat Title
+  children.push(
+    new Paragraph({
+      alignment: AlignmentType.CENTER,
+      spacing: {
+        after: 400,
+      },
+      children: [
+        new TextRun({
+          text: chat.chatName || "Chat Export",
+          bold: true,
+          size: 32, // 16pt
+        }),
+      ],
+    })
+  );
+
+  chat.messages.forEach((msg) => {
+    const isUser = msg.role === "user";
+    const sender = isUser ? "You" : "BookVault";
+
+    // Sender
+    children.push(
+      new Paragraph({
+        alignment: isUser
+          ? AlignmentType.RIGHT
+          : AlignmentType.LEFT
+      })
+    );
+  });
+
 };
