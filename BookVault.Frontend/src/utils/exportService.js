@@ -115,6 +115,7 @@ export const exportChatToWord = async (chat) => {
   );
 
   chat.messages.forEach((msg) => {
+    const isUser = msg.role === "user";
   });
 
 };
