@@ -119,7 +119,13 @@ export const exportChatToWord = async (chat) => {
     const sender = isUser ? "You" : "BookVault";
 
     // Sender
-    children.push();
+    children.push(
+      new Paragraph({
+        alignment: isUser
+          ? AlignmentType.RIGHT
+          : AlignmentType.LEFT
+      })
+    );
   });
 
 };
