@@ -127,6 +127,9 @@ export const exportChatToWord = async (chat) => {
         spacing: {
           after: 100,
         },
+        children: [
+          new TextRun({}),
+        ],
       })
     );
   });
