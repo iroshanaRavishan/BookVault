@@ -136,6 +136,11 @@ export const exportChatToWord = async (chat) => {
         ],
       })
     );
+
+    // Message
+    children.push(
+      new Paragraph({})
+    );
   });
 
 };
