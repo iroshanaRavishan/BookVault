@@ -139,7 +139,11 @@ export const exportChatToWord = async (chat) => {
 
     // Message
     children.push(
-      new Paragraph({})
+      new Paragraph({
+        alignment: isUser
+          ? AlignmentType.RIGHT
+          : AlignmentType.LEFT,
+      })
     );
   });
 
