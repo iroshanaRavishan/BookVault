@@ -130,6 +130,8 @@ export const exportChatToWord = async (chat) => {
         children: [
           new TextRun({
             text: sender,
+            bold: true,
+            size: 24,
           }),
         ],
       })
