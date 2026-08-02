@@ -128,7 +128,9 @@ export const exportChatToWord = async (chat) => {
           after: 100,
         },
         children: [
-          new TextRun({}),
+          new TextRun({
+            text: sender,
+          }),
         ],
       })
     );
