@@ -123,7 +123,10 @@ export const exportChatToWord = async (chat) => {
       new Paragraph({
         alignment: isUser
           ? AlignmentType.RIGHT
-          : AlignmentType.LEFT
+          : AlignmentType.LEFT,
+        spacing: {
+          after: 100,
+        },
       })
     );
   });
