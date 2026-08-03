@@ -156,5 +156,7 @@ export const exportChatToWord = async (chat) => {
     );
   });
 
-  const doc = new Document({});
+  const doc = new Document({
+    sections: [],
+  });
 };
