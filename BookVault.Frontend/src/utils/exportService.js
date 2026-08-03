@@ -157,6 +157,10 @@ export const exportChatToWord = async (chat) => {
   });
 
   const doc = new Document({
-    sections: [],
+    sections: [
+      {
+        children,
+      },
+    ],
   });
 };
