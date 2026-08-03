@@ -143,6 +143,7 @@ export const exportChatToWord = async (chat) => {
         alignment: isUser
           ? AlignmentType.RIGHT
           : AlignmentType.LEFT,
+        spacing: {},
       })
     );
   });
