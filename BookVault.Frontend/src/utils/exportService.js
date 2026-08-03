@@ -149,6 +149,7 @@ export const exportChatToWord = async (chat) => {
         children: [
           new TextRun({
             text: msg.content || "",
+            size: 22
           }),
         ],
       })
