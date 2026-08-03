@@ -146,6 +146,7 @@ export const exportChatToWord = async (chat) => {
         spacing: {
           after: 250,
         },
+        children: [],
       })
     );
   });
