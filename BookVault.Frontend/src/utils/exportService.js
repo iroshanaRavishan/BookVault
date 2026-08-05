@@ -165,4 +165,5 @@ export const exportChatToWord = async (chat) => {
   });
 
   const blob = await Packer.toBlob(doc);
+  saveAs(blob, `${chat.chatName || "chat"}.docx`);
 };
