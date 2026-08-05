@@ -1,4 +1,6 @@
 import { jsPDF } from "jspdf";
+import { Document, Packer, Paragraph, TextRun, AlignmentType } from "docx";
+import { saveAs } from "file-saver";
 
 // Format messages
 const formatMessages = (messages) => {
