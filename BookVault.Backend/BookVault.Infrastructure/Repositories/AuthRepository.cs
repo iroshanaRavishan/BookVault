@@ -128,5 +128,8 @@ namespace BookVault.Infrastructure.Repositories
                 throw;
             }
         }
+        public async Task<List<User>> GetAllUsersAsync()
+        {
+        }
     }
 }
