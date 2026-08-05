@@ -132,7 +132,9 @@ namespace BookVault.Infrastructure.Repositories
         {
             try
             {
-                return await _userManager.Users.ToListAsync();
+                return await _userManager.Users
+                    .OrderByDescending(u => u.CreatedDate)
+                    .ToListAsync();
             }
             catch ()
             {
