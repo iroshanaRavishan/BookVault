@@ -132,7 +132,7 @@ namespace BookVault.Infrastructure.Repositories
         {
             try
             {
-                return _userManager.Users.ToListAsync();
+                return await _userManager.Users.ToListAsync();
             }
             catch ()
             {
