@@ -130,6 +130,14 @@ namespace BookVault.Infrastructure.Repositories
         }
         public async Task<List<User>> GetAllUsersAsync()
         {
+            try
+            {
+                return _userManager.Users.ToListAsync();
+            }
+            catch ()
+            {
+                throw;
+            }
         }
     }
 }
