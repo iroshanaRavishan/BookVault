@@ -128,5 +128,18 @@ namespace BookVault.Infrastructure.Repositories
                 throw;
             }
         }
+        public async Task<List<User>> GetAllUsersAsync()
+        {
+            try
+            {
+                return await _userManager.Users
+                    .OrderByDescending(u => u.CreatedDate)
+                    .ToListAsync();
+            }
+            catch ()
+            {
+                throw;
+            }
+        }
     }
 }

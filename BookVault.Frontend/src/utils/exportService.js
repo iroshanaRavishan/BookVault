@@ -1,4 +1,6 @@
 import { jsPDF } from "jspdf";
+import { Document, Packer, Paragraph, TextRun, AlignmentType } from "docx";
+import { saveAs } from "file-saver";
 
 // Format messages
 const formatMessages = (messages) => {
@@ -123,9 +125,47 @@ export const exportChatToWord = async (chat) => {
       new Paragraph({
         alignment: isUser
           ? AlignmentType.RIGHT
-          : AlignmentType.LEFT
+          : AlignmentType.LEFT,
+        spacing: {
+          after: 100,
+        },
+        children: [
+          new TextRun({
+            text: sender,
+            bold: true,
+            size: 24,
+          }),
+        ],
+      })
+    );
+
+    // Message
+    children.push(
+      new Paragraph({
+        alignment: isUser
+          ? AlignmentType.RIGHT
+          : AlignmentType.LEFT,
+        spacing: {
+          after: 250,
+        },
+        children: [
+          new TextRun({
+            text: msg.content || "",
+            size: 22
+          }),
+        ],
       })
     );
   });
 
+  const doc = new Document({
+    sections: [
+      {
+        children,
+      },
+    ],
+  });
+
+  const blob = await Packer.toBlob(doc);
+  saveAs(blob, `${chat.chatName || "chat"}.docx`);
 };
