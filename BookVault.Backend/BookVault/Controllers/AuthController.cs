@@ -96,5 +96,57 @@ namespace BookVault.API.Controllers
                 return BadRequest(new { message = "Something went wrong. " + ex.Message, isSuccess = false });
             }
         }
+
+        [HttpGet("users")]
+        // [Authorize(Roles = "Admin")]  // need to enable when roles are ready
+        public async Task<IActionResult> GetAllUsers()
+        {
+            try
+            {
+                var users = await _authService.GetAllUsersAsync();
+                return Ok(new
+                {
+                    isSuccess = true,
+                    users
+                });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new
+                {
+                    isSuccess = false,
+                    message = "Failed to retrieve users. " + ex.Message
+                });
+            }
+        }
+
+        [HttpDelete("users/{userId}")]
+        // [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> DeleteUser(string userId)
+        {
+            try
+            {
+                var (isSuccess, message) =
+                    await _authService.DeleteUserAsync(User, userId);
+
+                if (!isSuccess)
+                    return BadRequest(new { isSuccess = false, message });
+
+                return Ok(new
+                {
+                    isSuccess = true,
+                    message
+                });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new
+                {
+                    isSuccess = false,
+                    message = "Failed to delete user. " + ex.Message
+                });
+            }
+        }
+
     }
 }

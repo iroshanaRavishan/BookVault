@@ -19,11 +19,11 @@ export default function BookReadingBorad() {
   const [isLeftPanelPinned, setIsLeftPanelPinned] = useState(false);
   const [selectedBookmarkedPageNumber, setSelectedBookmarkedPageNumber] = useState(null);
   const [thumbnailGeneratedBookmarkDelFromBook, setThumbnailGeneratedBookmarkDelFromBook] = useState(null);
-  const [currentPageInfo, setCurrentPageInfo] = useState({
-    left: 0,
-    right: 1,
-    total: null
-  });
+  // const [currentPageInfo, setCurrentPageInfo] = useState({
+  //   left: 0,
+  //   right: 1,
+  //   total: null
+  // });
 
   // This replaces useState for isRightPanelOpen
   const isRightPanelOpen = useMemo(() => {
@@ -130,7 +130,7 @@ export default function BookReadingBorad() {
           setIsLeftPanelPinned={setIsLeftPanelPinned}
           onBookmarkSelect={handleBookmarkSelect}
           onThumbnailGeneratedBookmarkDelFromBook={thumbnailGeneratedBookmarkDelFromBook}
-          currentPageInfo={currentPageInfo}
+          // currentPageInfo={currentPageInfo}
         />
       </div>
       <div className={styles.book} style={{ width: `${bookWidth}%` }}>
@@ -138,7 +138,7 @@ export default function BookReadingBorad() {
           isRightPanelOpen={isRightPanelOpen}
           selectedBookmarkedPageNumber={selectedBookmarkedPageNumber}
           setThumbnailGeneratedBookmarkDelFromBook={setThumbnailGeneratedBookmarkDelFromBook}
-          setCurrentPageInfo={setCurrentPageInfo}
+          // setCurrentPageInfo={setCurrentPageInfo}
         />
       </div>
     </div>

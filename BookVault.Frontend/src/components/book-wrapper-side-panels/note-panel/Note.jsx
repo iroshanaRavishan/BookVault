@@ -14,8 +14,12 @@ import { useNoteContext } from '../../../context/NoteContext.jsx';
 import { useParams } from 'react-router-dom';
 import { useUser } from '../../../context/UserContext.jsx';
 import { useFullscreenContext } from '../../../context/FullscreenContext.jsx';
+import { useFlipBook } from '../../../context/FlipBookContext.jsx';
 
-export default function Note({ isPanelPinned, currentPageInfo }) {
+export default function Note({ 
+        isPanelPinned,
+        //  currentPageInfo  
+    }) {
     const { setHasUnsavedChanges, showUnsavedWarningPopup, setShowUnsavedWarningPopup } = useNoteContext();
     const { id } = useParams(); 
     const { user } = useUser();
@@ -24,6 +28,7 @@ export default function Note({ isPanelPinned, currentPageInfo }) {
     const hasMountedRef = useRef(false);
     const quillRef = useRef(null); // Ref to access Quill instance
     const { isFullScreen } = useFullscreenContext();
+    const { currentPageInfo } = useFlipBook();
 
     const [content, setContent] = useState('');
     const [notesByPage, setNotesByPage] = useState({});

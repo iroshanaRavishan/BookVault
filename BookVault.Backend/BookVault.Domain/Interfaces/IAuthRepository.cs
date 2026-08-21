@@ -18,5 +18,7 @@ namespace BookVault.Domain.Interfaces
         Task<IdentityResult> UpdateUserAsync(User user);
         Task<IdentityResult> RemoveUserPasswordAsync(User user);
         Task<IdentityResult> AddUserPasswordAsync(User user, string newPassword);
+        Task<List<User>> GetAllUsersAsync();
+        Task<IdentityResult> DeleteUserAsync(User user);
     }
 }

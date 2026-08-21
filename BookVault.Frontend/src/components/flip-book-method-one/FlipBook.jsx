@@ -9,6 +9,7 @@ import { useParams } from 'react-router-dom';
 import BookmarkListener from '../bookmark-listener/BookmarkListener';
 import { useNoteContext } from '../../context/NoteContext';
 import { useFullscreenContext } from '../../context/FullscreenContext';
+import { useFlipBook } from '../../context/FlipBookContext';
 
 const Page = forwardRef(({ 
   children,
@@ -102,7 +103,7 @@ export default function FlipBook({
   isRightPanelOpen, 
   selectedBookmarkedPageNumber, 
   setThumbnailGeneratedBookmarkDelFromBook,
-  setCurrentPageInfo 
+  // setCurrentPageInfo 
 }) {
   const [currentPage, setCurrentPage] = useState(0);
   const [bookmarks, setBookmarks] = useState([]);
@@ -122,6 +123,7 @@ export default function FlipBook({
   const [rightPageIndex, setRightPageIndex] = useState(0);
 
   const { isFullScreen } = useFullscreenContext();
+  const { setCurrentPageInfo } = useFlipBook();
 
   pages.push({ type: 'cover', content: <section>Cover Page</section> });
   pages.push({ type: 'blank', content: null });

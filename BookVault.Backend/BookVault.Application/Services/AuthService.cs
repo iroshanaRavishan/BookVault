@@ -3,6 +3,7 @@ using BookVault.Application.Interfaces;
 using BookVault.Domain.Entities;
 using BookVault.Domain.Interfaces;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -184,5 +185,69 @@ namespace BookVault.Application.Services
                 return (false, "Internal server error", IdentityResult.Failed());
             }
         }
+        public async Task<List<UserDto>> GetAllUsersAsync()
+        {
+            try
+            {
+                var users = await _authRepository.GetAllUsersAsync();
+
+                return users.Select(u => new UserDto
+                {
+                    Id = u.Id,
+                    Name = u.Name,
+                    UserName = u.UserName,
+                    Email = u.Email,
+                    IsAdmin = u.IsAdmin,
+                    CreatedDate = u.CreatedDate,
+                    LastLogin = u.LastLogin,
+                    ProfilePictureUrl = u.ProfilePicture != null
+                        ? $"api/auth/profile-picture/{u.Id}"
+                        : null
+                }).ToList();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error getting users");
+                throw;
+            }
+        }
+        public async Task<(bool IsSuccess, string Message)> DeleteUserAsync(
+            ClaimsPrincipal currentUser,string userId)
+        {
+            try
+            {
+                var requester = await _authRepository.GetAuthenticatedUserAsync(currentUser);
+                if (requester == null || !requester.IsAdmin)
+                    return (false, "Unauthorized");
+
+                var userToDelete = await _userManager.FindByIdAsync(userId);
+                if (userToDelete == null)
+                    return (false, "User not found");
+
+                // Prevent deleting the logged user
+                if (requester.Id == userToDelete.Id)
+                    return (false, "You cannot delete your own account");
+
+                // Prevent deleting last admin
+                if (userToDelete.IsAdmin)
+                {
+                    var adminCount = _userManager.Users.Count(u => u.IsAdmin);
+                    if (adminCount <= 1)
+                        return (false, "Cannot delete the last admin user");
+                }
+
+                var result = await _authRepository.DeleteUserAsync(userToDelete);
+                if (!result.Succeeded)
+                    return (false, "Failed to delete user");
+
+                return (true, "User deleted successfully");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error deleting user");
+                return (false, "Internal server error");
+            }
+        }
+
     }
 }

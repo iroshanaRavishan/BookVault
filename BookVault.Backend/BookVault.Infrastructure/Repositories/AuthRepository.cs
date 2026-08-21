@@ -136,8 +136,21 @@ namespace BookVault.Infrastructure.Repositories
                     .OrderByDescending(u => u.CreatedDate)
                     .ToListAsync();
             }
-            catch ()
+            catch (Exception ex)
             {
+                _logger.LogError(ex, "Error retrieving users");
+                throw;
+            }
+        }
+        public async Task<IdentityResult> DeleteUserAsync(User user)
+        {
+            try
+            {
+                return await _userManager.DeleteAsync(user);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error deleting user");
                 throw;
             }
         }

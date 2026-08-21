@@ -7,7 +7,7 @@
     padding: 10px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
     z-index: 1000;
-    width: 160px;
+    width: 120px;
     border-radius: 8px;
     display: flex;
     flex-direction: column;
@@ -39,7 +39,6 @@
 .deletionActionItem {
     font-size: 12px;
     font-weight: 600;
-    margin-top: 10px;
     position: relative;
     display: flex;       
     flex-direction: column;   
@@ -50,11 +49,12 @@
     flex-grow: 1;           
     height: 1px;
     background-color: #ccc;
+    margin-bottom: 5px;
   }
 
 .historyActionPopupBody {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    gap: 10px;
+    gap: 5px;
 }

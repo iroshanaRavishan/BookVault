@@ -22,6 +22,7 @@ import ProfileSettings from '../profile-settings/ProfileSettings';
 import BookReadingBorad from '../book-reading-board/BookReadingBorad';
 import { NoteProvider } from '../../context/NoteContext';
 import { FullscreenProvider } from '../../context/FullscreenContext';
+import { FlipBookProvider } from '../../context/FlipBookContext';
 
 export default function BookVaultApp() {
 
@@ -29,7 +30,7 @@ export default function BookVaultApp() {
     createRoutesFromElements(
       <Route element={<Layout />}>
         {/* Protected route wrapper for authentication */}
-        <Route element={ <ProtectedRouter /> }>
+        {/* <Route element={ <ProtectedRouter /> }> */}
           <Route path="/" element={<LandingPage />} />
           <Route path="/" element={<AllBooks />} />
           <Route path="/create" element={<CreateBook />} />
@@ -40,10 +41,14 @@ export default function BookVaultApp() {
           <Route path="/profile-settings" element={<ProfileSettings />} />
           <Route path="/read/:id" element={
               <NoteProvider>
-                <FullscreenProvider> <BookReadingBorad /></FullscreenProvider>
+                <FullscreenProvider> 
+                  <FlipBookProvider>  
+                    <BookReadingBorad /> 
+                  </FlipBookProvider>
+                </FullscreenProvider>
               </NoteProvider>
           } />
-        </Route>
+        {/* </Route> */}
 
         {/* Public routes */}
         <Route path="/auth" element={ <Auth /> } /> 
@@ -69,3 +74,12 @@ export default function BookVaultApp() {
     </UserProvider>
   );
 }
+
+
+
+// sorting case - when I remove a bookmark and if I have the sorting methos as page 
+// number up and then if I add another bookmark, it comes to the top
+
+// page numbering in the note and the Ask AI panels - last page is shown in the note panel and 
+// in the Ask AI panel, last page number is not shown when I turn the book to the last back cover page. 
+// but both do show 1 even if I am inthe first back cover

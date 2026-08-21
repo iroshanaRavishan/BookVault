@@ -4,6 +4,7 @@ import MessageWall from './ask-aI-widgets/MessageWall';
 import ChatInput from './ask-aI-widgets/ChatInput';
 import ExportPopup from "./ask-aI-widgets/export-popup/ExportPopup";
 import { exportChatToPDF, exportChatToWord } from "../../../utils/exportService";
+import { useFlipBook } from '../../../context/FlipBookContext';
 import { GoDotFill } from "react-icons/go";
 import ChipStack from './ask-aI-widgets/ChipStack';
 import { FiCheck, FiPlus } from 'react-icons/fi';
@@ -54,6 +55,9 @@ export default function AskAI() {
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [openedChatId, setOpenedChatId] = useState(null);
   const [chatLocation, setChatLocation] = useState(null);
+
+  const { currentPageInfo } = useFlipBook();
+  // use this to sent to the backend with the message
 
   useEffect(() => {
     if (messages.length > 0) {
@@ -110,6 +114,18 @@ export default function AskAI() {
     hasNamedChatRef.current = false; 
     setTimeout(() => setIsResetting(false), 0);
     setOpenedChatId(conversationIdRef.current)
+  };
+
+  const getCurrentChat = () => {
+    return {
+      conversationId: conversationIdRef.current,
+      chatName: currentChatName,
+      messages: messages.map((msg) => ({
+        role: msg.sender === "user" ? "user" : "assistant",
+        content: msg.text,
+        created_at: msg.date,
+      })),
+    };
   };
 
   const hasMessages = messages.length > 0;
@@ -576,12 +592,11 @@ export default function AskAI() {
               setActiveChatId(openedChatId)
             }}
           />
-          <RiShareForwardFill 
+          <RiShareForwardFill
             onClick={() => {
-                handleExportClick(activeChat)
-                setChatLocation('activeChat')
-              }
-            }
+              handleExportClick(getCurrentChat());
+              setChatLocation("activeChat");
+            }}
           />
         </div>
       </div>

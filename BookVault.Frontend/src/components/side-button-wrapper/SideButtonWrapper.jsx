@@ -28,7 +28,7 @@ export default function SideButtonsWrapper({
   setIsLeftPanelPinned,
   onBookmarkSelect,
   onThumbnailGeneratedBookmarkDelFromBook,
-  currentPageInfo
+  // currentPageInfo
 }) {
   const [rightOffsets, setRightOffsets] = useState([]);
   const [leftOffsets, setLeftOffsets] = useState([]);
@@ -320,7 +320,10 @@ export default function SideButtonsWrapper({
               ? (isLeftPanelPinned ? "948px" : "790px") 
               : (isLeftPanelPinned ? "790px" : "627px")
             }}>
-            <Note isPanelPinned={isLeftPanelPinned} currentPageInfo={currentPageInfo} />
+            <Note 
+              isPanelPinned={isLeftPanelPinned}
+              //  currentPageInfo={currentPageInfo}
+            />
           </div>
           {isLeftPanelPinned && (
             <div className={styles.resizer} onMouseDown={handleMouseDown} />
